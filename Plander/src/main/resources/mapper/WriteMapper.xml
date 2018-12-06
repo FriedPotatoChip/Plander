@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.bit.mapper.WriteMapper">
+	
+	<!-- Planner 인서트 -->
+	<insert id="insertPlanner" parameterType="com.bit.domain.PlannerVO">
+		INSERT INTO PLANNER (P_IDX, P_TITLE, P_START_DATE, P_END_DATE)
+					VALUES (PLANNER_SEQ.NEXTVAL, #{p_title}, #{p_start_date}, #{p_end_date})
+	</insert>	
+	
+	<!-- Planner_detail 인서트 -->
+	<insert id="insertDetail" parameterType="com.bit.domain.Planner_dVO">
+		INSERT INTO PLANNER_DETAIL (PD_IDX, PD_START_TIME, PD_END_TIME, PD_CONTENT, P_IDX)
+					VALUES (PLANNER_D_SEQ.NEXTVAL, #{pd_start_time}, #{pd_end_time}, #{pd_content}, #{p_idx})
+	</insert>
+	
+	
+	
+	
+	
+</mapper>
+

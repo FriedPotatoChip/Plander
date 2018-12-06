@@ -23,4 +23,6 @@ public class PlannerVO {
 	private int u_idx;
 	private int ct_idx;
 	
+	
+	
 }
