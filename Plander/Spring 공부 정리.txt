@@ -1,0 +1,157 @@
+Spring
+
+컨트롤러에서 흔히 사용하는 어노테이션
+@Controller		// 해당 클래스가 컨트롤러라는것을 정의
+@RequestMapping		// uri 맵핑해주는 역할. (메소드와 클래스에 모두 사용 가능하다)
+
+ex) 
+@Controller		// 이 경우 SampleController 클래스는 컨트롤러로서 스프링 컨테이너에서 객체 생성
+@RequestMapping("/sample/*) // SampleController는 루트/sample/* 의 경로를 갖게된다. (*는 이후 올 메소드들)
+public class SampleController {
+	
+	@GetMapping("/ex01")	// 루트/sample/ex01 의 경로를 가짐
+	public String ex01 (SampleVO vo) { 
+// SampleVO vo를 인자로 받게 되면 해당 메소드를 호출하는 페이지에서 SampleVO에 해당하는 데이터를 넘겼을 때
+// 알아서 데이터를 받고 vo객체에 set처리를 해줌
+// ex) 전 페이지에서 name="id"와 name="password"로 값을 넘겼을 떄 
+// 	SampleVO 에 id와 password가 선언되어 겟, 셋 메소드를 작성 해놨다면
+//	ex01메소드를 불렀을 때 
+//	vo.setId(request.getParameter("id"));
+//	vo.setPassword(request.getParameter("password"));
+//	처리를 해주기 때문에 따로 겟, 셋 처리를 할 필요가 없다.	
+	}
+
+
+
+// VO 객체가 아닌 기본 자료형이나 문자열 등을 이용한다면 해당 파라미터의 값만을 받을 수 있다.
+	@GetMapping("/ex02")
+	public String ex02 (@RequestParam("id") String id, @RequestParam("password") int password) {
+// @RequestParam은 request.getParameter("")와 같은 역할을 한다.
+// 따라서, @RequestParam("id")는 request.getParameter("id")와 같고 받은 데이터를 String타입의 id로 저장해준다.
+// 여기서 주목할 점은 request.getParameter("")는 String타입이지만, 위의 password를 보면 int타입인것 처럼
+// 자동 형변환 처리를 해주기 때문에 따로 String을 다른 타입으로 변환할 필요가 없다.
+	}	
+
+
+// 기본 데이터타입이 아닌 리스트타입도 사용 가능하다
+	@GetMapping("/ex02List")
+	public String ex02List(@RequestParam("ids") ArrayList<String> ids) {
+// 넘어오는 데이터가 동일한 이름으로 여러개가 넘어오는 경우 리스트 타입으로 받을 수 있다.
+// 예를 들면 http://localhost:8080/sample/ex02List 이 uri가 ex02List메소드로 매핑됐을 때,
+// http://localhost:8080/sample/ex02List?ids=1&ids=11&ids=33 과 같이 ids이름으로 여러 데이터가 넘어오면
+// ArrayList<String> 타입의 ids변수에 차례로 담겨 
+// ids는 [1, 11, 33]의 값을 가지게 된다.
+
+// 리스트 타입이 아닌 배열도 동일하게 처리 할 수 있다.
+// @RequestParam("ids") String[] idx
+// 위와 같이 작성되어도 ids는 String배열 타입에 차례로 담기게된다.
+	}
+
+
+// 객체타입 데이터를 리스트로 받는 경우도 가능하다
+// SampleVO객체타입을 리스트로 갖는 SampleVOList 클래스를 작성하고
+// SampleVOList에 private List<SampleVO> list;를 선언하고 셋, 겟메소드를 작성해주면 된다.
+// 위의 과정을 진행한 다음에 
+	@GetMapping("/ex02Bean")
+	public String ex02Bean(SampleVOList list) {
+// 이와 같이 작성하게 되면 SampleVOList 클래스를 호출해 그 안에 있는 set메소드를 호출해
+// 데이터를 하나씩 list에 담아준다.
+// 데이터를 보낼 때는 /sample/ex02Bean?list[0].id=aaa&list[1].id=abc&list[1].password=abcpwd
+// 와 같이 보내주면 받을 수 있다.
+	}
+
+
+}
+
+
+
+데이터 타입 처리
+// 1. 컨트롤러에서 처리하는 방법
+//	@InitBinder 어노테이션 사용
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SompleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, false));
+	}
+// 위와 같이 작성해주면 (yyyy-MM-dd)형태로 들어오는 데이터를 java.util.Date타입으로 변환해준다
+
+// 2. VO안에서 처리
+// 	@DateTimeFormat 어노테이션 사용
+	@Data
+	public class SampleVO {
+		@DateTimeFormat(pattern = "yyyy/MM/dd")
+		private Date dueDate;
+	}
+// 이와 같이 작성해주면 vo객체에 담아줄 때 
+// (yyyy/MM/dd)형태로 들어온 데이터를 자동으로 java.util.Date타입으로 변환해준다.
+
+
+
+
+
+Model 데이터 전달자
+// Servlet에서 데이터 전달의 경우
+request.setAttribute("serverTime", new java.util.Date());
+RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+dispatcher.forward(request, response);
+// 이와 같은 방식으로 포워딩 처리하여 데이터를 전달한다.
+
+// 스프링에서 Model을 사용하는 경우
+	public String home(Model model) {
+		model.addAttribute("serverTime", new java.util.Date());
+		return "home";
+	}
+// 이와 같이 처리 할 수 있다.
+
+
+ModelAttribute
+@RequestParam("")의 경우 따로 request.setAttribute처리를 해주지 않는 이상
+다음 페이지 까지 받아온 파라미터를 전달해 주지 못한다.
+이를 편하게 위의 모델과 같이 처리하기 위한 방법이
+@ModelAttribute("")어노테이션이다.
+사용하는 방법은 @RequestParam과 같고
+(@ModelAttribute("id") String id) 와 같이 파라미터를 작성하게 되면
+받아온 id값을 다음 보낼 페이지까지 전달해 줄 수 있다.
+
+
+
+RedirectAttributes
+일반적으로 리다이렉트는 POST -> 리다이렉트 -> GET 방식으로 넘어간다.
+리다이렉트는 GET방식으로 넘어가지만, 보통의 경우엔 파라미터를 담아 넘겨줄 수 없다
+RedirectAttributes를 사용하면 리다이렉트로 페이지를 넘겨도 파라미터값을 전달해 줄 수 있다.
+// Servlet에서 redirect
+//	response.sendRedirect("/home?id=aaa&password=aaapwd");
+이와 같이 파라미터를 넘기려면 URL에 노출되게끔 GET방식을 써야한다.
+// SpringMVC 에서 redirect
+	@RequestMapping("exRedAttr")
+	public String exRedAttr(RedirectAttributes rttr){
+		rttr.addFlashAttribute("id", "아이디");
+		return "redirect:/home";
+// 이와 같이 RedirectAttributes를 파라미터로 받으면 파라미터 값을 URL에 노출시키지 않고 전달할 수 있다.
+// RedirectAttributes는 플래시 속성에 저장해논 뒤 리다이렉트가 발생하기 직전에 세션에 플래시 속성을 복사하고
+// 리다이렉트가 발생한 뒤엔 세션에서 다시 모델로 이동시켜 리다이렉트시에도 데이터를 안전하게 전달할 수 있다.
+	}
+
+
+
+
+
+
+
+
+// 컨트롤러 타입
+// 1. void
+	컨트롤러에서 메소드 타입이 void로 설정된 경우 
+	Mapping된 url경로 뒤에 .jsp가 붙어 호출 (prefix, suffix에 의해 적용)
+// 2. String
+	호출할 경로를 String타입으로 작성하여 리턴
+	redirect:, forward: 방식 사용 가능
+	역시 마찬가지로 설정파일에서 설정된 prefix, suffix 적용. (/WEB-INF/views/리턴.jsp)
+// 3. 객체
+	리턴 타입을 VO, DTO등 객체로 지정해 리턴할 경우
+	페이지 호출이 아닌 데이터 자체를 불러낸다.
+	주로 xml방식과 JSON방식을 사용하는데 JSON방식이 더 많이 선호된다.
+	JSON의 경우 jackson-databind 메이븐 등록, 
+	xml의 경우 jackson dataformat xml메이븐 등록이 필요하다.
+
+

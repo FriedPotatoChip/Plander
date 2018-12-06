@@ -7,4 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/Plander/write/*")
 public class WriteController {
 
+	@RequestMapping("test")
+	public String test() {
+		return "home";
+	}
+	
+	
+	
+	
+	
+	
 }
