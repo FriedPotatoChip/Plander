@@ -8,11 +8,9 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	뽀우누나 이쁘죠 ?
-</h1>
+<h1>뽀호~우</h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<img alt="뽀우" src="/resources/images/BBO.jpg">
+<img alt="뽀우" src="/resources/images/BBoHou.png">
 </body>
 </html>
