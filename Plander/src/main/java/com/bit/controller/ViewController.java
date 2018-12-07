@@ -1,5 +1,7 @@
 package com.bit.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,10 @@ public class ViewController {
 	
 	@RequestMapping("")
 	public String main(CategoryVO cvo, Model model, Category_dVO cdvo) {
-		System.out.println("sadasd");
 		model.addAttribute("category", service.getListCategory(cvo));
 		model.addAttribute("category_d", service.getListCategory_d(cdvo));
-		return "planderList";
+
+		return "viewPage/planderList";
 	}
 	
 }

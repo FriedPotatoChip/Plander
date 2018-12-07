@@ -6,6 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AllPlanderList</title>
+<!-- jQuery first -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
 <style>
 body, html {
 	margin: auto;
@@ -173,6 +177,14 @@ body, html {
 	text-decoration: none;
 }
 </style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.po_category').click(function() {
+			$('.po_category').removeClass('on');
+			$(this).addClass('on');
+		})
+	});
+</script>
 </head>
 <body>
 
@@ -195,7 +207,7 @@ body, html {
 		<div class="wrap">
 			<div class="planner_title">Recommended Planner</div>
 			<div class="planner_tap">
-				<div class="po_category on" data="all">추천</div>
+				<div class="po_category on">추천</div>
 				<div class="po_line">&nbsp;</div>
 				<c:forEach var="category" items="${category }">
 					<div class="po_category">${category.ct_name }</div>
@@ -222,8 +234,9 @@ body, html {
 
 	<!-- 칸 설정  -->
 	<div class="clear" />
-
 	<!-- 전체 카테고리 상세리스트 -->
+
+
 	<c:forEach var="category" items="${category }">
 		<div class="area_planner">
 			<div class="wrap">
@@ -231,9 +244,11 @@ body, html {
 				<div class="planner_top_name as">${category.ct_name }</div>
 				<div class="planner_list">
 					<c:forEach var="category_d" items="${category_d }">
-						<a href="#" class="planner_n_link">${category_d.ctd_name }&nbsp;
-							<span>Eat Drug</span>
-						</a>
+						<c:if test="${category_d.ct_idx == category.ct_idx }">
+							<a href="#" class="planner_n_link">${category_d.ctd_name }&nbsp;
+								<span>${category_d.ctd_name_e }</span>
+							</a>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>

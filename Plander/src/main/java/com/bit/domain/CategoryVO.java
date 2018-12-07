@@ -11,5 +11,4 @@ public class CategoryVO {
 	
 	private int ct_idx;
 	private String ct_name;
-	
 }
