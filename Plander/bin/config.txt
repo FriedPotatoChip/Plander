@@ -1,0 +1,52 @@
+[BitFinalProject]
+
+<작업 주의사항>
+0. * 싸우지 말기 *
+1. 백업 습관화 합시다!
+2. 주석 습관화 합시다!
+3. config.txt 및 설계 파일 참고하기!
+
+
+<리소스 폴더>
+src/main/webapp/resources 아래
+사진이나 기타 필요한 파일들 저장
+
+<패키지 설정>
+Controller는 com.bit.controller 아래
+*Controller 형식으로 작성
+
+Mapper 인터페이스는 com.bit.mapper 아래
+*Mapper 형식으로 작성
+
+Service 인터페이스는 com.bit.service 아래
+*Service 형식으로 작성
+
+ServiceImpl 클래스는 com.bit.service.impl 아래
+*ServiceImpl 형식으로 작성 
+
+VO, Paging 등 기타 클래스는 com.bit.domain 아래 작성
+
+
+
+<Mapper>
+Mapper.xml 파일을
+src/main/resources 밑에 mapper폴더 안에
+*Mapper.xml 형식으로 작성
+
+(중요)*Mapper.xml의 namespace는 com.bit.mapper 안의 *Mapper 인터페이스 경로 지정
+
+
+<MyBatis 사용법>
+1. src/main/resources 내의 mapper폴더 안에 *Mapper.xml 작성
+2. com.bit.mapper 안에 *Mapper 인터페이스 설정
+3. 생성한 인터페이스 내의 메소드 이름을 *Mapper.xml에서 지정한 id와 동일하게 작성
+	(<select id="getTest" resultType="com.bit.domain.TestVO">
+		쿼리문	
+	</select>
+	형식이면 *Mapper 인터페이스 안의 메소드는 
+	public TestVO getTest(); 와 같이 작성)
+4. 불러다 쓸 클래스 안에서(*ServiceImpl 클래스) *Mapper인터페이스에 @Autowired 적용
+	@Autowired 된 Mapper 인터페이스내의 메소드를 불러 사용
+
+
+

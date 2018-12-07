@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.bit.mapper.ViewMapper">
+	
+	<select id="getListCategory" resultType="com.bit.domain.CategoryVO">
+		SELECT * FROM CATEGORY
+	</select>
+	
+	<select id="getListCategory_d" resultType="com.bit.domain.Category_dVO">
+		SELECT * FROM CATEGORY_DETAIL WHERE CT_IDX=#{ct_idx}
+	</select>
+</mapper>
+
