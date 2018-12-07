@@ -8,7 +8,7 @@
 				<td rowspan="3" width="10%">
 					<img height="100" width="100" alt="힘이없을때는 경수를 보자" src="/resources/images/do.png">
 				</td>
-				<td colspan="2" width="13%"><b>도경수</b></td>
+				<td colspan="2" width="13%"><b>${user.name }</b></td>
 				<td rowspan="3" width="57%"><b style="font-size: 28px;">[오늘의 일정] 메인 페이지 만들기 !</b></td>
 				<td rowspan="3" width="10%">일정<br>만들기</td>
 				<td rowspan="3" width="10%">myPage</td>

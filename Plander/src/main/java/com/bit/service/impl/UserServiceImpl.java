@@ -18,5 +18,9 @@ public class UserServiceImpl implements UserService {
 		System.out.println("userImpl 까지옴!");
 		return userMapper.getUser(vo);
 	}
+	
+	public int loginchk(UserVO vo) {
+		return 0;
+	}
 
 }

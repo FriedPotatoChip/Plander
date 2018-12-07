@@ -1,5 +1,7 @@
+<%@page import="com.bit.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +31,8 @@
 <body>
 <div id="container">
 <!-- 헤더 -->
-<jsp:include page="/commons/header.jsp"/>
+<c:if test="${empty user }"><jsp:include page="/commons/header.jsp"/></c:if>
+<c:if test="${not empty user }"><jsp:include page="/commons/loginheader.jsp"/></c:if>
 	
 <!-- 로그인 모달 -->
 
@@ -52,7 +55,7 @@
 <br><hr><br><br>
 
 <!-- 로그인시 보여주는 마이페이지 -->
-<jsp:include page="/commons/mypageBar.jsp"/>
+<c:if test="${not empty user }"><jsp:include page="/commons/mypageBar.jsp"/></c:if>
 
 <!-- 인기 카테고리 -->
 <div id="category">

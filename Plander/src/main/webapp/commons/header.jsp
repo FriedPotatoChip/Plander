@@ -20,6 +20,29 @@
 	</div>
 </div>
 <br><br><br><br>
+<!-- 헤더 끝 -->
+
+
+<script>
+	function chk() {
+		if (!document.frm.id.value) {
+			alert("아이디를 입력해주세요.");
+			document.frm.id.focus();
+			document.frm.action ="/Plander";
+			return false;
+		}
+		
+		if (!document.frm.password.value) {
+			alert("비밀번호를 입력해주세요.");
+			document.frm.password.focus()
+			document.frm.action ="/Plander";
+			return false;
+		}
+		
+		document.frm.submit();
+	}
+</script>
+
 
 <!-- 로그인 모달창 시작 -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -33,10 +56,10 @@
 			</button>
 		</div>
 
-		<form action="/Plander/login" method="post">
+		<form name="frm" action="/Plander/login" method="post" onsubmit="chk()">
 			<div class="modal-body center">
 				<input type="text" name="id" class="form-control" placeholder="아이디">
-				<input type="text" name="pw" class="form-control" style="margin-top: 1.5%;"
+				<input type="text" name="password" class="form-control" style="margin-top: 1.5%;"
 					placeholder="비밀번호">
 				<hr>
 				<input type="button" name="googleLogin" class="btn btn-outline-secondary form-control"

@@ -4,8 +4,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bit.domain.UserVO;
 import com.bit.service.UserService;
@@ -23,13 +23,22 @@ public class MainController {
 		return "main";
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(UserVO vo, HttpSession session) {
 		System.out.println("controller 로그인 테스트");
-		service.getUser(vo);
+		UserVO user = service.getUser(vo);
 		
-		System.out.println("vo : " + vo);
-		return "main";
+		if (user == null) {
+			System.out.println("로그인 실패" + user);
+			return "main";
+		} else if (user.getId().equals(vo.getId()) || user.getPassword().equals(vo.getPassword())) {
+			session.setAttribute("user", user);
+			System.out.println("user 확인 : " + user);
+			return "main";
+		} else {
+			System.out.println("로그인 실패");
+			return "main";
+		}
 	}
 	
 	@RequestMapping("/logout")
