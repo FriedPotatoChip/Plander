@@ -20,20 +20,37 @@
 </style>
 </head>
 <body>
+
 <!-- 로그인 모달 창 -->
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal">
-		<span aria-hidden="true">×</span><span class="sr-only">Close</span>
-	</button>
-	<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-</div>
+<button type="button" class="btn btn-link"
+	data-toggle="modal" data-target="#myModal">로그인
+</button>
 
-<div class="modal-body">
-모달창 테스트 !!
-</div>
-
-<div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		
+			<div class="modal-header">
+			<h4 class="modal-title" id="myModalLabel">LOGIN</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<form action="/Plander/login" method="post">
+				<div class="modal-body">
+					<input type="text" name="id" placeholder="아이디">
+					<input type="text" name="pw" placeholder="비밀번호">
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-outline-secondary">로그인</button>
+					<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">닫기</button>
+				</div>
+			</form>
+			
+		</div>
+	</div>
 </div>
 
 </body>
