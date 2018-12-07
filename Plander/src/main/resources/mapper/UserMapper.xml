@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.bit.mapper.UserMapper">
+	
+	<!-- 로그인시 회원 확인 -->
+	<select id="getUser" resultType="com.bit.domain.UserVO">
+		SELECT * FROM USERS WHERE ID = #{id}
+	</select>
+	
+	<!-- 회원가입 -->
+
+
+
+</mapper>
+
+
+
