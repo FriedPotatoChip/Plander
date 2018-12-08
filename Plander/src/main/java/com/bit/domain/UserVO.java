@@ -2,9 +2,13 @@ package com.bit.domain;
 
 import java.util.Date;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Setter
+@Getter
+@ToString
 public class UserVO {
 	private int u_idx, rank;
 	private String id, password, name, email, address;

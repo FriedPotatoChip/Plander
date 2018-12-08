@@ -15,7 +15,12 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserVO getUser(UserVO vo) {
+		System.out.println("userImpl 까지옴!");
 		return userMapper.getUser(vo);
+	}
+	
+	public int loginchk(UserVO vo) {
+		return 0;
 	}
 
 }
