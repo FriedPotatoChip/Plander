@@ -21,6 +21,12 @@ public class WriteController {
 	@Autowired
 	private WriteService service;
 	
+	@RequestMapping("test")
+	public String calTest() {
+		System.out.println("여기 들어옴");
+		return "write/gcal";
+	}
+	
 	@GetMapping("")
 	public String writeMain() {
 		return "write/planderWrite";
@@ -49,4 +55,5 @@ public class WriteController {
 		
 		return "write/planderWrite_detail";
 	}
+	
 }
