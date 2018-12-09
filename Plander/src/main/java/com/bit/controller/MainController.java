@@ -1,11 +1,14 @@
 package com.bit.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.domain.UserVO;
 import com.bit.service.UserService;
@@ -48,5 +51,21 @@ public class MainController {
 		return "main";
 	}
 	
+	//회원가입
+	@RequestMapping(value="/join", method = { RequestMethod.GET, RequestMethod.POST })
+	public String join(UserVO vo, Model model) {
+		System.out.println("controller 회원가입");
+		service.join(vo);
+		System.out.println("컨트롤러에서 : " + vo);
+		model.addAttribute("username", vo.getName());
+		return "redirect:main/joinOk";
+	}
+	
+	//회원가입 아이디 중복확인
+	@RequestMapping(value="/idchk", method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody String idChk(UserVO vo, Model model) {
+		int result = service.idchk(vo);
+		return String.valueOf(result);
+	}
 	
 }

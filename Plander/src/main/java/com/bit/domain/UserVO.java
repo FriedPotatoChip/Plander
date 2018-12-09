@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class UserVO {
 	private int u_idx, rank;
-	private String id, password, name, email, address;
+	private String id, password, name, email, phone;
 	private Date regdate;
 }

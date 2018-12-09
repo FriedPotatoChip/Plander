@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>로그인 페이지</title>
+<title>회원가입 완료</title>
+<link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR" rel="stylesheet">
+
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -16,42 +19,29 @@
 <style>
 	body, html { width: 90%; margin: auto; }
 	* { font-family: 'Noto Sans KR', sans-serif; text-decoration: none; }
+	#home { font-family: 'East Sea Dokdo', cursive; font-size: 2em; }
 	.center { text-align: center; }
+	
 </style>
 </head>
 <body>
+<div id="container">
+<!-- 헤더 -->
+<c:if test="${empty user }"><jsp:include page="/commons/header.jsp"/></c:if>
 
-<!-- 로그인 모달 창 -->
-<button type="button" class="btn btn-link"
-	data-toggle="modal" data-target="#myModal">로그인
-</button>
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-		
-			<div class="modal-header">
-			<h4 class="modal-title" id="myModalLabel">LOGIN</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			
-			<form action="/Plander/login" method="post">
-				<div class="modal-body">
-					<input type="text" name="id" placeholder="아이디">
-					<input type="text" name="pw" placeholder="비밀번호">
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-outline-secondary">로그인</button>
-					<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">닫기</button>
-				</div>
-			</form>
-			
-		</div>
-	</div>
-</div>
+	<h3 class="center">회원가입 완료</h3>
+	<hr>
+	<p class="center">${username } 님, 회원가입을 축하드립니다!<br>
+	로그인을 해서 플랜더의 다양한 컨텐츠를 이용해보세요.</p>
+	
+	<p class="center" style="width: 50%; margin: auto;">
+		<button type="button" class="btn btn-outline-secondary form-control">메인화면</button>
+	</p>
+	
+	<br><br><br><br>
+<!-- 풋터 -->
+<jsp:include page="/commons/footer.jsp"/>	
+</div> <!-- 바디 콘테이너 끝 -->
 
 </body>
 </html>
