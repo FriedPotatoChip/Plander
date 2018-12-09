@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.bit.mapper.WriteMapper">
 	
+	<!-- 전체 플래너 셀렉트 -->
+	<select id="getListAll" resultType="com.bit.domain.PlannerVO">
+		select * from planner order by p_idx
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- Planner 인서트 -->
 	<insert id="insertPlanner" parameterType="com.bit.domain.PlannerVO">
 		INSERT INTO PLANNER (P_IDX, P_TITLE, P_START_DATE, P_END_DATE)

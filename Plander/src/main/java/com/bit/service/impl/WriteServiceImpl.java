@@ -1,5 +1,7 @@
 package com.bit.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class WriteServiceImpl implements WriteService {
 	@Override
 	public boolean registerDetail(Planner_dVO vo) {
 		return mapper.insertDetail(vo);
+	}
+
+	@Override
+	public List<PlannerVO> getListAll() {
+		return mapper.getListAll();
 	}
 
 }

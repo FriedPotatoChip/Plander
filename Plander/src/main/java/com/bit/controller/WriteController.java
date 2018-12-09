@@ -1,6 +1,7 @@
 package com.bit.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bit.domain.CategoryVO;
 import com.bit.domain.PlannerVO;
 import com.bit.domain.Planner_dVO;
+import com.bit.service.ViewService;
 import com.bit.service.WriteService;
 
 @Controller
@@ -21,10 +24,22 @@ public class WriteController {
 	@Autowired
 	private WriteService service;
 	
+	@Autowired
+	private ViewService viewService;
+	
 	@RequestMapping("test")
-	public String calTest() {
+	public String calTest(CategoryVO cvo, Model model) {
 		System.out.println("여기 들어옴");
+		List<CategoryVO> ctList = viewService.getListCategory(cvo);
+		model.addAttribute("ctList", ctList);
+		
+		model.addAttribute("planList", service.getListAll());
 		return "write/gcal";
+	}
+	 
+	@RequestMapping("test2")
+	public String test2() {
+		return "write/test2";
 	}
 	
 	@GetMapping("")
