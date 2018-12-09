@@ -7,6 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>마이페이지</title>
 <style>
+#update_btn {
+	float: right;
+}
 </style>
 </head>
 <body>
@@ -17,11 +20,12 @@
 			<div class="container">
 				<img height="100" width="100" alt="힘이없을때는 경수를 보자"
 					src="/resources/images/do.png"> <b>${user.name }</b>
-				<h1 class="display-4">마이페이지</h1>
-				<p class="lead">This is a modified jumbotron that occupies the
-					entire horizontal space of its parent.</p>
+				<button type="button" class="btn btn-info" id="update_btn"
+					onclick="jsp:location.href='update.jsp'">회원정보수정</button>
+				<h1 class="display-4 text-center">마이페이지</h1>
+				<p class="lead text-center">This is a modified jumbotron that
+					occupies the entire horizontal space of its parent.</p>
 			</div>
-			<button type="button" class="btn btn-info" onclick="jsp:location.href='update.jsp'">회원정보수정</button>
 		</div>
 
 		<nav>

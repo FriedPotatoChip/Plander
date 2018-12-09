@@ -64,7 +64,8 @@ body, html {
 			<table class="table table-bordered">
 				<tbody>
 					<tr>
-						<td width="25%">아이디&nbsp;<b>${user.id }</b></td>
+						<td width="25%">아이디&nbsp;</td>
+						<td><b>${user.id }</b></td>
 					</tr>
 					<tr>
 						<td>비밀번호&nbsp;</td>
@@ -95,7 +96,7 @@ body, html {
 							class="col-sm-2 form-control input-sm"></td> -->
 					</tr>
 					<tr>
-						<td>이메일&nbsp;/td>
+						<td>이메일&nbsp;</td>
 						<td><input type="text" name="email"
 							class="col-sm-4 form-control input-sm" value="${user.email }"></td>
 						<!-- 						<td class="form-inline"><input type="text" name="email1"
