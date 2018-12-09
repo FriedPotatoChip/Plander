@@ -36,7 +36,7 @@ public class WriteController {
 		model.addAttribute("planList", service.getListAll());
 		return "write/gcal";
 	}
-	
+	 
 	@RequestMapping("test2")
 	public String test2() {
 		return "write/test2";
