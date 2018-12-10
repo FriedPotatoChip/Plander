@@ -8,7 +8,7 @@ public interface UserService {
 	public UserVO getUser(UserVO vo);
 	
 	//회원가입
-	public UserVO join(UserVO vo);
+	public int join(UserVO vo);
 	//회원가입 아이디 중복체크
 	public int idchk(UserVO vo);
 	

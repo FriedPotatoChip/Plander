@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div id="header" class="row">
 	<div class="col-xs-12 col-sm-6 col-md-8">
-		<a href="" id="home">플랜더</a>&nbsp;&nbsp;
+		<a href="/Plander" id="home">플랜더</a>&nbsp;&nbsp;
 		<a href="">전체 플래너</a>&nbsp;
 		<a href="">플래너 작성</a>&nbsp;
 		<a href="">이용방법</a>&nbsp;
@@ -222,7 +222,7 @@
 			<a data-toggle="modal" href="#myModal" data-dismiss="modal">로그인</a></p>
 			<div id="admit">
 				<div class="checkbox">
-					<label><input type="checkbox">&nbsp;<b>플랜더</b>에 가입하면서 이용약관 과 개인정보 취급방침을 확인하고 이에 동의합니다.</label>
+					<label><input type="checkbox">&nbsp;<b>플랜더</b>에 가입하면서 <a>이용약관</a>과 <a>개인정보 취급방침</a>을 확인하고 이에 동의합니다.</label>
 				</div>
 			</div>
 		</div> <!-- 모달 바디 끝 -->

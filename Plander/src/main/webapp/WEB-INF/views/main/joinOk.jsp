@@ -35,7 +35,8 @@
 	로그인을 해서 플랜더의 다양한 컨텐츠를 이용해보세요.</p>
 	
 	<p class="center" style="width: 50%; margin: auto;">
-		<button type="button" class="btn btn-outline-secondary form-control">메인화면</button>
+		<button type="button" class="btn btn-outline-secondary"
+				onclick="location.href='/Plander'">메인화면</button>
 	</p>
 	
 	<br><br><br><br>

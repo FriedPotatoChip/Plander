@@ -1,7 +1,8 @@
 package com.bit.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bit.domain.PlannerVO;
 import com.bit.domain.UserVO;
+import com.bit.service.PlanService;
 import com.bit.service.UserService;
 
 @Controller
@@ -20,9 +23,14 @@ public class MainController {
 	@Autowired
 	private UserService service;
 	
+	@Autowired
+	private PlanService planService;
+	
 	@RequestMapping("")
-	public String main() {
+	public String main(Model model) {
 		System.out.println("메인화면");
+		model.addAttribute("listPlan", planService.getListPlan());
+		System.out.println("listPlan : " + planService.getListPlan());
 		return "main";
 	}
 	
@@ -58,7 +66,7 @@ public class MainController {
 		service.join(vo);
 		System.out.println("컨트롤러에서 : " + vo);
 		model.addAttribute("username", vo.getName());
-		return "redirect:main/joinOk";
+		return "main/joinOk";
 	}
 	
 	//회원가입 아이디 중복확인
@@ -67,5 +75,35 @@ public class MainController {
 		int result = service.idchk(vo);
 		return String.valueOf(result);
 	}
+	
+	//플래너 제목 내용 검색 
+	@RequestMapping(value="/search", method = { RequestMethod.GET, RequestMethod.POST })
+	public String search(PlannerVO pvo, Model model) {
+		System.out.println("controller 검색");
+		
+		String keyword = pvo.getKeyword();
+		System.out.println("검색어 : " + keyword + ", pvo : " + pvo);
+		String path ="";
+		
+		if (keyword == null) {
+			pvo.setKeyword("");
+			System.out.println("검색 결과가 없습니다.");
+			path = "main";
+		} else {
+			List<PlannerVO> searchlist = planService.searchPlan(pvo);
+			System.out.println("검색결과 : " + searchlist);
+			model.addAttribute("searchPlan", searchlist);
+			model.addAttribute("keyword", keyword);
+			path = "main/searchList";
+		}
+		
+		return path;
+	}
+//	
+//	@RequestMapping("/searchList")
+//	public String searchList() {
+//		return "main/searchList";
+//	}
+//	
 	
 }
