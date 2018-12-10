@@ -19,7 +19,7 @@ public interface MyService {
 //	내가 쓴 댓글
 	public CommentsVO getMyCommentList(int u_idx);
 //	내 글에 달린 댓글
-	public CommentsVO getCommentList(int u_idx);
+	public List<CommentsVO> getCommentList(int u_idx);
 //	전체일정(내플래너) 갯수
 	public int getPlannerCnt(int u_idx);
 //	북마크 갯수
@@ -28,4 +28,7 @@ public interface MyService {
 	public int getCommentCnt(int u_idx);
 //	회원 정보 수정 
 	public int updateUser(UserVO user);
+//	totalCount(페이징 처리용)
+	public int totalCount(int u_idx);
+
 }

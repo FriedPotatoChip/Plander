@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.domain.UserVO;
+import com.bit.service.MyService;
 import com.bit.service.UserService;
 
 @Controller
@@ -20,6 +21,9 @@ public class MainController {
 	@Autowired
 	private UserService service;
 	
+	@Autowired
+	private MyService myservice;
+	
 	@RequestMapping("")
 	public String main() {
 		System.out.println("메인화면");
@@ -27,7 +31,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(UserVO vo, HttpSession session) {
+	public String login(UserVO vo, HttpSession session, Model model) {
 		System.out.println("controller 로그인 테스트");
 		UserVO user = service.getUser(vo);
 		
@@ -37,6 +41,9 @@ public class MainController {
 		} else if (user.getId().equals(vo.getId()) || user.getPassword().equals(vo.getPassword())) {
 			session.setAttribute("user", user);
 			System.out.println("user 확인 : " + user);
+			model.addAttribute("getPlannerCnt", myservice.getPlannerCnt(user.getU_idx()));
+			model.addAttribute("getBookmarkCnt", myservice.getBookmarkCnt(user.getU_idx()));
+			model.addAttribute("getCommentCnt", myservice.getCommentCnt(user.getU_idx()));
 			return "main";
 		} else {
 			System.out.println("로그인 실패");
@@ -67,5 +74,7 @@ public class MainController {
 		int result = service.idchk(vo);
 		return String.valueOf(result);
 	}
+	
+
 	
 }
