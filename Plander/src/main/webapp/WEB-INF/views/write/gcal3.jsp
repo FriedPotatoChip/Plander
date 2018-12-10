@@ -5,19 +5,17 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<link href="/resources/css/datepicker.css" rel="stylesheet">
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="/resources/js/datepicker.js"></script>
-
+    <script type='text/javascript' src='//code.jquery.com/jquery-1.9.1.js'></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/datepicker3.css" />
+<script type="text/javascript" src="/resources/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap-datepicker.kr.js"></script>
 <script src='/resources/js/moment.min.js'></script>
-
 <!---*** Start: Bootstrap 3.3.7 version files. ***--->
-<script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-<!-- <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!---*** End: Bootstrap 3.3.7 version files. ***--->
+
+<!--  -->
 
 
 <script src='/resources/js/fullcalendar.js'></script>
@@ -28,39 +26,14 @@
 <link href='/resources/css/fullcalendar.print.min.css' rel='stylesheet'
 	media='print' />
 <script src='/resources/js/ko.js'></script>
-<script>
-
-$(function() {
-
-	var $start = $('#start'),
-		$end = $('#end');
-		$start.datepicker({
-			language: 'ko',
-			autoClose: true,
-			onSelect: function (fd, date) {
-				$end.data('datepicker').update('minDate', date)
-			},
-			navTitles: {
-			    days: '<i>yyyy</i>년 MM',
-			    months: 'yyyy',
-			    years: 'yyyy1 - yyyy2'
-			}
-		})
-		$end.datepicker({
-			language: 'ko',
-			autoClose: true,
-			onSelect: function (fd, date) {
-				$start.data('datepicker').update('maxDate', date)
-			},
-			navTitles: {
-			    days: '<i>yyyy</i>년 MM',
-			    months: 'yyyy',
-			    years: 'yyyy1 - yyyy2'
-			}
-		})
-});
-</script>
-
+    <script type='text/javascript'>
+    $(function(){
+    	$('#dateRangePicker').datepicker({
+    		 format: "yyyy-mm-dd",
+    		 language: "kr"
+    		 });
+    });
+    </script>
 <script>
 
 
@@ -98,19 +71,17 @@ $(function() {
 			select : function(startDate, endDate) {
 				//alert('selected ' + startDate.format() + ' to ' + endDate.format());
 				// 날짜 길이 startDate.format().length
-				/* $("#start").attr("value", startDate.format("YYYY-MM-DD")); */
-				document.getElementById("start").value=startDate.format("YYYY-MM-DD");
-				/* $("#end").attr("value", endDate.format("YYYY-MM-DD")); */
-				document.getElementById("end").value=endDate.format("YYYY-MM-DD");
+
 				$('#myModal').modal('show');
 				//$("#start_date").html(startDate.format("YYYY-MM-DD HH:mm"));
+				$("#start_date").attr("value", startDate.format("YYYY-MM-DD"));
+				$("#end_date").attr("value", endDate.format("YYYY-MM-DD"));
 			},
 			events : [ 
 				<c:forEach var="list" items="${planList}">
 					<c:if test="${not empty list}">
 						{
 							title : "${list.p_title}",
-							color : "#b197fc",
 							start : "${list.p_start_date}",
 							end : "${list.p_end_date}",
 							url: 'https://scontent-icn1-1.xx.fbcdn.net/v/t31.0-8/10383789_1539879212958441_3985988292410140175_o.png?_nc_cat=108&_nc_ht=scontent-icn1-1.xx&oh=a84657bf08f258bb5c71691201645595&oe=5CA2AE8C'
@@ -157,34 +128,35 @@ body {
 	background-color: #EA4C89;
 }
 .fc-event {
+	background-color: #b197fc;
 	opacity: 0.6;
-}
-#miniCal {
-	width: 50px;
 }
 </style>
 </head>
 <body>
+
 	<div id='loading'>loading...</div>
 
-	<div class="row">
-		<div id="miniCal" class="datepicker-here col-3" data-language="ko"></div>
-		<div id='calendar' class="col-8"></div>
-	</div>
+	<div id='calendar'></div>
+
+
+
+	<div class="input-group input-append date" id="dateRangePicker"> </div>
 
 	<!--  -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">일정 작성</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
+					<h4 class="modal-title" id="myModalLabel">일정 작성</h4>
 				</div>
 				<div class="modal-body">
-					<table id="modalTable">
+					<table>
 						<tr>
 							<select name="category">
 								<c:forEach var="ctList" items="${ctList }">
@@ -197,12 +169,8 @@ body {
 							<td><input type="text" name="title"></td>
 						</tr>
 						<tr>
-							<td>
-								<input type='text' class='datepicker-her0e' data-language='ko' data-position='bottom right' id="start">
-					        </td>
-							<td>
-								<input type='text' class='datepicker-here' data-language='ko' data-position='bottom left' id="end">
-							</td>
+						<td>
+				        </td>
 				        </tr>
 					</table>
 				</div>
@@ -215,22 +183,22 @@ body {
 			</div>
 		</div>
 	</div>
+
+
+
 	
-
-<button type="button" class="btn btn-primary">Primary</button>
-<button type="button" class="btn btn-secondary">Secondary</button>
-<button type="button" class="btn btn-success">Success</button>
-<button type="button" class="btn btn-danger">Danger</button>
-<button type="button" class="btn btn-warning">Warning</button>
-<button type="button" class="btn btn-info">Info</button>
-<button type="button" class="btn btn-light">Light</button>
-<button type="button" class="btn btn-dark">Dark</button>
-
-<button type="button" class="btn btn-link">Link</button>
-
-
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+<script>
+;(function($){
+	$.fn.datepicker.dates['kr'] = {
+		days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
+		daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
+		daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
+		months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+		monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+	};
+}(jQuery));
+</script>
 </body>
 </html>
