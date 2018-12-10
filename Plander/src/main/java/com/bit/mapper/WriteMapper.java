@@ -15,7 +15,9 @@ public interface WriteMapper {
 	
 	// Planner 전체 조회
 	public List<PlannerVO> getListAll();
-	
-	
+	// Planner 전체 조회(작성자포함)
+	public List<PlannerVO> getListPlan();
+	// Planner 검색(제목/내용)
+	public List<PlannerVO> searchPlan(String keyword);
 	
 }

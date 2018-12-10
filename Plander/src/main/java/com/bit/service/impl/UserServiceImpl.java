@@ -1,7 +1,5 @@
 package com.bit.service.impl;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +22,7 @@ public class UserServiceImpl implements UserService {
 	
 	//회원가입
 	@Override
-	public UserVO join(UserVO vo) {
+	public int join(UserVO vo) {
 		System.out.println("userImpl : join 까지옴!");
 		return userMapper.join(vo);
 	}
@@ -35,5 +33,5 @@ public class UserServiceImpl implements UserService {
 		System.out.println("아이디 중복체크 Impl : " + vo);
 		return userMapper.idchk(vo);
 	}
-
+	
 }

@@ -73,6 +73,12 @@ public class PlannerVO {
 	}
 	
 	
+	//전체목록 작성자보기
+	private String name;
+	//조회수 좋아요 증가 
+	private int hit, good;
 	
+	//검색
+	private String keyword;
 	
 }
