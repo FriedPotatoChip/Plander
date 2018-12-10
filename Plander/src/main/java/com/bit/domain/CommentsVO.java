@@ -16,4 +16,7 @@ public class CommentsVO {
 	private String c_content, u_idx;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date c_regdate;
+	
+	private String p_title;
+	private int ct_idx;
 }

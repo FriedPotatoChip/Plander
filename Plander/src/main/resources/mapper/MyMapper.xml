@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-<mapper namespace="com.bit.mapper.UserMapper">
+<mapper namespace="com.bit.mapper.MyMapper">
 
 	<!-- 내플래너 목록 보기 -->
 	<select id="getPlannerList"
@@ -49,7 +49,7 @@
 	<!-- 내 글에 달린 댓글 -->
 	<select id="getCommentList"
 		resultType="com.bit.domain.CommentsVO" parameterType="int">
-		SELECT C.*
+		SELECT C.*, P.*
 		FROM
 		COMMENTS C, PLANNER P
 		WHERE P.U_IDX = #{u_idx}
@@ -58,19 +58,19 @@
 
 	<!-- 전체일정(내플래너) 갯수 -->
 	<select id="getPlannerCnt" resultType="int" parameterType="int">
-		SELECT COUNT(*) FROM
+		SELECT COUNT(P_IDX) FROM
 		PLANNER WHERE U_IDX = #{u_idx}
 	</select>
 
 	<!-- 북마크 갯수 -->
 	<select id="getBookmarkCnt" resultType="int" parameterType="int">
-		SELECT COUNT(*) FROM
+		SELECT COUNT(BM_IDX) FROM
 		BOOKMARK WHERE U_IDX = #{u_idx}
 	</select>
 
 	<!-- 내 글에 달린 댓글 갯수 -->
 	<select id="getCommentCnt" resultType="int" parameterType="int">
-		SELECT COUNT(C.*)
+		SELECT COUNT(C.C_IDX)
 		FROM
 		COMMENTS C, PLANNER P
 		WHERE P.U_IDX = #{u_idx}
@@ -83,10 +83,17 @@
 		UPDATE USERS
 		SET PASSWORD = #{password},
 		NAME = #{name},
-		EMAIL = #{email},
-		ADDRESS = #{address}
+		PHONE = #{phone},
+		EMAIL = #{email}
 		WHERE U_IDX = #{u_idx}
 	</update>
+	
+	<!-- totalCount(페이징 처리용) -->
+	<select id="totalCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) AS TOTALCOUNT FROM PLANNER WHERE U_IDX = #{u_idx}
+	</select>
+	
+	
 
 </mapper>
 

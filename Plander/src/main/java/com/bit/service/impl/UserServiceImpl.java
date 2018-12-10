@@ -13,14 +13,25 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 	
+	//로그인
 	@Override
 	public UserVO getUser(UserVO vo) {
-		System.out.println("userImpl 까지옴!");
+		System.out.println("userImpl : login 까지옴!");
 		return userMapper.getUser(vo);
 	}
 	
-	public int loginchk(UserVO vo) {
-		return 0;
+	//회원가입
+	@Override
+	public int join(UserVO vo) {
+		System.out.println("userImpl : join 까지옴!");
+		return userMapper.join(vo);
 	}
-
+	
+	//회원가입 아이디 중복체크
+	@Override
+	public int idchk(UserVO vo) {
+		System.out.println("아이디 중복체크 Impl : " + vo);
+		return userMapper.idchk(vo);
+	}
+	
 }

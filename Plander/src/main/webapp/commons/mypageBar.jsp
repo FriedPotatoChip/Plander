@@ -11,7 +11,7 @@
 				<td colspan="2" width="13%"><b>${user.name }</b></td>
 				<td rowspan="3" width="57%"><b style="font-size: 28px;">[오늘의 일정] 메인 페이지 만들기 !</b></td>
 				<td rowspan="3" width="10%">일정<br>만들기</td>
-				<td rowspan="3" width="10%"><a href="myPage/Plander/mypage?u_idx=${user.u_idx }&name=${user.name}">mypage</a></td>
+				<td rowspan="3" width="10%"><a href="mypage?u_idx=${user.u_idx }&name=" + encodeURI(${user.name})>mypage</a></td>
 			</tr>
 			<tr>
 				<td>전체일정</td>
@@ -19,9 +19,9 @@
 				<td>댓글</td>
 			</tr>
 			<tr>
-				<td>1</td>
-				<td>1</td>
-				<td>1</td>
+				<td>${getPlannerCnt}</td>
+				<td>${getBookmarkCnt}</td>
+				<td>${getCommentCnt}</td> 
 			</tr>
 		</table>
 	</div>
