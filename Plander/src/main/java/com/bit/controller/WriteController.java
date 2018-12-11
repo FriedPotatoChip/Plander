@@ -1,6 +1,7 @@
 package com.bit.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,8 @@ public class WriteController {
 		
 		return "write/planderWrite_detail";
 	}
+	
+	
 	
 	@PostMapping("/detail")
 	public String writeDetail(Planner_dVO vo) {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bit.domain.CategoryVO;
 import com.bit.domain.Category_dVO;
+import com.bit.domain.PlannerVO;
 import com.bit.mapper.ViewMapper;
 import com.bit.service.ViewService;
 
@@ -23,5 +24,20 @@ public class ViewServiceImpl implements ViewService {
 	
 	public List<Category_dVO> getListCategory_d(Category_dVO cdvo) {
 		return viewMapper.getListCategory_d(cdvo);
+	}
+
+	@Override
+	public List<PlannerVO> getListPlannerRandom(PlannerVO pvo) {
+		return viewMapper.getListPlannerRandom();
+	}
+
+	@Override
+	public List<PlannerVO> getDetailPlannerList(PlannerVO pvo) {
+		return viewMapper.getDetailPlannerList(pvo);
+	}
+
+	@Override
+	public List<PlannerVO> getDetailPlannerList_2(PlannerVO pvo) {
+		return viewMapper.getDetailPlannerList_2(pvo);
 	}
 }
