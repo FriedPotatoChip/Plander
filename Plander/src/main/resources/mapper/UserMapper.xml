@@ -7,9 +7,10 @@
 		SELECT * FROM USERS WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
 	
-	<!-- 회원/관리자 확인 -->
+	<!-- 관리자 확인 -->
 	<select id="userchk" resultType="com.bit.domain.UserVO">
 		SELECT * FROM USERS WHERE RANK = '1'
+		AND (ID = #{id} AND PASSWORD = #{password})
 	</select>
 	
 	<!-- 회원가입 아이디 중복체크 -->
@@ -22,6 +23,16 @@
 		INSERT INTO USERS (U_IDX, ID, PASSWORD, NAME, EMAIL, PHONE, REGDATE)
 		VALUES (USERS_SEQ.NEXTVAL, #{id}, #{password}, #{name}, #{email}, #{phone}, SYSDATE)
 	</insert>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="com.bit.domain.UserVO">
+		SELECT * FROM USERS WHERE NAME = #{name} AND PHONE = #{phone}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" resultType="com.bit.domain.UserVO">
+		SELECT * FROM USERS WHERE ID = #{id}
+	</select>
 	
 </mapper>
 

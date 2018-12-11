@@ -8,8 +8,6 @@
 		<a href="">이용방법</a>&nbsp;
 	</div>
 	<div class="col-xs-6 col-md-4" style="text-align: right; padding-top: 0.8%;">
-		[ 관리자 ]&nbsp;<!-- 관리자 모드에서만 보이게 -->
-		
 		<!-- 로그인 모달 창 -->
 		<a data-toggle="modal" href="#myModal">로그인</a>&nbsp;
 		<a data-toggle="modal" href="#joinModal">회원가입</a>&nbsp;
@@ -151,9 +149,9 @@
 			</form><hr>
 			
 			<div class="center">
-				<a href="">아이디 찾기</a>&nbsp;
-				<a href="">비밀번호 찾기</a>&nbsp;
-				<a href="">회원가입</a>
+				<a href="/Plander/findIdPw">아이디 찾기</a>&nbsp;
+				<a href="/Plander/findIdPw">비밀번호 찾기</a>&nbsp;
+				<a data-toggle="modal" href="#joinModal" data-dismiss="modal">회원가입</a>
 			</div>
 		</div>
 			
