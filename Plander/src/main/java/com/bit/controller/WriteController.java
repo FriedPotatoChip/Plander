@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bit.domain.CategoryVO;
 import com.bit.domain.PlannerVO;
 import com.bit.domain.Planner_dVO;
+import com.bit.service.ViewService;
 import com.bit.service.WriteService;
 
 @Controller
@@ -21,6 +23,32 @@ public class WriteController {
 
 	@Autowired
 	private WriteService service;
+	
+	@Autowired
+	private ViewService viewService;
+	
+	@RequestMapping("test")
+	public String calTest(CategoryVO cvo, Model model) {
+		System.out.println("여기 들어옴");
+		List<CategoryVO> ctList = viewService.getListCategory(cvo);
+		model.addAttribute("ctList", ctList);
+		
+		model.addAttribute("planList", service.getListAll());
+		return "write/gcal";
+	}
+	 
+	@RequestMapping("test2")
+	public String test2() {
+		return "write/test2";
+	}
+	@RequestMapping("test3")
+	public String test3() {
+		return "write/gcal3";
+	}
+	@RequestMapping("gcal2")
+	public String gcal2() {
+		return "write/gcal2";
+	}
 	
 	@GetMapping("")
 	public String writeMain() {
@@ -52,4 +80,5 @@ public class WriteController {
 		
 		return "write/planderWrite_detail";
 	}
+	
 }

@@ -2,15 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.bit.mapper.UserMapper">
 	
-	<!-- 로그인시 회원 확인 -->
+	<!-- 로그인 -->
 	<select id="getUser" resultType="com.bit.domain.UserVO">
-		SELECT * FROM USERS WHERE ID = #{id}
+		SELECT * FROM USERS WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>
+	
+	<!-- 회원/관리자 확인 -->
+	<select id="userchk" resultType="com.bit.domain.UserVO">
+		SELECT * FROM USERS WHERE RANK = '1'
+	</select>
+	
+	<!-- 회원가입 아이디 중복체크 -->
+	<select id="idchk" resultType="int" parameterType="com.bit.domain.UserVO">
+		SELECT NVL(COUNT(*),0) FROM USERS WHERE ID = #{id}
 	</select>
 	
 	<!-- 회원가입 -->
-
-
-
+	<insert id="join" parameterType="com.bit.domain.UserVO">
+		INSERT INTO USERS (U_IDX, ID, PASSWORD, NAME, EMAIL, PHONE, REGDATE)
+		VALUES (USERS_SEQ.NEXTVAL, #{id}, #{password}, #{name}, #{email}, #{phone}, SYSDATE)
+	</insert>
+	
 </mapper>
 
 
