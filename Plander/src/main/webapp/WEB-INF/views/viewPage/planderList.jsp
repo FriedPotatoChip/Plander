@@ -5,11 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AllPlanderList</title>
+<title>AllPlannerList</title>
+
 <!-- jQuery first -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js">
+	
+</script>
 <style>
 body, html {
 	margin: auto;
@@ -178,12 +182,42 @@ body, html {
 }
 </style>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('.po_category').click(function() {
-			$('.po_category').removeClass('on');
-			$(this).addClass('on');
-		})
-	});
+		$(document).ready(function() {
+
+			$('.po_category').click(function() {
+
+				//색변환
+				$('.po_category').removeClass('on');
+				$(this).addClass('on');
+				get_reco_planner();
+			})
+		});
+
+		function get_reco_planner() {
+			console.log('aaaa');
+			var code = $('.po_category.on').attr('value');
+			console.log(code);
+			$.ajax({
+				url : '/Plander/view/test',
+				data : {
+					'ct_idx' : code
+				},
+				success : function(data) {
+					console.log(data);
+					var _html = "";
+					$(data).each(function() {
+						_html += '<a href="#" class="po_planner"><div class="po_planner_name">'
+								+ this.p_title
+								+ '</div>';
+						_html += "<img src='../resources/images/"+this.p_idx+".jpg' class='po_planner_img'></a>";
+					});
+
+					_html += '<div class="clear"></div>';
+
+					$('.planner_box').html(_html);
+				}
+			});
+		}
 </script>
 </head>
 <body>
@@ -195,7 +229,9 @@ body, html {
 			<div class="planner_section">
 				<span class="planner_left">인기 주제</span>
 				<c:forEach var="category" items="${category }">
-					<a href="#" class="planner_category">${category.ct_name }</a>
+					<a
+						href="/Plander/view/CategoryDetailPlanner?ct_idx=${category.ct_idx }"
+						class="planner_category">${category.ct_name }</a>
 				</c:forEach>
 			</div>
 		</div>
@@ -207,12 +243,12 @@ body, html {
 		<div class="wrap">
 			<div class="planner_title">Recommended Planner</div>
 			<div class="planner_tap">
-				<div class="po_category on">추천</div>
+				<div class="po_category on" value="0">추천</div>
 				<div class="po_line">&nbsp;</div>
 				<c:forEach var="category" items="${category }">
-					<div class="po_category">${category.ct_name }</div>
+					<div class="po_category" value="${category.ct_idx }">${category.ct_name }</div>
 					<div class="po_line">&nbsp;</div>
-					<!-- 				<div class="po_category">가계부</div>
+					<!-- 			<div class="po_category">가계부</div>
 				<div class="po_line">&nbsp;</div>
 				<div class="po_category">식단</div>
 				<div class="po_line">&nbsp;</div>
@@ -221,10 +257,11 @@ body, html {
 			</div>
 			<div class="clear" />
 			<div class="planner_box">
-				<c:forEach var="category" items="${category }">
+				<c:forEach var="plannerRandom" items="${plannerRandom }">
+
 					<a href="#" class="po_planner">
-						<div class="po_planner_name">${category.ct_name }</div> <img
-						src="../resources/images/${category.ct_idx }.jpg" alt
+						<div class="po_planner_name" value="${plannerRandom.ct_idx }">${plannerRandom.p_title }</div>
+						<img src="../resources/images/${plannerRandom.p_idx }.jpg" alt
 						class="po_planner_img">
 					</a>
 				</c:forEach>
@@ -272,8 +309,6 @@ body, html {
 			</div>
 		</div>
 	</div> -->
-
-
 	<br>
 	<br>
 	<br>

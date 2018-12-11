@@ -86,7 +86,8 @@
 <br><hr><br><br>
 
 <!-- 로그인시 보여주는 마이페이지 -->
-<c:if test="${not empty user }"><jsp:include page="/commons/mypageBar.jsp"/></c:if>
+<c:if test="${not empty user }">
+<jsp:include page="/commons/mypageBar.jsp"/></c:if>
 
 <!--추천 카테고리 ================================================================== 카테고리 EL 태그 넣기 -->
 <div class="row">

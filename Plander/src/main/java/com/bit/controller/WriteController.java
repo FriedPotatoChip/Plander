@@ -41,6 +41,14 @@ public class WriteController {
 	public String test2() {
 		return "write/test2";
 	}
+	@RequestMapping("test3")
+	public String test3() {
+		return "write/gcal3";
+	}
+	@RequestMapping("gcal2")
+	public String gcal2() {
+		return "write/gcal2";
+	}
 	
 	@GetMapping("")
 	public String writeMain() {
@@ -59,6 +67,8 @@ public class WriteController {
 		
 		return "write/planderWrite_detail";
 	}
+	
+	
 	
 	@PostMapping("/detail")
 	public String writeDetail(Planner_dVO vo) {
