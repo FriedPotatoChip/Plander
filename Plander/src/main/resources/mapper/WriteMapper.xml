@@ -9,8 +9,12 @@
 	
 	<!-- 전체 플래너 리스트 조회(작성자명포함) -->
 	<select id="getListPlan" resultType="com.bit.domain.PlannerVO">
-		SELECT P.*, U.* FROM PLANNER P, USERS U
-		WHERE P.U_IDX = U.U_IDX ORDER BY P.P_IDX DESC
+		SELECT * FROM (
+			SELECT ROWNUM R_NUM, A.* FROM (
+				SELECT P.*, U.ID, U.NAME FROM PLANNER P, USERS U
+				WHERE P.U_IDX = U.U_IDX ORDER BY P.P_IDX DESC) A)
+		WHERE R_NUM <![CDATA[<= 8]]>
+		ORDER BY R_NUM DESC
 	</select>
 	
 	<!-- 플래너 조회수 증가 -->
@@ -25,11 +29,25 @@
 	
 	<!-- 플래너 제목/내용 검색 -->
 	<select id="searchPlan" resultType="com.bit.domain.PlannerVO">
-		SELECT P.*, PD.PD_CONTENT, U.NAME
-			FROM PLANNER P, PLANNER_DETAIL PD, USERS U
-		WHERE P.P_IDX = PD.P_IDX AND P.U_IDX = U.U_IDX
-			AND (UPPER(P.P_TITLE) LIKE UPPER ('%'||#{keyword}||'%') OR UPPER(PD.PD_CONTENT) LIKE UPPER ('%'||#{keyword}||'%'))
-		ORDER BY P.P_IDX
+		SELECT * FROM (
+			SELECT ROWNUM R_NUM, A.* FROM (
+			SELECT P.*, PD.PD_CONTENT, U.NAME
+						FROM PLANNER P, PLANNER_DETAIL PD, USERS U
+					WHERE P.P_IDX = PD.P_IDX AND P.U_IDX = U.U_IDX
+						AND (UPPER(P.P_TITLE) LIKE UPPER ('%'||#{keyword}||'%') OR UPPER(PD.PD_CONTENT) LIKE UPPER ('%'||#{keyword}||'%'))
+					ORDER BY P.P_IDX) A)
+			WHERE R_NUM <![CDATA[<= 12]]>
+			ORDER BY R_NUM DESC
+	</select>
+	
+	<!-- 검색결과 수 -->
+	<select id="searchCnt" resultType="int">
+		SELECT COUNT(*) FROM (
+			SELECT P.*, PD.PD_CONTENT, U.NAME
+				FROM PLANNER P, PLANNER_DETAIL PD, USERS U
+			WHERE P.P_IDX = PD.P_IDX AND P.U_IDX = U.U_IDX
+				AND (UPPER(P.P_TITLE) LIKE UPPER ('%'||#{keyword}||'%') OR UPPER(PD.PD_CONTENT) LIKE UPPER ('%'||#{keyword}||'%'))
+			ORDER BY P.P_IDX)
 	</select>
 	
 	
@@ -37,8 +55,8 @@
 	
 	<!-- Planner 인서트 -->
 	<insert id="insertPlanner" parameterType="com.bit.domain.PlannerVO">
-		INSERT INTO PLANNER (P_IDX, P_TITLE, P_START_DATE, P_END_DATE)
-					VALUES (PLANNER_SEQ.NEXTVAL, #{p_title}, #{p_start_date}, #{p_end_date})
+		INSERT INTO PLANNER (P_IDX, P_TITLE, P_START_DATE, P_END_DATE, DAYS, CT_IDX)
+					VALUES (PLANNER_SEQ.NEXTVAL, #{p_title}, #{p_start_date}, #{p_end_date}, #{days}, #{ct_idx})
 	</insert>	
 	
 	<!-- Planner_detail 인서트 -->

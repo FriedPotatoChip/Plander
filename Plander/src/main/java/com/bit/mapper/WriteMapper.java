@@ -19,5 +19,7 @@ public interface WriteMapper {
 	public List<PlannerVO> getListPlan();
 	// Planner 검색(제목/내용)
 	public List<PlannerVO> searchPlan(String keyword);
+	// 검색 결과 수 
+	public int searchCnt(String keyword);
 	
 }

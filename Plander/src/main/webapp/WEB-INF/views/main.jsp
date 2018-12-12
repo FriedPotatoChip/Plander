@@ -24,25 +24,56 @@
 	.center { text-align: center; }
 	#mypage img { display: inline-block; }
 	
-	.card-padding { padding: 0 20px 0 20px; }
+	/* .card-padding { padding: 0 20px 0 20px; } */
+	
+	/* 인기 카테고리
+	.planner_box { width: 100%; box-sizing: border-box; }
+	.po_planner { */
+		/* float: left; */
+		/* width: 286px;
+		height: 191px; */
+		/* margin-top: 2%; margin-right: 0.5%;
+		position: relative; */
+	/* 	overflow: hidden;
+	}
+	.po_planner_img {
+		width: 100%;
+		height: 100%;
+		-webkit-transition: all 3.6s;
+		margin: 0; padding: 0; border: 0;
+		font-size: 100%;
+		font: inherit;
+	} */
+	/* 인기 카테고리 끝 */
+	
+	
 	
 </style>
 </head>
 <body>
 <div id="container">
 <!-- 헤더 -->
-<c:if test="${empty user }"><jsp:include page="/commons/header.jsp"/></c:if>
-<c:if test="${not empty user }"><jsp:include page="/commons/loginheader.jsp"/></c:if>
+
+<c:choose>
+	<c:when test="${not empty user }">
+		<jsp:include page="/commons/loginheader.jsp"/>
+	</c:when>
+	<c:when test="${not empty admin }">
+		<jsp:include page="/commons/adminLoginheader.jsp"/>
+	</c:when>
+	<c:otherwise>
+		<jsp:include page="/commons/header.jsp"/>
+	</c:otherwise>
+</c:choose>
 	
 <!-- 로그인 모달 -->
-
 <div id="mainbox" class="center">
 	<h1>특별한 나만의 계획표를 만들어보아요!</h1><br>
 	<form class="form-group" method="post" action="/Plander/search">
 		<table style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td>
-				<input type="text" name="keyword"  placeholder="제목/내용으로 검색">&nbsp;
+				<input type="text" name="keyword" placeholder="제목/내용으로 검색">&nbsp;
 				<button type="submit">검색</button>
 			</td>
 		</tr>
@@ -58,20 +89,54 @@
 <c:if test="${not empty user }">
 <jsp:include page="/commons/mypageBar.jsp"/></c:if>
 
-<!-- 인기 카테고리 -->
-<div id="category">
+<!--추천 카테고리 ================================================================== 카테고리 EL 태그 넣기 -->
 <div class="row">
 	<!-- 1번 카테고리 -->
-	<div>
-	
+	<div style="border: 1px solid; width: 286px; height: 191px; overflow: hidden;">
+		<div>
+		<a><img class="card-img-top" src="/resources/images/3.jpg" alt="카테고리 이미지"></a>
+		이미지 넣기,,,,사이즈,,,,,,,,,,
+		</div>
+	</div>
+	<!-- 2번 -->
+	<div style="border: 1px solid; width: 286px; height: 191px; overflow: hidden;">
+		<div>
+		<a><img class="card-img-top" src="/resources/images/do.png" alt="카테고리 이미지"></a>
+		</div>
+	</div>
+	<!-- 3번 -->
+	<div style="border: 1px solid; width: 286px; height: 191px; overflow: hidden;">
+		<div>
+		이미지 넣기,,,,사이즈,,,,,,,,,,
+		</div>
+	</div>
+	<!-- 4번 -->
+	<div style="border: 1px solid; width: 286px; height: 191px; overflow: hidden;">
+		<div>
+		이미지 넣기,,,,사이즈,,,,,,,,,,
+		</div>
 	</div>
 </div>
-</div>
-<hr>
+
+
+<%-- <div class="">
+	<div class="planner_box">
+		<c:forEach var="category" items="${category }">
+			<a href="#" class="po_planner"
+				style=" overflow: hidden; width: 286px; height: 191px;">
+				<img src="../resources/images/${category.ct_idx }.jpg" alt="추천 카테고리" class="po_planner_img"
+				style="width: 100%; height: 100%;">
+			</a>
+		</c:forEach>
+	</div>
+</div> --%>
+<!-- ============================================================================================= -->
+
 
 <!-- 인기 플래너 -->
 <!-- 카드 바디 -->
 <div id="popular">
+<br><hr><br><br>
 <!-- <p class="center">목록이 없습니다 T_T 새로운 플래너를 작성해보세요!</p> -->
 	<c:if test="${empty listPlan }">
 		<p class="center">목록이 없습니다 T_T 새로운 플래너를 작성해보세요!</p>

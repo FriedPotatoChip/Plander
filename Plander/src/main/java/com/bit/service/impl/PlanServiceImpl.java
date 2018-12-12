@@ -29,5 +29,13 @@ public class PlanServiceImpl implements PlanService {
 		System.out.println(keyword + " : 임플에서 찍힘 ");
 		return mapper.searchPlan(keyword);
 	}
+	
+	//검색 결과 수 
+	@Override
+	public int searchCnt(PlannerVO pvo) {
+		System.out.println("planImpl cnt 까지옴!");
+		String keyword = pvo.getKeyword();
+		return mapper.searchCnt(keyword);
+	}
 
 }
