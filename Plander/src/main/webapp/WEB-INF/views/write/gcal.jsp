@@ -11,7 +11,7 @@
 
 <script src='/resources/js/moment.min.js'></script>
 
-<!---*** Start: Bootstrap 3.3.7 version files. ***--->
+<!---*** Start: Bootstrap 4.1.3 version files. ***--->
 <script language="javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
@@ -29,9 +29,24 @@
 	media='print' />
 <script src='/resources/js/ko.js'></script>
 <script>
-
+var start_date;
+var end_date;
+var clickChk = 0;
+var days;
+function calDays() {
+	if(end_date == undefined || start_date == undefined) {
+		return;
+	}
+	days = ((end_date - start_date + (1000*60*60*24))/60/60/24/1000);
+	
+	$("#days").html(days+ "일");
+	$("#daysForm").attr("value", days);
+	console.log("start_date: "+ start_date+ ", end_date: "+ end_date);
+}
 $(function() {
 
+	
+	
 	var $start = $('#start'),
 		$end = $('#end');
 		$start.datepicker({
@@ -39,6 +54,12 @@ $(function() {
 			autoClose: true,
 			onSelect: function (fd, date) {
 				$end.data('datepicker').update('minDate', date)
+				console.log("date: "+ date+ ", end_date: "+ end_date);
+				if (end_date == undefined) {
+					$("#days").html("");
+				}
+				start_date = date.getTime();
+				calDays();
 			},
 			navTitles: {
 			    days: '<i>yyyy</i>년 MM',
@@ -51,6 +72,12 @@ $(function() {
 			autoClose: true,
 			onSelect: function (fd, date) {
 				$start.data('datepicker').update('maxDate', date)
+				console.log("date: "+ date+ date.getTime());
+				if (start_date == undefined) {
+					$("#days").html("");
+				}
+				end_date = date.getTime();
+				calDays();
 			},
 			navTitles: {
 			    days: '<i>yyyy</i>년 MM',
@@ -62,9 +89,9 @@ $(function() {
 </script>
 
 <script>
-
-
 	$(function() {
+		$("#start").on("click", function(){
+		})
 		// page is now ready, initialize the calendar...
 		// 캘린더 이벤트 추가
 		$('#calendar').fullCalendar({
@@ -87,21 +114,36 @@ $(function() {
                 }],
 		    nowIndicator: true,
 			selectable : true,
+			defaultView: 'month',
+			editable: true,
+			height: '300px', 
 			header : {
 				left : 'prev,next today',
 				center : 'title',
-				right : 'month,agendaWeek'
+				right : ''
+				//agendaWeek, month
 			},
 			dayClick : function(date) {
-				alert('clicked ' + date.format());
+				//alert('clicked ' + date.format());
 			},
 			select : function(startDate, endDate) {
-				//alert('selected ' + startDate.format() + ' to ' + endDate.format());
+				window.scrollTo(0,0);
+				// 선택 날짜 기간 
+				days = ((endDate - startDate)/60/60/24/1000);
+				console.log("선택 날짜 기간: "+ days);
+				$("#days").html(days+ "일");
+				$("#daysForm").attr("value", days);
 				// 날짜 길이 startDate.format().length
+				var endDate_date = endDate.format("YYYY-MM-DD").substr(8,2);
+				endDate_date -= 1;
+				if (endDate_date < 10) {
+					endDate_date = '0' + endDate_date;
+				}
+				var endDate_fix = endDate.format("YYYY-MM-DD").substr(0,8) + endDate_date;
 				/* $("#start").attr("value", startDate.format("YYYY-MM-DD")); */
 				document.getElementById("start").value=startDate.format("YYYY-MM-DD");
 				/* $("#end").attr("value", endDate.format("YYYY-MM-DD")); */
-				document.getElementById("end").value=endDate.format("YYYY-MM-DD");
+				document.getElementById("end").value=endDate_fix;
 				$('#myModal').modal('show');
 				//$("#start_date").html(startDate.format("YYYY-MM-DD HH:mm"));
 			},
@@ -111,6 +153,7 @@ $(function() {
 						{
 							title : "${list.p_title}",
 							color : "#b197fc",
+							allDay : true,
 							start : "${list.p_start_date}",
 							end : "${list.p_end_date}",
 							url: 'https://scontent-icn1-1.xx.fbcdn.net/v/t31.0-8/10383789_1539879212958441_3985988292410140175_o.png?_nc_cat=108&_nc_ht=scontent-icn1-1.xx&oh=a84657bf08f258bb5c71691201645595&oe=5CA2AE8C'
@@ -146,33 +189,27 @@ body {
 	margin: 0 auto;
 }
 
-.fc-sun {
-	color: red;
-}
-
-.fc-sat {
-	color: blue;
-}
-.fc-highlight {
-	background-color: #EA4C89;
-}
-.fc-event {
-	opacity: 0.6;
-}
-#miniCal {
-	width: 50px;
-}
+.fc-sun { color: red; }
+.fc-sat { color: blue; }
+.fc-highlight {	background-color: #EA4C89; }
+.fc-event {	opacity: 0.6; }
+.right { text-align: right; }
+.width100 { width: 100%; }
+.fontBig { font-size: 2.0em; }
+.dateFont { font-size: 1.2em; }
+.borderZero { border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px; }
 </style>
 </head>
 <body>
 	<div id='loading'>loading...</div>
 
 	<div class="row">
-		<div id="miniCal" class="datepicker-here col-3" data-language="ko"></div>
+		<div id="miniCal" class="datepicker-here col-2" data-language="ko"></div>
 		<div id='calendar' class="col-8"></div>
 	</div>
-
+ 
 	<!--  -->
+					<form method="post">
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -184,37 +221,46 @@ body {
 					</button>
 				</div>
 				<div class="modal-body">
-					<table id="modalTable">
+				
+					<!-- 폼태그 -->
+						<table id="modalTable" class="table">
+							<tr>  
+								<td colspan="2"><input id="p_title" type="text" name="p_title" class="width100 fontBig borderZero" placeholder="제목 및 내용"></td>
+							</tr>
 						<tr>
-							<select name="category">
-								<c:forEach var="ctList" items="${ctList }">
-									<option value="${ctList.ct_idx }">${ctList.ct_name }</option>
-								</c:forEach>
-							</select>
-						</tr>
-						<tr>
-							<th>제목</th>
-							<td><input type="text" name="title"></td>
-						</tr>
-						<tr>
-							<td>
-								<input type='text' class='datepicker-her0e' data-language='ko' data-position='bottom right' id="start">
-					        </td>
-							<td>
-								<input type='text' class='datepicker-here' data-language='ko' data-position='bottom left' id="end">
+							<td colspan="2">
+								<select class="custom-select" id="inputGroupSelect01" name="ct_idx">
+									<c:forEach var="ctList" items="${ctList }">
+										<option value="${ctList.ct_idx }">${ctList.ct_name }</option>
+									</c:forEach>
+								</select>
 							</td>
-				        </tr>
-					</table>
+						</tr>
+						<tr>
+							<th>시작</th>
+							<td>
+								<input autocomplete="off" placeholder="startDate" type='text' name="p_start_date" class='datepicker-here borderZero dateFont' data-language='ko' data-position='bottom right' id="start"><span id="days"></span>
+							</td>
+						</tr>
+						<tr>
+							<th>종료</th>
+							<td>
+								<input autocomplete="off" placeholder="endDate" type='text' name="p_end_date" class='borderZero datepicker-here dateFont' data-language='ko' data-position='bottom left' id="end">
+							</td>
+						</tr> 
+						</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">작성완료</button>
-					<button type="button" class="btn btn-danger">상세작성</button>
+					<button type="button" class="btn btn-primary" onClick="writePlan(this.form)">작성완료</button>
+					<button type="button" class="btn btn-danger" onClick="writePlanD(this.form)">상세작성</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						id="modal_close">닫기</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<input type="hidden" name="days" id="daysForm">
+					</form>
 	
 
 <button type="button" class="btn btn-primary">Primary</button>
@@ -231,6 +277,26 @@ body {
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<script>
 
+	function writePlan(frm){
+		var p_title = document.getElementById("p_title").value;
+		if (p_title == "") {
+			alert("제목을 입력해주세요");
+			return false;
+		}
+		frm.action = "/Plander/write";
+		frm.submit();
+	}
+	function writePlanD(frm){
+		/* var p_title = document.getElementById("p_title").value;
+		if (p_title == "") {
+			alert("제목을 입력해주세요");
+			return false;
+		} */
+		frm.action = "/Plander/write/detail";
+		frm.submit();
+	}
+</script>
 </body>
 </html>

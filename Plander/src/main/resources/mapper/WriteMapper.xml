@@ -55,8 +55,8 @@
 	
 	<!-- Planner 인서트 -->
 	<insert id="insertPlanner" parameterType="com.bit.domain.PlannerVO">
-		INSERT INTO PLANNER (P_IDX, P_TITLE, P_START_DATE, P_END_DATE)
-					VALUES (PLANNER_SEQ.NEXTVAL, #{p_title}, #{p_start_date}, #{p_end_date})
+		INSERT INTO PLANNER (P_IDX, P_TITLE, P_START_DATE, P_END_DATE, DAYS, CT_IDX)
+					VALUES (PLANNER_SEQ.NEXTVAL, #{p_title}, #{p_start_date}, #{p_end_date}, #{days}, #{ct_idx})
 	</insert>	
 	
 	<!-- Planner_detail 인서트 -->

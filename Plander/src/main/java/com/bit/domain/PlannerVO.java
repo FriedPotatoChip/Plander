@@ -16,11 +16,11 @@ public class PlannerVO {
 	private String p_start_date;
 	// @DateTimeFormat(pattern = "yyyy-MM-dd")	
 	private String p_end_date;
-	private Date regdate;
+	private Date regdate; 
 	private int u_idx;
 	private int ct_idx;
-
-	
+	// 선택 기간 일수
+	private int days;
 	//전체목록 작성자보기
 	private String name;
 	//조회수 좋아요 증가 
@@ -28,5 +28,6 @@ public class PlannerVO {
 	
 	//검색
 	private String keyword;
+	
 	
 }
