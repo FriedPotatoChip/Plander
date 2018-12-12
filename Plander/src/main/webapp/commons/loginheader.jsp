@@ -8,7 +8,7 @@
 		<a href="">이용방법</a>&nbsp;
 	</div>
 	<div class="col-xs-6 col-md-4" style="text-align: right; padding-top: 0.8%;">
-		[ 관리자 ]&nbsp;<!-- 관리자 모드에서만 보이게 -->
+		<a href="/Plander/admin">관리자</a>&nbsp;<!-- 관리자 모드에서만 보이게 -->
 		
 		<a href="/Plander/logout">로그아웃</a>&nbsp;
 		<select name="language">
