@@ -16,7 +16,7 @@ public class PlannerVO {
 	private String p_start_date;
 	// @DateTimeFormat(pattern = "yyyy-MM-dd")	
 	private String p_end_date;
-	private Date regdate;
+	private Date regdate; 
 	private int u_idx;
 	private int ct_idx;
 	// 선택 기간 일수

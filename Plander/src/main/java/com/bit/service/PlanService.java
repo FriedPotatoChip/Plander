@@ -10,5 +10,7 @@ public interface PlanService {
 	public List<PlannerVO> getListPlan();
 	//플래너 제목/내용 검색
 	public List<PlannerVO> searchPlan(PlannerVO pvo);
+	//검색 결과 수 
+	public int searchCnt(PlannerVO pvo);
 	
 }

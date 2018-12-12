@@ -58,7 +58,7 @@ public class WriteController {
 	}
 	@RequestMapping("test3")
 	public String test3() {
-		return "write/gcal3";
+		return "write/gcal3"; 
 	}
 	@RequestMapping("gcal2")
 	public String gcal2() {
