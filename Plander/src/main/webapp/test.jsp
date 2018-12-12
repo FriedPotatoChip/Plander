@@ -45,6 +45,7 @@
 	}
 	
 	#home { font-family: 'East Sea Dokdo', cursive; font-size: 2em; }
+	.center { text-align: center; }
 </style>
 
 </head>
@@ -68,7 +69,27 @@
 </div>
 
 <hr>
-
+<table class="center" border="1px solid;" style="width: 100%;">
+<tr>
+	<td rowspan="3" width="10%">
+		<img height="100" width="100" alt="힘이없을때는 경수를 보자" src="/resources/images/do.png">
+	</td>
+	<td colspan="3" width="18%"><b>이름</b></td>
+	<td rowspan="3" width="60%"><b style="font-size: 28px;">[오늘의 일정] 메인 페이지 만들기 !</b></td>
+	<td rowspan="3" width="6%">일정<br>만들기</td>
+	<td rowspan="3" width="6%">mypage</td>
+</tr>
+<tr>
+	<td width="6%">전체일정</td>
+	<td width="6%">북마크</td>
+	<td width="6%">댓글</td>
+</tr>
+<tr>
+	<td>5</td>
+	<td>5</td>
+	<td>10</td>
+</tr>
+</table>
 
 
 </body>

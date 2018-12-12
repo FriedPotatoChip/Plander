@@ -50,23 +50,24 @@ public class MainController {
 		UserVO user = service.getUser(vo);
 		UserVO admin = service.userchk(vo);
 		
-		if (user == null || admin == null) {
-			System.out.println("로그인 실패" + user);
-			return "main";
-		} else if (admin.getId().equals(vo.getId()) || admin.getPassword().equals(vo.getPassword())) {
-			session.setAttribute("admin", admin);
-			System.out.println("관리자 확인 : " + admin);
-			return "main";
-		} else if ( user.getId().equals(vo.getId()) || user.getPassword().equals(vo.getPassword())) {
+		if (user.getRank() == 1) {
+			//관리자 로그인
+			if ( admin.getId().equals(vo.getId()) || admin.getPassword().equals(vo.getPassword()) ) {
+				session.setAttribute("admin", admin);
+				System.out.println("관리자 확인 : " + admin);
+			} else {
+				System.out.println("관리자 로그인 실패 !");
+			}
+			
+		} else if ( user.getId().equals(vo.getId()) || user.getPassword().equals(vo.getPassword()) ) {
+			//유저로그인
 			session.setAttribute("user", user);
 			System.out.println("user 확인 : " + user);
-			return "main";
-		} 
-		
-		else {
-			System.out.println("로그인 실패");
-			return "main";
+		} else {
+			System.out.println("유저 로그인 실패!");
 		}
+		
+		return "main";
 	}
 	
 	@RequestMapping("/logout")
