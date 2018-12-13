@@ -57,7 +57,7 @@
 			},
 			error:function() {
 				//alert("관리자에게 연락바랍니다.");
-				return "error404.jsp";
+				return "/commons/error404.jsp";
 			}
 		})
 	}
