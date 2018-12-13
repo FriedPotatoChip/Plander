@@ -36,8 +36,8 @@ public class MypageController {
 		int listCnt = service.totalCount(u_idx);
 
 		Pagination pagination = new Pagination(listCnt, curPage);
-		planner.setStartIndex(pagination.getStartIndex());
-		planner.setCntPerPage(pagination.getPageSize());
+//		planner.setStartIndex(pagination.getStartIndex());
+//		planner.setCntPerPage(pagination.getPageSize());
 
 		model.addAttribute("listCnt", listCnt);
 		model.addAttribute("pagination", pagination);

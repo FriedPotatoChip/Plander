@@ -48,25 +48,19 @@ public class MainController {
 	public String login(UserVO vo, HttpSession session) {
 		System.out.println("controller 로그인 테스트");
 		UserVO user = service.getUser(vo);
-		UserVO admin = service.userchk(vo);
 		
-		if (user == null || admin == null) {
+		if (user == null) {
 			System.out.println("로그인 실패" + user);
-			return "main";
-		} else if (admin.getId().equals(vo.getId()) || admin.getPassword().equals(vo.getPassword())) {
-			session.setAttribute("admin", admin);
-			System.out.println("관리자 확인 : " + admin);
-			return "main";
-		} else if ( user.getId().equals(vo.getId()) || user.getPassword().equals(vo.getPassword())) {
+		} else if (user != null && user.getRank() == 1) {
+			session.setAttribute("admin", user);
+			System.out.println("관리자 확인 : " + user);
+		} else if (user != null && user.getRank() != 1) {
 			session.setAttribute("user", user);
 			System.out.println("user 확인 : " + user);
-			return "main";
-		} 
-		
-		else {
-			System.out.println("로그인 실패");
-			return "main";
 		}
+		
+		
+		return "main";
 	}
 	
 	@RequestMapping("/logout")

@@ -148,6 +148,7 @@ $(function() {
 				//$("#start_date").html(startDate.format("YYYY-MM-DD HH:mm"));
 			},
 			events : [ 
+				
 				<c:forEach var="list" items="${planList}">
 					<c:if test="${not empty list}">
 						{
@@ -161,6 +162,11 @@ $(function() {
 					</c:if>
 				</c:forEach>
 				{
+			        title:"My repeating event",
+			        start: '10:00', // a start time (10am in this example)
+			        end: '14:00', // an end time (6pm in this example)
+			        
+			        dow: [ 1, 4 ] // Repeat monday and thursday
 				} 
 			]
 
