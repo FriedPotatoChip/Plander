@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 	
 	
-	
 	@GetMapping("naverTest")
 	public String test() {
 		return "main/naverLoginTest";
@@ -24,6 +23,7 @@ public class MainController {
 	@RequestMapping("test")
 	public String asdf() {
 		return "main/test";
+
 	}
 	
 }
