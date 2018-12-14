@@ -11,8 +11,6 @@ public class MainController {
 	
 	
 	
-	
-	
 	@GetMapping("naverTest")
 	public String test() {
 		return "main/naverLoginTest";
