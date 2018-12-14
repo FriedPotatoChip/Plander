@@ -9,8 +9,11 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class UserVO {
+public class UsersVO {
+	
 	private int u_idx, rank;
-	private String id, password, name, email, phone;
+	private String id, password, name, address, phone, email;
 	private Date regdate;
+	
+	
 }

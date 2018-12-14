@@ -4,14 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/TMS/admin")
-public class AdminController {
+@RequestMapping("/TMS/book")
+public class BookController {
 	
-	@RequestMapping("")
-	public String adminPage() {
-		
-		return "adminPage/admin";
-	}
 	
 	
 	
