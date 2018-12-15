@@ -19,7 +19,7 @@ ${usersVO }
 </c:if>
 <c:if test="${not empty usersVO }"> 
 	<jsp:include page="/commons/loginheader.jsp"/>
-</c:if>
+</c:if> 
 
 	<a href="#">운영안내</a>
 	<a href="#">이용안내</a>

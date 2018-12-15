@@ -8,11 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/TMS")
 public class MainController {
+	
+	
+	@GetMapping("naverTest")
+	public String test() {
+		return "main/naverLoginTest";
+	}
+	
+	@PostMapping("naver")
+	public String naverTest() {
+		return "main/naverTest";
+	}
+	
+	@RequestMapping("test")
+	public String asdf() {
+		return "main/test";
 
-	@RequestMapping("")
-	public String main() {
-		System.out.println("dasdf");
-		return "main/main";
 	}
 	
 }
