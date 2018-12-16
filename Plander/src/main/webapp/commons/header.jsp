@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!-- 네이버 로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <!-- 카카오 로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
 <div id="header" class="row">
 	<div class="col-xs-12 col-sm-6 col-md-8">
 		<a href="/TMS" id="home">거기스</a>&nbsp;&nbsp;
@@ -152,11 +150,13 @@ var chkId = false;
 			<hr>
 			
 			<form>
-				<input type="button" name="googleLogin" class="btn btn-outline-secondary form-control"
-						onclick="" value="구글 로그인">
+				<!-- <input type="button" name="googleLogin" class="btn btn-outline-secondary form-control"
+						onclick="" value="구글 로그인"> -->
+			<!-- 네이버 로그인 -->
 				<div id="naverIdLogin"></div>
 				<!-- <input type="button" name="naverLogin" class=" btn btn-outline-secondary form-control"
 					style="margin-top: 1.5%;" onclick="" id="naverIdLogin" value="네이버 로그인"> -->
+			<!-- 카카오 로그인 -->
 				<a id="kakao-login-btn"></a>
 				<!-- <input type="button" name="kakaoLogin" class=" btn btn-outline-secondary form-control"
 					style="margin-top: 1.5%;" onclick="" value="카카오톡으로 로그인"> -->
@@ -253,7 +253,6 @@ var chkId = false;
 <!-- 회원가입 모달창 끝 -->
 
 
-    
 <!-- 카카오 로그인 api -->
 <script type='text/javascript'>
 var kakao_id;
@@ -261,7 +260,7 @@ var kakao_email;
 var kakao_name;
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('카카오톡 클라이언트 id');	/* 클라이언트 id 숨겨두기 */
+    Kakao.init('카카오 로그인');	/* 클라이언트 id 숨겨두기 */
     // 카카오 로그인 버튼을 생성합니다.
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
@@ -286,9 +285,9 @@ var kakao_name;
 	             console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근
 	             kakao_name = res.properties['nickname'];
            		 /* 안나옴 */
-	             console.log(res.properties['email']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+	             console.log(res.properties['email']); 
            		 /* 안나옴 */
-	             console.log(res.properties['name']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+	             console.log(res.properties['name']); 
 	             // res.properties.nickname으로도 접근 가능 )
 	             //console.log(res.created);
 	             //console.log(res.status);
@@ -301,7 +300,7 @@ var kakao_name;
 	    		    data: {'api_id' : kakao_id, 'email':kakao_email, 'name':kakao_name, 'type':'kakao'},
 	    		    dataType: 'text',
 	    		    success:function(data){
-	    		        alert(data);
+	    		        console.log(data);
 	    		        location.href=data;
 	    		    },
 	    		    error:function(jqXHR, textStatus, errorThrown){

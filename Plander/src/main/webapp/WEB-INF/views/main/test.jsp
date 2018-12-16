@@ -24,7 +24,7 @@
 			nameTxt.innerHTML = '';
 		}
 	}
-
+ 
 
 	function init() {
 		console.log('init');
@@ -32,7 +32,7 @@
 			console.log('auth2');
 			// var gauth = gapi.auth2.init({
 			window.gauth = gapi.auth2.init({
-				client_id:'구글 클라이언트 아이디'	/* 구글 클라이언트 ID */
+				client_id:'702849703047-ssi0aumpcmnp5bbdqm24vqem3pn6q1mr.apps.googleusercontent.com'	/* 구글 클라이언트 ID */
 			})
 			gauth.then(function(){
 				console.log('googleAuth success');
@@ -40,12 +40,13 @@
 			}, function(){
 				console.log("googleAuth fail");
 			});
-		});
+ 		});
 	}
 </script>
+
 </head>
 <body>
-	<span id="name"></span><input type="button" id="loginBtn" value="checking..." onclick="
+ 	<span id="name"></span><input type="button" id="loginBtn" value="checking..." onclick="
 	if(this.value == 'Login'){
 		gauth.signIn().then(function(){
 			console.log('gauth.signIn()');

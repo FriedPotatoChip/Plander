@@ -4,17 +4,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bit.domain.UsersVO;
 import com.bit.service.LoginService;
 
 @Controller
-@SessionAttributes("usersVO")
 public class LoginController {
 	
 	@Autowired
@@ -31,7 +30,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/TMS/signUp_api")
-	public String signUp_api(UsersVO vo, HttpSession session) {
+	public String signUp_api(UsersVO vo, HttpSession session, Model model) {
 		UsersVO sessionUser = (UsersVO) session.getAttribute("usersVO");
 		sessionUser.setId(vo.getId());
 		sessionUser.setPhone(vo.getPhone());
@@ -40,6 +39,7 @@ public class LoginController {
 		service.insertApi(sessionUser);
 		session.removeAttribute("usersVO");
 		session.setAttribute("usersVO", sessionUser);
+		model.addAttribute("name", sessionUser.getName());
 		
 		return "main/joinOk";
 	}
@@ -92,6 +92,7 @@ public class LoginController {
 	
 	@GetMapping("sessionDel")
 	public String sessionDel(HttpSession session) {
+		System.out.println("로그아웃 들어옴");
 		session.invalidate();
 		return "main/main";
 	}
