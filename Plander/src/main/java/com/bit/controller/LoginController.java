@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bit.domain.UsersVO;
 import com.bit.service.LoginService;
@@ -30,17 +31,24 @@ public class LoginController {
 	}
 	
 	@PostMapping("/TMS/signUp_api")
-	public String signUp_api(UsersVO vo, HttpSession session, Model model) {
+	public String signUp_api(UsersVO vo, HttpSession session) {
 		UsersVO sessionUser = (UsersVO) session.getAttribute("usersVO");
 		sessionUser.setId(vo.getId());
 		sessionUser.setPhone(vo.getPhone());
-		sessionUser.setAddress(vo.getAddress());
+		sessionUser.setAddrDetail(vo.getAddrDetail());
+		sessionUser.setZipNo(vo.getZipNo());
+		sessionUser.setRoadAddrPart1(vo.getRoadAddrPart1());
+		sessionUser.setType(vo.getType());
 		System.out.println("usersVO: "+ sessionUser);
 		service.insertApi(sessionUser);
 		session.removeAttribute("usersVO");
 		session.setAttribute("usersVO", sessionUser);
-		model.addAttribute("name", sessionUser.getName());
 		
+		return "redirect: /joinOk";
+	}
+	
+	@GetMapping("joinOk")
+	public String joinOk() {
 		return "main/joinOk";
 	}
 	
@@ -57,6 +65,7 @@ public class LoginController {
 			return "/TMS/api_signUp";
 		} else {
 			System.out.println("낫널로 들어옴");
+			result.setType(vo.getType());
 			session.setAttribute("usersVO", result);
 			return "/TMS";
 		}
@@ -90,6 +99,11 @@ public class LoginController {
 		
 	}
 	
+	@RequestMapping("/juso")
+	public String juso() {
+		return "login/juso";
+	}
+	
 	@GetMapping("sessionDel")
 	public String sessionDel(HttpSession session) {
 		System.out.println("로그아웃 들어옴");
@@ -97,9 +111,42 @@ public class LoginController {
 		return "main/main";
 	}
 	
+	@GetMapping("googleLogin")
+	public String googleLogin() {
+		return "login/googleLogin";
+	}
+	
+	@RequestMapping("/TMS/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "main/main";
+	}
 	
 	@RequestMapping("/test")
 	public String goTest() {
 		return "main/test";
 	}
+	
+	@PostMapping("/TMS/login")
+	public String login(UsersVO vo, HttpSession session, Model model) {
+			System.out.println("controller 로그인 테스트");
+			
+			UsersVO user = service.login(vo);
+			if (user == null) {
+				System.out.println("유저 로그인 실패!");
+				model.addAttribute("loginResult", "fail");
+				return "main/main";
+			} else if (user.getRank() == 1) {
+				session.setAttribute("usersVO", user);
+				System.out.println("관리자 확인 : " + user);
+				model.addAttribute("loginResult", "admin");
+			} else if (user.getRank() != 1) {
+				//유저로그인
+				session.setAttribute("usersVO", user);
+				System.out.println("user 확인 : " + user);
+				model.addAttribute("loginResult", "user");
+			}
+			
+			return "redirect: /TMS";
+		}
 }

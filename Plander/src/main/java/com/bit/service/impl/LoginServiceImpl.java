@@ -31,4 +31,10 @@ public class LoginServiceImpl implements LoginService {
 		return mapper.chkId(vo);
 	}
 
+
+	@Override
+	public UsersVO login(UsersVO vo) {
+		return mapper.getUser(vo);
+	}
+
 }

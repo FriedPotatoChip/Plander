@@ -11,4 +11,6 @@ public interface LoginMapper {
 	
 	public UsersVO chkId(UsersVO vo);
 	
+	public UsersVO getUser(UsersVO vo);
+	
 }

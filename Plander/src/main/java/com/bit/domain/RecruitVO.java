@@ -13,5 +13,4 @@ public class RecruitVO {
 	private String rc_title, rc_content, id;
 	private int rc_idx, cur_mem, max_mem;
 	private Date rc_regdate;
-
 }

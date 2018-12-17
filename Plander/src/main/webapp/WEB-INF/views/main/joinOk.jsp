@@ -31,7 +31,7 @@
 
 	<h3 class="center">회원가입 완료</h3>
 	<hr>
-	<p class="center">${name } 님, 회원가입을 축하드립니다!<br>
+	<p class="center">${usersVO.name } 님, 회원가입을 축하드립니다!<br>
 	로그인을 해서 플랜더의 다양한 컨텐츠를 이용해보세요.</p>
 	
 	<p class="center" style="width: 50%; margin: auto;">

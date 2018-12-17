@@ -15,7 +15,7 @@
 	
 	
 	
-	var naver_id_login = new naver_id_login("네이버 클라이언트 id", "http://localhost:8095/TMS/naverCallback");
+	var naver_id_login = new naver_id_login("네이버 클라이언트 id", "http://localhost:8095/TMS/naverCallback");/* 네이버 클라이언트 id */
 	// 접근 토큰 값 출력
 	console.log(naver_id_login.oauthParams.access_token);
 	// 네이버 사용자 프로필 조회
