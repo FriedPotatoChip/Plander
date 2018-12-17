@@ -28,12 +28,23 @@
 		height: auto;
 	}
 	.box { float: left; }
-	.boximg { width: 60%; height: 312px; overflow: hidden; }
-	.boxprice { width: 40%; padding: 10px; }
+	.boximg {
+		display: block;
+		width: 75%; height: auto;
+		margin-left: auto; margin-right: auto;
+		overflow: hidden;
+	}
+	
 	.boxoutside::after {
 		content: "";
 		clear: both;
 		display: table;
+	}
+	
+	.price {
+		display: block;
+		width: 75%;
+		margin-left: auto; margin-right: auto;
 	}
 	
 </style>
@@ -43,47 +54,47 @@
 <div id="container">
 <!-- 헤더 --><br>
 
+<div class="price">
+	<table border="1px solid" style="width: 100%;">
+		<thead>
+			<tr>
+				<td width="30%;"></td>
+				<th width="35%;" class="center">1인/2인</th>
+				<th width="35%;" class="center">3인 이상</th>
+			</tr>
+		</thead>
+		<tr>
+			<td>평일 8:00 ~ 18:00</td>
+			<td class="center">1시간 1,900원</td>
+			<td class="center">1시간 1,500원</td>
+		</tr>
+		<tr>
+			<td>평일 18:00 이후</td>
+			<td class="center">1시간 1,800원</td>
+			<td class="center">1시간 2,500원</td>
+		</tr>
+		<tr>
+			<td>주말/공휴일</td>
+			<td class="center">1시간 2,500원</td>
+			<td class="center">1시간 1,800원</td>
+		</tr>
+	</table>
+</div>
+<br>
+
 <div style="box-sizing: border-box;">
 	<h3>1호점</h3>
 	<hr>
 	<div class="boxoutside">
-		<div class="box boximg">
+		<div class="boximg">
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do1.jpg" style="width: auto; height: auto;">
 		</div>
-		
-		<div class="box boxprice">
-			<p>예약가능 좌석</p>
-			<p>개인석 16 석<br>
-			랩실 4인실 1 석 / 8인실 0 석 / 12인실 1 석</p>
-			<hr>
-			<table border="1px solid" style="width: 100%;">
-				<thead>
-					<tr>
-						<td width="30%;"></td>
-						<th width="35%;" class="center">1인/2인</th>
-						<th width="35%;" class="center">3인 이상</th>
-					</tr>
-				</thead>
-				<tr>
-					<td>평일 8:00 ~ 18:00</td>
-					<td class="center">1시간 1,900원</td>
-					<td class="center">1시간 1,500원</td>
-				</tr>
-				<tr>
-					<td>평일 18:00 이후</td>
-					<td class="center">1시간 1,800원</td>
-					<td class="center">1시간 2,500원</td>
-				</tr>
-				<tr>
-					<td>주말/공휴일</td>
-					<td class="center">1시간 2,500원</td>
-					<td class="center">1시간 1,800원</td>
-				</tr>
-			</table><br>
-			<button type="button" class="btn btn-outline-secondary"
-				onclick="">예약하기</button>
-		</div>
-	</div>
+		<br>
+		<form method="post" action="/TMS/book/booking" onsubmit="">
+			<input type="hidden" name="br_idx" value="1">
+			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+		</form>
+	</div> <!-- boxoutside 끝 -->
 </div> <!-- 1 호점 끝 -->
 
 <br><br><br>
@@ -91,42 +102,15 @@
 	<h3>2호점</h3>
 	<hr>
 	<div class="boxoutside">
-		<div class="box boximg">
+		<div class="boximg">
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do2.jpg" style="width: auto; height: auto;">
 		</div>
-		
-		<div class="box boxprice">
-			<p>예약가능 좌석</p>
-			<p>개인석 35 석<br>
-			랩실 4인실 1 석 / 8인실 2 석 / 12인실 0 석</p>
-			<hr>
-			<table border="1px solid" style="width: 100%;">
-				<thead>
-					<tr>
-						<td width="30%;"></td>
-						<th width="35%;" class="center">1인/2인</th>
-						<th width="35%;" class="center">3인 이상</th>
-					</tr>
-				</thead>
-				<tr>
-					<td>평일 8:00 ~ 18:00</td>
-					<td class="center">1시간 1,900원</td>
-					<td class="center">1시간 1,500원</td>
-				</tr>
-				<tr>
-					<td>평일 18:00 이후</td>
-					<td class="center">1시간 1,800원</td>
-					<td class="center">1시간 2,500원</td>
-				</tr>
-				<tr>
-					<td>주말/공휴일</td>
-					<td class="center">1시간 2,500원</td>
-					<td class="center">1시간 1,800원</td>
-				</tr>
-			</table><br>
-			<button type="button" class="btn btn-outline-secondary">예약하기</button>
-		</div>
-	</div>
+		<br>
+		<form method="post" action="/TMS/book/booking" onsubmit="">
+			<input type="hidden" name="br_idx" value="2">
+			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+		</form>
+	</div> <!-- boxoutside 끝 -->
 </div> <!-- 2 호점 끝 -->
 
 <br><br><br>
@@ -134,42 +118,15 @@
 	<h3>3호점</h3>
 	<hr>
 	<div class="boxoutside">
-		<div class="box boximg">
+		<div class="boximg">
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do3.jpeg" style="width: auto; height: auto;">
 		</div>
-		
-		<div class="box boxprice">
-			<p>예약가능 좌석</p>
-			<p>개인석 35 석<br>
-			랩실 4인실 1 석 / 8인실 2 석 / 12인실 0 석</p>
-			<hr>
-			<table border="1px solid" style="width: 100%;">
-				<thead>
-					<tr>
-						<td width="30%;"></td>
-						<th width="35%;" class="center">1인/2인</th>
-						<th width="35%;" class="center">3인 이상</th>
-					</tr>
-				</thead>
-				<tr>
-					<td>평일 8:00 ~ 18:00</td>
-					<td class="center">1시간 1,900원</td>
-					<td class="center">1시간 1,500원</td>
-				</tr>
-				<tr>
-					<td>평일 18:00 이후</td>
-					<td class="center">1시간 1,800원</td>
-					<td class="center">1시간 2,500원</td>
-				</tr>
-				<tr>
-					<td>주말/공휴일</td>
-					<td class="center">1시간 2,500원</td>
-					<td class="center">1시간 1,800원</td>
-				</tr>
-			</table><br>
-			<button type="button" class="btn btn-outline-secondary">예약하기</button>
-		</div>
-	</div>
+		<br>
+		<form method="post" action="/TMS/book/booking" onsubmit="">
+			<input type="hidden" name="br_idx" value="3">
+			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+		</form>
+	</div> <!-- boxoutside 끝 -->
 </div> <!-- 3 호점 끝 -->
 
 <br>
