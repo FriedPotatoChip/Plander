@@ -10,20 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 	
 	
-	@GetMapping("naverTest")
-	public String test() {
-		return "main/naverLoginTest";
+	@GetMapping("")
+	public String main() {
+		return "main/main";
 	}
 	
-	@PostMapping("naver")
-	public String naverTest() {
-		return "main/naverTest";
-	}
-	
-	@RequestMapping("test")
-	public String asdf() {
-		return "main/test";
-
-	}
 	
 }
