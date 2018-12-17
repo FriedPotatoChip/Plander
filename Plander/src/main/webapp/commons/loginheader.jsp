@@ -6,6 +6,7 @@
 		<a href="">전체 플래너</a>&nbsp;
 		<a href="">플래너 작성</a>&nbsp;
 		<a href="">이용방법</a>&nbsp;
+		<a href="/TMS/mypage?id=${usersVO.id }">마이페이지</a>
 	</div>
 	<div class="col-xs-6 col-md-4" style="text-align: right; padding-top: 0.8%;">
 		

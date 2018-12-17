@@ -1,19 +1,30 @@
 package com.bit.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.bit.domain.UsersVO;
+import com.bit.service.MyService;
 
 @Controller
 @RequestMapping("/TMS/mypage")
 public class MypageController {
+	
+	@Autowired
+	MyService myService;
 
 	@RequestMapping("")
-	public String mypage() {
+	public String mypage(String id, Model model) {
+		System.out.println("id: " + id);
+		model.addAttribute("vo", myService.user(id));
 		return "my/mypage";
 	}
 	
 	@RequestMapping("board")
-	public String board() {
+	public String board(String id, Model model) {
 		return "my/board";
 	}
 	

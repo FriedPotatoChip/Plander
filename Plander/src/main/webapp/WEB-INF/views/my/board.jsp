@@ -17,13 +17,13 @@
 		<th>RC_REGDATE</th>
 	</tr>
 	<tr>
-		<td>1</td>
-		<td>1</td>
-		<td>1</td>
-		<td>1</td>
-		<td>1</td>
-		<td>1</td>
-		<td>1</td>
+		<td>${vo.rc_idx }</td>
+		<td>${vo.rc_title }</td>
+		<td>${vo.rc_content }</td>
+		<td>${vo.id }</td>
+		<td>${vo.cur_mem }</td>
+		<td>${vo.max_mem }</td>
+		<td>${vo.rc_regdate }</td>
 	</tr>
 </body>
 </html>

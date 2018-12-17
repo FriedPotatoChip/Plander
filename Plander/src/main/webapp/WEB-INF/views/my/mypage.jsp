@@ -115,51 +115,51 @@ p {
 				<table class="my_info_table">
 					<tr>
 						<th>U_IDX</th>
-						<td>1</td>
+						<td>${vo.u_idx }</td>
 					</tr>
 					<tr>
 						<th>ID</th>
-						<td>1</td>
+						<td>${vo.id }</td>
 					</tr>
 					<tr>
 						<th>PASSWORD</th>
-						<td>1</td>
+						<td>${vo.password }</td>
 					</tr>
 					<tr>
 						<th>NAME</th>
-						<td>1</td>
+						<td>${vo.name }</td>
 					</tr>
 					<tr>
 						<th>REGDATE</th>
-						<td>1</td>
+						<td>${vo.regdate }</td>
 					</tr>
 					<tr>
 						<th>PHONE</th>
-						<td>1</td>
+						<td>${vo.phone }</td>
 					</tr>
 					<tr>
 						<th>EMAIL</th>
-						<td>1</td>
+						<td>${vo.email }</td>
 					</tr>
 					<tr>
 						<th>RANK</th>
-						<td>1</td>
+						<td>${vo.rank }</td>
 					</tr>
 					<tr>
 						<th>API_ID</th>
-						<td>1</td>
+						<td>${vo.api_id }</td>
 					</tr>
 					<tr>
 						<th>ZIPNO</th>
-						<td>1</td>
+						<td>${vo.zipNo }</td>
 					</tr>
 					<tr>
 						<th>ROADADDRPART1</th>
-						<td>1</td>
+						<td>${vo.roadAddrPart1 }</td>
 					</tr>
 					<tr>
 						<th>ADDRDETAIL</th>
-						<td>1</td>
+						<td>${vo.addrDetail }</td>
 					</tr>
 				</table>
 			</form>
