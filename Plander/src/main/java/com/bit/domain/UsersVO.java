@@ -12,7 +12,7 @@ import lombok.ToString;
 public class UsersVO {
 	
 	private int u_idx, rank;
-	private String id, password, name, zipno, roadaddrpart1, addrdetail , phone, email;
+	private String id, password, name, phone, email, type, api_id, zipNo, roadAddrPart1, addrDetail;
 	private Date regdate;
 	
 	
