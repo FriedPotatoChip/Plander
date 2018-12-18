@@ -15,6 +15,7 @@
 	<select id="comment" resultType="com.bit.domain.CommentsVO">
 		SELECT * FROM COMMENTS WHERE ID
 		= #{id}
+		AND B_IDX IS NOT NULL
 	</select>
 
 	<select id="board_comment"
@@ -25,22 +26,26 @@
 		WHERE ID = #{id})
 	</select>
 
-	<select id="comment_comment"
-		resultType="com.bit.domain.CommentsVO">
-
+	<select id="comment_comment" resultType="com.bit.domain.ReplyVO">
+		SELECT *
+		FROM REPLY
+		WHERE
+		C_IDX = (SELECT C_IDX FROM COMMENTS
+		WHERE ID = #{id} AND B_IDX IS NOT
+		NULL)
 	</select>
 
-	<select id="seat" resultType="com.bit.domain.SeatsVO">
+	<select id="seat" resultType="com.bit.domain.BookingVO">
 		SELECT * FROM BOOKING WHERE ID =
 		#{id}
 	</select>
 
-	<select id="cabinet" resultType="com.bit.domain.CabinetVO">
+	<select id="cabinet" resultType="com.bit.domain.BookingCbVO">
 		SELECT * FROM BOOKING_CB WHERE
 		ID = #{id}
 	</select>
 
-	<select id="board2" resultType="com.bit.domain.BoardVO">
+	<select id="board2" resultType="com.bit.domain.RecruitVO">
 		SELECT * FROM RECRUIT WHERE ID =
 		#{id}
 	</select>
@@ -48,7 +53,38 @@
 	<select id="comment2" resultType="com.bit.domain.CommentsVO">
 		SELECT * FROM COMMENTS WHERE ID
 		= #{id}
+		AND RC_IDX IS NOT NULL
 	</select>
+
+	<select id="board_comment2"
+		resultType="com.bit.domain.CommentsVO">
+		SELECT *
+		FROM COMMENTS
+		WHERE RC_IDX = (SELECT RC_IDX FROM
+		RECRUIT
+		WHERE ID = #{id})
+	</select>
+
+	<select id="comment_comment2"
+		resultType="com.bit.domain.ReplyVO">
+		SELECT *
+		FROM REPLY
+		WHERE C_IDX = (SELECT C_IDX FROM COMMENTS
+		WHERE ID = #{id} AND RC_IDX IS NOT NULL)
+	</select>
+	
+	<update id="update" parameterType="com.bit.domain.UsersVO">
+		UPDATE USERS
+		SET PASSWORD = #{password},
+		NAME = #{name},
+		PHONE = #{phone},
+		EMAIL = #{email}, 
+		ZIPNO = #{zipNo},
+		ROADADDRPART1 = #{roadAddrPart1}, 
+		ADDRDETAIL = #{addrDetail}
+		WHERE ID = #{id}
+	</update>
+	
 </mapper>
 
 

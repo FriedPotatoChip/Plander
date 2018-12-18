@@ -13,6 +13,18 @@
 	background-color: #f1f3f5;
 }
 
+a {
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+}
+
+a:hover {
+	color: #e64980;
+}
+
 .my_information {
 	float: left;
 	width: 48%;
@@ -35,7 +47,8 @@
 
 .my_recruit {
 	clear: right;
-	float: right; width : 48%;
+	float: right;
+	width: 48%;
 	padding: 1%;
 	width: 48%;
 }
@@ -58,7 +71,6 @@ p {
 	margin-top: 2%;
 	border-collapse: collapse;
 	width: 100%;
-	border-collapse: collapse;
 }
 
 .my_info_table th {
@@ -74,6 +86,33 @@ p {
 
 .my_info_title {
 	display: inline;
+}
+
+.name {
+	color: #1971c2;
+}
+
+.profile {
+	width: 100%;
+	height: 200px;
+	background-color: #f783ac;
+	text-align: center;
+}
+
+.circle {
+	margin-top: 40px;
+	height: 60%;
+	width: 120px;
+	background-image: url("/resources/images/profile.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.circle:hover {
+	background-blend-mode: luminosity;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -107,62 +146,69 @@ p {
 </head>
 <body>
 	<div class="container">
-		<h1 style="text-align: center;">마이페이지</h1>
+		<h1 style="text-align: center;">
+			<span class="name">${user.name }</span>님의 마이페이지
+		</h1>
+
+		<div class="profile">
+			<span class="circle" onclick="location.href='/TMS/mypage/profile'"></span>
+		</div>
+
+
 		<div class="my_information">
-			<form>
-				<h3 class="my_info_title">내정보</h3>
-				<input class="my_info_btn" type="submit" value="회원정보수정">
-				<table class="my_info_table">
-					<tr>
-						<th>U_IDX</th>
-						<td>${vo.u_idx }</td>
-					</tr>
-					<tr>
-						<th>ID</th>
-						<td>${vo.id }</td>
-					</tr>
-					<tr>
-						<th>PASSWORD</th>
-						<td>${vo.password }</td>
-					</tr>
-					<tr>
-						<th>NAME</th>
-						<td>${vo.name }</td>
-					</tr>
-					<tr>
-						<th>REGDATE</th>
-						<td>${vo.regdate }</td>
-					</tr>
-					<tr>
-						<th>PHONE</th>
-						<td>${vo.phone }</td>
-					</tr>
-					<tr>
-						<th>EMAIL</th>
-						<td>${vo.email }</td>
-					</tr>
-					<tr>
-						<th>RANK</th>
-						<td>${vo.rank }</td>
-					</tr>
-					<tr>
-						<th>API_ID</th>
-						<td>${vo.api_id }</td>
-					</tr>
-					<tr>
-						<th>ZIPNO</th>
-						<td>${vo.zipNo }</td>
-					</tr>
-					<tr>
-						<th>ROADADDRPART1</th>
-						<td>${vo.roadAddrPart1 }</td>
-					</tr>
-					<tr>
-						<th>ADDRDETAIL</th>
-						<td>${vo.addrDetail }</td>
-					</tr>
-				</table>
-			</form>
+			<h3 class="my_info_title">내정보</h3>
+			<button type="button" class="my_info_btn"
+				onclick="location.href='/TMS/mypage/update'">회원정보수정</button>
+			<table class="my_info_table">
+				<tr>
+					<th>U_IDX</th>
+					<td>${user.u_idx }</td>
+				</tr>
+				<tr>
+					<th>ID</th>
+					<td>${user.id }</td>
+				</tr>
+				<tr>
+					<th>PASSWORD</th>
+					<td>${user.password }</td>
+				</tr>
+				<tr>
+					<th>NAME</th>
+					<td>${user.name }</td>
+				</tr>
+				<tr>
+					<th>REGDATE</th>
+					<td>${user.regdate }</td>
+				</tr>
+				<tr>
+					<th>PHONE</th>
+					<td>${user.phone }</td>
+				</tr>
+				<tr>
+					<th>EMAIL</th>
+					<td>${user.email }</td>
+				</tr>
+				<tr>
+					<th>RANK</th>
+					<td>${user.rank }</td>
+				</tr>
+				<tr>
+					<th>API_ID</th>
+					<td>${user.api_id }</td>
+				</tr>
+				<tr>
+					<th>ZIPNO</th>
+					<td>${user.zipNo }</td>
+				</tr>
+				<tr>
+					<th>ROADADDRPART1</th>
+					<td>${user.roadAddrPart1 }</td>
+				</tr>
+				<tr>
+					<th>ADDRDETAIL</th>
+					<td>${user.addrDetail }</td>
+				</tr>
+			</table>
 		</div>
 
 		<div class="my_reservation">
