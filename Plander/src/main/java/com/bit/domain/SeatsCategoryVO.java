@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class SeatsCategoryVO {
-	private String sct_idx, sct_name;
-	private int maximum;
+	private int sct_idx, maximum;
+	private String sct_name;
 
 }

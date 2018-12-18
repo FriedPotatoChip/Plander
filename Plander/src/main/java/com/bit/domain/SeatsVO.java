@@ -10,8 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class SeatsVO {
-	private int s_idx, br_idx, s_col;
-	private String sct_idx;
+	private int s_idx, br_idx, s_col, sct_idx;
 	
 	//날짜 선택
 	private String date;
