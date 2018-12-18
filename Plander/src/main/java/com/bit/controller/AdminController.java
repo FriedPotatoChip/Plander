@@ -21,4 +21,8 @@ public class AdminController {
 		return "adminPage/admin";
 	}
 	
+	@RequestMapping("/Cabinet")
+	public String CabitnetPage() {
+		return "adminPage/Cabinet";
+	}
 }
