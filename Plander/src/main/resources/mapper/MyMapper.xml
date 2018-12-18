@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.bit.mapper.MyMapper">
+
+	<select id="user" resultType="com.bit.domain.UsersVO">
+		SELECT * FROM USERS WHERE ID =
+		#{id}
+	</select>
+
+	<select id="board" resultType="com.bit.domain.BoardVO">
+		SELECT * FROM BOARD WHERE ID =
+		#{id}
+	</select>
+
+	<select id="comment" resultType="com.bit.domain.CommentsVO">
+		SELECT * FROM COMMENTS WHERE ID
+		= #{id}
+	</select>
+
+	<select id="board_comment"
+		resultType="com.bit.domain.CommentsVO">
+		SELECT *
+		FROM COMMENTS
+		WHERE B_IDX = (SELECT B_IDX FROM BOARD
+		WHERE ID = #{id})
+	</select>
+
+	<select id="comment_comment"
+		resultType="com.bit.domain.CommentsVO">
+
+	</select>
+
+	<select id="seat" resultType="com.bit.domain.SeatsVO">
+		SELECT * FROM BOOKING WHERE ID =
+		#{id}
+	</select>
+
+	<select id="cabinet" resultType="com.bit.domain.CabinetVO">
+		SELECT * FROM BOOKING_CB WHERE
+		ID = #{id}
+	</select>
+
+	<select id="board2" resultType="com.bit.domain.BoardVO">
+		SELECT * FROM RECRUIT WHERE ID =
+		#{id}
+	</select>
+
+	<select id="comment2" resultType="com.bit.domain.CommentsVO">
+		SELECT * FROM COMMENTS WHERE ID
+		= #{id}
+	</select>
+</mapper>
+
+
+

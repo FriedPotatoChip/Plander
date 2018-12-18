@@ -7,6 +7,18 @@
 <meta charset="UTF-8">
 <title>api로그인 회원가입</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	function goPopup(){
+	    var pop = window.open("/juso","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	}
+	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+			, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		document.getElementById("roadAddrPart1").value = roadAddrPart1;
+		document.getElementById("addrDetail").value = addrDetail;
+		document.getElementById("zipNo").value = zipNo;
+	}
+</script>
 </head>
 <body>
 <form action="/TMS/signUp_api" method="post" name="joinform">
@@ -21,8 +33,22 @@
 			<td><input type="text" name="phone" id="phone"></td>
 		</tr>
 		<tr>
-			<th>주소</th>
-			<td><input type="text" name="address" id="address"></td>
+			<th>우편번호</th>
+			<td>
+			    <input type="hidden" id="confmKey" name="confmKey" value=""  >
+				<input type="text" id="zipNo" name="zipNo" readonly style="width:100px"><!-- 우편번호 -->
+				<input type="button"  value="주소검색" onclick="goPopup();">
+			</td>
+		</tr>
+		<tr>
+			<th>도로명주소</th>
+			<td><input type="text" name="roadAddrPart1" id="roadAddrPart1" style="width:85%"></td>	<!-- 도로명 주소 -->
+		</tr>
+		<tr>
+			<th>상세주소</th>
+			<td> 
+				<input type="text" name="addrDetail" id="addrDetail" style="width:85%" value="">	<!-- 상세주소 -->
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="button" value="회원가입" id="submitBtn" onclick="join()"></td>
@@ -53,8 +79,8 @@ function join() {
 		return false;
 	}
 	
-	if (!frm.address.value) {
-		alert("주소를 입력해주세요.");
+	if (!frm.roadAddrPart1.value) {
+		alert("주소를 입력해주세요");
 		frm.address.focus();
 		return false;
 	}

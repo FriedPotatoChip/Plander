@@ -10,4 +10,5 @@ public interface LoginService {
 	
 	public UsersVO chkId(UsersVO vo);
 	
+	public UsersVO login(UsersVO vo);
 }

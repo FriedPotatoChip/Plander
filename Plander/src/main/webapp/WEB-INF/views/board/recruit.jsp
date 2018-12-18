@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-
+	
+	<h3>모집 게시판임</h3>
+	
+	${boardList }
+	
+	
+	
 </body>
 </html>
