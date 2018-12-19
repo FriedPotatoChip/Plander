@@ -1,9 +1,14 @@
  package com.bit.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.domain.BookingVO;
@@ -29,50 +34,47 @@ public class BookController {
 		System.out.println("1.지점번호 : " + svo.getBr_idx());
 		System.out.println("2.날짜 선택, 방 선택");
 		
-		model.addAttribute("BRidx", svo.getBr_idx());
+		model.addAttribute("svo", svo);
 		return "book/booking";
 	}
 	
 	//좌석 조회
 	@RequestMapping("/selectSeat")
-	public String seat(SeatsVO svo, Model model) {
+	public String seat(BookingVO bvo, Model model) {
 		System.out.println("/selectSeat");
-		System.out.println("날짜 : " + svo.getDate());
-		System.out.println("지점번호 : " + svo.getBr_idx() + ", 방 번호 : " + svo.getSct_idx());
 		
-		//전체 좌석 수 확인
-		int allseat = bookService.seatCnt(svo.getBr_idx(), svo.getSct_idx());
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
+		Date date = new Date();
+		String today = format.format(date);
+		bvo.setBk_regdate(today);
+		
+		System.out.println("예약날짜(regdate) : " + bvo.getBk_regdate());
+		System.out.println("시작날짜 : " + bvo.getStart_time());
+		System.out.println("끝 날짜 : " + bvo.getEnd_time());
+		System.out.println("***** 지점번호 : " + bvo.getBr_idx() + ", 방 번호 : " + bvo.getSct_idx());
+		
+		//전체 좌석 
+		int allseat = bookService.seatCnt(bvo.getBr_idx(), bvo.getSct_idx());
 		System.out.println("전체 좌석 수 : " + allseat);
-		//예약된 좌석 수 확인
-		int bookseat = bookService.bookSeatCnt(svo.getSct_idx());
+		//예약 좌석
+		int bookseat = bookService.bookSeatCnt(bvo);
 		System.out.println("예약된 좌석 수 : " + bookseat);
 		//남은 좌석 수
 		int leaveseat = (allseat - bookseat);
 		System.out.println("남은 좌석 수 : " + leaveseat);
 		
-		model.addAttribute("BRidx", svo.getBr_idx());
-		model.addAttribute("SCTidx", svo.getSct_idx());
-		model.addAttribute("date", svo.getDate());
-		model.addAttribute("allseat", allseat);
-		model.addAttribute("bookseat", bookseat);
-		model.addAttribute("leaveseat", leaveseat);
+		List<BookingVO> booklist = bookService.bookSeat(bvo);
+		System.out.println("booklist : " + booklist);
 		
-		return "book/bookingSeat";
+		model.addAttribute("bvo", bvo);
+		model.addAttribute("booklist", booklist);
+		
+		return "book/booking_floor_2";
 	}
 	
-	
-	//예약된 좌석 확인
-	@RequestMapping("/seatchk")
-	public @ResponseBody int seatchk(BookingVO bvo) {
-		int result = bookService.bookSeat();
-		System.out.println("예약된 좌석 내역 : " + result);
-		return result;
-	}
 	
 	@RequestMapping("/pay")
 	public String pay(BookingVO bvo) {
-		int result = bookService.bookSeat();
-		System.out.println("예약된 좌석 내역 : " + result);
 		return "book/payment";
 	}
 	

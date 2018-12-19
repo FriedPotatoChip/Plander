@@ -1,6 +1,7 @@
 package com.bit.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,25 +32,22 @@ public class BookServiceImpl implements BookService {
 	
 	//예약된 좌석 수
 	@Override
-	public int bookSeatCnt(int sct_idx) {
-		System.out.println("bookSeatCnt() : Impl 까지 옴!");
-		System.out.println("sct_idx : " + sct_idx);
-		return bookmapper.bookSeatCnt(sct_idx);
+	public int bookSeatCnt(BookingVO bvo) {
+		System.out.println("***** bookSeatCnt() : Impl 까지 옴!");
+		return bookmapper.bookSeatCnt(bvo);
 	}
-	
-	//예약된 좌석 조회
+
 	@Override
-	public int bookSeat() {
-		System.out.println("bookSeat() : Impl 까지 옴!");
-		return bookmapper.bookSeat();
+	public List<BookingVO> bookSeat(BookingVO bvo) {
+		System.out.println("***** bookSeat() : Impl 까지 옴!");
+		return bookmapper.bookSeat(bvo);
 	}
-	
+
 	//방 조회
 	@Override
 	public SeatsCategoryVO room() {
 		return bookmapper.room();
 	}
-
 
 
 }
