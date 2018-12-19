@@ -118,12 +118,12 @@ h3 {
 								data-feather="users"></span> Customers <span class="sr-only">(current)</span>
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link active" 
+						<li class="nav-item"><a class="nav-link"
 							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Chart"> <span
+						<li class="nav-item"><a class="nav-link active" href="/TMS/admin/Chart"> <span
 								data-feather="home"></span> Reservation
 						</a></li>
 
@@ -134,42 +134,8 @@ h3 {
 				</div>
 			</nav>
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-				<h3 class="h3">개인 사물함 배치도</h3>
-				<div class="use d-inline-flex"
-					style="width: 4%; height: 3%; background-color: #d0bfff;"></div>
-				<span>&nbsp;: 사용중</span>
-				<div class="use d-inline-flex"
-					style="width: 4%; height: 3%; background-color: #f8f9fa;"></div>
-				<span>&nbsp;: 사용가능</span>
-
-			<div class="area_planner">
-				<div class="wrap">
-					<div class="planner_tap">
-						<div class="po_category on" value="1">지점 A</div>
-						<div class="po_line">&nbsp;</div>
-						<div class="po_category" value="2">지점 B</div>
-						<div class="po_line">&nbsp;</div>
-						<div class="po_category" value="3">지점 C</div>
-					</div>
-					<div class="clear" />
-				</div>
-			</div>
-
-			<div class="table-responsive" style="margin-top: 1rem;">
-				<div class="box">
-					<c:forEach var="i" begin="1" end="40" step="1">
-						<div class="item" id="${i }">
-							<p>${i} &nbsp; <strong>빈 자리</strong></p>
-						</div>
-					</c:forEach>
-
-				</div>
-			</div>
-			
-			<div class="cabinet_situation">
-				<span>전체 사물함 수 : 40</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>이용자
-					수(오늘 날짜 기준) : ${count }</span>
-			</div>
+				<h3 class="h3">시간대별 예약현황</h3>
+				<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 			</main>
 		</div>
 	</div>
@@ -180,28 +146,6 @@ h3 {
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-
-	<script>
-		$(document).ready(function() {
-
-			$('.po_category').click(function() {
-
-				//색변환
-				$('.po_category').removeClass('on');
-				$(this).addClass('on');
-			})
-
-			var list = new Array();
-			<c:forEach var = "item" items="${cabinet}"> 
-				var cb_num = '${item.cb_number}';
-				var id = '${item.id}';
-				var start = '<fmt:formatDate value="${item.start_date }" pattern="yyyy-MM-dd" />';
-				var end = '<fmt:formatDate value="${item.end_date }" pattern="yyyy-MM-dd" />';
-				$("#"+cb_num+"").attr("style", "background-color:#d0bfff;");
-				$("#"+cb_num+"").html("<div><p>"+cb_num+". &nbsp&nbsp;<strong>"+id+"</strong></p> <i>"+start+"<br><span class='right'> ~ "+end+"</span></i></div>");
-			</c:forEach>
-		});
-	</script>
 
 	<script>
 		window.jQuery
