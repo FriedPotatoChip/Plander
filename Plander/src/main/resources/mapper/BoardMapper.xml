@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.bit.mapper.BoardMapper">
-	
+		
+		<!-- RECRUIT 전체 조회 -->
 		<select id="getList" resultType="com.bit.domain.RecruitVO">
-			SELECT * FROM RECRUIT
+		<![CDATA[
+			SELECT /*+ INDEX_DESC (RECRUIT RECRUIT_PK) */
+			* FROM RECRUIT
+		]]>
 		</select>
-	
-	
-	
+		
+		<!-- 글 상세 조회 -->
+		<select id="getOne" resultType="com.bit.domain.RecruitVO">
+			SELECT * FROM RECRUIT WHERE RC_IDX = #{rc_idx}
+		</select>
+		
+				
+		
+		<!-- 모집게시판 insert -->
+		<insert id="insertRecruit" parameterType="com.bit.domain.RecruitVO">
+			INSERT INTO RECRUIT (RC_IDX, RC_TITLE, RC_CONTENT, ID, MAX_MEM)
+						VALUES (RECRUIT_SEQ.NEXTVAL, #{rc_title}, #{rc_content}, #{id}, #{max_mem})
+		</insert>
+		
 </mapper>
 
 

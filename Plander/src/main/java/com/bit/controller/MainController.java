@@ -20,13 +20,21 @@ public class MainController {
 		return "main/main";
 	}
 	
-	@GetMapping("/recruit")
-	public String recruit(Model model) {
-		model.addAttribute("boardList", service.getList());
-		return "board/recruit";
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("")
+	public String uploadTest() {
+		return "";
 	}
-	
-	
 	
 	
 }

@@ -20,4 +20,14 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getList();
 	}
 
+	@Override
+	public boolean register(RecruitVO vo) {
+		return mapper.insertRecruit(vo);
+	}
+
+	@Override
+	public RecruitVO detailOne(int rc_idx) {
+		return mapper.getOne(rc_idx);
+	}
+
 }
