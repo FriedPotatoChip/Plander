@@ -5,7 +5,24 @@
 	<select id="getUserList" resultType="com.bit.domain.UsersVO">
 		SELECT * FROM USERS
 	</select>
-	
+
+	<select id="bookingCabinet"
+		resultType="com.bit.domain.BookingCbVO">
+		select *
+		from booking_cb bc, cabinet c
+		where c.cb_number = bc.cb_number
+		and sysdate between bc.start_date and end_date
+		and br_idx= 1
+	</select>
+
+	<select id="bookingCabinet_count"
+		resultType="int">
+		select count(bc.ckb_idx)
+		from booking_cb bc, cabinet c
+		where c.cb_number = bc.cb_number
+		and sysdate between bc.start_date and end_date
+		and br_idx= 1
+	</select>
 </mapper>
 
 
