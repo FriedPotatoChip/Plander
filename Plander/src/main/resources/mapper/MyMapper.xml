@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.bit.mapper.MyMapper">
+
+	<select id="user" resultType="com.bit.domain.UsersVO">
+		SELECT * FROM USERS WHERE ID =
+		#{id}
+	</select>
+
+	<select id="board" resultType="com.bit.domain.BoardVO">
+		SELECT * FROM BOARD WHERE ID =
+		#{id}
+	</select>
+
+	<select id="comment" resultType="com.bit.domain.CommentsVO">
+		SELECT * FROM COMMENTS WHERE ID
+		= #{id}
+		AND B_IDX IS NOT NULL
+	</select>
+
+	<select id="board_comment"
+		resultType="com.bit.domain.CommentsVO">
+		SELECT *
+		FROM COMMENTS
+		WHERE B_IDX = (SELECT B_IDX FROM BOARD
+		WHERE ID = #{id})
+	</select>
+
+	<select id="comment_comment" resultType="com.bit.domain.ReplyVO">
+		SELECT *
+		FROM REPLY
+		WHERE
+		C_IDX = (SELECT C_IDX FROM COMMENTS
+		WHERE ID = #{id} AND B_IDX IS NOT
+		NULL)
+	</select>
+
+	<select id="seat" resultType="com.bit.domain.BookingVO">
+		SELECT * FROM BOOKING WHERE ID =
+		#{id}
+	</select>
+
+	<select id="cabinet" resultType="com.bit.domain.BookingCbVO">
+		SELECT * FROM BOOKING_CB WHERE
+		ID = #{id}
+	</select>
+
+	<select id="board2" resultType="com.bit.domain.RecruitVO">
+		SELECT * FROM RECRUIT WHERE ID =
+		#{id}
+	</select>
+
+	<select id="comment2" resultType="com.bit.domain.CommentsVO">
+		SELECT * FROM COMMENTS WHERE ID
+		= #{id}
+		AND RC_IDX IS NOT NULL
+	</select>
+
+	<select id="board_comment2"
+		resultType="com.bit.domain.CommentsVO">
+		SELECT *
+		FROM COMMENTS
+		WHERE RC_IDX = (SELECT RC_IDX FROM
+		RECRUIT
+		WHERE ID = #{id})
+	</select>
+
+	<select id="comment_comment2"
+		resultType="com.bit.domain.ReplyVO">
+		SELECT *
+		FROM REPLY
+		WHERE C_IDX = (SELECT C_IDX FROM COMMENTS
+		WHERE ID = #{id} AND RC_IDX IS NOT NULL)
+	</select>
+	
+	<update id="update" parameterType="com.bit.domain.UsersVO">
+		UPDATE USERS
+		SET PASSWORD = #{password},
+		NAME = #{name},
+		PHONE = #{phone},
+		EMAIL = #{email}, 
+		ZIPNO = #{zipNo},
+		ROADADDRPART1 = #{roadAddrPart1}, 
+		ADDRDETAIL = #{addrDetail}
+		WHERE ID = #{id}
+	</update>
+	
+</mapper>
+
+
+

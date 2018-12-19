@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,13 +14,19 @@
 		<th>B_IDX</th>
 		<th>ID</th>
 		<th>C_REGDATE</th>
+		<th>RP_IDX</th>
+		<th>RC_IDX</th>
 	</tr>
-	<tr>
-		<td>1</td>
-		<td>1</td>
-		<td>1</td>
-		<td>1</td>
-		<td>1</td>
-	</tr>
+	<c:forEach var="comment" items="${comment2 }">
+		<tr>
+			<td>${comment.c_idx }</td>
+			<td>${comment.c_content }</td>
+			<td>${comment.b_idx }</td>
+			<td>${comment.id }</td>
+			<td>${comment.c_regdate }</td>
+			<td>${comment.rp_idx }</td>
+			<td>${comment.rc_idx }</td>
+		</tr>
+	</c:forEach>
 </body>
 </html>

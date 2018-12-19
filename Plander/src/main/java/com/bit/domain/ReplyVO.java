@@ -9,8 +9,9 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class SeatsCategoryVO {
-	private int sct_idx, maximum;
-	private String sct_name;
+public class ReplyVO {
+	private int rp_idx, b_idx, rc_idx, c_idx;
+	private String rp_content, id;
+	private Date rp_regdate;
 
 }
