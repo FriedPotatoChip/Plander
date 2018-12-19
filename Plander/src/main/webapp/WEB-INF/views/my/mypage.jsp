@@ -145,6 +145,7 @@ p {
 </script>
 </head>
 <body>
+${pvo} 
 	<div class="container">
 		<h1 style="text-align: center;">
 			<span class="name">${user.name }</span>님의 마이페이지
