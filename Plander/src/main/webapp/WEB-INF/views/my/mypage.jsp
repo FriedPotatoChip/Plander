@@ -202,8 +202,10 @@ body {
 </head>
 <body>
 	<div class="intro"
-		style="width: 100%; padding: 150px; height: 300px; background-color: #8db9ca;">
-		<div style="width: 200px; height: 200px; background-color: white;"
+		style="width: 100%; padding: 20px; height: 300px; background-color: #8db9ca;">
+		<button type="button" class="btn btn-dark" style="float: right;"
+			onclick="location.href='/TMS'">홈으로가기</button>
+		<div style="width: 200px; height: 200px; margin: 100px; background-color: white;"
 			onclick="document.getElementById('id01').style.display='block'"
 			class="w3-button">
 			<img src="#">

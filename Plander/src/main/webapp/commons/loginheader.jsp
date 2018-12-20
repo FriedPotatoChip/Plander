@@ -6,7 +6,7 @@
 	<a class="navbar-brand" href="/TMS"><img
 		src="/resources/images/turtle.png" width="30" height="30"
 		class="d-inline-block align-top ml-4" alt="거북이">
-		<h1 class="light ml-3">거북이의기적</h1></a>
+		<h1 class="light ml-3" id="title_name">거북이의기적</h1></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
