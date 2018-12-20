@@ -17,16 +17,29 @@
 <!-- 폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Gugi|Noto+Sans+KR"
 	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gamja+Flower"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <!-- 폰트 사용하기
 	font-family: 'Gugi', cursive;
 	font-family: 'Noto Sans KR', sans-serif; 
+	font-family: 'Jua', sans-serif;
+	font-family: 'Gamja Flower', cursive;
+	font-family: 'Do Hyeon', sans-serif;
 -->
 <title>거북이의기적</title>
 <style>
 body {
 	font-family: 'NanumSquare', sans-serif;
+}
+
+#title_name {
+	font-family: 'Do Hyeon', sans-serif;
 }
 
 .normal {
