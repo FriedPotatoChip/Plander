@@ -1,6 +1,7 @@
 package com.bit.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bit.domain.BoardVO;
 import com.bit.domain.BookingCbVO;
@@ -14,6 +15,9 @@ public interface MyMapper {
 	
 	/* 내정보 */
 	public UsersVO user(String id);
+	
+	/* 내프사수정 */
+	public int updateProfile(Map<String, String> map);
 	
 	/* 내정보수정 */
 	public int update(UsersVO vo);
@@ -67,6 +71,9 @@ public interface MyMapper {
 	public List<BookingCbVO> cabinet(String id);
 	
 	public int cabinet_cnt(String id);
+
+	/* 프사업로드 */
+	public void insertBoard(UsersVO vo);
 	
 	
 	

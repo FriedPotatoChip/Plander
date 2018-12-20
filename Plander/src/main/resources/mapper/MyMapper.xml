@@ -7,6 +7,13 @@
 		SELECT * FROM USERS WHERE ID =
 		#{id}
 	</select>
+	
+	<!-- 내프사수정 -->
+	<insert id="updateProfile" parameterType="map">
+		INSERT INTO USERS (FILE_NAME, ORI_NAME)
+		VALUES (#{file_name}, #{ori_name})
+		WHERE ID = #{id}
+	</insert>
 
 	<!-- 내정보수정 -->
 	<update id="update" parameterType="com.bit.domain.UsersVO">
@@ -174,6 +181,12 @@
 		WHERE ID = #{id}
 		AND RC_IDX IS NOT NULL)
 	</select>
+	
+	<!-- 프사업로드 -->
+	<insert id="insertBoard" parameterType="com.bit.domain.UsersVO">
+		INSERT INTO USERS (UPLOADFILE)
+		VALUES (#{uploadfile})
+	</insert>
 
 </mapper>
 

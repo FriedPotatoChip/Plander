@@ -1,6 +1,7 @@
 package com.bit.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -142,6 +143,16 @@ public class MyServiceImpl implements MyService {
 	@Override
 	public int cabinet_cnt(String id) {
 		return myMapper.cabinet_cnt(id);
+	}
+
+	@Override
+	public int updateProfile(Map<String, String> map) {
+		return myMapper.updateProfile(map);
+	}
+
+	@Override
+	public void insertBoard(UsersVO vo) {
+		myMapper.insertBoard(vo);
 	}
 
 
