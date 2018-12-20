@@ -1,5 +1,7 @@
 package com.bit.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.domain.BoardVO;
 import com.bit.domain.Paging;
@@ -32,6 +35,25 @@ public class MypageController {
 		System.out.println("id: " + id);
 		model.addAttribute("id", id);
 		session.setAttribute("user", myService.user(id));
+		return "my/mypage";
+	}
+	
+	@RequestMapping("profileUpdate")
+	public String profileUpdate(UsersVO vo) throws IllegalStateException, IOException {
+		//파일 업로드 처리
+		//MultipartFile 인터페이스 주요 메소드
+		//String getOriginalFilename() : 업로드한 파일명
+		//void transferTo(File destFile) : 업로드한 파일을 destFile에 저장
+		//boolean isEmpty() : 업로드한 파일의 존재여부(없으면 true 리턴)
+		System.out.println("user: " + vo);
+		MultipartFile uploadFile = vo.getUploadFile();
+		if (!uploadFile.isEmpty()) {
+			String fileName = uploadFile.getOriginalFilename();
+			uploadFile.transferTo(new File("D:\\kms\\Plander\\Plander\\src\\main\\webapp\\upload" + fileName));
+		}
+		
+		myService.insertBoard(vo);
+		
 		return "my/mypage";
 	}
 
