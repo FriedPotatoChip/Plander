@@ -24,7 +24,34 @@
 <body>
 <div id="container">
 	<div>
-		<!-- 결제 정보 -->
+		<form>
+			<!-- 결제 정보 -->
+			<p>나의 예약 정보</p>
+			<table border="1px solid;" class="table table-bordered" style="width: 25%;">
+				<tbody>
+					<tr>
+						<td width="40%">날짜/시간</td>
+						<td width="60%">2018-12-20 11:49 ~ 2018-12-21 11:50</td>
+					</tr>
+					<tr>
+						<td>선택 좌석정보</td>
+						<td>개인석 A-3</td>
+					</tr>
+					<tr>
+						<td>금액</td>
+						<td>1,800원</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2" style="text-align: center;">
+							<button type="button" class="btn btn-default">이전단계</button>&nbsp;
+							<button type="button" class="btn btn-default">다음단계</button>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</form>
 		
 	</div>
 	

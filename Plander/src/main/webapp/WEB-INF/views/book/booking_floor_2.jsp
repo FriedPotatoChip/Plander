@@ -19,24 +19,73 @@
 	$().ready(function(){
 		var size = document.getElementsByName('s_col').length;
 		alert("size : " + size);
-		
 		var booklist = '<c:out value='${booklist}' />';
 		
 		for (var i=0; i<= size; i++) {
 			<c:forEach var='k' items='${booklist }'>
 				var bookseat = '${k.s_col }';
-					if ( bookseat == document.getElementsByName('s_col')[i].value) {
-						alert("예약된 값 : " + bookseat );
-						//$('#seatinfo').html("<span>A-" + document.getElementsByName('s_col')[i].value + "</span>");
-						$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-						break;
-					}
+				
+				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+				if ( bookseat == document.getElementsByName('s_col')[i].value) {
+					alert("예약된 값 : " + bookseat );
+					//$('#seatinfo').html("<span>A-" + document.getElementsByName('s_col')[i].value + "</span>");
+					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+					
+					break;
+				}
 			</c:forEach>
-			
+		}
+		
+		//선택한 인원 수와 체크된 박스 수가 같을 때 나머지 체크박스 disabled
+		$(":checkbox").change(function() {
+			var cnt = $("#people").val(); //선택된 인원 수
+			if (cnt == $(":checkbox:checked").length) {
+				$(":checkbox:not(:checked)").attr("disabled", true);
+			} else {
+				for (var i=0; i<= size; i++) {
+					<c:forEach var='k' items='${booklist }'>
+						var bookseat = '${k.s_col }';
+						
+						//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+						if ( bookseat == document.getElementsByName('s_col')[i].value) {
+							$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+							
+							break;
+						} else {
+							$(":checkbox").removeAttr("disabled");
+						}
+					</c:forEach>
+				}
+			}
+		});
+		
+	});
+
+</script>
+<script>
+	//인원수를 바꾸면 : db에 값이 있는건 disabled, 나머지는 체크해제
+	$("#people").change(function() {
+		var size = document.getElementsByName('s_col').length;
+		alert("size : " + size);
+		var booklist = '<c:out value='${booklist}' />';
+		
+		for (var i=0; i<= size; i++) {
+			<c:forEach var='k' items='${booklist }'>
+				var bookseat = '${k.s_col }';
+				
+				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+				if ( bookseat == document.getElementsByName('s_col')[i].value) {
+					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+					
+					break;
+				} else {
+					$(":checkbox").removeAttr("checked");
+					$(":checkbox").removeAttr("disabled");
+				}
+			</c:forEach>
 		}
 		
 	});
-	
 
 </script>
 
@@ -54,7 +103,7 @@
 	}
 	
 	.box { float: left; }
-	.boxoutside::after, #allseat::after {
+	.boxoutside::after, #allseat::after, #myselect::after {
 		content: "";
 		clear: both;
 		display: table;
@@ -67,17 +116,22 @@
 </head>
 <body>
 <div id="container" style="box-sizing: border-box;">
-	<h4><a href="">날짜 선택</a>&nbsp;&nbsp;&nbsp;
-	<a href="">좌석 선택</a></h4>
+	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
 	<hr>
 	
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
-		<form method="get" onsubmit="seatchk()">
+		<form method="post" action="/TMS/book/pay">
 			
 			<div>
 				<h4><a href="">1층</a>&nbsp;&nbsp;&nbsp;
 				<a href="">2층</a></h4>
+				<p style="font-style: italic;">1인 2석까지 예약 가능합니다.</p>
+				<span>인원 수 선택 : </span>
+				<select id="people">
+					<option value="1">1명</option>
+					<option value="2">2명</option>
+				</select>
 			</div>
 			<hr>
 			
@@ -220,14 +274,32 @@
 		</div>
 		
 			<!-- 선택 정보 -->
-			<div id="myselect" style="border: 1px solid;">
-				<h4>선택 정보</h4>
-				<p id="seatinfo"></p>
-				<p id="seatprice">2000원</p>
-			</div>
+			<p>선택 정보</p>
+			<table border="1px solid;" class="table table-bordered" style="width: 55%;">
+				<tr>
+					<td width="30%">날짜/시간</td>
+					<td width="25%">선택 좌석정보</td>
+				</tr>
+				<tr>
+					<td>${bvo.start_time } ~ ${bvo.end_time }</td>
+					<td id="msg"></td>
+				</tr>
+				<tfoot>
+					<tr>
+						<td colspan="3" style="text-align: center;">
+							<button type="button" class="btn btn-default" onclick="history.back(); return false;">이전단계</button>&nbsp;
+							<button type="submit" class="btn btn-default">다음단계</button>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
 			<br>
-			<button type="submit" class="btn btn-default btn-lg"
-				style="float: right; margin: 0 15px 15px 0;">다음단계</button>
+			예약한 새럼들 : ${booklist }
+			<hr>
+			지금 예약하는애 : ${bvo }
+			<script>
+				
+			</script>
 			
 		</form>
 		

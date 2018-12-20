@@ -59,8 +59,8 @@
 		<thead>
 			<tr>
 				<td width="30%;"></td>
-				<th width="35%;" class="center">1인/2인</th>
-				<th width="35%;" class="center">3인 이상</th>
+				<th width="35%;" class="center">개인석(1인)</th>
+				<th width="35%;" class="center">4인/8인/12인</th>
 			</tr>
 		</thead>
 		<tr>

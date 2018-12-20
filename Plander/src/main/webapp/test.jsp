@@ -89,5 +89,13 @@
 	</script>
 </div>
 
+	
+	<p>1인 2석까지 예약 가능합니다.</p>
+	<span>인원 수 선택 : </span>
+	<select id="people">
+		<option value="1">1명</option>
+		<option value="2">2명</option>
+	</select>
+
 </body>
 </html>

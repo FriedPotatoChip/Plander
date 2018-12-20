@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,10 +39,10 @@ public class BookController {
 		return "book/booking";
 	}
 	
-	//좌석 조회
-	@RequestMapping("/selectSeat")
+	//좌석 조회(개인실)
+	@RequestMapping("/oneseat")
 	public String seat(BookingVO bvo, Model model) {
-		System.out.println("/selectSeat");
+		System.out.println("/oneseat");
 		
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
 		Date date = new Date();
@@ -70,14 +71,34 @@ public class BookController {
 		model.addAttribute("booklist", booklist);
 		
 		return "book/booking_floor_2";
+		
 	}
 	
+	//좌석 조회(랩실)
+	@RequestMapping("/roomseat")
+	public String roomseat(BookingVO bvo, Model model) {
+		System.out.println("/oneseat");
+		
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
+		Date date = new Date();
+		String today = format.format(date);
+		bvo.setBk_regdate(today);
+		
+		System.out.println("예약날짜(regdate) : " + bvo.getBk_regdate());
+		System.out.println("시작날짜 : " + bvo.getStart_time());
+		System.out.println("끝 날짜 : " + bvo.getEnd_time());
+		System.out.println("***** 지점번호 : " + bvo.getBr_idx());
+		
+		
+		return "book/booking_floor_1";
+	}
 	
+	//결제 페이지
 	@RequestMapping("/pay")
 	public String pay(BookingVO bvo) {
+		
 		return "book/payment";
 	}
-	
 	
 	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,6 +38,20 @@
 			$('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
 		});
 	});
+	
+</script>
+
+<script>
+	function floorChk(frm) {
+		var chk = $(":input:radio[name=sct_idx]:checked").val();
+		if (chk==1) {
+			frm.action = "/TMS/book/oneseat";
+			frm.submit();
+		} else {
+			frm.action = "/TMS/book/roomseat";
+			frm.submit();
+		}
+	}
 </script>
 
 <style>
@@ -60,7 +75,6 @@
 	#calendar, #selectSeat { padding: 20px; }
 	#calendar { width: 30%; }
 	#selectSeat { width: 70%; }
-
 </style>
 
 </head>
@@ -72,7 +86,7 @@
 	
 	<div id="ticket" style="box-sizing: border-box;">
 		<div class="boxoutside" style="border: 1px solid;">
-			<form method="post" action="/TMS/book/selectSeat" onsubmit="">
+			<form method="post">
 				<!-- 달력 -->
 				<div id="calendar" class="box">
 					<div class="form-group">
@@ -97,14 +111,14 @@
 				<div id="selectSeat" class="box">
 					<h4>선택 날짜별 좌석 현황</h4>
 					<input type="hidden" name="br_idx" value="${svo.br_idx }">
-					<div class="checkbox">
-						<label><input type="checkbox" name="sct_idx" value="1">개인석</label><br>
-						<label><input type="checkbox" name="sct_idx" value="2">4인실</label><br>
-						<label><input type="checkbox" name="sct_idx" value="3">8인실</label><br>
-						<label><input type="checkbox" name="sct_idx" value="4">12인실</label>
+					<div class="radio">
+						<label><input type="radio" name="sct_idx" value="1">개인석</label><br>
+						<label><input type="radio">랩실</label><br>
 					</div>
 					<hr>
-					<button type="submit" class="btn btn-default btn-lg" onclick="">다음단계</button>
+					
+					<button type="button" class="btn btn-default btn-lg"
+							onclick="floorChk(this.form)">다음단계</button>
 				</div>
 				
 			</form>
