@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,6 +16,31 @@
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR" rel="stylesheet">
 
 <script>
+	//DB에서 예약된 좌석이랑 비교해서 체크박스 disabled
+	$().ready(function(){
+		//var size = document.getElementsByName('s_col').length;
+		var bookroomlist = '<c:out value='${bookroomlist}' />';
+		var size = '${fn:length(bookroomlist) }';
+		alert("bookroomlist.legnth : " + size); //예약된 좌석 수
+		
+		for (var i=0; i<= size; i++) {
+			<c:forEach var='k' items='${bookroomlist }'>
+				var bookseat = '${k.s_col }';
+				var sct = '${k.sct_idx }';
+				
+				
+				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+				if ( bookseat == document.getElementsByName('s_col')[i].value) {
+					alert("예약된 값 : " + bookseat );
+					//$('#seatinfo').html("<span>A-" + document.getElementsByName('s_col')[i].value + "</span>");
+					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+					break;
+				} 
+			</c:forEach>
+		}
+		
+		
+	});
 
 </script>
 
@@ -45,7 +71,7 @@
 <div id="container" style="box-sizing: border-box;">
 	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
 	<hr>
-	
+	${bookroomlist }
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
 		<form method="get">

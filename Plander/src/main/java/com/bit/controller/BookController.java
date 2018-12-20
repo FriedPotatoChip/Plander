@@ -41,7 +41,7 @@ public class BookController {
 	
 	//좌석 조회(개인실)
 	@RequestMapping("/oneseat")
-	public String seat(BookingVO bvo, Model model) {
+	public String oneseat(BookingVO bvo, Model model) {
 		System.out.println("/oneseat");
 		
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
@@ -58,13 +58,13 @@ public class BookController {
 		int allseat = bookService.seatCnt(bvo.getBr_idx(), bvo.getSct_idx());
 		System.out.println("전체 좌석 수 : " + allseat);
 		//예약 좌석
-		int bookseat = bookService.bookSeatCnt(bvo);
+		int bookseat = bookService.bookoneCnt(bvo);
 		System.out.println("예약된 좌석 수 : " + bookseat);
 		//남은 좌석 수
 		int leaveseat = (allseat - bookseat);
 		System.out.println("남은 좌석 수 : " + leaveseat);
 		
-		List<BookingVO> booklist = bookService.bookSeat(bvo);
+		List<BookingVO> booklist = bookService.bookone(bvo);
 		System.out.println("booklist : " + booklist);
 		
 		model.addAttribute("bvo", bvo);
@@ -77,7 +77,7 @@ public class BookController {
 	//좌석 조회(랩실)
 	@RequestMapping("/roomseat")
 	public String roomseat(BookingVO bvo, Model model) {
-		System.out.println("/oneseat");
+		System.out.println("/roomseat");
 		
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
 		Date date = new Date();
@@ -88,6 +88,18 @@ public class BookController {
 		System.out.println("시작날짜 : " + bvo.getStart_time());
 		System.out.println("끝 날짜 : " + bvo.getEnd_time());
 		System.out.println("***** 지점번호 : " + bvo.getBr_idx());
+		
+		//전체 좌석 : 5
+		//예약된 좌석
+		int roomseat = bookService.bookroomCnt(bvo);
+		int leaveroomseat = (5 - roomseat); //남은 좌석 수
+		
+		System.out.println("랩실 남은 좌석 수 : " + leaveroomseat);
+		List<BookingVO> bookroomlist = bookService.bookroom(bvo);
+		System.out.println("bookroomlist : " + bookroomlist);
+		
+		model.addAttribute("bvo", bvo);
+		model.addAttribute("bookroomlist", bookroomlist);
 		
 		
 		return "book/booking_floor_1";

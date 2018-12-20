@@ -30,23 +30,30 @@ public class BookServiceImpl implements BookService {
 		return bookmapper.seatCnt(map);
 	}
 	
-	//예약된 좌석 수
+	//예약된 좌석 수(개인실)
 	@Override
-	public int bookSeatCnt(BookingVO bvo) {
-		System.out.println("***** bookSeatCnt() : Impl 까지 옴!");
-		return bookmapper.bookSeatCnt(bvo);
+	public int bookoneCnt(BookingVO bvo) {
+		System.out.println("***** bookoneCnt() : Impl 까지 옴!");
+		return bookmapper.bookoneCnt(bvo);
 	}
 
 	@Override
-	public List<BookingVO> bookSeat(BookingVO bvo) {
-		System.out.println("***** bookSeat() : Impl 까지 옴!");
-		return bookmapper.bookSeat(bvo);
+	public List<BookingVO> bookone(BookingVO bvo) {
+		System.out.println("***** bookone() : Impl 까지 옴!");
+		return bookmapper.bookone(bvo);
+	}
+	
+	//예약된 좌석 수(랩실)
+	@Override
+	public int bookroomCnt(BookingVO bvo) {
+		System.out.println("***** bookroomCnt() : Impl 까지 옴!");
+		return bookmapper.bookroomCnt(bvo);
 	}
 
-	//방 조회
 	@Override
-	public SeatsCategoryVO room() {
-		return bookmapper.room();
+	public List<BookingVO> bookroom(BookingVO bvo) {
+		System.out.println("***** bookroom() : Impl 까지 옴!");
+		return bookmapper.bookroom(bvo);
 	}
 
 

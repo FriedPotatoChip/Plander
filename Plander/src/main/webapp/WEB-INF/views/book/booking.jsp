@@ -113,7 +113,7 @@
 					<input type="hidden" name="br_idx" value="${svo.br_idx }">
 					<div class="radio">
 						<label><input type="radio" name="sct_idx" value="1">개인석</label><br>
-						<label><input type="radio">랩실</label><br>
+						<label><input type="radio" name="sct_idx" value="">랩실</label><br>
 					</div>
 					<hr>
 					
