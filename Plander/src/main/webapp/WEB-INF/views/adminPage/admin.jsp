@@ -39,7 +39,7 @@
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link active" href="#">
+						<li class="nav-item"><a class="nav-link active" href="/TMS/admin">
 								<span data-feather="users"></span> Customers <span
 								class="sr-only">(current)</span>
 						</a></li>
@@ -48,7 +48,7 @@
 								data-feather="file"></span> Cabinet
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="#"> <span
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Chart"> <span
 								data-feather="home"></span> Reservation
 						</a></li>
 
@@ -118,39 +118,7 @@
 		feather.replace()
 	</script>
 
-	Graphs
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-	<script>
-		var ctx = document.getElementById("myChart");
-		var myChart = new Chart(ctx, {
-			type : 'line',
-			data : {
-				labels : [ "Sunday", "Monday", "Tuesday", "Wednesday",
-						"Thursday", "Friday", "Saturday" ],
-				datasets : [ {
-					data : [ 15339, 21345, 18483, 24003, 23489, 24092, 12034 ],
-					lineTension : 0,
-					backgroundColor : 'transparent',
-					borderColor : '#007bff',
-					borderWidth : 4,
-					pointBackgroundColor : '#007bff'
-				} ]
-			},
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : false
-						}
-					} ]
-				},
-				legend : {
-					display : false,
-				}
-			}
-		});
-	</script>
+
 </body>
 
 </html>

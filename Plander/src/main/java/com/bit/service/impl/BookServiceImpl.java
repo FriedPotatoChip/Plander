@@ -1,6 +1,7 @@
 package com.bit.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,27 +30,31 @@ public class BookServiceImpl implements BookService {
 		return bookmapper.seatCnt(map);
 	}
 	
-	//예약된 좌석 수
+	//예약된 좌석 수(개인실)
 	@Override
-	public int bookSeatCnt(int sct_idx) {
-		System.out.println("bookSeatCnt() : Impl 까지 옴!");
-		System.out.println("sct_idx : " + sct_idx);
-		return bookmapper.bookSeatCnt(sct_idx);
-	}
-	
-	//예약된 좌석 조회
-	@Override
-	public int bookSeat() {
-		System.out.println("bookSeat() : Impl 까지 옴!");
-		return bookmapper.bookSeat();
-	}
-	
-	//방 조회
-	@Override
-	public SeatsCategoryVO room() {
-		return bookmapper.room();
+	public int bookoneCnt(BookingVO bvo) {
+		System.out.println("***** bookoneCnt() : Impl 까지 옴!");
+		return bookmapper.bookoneCnt(bvo);
 	}
 
+	@Override
+	public List<BookingVO> bookone(BookingVO bvo) {
+		System.out.println("***** bookone() : Impl 까지 옴!");
+		return bookmapper.bookone(bvo);
+	}
+	
+	//예약된 좌석 수(랩실)
+	@Override
+	public int bookroomCnt(BookingVO bvo) {
+		System.out.println("***** bookroomCnt() : Impl 까지 옴!");
+		return bookmapper.bookroomCnt(bvo);
+	}
+
+	@Override
+	public List<BookingVO> bookroom(BookingVO bvo) {
+		System.out.println("***** bookroom() : Impl 까지 옴!");
+		return bookmapper.bookroom(bvo);
+	}
 
 
 }

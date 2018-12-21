@@ -23,6 +23,6 @@ public class MybatisTest {
 //		mapper2.getTestList().forEach(test -> log.info(test));
 		
 	}
-	
+	 
 	
 }

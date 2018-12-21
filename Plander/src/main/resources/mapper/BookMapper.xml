@@ -7,28 +7,63 @@
 		SELECT COUNT(S_COL) FROM SEATS WHERE BR_IDX = #{br_idx} AND SCT_IDX = #{sct_idx}
 	</select>
 	
-	<!-- 예약된 좌석 수 -->
-	<select id="bookSeatCnt" resultType="int">
+	<!-- 예약된 좌석 수 (개인실)-->
+	<select id="bookoneCnt" resultType="int" parameterType="com.bit.domain.BookingVO">
 		SELECT NVL(COUNT(*),0) FROM (
-			SELECT B.*, S.BR_IDX, S.S_COL, S.SCT_IDX FROM BOOKING B, SEATS S
-			WHERE B.S_IDX = S.S_IDX AND S.SCT_IDX = #{sct_idx} )
+			SELECT distinct sv.*, B.ID, B.BK_REGDATE FROM SEATS_VIEW SV, BOOKING B 
+			WHERE SV.S_IDX = B.S_IDX
+			AND NOT (
+				<![CDATA[
+				(b.end_time < to_date(#{start_time}, 'YYYY-MM-DD HH24:MI'))
+			or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
+				]]>
+		    )
+			AND SV.SCT_IDX = #{sct_idx} )
 	</select>
 	
-	<!-- 예약된 좌석 조회 -->
-	<select id="bookSeat" resultType="com.bit.domain.BookingVO">
-		SELECT B.*, S.BR_IDX, S.S_COL, S.SCT_IDX FROM BOOKING B, SEATS S
-		WHERE B.S_IDX = S.S_IDX AND S.SCT_IDX = #{sct_idx} ORDER BY B.BK_REGDATE
+	<!-- 예약된 좌석 조회 (개인실) -->
+	<select id="bookone" resultType="com.bit.domain.BookingVO">
+		SELECT distinct sv.*, B.ID, B.START_TIME, B.END_TIME, B.BK_REGDATE FROM SEATS_VIEW SV, BOOKING B 
+		WHERE SV.S_IDX = B.S_IDX
+		AND NOT (
+			<![CDATA[
+				(b.end_time < to_date(#{start_time}, 'YYYY-MM-DD HH24:MI'))
+			or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
+			]]>
+		)
+		AND SV.SCT_IDX = #{sct_idx}
 	</select>
 	
 	
-	
-	
-	
-	
-	<!-- 방 조회 -->
-	<select id="room" resultType="com.bit.domain.SeatsCategoryVO">
-		SELECT * FROM SEAT_CATEGORY WHERE SCT_IDX = #{sct_idx}
+	<select id="bookroomCnt" resultType="int" parameterType="com.bit.domain.BookingVO">
+		SELECT NVL(COUNT(*),0) FROM (
+			SELECT distinct sv.* FROM SEATS_VIEW SV, BOOKING B 
+			WHERE sv.s_idx = b.s_idx
+			AND not (
+				<![CDATA[
+					(b.end_time < to_date(#{start_time}, 'YYYY-MM-DD HH24:MI'))
+					or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
+				]]>
+			)
+			and sv.sct_idx between 2 and 4
+			order by sv.s_idx )
 	</select>
+	
+	<select id="bookroom" resultType="com.bit.domain.BookingVO">
+		SELECT distinct sv.* FROM SEATS_VIEW SV, BOOKING B 
+		WHERE sv.s_idx = b.s_idx
+		AND not (
+			<![CDATA[
+				(b.end_time < to_date(#{start_time}, 'YYYY-MM-DD HH24:MI'))
+				or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
+			]]>
+		)
+		and sv.sct_idx between 2 and 4
+		order by sv.s_idx
+	</select>	
+	
+	
+	
 	
 	<!-- 내 선택 정보 조회 -->
 	<select id="myseat" resultType="com.bit.domain.BookingVO">

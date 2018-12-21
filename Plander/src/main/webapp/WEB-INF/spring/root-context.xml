@@ -4,23 +4,32 @@
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
-		
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@203.236.209.175:1521:xe"></property>
+
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url"
+			value="jdbc:oracle:thin:@203.236.209.175:1521:xe"></property>
 		<property name="username" value="KMS"></property>
 		<property name="password" value="kms"></property>
 	</bean>
-	
-	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+	<bean id="SqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property value="classpath:mybatis-config.xml" name="configLocation" />
-	    <property value="classpath:/mapper/*Mapper.xml" name="mapperLocations" />
+		<property value="classpath:mybatis-config.xml"
+			name="configLocation" />
+		<property value="classpath:/mapper/*Mapper.xml"
+			name="mapperLocations" />
 	</bean>
-	<mybatis-spring:scan base-package="com.bit.mapper"/>
-	
-	
+	<mybatis-spring:scan base-package="com.bit.mapper" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000" /><!-- 단위 bytes -->
+	</bean>
 </beans>

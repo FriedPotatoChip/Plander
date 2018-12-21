@@ -9,15 +9,11 @@ import org.springframework.stereotype.Service;
 import com.bit.domain.BoardVO;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
-import com.bit.domain.CabinetVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
 import com.bit.domain.ReplyVO;
-import com.bit.domain.SeatsVO;
 import com.bit.domain.UsersVO;
-import com.bit.mapper.BookMapper;
 import com.bit.mapper.MyMapper;
-import com.bit.service.BookService;
 import com.bit.service.MyService;
 
 @Service
@@ -97,6 +93,66 @@ public class MyServiceImpl implements MyService {
 		int result = myMapper.update(vo);
 		System.out.println("처리건수: " + result);
 		return result;
+	}
+
+	@Override
+	public int board_cnt(String id) {
+		return myMapper.board_cnt(id);
+	}
+
+	@Override
+	public int comment_cnt(String id) {
+		return myMapper.comment_cnt(id);
+	}
+
+	@Override
+	public int board_comment_cnt(String id) {
+		return myMapper.comment_cnt(id);
+	}
+
+	@Override
+	public int comment_comment_cnt(String id) {
+		return myMapper.comment_comment_cnt(id);
+	}
+
+	@Override
+	public int board2_cnt(String id) {
+		return myMapper.board2_cnt(id);
+	}
+
+	@Override
+	public int comment2_cnt(String id) {
+		return myMapper.comment2_cnt(id);
+	}
+
+	@Override
+	public int board_comment2_cnt(String id) {
+		return myMapper.board_comment2_cnt(id);
+	}
+
+	@Override
+	public int comment_comment2_cnt(String id) {
+		return myMapper.comment_comment2_cnt(id);
+	}
+
+	@Override
+	public int seat_cnt(String id) {
+		return myMapper.seat_cnt(id);
+	}
+
+	@Override
+	public int cabinet_cnt(String id) {
+		return myMapper.cabinet_cnt(id);
+	}
+
+	@Override
+	public int updateProfile(Map<String, String> map) {
+		return myMapper.updateProfile(map);
+	}
+
+	@Override
+	public void insertBoard(UsersVO vo) {
+		myMapper.insertBoard(vo);
 	}
 
 
