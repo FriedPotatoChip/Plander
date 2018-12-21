@@ -29,7 +29,7 @@
 	</beans:bean>
 	<!-- 파일 저장 path -->
 	<beans:bean id = "uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="C:\Users\po935\git\Plander\Plander\src\main\webapp\resources\upload">
+		<beans:constructor-arg value="C:/Users/hb/git/Plander/Plander/src/main/webapp/resources/upload">
 	</beans:constructor-arg>
 </beans:bean>
 	  
