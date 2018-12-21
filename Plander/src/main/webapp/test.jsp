@@ -7,95 +7,117 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js?ver=1"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.0/moment-with-locales.js"></script>
-<script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/5a991bff/src/js/bootstrap-datetimepicker.js"></script>
-<link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js?ver=1"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.0/moment-with-locales.js"></script>
+<script
+	src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/5a991bff/src/js/bootstrap-datetimepicker.js"></script>
+<link
+	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/css/bootstrap-datetimepicker.css"
+	rel="stylesheet" />
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet" />
 
 
+<script type="text/javascript">
+	$(function() {
+		$('#datetimepicker6').datetimepicker({
+			format: 'YYYY-MM-DD HH:00',
+			minDate : moment()
+		});
+		$('#datetimepicker7').datetimepicker({
+			format: 'YYYY-MM-DD HH:00',
+			useCurrent : false
+		//Important! See issue #1075
+		});
+		$("#datetimepicker6").on("dp.change", function(e) {
+			$('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+		});
+		$("#datetimepicker7").on("dp.change", function(e) {
+			$('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+		});
+	});
+	
+</script>
 <script>
-
+	function test(frm) {
+		if (!frm.startdate.value) {
+			alert("예약 시작 날짜를 선택해주세요.");
+			frm.startdate.focus();
+			return false;
+		}
+		if (!frm.enddate.value) {
+			alert("예약 마감 날짜를 선택해주세요.");
+			frm.enddate.focus();
+			return false;
+		}
+		
+		alert("테스트 성공 !");
+		frm.action = "/test.jsp"
+		frm.submit();
+		
+		
+	}
 </script>
 
 
 </head>
 <body>
-
-
-
-
-
-<hr>
+<br>
+<form method="get">
 	<div class="container">
-		<div class="row">
-			<div class='col-sm-6'>
-				<div class="form-group">
-					<div class='input-group date' id='datetimepicker1'>
-						<input type='text' class="form-control" /> <span
-							class="input-group-addon"> <span
-							class="glyphicon glyphicon-calendar"></span>
-						</span>
-					</div>
+		<div class='col-md-5'>
+			<div class="form-group">
+				<div class='input-group date' id='datetimepicker6'>
+					<input type='text' name="startdate" class="form-control" /> <span
+						class="input-group-addon"> <span
+						class="glyphicon glyphicon-calendar"></span>
+					</span>
 				</div>
 			</div>
-			<script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
+		</div>
+		<div class='col-md-5'>
+			<div class="form-group">
+				<div class='input-group date' id='datetimepicker7'>
+					<input type='text' name="enddate" class="form-control" /> <span
+						class="input-group-addon"> <span
+						class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
 		</div>
 	</div>
+	<button type="button" onclick="test(this.form)">다음으로</button>
+</form>
+
+
+
+<hr>
+
+
 <hr>
 <div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <input type='text' class="form-control" id='datetimepicker4' />
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker4').datetimepicker();
-            });
-        </script>
-    </div>
+	<div class="row">
+		<div class='col-sm-6'>
+			<input type='text' class="form-control" id='datetimepicker4' />
+		</div>
+		<script type="text/javascript">
+           $(function () {
+               $('#datetimepicker4').datetimepicker();
+           });
+       </script>
+	</div>
 </div>
 
 <hr>
-
-<div style="overflow:hidden;">
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-8">
-                <div id="datetimepicker12"></div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker12').datetimepicker({
-                inline: true
-            });
-        });
-    </script>
-    
-    <input type="text" id="textdate" name="date" value="" class="form-control">
-	<script>
-		//input 박스에 넣어서 값 넘기기
-		$('#datetimepicker12').on('changeDate', function(){
-			$('#textdate').val(
-				$('#datetimepicker12').datetimepicker('getFormattedDate')
-			);
-		});
-	</script>
-</div>
-
-	
-	<p>1인 2석까지 예약 가능합니다.</p>
-	<span>인원 수 선택 : </span>
-	<select id="people">
-		<option value="1">1명</option>
-		<option value="2">2명</option>
-	</select>
+<p>1인 2석까지 예약 가능합니다.</p>
+<span>인원 수 선택 : </span>
+<select id="people">
+	<option value="1">1명</option>
+	<option value="2">2명</option>
+</select>
 
 </body>
 </html>
