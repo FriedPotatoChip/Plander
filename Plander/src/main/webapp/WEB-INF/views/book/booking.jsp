@@ -80,8 +80,7 @@
 </head>
 <body>
 <div id="container">
-	<h4><a href="">날짜 선택</a>&nbsp;&nbsp;&nbsp;
-	<a href="">좌석 선택</a></h4>
+	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
 	<hr>
 	
 	<div id="ticket" style="box-sizing: border-box;">
@@ -113,7 +112,7 @@
 					<input type="hidden" name="br_idx" value="${svo.br_idx }">
 					<div class="radio">
 						<label><input type="radio" name="sct_idx" value="1">개인석</label><br>
-						<label><input type="radio" name="sct_idx" value="">랩실</label><br>
+						<label><input type="radio" value="">랩실</label><br>
 					</div>
 					<hr>
 					
