@@ -3,6 +3,9 @@ package com.bit.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -26,9 +29,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
-import com.bit.service.BoardService;
+import com.bit.service.RecruitService;
 import com.bit.utils.MediaUtils;
+import com.bit.utils.PagingVO;
 import com.bit.utils.UploadFileUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 
 	@Autowired
-	private BoardService service;
+	private RecruitService service;
 	
 	@GetMapping("/TMS/recruitWrite")
 	public String recruitWrite() {
@@ -48,40 +53,123 @@ public class BoardController {
 	@PostMapping("/TMS/recruitWrite")
 	public String recruitWrite(RecruitVO vo) {
 		
-		log.info("vo: "+ vo);
-		
 		service.register(vo);
 		
 		return "redirect: /TMS/recruit";
 	}
 	
 	@GetMapping("/TMS/recruit")
-	public String recruit(Model model) {
-		model.addAttribute("boardList", service.getList());
+	public String recruit(Model model, PagingVO page) {
+		
+		
+		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal());
+		
+		
+		page.CalcPage(page.getNowPage(), page.getCntPerPage());
+		model.addAttribute("page", page);
+		model.addAttribute("boardList", service.getListPage(page));
 		return "board/recruit";
 	}
 	
 	@GetMapping("/TMS/detail")
 	public String detailOne(@RequestParam("idx")int rc_idx, Model model) {
 		
-		log.info("상세보기: "+ rc_idx);
-		
+		service.updateHit(rc_idx);
 		model.addAttribute("rc_board", service.detailOne(rc_idx));
+		model.addAttribute("apply", service.getApplyList(rc_idx));
 		
 		return "board/detail";
 	}
 	
+	@RequestMapping("/apply")
+	public @ResponseBody String apply(@RequestParam("id") String id, @RequestParam("rc_idx") int rc_idx) {
+		
+		log.info("ajax 데이터 테스트: "+ id+", "+ rc_idx);
+		boolean chkUp = service.updateCur(rc_idx);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("rc_idx", rc_idx);
+		boolean chkApp = service.apply(map);
+		
+		if(chkUp && chkApp) {
+			return "success";
+		} else {
+			return "fail";
+		}
+		
+	}
 	
+	@RequestMapping("/applyCancel")
+	public @ResponseBody String applyCancel(@RequestParam("id") String id, @RequestParam("rc_idx") int rc_idx) {
+		
+		boolean chkUp = service.minusCur(rc_idx);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("rc_idx", rc_idx);
+		boolean chkApp = service.deleteApply(map);
+		
+		if(chkUp && chkApp) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 	
+	@GetMapping("/deleteRec")
+	public String deleteRecruit(@RequestParam("rc_idx") int rc_idx) {
+		service.deleteRec(rc_idx);
+		return "redirect: /TMS/recruit";
+	}
 	
+	@GetMapping("/TMS/modifyRec")
+	public String modifyRecruit(@RequestParam("rc_idx") int rc_idx, Model model) {
+		model.addAttribute("rc_board", service.detailOne(rc_idx));
+		return "board/recruitModify";
+	}
 	
+	@PostMapping("/TMS/modifyRec")
+	public String modifyRecruit(RecruitVO vo) {
+		service.modifyRec(vo);
+		return "redirect: /TMS/detail?idx="+vo.getRc_idx();
+	}
 	
+	// 모집글 댓글 입력
+	@PostMapping("/registerComm")
+	public @ResponseBody String registerComm(CommentsVO vo) {
+		log.info("넘어온 댓글 내용: "+ vo);
+		boolean chkIns = service.insertComm(vo);
+		if (chkIns) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 	
+	// 댓글 출력
+	@GetMapping("/commentList")
+	public @ResponseBody List<CommentsVO> commList(@RequestParam("rc_idx")int rc_idx, PagingVO page, Model model){
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("rc_idx", rc_idx);
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		model.addAttribute("page", page);
+		
+		return service.getCommList(map);
+	}
 	
-	
-	
-	
-	
+	// 댓글 페이징처리
+	@RequestMapping("/commPaging")
+	public @ResponseBody PagingVO paingComm(@RequestParam("rc_idx")int rc_idx, PagingVO page) {
+		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.cntCommAll(rc_idx));
+		
+		page.CalcPage(page.getNowPage(), page.getCntPerPage());
+		System.out.println("page: "+ page);
+		
+		return page;
+	}
 	
 	
 	

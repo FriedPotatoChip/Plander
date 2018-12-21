@@ -23,16 +23,16 @@
 <body>
 	<h3>모집 게시판 글 작성 페이지</h3>
 	
-<form id="articleForm" role="form" action="/TMS/recruitWrite" method="post">
+<form id="articleForm" role="form" action="/TMS/modifyRec" method="post">
  <br style="clear: both">
 	<table>
 		<tr>
 			<td>
 				<div class="col-xs-9 zeroPad">
-					<input type="text" class="form-control" id="rc_title" name="rc_title" placeholder="제목" required>
+					<input type="text" class="form-control" id="rc_title" name="rc_title" placeholder="제목" value="${rc_board.rc_title }"  required>
 				</div>
 				<div class="col-xs-3 zeroPad">
-					<input type="number" class="form-control" placeholder="최대인원" name="max_mem" required>
+					<input type="number" class="form-control" placeholder="최대인원" name="max_mem" value="${rc_board.max_mem }" required>
 				</div>
 			</td>
 		</tr>  
@@ -44,21 +44,21 @@
 		</tr>
 		<tr>
 			<td>
-				<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">글 작성</button>
+				<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">수정하기</button>
 			</td>
 		</tr>
 	</table>
-	<input type="hidden" name="id" value="${usersVO.id }">
+	<input type="hidden" name="rc_idx" value="${rc_board.rc_idx }">
 		
 </form>
 
 
 <script type="text/javascript">
     $(document).ready(function() {
+      $("#summernote").summernote('code', '${rc_board.rc_content}');
       $('#summernote').summernote({
     	placeholder: 'content',
-        height: 350,
-        minHeight: null,
+        minHeight: 370,
         maxHeight: null,
         focus: true,
         lang : 'ko-KR',
