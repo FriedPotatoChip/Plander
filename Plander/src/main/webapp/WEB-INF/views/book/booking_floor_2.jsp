@@ -21,20 +21,20 @@
 		alert("size : " + size);
 		var booklist = '<c:out value='${booklist}' />';
 		
-		for (var i=0; i<= size; i++) {
-			<c:forEach var='k' items='${booklist }'>
-				var bookseat = '${k.s_col }';
+		<c:forEach var='k' items='${booklist }'>
+			var bookseat = '${k.s_col }';
+			console.log("s_col : " + bookseat);
 				
+			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 				if ( bookseat == document.getElementsByName('s_col')[i].value) {
 					alert("예약된 값 : " + bookseat );
 					//$('#seatinfo').html("<span>A-" + document.getElementsByName('s_col')[i].value + "</span>");
 					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-					
 					break;
 				}
-			</c:forEach>
-		}
+			}
+		</c:forEach>
 		
 		//선택한 인원 수와 체크된 박스 수가 같을 때 나머지 체크박스 disabled
 		$(":checkbox").change(function() {
@@ -42,20 +42,19 @@
 			if (cnt == $(":checkbox:checked").length) {
 				$(":checkbox:not(:checked)").attr("disabled", true);
 			} else {
-				for (var i=0; i<= size; i++) {
-					<c:forEach var='k' items='${booklist }'>
-						var bookseat = '${k.s_col }';
-						
+				$(":checkbox").removeAttr("disabled");
+				<c:forEach var='k' items='${booklist }'>
+					var bookseat = '${k.s_col }';
+					console.log("s_col : " + bookseat);
+					
+					for (var i=0; i<= size; i++) {
 						//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 						if ( bookseat == document.getElementsByName('s_col')[i].value) {
 							$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-							
 							break;
-						} else {
-							$(":checkbox").removeAttr("disabled");
 						}
-					</c:forEach>
-				}
+					}
+				</c:forEach>
 			}
 		});
 		
@@ -65,25 +64,24 @@
 <script>
 	//인원수를 바꾸면 : db에 값이 있는건 disabled, 나머지는 체크해제
 	$("#people").change(function() {
+		$(":checkbox").removeAttr("checked");
+		$(":checkbox").removeAttr("disabled");
+		
 		var size = document.getElementsByName('s_col').length;
 		alert("size : " + size);
 		var booklist = '<c:out value='${booklist}' />';
 		
-		for (var i=0; i<= size; i++) {
-			<c:forEach var='k' items='${booklist }'>
-				var bookseat = '${k.s_col }';
+		<c:forEach var='k' items='${booklist }'>
+			var bookseat = '${k.s_col }';
 				
+			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 				if ( bookseat == document.getElementsByName('s_col')[i].value) {
 					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-					
 					break;
-				} else {
-					$(":checkbox").removeAttr("checked");
-					$(":checkbox").removeAttr("disabled");
 				}
-			</c:forEach>
-		}
+			}
+		</c:forEach>
 		
 	});
 

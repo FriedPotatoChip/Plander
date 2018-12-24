@@ -25,10 +25,11 @@
 	//부트스트랩 캘린더
 	$(function() {
 		$('#datetimepicker6').datetimepicker({
-			format: 'YYYY-MM-DD HH:mm'
+			format: 'YYYY-MM-DD HH:00',
+			minDate : moment()
 		});
 		$('#datetimepicker7').datetimepicker({
-			format: 'YYYY-MM-DD HH:mm',
+			format: 'YYYY-MM-DD HH:00',
 			useCurrent : false
 		});
 		$("#datetimepicker6").on("dp.change", function(e) {
@@ -43,8 +44,22 @@
 
 <script>
 	function floorChk(frm) {
+		if (!frm.start_time.value) {
+			alert("예약 시작 날짜를 선택해주세요.");
+			frm.start_time.focus();
+			return false;
+		}
+		if (!frm.end_time.value) {
+			alert("예약 마감 날짜를 선택해주세요.");
+			frm.end_time.focus();
+			return false;
+		}
+		
 		var chk = $(":input:radio[name=sct_idx]:checked").val();
-		if (chk==1) {
+		if (chk==null) {
+			alert("개인실/랩실 선택은 필수입니다.");
+			return false;
+		} else if (chk==1) {
 			frm.action = "/TMS/book/oneseat";
 			frm.submit();
 		} else {
@@ -80,8 +95,7 @@
 </head>
 <body>
 <div id="container">
-	<h4><a href="">날짜 선택</a>&nbsp;&nbsp;&nbsp;
-	<a href="">좌석 선택</a></h4>
+	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
 	<hr>
 	
 	<div id="ticket" style="box-sizing: border-box;">
@@ -113,7 +127,7 @@
 					<input type="hidden" name="br_idx" value="${svo.br_idx }">
 					<div class="radio">
 						<label><input type="radio" name="sct_idx" value="1">개인석</label><br>
-						<label><input type="radio" name="sct_idx" value="">랩실</label><br>
+						<label><input type="radio" name="sct_idx" value="0">랩실</label><br>
 					</div>
 					<hr>
 					

@@ -1,23 +1,102 @@
 package com.bit.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit.domain.ApplyVO;
+import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
-import com.bit.mapper.BoardMapper;
-import com.bit.service.BoardService;
+import com.bit.mapper.RecruitMapper;
+import com.bit.service.RecruitService;
+import com.bit.utils.PagingVO;
 
 @Service
-public class BoardServiceImpl implements BoardService {
+public class BoardServiceImpl implements RecruitService {
 
 	@Autowired
-	private BoardMapper mapper;
+	private RecruitMapper mapper;
 	
 	@Override
 	public List<RecruitVO> getList() {
 		return mapper.getList();
+	}
+
+	@Override
+	public boolean register(RecruitVO vo) {
+		return mapper.insertRecruit(vo);
+	}
+
+	@Override
+	public RecruitVO detailOne(int rc_idx) {
+		return mapper.getOne(rc_idx);
+	}
+
+	@Override
+	public int getTotal() {
+		return mapper.getTotal();
+	}
+
+	@Override
+	public List<RecruitVO> getListPage(PagingVO vo) {
+		return mapper.getListPage(vo);
+	}
+
+	@Override
+	public boolean updateHit(int rc_idx) {
+		return mapper.updateHit(rc_idx);
+	}
+
+	@Override
+	public boolean apply(Map<String, Object> map) {
+		return mapper.insertApply(map);
+	}
+
+	@Override
+	public boolean updateCur(int rc_idx) {
+		return mapper.updateCur(rc_idx);
+	}
+
+	@Override
+	public List<ApplyVO> getApplyList(int rc_idx) {
+		return mapper.getApplyList(rc_idx);
+	}
+
+	@Override
+	public boolean deleteApply(Map<String, Object> map) {
+		return mapper.deleteApply(map);
+	}
+
+	@Override
+	public boolean minusCur(int rc_idx) {
+		return mapper.minusCur(rc_idx);
+	}
+
+	@Override
+	public boolean deleteRec(int rc_idx) {
+		return mapper.deleteRec(rc_idx);
+	}
+
+	@Override
+	public boolean modifyRec(RecruitVO vo) {
+		return mapper.updateRec(vo);
+	}
+
+	@Override
+	public List<CommentsVO> getCommList(Map<String, Object> map) {
+		return mapper.getCommList(map);
+	}
+
+	@Override
+	public boolean insertComm(CommentsVO vo) {
+		return mapper.insertComm(vo);
+	}
+
+	@Override
+	public int cntCommAll(int rc_idx) {
+		return mapper.cntCommAll(rc_idx);
 	}
 
 }

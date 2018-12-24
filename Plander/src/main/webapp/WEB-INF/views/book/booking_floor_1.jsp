@@ -18,28 +18,48 @@
 <script>
 	//DB에서 예약된 좌석이랑 비교해서 체크박스 disabled
 	$().ready(function(){
-		//var size = document.getElementsByName('s_col').length;
-		var bookroomlist = '<c:out value='${bookroomlist}' />';
-		var size = '${fn:length(bookroomlist) }';
-		alert("bookroomlist.legnth : " + size); //예약된 좌석 수
+		var size = document.getElementsByName('s_col').length; //6개
+		var bookroomlist = '<c:out value='${bookroomlist}' />'; //예약된 좌석 리스트 
+		alert("총 좌석 수  : " + size + ", 예약된 좌석 : " + bookroomlist);
 		
-		for (var i=0; i<= size; i++) {
-			<c:forEach var='k' items='${bookroomlist }'>
-				var bookseat = '${k.s_col }';
-				var sct = '${k.sct_idx }';
+		<c:forEach var='k' items='${bookroomlist }'>
+			var bookseat = '${k.s_col }'; //예약된 좌석 번호
+			console.log("s_col : " + bookseat);
 				
-				
+			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 				if ( bookseat == document.getElementsByName('s_col')[i].value) {
 					alert("예약된 값 : " + bookseat );
-					//$('#seatinfo').html("<span>A-" + document.getElementsByName('s_col')[i].value + "</span>");
 					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
 					break;
 				} 
-			</c:forEach>
-		}
+			}
+		</c:forEach>
 		
-		
+		//체크박스 클릭했을 때 
+		$(":checkbox").change(function() {
+			var cnt =1;
+			
+			//체크된 박스 수가 1일 때 나머지 체크박스 disabled
+			if (cnt == $(":checkbox:checked").length) {
+				$(":checkbox:not(:checked)").attr("disabled", true); //같으면 나머지 체크박스 disabled
+			} else {
+				$(":checkbox").removeAttr("disabled");
+				<c:forEach var='k' items='${bookroomlist }'>
+					var bookseat = '${k.s_col }'; //예약된 좌석 번호
+					console.log("s_col : " + bookseat);
+						
+					for (var i=0; i<= size; i++) {
+						if ( bookseat == document.getElementsByName('s_col')[i].value) {
+							$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+							console.log("if문 안의 s_col : " + bookseat);
+							break;
+						} 
+					}
+				</c:forEach>
+				
+			}
+		});
 	});
 
 </script>
@@ -80,10 +100,7 @@
 				<h4><a href="">1층</a>&nbsp;&nbsp;&nbsp;
 				<a href="">2층</a></h4>
 				<p style="font-style: italic;">랩실은 4인실 기준 최소 3인 이상 단체예약만 가능합니다.</p>
-				<span>인원 수 선택 : </span>
-				<select id="people">
-					<option value="1">단체</option>
-				</select>
+
 			</div>
 			<hr>
 			<script>
@@ -93,51 +110,41 @@
 				//12인실 : sct_idx = 4
 				//sct_idx 값이 2 : 4인실 빼고 체크박스 disabled, 3 : 8인실 빼고 disabled, 4 : 12인실 빼고 disabled
 				
-				if ( $('input:checkbox[id="4room"]').is(":checked") == true) {
-					$('#sct_idx').val('2');
-				} else if ( $('input:checkbox[id="8room"]').is(":checked") == true) {
-					$('#sct_idx').val('3');
-				} else if ( $('input:checkbox[id="12room"]').is(":checked") == true) {
-					$('#sct_idx').val('4');
-				} else {
-					alert("ㅋㅋ ");
-					return false;
-				}
-				
 				frm.action = "/test.jsp";
 				frm.submit();
 			}
 			</script>
 			
 		<div id="allseat">
-			<input type="hidden" id="sct_idx" name="sct_idx" value="">
+			<!-- sct_idx 값 0으로 넘어옴 -->
+			<input type="hidden" name="sct_idx" value="">
 			<div>
 				<div class="checkbox" style="width: 100%; display: table;">
 					<div id="4people" style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="4room" name="s_col" value="1">4인실</label></p>
+						<p><label><input type="checkbox" id="4room" name="s_col" value="201">4인실</label></p>
 					</div>
 					
 					<div id="8people" style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="8room" name="s_col" value="1">8인실</label></p>
+						<p><label><input type="checkbox" id="8room" name="s_col" value="301">8인실</label></p>
 					</div>
 					
 					<div id="8people" style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="8room" name="s_col" value="2">8인실</label></p>
+						<p><label><input type="checkbox" id="8room" name="s_col" value="302">8인실</label></p>
 					</div>
 				</div>
 				<br>
 				
 				<div class="checkbox" style="width: 100%; display: table;">
 					<div id="4people" style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="4room" name="s_col" value="2">4인실</label></p>
+						<p><label><input type="checkbox" id="4room" name="s_col" value="202">4인실</label></p>
 					</div>
 					
 					<div id="12people" style="display: inline-table; width: 53%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="12room" name="s_col" value="1">12인실</label></p>
+						<p><label><input type="checkbox" id="12room" name="s_col" value="401">12인실</label></p>
 					</div>
 					
 					<div id="4people" style="display: inline-table; width: 15%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" name="s_col" value="100">카페 터틀🐢</label></p>
+						<p><label>카페 터틀🐢</label></p>
 					</div>
 				</div>
 				<br>

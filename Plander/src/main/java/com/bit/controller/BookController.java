@@ -101,7 +101,6 @@ public class BookController {
 		model.addAttribute("bvo", bvo);
 		model.addAttribute("bookroomlist", bookroomlist);
 		
-		
 		return "book/booking_floor_1";
 	}
 	
