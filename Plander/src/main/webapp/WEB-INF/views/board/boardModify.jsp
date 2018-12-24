@@ -23,23 +23,20 @@
 <body>
 	<h3>모집 게시판 글 작성 페이지</h3>
 	
-<form id="articleForm" role="form" action="/TMS/modifyRec" method="post">
+<form id="articleForm" role="form" action="/TMS/modifyBoard" method="post">
  <br style="clear: both">
 	<table>
 		<tr>
 			<td>
 				<div class="col-xs-9 zeroPad">
-					<input type="text" class="form-control" id="rc_title" name="rc_title" placeholder="제목" value="${rc_board.rc_title }"  required>
-				</div>
-				<div class="col-xs-3 zeroPad">
-					<input type="number" class="form-control" placeholder="최대인원" name="max_mem" value="${rc_board.max_mem }" required>
+					<input type="text" class="form-control" id="b_title" name="b_title" placeholder="제목" value="${board.b_title }"  required>
 				</div>
 			</td>
 		</tr>  
 		<tr>
 			<td>
 				<br>
-				<textarea class="form-control" id="summernote" name="rc_content" placeholder="content" required></textarea>
+				<textarea class="form-control" id="summernote" name="b_content" placeholder="content" required></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -48,7 +45,7 @@
 			</td>
 		</tr>
 	</table>
-	<input type="hidden" name="rc_idx" value="${rc_board.rc_idx }">
+	<input type="hidden" name="b_idx" value="${board.b_idx }">
 		
 </form>
 
@@ -69,7 +66,7 @@
           }
         }
       });
-      $("#summernote").summernote('code',  '${rc_board.rc_content}');
+      $("#summernote").summernote('code',  '${board.b_content}');
     });
     function sendFile(file, el) {
       var form_data = new FormData();

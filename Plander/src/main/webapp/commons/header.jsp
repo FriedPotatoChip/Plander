@@ -83,14 +83,12 @@
 		if (!document.frm.id.value) {
 			alert("아이디를 입력해주세요.");
 			document.frm.id.focus();
-			document.frm.action = "/TMS";
 			return false;
 		}
 
 		if (!document.frm.password.value) {
 			alert("비밀번호를 입력해주세요.");
 			document.frm.password.focus()
-			document.frm.action = "/TMS";
 			return false;
 		}
 
@@ -208,9 +206,9 @@
 
 			<div class="modal-body center">
 				<form name="frm" action="/TMS/login" method="post" onsubmit="chk()">
-					<input type="text" name="id" class="form-control" placeholder="아이디">
+					<input type="text" name="id" class="form-control" placeholder="아이디" required>
 					<input type="text" name="password" class="form-control"
-						style="margin-top: 1.5%;" placeholder="비밀번호">
+						style="margin-top: 1.5%;" placeholder="비밀번호" required>
 					<button type="submit" style="margin-top: 1.5%;"
 						class="btn btn-outline-secondary form-control">로그인</button>
 				</form>
@@ -267,13 +265,13 @@
 							<tr>
 								<td width="35%">아이디&nbsp;<b style="color: red;">&#42;</b></td>
 								<td width="65%"><input type="text" name="id" id="id"
-									oninput="idchk()" class="col-sm-6 form-control">
+									oninput="idchk()" class="col-sm-6 form-control" required>
 									<p id="idMsg" style="font-size: 13px;"></p></td>
 							</tr>
 							<tr>
 								<td>비밀번호&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="password" name="password" id="password"
-									oninput="pwchk()" class="col-sm-6 form-control">
+									oninput="pwchk()" class="col-sm-6 form-control" required>
 									<p id="pwMsg" style="font-size: 13px;">(영문 대소문자/숫자/특수문자 중
 										2가지 이상 조합, 8자~16자)</p></td>
 							</tr>
@@ -281,25 +279,25 @@
 								<td>비밀번호 확인&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="password" name="passwordchk"
 									id="passwordchk" oninput="pwchk()"
-									class="col-sm-6 form-control">
+									class="col-sm-6 form-control" required>
 									<p id="pwchkMsg" style="font-size: 13px;"></p> <!-- 비밀번호가 일치하지 않습니다. -->
 								</td>
 							</tr>
 							<tr>
 								<td>이름&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" name="name"
-									class="col-sm-6 form-control"></td>
+									class="col-sm-6 form-control" required></td>
 							</tr>
 
 							<tr>
 								<td>휴대전화&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" name="phone"
-									class="col-sm-10 form-control"></td>
+									class="col-sm-10 form-control" required></td>
 							</tr>
 							<tr>
 								<td>이메일&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" name="email"
-									class="col-sm-10 form-control"></td>
+									class="col-sm-10 form-control" required></td>
 							</tr>
 						</tbody>
 					</table>
@@ -334,14 +332,12 @@
 <!-- 카카오 로그인 api -->
 <script type='text/javascript'>
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('카카오 로그인'); /* 클라이언트 id 숨겨두기 */
+	Kakao.init('카카오 자바스크립트 키'); /* 클라이언트 id 숨겨두기 */
 	// 카카오 로그인 버튼을 생성합니다.
 	Kakao.Auth.createLoginButton({
 		container : '#kakao-login-btn',
 		success : function(authObj) {
-			_$ta
 			alert(JSON.stringify(authObj));
-			_$t
 
 			Kakao.API.request({
 				url : '/v1/user/me',
@@ -379,7 +375,7 @@
 <!-- 네이버 로그인 api -->
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId({
-		clientId : "네이버 클라이언트 id", /* 클라이언트 ID (숨겨두기) */
+		clientId : "네이버 클라이언트 아이디", /* 클라이언트 ID (숨겨두기) */
 		callbackUrl : "http://localhost:8095/TMS/naverCallback",
 		isPopup : true, /* 팝업을 통한 연동처리 여부 */
 		callbackHandle : true,
@@ -400,7 +396,7 @@
 		console.log("구글 로그인 시작");
 		gapi.load('auth2', function() {
 			var gauth = gapi.auth2.init({
-				client_id : '구글 클라이언트 id'/* 구글 클라이언트 키 */
+				client_id : '구글 클라이언트 키'/* 구글 클라이언트 키 */
 			})
 			gauth.signIn()
 					.then(

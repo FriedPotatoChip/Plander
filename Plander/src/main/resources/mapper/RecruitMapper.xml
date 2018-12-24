@@ -14,8 +14,10 @@
 		<select id="getListPage" resultType="com.bit.domain.RecruitVO" parameterType="com.bit.utils.PagingVO">
 		<![CDATA[
 			SELECT * FROM (
-							SELECT /*+ INDEX_DESC (RECRUIT RECRUIT_PK) */
-							ROWNUM RN, RC_IDX, RC_TITLE, RC_CONTENT, ID, CUR_MEM, MAX_MEM, RC_REGDATE, HIT FROM RECRUIT
+							SELECT ROWNUM RN, R.*, CNT 
+							FROM RECRUIT R LEFT OUTER JOIN (SELECT RC_IDX, COUNT(*) CNT FROM COMMENTS GROUP BY RC_IDX) C
+							ON R.RC_IDX = C.RC_IDX
+							ORDER BY R.RC_IDX DESC
 						  )
 			WHERE RN BETWEEN #{start} AND #{end}
 		]]>
@@ -55,8 +57,11 @@
 		
 		<!-- 모집게시판 insert -->
 		<insert id="insertRecruit" parameterType="com.bit.domain.RecruitVO">
+			<selectKey keyProperty="rc_idx" order="BEFORE" resultType="int">
+				SELECT RECRUIT_SEQ.NEXTVAL FROM DUAL
+			</selectKey>
 			INSERT INTO RECRUIT (RC_IDX, RC_TITLE, RC_CONTENT, ID, MAX_MEM)
-						VALUES (RECRUIT_SEQ.NEXTVAL, #{rc_title}, #{rc_content}, #{id}, #{max_mem})
+						VALUES (#{rc_idx}, #{rc_title}, #{rc_content}, #{id}, #{max_mem})
 		</insert>
 		
 		<!-- 모집게시판 신청 insert -->
@@ -108,6 +113,30 @@
 			INSERT INTO COMMENTS (C_IDX, C_CONTENT, ID, RC_IDX)
 						VALUES (COMMENTS_SEQ.NEXTVAL, #{c_content}, #{id}, #{rc_idx})
 		</insert>
+		
+		<!-- 모집글 대댓글 등록 -->
+		<insert id="insertReplyComm" parameterType="com.bit.domain.CommentsVO">
+			INSERT INTO COMMENTS (C_IDX, C_CONTENT, ID, RC_IDX, RP_IDX)
+						VALUES (COMMENTS_SEQ.NEXTVAL, #{c_content}, #{id}, #{rc_idx}, #{rp_idx})
+		</insert>
+		
+		
+		<!-- 댓글 삭제 -->
+		<delete id="deleteComm" parameterType="int">
+			DELETE FROM COMMENTS WHERE C_IDX = #{c_idx}
+		</delete>
+		<!-- 해당 댓글에 대댓글 있는지 조회 -->
+		<select id="cntReplyComm" resultType="int" parameterType="map">
+			SELECT COUNT(*) FROM COMMENTS WHERE RC_IDX = #{rc_idx} AND RP_IDX = #{rp_idx}
+		</select>
+		<!-- 대댓글이 달린 경우 내용 처리 -->
+		<update id="updateDeleteComm" parameterType="int">
+			UPDATE COMMENTS SET C_CONTENT = '[삭제된 댓글입니다.]', DEL = 1 WHERE C_IDX = #{c_idx}
+		</update>
+		<!-- 댓글 수정 -->
+		<update id="updateComm" parameterType="com.bit.domain.CommentsVO">
+			UPDATE COMMENTS SET C_CONTENT = #{c_content} WHERE C_IDX = #{c_idx}
+		</update>
 		
 </mapper>
 

@@ -79,7 +79,6 @@ body {
 </style>
 </head>
 <body>
-	${sessionScope.usersVO }
 	<c:if test="${empty sessionScope.usersVO }">
 		<jsp:include page="/commons/header.jsp" />
 	</c:if>
@@ -90,10 +89,10 @@ body {
 	<div id="linker" class="d-flex justify-content-center normal"
 		style="padding-top: 10px; padding-bottom: 10px;">
 		<a class="nav-link active" href="#">운영안내</a> <a class="nav-link"
-			href="#">이용안내</a> <a class="nav-link" href="#">모집하기</a> <a
+			href="#">이용안내</a> <a class="nav-link" href="#" onclick="chkLogin()">모집하기</a> <a
 			class="nav-link" href="#">게시판</a> <a class="nav-link" href="#">예약하기</a>
 		<a class="nav-link" href="#">세부공간보기</a> <a class="nav-link" href="#">찾아오시는길</a>
-		<a class="nav-link" href="#" onclick="chkLogin()">모집게시판</a>
+		<a class="nav-link" href="/TMS/board?ct_idx=2">자유게시판</a>
 	</div>
 
 	<div id="carouselExampleIndicators" class="carousel slide"

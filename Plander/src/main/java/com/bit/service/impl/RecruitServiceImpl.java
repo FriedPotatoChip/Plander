@@ -6,17 +6,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bit.domain.BoardVO;
+import com.bit.domain.ApplyVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
-import com.bit.mapper.BoardMapper;
-import com.bit.service.BoardService;
+import com.bit.mapper.RecruitMapper;
+import com.bit.service.RecruitService;
+import com.bit.utils.PagingVO;
 
 @Service
-public class BoardServiceImpl implements BoardService {
+public class RecruitServiceImpl implements RecruitService {
 
 	@Autowired
-	private BoardMapper mapper;
+	private RecruitMapper mapper;
 	
 	@Override
 	public List<RecruitVO> getList() {
@@ -24,23 +25,23 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int register(BoardVO vo) {	//
-		return mapper.insertBoard(vo);
+	public boolean register(RecruitVO vo) {
+		return mapper.insertRecruit(vo);
 	}
 
 	@Override
-	public BoardVO detailOne(int rc_idx) {
+	public RecruitVO detailOne(int rc_idx) {
 		return mapper.getOne(rc_idx);
 	}
 
 	@Override
-	public int getTotal(int ct_idx) {
-		return mapper.getTotal(ct_idx);
+	public int getTotal() {
+		return mapper.getTotal();
 	}
 
 	@Override
-	public List<RecruitVO> getListPage(Map<String, Integer> map) {
-		return mapper.getListPage(map);
+	public List<RecruitVO> getListPage(PagingVO vo) {
+		return mapper.getListPage(vo);
 	}
 
 	@Override
@@ -54,12 +55,32 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public boolean updateCur(int rc_idx) {
+		return mapper.updateCur(rc_idx);
+	}
+
+	@Override
+	public List<ApplyVO> getApplyList(int rc_idx) {
+		return mapper.getApplyList(rc_idx);
+	}
+
+	@Override
+	public boolean deleteApply(Map<String, Object> map) {
+		return mapper.deleteApply(map);
+	}
+
+	@Override
+	public boolean minusCur(int rc_idx) {
+		return mapper.minusCur(rc_idx);
+	}
+
+	@Override
 	public boolean deleteRec(int rc_idx) {
 		return mapper.deleteRec(rc_idx);
 	}
 
 	@Override
-	public boolean modifyRec(BoardVO vo) {
+	public boolean modifyRec(RecruitVO vo) {
 		return mapper.updateRec(vo);
 	}
 
@@ -102,7 +123,5 @@ public class BoardServiceImpl implements BoardService {
 	public boolean updateComm(CommentsVO vo) {
 		return mapper.updateComm(vo);
 	}
-
-
 
 }
