@@ -1,151 +1,252 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-<meta charset="UTF-8">
-<!-- 폰트 -->
-<link href="https://fonts.googleapis.com/css?family=Gugi|Noto+Sans+KR"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Jua"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Gamja+Flower"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
-	rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Main 화면</title>
+
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-<!-- 폰트 사용하기
-	font-family: 'Gugi', cursive;
-	font-family: 'Noto Sans KR', sans-serif; 
-	font-family: 'Jua', sans-serif;
-	font-family: 'Gamja Flower', cursive;
-	font-family: 'Do Hyeon', sans-serif;
--->
-<title>거북이의기적</title>
 <style>
+@media screen and (max-width: 800px) .page-content h1 {
+	font-size
+	
+	
+	:
+	
+	
+	4
+	.5vw
+	
+	
+	;
+	line-height
+	
+	
+	:
+	
+	
+	7
+	vw
+	;
+	
+	
+
+
+}
+
+@media screen and (max-width:1200px) .page-content h1 {
+	padding-bottom
+	
+	
+	:
+	
+	
+	20
+	px
+	;
+	
+	
+	
+	
+	font-family
+	
+	
+	:
+	
+	 
+	
+	'
+	NanumSquare
+	
+	
+	'
+	,
+	sans-serif
+	
+	
+	;
+}
+
+@media screen and (max-width: 800px) .page-content h2 {
+	font-size
+	
+	
+	:
+	
+	
+	3
+	.5vw
+	
+	
+	;
+	line-height
+	
+	
+	:
+	
+	
+	6
+	vw
+	;
+	
+	
+
+
+}
+
+@media screenand (max-width:1200px).page-content h2 {
+	margin
+	
+	
+	:
+	
+	
+	020
+	px
+	;
+	
+	
+	
+	
+	font-family
+	
+	
+	:
+	
+	 
+	
+	'
+	NanumSquare
+	
+	
+	'
+	,
+	sans-serif
+	
+	
+	;
+}
+
 body {
 	font-family: 'NanumSquare', sans-serif;
+	font-weight: 400;
+	color: #666;
+	font-size: 1.2rem;
 }
 
-#title_name {
-	font-family: 'Do Hyeon', sans-serif;
+.page-content {
+	overflow-y: hidden;
+	width: 100%;
+	display: table;
 }
 
-.normal {
-	font-weight: 400
+.home-1 {
+	/* background-image: url(../resources/images/main2.jpg); */
+	overflow: hidden;
+	text-align: center;
+	position:absolute;
+	background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(../resources/images/main2.jpg); 
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
-.bold {
-	font-weight: 700
+
+
+.page-content.active {
+	filter: grayscale(0%);
+	transition: all 1s ease;
 }
 
-.bolder {
-	font-weight: 800
+.page-content>.content {
+	display: table-cell;
+	vertical-align: middle;
 }
 
-.light {
-	font-weight: 300
+.home-1.content {
+	position: relative;
+	
 }
 
-#linker a {
-	color: #002054;
+.page-content h1 {
+	display: block;
+	margin-block-start: 0.67em;
+	margin-block-end: 0.67em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	color: #fff;
+	position: relative;
+	z-index:3;
+	
 }
 
-#linker a:hover {
-	font-weight: 800;
-	color: #00539f;
+.page-content h2 {
+	display: block;
+	margin-block-start: 0.67em;
+	margin-block-end: 0.67em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	color: #fff;
 }
 
-#primaryNav li a h5 {
-	color: black;
-	font-weight: 700;
+.text1 {
+	width: 7rem;
+	display: inline-block;
+	border: 3px solid #e8590c;
+	border-radius: 10px;
+	padding: 20px 35px;
+	margin-right: 20px;
+	font-weight: bold;
 }
 
-#primaryNav li a h5:hover {
-	color: #00539f;
-	font-weight: 800;
+.text2 {
+	width: 7rem;
+	display: inline-block;
+	border: 3px solid #e03131;
+	border-radius: 10px;
+	padding: 20px 35px;
+	margin-right: 20px;
+	font-weight: bold;
+}
+
+.button {
+	margin-bottom: 50px;
+}
+
+.home-1 a {
+	color: #fff;
+}
+
+.text1:hover {
+	background-color:#e8590c;
+	color:white;
+}
+
+.text2:hover {
+	background-color:#e03131;
+	color:white;
 }
 </style>
 </head>
 <body>
-	${sessionScope.usersVO }
-	<c:if test="${empty sessionScope.usersVO }">
-		<jsp:include page="/commons/header.jsp" />
-	</c:if>
-	<c:if test="${not empty sessionScope.usersVO }">
-		<jsp:include page="/commons/loginheader.jsp" />
-	</c:if>
-
-	<div id="linker" class="d-flex justify-content-center normal"
-		style="padding-top: 10px; padding-bottom: 10px;">
-		<a class="nav-link active" href="#">운영안내</a> <a class="nav-link"
-			href="#">이용안내</a> <a class="nav-link" href="#">모집하기</a> <a
-			class="nav-link" href="#">게시판</a> <a class="nav-link" href="#">예약하기</a>
-		<a class="nav-link" href="#">세부공간보기</a> <a class="nav-link" href="#">찾아오시는길</a>
-		<a class="nav-link" href="#" onclick="chkLogin()">모집게시판</a>
-	</div>
-
-	<div id="carouselExampleIndicators" class="carousel slide"
-		data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleIndicators" data-slide-to="0"
-				class="active"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img class="d-block w-100" src="/resources/images/sr0.jpg"
-					alt="First slide">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="/resources/images/sr1.jpg"
-					alt="Second slide">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="/resources/images/sr2.jpg"
-					alt="Third slide">
+	<div class="page-content home-1 active"
+		style="height: -webkit-fill-available;">
+		<div class="content">
+			<h1>거북이의 기적에 오신걸 환영합니다~!!!</h1>
+			<h2>
+				스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
+			</h2>
+			<div class="button">
+				<a href="#"> 
+					<span class="text1">Login</span>
+				</a> 
+				<a href="#"> 
+					<span class="text2">Learn More</span>
+				</a>
 			</div>
 		</div>
-		<a class="carousel-control-prev" href="#carouselExampleIndicators"
-			role="button" data-slide="prev"> <span
-			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-			class="sr-only">Previous</span>
-		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-			role="button" data-slide="next"> <span
-			class="carousel-control-next-icon" aria-hidden="true"></span> <span
-			class="sr-only">Next</span>
-		</a>
 	</div>
 
-	<script>
-		if ('${loginResult}' == 'admin') {
-			alert("관리자 로그인에 성공하였습니다.");
-		} else if ('${loginResult}' == 'user') {
-			alert("로그인 성공");
-		} else if ('${loginResult}' == 'fail') {
-			alert("로그인에 실패하였습니다.");
-		}
-
-		function chkLogin() {
-			if ("${usersVO}" == "") {
-				alert("로그인 후 이용해주세요");
-				return false;
-			} else {
-				location.href = "/TMS/recruit";
-			}
-		}
-	</script>
 </body>
 </html>

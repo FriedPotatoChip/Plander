@@ -114,8 +114,9 @@ h3 {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin"> <span
-								data-feather="users"></span> Customers <span class="sr-only">(current)</span>
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
+								<span data-feather="users"></span> Customers <span
+								class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
@@ -123,8 +124,9 @@ h3 {
 								Cabinet
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link active" href="/TMS/admin/Chart"> <span
-								data-feather="home"></span> Reservation
+						<li class="nav-item"><a class="nav-link active"
+							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+								Reservation
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link" href="#"> <span
@@ -134,12 +136,11 @@ h3 {
 				</div>
 			</nav>
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-				<h3 class="h3">시간대별 예약현황</h3>
-				<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+			<h3 class="h3">시간대별 예약현황</h3>
+			<canvas id="horizontalBar"></canvas>
 			</main>
 		</div>
 	</div>
-
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -163,31 +164,36 @@ h3 {
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 	<script>
-		var ctx = document.getElementById("myChart");
-		var myChart = new Chart(ctx, {
-			type : 'line',
-			data : {
-				labels : [ "Sunday", "Monday", "Tuesday", "Wednesday",
-						"Thursday", "Friday", "Saturday" ],
-				datasets : [ {
-					data : [ 15339, 21345, 18483, 24003, 23489, 24092, 12034 ],
-					lineTension : 0,
-					backgroundColor : 'transparent',
-					borderColor : '#007bff',
-					borderWidth : 4,
-					pointBackgroundColor : '#007bff'
+		new Chart(document.getElementById("horizontalBar"), {
+			"type" : "horizontalBar",
+			"data" : {
+				"labels" : [ "Red", "Orange", "Yellow", "Green", "Blue",
+						"Purple", "Grey" ],
+				"datasets" : [ {
+					"label" : "My First Dataset",
+					"data" : [ 22, 33, 55, 12, 86, 23, 14 ],
+					"fill" : false,
+					"backgroundColor" : [ "rgba(255, 99, 132, 0.2)",
+							"rgba(255, 159, 64, 0.2)",
+							"rgba(255, 205, 86, 0.2)",
+							"rgba(75, 192, 192, 0.2)",
+							"rgba(54, 162, 235, 0.2)",
+							"rgba(153, 102, 255, 0.2)",
+							"rgba(201, 203, 207, 0.2)" ],
+					"borderColor" : [ "rgb(255, 99, 132)", "rgb(255, 159, 64)",
+							"rgb(255, 205, 86)", "rgb(75, 192, 192)",
+							"rgb(54, 162, 235)", "rgb(153, 102, 255)",
+							"rgb(201, 203, 207)" ],
+					"borderWidth" : 1
 				} ]
 			},
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : false
+			"options" : {
+				"scales" : {
+					"xAxes" : [ {
+						"ticks" : {
+							"beginAtZero" : true
 						}
 					} ]
-				},
-				legend : {
-					display : false,
 				}
 			}
 		});

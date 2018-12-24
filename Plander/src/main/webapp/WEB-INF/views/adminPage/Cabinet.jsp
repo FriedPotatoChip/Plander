@@ -145,11 +145,11 @@ h3 {
 			<div class="area_planner">
 				<div class="wrap">
 					<div class="planner_tap">
-						<div class="po_category on" value="1">지점 A</div>
+						<div class="po_category on" value="1">지점A</div>
 						<div class="po_line">&nbsp;</div>
-						<div class="po_category" value="2">지점 B</div>
+						<div class="po_category" value="2">지점B</div>
 						<div class="po_line">&nbsp;</div>
-						<div class="po_category" value="3">지점 C</div>
+						<div class="po_category" value="3">지점C</div>
 					</div>
 					<div class="clear" />
 				</div>
@@ -182,15 +182,21 @@ h3 {
 		crossorigin="anonymous"></script>
 
 	<script>
+	
 		$(document).ready(function() {
-
+			
 			$('.po_category').click(function() {
-
+				
 				//색변환
 				$('.po_category').removeClass('on');
 				$(this).addClass('on');
-			})
-
+				
+				var code = $(this).attr('value');
+				console.log('code : ' + code);
+				
+				location.href = '/TMS/admin/Cabinet?br_idx='+ code;
+			});
+			
 			var list = new Array();
 			<c:forEach var = "item" items="${cabinet}"> 
 				var cb_num = '${item.cb_number}';
@@ -201,8 +207,9 @@ h3 {
 				$("#"+cb_num+"").html("<div><p>"+cb_num+". &nbsp&nbsp;<strong>"+id+"</strong></p> <i>"+start+"<br><span class='right'> ~ "+end+"</span></i></div>");
 			</c:forEach>
 		});
+		
 	</script>
-
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"/>
 	<script>
 		window.jQuery
 				|| document
@@ -216,37 +223,6 @@ h3 {
 		feather.replace()
 	</script>
 	Graphs
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-	<script>
-		var ctx = document.getElementById("myChart");
-		var myChart = new Chart(ctx, {
-			type : 'line',
-			data : {
-				labels : [ "Sunday", "Monday", "Tuesday", "Wednesday",
-						"Thursday", "Friday", "Saturday" ],
-				datasets : [ {
-					data : [ 15339, 21345, 18483, 24003, 23489, 24092, 12034 ],
-					lineTension : 0,
-					backgroundColor : 'transparent',
-					borderColor : '#007bff',
-					borderWidth : 4,
-					pointBackgroundColor : '#007bff'
-				} ]
-			},
-			options : {
-				scales : {
-					yAxes : [ {
-						ticks : {
-							beginAtZero : false
-						}
-					} ]
-				},
-				legend : {
-					display : false,
-				}
-			}
-		});
-	</script>
+	
 </body>
 </html>

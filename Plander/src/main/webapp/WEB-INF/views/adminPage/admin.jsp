@@ -20,6 +20,44 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/dashboard.css" rel="stylesheet">
 <!-- ======================================================================================== -->
+<style>
+.paging {
+	list-style: none;
+}
+
+.paging li {
+	float: left;
+	margin-right: 8px;
+}
+
+.paging li a {
+	text-decoration: none;
+	display: block;
+	padding: 3px 7px;
+	border: 1px solid #00B3DC;
+	font-weight: bold;
+	color: black;
+}
+
+.paging li a:hover {
+	background-color: #00B3DC;
+	color: white;
+}
+
+.paging .disable {
+	padding: 3px 7px;
+	border: 1px solid silver;
+	color: silver;
+}
+
+.paging .now {
+	padding: 3px 7px;
+	border: 1px solid #ff4aa5;
+	background-color: #ff4aa5;
+	color: white;
+	font-weight: bold;
+}
+</style>
 </head>
 
 <body>
@@ -39,17 +77,19 @@
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link active" href="/TMS/admin">
-								<span data-feather="users"></span> Customers <span
-								class="sr-only">(current)</span>
+						<li class="nav-item"><a class="nav-link active"
+							href="/TMS/admin"> <span data-feather="users"></span>
+								Customers <span class="sr-only">(current)</span>
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Cabinet"> <span
-								data-feather="file"></span> Cabinet
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Cabinet?br_idx=1"> <span data-feather="file"></span>
+								Cabinet
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Chart"> <span
-								data-feather="home"></span> Reservation
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+								Reservation
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link" href="#"> <span
@@ -60,7 +100,11 @@
 			</nav>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+			<h2 class="m-auto">[회원관리]</h2>
+
 			<div class="table-responsive" style="margin-top: 3rem;">
+				<input class="form-control w-100 m-1" type="text"
+					placeholder="Search" aria-label="Search">
 				<table class="table table-striped table-hover"
 					style="text-align: center;">
 					<thead class="thead-light">
@@ -93,6 +137,51 @@
 							</tr>
 						</c:forEach>
 					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="4">
+								<ol class="paging">
+									<%--[이전으로]에 대한 사용여부 처리 --%>
+									<c:choose>
+										<%-- 사용불가(disable) : 첫번째 블록인 경우 --%>
+										<c:when test="${pvo.beginPage == 1 }">
+											<li class="disable">이전으로</li>
+										</c:when>
+										<%--사용가능(enable) : 두번째 이상(첫번째 아닌경우) --%>
+										<c:otherwise>
+											<li><a href="/TMS/admin?cPage=${pvo.beginPage - 1 }">이전으로</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+
+									<%-- 블록내에 표시할 페이지 반복처리(시작페이지~끝페이지)--%>
+									<c:forEach var="k" begin="${pvo.beginPage }"
+										end="${pvo.endPage }">
+										<c:choose>
+											<c:when test="${k == pvo.nowPage }">
+												<li class="now">${k }</li>
+											</c:when>
+											<c:otherwise>
+												<li><a href="/TMS/admin?cPage=${k }">${k }</a></li>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+
+									<%--[다음으로]에 대한 사용여부 처리 --%>
+									<c:choose>
+										<%--사용불가(disable) : endPage가 전체페이지수 보다 크거나 같으면 --%>
+										<c:when test="${pvo.endPage >= pvo.totalPage }">
+											<li class="disable">다음으로</li>
+										</c:when>
+										<%--사용가능(enable) --%>
+										<c:otherwise>
+											<li><a href="/TMS/admin?cPage=${pvo.endPage + 1 }">다음으로</a></li>
+										</c:otherwise>
+									</c:choose>
+								</ol>
+							</td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 			</main>
