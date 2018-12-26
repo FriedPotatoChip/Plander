@@ -59,7 +59,8 @@ public class BookController {
 		System.out.println("예약날짜(regdate) : " + bvo.getBk_regdate());
 		System.out.println("시작날짜 : " + bvo.getStart_time());
 		System.out.println("끝 날짜 : " + bvo.getEnd_time());
-		System.out.println("***** 지점번호 : " + bvo.getBr_idx() + ", 방 번호 : " + bvo.getSct_idx());
+		System.out.println("***** 지점번호 : " + bvo.getBr_idx() + ", 방 번호 : " + bvo.getSct_idx()
+				+ ", 정기권 확인 : " + bvo.getTime_idx());
 		
 		//전체 좌석 
 		int allseat = bookService.seatCnt(bvo.getBr_idx(), bvo.getSct_idx());

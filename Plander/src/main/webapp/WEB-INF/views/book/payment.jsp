@@ -19,6 +19,122 @@
 	.center { text-align: center; }
 </style>
 
+<script>
+	$(function() {
+		$('#booknum').html(
+				'<span>' + '${bvo.getStart_time() }'.substring(0,4)
+				+ '${bvo.getStart_time() }'.substring(5,7)
+				+ '${bvo.getStart_time() }'.substring(8,10) + '</span>');
+		
+		//시간에 따른 가격계산
+		var startdate = new Date('${bvo.start_time }');
+		var enddate = new Date('${bvo.end_time }');
+		
+		var start = startdate.toLocaleString('en-GB').substring(12,14);
+		var end = enddate.toLocaleString('en-GB').substring(12,14);
+		
+		var sum = 0;
+		var sct_idx = '${bvo.sct_idx }'; //방번호 확인
+		var time_idx = '${bvo.time_idx }'; //정기권 확인
+		var cabinet = '${bvo.cabinet }'; //사물함 사용여부 y/n
+        
+        //1. 1인실 sct_idx=1일 때
+        if (sct_idx == 1) {
+        	console.log('sct_idx : ' + sct_idx);
+        	console.log('time_idx : ' + time_idx);
+        	//정기권을 구입한 사람들
+        	//정기권 2주 time_idx ==100
+        	//사물함 선택 유무확인, 사물함 선택시 +2000
+        	if (time_idx == 100) {
+        		price = 18000;
+				if (cabinet == 'y') {
+					sum = price + 2000;
+				} else {
+					sum = price;
+				}
+			} else if (time_idx == 101) {
+				//정기권 1개월
+				price = 45000;
+				sum = price;
+			} else if (time_idx == 102) {
+				//야간권 10:00 ~ 8:00
+				price = 12000;
+				sum = price;
+			} else {
+				//정기권 X
+				for (var i=start; i<end; i++) {
+					console.log('i : ' + i);
+					if (8 <= i && i < 18) {
+						var price = 1500;
+						sum += price;
+						console.log('8시~18 시 : ' + price);
+						console.log('i : ' + i + ', sum : ' + sum);
+					} else if (i >= 18 && i <= 22) {
+						price = 2000;
+						sum += price;
+						console.log('18 시 이후 : ' + price);
+						console.log('i : ' + i + ', sum : ' + sum);
+					} else {
+						console.log('여기까지 확인');
+					}
+				} //for문 끝
+			}
+
+		} else if (sct_idx == 2) {
+			//4인실 일 때
+			console.log('4인실 sct_idx : ' + sct_idx);
+			for (var i = start; i < end; i++) {
+				console.log('i : ' + i);
+				if (8 <= i && i <= 22) {
+					var price = 1800;
+					sum += price;
+					console.log('평일 8시~22 시 : ' + price);
+					console.log('i : ' + i + ', sum : ' + sum);
+				} else {
+					console.log('4인실 여기까지 확인');
+				}
+			}
+			
+		} else if (sct_idx == 3) {
+			//8인실 일 때
+			console.log('8인실 sct_idx : ' + sct_idx);
+			for (var i = start; i < end; i++) {
+				console.log('i : ' + i);
+				if (8 <= i && i <= 22) {
+					var price = 2000;
+					sum += price;
+					console.log('평일 8시~22 시 : ' + price);
+					console.log('i : ' + i + ', sum : ' + sum);
+				} else {
+					console.log('8인실 여기까지 확인');
+				}
+			}
+			
+		} else if (sct_idx == 4) {
+			//12인실 일 때
+			console.log('12인실 sct_idx : ' + sct_idx);
+			for (var i = start; i < end; i++) {
+				console.log('i : ' + i);
+				if (8 <= i && i <= 22) {
+					var price = 2200;
+					sum += price;
+					console.log('평일 8시~22 시 : ' + price);
+					console.log('i : ' + i + ', sum : ' + sum);
+				} else {
+					console.log('12인실 여기까지 확인');
+				}
+			}
+			
+		} else {
+			alert("담당자에게 연락주세여..");
+		}
+		
+		console.log('최종 가격 확인 sum : ' + sum);
+		$('#bookprice').html('<span>' + sum + '원</span>');
+
+	});
+</script>
+
 
 </head>
 <body>
@@ -62,17 +178,6 @@
 				</table>
 			</div> <!-- 나의 예약 정보 끝 -->
 			<!--  -->
-			<script>
-				$(function() {
-					$('#booknum').html(
-							'<span>' + ${bvo.getStart_time() }.subString(0,4)
-							+ ${bvo.getStart_time() }.subString(5,7)
-							+ ${bvo.getStart_time() }.subString(8,10) + '</span>');
-					
-					$('#bookprice').html(
-							'<span>' + '원</span>');
-				});
-			</script>
 			
 			<!-- 결제방식 선택 -->
 			<div id="pay" class="radio" style="padding: 10px;">
