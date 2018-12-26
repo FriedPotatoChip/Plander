@@ -23,7 +23,7 @@
 		
 		<c:forEach var='k' items='${booklist }'>
 			var bookseat = '${k.s_col }';
-			console.log("s_col : " + bookseat);
+			//console.log("s_col : " + bookseat);
 				
 			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
@@ -38,14 +38,20 @@
 		
 		//선택한 인원 수와 체크된 박스 수가 같을 때 나머지 체크박스 disabled
 		$(":checkbox").change(function() {
+			console.log("체크된 좌석 : " + $(":checkbox:checked").val() ); //체크값 확인ok
+			$("#msg").html("<span>A-" + $(":checkbox:checked").val() + "&nbsp;</span>");
+			
 			var cnt = $("#people").val(); //선택된 인원 수
 			if (cnt == $(":checkbox:checked").length) {
 				$(":checkbox:not(:checked)").attr("disabled", true);
+				
 			} else {
 				$(":checkbox").removeAttr("disabled");
+				$("#msg").html("");
+				
 				<c:forEach var='k' items='${booklist }'>
 					var bookseat = '${k.s_col }';
-					console.log("s_col : " + bookseat);
+					//console.log("s_col : " + bookseat);
 					
 					for (var i=0; i<= size; i++) {
 						//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
@@ -66,6 +72,7 @@
 	$("#people").change(function() {
 		$(":checkbox").removeAttr("checked");
 		$(":checkbox").removeAttr("disabled");
+		$("#msg").html("");
 		
 		var size = document.getElementsByName('s_col').length;
 		alert("size : " + size);
@@ -84,6 +91,15 @@
 		</c:forEach>
 		
 	});
+
+</script>
+
+<script>
+	function next(frm) {
+		
+		frm.action="/TMS/book/pay"
+		frm.submit();
+	}
 
 </script>
 
@@ -119,7 +135,7 @@
 	
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
-		<form method="post" action="/TMS/book/pay">
+		<form method="post">
 			
 			<div>
 				<h4><a href="">1층</a>&nbsp;&nbsp;&nbsp;
@@ -286,18 +302,17 @@
 					<tr>
 						<td colspan="3" style="text-align: center;">
 							<button type="button" class="btn btn-default" onclick="history.back(); return false;">이전단계</button>&nbsp;
-							<button type="submit" class="btn btn-default">다음단계</button>
+							<button type="button" class="btn btn-default" onclick="next(this.form)">다음단계</button>
 						</td>
 					</tr>
 				</tfoot>
 			</table>
 			<br>
+			<!--  -->
 			예약한 새럼들 : ${booklist }
 			<hr>
 			지금 예약하는애 : ${bvo }
-			<script>
-				
-			</script>
+			<!--  -->
 			
 		</form>
 		

@@ -34,7 +34,6 @@
 		AND SV.SCT_IDX = #{sct_idx}
 	</select>
 	
-	
 	<select id="bookroomCnt" resultType="int" parameterType="com.bit.domain.BookingVO">
 		SELECT NVL(COUNT(*),0) FROM (
 			SELECT distinct sv.* FROM SEATS_VIEW SV, BOOKING B 
@@ -63,12 +62,12 @@
 	</select>	
 	
 	
-	
-	
-	<!-- 내 선택 정보 조회 -->
+	<!-- 오늘 예매자 선택 정보 조회 -->
 	<select id="myseat" resultType="com.bit.domain.BookingVO">
-		SELECT B.*, S.BR_IDX, S.S_COL, S.SCT_IDX FROM BOOKING B, SEATS S
-		WHERE B.S_IDX = S.S_IDX AND B.ID = #{id}
+		SELECT distinct sv.*, B.ID, B.START_TIME, B.END_TIME, B.BK_REGDATE, B.BOOKNUM
+		FROM SEATS_VIEW SV, BOOKING B 
+		WHERE sv.s_idx = B.S_IDX
+		AND B.BK_REGDATE = SYSDATE and id=#{id}
 	</select>
 	
 

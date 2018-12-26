@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.bit.domain.BookingVO;
-import com.bit.domain.SeatsCategoryVO;
 
 public interface BookMapper {
 	
@@ -17,6 +16,9 @@ public interface BookMapper {
 	
 	public int bookroomCnt(BookingVO bvo);
 	public List<BookingVO> bookroom(BookingVO bvo);
+	
+	//선택 정보 조회
+	public List<BookingVO> myseat(BookingVO bvo);
 	
 	
 }
