@@ -314,7 +314,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-			</div>
+			</div> 
 
 			<form name="joinform" action="/signUp" method="post">
 				<div class="modal-body">
@@ -470,7 +470,7 @@
 								console.log("로그인 성공");
 								var profile = gauth.currentUser.get()
 										.getBasicProfile();
-
+ 
 								$.ajax({
 									url : "/TMS/naverAjax",
 									type : 'POST',

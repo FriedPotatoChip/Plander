@@ -307,6 +307,10 @@
 					</tr>
 				</tfoot>
 			</table>
+			<input type="hidden" name="br_idx" value="${bvo.br_idx }">
+			<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
+			<input type="hidden" name="start_time" value="${bvo.start_time }">
+			<input type="hidden" name="end_time" value="${bvo.end_time }">
 			<br>
 			<!--  -->
 			예약한 새럼들 : ${booklist }

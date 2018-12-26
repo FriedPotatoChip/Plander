@@ -91,7 +91,7 @@ body {
 		style="padding-top: 10px; padding-bottom: 10px;">
 		<a class="nav-link active" href="#">운영안내</a> <a class="nav-link"
 			href="#">이용안내</a> <a class="nav-link" href="#">모집하기</a> <a
-			class="nav-link" href="#">게시판</a> <a class="nav-link" href="#">예약하기</a>
+			class="nav-link" href="#">게시판</a> <a class="nav-link" href="/TMS/book">예약하기</a>
 		<a class="nav-link" href="#">세부공간보기</a> <a class="nav-link" href="#">찾아오시는길</a>
 		<a class="nav-link" href="#" onclick="chkLogin()">모집게시판</a>
 	</div>
