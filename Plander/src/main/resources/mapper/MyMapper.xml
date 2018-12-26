@@ -4,191 +4,100 @@
 
 	<!-- 내정보 -->
 	<select id="user" resultType="com.bit.domain.UsersVO">
-		SELECT * FROM USERS WHERE ID =
+		select * from users where id =
 		#{id}
 	</select>
-	
-	<!-- 내프사수정 -->
-	<insert id="updateProfile" parameterType="map">
-		INSERT INTO USERS (FILE_NAME, ORI_NAME)
-		VALUES (#{file_name}, #{ori_name})
-		WHERE ID = #{id}
-	</insert>
 
 	<!-- 내정보수정 -->
-	<update id="update" parameterType="com.bit.domain.UsersVO">
-		UPDATE USERS
-		SET PASSWORD =
-		#{password},
-		NAME = #{name},
-		PHONE = #{phone},
-		EMAIL = #{email},
-		ZIPNO =
+	<update id="userUpdate" parameterType="com.bit.domain.UsersVO">
+		update users set password
+		= #{password},
+		name = #{name},
+		phone = #{phone},
+		email = #{email},
+		zipNo =
 		#{zipNo},
-		ROADADDRPART1 = #{roadAddrPart1},
-		ADDRDETAIL = #{addrDetail}
-		WHERE ID = #{id}
+		roadAddrPart1 = #{roadAddrPart1},
+		addrDetail = #{addrDetail}
+		where id = #{id}
 	</update>
 
-	<!-- 내가쓴글 -->
-	<select id="board" resultType="com.bit.domain.BoardVO">
-		SELECT * FROM BOARD WHERE ID =
-		#{id}
-	</select>
-
-	<select id="board_cnt" resultType="int">
-		SELECT COUNT(*) FROM BOARD
-		WHERE
-		ID =
-		#{id}
-	</select>
-
-	<!-- 내가쓴댓글 -->
-	<select id="comment" resultType="com.bit.domain.CommentsVO">
-		SELECT * FROM COMMENTS WHERE ID
-		= #{id}
-		AND B_IDX IS NOT NULL
-	</select>
-
-	<select id="comment_cnt" resultType="int">
-		SELECT COUNT(*) FROM
-		COMMENTS
-		WHERE ID
-		= #{id}
-		AND B_IDX IS NOT NULL
-	</select>
-
-	<!-- 내게시물에쓴댓글 -->
-	<select id="board_comment"
-		resultType="com.bit.domain.CommentsVO">
-		SELECT *
-		FROM COMMENTS
-		WHERE B_IDX = (SELECT B_IDX FROM BOARD
-		WHERE ID = #{id})
-	</select>
-
-	<select id="board_comment_cnt" resultType="int">
-		SELECT COUNT(*)
-		FROM
-		COMMENTS
-		WHERE B_IDX = (SELECT B_IDX FROM BOARD
-		WHERE ID = #{id})
-	</select>
-
-	<!-- 내댓글에달린댓글 -->
-	<select id="comment_comment" resultType="com.bit.domain.ReplyVO">
-		SELECT *
-		FROM REPLY
-		WHERE
-		C_IDX = (SELECT C_IDX FROM COMMENTS
-		WHERE ID = #{id} AND B_IDX IS NOT
-		NULL)
-	</select>
-
-	<select id="comment_comment_cnt" resultType="int">
-		SELECT COUNT(*)
-		FROM
-		REPLY
-		WHERE
-		C_IDX = (SELECT C_IDX FROM COMMENTS
-		WHERE ID = #{id} AND
-		B_IDX IS NOT
-		NULL)
-	</select>
-
-	<!-- 내좌석예약내역 -->
-	<select id="seat" resultType="com.bit.domain.BookingVO">
-		SELECT * FROM BOOKING WHERE ID =
-		#{id}
-	</select>
-
-	<select id="seat_cnt" resultType="int">
-		SELECT COUNT(*) FROM BOOKING
-		WHERE ID =
-		#{id}
-	</select>
-
-	<!-- 내사물함예약내역 -->
-	<select id="cabinet" resultType="com.bit.domain.BookingCbVO">
-		SELECT * FROM BOOKING_CB WHERE
-		ID = #{id}
-	</select>
-
-	<select id="cabinet_cnt" resultType="int">
-		SELECT COUNT(*) FROM
-		BOOKING_CB WHERE
-		ID = #{id}
-	</select>
-
-	<!-- 내가쓴모집글 -->
-	<select id="board2" resultType="com.bit.domain.RecruitVO">
-		SELECT * FROM RECRUIT WHERE ID =
-		#{id}
-	</select>
-
-	<select id="board2_cnt" resultType="int">
-		SELECT COUNT(*) FROM RECRUIT
-		WHERE ID =
-		#{id}
-	</select>
-
-	<!-- 내가쓴모집댓글 -->
-	<select id="comment2" resultType="com.bit.domain.CommentsVO">
-		SELECT * FROM COMMENTS WHERE ID
-		= #{id}
-		AND RC_IDX IS NOT NULL
-	</select>
-
-	<select id="comment2_cnt" resultType="int">
-		SELECT COUNT(*) FROM
-		COMMENTS WHERE ID
-		= #{id}
-		AND RC_IDX IS NOT NULL
-	</select>
-
-	<!-- 내모집글에달린댓글 -->
-	<select id="board_comment2"
-		resultType="com.bit.domain.CommentsVO">
-		SELECT *
-		FROM COMMENTS
-		WHERE RC_IDX = (SELECT RC_IDX FROM
-		RECRUIT
-		WHERE ID = #{id})
-	</select>
-
-	<select id="board_comment2_cnt" resultType="int">
-		SELECT COUNT(*)
-		FROM
-		COMMENTS
-		WHERE RC_IDX = (SELECT RC_IDX FROM
-		RECRUIT
-		WHERE ID = #{id})
-	</select>
-
-	<!-- 내모집댓글에달린댓글 -->
-	<select id="comment_comment2"
-		resultType="com.bit.domain.ReplyVO">
-		SELECT *
-		FROM REPLY
-		WHERE C_IDX = (SELECT C_IDX FROM COMMENTS
-		WHERE ID = #{id} AND RC_IDX IS NOT NULL)
-	</select>
-
-	<select id="comment_comment2_cnt" resultType="int">
-		SELECT COUNT(*)
-		FROM REPLY
-		WHERE C_IDX = (SELECT C_IDX FROM COMMENTS
-		WHERE ID = #{id}
-		AND RC_IDX IS NOT NULL)
-	</select>
-	
-	<!-- 프사업로드 -->
-	<insert id="insertBoard" parameterType="com.bit.domain.UsersVO">
-		INSERT INTO USERS (UPLOADFILE)
-		VALUES (#{uploadfile})
+	<!-- 모집글 작성 -->
+	<insert id="insertRecruit"
+		parameterType="com.bit.domain.RecruitVO">
+		insert into recruit (rc_idx, rc_title, rc_content, id,
+		max_mem)
+		values (recruit_seq.nextval, #{rc_title}, #{rc_content},
+		#{id}, #{max_mem})
 	</insert>
 
+	<!-- 내가 쓴 모집글 -->
+	<select id="my_recruit" resultType="com.bit.domain.RecruitVO">
+		select * from recruit where
+		id = #{id}
+	</select>
+
+	<!-- 내가 쓴 모집글 상세 조회 -->
+	<select id="getOne" resultType="com.bit.domain.RecruitVO">
+		select * from recruit where
+		rc_idx = #{rc_idx}
+	</select>
+
+	<!-- 내가 쓴 모집글 수정 -->
+	<update id="updateRec" parameterType="com.bit.domain.RecruitVO">
+		update recruit set rc_title
+		= #{rc_title}, max_mem = #{max_mem}, rc_content = #{rc_content} where
+		rc_idx = #{rc_idx}
+	</update>
+
+	<!-- 내가 쓴 모집글 삭제 -->
+	<delete id="deleteRec" parameterType="int">
+		delete from recruit where
+		rc_idx = #{rc_idx}
+	</delete>
+
+	<!-- 내 모집글에 달린 댓글 -->
+	<select id="my_recruit_comment"
+		resultType="com.bit.domain.CommentsVO">
+		select c.*, rc.*
+		from comments c, recruit rc
+		where c.rc_idx =
+		rc.rc_idx
+		and rc.id = #{id}
+	</select>
+
+	<!-- 모집글 댓글 등록 -->
+	<insert id="insertComm"
+		parameterType="com.bit.domain.CommentsVO">
+		insert into comments (c_idx, c_content, id, rc_idx)
+		values (comments_seq.nextval, #{c_content}, #{id}, #{rc_idx})
+	</insert>
+
+	<!-- 내 모집글의 신청자 목록 조회 -->
+	<select id="getApplyList" resultType="com.bit.domain.ApplyVO">
+		select a.*, rc.*
+		from apply a, recruit rc
+		where a.rc_idx = rc.rc_idx
+		and rc.rc_idx = (select rc_idx from recruit where id = 'test')
+	</select>
+
+	<!-- 내 좌석 예약내역 -->
+	<select id="my_seat" resultType="com.bit.domain.BookingVO">
+		select b.*, s.*
+		from booking b,
+		seats_view s
+		where b.s_idx = s.s_idx
+		and b.id = #{id}
+	</select>
+
+	<!-- 내 사물함 예약내역 -->
+	<select id="my_cabinet" resultType="com.bit.domain.BookingCbVO">
+		select b.*, c.*, br.br_name
+		from booking_cb b, cabinet c, branches br
+		where b.cb_number =
+		c.cb_number
+		and c.br_idx = br.br_idx
+		and b.id = #{id}
+	</select>
+
 </mapper>
-
-
-

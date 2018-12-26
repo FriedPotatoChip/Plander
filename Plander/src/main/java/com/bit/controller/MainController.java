@@ -10,30 +10,13 @@ import com.bit.service.RecruitService;
 @Controller
 @RequestMapping("/TMS")
 public class MainController {
-	
+
 	@Autowired
 	private RecruitService service;
-	
+
 	@GetMapping("")
 	public String main() {
-		return "main/main";
+		return "main/submain";
 	}
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@RequestMapping("")
-	public String uploadTest() {
-		return "";
-	}
-	
-	
 }
