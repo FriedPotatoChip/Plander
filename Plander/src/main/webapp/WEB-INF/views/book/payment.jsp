@@ -26,6 +26,11 @@
 	<div class="boxoutside" style="border: 1px solid;">
 		<form method="get">
 			<!-- 결제 정보 -->
+			${bvo }<br>
+			${myseat }<br>
+			${uservo }
+			<!--  -->
+			
 			<div style="padding: 10px;">
 				<h5>예매자 확인</h5>
 				<span>☑︎ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
@@ -46,16 +51,28 @@
 							<td width="10%">금액</td>
 						</tr>
 						<tr>
-							<td>181217-1700</td>
-							<td>프리권시</td>
-							<td>010-9090-9090</td>
-							<td>2018/12/17 17:00 ~ 2018/12/19 19:00</td>
-							<td>개인석 A-3</td>
-							<td>1,800원</td>
+							<td id="booknum"></td>
+							<td>${uservo.name }</td>
+							<td>${uservo.phone }</td>
+							<td>${bvo.start_time } ~ ${bvo.end_time }</td>
+							<td>${bvo.sct_name } - ${bvo.s_col }</td>
+							<td id="bookprice"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div> <!-- 나의 예약 정보 끝 -->
+			<!--  -->
+			<script>
+				$(function() {
+					$('#booknum').html(
+							'<span>' + ${bvo.getStart_time() }.subString(0,4)
+							+ ${bvo.getStart_time() }.subString(5,7)
+							+ ${bvo.getStart_time() }.subString(8,10) + '</span>');
+					
+					$('#bookprice').html(
+							'<span>' + '원</span>');
+				});
+			</script>
 			
 			<!-- 결제방식 선택 -->
 			<div id="pay" class="radio" style="padding: 10px;">

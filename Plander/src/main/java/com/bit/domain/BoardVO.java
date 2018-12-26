@@ -13,4 +13,9 @@ public class BoardVO {
 	private int b_idx, ct_idx, cnt, hit;
 	private String b_title, b_content, id;
 	private Date b_regdate;
+	
+	
+	// 검색 관련
+	private String target;
+	private String keyword;
 }

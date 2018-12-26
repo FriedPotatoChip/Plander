@@ -123,11 +123,18 @@
 			
 				<!-- 좌석 선택 -->
 				<div id="selectSeat" class="box">
-					<h4>선택 날짜별 좌석 현황</h4>
+					<h4>︎선택 날짜별 좌석 현황</h4>
 					<input type="hidden" name="br_idx" value="${svo.br_idx }">
 					<div class="radio">
 						<label><input type="radio" name="sct_idx" value="1">개인석</label><br>
 						<label><input type="radio" name="sct_idx" value="0">랩실</label><br>
+					</div>
+					<hr>
+					
+					<h4>사물함 사용여부</h4>
+					<div class="radio">
+						<label><input type="radio" name="cabinet" value="y">사용</label><br>
+						<label><input type="radio" name="cabinet" value="n">사용안함</label>
 					</div>
 					<hr>
 					

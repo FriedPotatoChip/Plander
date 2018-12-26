@@ -37,4 +37,10 @@ public class LoginServiceImpl implements LoginService {
 		return mapper.getUser(vo);
 	}
 
+
+	@Override
+	public boolean signUp(UsersVO vo) {
+		return mapper.insertUser(vo);
+	}
+
 }

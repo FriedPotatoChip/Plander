@@ -11,4 +11,6 @@ public interface LoginService {
 	public UsersVO chkId(UsersVO vo);
 	
 	public UsersVO login(UsersVO vo);
+	
+	public boolean signUp(UsersVO vo);
 }

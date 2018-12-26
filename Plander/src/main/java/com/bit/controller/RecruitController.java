@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit.domain.BoardVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
 import com.bit.service.RecruitService;
@@ -45,6 +46,7 @@ public class RecruitController {
 	@Autowired
 	private RecruitService service;
 	
+	/* 모집글 작성 시작 */
 	@GetMapping("/TMS/recruitWrite")
 	public String recruitWrite() {
 		return "board/recruitWrite";
@@ -57,7 +59,9 @@ public class RecruitController {
 		
 		return "redirect: /TMS/recruitDetail?idx="+vo.getRc_idx();
 	}
+	/* 모집글 작성 끝 */
 	
+	/* 모집글 목록 */
 	@GetMapping("/TMS/recruit")
 	public String recruit(Model model, PagingVO page) {
 		
@@ -71,6 +75,7 @@ public class RecruitController {
 		return "board/recruit";
 	}
 	
+	/* 모집글 상세보기 */
 	@GetMapping("/TMS/recruitDetail")
 	public String detailOne(@RequestParam("idx")int rc_idx, Model model, PagingVO page) {
 		
@@ -83,6 +88,7 @@ public class RecruitController {
 		return "board/recruitDetail";
 	}
 	
+	/* 모집글 신청 */
 	@RequestMapping("/apply")
 	public @ResponseBody String apply(@RequestParam("id") String id, @RequestParam("rc_idx") int rc_idx) {
 		
@@ -102,6 +108,7 @@ public class RecruitController {
 		
 	}
 	
+	/* 모집글 신청 취소 */
 	@RequestMapping("/applyCancel")
 	public @ResponseBody String applyCancel(@RequestParam("id") String id, @RequestParam("rc_idx") int rc_idx) {
 		
@@ -119,6 +126,7 @@ public class RecruitController {
 		}
 	}
 	
+	/* 수정, 삭제 시작 */
 	@GetMapping("/deleteRec")
 	public String deleteRecruit(@RequestParam("rc_idx") int rc_idx) {
 		service.deleteRec(rc_idx);
@@ -136,6 +144,26 @@ public class RecruitController {
 		service.modifyRec(vo);
 		return "redirect: /TMS/detail?idx="+vo.getRc_idx();
 	}
+	/* 수정, 삭제 끝 */
+	
+	/* 검색 */
+	@GetMapping("/TMS/searchRecruitList")
+	public String searchList(@RequestParam("keyword")String keyword, @RequestParam("target")String target, PagingVO page, Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("target", target);
+		
+		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getSearchTotal(map));
+		page.CalcPage(page.getNowPage(), page.getCntPerPage());
+		
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		
+		model.addAttribute("page", page);
+		model.addAttribute("boardList", service.getSearchList(map));
+		return "board/recruit";
+	}
+	
 	
 	// 모집글 댓글 입력
 	@PostMapping("/registerComm")
@@ -148,7 +176,6 @@ public class RecruitController {
 			return "fail";
 		}
 	}
-	
 	@PostMapping("/registerReplyComm")
 	public @ResponseBody String registerReplyComm(CommentsVO vo) {
 		log.info("넘어온 대댓글 내용: "+ vo);
@@ -178,7 +205,7 @@ public class RecruitController {
 	public @ResponseBody PagingVO paingComm(@RequestParam("rc_idx")int rc_idx, PagingVO page) {
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.cntCommAll(rc_idx));
 		
-		page.CalcPage(page.getNowPage(), page.getCntPerPage());
+		page.CalcPage(page.getNowPage(), 20);
 		System.out.println("page: "+ page);
 		
 		return page;

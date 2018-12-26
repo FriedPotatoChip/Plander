@@ -137,29 +137,30 @@ $(document).ready(function(){
 				window.start = page.start;
 				window.end = page.end;
 				
-				var html = "";
-				
-				if (chkStartPage){
-					html += "<li><a href='#' onclick='paging("+startPage-1+")'><button>&lt;</button></a></li>"
-				}
-				for (var i = startPage; i <= endPage; i++){
-					if (startPage == 1 && endPage == 1){
-						html += "";
-					} else if (i == nowPage){
-						html += "<li>";
-						html += "<a class='now marginLi' href='#'>"+i+"</a>";
-						html += "</li>";					
-					} else if (i != nowPage){
-						html += "<li>";
-						html += "<a class='marginLi' href='#' onclick='paging("+i+")'>"+i+"</a>";
-						html += "</li>";
+				if (endPage != 1){
+					var html = "";
+					if (chkStartPage){
+						html += "<li><a href='#' onclick='paging("+startPage-1+")'><button>&lt;</button></a></li>"
 					}
+					for (var i = startPage; i <= endPage; i++){
+						if (startPage == 1 && endPage == 1){
+							html += "";
+						} else if (i == nowPage){
+							html += "<li>";
+							html += "<a class='now marginLi' href='#'>"+i+"</a>";
+							html += "</li>";					
+						} else if (i != nowPage){
+							html += "<li>";
+							html += "<a class='marginLi' href='#' onclick='paging("+i+")'>"+i+"</a>";
+							html += "</li>";
+						}
+					}
+					if (chkEndPage){
+						html += "<li><a href='#'onclick='paging("+endPage+1+")'><button>&gt;</button></a></li>";
+					}
+					
+					$("#pagingList").html(html);
 				}
-				if (chkEndPage){
-					html += "<li><a href='#'onclick='paging("+endPage+1+")'><button>&gt;</button></a></li>";
-				}
-				
-				$("#pagingList").html(html);
 				
 				commAjax();
 			}, error: function(){

@@ -230,7 +230,7 @@ body {
 </style>
 </head>
 <body>
-	<div class="page-content home-1 active"
+	<div class="page-content home-1 active" 
 		style="height: -webkit-fill-available;">
 		<div class="content">
 			<h1>거북이의 기적에 오신걸 환영합니다~!!!</h1>

@@ -58,25 +58,33 @@
 	<table border="1px solid" style="width: 100%;">
 		<thead>
 			<tr>
-				<td width="30%;"></td>
-				<th width="35%;" class="center">개인석(1인)</th>
-				<th width="35%;" class="center">4인/8인/12인</th>
+				<td width="10%;"></td>
+				<th width="10%;" class="center">개인석(1인)</th>
+				<th width="10%;" class="center">4인실</th>
+				<th width="10%;" class="center">8인실</th>
+				<th width="10%;" class="center">12인실</th>
 			</tr>
 		</thead>
 		<tr>
 			<td>평일 8:00 ~ 18:00</td>
-			<td class="center">1시간 1,900원</td>
 			<td class="center">1시간 1,500원</td>
+			<td class="center">1시간 1,800원</td>
+			<td class="center">1시간 2,000원</td>
+			<td class="center">1시간 2,200원</td>
 		</tr>
 		<tr>
 			<td>평일 18:00 이후</td>
 			<td class="center">1시간 1,800원</td>
-			<td class="center">1시간 2,500원</td>
+			<td class="center">1시간 2,000원</td>
+			<td class="center">1시간 2,000원</td>
+			<td class="center">1시간 2,200원</td>
 		</tr>
 		<tr>
 			<td>주말/공휴일</td>
-			<td class="center">1시간 2,500원</td>
 			<td class="center">1시간 1,800원</td>
+			<td class="center">1시간 2,000원</td>
+			<td class="center">1시간 2,300원</td>
+			<td class="center">1시간 2,500원</td>
 		</tr>
 	</table>
 </div>
