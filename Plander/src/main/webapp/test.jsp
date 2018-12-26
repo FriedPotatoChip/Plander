@@ -114,12 +114,28 @@
 
 <hr>
 <p id="msg">데이터 값 : </p>
-<script>
-	function () {
-		var date = '2018-12-26 12:00';
-	}
 
-</script>
+<hr>
+<p>정기 이용권(1인실)</p>
+<table border="1px solid" style="width: 100%;">
+	<tr>
+		<th width="20%">정기권 2주</th>
+		<td width="">18,000원(사물함 선택 시 +2,000원)</td>
+	</tr>
+	<tr>
+		<th>정기권 1개월</th>
+		<td>45,000원(사물함 제공)</td>
+	</tr>
+	<tr>
+		<th>야간권(22:00 ~ 다음날 8:00)</th>
+		<td>12,000원</td>
+	</tr>
+</table>
+
+
+
+
+
 
 </body>
 </html>

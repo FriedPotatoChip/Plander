@@ -12,9 +12,9 @@ public class BookingVO {
 	private String id, s_row, booknum;
 	
 	//좌석 조회
-	private int br_idx, s_col, sct_idx;
+	private int br_idx, s_col, sct_idx, time_idx;
 	//SEATS_VIEW
-	private String br_name, sct_name;
+	private String br_name, sct_name, cabinet;
 	//날짜 선택
-	private String date, start_time, end_time, bk_regdate;
+	private String start_time, end_time, bk_regdate;
 }
