@@ -29,9 +29,45 @@
 							FROM BOARD B LEFT OUTER JOIN (SELECT B_IDX, COUNT(*) CNT FROM COMMENTS GROUP BY B_IDX) C
 							ON B.B_IDX = C.B_IDX
 							WHERE CT_IDX = #{ct_idx}
+							AND
+							<choose>
+								<when test="target == 't'.toString()">
+									B_TITLE LIKE '%'||#{keyword}||'%'
+								</when>
+								<when test="target == 'c'.toString()">
+									B_CONTENT LIKE '%'||#{keyword}||'%'
+								</when>
+								<when test="target == 'tc'.toString()">
+									(B_TITLE LIKE '%'||#{keyword}||'%' OR
+									B_CONTENT LIKE '%'||#{keyword}||'%')
+								</when>
+								<when test="target == 'w'.toString()">
+									ID LIKE '%'||#{keyword}||'%'
+								</when>
+							</choose>
 							ORDER BY B.B_IDX DESC
 						  )
 			WHERE RN BETWEEN #{start} AND #{end}
+		</select>
+		
+		<!-- 검색 총 게시글 수 -->
+		<select id="getSearchTotal" resultType="int" parameterType="map">
+			SELECT COUNT(*) FROM BOARD WHERE
+			<choose>
+				<when test="target == 't'.toString()">
+					B_TITLE LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="target == 'c'.toString()">
+					B_CONTENT LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="target == 'tc'.toString()">
+					(B_TITLE LIKE '%'||#{keyword}||'%' OR
+					B_CONTENT LIKE '%'||#{keyword}||'%')
+				</when>
+				<when test="target == 'w'.toString()">
+					ID LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
 		</select>
 		
 		<!-- 게시판 insert -->
@@ -68,7 +104,7 @@
 						WHERE B_IDX = #{b_idx}
 						START WITH RP_IDX IS NULL 
 						CONNECT BY PRIOR C_IDX = RP_IDX 
-						ORDER SIBLINGS BY C_IDX DESC
+						ORDER SIBLINGS BY C_IDX ASC
 					   )
 				  WHERE RN BETWEEN #{start} AND #{end}
 		</select>

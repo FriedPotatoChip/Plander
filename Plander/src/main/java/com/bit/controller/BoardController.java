@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.domain.BoardVO;
 import com.bit.domain.CommentsVO;
-import com.bit.domain.RecruitVO;
 import com.bit.service.BoardService;
 import com.bit.utils.PagingVO;
 
@@ -31,12 +30,11 @@ public class BoardController {
 	
 	@GetMapping("/TMS/board")
 	public String freeBoard(Model model, PagingVO page, @RequestParam("ct_idx")int ct_idx) {
-		log.info("처음 들어온 page: "+ page);
+		
 		Map<String, Integer> map = new HashMap<>();
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal(ct_idx));
-		log.info("page 객체 생성: "+ page);
 		page.CalcPage(page.getNowPage(), page.getCntPerPage());
-		log.info("page 계산 결과: "+ page);
+		
 		model.addAttribute("page", page);
 		map.put("start", page.getStart());
 		map.put("end", page.getEnd());
@@ -55,7 +53,6 @@ public class BoardController {
 	@PostMapping("/TMS/boardWrite")
 	public String recruitWrite(BoardVO vo) {
 		service.register(vo);
-		// 글 등록 후 디테일 페이지로 이동
 		return "redirect: /TMS/boardDetail?idx="+vo.getB_idx();
 		
 	}
@@ -71,6 +68,28 @@ public class BoardController {
 		
 		return "board/boardDetail";
 	}
+	
+	/* 검색 */
+	@GetMapping("/TMS/searchList")
+	public String searchList(@RequestParam("keyword")String keyword, @RequestParam("target")String target, BoardVO vo, PagingVO page, Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("target", target);
+		
+		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getSearchTotal(map));
+		page.CalcPage(page.getNowPage(), page.getCntPerPage());
+		
+		map.put("ct_idx", vo.getCt_idx());
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		
+		model.addAttribute("page", page);
+		model.addAttribute("boardList", service.getSearchList(map));
+		model.addAttribute("ct_idx", vo.getCt_idx());
+		return "board/boardList";
+	}
+	
+	
 	
 	/* 수정 삭제 시작 */
 	@GetMapping("/deleteBoard")
@@ -134,7 +153,7 @@ public class BoardController {
 	public @ResponseBody PagingVO paingComm(@RequestParam("b_idx")int b_idx, PagingVO page) {
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.cntCommAll(b_idx));
 		
-		page.CalcPage(page.getNowPage(), page.getCntPerPage());
+		page.CalcPage(page.getNowPage(), 30);
 		System.out.println("page: "+ page);
 		
 		return page;

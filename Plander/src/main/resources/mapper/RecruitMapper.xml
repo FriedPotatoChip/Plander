@@ -53,6 +53,52 @@
 		</update>
 		
 		
+				<!-- 검색 총 게시글 수 -->
+		<select id="getSearchTotal" resultType="int" parameterType="map">
+			SELECT COUNT(*) FROM RECRUIT WHERE
+			<choose>
+				<when test="target == 't'.toString()">
+					RC_TITLE LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="target == 'c'.toString()">
+					RC_CONTENT LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="target == 'tc'.toString()">
+					(RC_TITLE LIKE '%'||#{keyword}||'%' OR
+					RC_CONTENT LIKE '%'||#{keyword}||'%')
+				</when>
+				<when test="target == 'w'.toString()">
+					ID LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</select>
+		
+				<!-- 검색기능 -->
+		<select id="getSearchList" resultType="com.bit.domain.RecruitVO" parameterType="map">
+			SELECT * FROM (
+							SELECT ROWNUM RN, B.*, CNT
+							FROM RECRUIT B LEFT OUTER JOIN (SELECT RC_IDX, COUNT(*) CNT FROM COMMENTS GROUP BY RC_IDX) C
+							ON B.RC_IDX = C.RC_IDX
+							WHERE 
+							<choose>
+								<when test="target == 't'.toString()">
+									RC_TITLE LIKE '%'||#{keyword}||'%'
+								</when>
+								<when test="target == 'c'.toString()">
+									RC_CONTENT LIKE '%'||#{keyword}||'%'
+								</when>
+								<when test="target == 'tc'.toString()">
+									(RC_TITLE LIKE '%'||#{keyword}||'%' OR
+									RC_CONTENT LIKE '%'||#{keyword}||'%')
+								</when>
+								<when test="target == 'w'.toString()">
+									ID LIKE '%'||#{keyword}||'%'
+								</when>
+							</choose>
+							ORDER BY B.RC_IDX DESC
+						  )
+			WHERE RN BETWEEN #{start} AND #{end}
+		</select>
 		
 		
 		<!-- 모집게시판 insert -->
@@ -98,7 +144,7 @@
 						WHERE RC_IDX = #{rc_idx}
 						START WITH RP_IDX IS NULL 
 						CONNECT BY PRIOR C_IDX = RP_IDX 
-						ORDER SIBLINGS BY C_IDX DESC
+						ORDER SIBLINGS BY C_IDX ASC
 					   )
 				  WHERE RN BETWEEN #{start} AND #{end}
 		</select>
