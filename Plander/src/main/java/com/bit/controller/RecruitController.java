@@ -205,7 +205,7 @@ public class RecruitController {
 	public @ResponseBody PagingVO paingComm(@RequestParam("rc_idx")int rc_idx, PagingVO page) {
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.cntCommAll(rc_idx));
 		
-		page.CalcPage(page.getNowPage(), 30);
+		page.CalcPage(page.getNowPage(), 20);
 		System.out.println("page: "+ page);
 		
 		return page;

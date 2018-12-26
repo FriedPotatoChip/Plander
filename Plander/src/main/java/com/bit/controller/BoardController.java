@@ -153,7 +153,7 @@ public class BoardController {
 	public @ResponseBody PagingVO paingComm(@RequestParam("b_idx")int b_idx, PagingVO page) {
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.cntCommAll(b_idx));
 		
-		page.CalcPage(page.getNowPage(), 30);
+		page.CalcPage(page.getNowPage(), 20);
 		System.out.println("page: "+ page);
 		
 		return page;
