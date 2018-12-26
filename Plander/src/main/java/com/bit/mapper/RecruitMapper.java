@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bit.domain.ApplyVO;
+import com.bit.domain.BoardVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
 import com.bit.utils.PagingVO;
@@ -71,5 +72,11 @@ public interface RecruitMapper {
 	
 	// 댓글 수정
 	public boolean updateComm(CommentsVO vo);
+	
+	// 검색 조회
+	public List<RecruitVO> getSearchList(Map<String, Object> map);
+	
+	// 검색 게시물수 조회
+	public int getSearchTotal(Map<String, Object> map);
 	
 }

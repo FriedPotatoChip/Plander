@@ -124,4 +124,14 @@ public class RecruitServiceImpl implements RecruitService {
 		return mapper.updateComm(vo);
 	}
 
+	@Override
+	public List<RecruitVO> getSearchList(Map<String, Object> map) {
+		return mapper.getSearchList(map);
+	}
+
+	@Override
+	public int getSearchTotal(Map<String, Object> map) {
+		return mapper.getSearchTotal(map);
+	}
+
 }

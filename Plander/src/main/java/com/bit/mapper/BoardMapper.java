@@ -12,10 +12,16 @@ import com.bit.utils.PagingVO;
 public interface BoardMapper {
 	
 	// 모집글 전체 조회
-	public List<RecruitVO> getList();
+	public List<BoardVO> getList();
 	
 	// 페이징 처리 후 조회
-	public List<RecruitVO> getListPage(Map<String, Integer> map);
+	public List<BoardVO> getListPage(Map<String, Integer> map);
+	
+	// 검색 조회
+	public List<BoardVO> getSearchList(Map<String, Object> map);
+	
+	// 검색 게시물수 조회
+	public int getSearchTotal(Map<String, Object> map);
 	
 	// 자유게시판 글 작성
 	public int insertBoard(BoardVO vo);	//

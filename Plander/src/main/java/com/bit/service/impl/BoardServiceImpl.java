@@ -19,7 +19,7 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper mapper;
 	
 	@Override
-	public List<RecruitVO> getList() {
+	public List<BoardVO> getList() {
 		return mapper.getList();
 	}
 
@@ -39,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<RecruitVO> getListPage(Map<String, Integer> map) {
+	public List<BoardVO> getListPage(Map<String, Integer> map) {
 		return mapper.getListPage(map);
 	}
 
@@ -101,6 +101,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public boolean updateComm(CommentsVO vo) {
 		return mapper.updateComm(vo);
+	}
+
+	@Override
+	public List<BoardVO> getSearchList(Map<String, Object> map) {
+		return mapper.getSearchList(map);
+	}
+
+	@Override
+	public int getSearchTotal(Map<String, Object> map) {
+		return mapper.getSearchTotal(map);
 	}
 
 
