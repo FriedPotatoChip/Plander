@@ -258,7 +258,7 @@
 				</button>
 			</div>
 
-			<form name="joinform" action="/Plander/join" method="post">
+			<form name="joinform" action="/TMS/join" method="post">
 				<div class="modal-body">
 					<table class="table table-bordered">
 						<tbody>

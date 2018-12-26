@@ -114,6 +114,12 @@
 
 <hr>
 <p id="msg">데이터 값 : </p>
+<script>
+	function () {
+		var date = '2018-12-26 12:00';
+	}
+
+</script>
 
 </body>
 </html>

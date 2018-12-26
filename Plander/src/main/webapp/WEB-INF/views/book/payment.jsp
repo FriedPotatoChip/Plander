@@ -29,6 +29,7 @@
 			${bvo }<br>
 			${myseat }<br>
 			${uservo }
+			<!--  -->
 			
 			<div style="padding: 10px;">
 				<h5>예매자 확인</h5>
@@ -50,16 +51,28 @@
 							<td width="10%">금액</td>
 						</tr>
 						<tr>
-							<td>181217-1700</td>
+							<td id="booknum"></td>
 							<td>${uservo.name }</td>
 							<td>${uservo.phone }</td>
 							<td>${bvo.start_time } ~ ${bvo.end_time }</td>
-							<td>개인석 A-3</td>
-							<td>1,800원</td>
+							<td>${bvo.sct_name } - ${bvo.s_col }</td>
+							<td id="bookprice"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div> <!-- 나의 예약 정보 끝 -->
+			<!--  -->
+			<script>
+				$(function() {
+					$('#booknum').html(
+							'<span>' + ${bvo.getStart_time() }.subString(0,4)
+							+ ${bvo.getStart_time() }.subString(5,7)
+							+ ${bvo.getStart_time() }.subString(8,10) + '</span>');
+					
+					$('#bookprice').html(
+							'<span>' + '원</span>');
+				});
+			</script>
 			
 			<!-- 결제방식 선택 -->
 			<div id="pay" class="radio" style="padding: 10px;">

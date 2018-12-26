@@ -48,7 +48,7 @@ public class BookController {
 	
 	//좌석 조회(개인실)
 	@RequestMapping("/oneseat")
-	public String oneseat(BookingVO bvo, Model model) {
+	public String oneseat(BookingVO bvo, Model model, UsersVO uservo) {
 		System.out.println("/oneseat");
 		
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
@@ -72,10 +72,12 @@ public class BookController {
 		System.out.println("남은 좌석 수 : " + leaveseat);
 		
 		List<BookingVO> booklist = bookService.bookone(bvo);
+		bvo.setId(uservo.getId());
 		System.out.println("booklist : " + booklist);
+		System.out.println("bvo : " + bvo);
 		
-		model.addAttribute("bvo", bvo);
 		model.addAttribute("booklist", booklist);
+		model.addAttribute("bvo", bvo);
 		
 		return "book/booking_floor_2";
 		
@@ -83,7 +85,7 @@ public class BookController {
 	
 	//좌석 조회(랩실)
 	@RequestMapping("/roomseat")
-	public String roomseat(BookingVO bvo, Model model) {
+	public String roomseat(BookingVO bvo, Model model, UsersVO uservo) {
 		System.out.println("/roomseat");
 		
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
@@ -100,13 +102,15 @@ public class BookController {
 		//예약된 좌석
 		int roomseat = bookService.bookroomCnt(bvo);
 		int leaveroomseat = (5 - roomseat); //남은 좌석 수
-		
 		System.out.println("랩실 남은 좌석 수 : " + leaveroomseat);
-		List<BookingVO> bookroomlist = bookService.bookroom(bvo);
-		System.out.println("bookroomlist : " + bookroomlist);
 		
-		model.addAttribute("bvo", bvo);
+		List<BookingVO> bookroomlist = bookService.bookroom(bvo);
+		bvo.setId(uservo.getId());
+		System.out.println("bookroomlist : " + bookroomlist);
+		System.out.println("bvo : " + bvo);
+		
 		model.addAttribute("bookroomlist", bookroomlist);
+		model.addAttribute("bvo", bvo);
 		
 		return "book/booking_floor_1";
 	}
@@ -116,13 +120,12 @@ public class BookController {
 	@RequestMapping("/pay")
 	public String pay(BookingVO bvo, Model model, UsersVO uservo) {
 		System.out.println("/pay");
-		bvo.setId(uservo.getId());
 		
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
 		Date date = new Date();
 		String today = format.format(date);
-		bvo.setBk_regdate(today);
-		bvo.setBk_regdate(today);
+		bvo.setBk_regdate(today); //예약날짜
+		bvo.setId(uservo.getId());
 		
 		
 		//내가 선택한 좌석 정보 넘기기

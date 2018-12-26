@@ -230,45 +230,7 @@ body {
 </style>
 </head>
 <body>
-<<<<<<< HEAD
-	${sessionScope.usersVO }
-	<c:if test="${empty sessionScope.usersVO }">
-		<jsp:include page="/commons/header.jsp" />
-	</c:if>
-	<c:if test="${not empty sessionScope.usersVO }">
-		<jsp:include page="/commons/loginheader.jsp" />
-	</c:if>
 
-	<div id="linker" class="d-flex justify-content-center normal"
-		style="padding-top: 10px; padding-bottom: 10px;">
-		<a class="nav-link active" href="#">운영안내</a> <a class="nav-link"
-			href="#">이용안내</a> <a class="nav-link" href="#">모집하기</a> <a
-			class="nav-link" href="#">게시판</a> <a class="nav-link" href="/TMS/book">예약하기</a>
-		<a class="nav-link" href="#">세부공간보기</a> <a class="nav-link" href="#">찾아오시는길</a>
-		<a class="nav-link" href="#" onclick="chkLogin()">모집게시판</a>
-	</div>
-
-	<div id="carouselExampleIndicators" class="carousel slide"
-		data-ride="carousel">
-		<ol class="carousel-indicators">
-			<li data-target="#carouselExampleIndicators" data-slide-to="0"
-				class="active"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img class="d-block w-100" src="/resources/images/sr0.jpg"
-					alt="First slide">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="/resources/images/sr1.jpg"
-					alt="Second slide">
-			</div>
-			<div class="carousel-item">
-				<img class="d-block w-100" src="/resources/images/sr2.jpg"
-					alt="Third slide">
-=======
 	<div class="page-content home-1 active"
 		style="height: -webkit-fill-available;">
 		<div class="content">
@@ -283,7 +245,6 @@ body {
 				<a href="#"> 
 					<span class="text2">Learn More</span>
 				</a>
->>>>>>> refs/remotes/origin/master
 			</div>
 		</div>
 	</div>
