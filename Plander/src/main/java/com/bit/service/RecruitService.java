@@ -54,8 +54,21 @@ public interface RecruitService {
 	
 	// 모집글 댓글 등록
 	public boolean insertComm(CommentsVO vo);
+	// 모집글 댓글 등록
+	public boolean insertReplyComm(CommentsVO vo);
 	
 	// 모집글 댓글 총 갯수
 	public int cntCommAll(int rc_idx);
 	
+	// 모집글 댓글 삭제
+	public boolean deleteComm(int c_idx);
+	
+	// 해당 댓글에 대댓글이 있는지 조회
+	public int cntReplyComm(Map<String, Object> map);
+	
+	// 대댓글이 있는 댓글 삭제 업데이트
+	public boolean updateDeleteComm(int c_idx);
+	
+	// 댓글 수정
+	public boolean updateComm(CommentsVO vo);
 }

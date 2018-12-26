@@ -14,21 +14,32 @@
 	.marginLi { margin-left: 5px; margin-right: 5px; }	
 	a { text-decoration: none; }
 	.now { background-color: orange; }
-</style>  	
+</style> 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 	
 <script> 
 	function selChange(){
 		var cntPerPage = document.getElementById("cntPerPage").value;
-		location.href= "/TMS/recruit?nowPage=${page.nowPage }&cntPerPage="+cntPerPage;
-		
+		location.href= "/TMS/board?ct_idx=${ct_idx}&nowPage=${page.nowPage }&cntPerPage="+cntPerPage;/*  */
 	}
 	function to_detail(b_idx){
 		var cntPerPage = document.getElementById("cntPerPage").value;
-		location.href="/TMS/recruitDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
+		location.href="/TMS/boardDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
 	}
+	$(document).ready(function(){
+		if ('${boardList[0].ct_idx}' == 1){
+			$("#boardType").html("공지사항");
+		}else if ('${boardList[0].ct_idx}' == 2){
+			$("#boardType").html("자유게시판");	
+		}else if ('${boardList[0].ct_idx}' == 3){
+			$("#boardType").html("후기게시판");	
+		}else if ('${boardList[0].ct_idx}' == 4){
+			$("#boardType").html("QNA");
+		}
+	});
 </script>
 </head>
 <body>
-	<h3>모집 게시판임</h3>
+	<h3 id="boardType"></h3>
 	
 	<div>
 	<select id="cntPerPage" onchange="selChange()">
@@ -51,19 +62,19 @@
 			<c:forEach var="list" items="${boardList }">
 				<tr>
 					<td width="10%">
-						${list.rc_idx }
+						${list.b_idx }
 					</td>
 					<td width="60%">
-						<a href="#" onclick="to_detail(${list.rc_idx})">${list.rc_title }</a>
+						<a href="#" onclick="to_detail(${list.b_idx})">${list.b_title }</a>
 						<c:if test="${list.cnt != 0 }">
-							<a href="#	" onclick="to_detail(${list.rc_idx})">[${list.cnt }]</a>
+							<a href="#" onclick="to_detail(${list.b_idx})">[${list.cnt }]</a>
 						</c:if>
 					</td>
 					<td>
 						${list.id }
 					</td>
 					<td>
-						<fmt:formatDate pattern="yyyy-MM-dd" value="${list.rc_regdate }" />
+						<fmt:formatDate pattern="yyyy-MM-dd" value="${list.b_regdate }" />
 					</td>
 					<td>
 						${list.hit }
@@ -78,12 +89,20 @@
 		</tfoot>
 	</table>
 	
-	<input type="text" name="keyword">	<!-- 검색창 -->
-	<select name="target">
-		<option value="title">제목</option>
-		<option value="content">내용</option>
-		<option value="title_content">제목 & 내용</option>
-	</select>
+	
+	<!--  -->
+	<form action="#">
+		<input type="text" name="keyword">	<!-- 검색창 -->
+		<select name="target">
+			<option value="title">제목</option>
+			<option value="content">내용</option>
+			<option value="title_content">제목 & 내용</option>
+		</select>
+		<input type="submit" value="검색">
+	</form>
+	<!--  -->
+	
+	
 	<br>
 	<input type="button" value="글쓰기" id="write" onclick="write_go()">
 	<br> 
@@ -91,25 +110,25 @@
 	<div id="paging">
 	<ul id="pagingList">
 		<c:if test="${page.chkStartPage }">
-		<li><a href="/TMS/recruit?nowPage=1&cntPerPage=${page.cntPerPage}"><button>&lt;&lt;</button></a></li>	
-		<li><a href="/TMS/recruit?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"><button>&lt;</button></a></li>	
+		<li><a href="/TMS/board?ct_idx=${ct_idx }&nowPage=1&cntPerPage=${page.cntPerPage}"><button>&lt;&lt;</button></a></li>
+		<li><a href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"><button>&lt;</button></a></li>
 		</c:if>		
 		<c:forEach var="p" begin="${page.startPage }" end="${page.endPage }">
 			<c:if test="${p == page.nowPage }">
 				<li>
-					<a class="now marginLi" href="/TMS/recruit?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+					<a class="now marginLi" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 				</li>
 			</c:if>
 			<c:if test="${p != page.nowPage }">
 				<li>
-					<a class="marginLi" href="/TMS/recruit?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+					<a class="marginLi" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 				</li>
 			</c:if>
 			
 		</c:forEach>
 		<c:if test="${page.chkEndPage }">
-			<li><a href="/TMS/recruit?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"><button>&gt;</button></a></li>
-			<li><a href="/TMS/recruit?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"><button>&gt;&gt;</button></a></li>
+			<li><a href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"><button>&gt;</button></a></li><!--  -->
+			<li><a href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"><button>&gt;&gt;</button></a></li><!--  -->
 		</c:if>
 	</ul>
 	</div>
@@ -121,7 +140,7 @@
 	
 <script>
 	function write_go(){
-		location.href="/TMS/recruitWrite";
+		location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
 	}
 </script>	
 	

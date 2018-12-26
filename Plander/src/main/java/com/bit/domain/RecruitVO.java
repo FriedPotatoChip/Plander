@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class RecruitVO {
 	private String rc_title, rc_content, id;
-	private int rc_idx, cur_mem, max_mem, hit;
+	private int rc_idx, cur_mem, max_mem, hit, cnt;
 	private Date rc_regdate;
 }

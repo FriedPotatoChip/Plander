@@ -119,7 +119,7 @@ public class LoginController {
 	@RequestMapping("/TMS/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "main/main";
+		return "redirect: /TMS";
 	}
 	
 	@RequestMapping("/test")
