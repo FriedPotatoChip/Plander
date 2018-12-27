@@ -44,7 +44,7 @@
 					or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
 				]]>
 			)
-			and sv.sct_idx between 2 and 4
+			and sv.roomnum = 2
 			order by sv.s_idx )
 	</select>
 	
@@ -57,7 +57,7 @@
 				or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
 			]]>
 		)
-		and sv.sct_idx between 2 and 4
+		and sv.roomnum = 2
 		order by sv.s_idx
 	</select>	
 	
