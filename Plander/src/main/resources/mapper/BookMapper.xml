@@ -48,6 +48,7 @@
 			order by sv.s_idx )
 	</select>
 	
+	<!-- 예약된 랩실 -->
 	<select id="bookroom" resultType="com.bit.domain.BookingVO">
 		SELECT distinct sv.* FROM SEATS_VIEW SV, BOOKING B 
 		WHERE sv.s_idx = b.s_idx
