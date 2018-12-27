@@ -50,20 +50,20 @@ public class UploadFileUtils {
 		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 	}
 
-//	private static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
-//
-//		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
-//
-//		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
-//
-//		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
-//
-//		File newFile = new File(thumbnailName);
-//		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
-//
-//		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
-//		return thumbnailName.substring(uploadPath.length()).replace(File.separatorChar, '/');
-//	}
+	private static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
+
+		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
+
+		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
+
+		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
+
+		File newFile = new File(thumbnailName);
+		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+
+		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+		return thumbnailName.substring(uploadPath.length()).replace(File.separatorChar, '/');
+	}
 
 	private static String calcPath(String uploadPath) {
 

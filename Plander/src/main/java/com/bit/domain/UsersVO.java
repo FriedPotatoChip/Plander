@@ -14,7 +14,7 @@ import lombok.ToString;
 public class UsersVO {
 
 	private int u_idx, rank;
-	private String id, password, name, phone, email, type, api_id, zipNo, roadAddrPart1, addrDetail;
+	private String id, password, name, phone, email, type, api_id, zipNo, roadAddrPart1, addrDetail, user_profileImagePath;
 	private Date regdate;
 
 	// 파일 관련 필드 추가

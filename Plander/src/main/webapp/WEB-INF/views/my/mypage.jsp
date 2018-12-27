@@ -70,6 +70,7 @@ h3 {
 #modal_table td {
 	width: 50%;
 }
+
 </style>
 </head>
 
@@ -81,7 +82,9 @@ h3 {
 			onclick="location.href='/TMS'">홈으로가기</button>
 	</nav>
 
-	<div class="profile"></div>
+	<div class="profile">
+
+	</div>
 
 	<div class="my_info">
 		<h3>- 내정보 -</h3>
@@ -138,7 +141,8 @@ h3 {
 			<strong><a href="#"
 				onclick="fetch_recruit('/TMS/my/my_recruit_comment')">내모집글댓글</a></strong>&nbsp;|&nbsp;
 			<strong><a href="#" onclick="fetch_recruit('/TMS/my/board')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#" onclick="fetch_recruit('/TMS/my/board_comment')">자유게시판에달린댓글</a></strong>
+			<strong><a href="#"
+				onclick="fetch_recruit('/TMS/my/board_comment')">자유게시판에달린댓글</a></strong>
 		</div>
 		<table id="myRecruit"></table>
 	</div>
@@ -257,6 +261,7 @@ h3 {
 			}
 		}
 
+		//내용 출력
 		function fetch_book(name) {
 			fetch(name).then(function(response) {
 				response.text().then(function(text) {
@@ -272,18 +277,7 @@ h3 {
 				});
 			});
 		}
-		
-		/* 페이징 */
-		function selChange() {
-			var cntPerPage = document.getElementById("cntPerPage").value;
-			location.href = "/TMS/recruit?nowPage=${page.nowPage }&cntPerPage=5";
-
-		}
-		function to_detail(b_idx) {
-			var cntPerPage = document.getElementById("cntPerPage").value;
-			location.href = "/TMS/recruitDetail?idx=" + b_idx
-					+ "&nowPage=${page.nowPage}&cntPerPage=5";
-		}
 	</script>
+	
 </body>
 </html>

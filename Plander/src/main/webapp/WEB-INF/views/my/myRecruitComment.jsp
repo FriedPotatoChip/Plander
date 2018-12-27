@@ -19,7 +19,7 @@
 		<c:choose>
 			<c:when test="${empty my_recruit_comment}">
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<h2>현재 등록된 댓글이 없습니다.</h2>
 					</td>
 				</tr>

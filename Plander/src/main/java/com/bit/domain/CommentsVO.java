@@ -15,4 +15,8 @@ public class CommentsVO {
 	private Date c_regdate;
 	
 	private String rc_title;
+	
+	private String b_title;
+	
+	
 }

@@ -17,6 +17,44 @@
 	* { font-family: 'Noto Sans KR', sans-serif; text-decoration: none; }
 	#home { font-family: 'East Sea Dokdo', cursive; font-size: 2em; }
 	.center { text-align: center; }
+	
+	/* 여기 밑으로 예약 헤더 CSS */
+	#chk a { text-decoration: none; }
+	#chk { width: 100%; margin-left: auto; margin-right: auto; }
+	ul>li {
+		float: left;
+		list-style-type: none;
+		padding: 0 5% 0 5.5%;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	ul>li>a { font-size: 1.1em; }
+	
+	#chk::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 선택 안할 시 */
+	.select { color: gray; }
+	.back {
+		background-color: gray;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	
+	/* 현재 페이지 */
+	.click { color: black; }
+	.noback {
+		background-color: rebeccapurple;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	/* 예약 헤더 CSS 끝 */
 </style>
 
 <script>
@@ -139,6 +177,33 @@
 </head>
 <body>
 <div id="container">
+	<br><br><br>
+	<!-- 예약 헤더 -->
+	<div id="chk">
+		<ul>
+			<li>
+				<a class="menu" href="/TMS/book/booking">
+					<b><span id="num" class="back">STEP1</span>
+					<span id="select" class="select">날짜선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu" href="#">
+					<b><span id="num" class="back">STEP2</span>
+					<span id="select" class="select">좌석선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu" href="#">
+					<b> <span id="num" class="noback">STEP3</span>
+					<span id="select" class="click">결제하기</span></b>
+				</a>
+			</li>
+		</ul>
+	</div> <!-- 예약 헤더끝 -->
+	
 	<div class="boxoutside" style="border: 1px solid;">
 		<form method="get">
 			<!-- 결제 정보 -->
@@ -162,8 +227,8 @@
 							<td width="15%">예매번호</td>
 							<td width="10%">예약자 이름</td>
 							<td width="15%">연락처</td>
-							<td width="40%">예약 날짜 및 시간</td>
-							<td width="10%">선택 좌석정보</td>
+							<td width="35%">예약 날짜 및 시간</td>
+							<td width="15%">선택 좌석정보</td>
 							<td width="10%">금액</td>
 						</tr>
 						<tr>
@@ -190,10 +255,10 @@
 					<button type="submit" class="btn btn-default" onclick="">다음단계</button>
 				</div>
 			</div> <!-- 결제방식 선택 끝  -->
-			
 		</form>
 		
-	</div> <!-- 박스 아웃사이드 끝 -->
+	</div> <!-- 박스 아웃사이드 끝 --><br><br><br>
+	<!--  -->지금예약 : ${bvo }
 	
 </div> <!-- 바디 콘테이너 끝 -->
 
