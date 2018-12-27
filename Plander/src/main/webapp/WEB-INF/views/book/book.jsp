@@ -105,6 +105,13 @@
 	</table>
 </div>
 <br>
+<script>
+	function book(frm) {
+		window.open("/TMS/book/booking", "예약하기", "width=1200, height=650");
+		frm.submit();
+	}
+
+</script>
 
 <div style="box-sizing: border-box;">
 	<h3>1호점</h3>
@@ -114,9 +121,10 @@
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do1.jpg" style="width: auto; height: auto;">
 		</div>
 		<br>
-		<form method="post" action="/TMS/book/booking" onsubmit="">
+		<form method="post">
 			<input type="hidden" name="br_idx" value="1">
-			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+			<button type="button" class="btn btn-outline-secondary"
+				style="float: right;" onclick="book(this.form)">예약하기</button>
 		</form>
 	</div> <!-- boxoutside 끝 -->
 </div> <!-- 1 호점 끝 -->
@@ -130,9 +138,10 @@
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do2.jpg" style="width: auto; height: auto;">
 		</div>
 		<br>
-		<form method="post" action="/TMS/book/booking" onsubmit="">
+		<form method="post">
 			<input type="hidden" name="br_idx" value="2">
-			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+			<button type="button" class="btn btn-outline-secondary"
+				style="float: right;" onclick="book(this.form)">예약하기</button>
 		</form>
 	</div> <!-- boxoutside 끝 -->
 </div> <!-- 2 호점 끝 -->
@@ -146,9 +155,10 @@
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do3.jpeg" style="width: auto; height: auto;">
 		</div>
 		<br>
-		<form method="post" action="/TMS/book/booking" onsubmit="">
-			<input type="hidden" name="br_idx" value="3">
-			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+		<form method="post">
+			<input type="button" name="br_idx" value="3">
+			<button type="submit" class="btn btn-outline-secondary"
+				style="float: right;" onclick="book(this.form)">예약하기</button>
 		</form>
 	</div> <!-- boxoutside 끝 -->
 </div> <!-- 3 호점 끝 -->
