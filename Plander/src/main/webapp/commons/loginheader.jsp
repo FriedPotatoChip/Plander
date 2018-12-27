@@ -19,7 +19,7 @@
 
 		</ul>
 		<ul class="nav justify-content-end" id="primaryNav">
-			<li class="nav-item"><a class="nav-link" href="/TMS/mypage?id=${usersVO.id }"><h5>마이페이지</h5></a></li>
+			<li class="nav-item"><a class="nav-link" href="/TMS/my"><h5>마이페이지</h5></a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="/TMS/logout"><h5>로그아웃</h5></a></li>
 			</li>

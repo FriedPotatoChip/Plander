@@ -25,6 +25,17 @@ public class LoginController {
 		return "login/naverCallback";
 	}
 	
+	@PostMapping("/signUp")
+	public String signUp(UsersVO vo, Model model, HttpSession session) {
+		boolean chkSignUp = service.signUp(vo);
+		if (chkSignUp) {
+			session.setAttribute("usersVO", vo);
+			return "main/joinOk";
+		}else {
+			return "main/main";
+		}
+	}
+	
 	@RequestMapping("/TMS/api_signUp")
 	public String api_signUP(UsersVO vo, HttpSession session) {
 		return "/login/api_signUp";
@@ -119,7 +130,7 @@ public class LoginController {
 	@RequestMapping("/TMS/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "main/main";
+		return "redirect: /TMS";
 	}
 	
 	@RequestMapping("/test")
@@ -133,20 +144,25 @@ public class LoginController {
 			
 			UsersVO user = service.login(vo);
 			if (user == null) {
-				System.out.println("유저 로그인 실패!");
-				model.addAttribute("loginResult", "fail");
+//				System.out.println("유저 로그인 실패!");
+//				model.addAttribute("loginResult", "fail");
 				return "main/main";
 			} else if (user.getRank() == 1) {
 				session.setAttribute("usersVO", user);
-				System.out.println("관리자 확인 : " + user);
-				model.addAttribute("loginResult", "admin");
+//				System.out.println("관리자 확인 : " + user);
+//				model.addAttribute("loginResult", "admin");
 			} else if (user.getRank() != 1) {
 				//유저로그인
 				session.setAttribute("usersVO", user);
-				System.out.println("user 확인 : " + user);
-				model.addAttribute("loginResult", "user");
+//				System.out.println("user 확인 : " + user);
+//				model.addAttribute("loginResult", "user");
 			}
 			
 			return "redirect: /TMS";
 		}
+	
+	
+	
+	
+	
 }

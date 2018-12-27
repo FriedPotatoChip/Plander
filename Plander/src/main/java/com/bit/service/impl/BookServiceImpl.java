@@ -55,6 +55,13 @@ public class BookServiceImpl implements BookService {
 		System.out.println("***** bookroom() : Impl 까지 옴!");
 		return bookmapper.bookroom(bvo);
 	}
+	
+	//선택 정보 조회
+	@Override
+	public List<BookingVO> myseat(BookingVO bvo) {
+		System.out.println("***** myseat() : Impl 까지 옴!");
+		return bookmapper.myseat(bvo);
+	}
 
 
 }

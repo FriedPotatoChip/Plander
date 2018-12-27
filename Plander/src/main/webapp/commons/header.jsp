@@ -35,7 +35,6 @@
 				data-toggle="modal" href="#myModal"><h5>로그인</h5></a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="modal"
 				href="#joinModal"><h5>회원가입</h5></a></li>
-			</li>
 
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -78,19 +77,17 @@
 
 
 <script>
-	var chkId = false;
+
 	function chk() {
 		if (!document.frm.id.value) {
 			alert("아이디를 입력해주세요.");
 			document.frm.id.focus();
-			document.frm.action = "/TMS";
 			return false;
 		}
 
 		if (!document.frm.password.value) {
 			alert("비밀번호를 입력해주세요.");
 			document.frm.password.focus()
-			document.frm.action = "/TMS";
 			return false;
 		}
 
@@ -100,54 +97,64 @@
 	//아이디 중복확인
 	function idchk() {
 		var inputed = $('#id').val();
-		$
-				.ajax({
-					data : {
-						'id' : inputed
-					},
-					url : '/idChk_api',
-
-					success : function(data) {
-						if (data == 'ok') {
-							chkId = true;
-							//아이디 사용가능
-							$('#idMsg')
-									.html(
-											"<span style='color: forestgreen'>사용 가능한 아이디입니다.</span>");
-						} else {
-							chkId = false;
-							$('#idMsg')
-									.html(
-											"<span style='color: red'>이미 사용중인 아이디입니다.</span>");
-						}
-					},
-					error : function() {
-						//alert("관리자에게 연락바랍니다.");
-						return "/commons/error404.jsp";
-					}
-				})
+		window.chkIdChk = false;
+		$.ajax({
+			data : {'id' : inputed},
+			url : '/idChk_api',
+			success : function(data) {
+				if (data == 'ok') {
+					chkId = true;
+					//아이디 사용가능
+					$('#idMsg').html("<span style='color: forestgreen'>사용 가능한 아이디입니다.</span>");
+					chkIdChk = true;
+				} else {
+					$('#idMsg').html("<span style='color: red'>이미 사용중인 아이디입니다.</span>");
+				}
+			},
+			error : function() {
+				//alert("관리자에게 연락바랍니다.");
+				return "/commons/error404.jsp";
+			}
+		})
 	}
 
 	//비밀번호 확인
 	function pwchk() {
 		var pw = $('#password').val();
 		var pwchk = $('#passwordchk').val();
-
+		window.chkPwdChk = false;
 		if (pw != pwchk || pwchk == "") {
 			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
-			$('#pwchkMsg').html(
-					"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+			$('#pwchkMsg').html("<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
 		} else {
-			$('#pwchkMsg').html(
-					"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+			$('#pwchkMsg').html("<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+			chkPwdChk = true;
 		}
 	}
 
 	//회원가입 
 	function join() {
-
+		var chkBox = $('input:checkbox[id="chkBox"]').is(":checked");
 		var frm = document.joinform;
+		
+		var password = frm.password.value;
+		var tel = frm.phone.value;
+		var email = frm.email.value;
+		
+		var testPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+		var testPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,16}$/;
+		var testEmail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
 
+
+	    var checkNumber = password.search(/[0-9]/g);
+	    var checkEnglish = password.search(/[a-z]/ig);
+	    var checkSpe = password.search(/[!@#$%^&*]/gi);
+		
+	    if (!chkBox){
+	    	alert("이용 약관에 동의해주세요");
+	    	frm.chkBox.focus();
+	    	return false;
+	    }
 		if (!frm.id.value) {
 			alert("아이디를 입력해주세요.");
 			frm.id.focus();
@@ -159,6 +166,26 @@
 			frm.password.focus();
 			return false;
 		}
+		
+	    if(checkNumber <0 || checkEnglish <0 || checkSpe < 0){
+	        alert("숫자, 영문자, 특수문자를 혼용하여야 합니다.");
+	        frm.password.value = "";
+	        frm.password.focus();
+	        return false;
+	    }
+	    if(/(\w)\1\1\1/.test(password)){
+	        alert('같은 문자를 4번 이상 사용하실 수 없습니다.');
+	        frm.password.value = "";
+	        frm.password.focus();
+	        return false;
+	    }
+	        
+	    if(password.search(frm.id.value) > -1){
+	        alert("비밀번호에 아이디가 포함되었습니다.");
+	        frm.password.value = "";
+	        frm.password.focus();
+	        return false;
+	    }
 
 		if (!frm.name.value) {
 			alert("이름을 입력해주세요.");
@@ -171,21 +198,50 @@
 			frm.phone.focus();
 			return false;
 		}
+		if( !testPhone.test(tel) ) {
+		    alert('유효하지 않은 번호입니다.');
+		    frm.phone.value = "";
+		    frm.phone.focus();
+		    return false;
+		}
 
 		if (!frm.email.value) {
 			alert("이메일을 입력해주세요.");
 			frm.email.focus();
 			return false;
 		}
-
-		if (!chkId) {
-			alert("Id 중복체크를 해주세요");
+		if (!testEmail.test(email)){
+			alert("유효하지 않은 이메일입니다.");
+			frm.email.value="";
 			frm.email.focus();
+			return false;
 		}
 
-		frm.action = "/Plander/join"
-		frm.submit();
+		if (!chkIdChk) {
+			alert("이미 사용중인 ID 입니다.");
+			frm.id.focus();
+			return false;
+		}
+		
+		if (chkIdChk && chkPwdChk){
+			frm.submit();
+		} else if (!chkPwdChk){
+			alert("비밀번호가 일치하지 않습니다.");
+			frm.password.focus();
+		}
 
+	}
+	
+	// 주소 api
+	function goPopup(){
+	    var pop = window.open("/juso","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	}
+	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+			, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+		document.getElementById("roadAddrPart1").value = roadAddrPart1;
+		document.getElementById("addrDetail").value = addrDetail;
+		document.getElementById("zipNo").value = zipNo;
 	}
 </script>
 
@@ -208,9 +264,9 @@
 
 			<div class="modal-body center">
 				<form name="frm" action="/TMS/login" method="post" onsubmit="chk()">
-					<input type="text" name="id" class="form-control" placeholder="아이디">
+					<input type="text" name="id" class="form-control" placeholder="아이디" required>
 					<input type="text" name="password" class="form-control"
-						style="margin-top: 1.5%;" placeholder="비밀번호">
+						style="margin-top: 1.5%;" placeholder="비밀번호" required>
 					<button type="submit" style="margin-top: 1.5%;"
 						class="btn btn-outline-secondary form-control">로그인</button>
 				</form>
@@ -258,48 +314,56 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-			</div>
+			</div> 
 
-			<form name="joinform" action="/Plander/join" method="post">
+			<form name="joinform" action="/signUp" method="post">
 				<div class="modal-body">
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
 								<td width="35%">아이디&nbsp;<b style="color: red;">&#42;</b></td>
 								<td width="65%"><input type="text" name="id" id="id"
-									oninput="idchk()" class="col-sm-6 form-control">
+									oninput="idchk()" class="col-sm-6 form-control" required>
 									<p id="idMsg" style="font-size: 13px;"></p></td>
 							</tr>
 							<tr>
 								<td>비밀번호&nbsp;<b style="color: red;">&#42;</b></td>
-								<td><input type="password" name="password" id="password"
-									oninput="pwchk()" class="col-sm-6 form-control">
-									<p id="pwMsg" style="font-size: 13px;">(영문 대소문자/숫자/특수문자 중
-										2가지 이상 조합, 8자~16자)</p></td>
+								<td><input type="password" name="password" id="password" style="font-family: 굴림;"
+									oninput="pwchk()" class="col-sm-6 form-control" required>
+									<p id="pwMsg" style="font-size: 13px;">(영문 대소문자/숫자/특수문자(!,@,#,$,%,^,&,*) 조합, 8자~16자)</p></td>
 							</tr>
 							<tr>
 								<td>비밀번호 확인&nbsp;<b style="color: red;">&#42;</b></td>
-								<td><input type="password" name="passwordchk"
+								<td><input type="password" name="passwordchk" style="font-family: 굴림;"
 									id="passwordchk" oninput="pwchk()"
-									class="col-sm-6 form-control">
+									class="col-sm-6 form-control" required>
 									<p id="pwchkMsg" style="font-size: 13px;"></p> <!-- 비밀번호가 일치하지 않습니다. -->
 								</td>
 							</tr>
 							<tr>
 								<td>이름&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" name="name"
-									class="col-sm-6 form-control"></td>
+									class="col-sm-6 form-control" required></td>
 							</tr>
 
 							<tr>
 								<td>휴대전화&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" name="phone"
-									class="col-sm-10 form-control"></td>
+									class="col-sm-10 form-control" required></td>
 							</tr>
 							<tr>
 								<td>이메일&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" name="email"
-									class="col-sm-10 form-control"></td>
+									class="col-sm-10 form-control" required></td>
+							</tr>
+							<tr>
+								<td>주소&nbsp;<b style="color: red;">&#42;</b></td>
+								<td> 
+									<input type="text" id="zipNo" class="col-sm-4 form-control" name="zipNo" placeholder="zip" readonly>
+									<input type="button" class="col-sm-4 form-control" value="주소 검색" onclick="goPopup()">
+									<input type="text" id="roadAddrPart1" class="col-sm-10 form-control" name="roadAddrPart1" placeholder="Address" readonly>
+									<input type="text" id="addrDetail" class="col-sm-10 form-control" name="addrDetail">
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -310,7 +374,7 @@
 					</p>
 					<div id="admit">
 						<div class="checkbox">
-							<label><input type="checkbox">&nbsp;<b>거기스</b>에
+							<label><input type="checkbox" id="chkBox" name="chKBox">&nbsp;<b>거기스</b>에
 								가입하면서 <a>이용약관</a>과 <a>개인정보 취급방침</a>을 확인하고 이에 동의합니다.</label>
 						</div>
 					</div>
@@ -334,14 +398,12 @@
 <!-- 카카오 로그인 api -->
 <script type='text/javascript'>
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('카카오 로그인'); /* 클라이언트 id 숨겨두기 */
+	Kakao.init('카카오 자바스크립트 키'); /* 클라이언트 id 숨겨두기 */
 	// 카카오 로그인 버튼을 생성합니다.
 	Kakao.Auth.createLoginButton({
 		container : '#kakao-login-btn',
 		success : function(authObj) {
-			_$ta
 			alert(JSON.stringify(authObj));
-			_$t
 
 			Kakao.API.request({
 				url : '/v1/user/me',
@@ -379,7 +441,7 @@
 <!-- 네이버 로그인 api -->
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId({
-		clientId : "네이버 클라이언트 id", /* 클라이언트 ID (숨겨두기) */
+		clientId : "네이버 클라이언트 아이디", /* 클라이언트 ID (숨겨두기) */
 		callbackUrl : "http://localhost:8095/TMS/naverCallback",
 		isPopup : true, /* 팝업을 통한 연동처리 여부 */
 		callbackHandle : true,
@@ -400,7 +462,7 @@
 		console.log("구글 로그인 시작");
 		gapi.load('auth2', function() {
 			var gauth = gapi.auth2.init({
-				client_id : '구글 클라이언트 id'/* 구글 클라이언트 키 */
+				client_id : '구글 클라이언트 키'/* 구글 클라이언트 키 */
 			})
 			gauth.signIn()
 					.then(
@@ -408,7 +470,7 @@
 								console.log("로그인 성공");
 								var profile = gauth.currentUser.get()
 										.getBasicProfile();
-
+ 
 								$.ajax({
 									url : "/TMS/naverAjax",
 									type : 'POST',
@@ -425,8 +487,7 @@
 									},
 									error : function(jqXHR, textStatus,
 											errorThrown) {
-										alert("에러 발생~~ \n" + jqXHR.status
-												+ " : " + errorThrown);
+										alert("에러 발생~~ \n" + jqXHR.status + " : " + errorThrown);
 									}
 								});
 

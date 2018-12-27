@@ -43,8 +43,11 @@
 			//체크된 박스 수가 1일 때 나머지 체크박스 disabled
 			if (cnt == $(":checkbox:checked").length) {
 				$(":checkbox:not(:checked)").attr("disabled", true); //같으면 나머지 체크박스 disabled
+				console.log("체크된 좌석 : " + $(":checkbox:checked").val() ); //체크값 확인ok
+				$("#msg").html("<span>" + $(":checkbox:checked").val() + "호</span>");
 			} else {
 				$(":checkbox").removeAttr("disabled");
+				$("#msg").html("");
 				<c:forEach var='k' items='${bookroomlist }'>
 					var bookseat = '${k.s_col }'; //예약된 좌석 번호
 					console.log("s_col : " + bookseat);
@@ -60,9 +63,40 @@
 				
 			}
 		});
+		
+	});
+</script>
+<script>
+	$(function() {
+		var val = "";
+		$("#4room").click(function() {
+			document.getElementsByName('sct_idx').value = 2;
+			val = document.getElementsByName('sct_idx').value;
+			$("input[name='sct_idx']").attr('value', val);
+			$("input[name='sct_name']").attr('value', '4인실');
+		});
+		$("#8room").click(function() {
+			document.getElementsByName('sct_idx').value = 3;
+			val = document.getElementsByName('sct_idx').value;
+			$("input[name='sct_idx']").attr('value', val);
+			$("input[name='sct_name']").attr('value', '8인실');
+		});
+		$("#12room").click(function() {
+			document.getElementsByName('sct_idx').value = 4;
+			val = document.getElementsByName('sct_idx').value;
+			$("input[name='sct_idx']").attr('value', val);
+			$("input[name='sct_name']").attr('value', '12인실');
+		});
 	});
 
+	function chkseat(frm) {
+		
+		frm.action="/TMS/book/pay";
+		frm.submit();
+	}
+
 </script>
+
 
 <style>
 	body, html { width: 90%; margin: auto; }
@@ -91,11 +125,15 @@
 <div id="container" style="box-sizing: border-box;">
 	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
 	<hr>
-	${bookroomlist }
+	<!--  -->
+	예약한 새럼들 : ${booklist }
+	<hr>
+	지금 예약하는애 : ${bvo }
+	
+	<!--  -->
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
-		<form method="get">
-			
+		<form method="post">
 			<div>
 				<h4><a href="">1층</a>&nbsp;&nbsp;&nbsp;
 				<a href="">2층</a></h4>
@@ -103,17 +141,6 @@
 
 			</div>
 			<hr>
-			<script>
-			function chkseat(frm) {
-				//4인실 : sct_idx = 2
-				//8인실 : sct_idx = 3
-				//12인실 : sct_idx = 4
-				//sct_idx 값이 2 : 4인실 빼고 체크박스 disabled, 3 : 8인실 빼고 disabled, 4 : 12인실 빼고 disabled
-				
-				frm.action = "/test.jsp";
-				frm.submit();
-			}
-			</script>
 			
 		<div id="allseat">
 			<!-- sct_idx 값 0으로 넘어옴 -->
@@ -121,26 +148,26 @@
 			<div>
 				<div class="checkbox" style="width: 100%; display: table;">
 					<div id="4people" style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="4room" name="s_col" value="201">4인실</label></p>
+						<p><label><input type="checkbox" id="4room" name="s_col" value="201">201호(4인실)</label></p>
 					</div>
 					
 					<div id="8people" style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="8room" name="s_col" value="301">8인실</label></p>
+						<p><label><input type="checkbox" id="8room" name="s_col" value="301">301호(8인실)</label></p>
 					</div>
 					
 					<div id="8people" style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="8room" name="s_col" value="302">8인실</label></p>
+						<p><label><input type="checkbox" id="8room" name="s_col" value="302">302호(8인실)</label></p>
 					</div>
 				</div>
 				<br>
 				
 				<div class="checkbox" style="width: 100%; display: table;">
 					<div id="4people" style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="4room" name="s_col" value="202">4인실</label></p>
+						<p><label><input type="checkbox" id="4room" name="s_col" value="202">202호(4인실)</label></p>
 					</div>
 					
 					<div id="12people" style="display: inline-table; width: 53%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="12room" name="s_col" value="401">12인실</label></p>
+						<p><label><input type="checkbox" id="12room" name="s_col" value="401">401호(12인실)</label></p>
 					</div>
 					
 					<div id="4people" style="display: inline-table; width: 15%; height: 100px; margin-right: 3%; border: 1px solid;">
@@ -153,16 +180,14 @@
 		
 			<!-- 선택 정보 -->
 			<p>선택 정보</p>
-			<table border="1px solid;" class="table table-bordered" style="width: 45%;">
+			<table border="1px solid;" class="table table-bordered" style="width: 55%;">
 				<tr>
-					<td width="15%">날짜</td>
-					<td width="15%">시간</td>
-					<td width="15%">선택 좌석정보</td>
+					<td width="30%">날짜/시간</td>
+					<td width="25%">선택 좌석정보</td>
 				</tr>
 				<tr>
-					<td>18/12/17 ~ 18/12/19</td>
-					<td>PM 5:00 ~ 7:00</td>
-					<td>4인실</td>
+					<td>${bvo.start_time } ~ ${bvo.end_time }</td>
+					<td id="msg"></td>
 				</tr>
 				<tfoot>
 					<tr>
@@ -173,6 +198,12 @@
 					</tr>
 				</tfoot>
 			</table>
+			<input type="hidden" name="br_idx" value="${bvo.br_idx }">
+			<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
+			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
+			<input type="hidden" name="sct_name" value="">
+			<input type="hidden" name="start_time" value="${bvo.start_time }">
+			<input type="hidden" name="end_time" value="${bvo.end_time }">
 			<br>
 		</form>
 		

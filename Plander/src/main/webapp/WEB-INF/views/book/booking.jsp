@@ -21,6 +21,111 @@
 <!-- ========================================================================================= -->
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR" rel="stylesheet">
 
+
+<script>
+	$(function() {
+		
+		//정기권 2주 체크시 endtime 자동으로 2주 뒤 날짜 클릭 생성
+		$('#2weeks').click(function() {
+			//alert("정기권 2주 클릭");
+			var startTime = $(document.getElementsByName('start_time')).val();
+			console.log('start_time : ' + startTime);
+			
+			if (startTime =="") {
+				alert('시작 날짜를 먼저 선택해주세요.');
+				$(document.getElementsByName('start_time')).focus();
+				return false;
+			} else {
+				function getTimeStamp() {
+		
+					var d = new Date(startTime);
+					console.log('new date : ' + d);
+					console.log('date 확인 : ' + d.toLocaleString());
+					d.setDate(d.getDate() + 13);
+					var day = d.toLocaleString();
+					
+					var s = leadingZeros(d.getFullYear(), 4) + '-'
+							+ leadingZeros(d.getMonth() + 1, 2) + '-'
+							+ leadingZeros(d.getDate(), 2) + ' '
+							+ leadingZeros(d.getHours(), 2) + ':'
+							+ leadingZeros(d.getMinutes(), 2);
+		
+					return s;
+				}
+		
+				function leadingZeros(n, digits) {
+					var zero = '';
+					n = n.toString();
+		
+					if (n.length < digits) {
+						for (i = 0; i < digits - n.length; i++)
+							zero += '0';
+					}
+					return zero + n;
+				}
+		
+				console.log('2주 뒤 날짜 확인 : ' + getTimeStamp());
+				$("input[name='end_time']").attr('value', getTimeStamp());
+			}
+		});
+		
+		//정기권 1개월 체크시 endtime 자동으로 30일 뒤 날짜 클릭 생성
+		$('#1month').click(function() {
+			//alert("정기권 1개월 클릭");
+			var startTime = $(document.getElementsByName('start_time')).val();
+			console.log('start_time : ' + startTime);
+			
+			if (startTime =="") {
+				alert('시작 날짜를 먼저 선택해주세요.');
+				$(document.getElementsByName('start_time')).focus();
+				return false;
+			} else {
+				function getTimeStamp() {
+		
+					var d = new Date(startTime);
+					console.log('new date : ' + d);
+					console.log('date 확인 : ' + d.toLocaleString());
+					d.setDate(d.getDate() + 29);
+					var day = d.toLocaleString();
+					
+					var s = leadingZeros(d.getFullYear(), 4) + '-'
+							+ leadingZeros(d.getMonth() + 1, 2) + '-'
+							+ leadingZeros(d.getDate(), 2) + ' '
+							+ leadingZeros(d.getHours(), 2) + ':'
+							+ leadingZeros(d.getMinutes(), 2);
+		
+					return s;
+				}
+		
+				function leadingZeros(n, digits) {
+					var zero = '';
+					n = n.toString();
+		
+					if (n.length < digits) {
+						for (i = 0; i < digits - n.length; i++)
+							zero += '0';
+					}
+					return zero + n;
+				}
+		
+				console.log('30일 뒤 날짜 확인 : ' + getTimeStamp());
+				$("input[name='end_time']").attr('value', getTimeStamp());
+			}
+		});
+		
+		//야간권 클릭시 
+		$('#night').click(function() {
+			//일단 빈문자열 !!
+			$("input[name='end_time']").attr('value', '');
+		});
+		//정기권 사용 안함 클릭 시 
+		$('#nope').click(function() {
+			$("input[name='end_time']").attr('value', '');
+		});
+		
+	});
+		
+</script>
 <script type="text/javascript">
 	//부트스트랩 캘린더
 	$(function() {
@@ -41,7 +146,6 @@
 	});
 	
 </script>
-
 <script>
 	function floorChk(frm) {
 		if (!frm.start_time.value) {
@@ -128,6 +232,20 @@
 					<div class="radio">
 						<label><input type="radio" name="sct_idx" value="1">개인석</label><br>
 						<label><input type="radio" name="sct_idx" value="0">랩실</label><br>
+					</div>
+					<hr>
+					
+					<h4>정기 이용권(1인실)</h4>
+					<div class="radio">
+						<label><input type="radio" id="nope" name="time_idx" value="0" checked="checked">정기권 사용안함</label>&nbsp;
+						<label><input type="radio" id="2weeks" name="time_idx" value="100">정기권 2주</label>&nbsp;
+						<label><input type="radio" id="1month" name="time_idx" value="101">정기권 1개월</label>&nbsp;
+						<label><input type="radio" id="night" name="time_idx" value="102">야간권(22:00~08:00)</label>
+						<hr>
+						<h5>사물함 사용여부</h5>
+						<p>*** <b>[ 정기권 2주 ]</b> 를 구입하시는 분들 중 사물함 사용을 원하시는 분들만 체크 바랍니다.</p>
+						<label><input type="radio" name="cabinet" value="y">사용</label>&nbsp;
+						<label><input type="radio" name="cabinet" value="n" checked="checked">사용안함</label><br>
 					</div>
 					<hr>
 					

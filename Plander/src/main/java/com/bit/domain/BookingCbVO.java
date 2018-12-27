@@ -14,4 +14,5 @@ public class BookingCbVO {
 	private String id;
 	private Date start_date, end_date, ckb_regdate;
 
+	private String br_name;
 }

@@ -13,4 +13,5 @@ public interface LoginMapper {
 	
 	public UsersVO getUser(UsersVO vo);
 	
+	public boolean insertUser(UsersVO vo);
 }

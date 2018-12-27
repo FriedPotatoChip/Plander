@@ -23,6 +23,14 @@
 	
 	<context:component-scan base-package="com.bit" />
 	
-	
-	
+	<!-- 파일 업로드 크기 제한 (10MB) -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
+	</beans:bean>
+	<!-- 파일 저장 path -->
+	<beans:bean id = "uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="C:\Users\po935\git\Plander\Plander\src\main\webapp\resources\upload">
+	</beans:constructor-arg>
+</beans:bean>
+	  
 </beans:beans>
