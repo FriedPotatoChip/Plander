@@ -1,7 +1,6 @@
 package com.bit.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,23 +8,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.domain.BookingCbVO;
-import com.bit.domain.Paging;
+import com.bit.domain.BookingVO;
 import com.bit.domain.UsersVO;
+import com.bit.service.BookService;
 import com.bit.service.adminService;
 import com.bit.utils.PagingVO;
 
 @Controller
 @RequestMapping("/TMS/admin")
 public class AdminController {
-
+	
+	@Autowired
+	private BookService bookservice;
+	
 	@Autowired
 	private adminService service;
 
-	// 페이징 처리
-	Paging p = new Paging();
 
 	@RequestMapping("")
 	public String adminPage(UsersVO vo, Model model, PagingVO page) {
@@ -74,9 +74,12 @@ public class AdminController {
 	
 	@RequestMapping("/Chart")
 	public String ChartPage(Model model) {
-		/*model.addAttribute("dateTime", service.DateTime());
-		List<DateTimeVO> datetime = service.DateTime();
-		System.out.println(datetime.toString());*/
+		
 		return "adminPage/Chart";
+	}
+	
+	@RequestMapping("/Seats")
+	public String SeatsPage(@RequestParam("sct_idx")int sct_idx , Model model, BookingVO bvo) {
+		return "adminPage/Seats";
 	}
 }
