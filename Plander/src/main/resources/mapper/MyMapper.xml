@@ -55,6 +55,23 @@
 	<!-- <select id="my_recruit" resultType="com.bit.domain.RecruitVO"> select 
 		* from recruit where id = #{id} </select> -->
 
+	<!-- 내가 쓴 모집글 페이징 처리용 -->
+	<select id="my_recruit" resultType="com.bit.domain.RecruitVO"
+		parameterType="Map">
+		select * from
+		(
+		select rownum rn, rc.* from recruit rc
+		where
+		rc.id =
+		#{id}
+		order by
+		rc_idx desc
+		)
+		where rn between #{start}
+		and
+		#{end}
+	</select>
+
 	<!-- 내가 쓴 모집글 상세 조회 -->
 	<select id="getOne" resultType="com.bit.domain.RecruitVO">
 		select * from recruit where
@@ -158,15 +175,18 @@
 		resultType="com.bit.domain.CommentsVO" parameterType="Map">
 		select *
 		from(
-		select rownum rn, b.b_idx, b.b_title, b.id, b.ct_idx, b.b_regdate, c.c_idx,
+		select rownum rn, b.b_idx, b.b_title, b.id, b.ct_idx, b.b_regdate,
+		c.c_idx,
 		c.c_regdate
 		from board b, comments c
 		where c.b_idx = b.b_idx
-		and b.ct_idx = 2
+		and
+		b.ct_idx = 2
 		and b.id = #{id}
 		order by c_idx desc
 		)
-		where rn between #{start} and #{end}
+		where rn between
+		#{start} and #{end}
 	</select>
 
 	<!-- 자유게시판에 달린 댓글목록 갯수 페이징용 -->

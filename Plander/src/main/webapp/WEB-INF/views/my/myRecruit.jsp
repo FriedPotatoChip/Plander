@@ -39,8 +39,15 @@
 		</c:choose>
 	</tbody>
 
+	<script>
+		function list(page) {
+			location.href = "/TMS/my/my_recruit?curPage" + page;
+		}
+	</script>
+
 	<!-- 페이징 -->
 	<jsp:include page="/commons/paging.jsp"></jsp:include>
+
 
 </body>
 </html>

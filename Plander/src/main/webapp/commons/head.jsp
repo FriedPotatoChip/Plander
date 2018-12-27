@@ -30,6 +30,12 @@
 	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
 	crossorigin="anonymous"></script>
 
+<script>
+	function list(page) {
+		location.href = "/TMS/my/my_recruit?curPage" + page;
+	};
+</script>
+
 <!-- 나눔스퀘어  -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
