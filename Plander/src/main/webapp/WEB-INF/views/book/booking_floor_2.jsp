@@ -309,6 +309,9 @@
 			</table>
 			<input type="hidden" name="br_idx" value="${bvo.br_idx }">
 			<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
+			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
+			<input type="hidden" name="cabinet" value="${bvo.cabinet }">
+			<input type="hidden" name="sct_name" value="1인실">
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
 			<br>

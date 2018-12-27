@@ -73,16 +73,19 @@
 			document.getElementsByName('sct_idx').value = 2;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
+			$("input[name='sct_name']").attr('value', '4인실');
 		});
 		$("#8room").click(function() {
 			document.getElementsByName('sct_idx').value = 3;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
+			$("input[name='sct_name']").attr('value', '8인실');
 		});
 		$("#12room").click(function() {
 			document.getElementsByName('sct_idx').value = 4;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
+			$("input[name='sct_name']").attr('value', '12인실');
 		});
 	});
 
@@ -195,6 +198,12 @@
 					</tr>
 				</tfoot>
 			</table>
+			<input type="hidden" name="br_idx" value="${bvo.br_idx }">
+			<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
+			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
+			<input type="hidden" name="sct_name" value="">
+			<input type="hidden" name="start_time" value="${bvo.start_time }">
+			<input type="hidden" name="end_time" value="${bvo.end_time }">
 			<br>
 		</form>
 		
