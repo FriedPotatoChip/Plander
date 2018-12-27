@@ -92,7 +92,7 @@
 	
 	<!-- 이미지 업로드 -->
 	<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib-->		
-	<dependency>
+	 <dependency>
 		<groupId>org.imgscalr</groupId>
 		<artifactId>imgscalr-lib</artifactId>
 		<version>4.2</version>
