@@ -125,27 +125,87 @@
 	#row { padding: 10px; }
 	#allseat, #myselect { width: 93%; margin-left: auto; margin-right: auto; }
 	
+	/* 여기 밑으로 예약 헤더 CSS */
+	#chk a { text-decoration: none; }
+	#chk { width: 100%; margin-left: auto; margin-right: auto; }
+	ul>li {
+		float: left;
+		list-style-type: none;
+		padding: 0 5% 0 5.5%;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	ul>li>a { font-size: 1.1em; }
+	
+	#chk::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 선택 안할 시 */
+	.select { color: gray; }
+	.back {
+		background-color: gray;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	
+	/* 현재 페이지 */
+	.click { color: black; }
+	.noback {
+		background-color: rebeccapurple;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	/* 예약 헤더 CSS 끝 */
 </style>
 
 </head>
 <body>
 <div id="container" style="box-sizing: border-box;">
-	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
-	<hr>
+	<br><br><br>
+	<!-- 예약 헤더 -->
+	<div id="chk">
+		<ul>
+			<li>
+				<a class="menu" href="/TMS/book/booking">
+					<b><span id="num" class="back">STEP1</span>
+					<span id="select" class="select">날짜선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu" href="#">
+					<b><span id="num" class="noback">STEP2</span>
+					<span id="select" class="click">좌석선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu" href="#">
+					<b> <span id="num" class="back">STEP3</span>
+					<span id="select" class="select">결제하기</span></b>
+				</a>
+			</li>
+		</ul>
+	</div> <!-- 예약 헤더끝 -->
 	
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
 		<form method="post">
-			
 			<div>
-				<h4><a href="">1층</a>&nbsp;&nbsp;&nbsp;
-				<a href="">2층</a></h4>
-				<p style="font-style: italic;">1인 2석까지 예약 가능합니다.</p>
-				<span>인원 수 선택 : </span>
-				<select id="people">
-					<option value="1">1명</option>
-					<option value="2">2명</option>
-				</select>
+				<h5>☑ 1인 2석까지 예약 가능합니다.</h5>
+				<div>
+					<span>☑ 인원 수 선택 : </span>
+					<select id="people">
+						<option value="1">1명</option>
+						<option value="2">2명</option>
+					</select>
+				</div>
 			</div>
 			<hr>
 			
@@ -280,33 +340,30 @@
 								<td><label><input type="checkbox" name="s_col" value="${i }">A-${i }</label></td>
 							</c:forEach>
 						</tr>
-						
 					</table>
 				</div>
 			</div> <!-- 4번 열 끝 -->
+		</div> <!-- allseat 끝 -->
 			
-		</div>
-		
 			<!-- 선택 정보 -->
-			<p>선택 정보</p>
-			<table border="1px solid;" class="table table-bordered" style="width: 55%;">
+			<hr>
+			<table class="table center" style="width: 100%; margin-left: auto; margin-right: auto;">
 				<tr>
-					<td width="30%">날짜/시간</td>
-					<td width="25%">선택 좌석정보</td>
+					<th width="50%" class="center">날짜/시간</th>
+					<th width="50%" class="center">선택 좌석정보</th>
 				</tr>
 				<tr>
 					<td>${bvo.start_time } ~ ${bvo.end_time }</td>
 					<td id="msg"></td>
 				</tr>
-				<tfoot>
-					<tr>
-						<td colspan="3" style="text-align: center;">
-							<button type="button" class="btn btn-default" onclick="history.back(); return false;">이전단계</button>&nbsp;
-							<button type="button" class="btn btn-default" onclick="next(this.form)">다음단계</button>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+				<tr><td colspan="2"></td></tr>
+			</table> <!-- 선택 정보 끝 -->
+			
+			<div class="center" style="padding: 10px;">
+				<button type="button" class="btn btn-default" onclick="history.back(); return false;">이전단계</button>&nbsp;
+				<button type="button" class="btn btn-default" onclick="next(this.form)">다음단계</button>
+			</div><br><br>
+			
 			<input type="hidden" name="br_idx" value="${bvo.br_idx }">
 			<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
 			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
@@ -314,18 +371,9 @@
 			<input type="hidden" name="sct_name" value="1인실">
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
-			<br>
-			<!--  -->
-			예약한 새럼들 : ${booklist }
-			<hr>
-			지금 예약하는애 : ${bvo }
-			<!--  -->
-			
 		</form>
-		
 		</div> <!-- 박스 아웃사이드 끝 -->
-	</div> <!-- 티켓 끝 -->
-
+	</div> <!-- 티켓 끝 --><br><br><br>
 
 </div> <!-- 바디 콘테이너 끝 -->
 </body>

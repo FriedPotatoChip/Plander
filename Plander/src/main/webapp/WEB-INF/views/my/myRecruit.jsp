@@ -16,7 +16,7 @@
 
 	<tbody>
 		<c:choose>
-			<c:when test="${empty my_recruit}">
+			<c:when test="${empty map.list}">
 				<tr>
 					<td colspan="4">
 						<h2>현재 등록된 모집글이 없습니다.</h2>
@@ -24,18 +24,23 @@
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach var="my_recruit" items="${my_recruit }">
+				<c:forEach var="my_recruit" items="${map.list }">
 					<tr>
-						<td><a href="/TMS/my/detail?rc_idx=${my_recruit.rc_idx }">${my_recruit.rc_title }</a></td>
-						<td>${my_recruit.cur_mem } / ${my_recruit.max_mem }</td>
+						<td><a
+							href="/TMS/my/detail?rc_idx=${my_recruit.rc_idx }&curPage=${map.boardPager.curPage}">${my_recruit.rc_title }</a>
+						</td>
+						<td>${my_recruit.cur_mem }/${my_recruit.max_mem }</td>
 						<td>${my_recruit.hit }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
-										value="${my_recruit.rc_regdate }" /></td>
+								value="${my_recruit.rc_regdate }" /></td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 	</tbody>
+
+	<!-- 페이징 -->
+	<jsp:include page="/commons/paging.jsp"></jsp:include>
 
 </body>
 </html>

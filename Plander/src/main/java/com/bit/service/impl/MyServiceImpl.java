@@ -1,11 +1,13 @@
 package com.bit.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.domain.ApplyVO;
+import com.bit.domain.BoardVO;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
@@ -35,10 +37,10 @@ public class MyServiceImpl implements MyService {
 		return mapper.insertRecruit(vo);
 	}
 
-	@Override
+/*	@Override
 	public List<RecruitVO> my_recruit(UsersVO vo) {
 		return mapper.my_recruit(vo);
-	}
+	}*/
 
 	@Override
 	public RecruitVO getOne(int rc_idx) {
@@ -78,6 +80,61 @@ public class MyServiceImpl implements MyService {
 	@Override
 	public List<BookingCbVO> my_cabinet(UsersVO vo) {
 		return mapper.my_cabinet(vo);
+	}
+
+	@Override
+	public int getTotal(UsersVO vo) {
+		return mapper.getTotal(vo);
+	}
+
+	@Override
+	public int getTotalSeat(UsersVO vo) {
+		return mapper.getTotalSeat(vo);
+	}
+
+	@Override
+	public int getTotalCabinet(UsersVO vo) {
+		return mapper.getTotalCabinet(vo);
+	}
+
+/*	@Override
+	public List<BoardVO> board(UsersVO vo) {
+		return mapper.board(vo);
+	}
+
+	@Override
+	public List<CommentsVO> board_comment(UsersVO vo) {
+		return mapper.board_comment(vo);
+	}*/
+
+	@Override
+	public BoardVO getBoardOne(int b_idx) {
+		return mapper.getBoardOne(b_idx);
+	}
+
+	@Override
+	public List<RecruitVO> my_recruit(Map<String, Object> map) {
+		return mapper.my_recruit(map);
+	}
+
+	@Override
+	public List<BoardVO> board(Map<String, Object> map) {
+		return mapper.board(map);
+	}
+
+	@Override
+	public List<CommentsVO> board_comment(Map<String, Object> map) {
+		return mapper.board_comment(map);
+	}
+
+	@Override
+	public int board_cnt(UsersVO vo) {
+		return mapper.board_cnt(vo);
+	}
+
+	@Override
+	public int board_comment_cnt(UsersVO vo) {
+		return mapper.board_comment_cnt(vo);
 	}
 	
 }

@@ -69,27 +69,30 @@
 <script>
 	$(function() {
 		var val = "";
-		$("#4room").click(function() {
+		$("#4room").change(function() {
 			document.getElementsByName('sct_idx').value = 2;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
 			$("input[name='sct_name']").attr('value', '4인실');
 		});
-		$("#8room").click(function() {
+		
+		$("#8room").change(function() {
 			document.getElementsByName('sct_idx').value = 3;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
 			$("input[name='sct_name']").attr('value', '8인실');
 		});
-		$("#12room").click(function() {
+		
+		$("#12room").change(function() {
 			document.getElementsByName('sct_idx').value = 4;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
 			$("input[name='sct_name']").attr('value', '12인실');
 		});
+		
 	});
 
-	function chkseat(frm) {
+	function next(frm) {
 		
 		frm.action="/TMS/book/pay";
 		frm.submit();
@@ -118,33 +121,84 @@
 	#row { padding: 10px; }
 	#allseat, #myselect { width: 93%; margin-left: auto; margin-right: auto; }
 	
+	/* 여기 밑으로 예약 헤더 CSS */
+	#chk a { text-decoration: none; }
+	#chk { width: 100%; margin-left: auto; margin-right: auto; }
+	ul>li {
+		float: left;
+		list-style-type: none;
+		padding: 0 5% 0 5.5%;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	ul>li>a { font-size: 1.1em; }
+	
+	#chk::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 선택 안할 시 */
+	.select { color: gray; }
+	.back {
+		background-color: gray;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	
+	/* 현재 페이지 */
+	.click { color: black; }
+	.noback {
+		background-color: rebeccapurple;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	/* 예약 헤더 CSS 끝 */
 </style>
 
 </head>
 <body>
 <div id="container" style="box-sizing: border-box;">
-	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
-	<hr>
-	<!--  -->
-	예약한 새럼들 : ${booklist }
-	<hr>
-	지금 예약하는애 : ${bvo }
+	<br><br><br>
+	<!-- 예약 헤더 -->
+	<div id="chk">
+		<ul>
+			<li>
+				<a class="menu" href="/TMS/book/booking">
+					<b><span id="num" class="back">STEP1</span>
+					<span id="select" class="select">날짜선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu" href="#">
+					<b><span id="num" class="noback">STEP2</span>
+					<span id="select" class="click">좌석선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu" href="#">
+					<b> <span id="num" class="back">STEP3</span>
+					<span id="select" class="select">결제하기</span></b>
+				</a>
+			</li>
+		</ul>
+	</div> <!-- 예약 헤더끝 -->
 	
-	<!--  -->
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
 		<form method="post">
 			<div>
-				<h4><a href="">1층</a>&nbsp;&nbsp;&nbsp;
-				<a href="">2층</a></h4>
-				<p style="font-style: italic;">랩실은 4인실 기준 최소 3인 이상 단체예약만 가능합니다.</p>
-
+				<h5>☑ 랩실은 4인실 기준 최소 3인 이상 단체예약만 가능합니다.</h5>
 			</div>
 			<hr>
 			
 		<div id="allseat">
-			<!-- sct_idx 값 0으로 넘어옴 -->
-			<input type="hidden" name="sct_idx" value="">
 			<div>
 				<div class="checkbox" style="width: 100%; display: table;">
 					<div id="4people" style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
@@ -179,37 +233,36 @@
 		</div>
 		
 			<!-- 선택 정보 -->
-			<p>선택 정보</p>
-			<table border="1px solid;" class="table table-bordered" style="width: 55%;">
+			<hr>
+			<table class="table center" style="width: 100%; margin-left: auto; margin-right: auto;">
 				<tr>
-					<td width="30%">날짜/시간</td>
-					<td width="25%">선택 좌석정보</td>
+					<th width="50%" class="center">날짜/시간</th>
+					<th width="50%" class="center">선택 좌석정보</th>
 				</tr>
 				<tr>
 					<td>${bvo.start_time } ~ ${bvo.end_time }</td>
 					<td id="msg"></td>
 				</tr>
-				<tfoot>
-					<tr>
-						<td colspan="3" style="text-align: center;">
-							<button type="button" class="btn btn-default" onclick="history.back(); return false;">이전단계</button>&nbsp;
-							<button type="button" class="btn btn-default" onclick="chkseat(this.form)">다음단계</button>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+				<tr><td colspan="2"></td></tr>
+			</table> <!-- 선택 정보 끝 -->
+			
+			<div class="center" style="padding: 10px;">
+				<button type="button" class="btn btn-default" onclick="history.back(); return false;">이전단계</button>&nbsp;
+				<button type="button" class="btn btn-default" onclick="next(this.form)">다음단계</button>
+			</div><br><br>
+			
 			<input type="hidden" name="br_idx" value="${bvo.br_idx }">
-			<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
 			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
+			<!-- sct_idx 값 0으로 넘어옴 -->
+			<input type="hidden" name="sct_idx" value="">
 			<input type="hidden" name="sct_name" value="">
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
-			<br>
 		</form>
 		
 		</div> <!-- 박스 아웃사이드 끝 -->
-	</div> <!-- 티켓 끝 -->
-
+	</div> <!-- 티켓 끝 --><br><br><br>
+	<!--  -->지금예약 : ${bvo }
 
 </div> <!-- 바디 콘테이너 끝 -->
 </body>
