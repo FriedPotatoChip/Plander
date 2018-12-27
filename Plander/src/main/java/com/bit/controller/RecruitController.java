@@ -270,16 +270,6 @@ public class RecruitController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
-	@RequestMapping("uploadTest")
-	public String uploadTest() {
-		return "board/uploadTest";
-	}
-	
-	@GetMapping("uploadForm")
-	public void uploadForm() throws Exception {
-		
-	}
-	
 	@PostMapping("uploadPath")
 	public String uploadForm(MultipartFile file, Model model) throws Exception{
 		

@@ -77,7 +77,9 @@
 
 
 <script>
-
+	function enterLogin(){
+		chk();
+	}
 	function chk() {
 		if (!document.frm.id.value) {
 			alert("아이디를 입력해주세요.");
@@ -283,9 +285,9 @@
 
 			<div class="modal-body center">
 				<form name="frm" action="#" method="post">
-					<input type="text" name="id" class="form-control" placeholder="아이디" required>
+					<input type="text" name="id" class="form-control" placeholder="아이디" onKeyPress="if (event.keyCode==13){enterLogin()}" required>
 					<input type="text" name="password" class="form-control"
-						style="margin-top: 1.5%;" placeholder="비밀번호" required>
+						style="margin-top: 1.5%;" placeholder="비밀번호" onKeyPress="if (event.keyCode==13){enterLogin()}" required>
 					<input type="button" style="margin-top: 1.5%;"
 						class="btn btn-outline-secondary form-control" value="로그인" onclick="chk()">
 				</form>
