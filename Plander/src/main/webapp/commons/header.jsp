@@ -89,9 +89,28 @@
 			alert("비밀번호를 입력해주세요.");
 			document.frm.password.focus()
 			return false;
-		}
-
-		document.frm.submit();
+		}	
+		// document.frm.submit();
+		var data = $("form[name='frm']").serialize();
+		$.ajax({
+			url: "/loginAjax",
+			type: 'post', 
+			dataType: 'text',
+			data: data,
+			success: function(result){
+				if (result == 'success'){
+					alert("거기스에 오신것을 환영합니다!");
+					window.location.reload();
+				} else if (result == 'fail'){
+					alert("아이디와 비밀번호가 일치하지 않습니다.");
+				} else if (result == 'admin'){
+					alert("관리자 로그인에 성공하였습니다");
+					location.href="/TMS"
+				}
+			}, error: function(result) {
+				
+			}
+		});
 	}
 
 	//아이디 중복확인
@@ -263,12 +282,12 @@
 			</div>
 
 			<div class="modal-body center">
-				<form name="frm" action="/TMS/login" method="post" onsubmit="chk()">
+				<form name="frm" action="#" method="post">
 					<input type="text" name="id" class="form-control" placeholder="아이디" required>
 					<input type="text" name="password" class="form-control"
 						style="margin-top: 1.5%;" placeholder="비밀번호" required>
-					<button type="submit" style="margin-top: 1.5%;"
-						class="btn btn-outline-secondary form-control">로그인</button>
+					<input type="button" style="margin-top: 1.5%;"
+						class="btn btn-outline-secondary form-control" value="로그인" onclick="chk()">
 				</form>
 				<hr>
 
