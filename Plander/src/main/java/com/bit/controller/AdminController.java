@@ -1,7 +1,6 @@
 package com.bit.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.domain.BookingCbVO;
-import com.bit.domain.Paging;
 import com.bit.domain.UsersVO;
 import com.bit.service.adminService;
 import com.bit.utils.PagingVO;
@@ -25,7 +22,6 @@ public class AdminController {
 	private adminService service;
 
 	// 페이징 처리
-	Paging p = new Paging();
 
 	@RequestMapping("")
 	public String adminPage(UsersVO vo, Model model, PagingVO page) {
