@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.bit.mapper.RecruitMapper">
+		
+		<!-- RECRUIT 전체 조회 -->
+		<select id="getList" resultType="com.bit.domain.RecruitVO">
+		<![CDATA[
+			SELECT /*+ INDEX_DESC (RECRUIT RECRUIT_PK) */
+			* FROM RECRUIT
+		]]>
+		</select>
+		
+		<!-- 페이징 처리 후 조회 -->
+		<select id="getListPage" resultType="com.bit.domain.RecruitVO" parameterType="com.bit.utils.PagingVO">
+		<![CDATA[
+			SELECT * FROM (
+							SELECT ROWNUM RN, R.*, CNT 
+							FROM RECRUIT R LEFT OUTER JOIN (SELECT RC_IDX, COUNT(*) CNT FROM COMMENTS GROUP BY RC_IDX) C
+							ON R.RC_IDX = C.RC_IDX
+							ORDER BY R.RC_IDX DESC
+						  )
+			WHERE RN BETWEEN #{start} AND #{end}
+		]]>
+		</select>
+		
+		<!-- 글 상세 조회 -->
+		<select id="getOne" resultType="com.bit.domain.RecruitVO">
+			SELECT * FROM RECRUIT WHERE RC_IDX = #{rc_idx}
+		</select>
+		
+		<!-- 전체 글 갯수 조회 -->
+		<select id="getTotal" resultType="int">
+			SELECT COUNT(*) FROM RECRUIT
+		</select>
+		
+		<!-- 모집게시판 신청자 목록 조회 -->
+		<select id="getApplyList" resultType="com.bit.domain.ApplyVO">
+			SELECT * FROM APPLY WHERE RC_IDX = #{rc_idx}
+		</select>
+				
+		<!-- 조회수 +1 -->
+		<update id="updateHit" parameterType="int">
+			UPDATE RECRUIT SET HIT = HIT+1 WHERE RC_IDX = #{rc_idx}
+		</update>
+		<!-- 모집게시판 신청시 cur_mem update -->
+		<update id="updateCur" parameterType="int">
+			UPDATE RECRUIT SET CUR_MEM = CUR_MEM+1 WHERE RC_IDX = #{rc_idx}
+		</update>
+		
+		<!-- 모집글 수정 -->
+		<update id="updateRec" parameterType="com.bit.domain.RecruitVO">
+			UPDATE RECRUIT SET RC_TITLE = #{rc_title}, MAX_MEM = #{max_mem}, RC_CONTENT = #{rc_content} WHERE RC_IDX = #{rc_idx}
+		</update>
+		
+		
+		
+		
+		<!-- 모집게시판 insert -->
+		<insert id="insertRecruit" parameterType="com.bit.domain.RecruitVO">
+			<selectKey keyProperty="rc_idx" order="BEFORE" resultType="int">
+				SELECT RECRUIT_SEQ.NEXTVAL FROM DUAL
+			</selectKey>
+			INSERT INTO RECRUIT (RC_IDX, RC_TITLE, RC_CONTENT, ID, MAX_MEM)
+						VALUES (#{rc_idx}, #{rc_title}, #{rc_content}, #{id}, #{max_mem})
+		</insert>
+		
+		<!-- 모집게시판 신청 insert -->
+		<insert id="insertApply" parameterType="map">
+			INSERT INTO APPLY (AP_IDX, ID, RC_IDX) 
+						VALUES (APPLY_SEQ.NEXTVAL, #{id}, #{rc_idx})
+		</insert>
+		
+		<!-- 모집글 삭제 -->
+		<delete id="deleteRec" parameterType="int">
+			DELETE FROM RECRUIT WHERE RC_IDX = #{rc_idx}
+		</delete>
+		
+		
+		<!-- 신청 취소시 apply 삭제 -->
+		<delete id="deleteApply" parameterType="map">
+			DELETE FROM APPLY WHERE ID = #{id} AND RC_IDX = #{rc_idx} 
+		</delete>
+		<!-- 신청 취소시 cur -1 -->
+		<update id="minusCur" parameterType="int">
+			UPDATE RECRUIT SET CUR_MEM = CUR_MEM - 1 WHERE RC_IDX = #{rc_idx}
+		</update>
+		
+		
+		
+		
+		
+		 
+		<!-- 페이징 처리 댓글 출력 -->
+		<select id="getCommList" resultType="com.bit.domain.CommentsVO" parameterType="map">
+		SELECT * FROM (
+						SELECT ROWNUM RN, LEVEL, C.* 
+						FROM COMMENTS C 
+						WHERE RC_IDX = #{rc_idx}
+						START WITH RP_IDX IS NULL 
+						CONNECT BY PRIOR C_IDX = RP_IDX 
+						ORDER SIBLINGS BY C_IDX DESC
+					   )
+				  WHERE RN BETWEEN #{start} AND #{end}
+		</select>
+		
+		<!-- 모집글 전체 댓글 갯수 -->
+		<select id="cntCommAll" resultType="int" parameterType="int">
+			SELECT COUNT(*) FROM COMMENTS WHERE RC_IDX = #{rc_idx}
+		</select>
+
+		<!-- 모집글 댓글 등록 -->
+		<insert id="insertComm" parameterType="com.bit.domain.CommentsVO">
+			INSERT INTO COMMENTS (C_IDX, C_CONTENT, ID, RC_IDX)
+						VALUES (COMMENTS_SEQ.NEXTVAL, #{c_content}, #{id}, #{rc_idx})
+		</insert>
+		
+		<!-- 모집글 대댓글 등록 -->
+		<insert id="insertReplyComm" parameterType="com.bit.domain.CommentsVO">
+			INSERT INTO COMMENTS (C_IDX, C_CONTENT, ID, RC_IDX, RP_IDX)
+						VALUES (COMMENTS_SEQ.NEXTVAL, #{c_content}, #{id}, #{rc_idx}, #{rp_idx})
+		</insert>
+		
+		
+		<!-- 댓글 삭제 -->
+		<delete id="deleteComm" parameterType="int">
+			DELETE FROM COMMENTS WHERE C_IDX = #{c_idx}
+		</delete>
+		<!-- 해당 댓글에 대댓글 있는지 조회 -->
+		<select id="cntReplyComm" resultType="int" parameterType="map">
+			SELECT COUNT(*) FROM COMMENTS WHERE RC_IDX = #{rc_idx} AND RP_IDX = #{rp_idx}
+		</select>
+		<!-- 대댓글이 달린 경우 내용 처리 -->
+		<update id="updateDeleteComm" parameterType="int">
+			UPDATE COMMENTS SET C_CONTENT = '[삭제된 댓글입니다.]', DEL = 1 WHERE C_IDX = #{c_idx}
+		</update>
+		<!-- 댓글 수정 -->
+		<update id="updateComm" parameterType="com.bit.domain.CommentsVO">
+			UPDATE COMMENTS SET C_CONTENT = #{c_content} WHERE C_IDX = #{c_idx}
+		</update>
+		
+</mapper>
+
+
+

@@ -1,336 +1,283 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-<title>마이페이지</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:include page="/commons/head.jsp" />
 <style>
-h1, h2, h3, h4, h5, p {
-	font-family: 'NanumSquare', sans-serif;
-	font-weight: 300
+.navs {
+	height: 60px;
 }
 
-.normal {
-	font-weight: 400
-}
-
-.bold {
-	font-weight: 700
-}
-
-.bolder {
-	font-weight: 800
-}
-
-.light {
-	font-weight: 300
-}
-
-a {
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-}
-
-a:hover {
-	color: #e64980;
-}
-
-.my_information {
-	float: left;
-	width: 48%;
-	padding: 1%;
-}
-
-.my_reservation {
+.nav_btn {
+	margin-right: 10px;
+	margin-top: 10px;
 	float: right;
-	width: 48%;
-	margin-bottom: 2%;
-	padding: 1%;
 }
 
-.my_writing {
-	clear: left;
-	float: left;
-	width: 48%;
-	padding: 1%;
-}
-
-.my_recruit {
-	clear: right;
-	float: right;
-	width: 48%;
-	padding: 1%;
-	width: 48%;
-}
-
-.my_info_btn {
-	display: inline;
-	margin-left: 2%;
-}
-
-p {
-	display: inline;
-}
-
-#writing, #reservation, #recruit {
-	margin-top: 2%;
-}
-
-.my_info_table {
-	margin: 0 auto;
-	margin-top: 2%;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.my_info_table th {
-	border: 1px solid black;
-	width: 50%;
-}
-
-.my_info_table td {
-	border: 1px solid black;
-	width: 50%;
+h3, th {
 	text-align: center;
 }
 
-.my_info_title {
-	display: inline;
-}
-
-.name {
-	color: #1971c2;
+h3 {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .profile {
-	width: 100%;
-	height: 300px;
-	background-color: #f3f4f7;
+	margin-bottom: 10px;
+	height: 100px;
+	background-color: gray;
+}
+
+.my_info {
+	width: 48%;
+	float: left;
+}
+
+.myBook {
+	width: 48%;
+	float: right;
+}
+
+#myBook, #myRecruit {
+	margin-top: 10px;
+}
+
+#myRecruit {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.myRecruit {
+	width: 96%;
+	clear: left;
+}
+
+#my_info_table {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.myinfo_nav, .myBook_nav, .myRecruit_nav {
 	text-align: center;
+	margin-bottom: 20px;
 }
 
-#circle {
-	margin-top: 40px;
-	height: 60%;
-	width: 180px;
-	background-image: url("/resources/images/profile.png");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-	border-radius: 50%;
-	display: inline-block;
+#modal_table th {
+	width: 50%;
 }
 
-#circle:hover {
-	background-blend-mode: luminosity;
+#modal_table td {
+	width: 50%;
 }
 
-.cnt {
-	text-decoration: none;
-	font-weight: 800;
-}
-
-body {
-	background-color: #f3f4f7;
-}
 </style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	crossorigin="anonymous"></script>
-<script>
-	function fetchPage(name) {
-		fetch(name).then(function(response) {
-			response.text().then(function(text) {
-				document.querySelector('#writing').innerHTML = text;
-			})
-		});
-	}
-
-	function fetchPage2(name) {
-		fetch(name).then(function(response) {
-			response.text().then(function(text) {
-				document.querySelector('#reservation').innerHTML = text;
-			})
-		});
-	}
-
-	function fetchPage3(name) {
-		fetch(name).then(function(response) {
-			response.text().then(function(text) {
-				document.querySelector('#recruit').innerHTML = text;
-			})
-		});
-	}
-
-	function sendData() {
-		var firstForm = document.forms[0];
-		for (var i = 0; i < firstForm.elements.length; i++) {
-			if (firstForm.elements[i].value.trim() == "") {
-				if (i == 3)
-					continue; //파일항목
-				alert(firstForm.elements[i].title + " 입력하세요");
-				firstForm.elements[i].focus();
-				return;
-			}
-		}
-		firstForm.submit();
-	}
-</script>
 </head>
+
 <body>
-	<div class="intro"
-		style="width: 100%; padding: 20px; height: 300px; background-color: #8db9ca;">
-		<button type="button" class="btn btn-dark" style="float: right;"
+	<nav class="navs">
+		<button type="button" class="btn btn-outline-danger nav_btn"
+			onclick="location.href='/TMS/logout'">로그아웃</button>
+		<button type="button" class="btn btn-outline-success nav_btn"
 			onclick="location.href='/TMS'">홈으로가기</button>
-		<div style="width: 200px; height: 200px; margin: 100px; background-color: white;"
-			onclick="document.getElementById('id01').style.display='block'"
-			class="w3-button">
-			<img src="#">
-		</div>
-	</div>
-	<div style="background-color: white;">
-		<h1 class="light"
-			style="margin-left: 400px; margin-top: 0px; padding-top: 5px; padding-bottom: 5px;">${user.name }님의
-			마이페이지</h1>
-	</div>
-	<!-- 모달 -->
-	<div id="id01" class="w3-modal">
-		<div class="w3-modal-content w3-animate-top w3-card-4">
-			<header class="w3-container w3-teal">
-				<span onclick="document.getElementById('id01').style.display='none'"
-					class="w3-button w3-display-topright">&times;</span>
-				<h2 style="color: black;">프로필 사진 변경</h2>
-			</header>
-			<div class="w3-container" style="margin: 20px auto;">
-				<form action="/TMS/mypage/profileUpdate" method="post"
-					enctype="multipart/form-data">
-					<table style="margin: 0 auto;">
-						<tr>
-							<th>첨부파일</th>
-							<td><input type="file" name="uploadFile"></td>
-						</tr>
-						<tr>
-							<td colspan="2"><input style="float: right;" type="button"
-								value="저장" onclick="sendData()"></td>
-						</tr>
-					</table>
-				</form>
-			</div>
-			<footer class="w3-container w3-teal">
-				<p></p>
-			</footer>
-		</div>
+	</nav>
+
+	<div class="profile">
+
 	</div>
 
-	<div class="my_information">
-		<h3 class="my_info_title bold">내정보</h3>
-		<button type="button" class="btn btn-dark ml-3"
-			onclick="location.href='/TMS/mypage/update'">회원정보수정</button>
-		<table class="table mt-4">
+	<div class="my_info">
+		<h3>- 내정보 -</h3>
+		<div class="myinfo_nav">
+			<strong><a href="#" data-toggle="modal"
+				data-target="#myModal">회원정보수정</a></strong>
+		</div>
+		<table class="table" id="my_info_table">
 			<tr>
-				<th>U_IDX</th>
-				<td>${user.u_idx }</td>
-			</tr>
-			<tr>
-				<th>ID</th>
+				<th>회원아이디</th>
 				<td>${user.id }</td>
 			</tr>
 			<tr>
-				<th>PASSWORD</th>
-				<td>${user.password }</td>
-			</tr>
-			<tr>
-				<th>NAME</th>
+				<th>회원명</th>
 				<td>${user.name }</td>
 			</tr>
 			<tr>
-				<th>REGDATE</th>
-				<td>${user.regdate }</td>
+				<th>회원등록일</th>
+				<td><fmt:formatDate pattern="yyyy-MM-dd"
+						value="${user.regdate }" /></td>
 			</tr>
 			<tr>
-				<th>PHONE</th>
+				<th>회원연락처</th>
 				<td>${user.phone }</td>
 			</tr>
 			<tr>
-				<th>EMAIL</th>
+				<th>회원이메일</th>
 				<td>${user.email }</td>
 			</tr>
 			<tr>
-				<th>RANK</th>
-				<td>${user.rank }</td>
-			</tr>
-			<tr>
-				<th>API_ID</th>
-				<td>${user.api_id }</td>
-			</tr>
-			<tr>
-				<th>ZIPNO</th>
-				<td>${user.zipNo }</td>
-			</tr>
-			<tr>
-				<th>ROADADDRPART1</th>
-				<td>${user.roadAddrPart1 }</td>
-			</tr>
-			<tr>
-				<th>ADDRDETAIL</th>
-				<td>${user.addrDetail }</td>
+				<th>회원주소</th>
+				<td>${user.roadAddrPart1 }&nbsp;${user.addrDetail }</td>
 			</tr>
 		</table>
 	</div>
 
-	<div class="my_reservation">
-		<h3 class="bold">내예약</h3>
-		<a href="#" onclick="fetchPage2('/TMS/mypage/seat')"><p>좌석예약내역</p></a>&nbsp;&nbsp;/&nbsp;&nbsp;<a
-			href="#" onclick="fetchPage2('/TMS/mypage/cabinet')"><p>사물함예약내역</p></a>
-		<table id="reservation"></table>
+	<div class="myBook">
+		<h3>- 내예약 -</h3>
+		<div class="myBook_nav">
+			<strong><a href="#" onclick="fetch_book('/TMS/my/my_seat')">좌석예약내역</a></strong>
+			&nbsp;|&nbsp;<strong><a href="#"
+				onclick="fetch_book('/TMS/my/my_cabinet')">사물함예약내역</a></strong>
+			<table id="myBook"></table>
+		</div>
 	</div>
 
-	<div class="my_writing">
-		<h3 class="bold">내커뮤니티</h3>
-		<a href="#" onclick="fetchPage('/TMS/mypage/board')"><p>내가 등록한
-				게시물</p></a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#"
-			onclick="fetchPage('/TMS/mypage/board_comment')"><p>내 게시물에 달린
-				댓글</p></a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#"
-			onclick="fetchPage('/TMS/mypage/comment')"><p>내가 등록한 댓글</p></a>&nbsp;&nbsp;/&nbsp;&nbsp;<a
-			href="#" onclick="fetchPage('/TMS/mypage/comment_comment')"><p>내
-				댓글에 달린 한줄의견</p></a>
-		<table id="writing"></table>
+	<div class="myRecruit">
+		<h3>- 내글목록 -</h3>
+		<div class="myRecruit_nav">
+			<strong><a href="#"
+				onclick="fetch_recruit('/TMS/my/my_recruit')">내모집글</a></strong>&nbsp;|&nbsp;
+			<strong><a href="#"
+				onclick="fetch_recruit('/TMS/my/applyList')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
+			<strong><a href="#"
+				onclick="fetch_recruit('/TMS/my/my_recruit_comment')">내모집글댓글</a></strong>&nbsp;|&nbsp;
+			<strong><a href="#" onclick="fetch_recruit('/TMS/my/board')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
+			<strong><a href="#"
+				onclick="fetch_recruit('/TMS/my/board_comment')">자유게시판에달린댓글</a></strong>
+		</div>
+		<table id="myRecruit"></table>
 	</div>
 
-	<div class="my_recruit">
-		<h3 class="bold">내모집</h3>
-		<a href="#" onclick="fetchPage3('/TMS/mypage/board2')"><p>내가
-				등록한 게시물</p></a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#"
-			onclick="fetchPage3('/TMS/mypage/board_comment2')"><p>내 게시물에
-				달린 댓글</p></a>&nbsp;&nbsp;/&nbsp;&nbsp;<a href="#"
-			onclick="fetchPage3('/TMS/mypage/comment2')"><p>내가 등록한 댓글</p></a>&nbsp;&nbsp;/&nbsp;&nbsp;<a
-			href="#" onclick="fetchPage3('/TMS/mypage/comment_comment2')"><p>내
-				댓글에 달린 한줄의견</p></a>
-		<table id="recruit"></table>
+	<!-- 모달창 -->
+	<div class="modal" tabindex="-1" role="dialog" id="myModal">
+		<div class="modal-dialog" role="document">
+			<form action="/TMS/my/update" method="POST">
+				<div class="modal-content" style="width: 800px;">
+					<div class="modal-header">
+						<h5 class="modal-title">회원정보수정</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table class="table" id="modal_table">
+							<tr>
+								<th>회원아이디</th>
+								<td>${user.id }</td>
+							</tr>
+							<tr>
+								<th>회원비밀번호&nbsp;<b style="color: red;">&#42;</b></th>
+								<td><input type="text" class="form-control" id="password"
+									name="password" placeholder="비밀번호" oninput="pwchk()" required>
+									<p id="pwchkMsg" style="font-size: 13px;"></p> <!-- 비밀번호가 일치하지 않습니다. -->
+								</td>
+							</tr>
+							<tr>
+								<th>회원명</th>
+								<td><input type="text" class="form-control" id="user_name"
+									name="name" placeholder="이름" value="${user.name }" required></td>
+							</tr>
+							<tr>
+								<th>회원등록일</th>
+								<td><fmt:formatDate pattern="yyyy-MM-dd"
+										value="${user.regdate }" /></td>
+							</tr>
+							<tr>
+								<th>회원연락처</th>
+								<td><input type="text" class="form-control" id="user_phone"
+									name="phone" placeholder="연락처" value="${user.phone }" required></td>
+							</tr>
+							<tr>
+								<th>회원이메일</th>
+								<td><input type="text" class="form-control" id="user_email"
+									name="email" placeholder="이메일" value="${user.email }" required></td>
+							</tr>
+							<tr>
+								<th>회원주소</th>
+								<td><input type="text" class="form-control" id="zipNo"
+									name="zipNo" readonly></td>
+								<td><input type="button" class="form-control" value="주소검색"
+									onclick="goPopup();"></td>
+							</tr>
+							<tr>
+								<th></th>
+								<td><input type="text" class="form-control"
+									id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
+									value="${user.roadAddrPart1 }" required></td>
+							</tr>
+							<tr>
+								<th></th>
+								<td><input type="text" class="form-control" id="addrDetail"
+									name="addrDetail" placeholder="상세주소"
+									value="${user.addrDetail }" required></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="reset" class="btn btn-outline-secondary"
+							data-dismiss="modal">초기화</button>
+						<input type="hidden" name="id" value="${user.id }" />
+						<button type="submit" id="update" class="btn btn-outline-primary">수정하기</button>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 
+	<script>
+		//주소검색
+		function goPopup() {
+			var pop = window.open("/juso", "pop",
+					"width=570,height=420, scrollbars=yes, resizable=yes");
+		}
+		function jusoCallBack(roadFullAddr, roadAddrPart1, addrDetail,
+				roadAddrPart2, engAddr, jibunAddr, zipNo, admCd, rnMgtSn,
+				bdMgtSn, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm,
+				rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo) {
+			// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+			document.getElementById("roadAddrPart1").value = roadAddrPart1;
+			document.getElementById("addrDetail").value = addrDetail;
+			document.getElementById("zipNo").value = zipNo;
+		}
+
+		//비밀번호 확인
+		function pwchk() {
+			var pw = $('#password').val();
+			var pwchk = $
+			{
+				user.password
+			}
+			;
+
+			if (pw != pwchk || pwchk == "") {
+				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
+				$('#pwchkMsg').html(
+						"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+				$('#update').prop("disabled", true);
+			} else {
+				$('#pwchkMsg').html(
+						"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+				$('#update').prop("disabled", false);
+			}
+		}
+
+		//내용 출력
+		function fetch_book(name) {
+			fetch(name).then(function(response) {
+				response.text().then(function(text) {
+					document.querySelector('#myBook').innerHTML = text;
+				});
+			});
+		}
+
+		function fetch_recruit(name) {
+			fetch(name).then(function(response) {
+				response.text().then(function(text) {
+					document.querySelector('#myRecruit').innerHTML = text;
+				});
+			});
+		}
+	</script>
+	
 </body>
 </html>

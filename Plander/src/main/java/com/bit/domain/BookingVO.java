@@ -1,7 +1,5 @@
 package com.bit.domain;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class BookingVO {
 	private int bk_idx;
-	private String id, s_row;
+	private String id, s_row, booknum;
 	
 	//좌석 조회
 	private int br_idx, s_col, sct_idx, time_idx;

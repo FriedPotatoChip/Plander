@@ -2,67 +2,84 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.bit.mapper.AdminMapper">
 
-	<select id="getUserList" resultType="com.bit.domain.UsersVO">
-		SELECT * FROM USERS
+	<!-- 회원List -->
+	<select id="getUserList" resultType="com.bit.domain.UsersVO"
+		parameterType="com.bit.utils.PagingVO">
+		<![CDATA[
+		select *    
+    		from (select rownum rn, u_idx, id, name, phone, email, rank, regdate, zipno, roadAddrPart1, addrDetail from users)
+    		where rn between #{start} and #{end}
+    	]]>
+	</select>
+
+	<select id="getSearchList" resultType="com.bit.domain.UsersVO"
+		parameterType="map">
+		select *
+		from (
+		select rownum rn, u_idx, id, name, phone, email, rank, regdate, zipno,
+		roadAddrPart1, addrDetail
+		from users
+		where
+		<choose>
+			<when test="target == 'id'.toString()">
+				id like '%' || #{keyword} || '%'
+			</when>
+
+			<when test="target == 'name'.toString()">
+				name like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+		)
+		where rn between #{start} and #{end}
+	</select>
+
+	<select id="getSearchTotal" resultType="int" parameterType="map">
+		select count(*) from users where
+		<choose>
+			<when test="target == 'id'.toString()">
+				id like '%' || #{keyword} || '%'
+			</when>
+
+			<when test="target == 'name'.toString()">
+				name like '%' || #{keyword} || '%'
+			</when>
+		</choose>
 	</select>
 	
+	<!-- 전체 회원 수 -->
 	<select id="getTotal" resultType="int">
 		SELECT count(*) FROM USERS
 	</select>
-	
+
+	<!-- 예약된 사물함 -->
 	<select id="bookingCabinet"
 		resultType="com.bit.domain.BookingCbVO">
 		select *
 		from booking_cb bc, cabinet c
-		where c.cb_number = bc.cb_number
+		where c.cb_number =
+		bc.cb_number
 		and sysdate between bc.start_date and end_date
-		and br_idx= #{br_idx}
+		and br_idx=
+		#{br_idx}
 	</select>
 
-	<select id="bookingCabinet_count"
-		resultType="int">
-		select count(bc.ckb_idx)
+	<!-- 예약된 사물함 수 -->
+	<select id="bookingCabinet_count" resultType="int">
+		select
+		count(bc.ckb_idx)
 		from booking_cb bc, cabinet c
-		where c.cb_number = bc.cb_number
+		where c.cb_number =
+		bc.cb_number
 		and sysdate between bc.start_date and end_date
-		and br_idx= #{br_idx}
+		and br_idx=
+		#{br_idx}
 	</select>
 	
-	<select id="DateTime" resultType="com.bit.domain.DateTimeVO">
-		select to_char(start_time, 'hh24') "hour" , nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181201, start_time)),0) "day1",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181202, start_time)),0) "day2",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181203, start_time)),0) "day3",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181204, start_time)),0) "day4",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181205, start_time)),0) "day5",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181206, start_time)),0) "day6",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181207, start_time)),0) "day7",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181208, start_time)),0) "day8",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181209, start_time)),0) "day9",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181210, start_time)),0) "day10",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181211, start_time)),0) "day11",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181212, start_time)),0) "day12",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181213, start_time)),0) "day13",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181214, start_time)),0) "day14",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181215, start_time)),0) "day15",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181216, start_time)),0) "day16",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181217, start_time)),0) "day17",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181218, start_time)),0) "day18",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181219, start_time)),0) "day19",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181220, start_time)),0) "day20",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181221, start_time)),0) "day21",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181222, start_time)),0) "day22",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181223, start_time)),0) "day23",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181224, start_time)),0) "day24",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181225, start_time)),0) "day25",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181226, start_time)),0) "day26",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181227, start_time)),0) "day27",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181228, start_time)),0) "day28",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181229, start_time)),0) "day29",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181230, start_time)),0) "day30",
-                                    nvl(count(decode(to_char(start_time, 'YYYYMMDD'), 20181231, start_time)),0) "day31"
-                                from booking
-                                group by to_char(start_time, 'hh24')
-	</select>
+	<!-- 회원삭제 -->
+	<delete id="userDelete" parameterType="int">
+		delete from users
+			where u_idx = #{u_idx}
+	</delete>
 </mapper>
 
 

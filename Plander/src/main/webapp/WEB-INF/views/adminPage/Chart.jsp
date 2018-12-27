@@ -15,6 +15,11 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/dashboard.css" rel="stylesheet">
 
+<!-- Load with base style -->
+<link rel="stylesheet" href="/resources/css/billboard.css">
+
+<!-- Or load different theme style -->
+<link rel="stylesheet" href="/resources/css/insight.css">
 <!-- ======================================================================================== -->
 
 <style>
@@ -136,8 +141,9 @@ h3 {
 				</div>
 			</nav>
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<h3 class="h3">시간대별 예약현황</h3>
-			<canvas id="horizontalBar"></canvas>
+				<h3 class="h3">시간대별 예약현황</h3>
+				<!-- Markup -->
+				<div id="LineChart" style="height:500px;"></div>
 			</main>
 		</div>
 	</div>
@@ -161,42 +167,38 @@ h3 {
 		feather.replace()
 	</script>
 	Graphs
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	<!-- Step 1) Load D3.js -->
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+
+	<!-- Step 2) Load billboard.js with style -->
+	<script src="/resources/js/billboard.js"></script>
 	<script>
-		new Chart(document.getElementById("horizontalBar"), {
-			"type" : "horizontalBar",
-			"data" : {
-				"labels" : [ "Red", "Orange", "Yellow", "Green", "Blue",
-						"Purple", "Grey" ],
-				"datasets" : [ {
-					"label" : "My First Dataset",
-					"data" : [ 22, 33, 55, 12, 86, 23, 14 ],
-					"fill" : false,
-					"backgroundColor" : [ "rgba(255, 99, 132, 0.2)",
-							"rgba(255, 159, 64, 0.2)",
-							"rgba(255, 205, 86, 0.2)",
-							"rgba(75, 192, 192, 0.2)",
-							"rgba(54, 162, 235, 0.2)",
-							"rgba(153, 102, 255, 0.2)",
-							"rgba(201, 203, 207, 0.2)" ],
-					"borderColor" : [ "rgb(255, 99, 132)", "rgb(255, 159, 64)",
-							"rgb(255, 205, 86)", "rgb(75, 192, 192)",
-							"rgb(54, 162, 235)", "rgb(153, 102, 255)",
-							"rgb(201, 203, 207)" ],
-					"borderWidth" : 1
-				} ]
+		// Script
+		var chart = bb.generate({
+			data : {
+				columns : [ [ "data1", 30, 200, 100, 400, 150, 250 ],
+						[ "data2", 50, 20, 10, 40, 15, 25 ] ]
 			},
-			"options" : {
-				"scales" : {
-					"xAxes" : [ {
-						"ticks" : {
-							"beginAtZero" : true
-						}
-					} ]
-				}
-			}
+			bindto : "#LineChart"
 		});
+
+		setTimeout(function() {
+			chart.load({
+				columns : [ [ "data1", 230, 190, 300, 500, 300, 400 ] ]
+			});
+		}, 1000);
+
+		setTimeout(function() {
+			chart.load({
+				columns : [ [ "data3", 130, 150, 200, 300, 200, 100 ] ]
+			});
+		}, 1500);
+
+		setTimeout(function() {
+			chart.unload({
+				ids : "data1"
+			});
+		}, 2000);
 	</script>
 </body>
 </html>
