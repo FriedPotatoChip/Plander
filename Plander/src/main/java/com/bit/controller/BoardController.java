@@ -1,5 +1,6 @@
 package com.bit.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,41 @@ public class BoardController {
 		return "board/boardDetail";
 	}
 	
+	// 글목록 출력 ajax
+	@RequestMapping("/boardListAjax")
+	public @ResponseBody List<BoardVO> boardListAjax(@RequestParam("nowPage")int nowPage, @RequestParam("ct_idx")int ct_idx){
+		
+		Map<String, Integer> map = new HashMap<>();
+		PagingVO page = new PagingVO(nowPage, 5, service.getTotal(ct_idx));
+		page.CalcPage(nowPage, 5);
+		
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		map.put("ct_idx", ct_idx);
+		
+		List<BoardVO> list = new ArrayList<>();
+		BoardVO vo = new BoardVO();
+		String chkEndPage = "false";
+		String chkStartPage = "false";
+		if (page.getNowPage() != 1) {
+			chkStartPage = "true";
+		}
+		if (page.getNowPage() != page.getLastPage()) {
+			chkEndPage = "true";
+		}
+		vo.setB_title(chkEndPage);
+		vo.setB_content(chkStartPage);
+		list.add(vo);
+		
+		List<BoardVO> listPage = service.getListPage(map);
+		list.addAll(listPage);
+		
+		return list;
+	}
+	
+	
+	
+	
 	/* 검색 */
 	@GetMapping("/TMS/searchList")
 	public String searchList(@RequestParam("keyword")String keyword, @RequestParam("target")String target, BoardVO vo, PagingVO page, Model model) {
@@ -110,6 +146,8 @@ public class BoardController {
 		return "redirect: /TMS/boardDetail?idx="+vo.getB_idx();
 	}
 	/* 수정 삭제 끝 */
+	
+	
 	
 	/* 댓글 관련 시작 */
 	// 게시판 댓글 입력
@@ -192,7 +230,7 @@ public class BoardController {
 			return "fail";
 		}
 	}	
-	/* 댓글 관련 시작 */
+	/* 댓글 관련 끝 */
 	
 	
 	

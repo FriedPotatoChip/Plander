@@ -255,16 +255,16 @@ public class RecruitController {
 	
 	
 	
-	
+	// 프로필 사진 업로드
 	@RequestMapping(value = "/TMS/profileUpload", method = RequestMethod.POST)
 	public String profileUpload(@RequestParam("file")MultipartFile file, @RequestParam("x")String x, @RequestParam("y")String y, @RequestParam("w")String w, @RequestParam("h")String h) throws Exception{
 		System.out.println("file: "+ file);
 		System.out.println("x: "+ x+ ", y: "+ y+ ", w: "+ w+ ", h: "+ h);
 		Map<String, Integer> map = new HashMap<>();
-		int xx = (int)Long.parseLong(x);
+		int xx = (int) Math.round(Double.parseDouble(x));
 		int yy = (int) Math.round(Double.parseDouble(y));
-		int ww = (int)Long.parseLong(w);
-		int hh = (int)Long.parseLong(h);
+		int ww = (int) Math.round(Double.parseDouble(w));
+		int hh = (int) Math.round(Double.parseDouble(h));
 		map.put("x", xx);
 		map.put("y", yy);
 		map.put("w", ww);
