@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +11,10 @@
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link href="/resources/css/map.css">
+<link href="/resources/css/main.css" rel="stylesheet">
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -17,7 +22,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-<link href="/resources/css/main.css" rel="stylesheet">
+
+
 <style>
 /* body {
 	font-family: 'NanumSquare', sans-serif;
@@ -138,11 +144,34 @@
 	</div>
 
 </body> -->
-<body>
+<body onload="initialize()">
+	<!-- Header -->
+	<c:if test="${empty sessionScope.usersVO }">
+		<jsp:include page="/commons/header.jsp" />
+	</c:if>
+	<c:if test="${not empty sessionScope.usersVO }">
+		<c:if test="${sessionScope.usersVO.id != 'admin' }">
+			<jsp:include page="/commons/loginheader.jsp" />
+		</c:if>
+		<c:if test="${sessionScope.usersVO.id == 'admin' }">
+			<jsp:include page="/commons/adminLoginheader.jsp" />
+		</c:if>
+	</c:if>
+	<%-- <c:choose>
+		<c:when test="${not empty user }">
+			<jsp:include page="/commons/loginheader.jsp" />
+		</c:when>
+		<c:when test="${not empty admin }">
+			<jsp:include page="/commons/adminLoginheader.jsp" />
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/commons/header.jsp" />
+		</c:otherwise>
+	</c:choose> --%>
 
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-	<div class="container-fluid">
+	<!-- <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+	 <div class="container-fluid">
 		<a class="navbar-brand" href="#"><img
 			src="/resources/images/logo.png" width="150px" height="50px"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -161,8 +190,8 @@
 				<li class="nav-item"><a class="nav-link" href="#">찾아오시는길</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
 			</ul>
-		</div>
-	</nav>
+		</div> 
+	</nav> -->
 
 	<!--- Image Slider -->
 	<div id="slides" class="carousel slide" data-ride="carousel">
@@ -177,9 +206,6 @@
 					<h3>
 						스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
 					</h3>
-					<button type="button" class="btn btn-outline-light btn-lg">Login</button>
-					<button type="button" class="btn-primary btn-lg">Learn
-						More</button>
 				</div>
 			</div>
 			<div class="carousel-item">
@@ -189,9 +215,6 @@
 					<h3>
 						스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
 					</h3>
-					<button type="button" class="btn btn-outline-light btn-lg">Login</button>
-					<button type="button" class="btn-primary btn-lg">Learn
-						More</button>
 				</div>
 			</div>
 			<div class="carousel-item">
@@ -202,10 +225,6 @@
 					<h3>
 						스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
 					</h3>
-					<br>
-					<button type="button" class="btn btn-outline-light btn-lg">L
-						O G I N</button>
-					<button type="button" class="btn-primary btn-lg">회 원 가 입</button>
 				</div>
 			</div>
 		</div>
@@ -246,8 +265,7 @@
 					height="auto">
 				<h3>지점 A</h3>
 				<p>
-					서울 서대문구 명물길 21, <br>
-					<strong>지번</strong> 창천동 41-12 3층
+					서울 서대문구 명물길 21, <br> <strong>지번</strong> 창천동 41-12 3층
 				</p>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4">
@@ -267,7 +285,7 @@
 	</div>
 
 	<!--- Two Column Section -->
-	<div class="container-fluid padding">
+	<!-- <div class="container-fluid padding">
 		<div class="row padding">
 			<div class="col-lg-6">
 				<h2>If you build it...</h2>
@@ -287,12 +305,12 @@
 	</div>
 
 	<hr class="my-4">
-	<!--- Fixed background -->
+	- Fixed background
 	<figure>
 	<div class="fixed-wrap">
 		<div id="fixed"></div>
 	</div>
-	</figure>
+	</figure>  -->
 
 	<!--- Emoji Section -->
 	<button class="fun" data-toggle="collapse" data-target="#emoji">click
@@ -301,7 +319,10 @@
 		<div class="container-fluid padding">
 			<div class="row text-center">
 				<div class="col-sm-6 col-md-3">
-					<img class="gif" src="img/gif/panda.gif">
+					<!-- <img class="gif" src="img/gif/panda.gif"> -->
+					<div id="Map">
+						<div id="map_canvas" style="width: auto; height: auto; margin: auto"></div>
+					</div>
 				</div>
 				<div class="col-sm-6 col-md-3">
 					<img class="gif" src="img/gif/poo.gif">
@@ -438,5 +459,9 @@
 		</div>
 	</div>
 	</footer>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJlm_fQlgR8usBba9QaWXX_p2jM7gpfrc&sensor=false&libraries=places"></script>
+<script src="/resources/js/map.js"></script>
+<script src="/resources/js/map2.js"></script>
 </body>
 </html>

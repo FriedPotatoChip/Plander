@@ -4,14 +4,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/commons/head.jsp" />
 </head>
-<body>
+<body>   
 	<!-- 페이징 -->
-	<nav aria-label="Page navigation example" style="margin-top: 20px; width: 400%;">
+	<nav aria-label="Page navigation example"
+		style="margin-top: 20px; width: 400%;">
 		<ul class="pagination justify-content-center">
 			<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
 			<c:if test="${map.boardPager.curBlock > 1}">
 				<li class="page-item"><a class="page-link"
-					href="javascript:list('1')">&lt;&lt;</a></li>
+					href="javascript:list('1')">&lt;&lt;</a></li> 
 			</c:if>
 			<!-- 이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
 			<c:if test="${map.boardPager.curBlock > 1}">
@@ -28,7 +29,7 @@
 							tabindex="-1" aria-disabled="true" href="#">${num}</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link"
+						<li class="page-item"><a id="unique" class="page-link"
 							href="javascript:list('${num}')">${num}</a></li>
 					</c:otherwise>
 				</c:choose>
