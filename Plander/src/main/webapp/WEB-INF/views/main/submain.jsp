@@ -83,7 +83,7 @@ body {
 	<c:if test="${empty sessionScope.usersVO }">
 		<jsp:include page="/commons/header.jsp" />
 	</c:if>
-	<c:if test="${not empty sessionScope.usersVO }">
+	 <c:if test="${not empty sessionScope.usersVO }">
 		<jsp:include page="/commons/loginheader.jsp" />
 	</c:if>
 
