@@ -80,6 +80,7 @@
 		delete from users
 			where u_idx = #{u_idx}
 	</delete>
+	
 </mapper>
 
 

@@ -23,7 +23,7 @@ public class MainController {
 	
 	@GetMapping("")
 	public String main() {
-		return "main/submain";
+		return "main/main";
 	}
 	
 	@GetMapping("/sub")
