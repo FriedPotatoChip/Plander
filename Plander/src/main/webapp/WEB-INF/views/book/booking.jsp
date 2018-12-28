@@ -158,7 +158,7 @@
 			return false;
 		}
 		
-		var chk = $(":input:radio[name=sct_idx]:checked").val();
+		var chk = $(":input:radio[name=roomnum]:checked").val();
 		if (chk==null) {
 			alert("개인실/랩실 선택은 필수입니다.");
 			return false;
@@ -192,7 +192,6 @@
 	
 	#calendar, #selectSeat { padding: 20px; }
 	#calendar { width: 30%; }
-	#selectSeat { width: 70%; }
 	
 	/* 여기 밑으로 예약 헤더 CSS */
 	#chk a { text-decoration: none; }
@@ -231,6 +230,22 @@
 		font-size: 15px;
 	}
 	/* 예약 헤더 CSS 끝 */
+	/* 버튼 */
+	button {
+		display: inline-block;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 14px;
+		text-align: center;
+		background-color: white;
+		border: 1px solid rebeccapurple;cursor: pointer;
+	}
+	button:hover {
+		border: 1px solid rebeccapurple;
+		background-color: rebeccapurple;
+		color: white;
+	}
+	/* 버튼 끝 */
 </style>
 
 </head>
@@ -249,14 +264,14 @@
 			</li>
 			<li>&gt;</li>
 			<li>
-				<a class="menu" href="#">
+				<a class="menu">
 					<b><span id="num" class="back">STEP2</span>
 					<span id="select" class="select">좌석선택</span></b>
 				</a>
 			</li>
 			<li>&gt;</li>
 			<li>
-				<a class="menu" href="#">
+				<a class="menu">
 					<b> <span id="num" class="back">STEP3</span>
 					<span id="select" class="select">결제하기</span></b>
 				</a>
@@ -268,50 +283,87 @@
 		<div class="boxoutside" style="border: 1px solid;">
 			<form method="post">
 				<!-- 달력 -->
-				<div id="calendar" class="box">
-					<div class="form-group">
-						<div class='input-group date' id='datetimepicker6'>
-							<input type='text' name="start_time" class="form-control" />
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
+				<div style="margin: 10px; background-color: rebeccapurple;">
+					<div id="calendar" class="container">
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker6'>
+								<input type='text' name="start_time" class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class='input-group date' id='datetimepicker7'>
-							<input type='text' name="end_time" class="form-control" />
-							<span class="input-group-addon">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker7'>
+								<input type='text' name="end_time" class="form-control" />
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div> <!-- 달력 div -->
 			
 				<!-- 좌석 선택 -->
-				<div id="selectSeat" class="box">
-					<h4>선택 날짜별 좌석 현황</h4>
+				<div id="selectSeat" class="">
+					<h4>좌석 종류 선택</h4>
 					<input type="hidden" name="br_idx" value="${svo.br_idx }">
+					
+					<!-- <h4><b>이용안내</b></h4>
+    <span>*** <b>[ 정기권 2주 ]</b> 를 구입하시는 분들 중 사물함 사용을 원하시는 분들만 체크 바랍니다.</span><br>
+    <span>☑︎ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
+    <span>☑ 취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
+    <span>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</span><br><br>
+    
+    <table border="1px solid;" style="width: 100%;">
+        <tr>
+            <th style="text-align: center;">좌석 종류 선택 </th>
+            <th style="text-align: center;">정기 이용권(1인실)</th>
+            <th style="text-align: center;">사물함 선택여부</th>
+        </tr>
+        <tr style="text-align: center;">
+            <td>
+                <input type="radio" id="2weeks" name="time_idx" value="100">개인석&nbsp;
+                <input type="radio" id="month" name="time_idx" value="100">랩실
+            </td>
+            <td>
+                <input type="radio" id="2weeks" name="time_idx" value="100">1일권&nbsp;
+                <input type="radio" id="month" name="time_idx" value="100">정기권 2주
+                <input type="radio" id="month" name="time_idx" value="100">정기권 1개월
+                <input type="radio" id="month" name="time_idx" value="100">야간권(22:00~08:00)
+            </td>
+            <td>
+                <input type="radio" id="2weeks" name="time_idx" value="100">사용&nbsp;
+                <input type="radio" id="2weeks" name="time_idx" value="100">사용안함
+            </td>
+        </tr>
+    </table> -->
+					
 					<div class="radio">
-						<label><input type="radio" name="sct_idx" value="1">개인석</label><br>
-						<label><input type="radio" name="sct_idx" value="0">랩실</label><br>
+						<label><input type="radio" name="roomnum" value="1">개인석</label>&nbsp;
+						<label><input type="radio" name="roomnum" value="2">랩실</label>
 					</div>
 					<hr>
 					
 					<h4>정기 이용권(1인실)</h4>
 					<div class="radio">
 						<label><input type="radio" id="nope" name="time_idx" value="0" checked="checked">정기권 사용안함</label>&nbsp;
+						<label><input type="radio" id="oneday" name="time_idx" value="100">1일권</label>&nbsp;
 						<label><input type="radio" id="2weeks" name="time_idx" value="100">정기권 2주</label>&nbsp;
 						<label><input type="radio" id="1month" name="time_idx" value="101">정기권 1개월</label>&nbsp;
 						<label><input type="radio" id="night" name="time_idx" value="102">야간권(22:00~08:00)</label>
 						<hr>
-						<h5>사물함 사용여부</h5>
+						<h4>사물함 사용여부</h4>
 						<p>*** <b>[ 정기권 2주 ]</b> 를 구입하시는 분들 중 사물함 사용을 원하시는 분들만 체크 바랍니다.</p>
 						<label><input type="radio" name="cabinet" value="y">사용</label>&nbsp;
 						<label><input type="radio" name="cabinet" value="n" checked="checked">사용안함</label><br>
 					</div>
 					<hr>
+					<div class="center" style="padding: 10px;">
+						<button type="button" class="btn btn-default" disabled="disabled">이전단계</button>&nbsp;
+						<button type="button" onclick="floorChk(this.form)">다음단계</button>
+					</div>
 					
-					<button type="button" class="btn btn-default btn-lg" onclick="floorChk(this.form)">다음단계</button>
 				</div> <!-- 좌석 선택 끝 -->
 				
 			</form>
