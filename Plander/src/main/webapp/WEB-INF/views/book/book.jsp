@@ -107,7 +107,11 @@
 <br>
 <script>
 	function book(frm) {
-		window.open("/TMS/book/booking", "예약하기", "width=1200, height=700");
+		var title = "bookingPage";
+		window.open("", title, "width=1200, height=700");
+		
+		frm.target = title;
+		frm.action = "/TMS/book/booking";
 		frm.submit();
 	}
 

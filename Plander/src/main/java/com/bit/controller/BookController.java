@@ -116,10 +116,16 @@ public class BookController {
 		return "book/booking_floor_1";
 	}
 	
+	public int idxchk(SeatsVO svo) {
+		SeatsVO svochk = bookService.seatnum(svo.getS_col(), svo.getBr_idx());
+		int idx = svochk.getS_idx();
+		System.out.println("svochk 확인 : " + svochk + ", idx 확인 : " + idx);
+		return idx;
+	}
 	
 	//결제 페이지
 	@RequestMapping("/pay")
-	public String pay(BookingVO bvo, Model model, UsersVO uservo) {
+	public String pay(BookingVO bvo, Model model, UsersVO uservo, SeatsVO svo) {
 		System.out.println("/pay");
 		
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
@@ -128,16 +134,40 @@ public class BookController {
 		bvo.setBk_regdate(today); //예약날짜
 		bvo.setId(uservo.getId());
 		
+		int idx = idxchk(svo);
+		System.out.println("idx 확인 : " + idx);
+		bvo.setS_idx(idx);
+		
+		model.addAttribute("bvo", bvo);
+		model.addAttribute("uservo", uservo);
+		model.addAttribute("svo", svo);
+		return "book/payment";
+	}
+	
+	//예약완료
+	@RequestMapping("/payok")
+	public String bookOk(BookingVO bvo, Model model, UsersVO uservo) {
+		System.out.println("/payok");
+		
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
+		Date date = new Date();
+		String today = format.format(date);
+		bvo.setBk_regdate(today); //예약날짜
+		bvo.setId(uservo.getId());
 		
 		//내가 선택한 좌석 정보 넘기기
 		List<BookingVO> myseat = bookService.myseat(bvo);
 		System.out.println("myseat : " + myseat);
 		
-		model.addAttribute("bvo", bvo);
+		int booked = bookService.bookOk(bvo);
+		System.out.println("예약완료 : " + booked + ", bvo 확인 : " + bvo);
+		
 		model.addAttribute("myseat", myseat);
+		model.addAttribute("booked", booked);
 		model.addAttribute("uservo", uservo);
-		return "book/payment";
+		return "book/payok";
 	}
+	
 	
 	
 	

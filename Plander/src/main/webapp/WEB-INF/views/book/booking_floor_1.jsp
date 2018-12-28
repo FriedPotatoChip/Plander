@@ -274,6 +274,7 @@
 			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
+			<input type="hidden" name="s_idx" value="${bvo.s_idx }">
 		</form>
 		
 		</div> <!-- 박스 아웃사이드 끝 -->

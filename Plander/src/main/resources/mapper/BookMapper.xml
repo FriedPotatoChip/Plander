@@ -68,7 +68,21 @@
 		SELECT distinct sv.*, B.ID, B.START_TIME, B.END_TIME, B.BK_REGDATE, B.BOOKNUM
 		FROM SEATS_VIEW SV, BOOKING B 
 		WHERE sv.s_idx = B.S_IDX
-		AND B.BK_REGDATE = SYSDATE and id=#{id}
+		AND id=#{id} and to_char(b.bk_regdate, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+	</select>
+	
+	<!-- 예약완료 -->
+	<insert id="bookOk" parameterType="com.bit.domain.BookingVO">
+		INSERT INTO BOOKING (bk_idx, id, s_idx, start_time, end_time, bk_regdate, booknum, price)
+			VALUES (
+			(select NVL(MAX(bk_idx),0)+1 from booking), #{id}, #{s_idx},
+			to_date(#{start_time}, 'YYYY-MM-DD HH24:MI'), to_date(#{end_time},'YYYY-MM-DD HH24:MI'),
+			SYSDATE, #{booknum}, #{price})
+	</insert>
+	
+	<!-- s_idx -->
+	<select id="seatnum" resultType="com.bit.domain.SeatsVO">
+		SELECT S_IDX FROM SEATS WHERE S_COL = #{s_col} AND BR_IDX = #{br_idx}
 	</select>
 	
 

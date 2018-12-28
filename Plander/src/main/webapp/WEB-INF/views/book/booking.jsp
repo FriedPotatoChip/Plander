@@ -305,7 +305,7 @@
 				</div> <!-- 달력 div -->
 			
 				<!-- 좌석 선택 -->
-				<div id="selectSeat" class="">
+				<div id="selectSeat">
 					<h4>좌석 종류 선택</h4>
 					<input type="hidden" name="br_idx" value="${svo.br_idx }">
 					
