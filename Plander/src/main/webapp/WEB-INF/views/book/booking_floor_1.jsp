@@ -158,6 +158,22 @@
 		font-size: 15px;
 	}
 	/* 예약 헤더 CSS 끝 */
+	/* 버튼 */
+	button {
+		display: inline-block;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 14px;
+		text-align: center;
+		background-color: white;
+		border: 1px solid rebeccapurple;cursor: pointer;
+	}
+	button:hover {
+		border: 1px solid rebeccapurple;
+		background-color: rebeccapurple;
+		color: white;
+	}
+	/* 버튼 끝 */
 </style>
 
 </head>
@@ -175,14 +191,14 @@
 			</li>
 			<li>&gt;</li>
 			<li>
-				<a class="menu" href="#">
+				<a class="menu">
 					<b><span id="num" class="noback">STEP2</span>
 					<span id="select" class="click">좌석선택</span></b>
 				</a>
 			</li>
 			<li>&gt;</li>
 			<li>
-				<a class="menu" href="#">
+				<a class="menu">
 					<b> <span id="num" class="back">STEP3</span>
 					<span id="select" class="select">결제하기</span></b>
 				</a>
@@ -247,15 +263,15 @@
 			</table> <!-- 선택 정보 끝 -->
 			
 			<div class="center" style="padding: 10px;">
-				<button type="button" class="btn btn-default" onclick="history.back(); return false;">이전단계</button>&nbsp;
-				<button type="button" class="btn btn-default" onclick="next(this.form)">다음단계</button>
+				<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
+				<button type="button" onclick="next(this.form)">다음단계</button>
 			</div><br><br>
 			
 			<input type="hidden" name="br_idx" value="${bvo.br_idx }">
-			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
-			<!-- sct_idx 값 0으로 넘어옴 -->
+			<input type="hidden" name="roomnum" value="${bvo.roomnum }">
 			<input type="hidden" name="sct_idx" value="">
 			<input type="hidden" name="sct_name" value="">
+			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
 		</form>

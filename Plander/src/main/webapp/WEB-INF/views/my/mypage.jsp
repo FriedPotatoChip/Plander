@@ -24,9 +24,17 @@ h3 {
 }
 
 .profile {
-	margin-bottom: 10px;
-	height: 100px;
-	background-color: gray;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.user:hover {
+	opacity: 0.5;
+}
+
+.user_name {
+	margin-top: 10px;
 }
 
 .my_info {
@@ -70,7 +78,6 @@ h3 {
 #modal_table td {
 	width: 50%;
 }
-
 </style>
 </head>
 
@@ -83,7 +90,35 @@ h3 {
 	</nav>
 
 	<div class="profile">
+		<hr>
+		<img class="user" src="/resources/images/users.png" alt="user"
+			data-toggle="modal" data-target="#profileModal" />
+		<h5 class="user_name">${user.name }님</h5>
+		<hr>
+	</div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 수정</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body mx-auto">
+					<img class="user" src="/resources/images/users.png" alt="user"
+						onclick="changeProfile()" />
+				</div>
+				<div class="modal-footer mx-auto">
+					<button type="button" class="btn btn-outline-danger mx-1">사진변경</button>
+					<button type="button" class="btn btn-outline-warning mx-1">삭제</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="my_info">
@@ -225,6 +260,11 @@ h3 {
 	</div>
 
 	<script>
+		//프로필 사진 변경
+		function changeProfile(){
+			
+		}
+	
 		//주소검색
 		function goPopup() {
 			var pop = window.open("/juso", "pop",
@@ -278,6 +318,6 @@ h3 {
 			});
 		}
 	</script>
-	
+
 </body>
 </html>

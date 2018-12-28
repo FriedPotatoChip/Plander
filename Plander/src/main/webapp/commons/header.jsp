@@ -83,31 +83,6 @@
 		</div>
 </nav>
 
-<!-- <form style="float: right;">
-	<select name="language">
-		<option value="ko">한국어</option>
-		<option value="en">영어</option>
-	</select> &nbsp;&nbsp;
-</form> -->
-<!-- <div id="header" class="row">
-	<div class="col-xs-12 col-sm-6 col-md-8">
-		<a href="/TMS" id="home">거기스</a>&nbsp;&nbsp; <a href="">테스트용 헤더</a>&nbsp;&nbsp;
-
-	</div>
-	<div class="col-xs-6 col-md-4"
-		style="text-align: right; padding-top: 0.8%;">
-		로그인 모달 창
-		<a data-toggle="modal" href="#myModal">로그인</a>&nbsp; <a
-			data-toggle="modal" href="#joinModal">회원가입</a>&nbsp; <select
-			name="language">
-			<option value="ko">한국어</option>
-			<option value="en">영어</option>
-		</select>
-	</div>
-</div> -->
-
-<!-- 헤더 끝 -->
-
 
 <script>
 	function enterLogin() {
