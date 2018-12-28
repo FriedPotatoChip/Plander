@@ -256,9 +256,30 @@ public class RecruitController {
 	
 	
 	
+	@RequestMapping(value = "/TMS/profileUpload", method = RequestMethod.POST)
+	public String profileUpload(@RequestParam("file")MultipartFile file, @RequestParam("x")String x, @RequestParam("y")String y, @RequestParam("w")String w, @RequestParam("h")String h) throws Exception{
+		System.out.println("file: "+ file);
+		System.out.println("x: "+ x+ ", y: "+ y+ ", w: "+ w+ ", h: "+ h);
+		Map<String, Integer> map = new HashMap<>();
+		int xx = (int)Long.parseLong(x);
+		int yy = (int) Math.round(Double.parseDouble(y));
+		int ww = (int)Long.parseLong(w);
+		int hh = (int)Long.parseLong(h);
+		map.put("x", xx);
+		map.put("y", yy);
+		map.put("w", ww);
+		map.put("h", hh);
+		ResponseEntity<String> img_path = new ResponseEntity<>(
+				UploadFileUtils.uploadThum(uploadPath, file.getOriginalFilename(), file.getBytes(), map),
+				HttpStatus.CREATED);
+		String user_imgPath = (String) img_path.getBody();
+		System.out.println("오리지널: "+ file.getOriginalFilename());
+		System.out.println("썸네일 경로: "+ img_path);
+		System.out.println("썸네일 경로: "+ user_imgPath);
+		return "main/proImgTest";
+	}
 	
-	
-	
+	 
 	
 	
 	

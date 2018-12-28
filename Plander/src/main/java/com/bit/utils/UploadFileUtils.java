@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -20,27 +21,34 @@ public class UploadFileUtils {
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
 
 		UUID uid = UUID.randomUUID();
-
 		String savedName = uid.toString() + "_" + originalName;
-
 		String savedPath = calcPath(uploadPath);
-
 		File target = new File(uploadPath + savedPath, savedName);
-
 		FileCopyUtils.copy(fileData, target);
-
 		String formatName = originalName.substring(originalName.lastIndexOf(".") + 1);
-
 		String uploadedFileName = null;
-
 //		if (MediaUtils.getMediaType(formatName) != null) {
 //			uploadedFileName = makeThumbnail(uploadPath, savedPath, savedName);
 //		} else {
 			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
 //		}
-
 		return uploadedFileName;
-
+	}
+	public static String uploadThum(String uploadPath, String originalName, byte[] fileData, Map<String, Integer> map) throws Exception {
+		
+		UUID uid = UUID.randomUUID();
+		String savedName = uid.toString() + "_" + originalName;
+		String savedPath = calcPath(uploadPath);
+		File target = new File(uploadPath + savedPath, savedName);
+		FileCopyUtils.copy(fileData, target);
+		String formatName = originalName.substring(originalName.lastIndexOf(".") + 1);
+		String uploadedFileName = null;
+//		if (MediaUtils.getMediaType(formatName) != null) {
+//			uploadedFileName = makeThumbnail(uploadPath, savedPath, savedName);
+		uploadedFileName = makeThumbnail(uploadPath, savedPath, savedName, map);
+//		} else {
+//		}
+		return uploadedFileName;
 	}
 
 	private static String makeIcon(String uploadPath, String path, String fileName) throws Exception {
@@ -50,11 +58,11 @@ public class UploadFileUtils {
 		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 	}
 
-	private static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
+	private static String makeThumbnail(String uploadPath, String path, String fileName, Map<String, Integer> map) throws Exception {
 
 		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
-
-		BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
+		
+		BufferedImage destImg = Scalr.crop(sourceImg, map.get("x"), map.get("y"), map.get("w"), map.get("h"));
 
 		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
 

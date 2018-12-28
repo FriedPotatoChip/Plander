@@ -47,7 +47,7 @@ $(document).ready(function() {
 	    filesArr.forEach(function(f) {
 	        if(!f.type.match("image.*")) {
 	            alert("확장자는 이미지 확장자만 가능합니다.");
-	            return;
+	            return false;
 	        }
 	
 	        sel_file = f;
@@ -66,42 +66,8 @@ $(document).ready(function() {
 	    		aspectRatio: 1
 	    	});
 	    });
-	    
-	    window.file = files[0]
-	    console.log("파일: "+ file);
-	    
-
-	    
-	    
 	}
 })
-</script>
-<script>
-function sendFile() {
-    var form_data = new FormData();
-    form_data.append('file', file);
-	form_data.append('x', x);
-	
-	
-    console.log("폼데이터: "+ form_data);
-    $.ajax({
-        data: form_data, 
-        type: "POST",
-        url: '/TMS/profileUpload',
-        cache: false,
-        contentType: false,
-        enctype: 'multipart/form-data',
-        processData: false,
-        success: function(url) {
-        	setTimeout(function(){
-	        	url = '/resources/upload'+url;
-	        	console.log("url: "+ url);
-	          $(el).summernote('editor.insertImage', url);
-	          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        	}, 3000)
-        }
-      });
-  }
 </script>
 </head>
 <body>
@@ -109,15 +75,16 @@ function sendFile() {
 </form>
 
 
-<form id="form" name="imgForm">
-    <input type='file' name="file" id="imgInput" />
-     <input type="text" name="x" id="x" />
-     <input type="text" name="y" id="y" />
-     <input type="text" name="w" id="w" />
-     <input type="text" name="h" id="h" />
+<form id="form" action="/TMS/profileUpload" name="imgForm" method="post" enctype="multipart/form-data" onclick="">
+	<input type='file' name="file" id="imgInput" />
+	<input type="text" name="x" id="x" />
+	<input type="text" name="y" id="y" />
+	<input type="text" name="w" id="w" />
+	<input type="text" name="h" id="h" />
+	<input type="submit" value="수정">
 </form>
-    <img id="profileImg" src="#" alt="your image" />
- <input type="button" value="전송" onclick="sendFile()">
+	<img id="profileImg" src="#" alt="your image" />
+	<input type="button" value="전송" onclick="sendFile()">
 
 
 </body>
