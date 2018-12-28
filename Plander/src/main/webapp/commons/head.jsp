@@ -1,6 +1,5 @@
 <!-- 해당 jsp를 include 하실 때 꼭 닫힌 head 태그를 함께 추가해주세요!!! -->
 <!-- title 태그 작성해주세요 -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -38,6 +37,12 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
+
+<script>
+	function list(page) {
+		location.href = "/TMS/my/my_recruit?curPage=" + page;
+	};
+</script>
 
 <!-- CSS -->
 <style>
