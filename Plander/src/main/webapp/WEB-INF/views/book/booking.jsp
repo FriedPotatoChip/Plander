@@ -24,7 +24,6 @@
 
 <script>
 	$(function() {
-		
 		//정기권 2주 체크시 endtime 자동으로 2주 뒤 날짜 클릭 생성
 		$('#2weeks').click(function() {
 			//alert("정기권 2주 클릭");
@@ -194,13 +193,76 @@
 	#calendar, #selectSeat { padding: 20px; }
 	#calendar { width: 30%; }
 	#selectSeat { width: 70%; }
+	
+	/* 여기 밑으로 예약 헤더 CSS */
+	#chk a { text-decoration: none; }
+	#chk { width: 100%; margin-left: auto; margin-right: auto; }
+	#chk ul>li {
+		float: left;
+		list-style-type: none;
+		padding: 0 5% 0 5.5%;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	#chk ul>li>a { font-size: 1.1em; }
+	
+	#chk::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 선택 안할 시 */
+	.select { color: gray; }
+	.back {
+		background-color: gray;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	
+	/* 현재 페이지 */
+	.click { color: black; }
+	.noback {
+		background-color: rebeccapurple;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	/* 예약 헤더 CSS 끝 */
 </style>
 
 </head>
 <body>
 <div id="container">
-	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
-	<hr>
+	
+	<br><br><br>
+	<!-- 예약 헤더 -->
+	<div id="chk">
+		<ul>
+			<li>
+				<a class="menu" href="/TMS/book/booking">
+					<b><span id="num" class="noback">STEP1</span>
+					<span id="select" class="click">날짜선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu" href="#">
+					<b><span id="num" class="back">STEP2</span>
+					<span id="select" class="select">좌석선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu" href="#">
+					<b> <span id="num" class="back">STEP3</span>
+					<span id="select" class="select">결제하기</span></b>
+				</a>
+			</li>
+		</ul>
+	</div> <!-- 예약 헤더끝 -->
 	
 	<div id="ticket" style="box-sizing: border-box;">
 		<div class="boxoutside" style="border: 1px solid;">
@@ -208,12 +270,12 @@
 				<!-- 달력 -->
 				<div id="calendar" class="box">
 					<div class="form-group">
-							<div class='input-group date' id='datetimepicker6'>
-								<input type='text' name="start_time" class="form-control" />
-								<span class="input-group-addon">
-									<span class="glyphicon glyphicon-calendar"></span>
-								</span>
-							</div>
+						<div class='input-group date' id='datetimepicker6'>
+							<input type='text' name="start_time" class="form-control" />
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
 					</div>
 					<div class="form-group">
 						<div class='input-group date' id='datetimepicker7'>
@@ -249,9 +311,8 @@
 					</div>
 					<hr>
 					
-					<button type="button" class="btn btn-default btn-lg"
-							onclick="floorChk(this.form)">다음단계</button>
-				</div>
+					<button type="button" class="btn btn-default btn-lg" onclick="floorChk(this.form)">다음단계</button>
+				</div> <!-- 좌석 선택 끝 -->
 				
 			</form>
 		</div>

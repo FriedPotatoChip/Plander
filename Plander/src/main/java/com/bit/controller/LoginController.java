@@ -138,30 +138,32 @@ public class LoginController {
 		return "main/test";
 	}
 	
-	@PostMapping("/TMS/login")
-	public String login(UsersVO vo, HttpSession session, Model model) {
+	
+	@PostMapping("/loginAjax")
+	public @ResponseBody String loginAjax(UsersVO vo, HttpSession session) {
 			System.out.println("controller 로그인 테스트");
 			
 			UsersVO user = service.login(vo);
 			if (user == null) {
 //				System.out.println("유저 로그인 실패!");
 //				model.addAttribute("loginResult", "fail");
-				return "main/main";
+				return "fail";
 			} else if (user.getRank() == 1) {
+				// 관리자 로그인 성공
 				session.setAttribute("usersVO", user);
 //				System.out.println("관리자 확인 : " + user);
 //				model.addAttribute("loginResult", "admin");
+				return "admin";
 			} else if (user.getRank() != 1) {
 				//유저로그인
 				session.setAttribute("usersVO", user);
 //				System.out.println("user 확인 : " + user);
 //				model.addAttribute("loginResult", "user");
+				return "success";
 			}
 			
 			return "redirect: /TMS";
-		}
-	
-	
+		}	
 	
 	
 	
