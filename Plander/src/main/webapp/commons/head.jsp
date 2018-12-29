@@ -34,10 +34,7 @@
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 
 <!-- 제이쿼리 -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	crossorigin="anonymous"></script>
-
+ 
 <script>
 	function list(page) {
 		location.href = "/TMS/my/my_recruit?curPage=" + page;

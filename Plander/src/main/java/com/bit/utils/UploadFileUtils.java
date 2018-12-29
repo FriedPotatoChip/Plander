@@ -63,7 +63,7 @@ public class UploadFileUtils {
 		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
 		
 		BufferedImage destImg = Scalr.crop(sourceImg, map.get("x"), map.get("y"), map.get("w"), map.get("h"));
-
+		destImg = Scalr.resize(destImg, 130, 130);
 		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
 
 		File newFile = new File(thumbnailName);

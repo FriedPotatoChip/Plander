@@ -136,5 +136,10 @@ public class MyServiceImpl implements MyService {
 	public int board_comment_cnt(UsersVO vo) {
 		return mapper.board_comment_cnt(vo);
 	}
+
+	@Override
+	public boolean updateProfileImg(UsersVO vo) {
+		return mapper.updateProfileImg(vo);
+	}
 	
 }

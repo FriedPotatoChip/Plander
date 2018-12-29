@@ -76,4 +76,7 @@ public interface MyMapper {
 
 	// 자유게시판 상세보기
 	public BoardVO getBoardOne(int b_idx);
+	
+	// 프로필 사진 업데이트
+	public boolean updateProfileImg(UsersVO vo);
 }
