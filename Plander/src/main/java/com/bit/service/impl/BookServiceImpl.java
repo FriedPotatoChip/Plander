@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.domain.BookingVO;
-import com.bit.domain.SeatsCategoryVO;
+import com.bit.domain.SeatsVO;
 import com.bit.mapper.BookMapper;
 import com.bit.service.BookService;
 
@@ -61,6 +61,24 @@ public class BookServiceImpl implements BookService {
 	public List<BookingVO> myseat(BookingVO bvo) {
 		System.out.println("***** myseat() : Impl 까지 옴!");
 		return bookmapper.myseat(bvo);
+	}
+	
+	//예약완료
+	@Override
+	public int bookOk(BookingVO bvo) {
+		System.out.println("bookOk() : Impl 까지 옴!");
+		return bookmapper.bookOk(bvo);
+	}
+
+	@Override
+	public SeatsVO seatnum(int s_col, int br_idx) {
+		System.out.println("seatnum() : Impl 까지 옴!");
+		System.out.println("s_col : " + s_col + ", br_idx : " + br_idx);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("s_col", s_col);
+		map.put("br_idx", br_idx);
+		
+		return bookmapper.seatnum(map);
 	}
 
 

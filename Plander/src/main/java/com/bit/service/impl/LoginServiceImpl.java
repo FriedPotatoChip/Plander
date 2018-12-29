@@ -43,4 +43,5 @@ public class LoginServiceImpl implements LoginService {
 		return mapper.insertUser(vo);
 	}
 
+
 }
