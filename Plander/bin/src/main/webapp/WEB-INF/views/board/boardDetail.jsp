@@ -16,33 +16,100 @@
 	.marginLi { margin-left: 5px; margin-right: 5px; }	
 	.now { background-color: orange; }
 	.commDate { font-size: 0.75em; color: gray;}
+	.hoverPointer:hover{ cursor: pointer; }
+	#board, #comments { border: 1px solid black; }
+	.comm { border: 1px solid blue; }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
 
 $(document).ready(function(){
-	
+	window.category = ""; 
 	if ('${board.ct_idx}' == 1){
 		$("#boardType").html("공지사항");
+		category = "공지사항";
 	}else if ('${board.ct_idx}' == 2){
 		$("#boardType").html("자유게시판");	
+		category = "자유게시판";
 	}else if ('${board.ct_idx}' == 3){
 		$("#boardType").html("후기게시판");	
+		category = "후기게시판";
 	}else if ('${board.ct_idx}' == 4){
-		$("#boardType").html("QNA");
+		category = "QNA";
 	}
+		$("#boardType").html(category);
 	<!-- 댓글 페이징 -->
 	paging(1);
-
+	
+	
+	boardList(${nowPage});
+	
+	
 });
+	<!-- 상세글 하단에 글목록 출력 -->
+	function boardList(nowPage){
+
+		$.ajax({
+			url: "/boardListAjax",
+			type: 'get',
+			dataType: "json",
+			data: {'nowPage':nowPage, 'ct_idx':'${board.ct_idx}'},
+			success: function(list){
+				
+				var html = "";
+				html += "<b>"+ category+ "</b><hr>";
+				html += "<table>"
+				$.each(list,function(index, value){
+					if (index == 0){ 
+						window.chkEndPage = value.b_title;
+						window.chkStartPage = value.b_content;
+					} else{
+						var regdate = new Date(value.b_regdate);
+						var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
+						html += "<tr>";
+						html += "<td width='80%'>";
+						if ('${board.b_idx}' == value.b_idx){
+							html += "<b>";
+						}
+						html += "<a href='/TMS/boardDetail?idx="+value.b_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
+						html += value.b_title;
+						html += "</a>";
+						if ('${board.b_idx}' == value.b_idx){
+							html += "</b>";
+						}
+						html += "</td>";
+						html += "<td>"; 
+						html += date; 					
+						html += "</td>";
+						html += "</tr>";
+					}
+				})
+				html += "</table>";
+				html += "<hr>";
+				if (chkStartPage == "true"){
+					html += "<a class='hoverPointer' onclick='boardList(${nowPage - 1})'>&lt;이전</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+				}
+				if (chkEndPage == "true"){
+					html += "<a class='hoverPointer' onclick='boardList(${nowPage + 1})'>다음&gt;</a>";
+				}
+				
+				
+				$("#boardListAjax").html(html);
+				
+			}, error: function(error){
+				console.log("error발생: "+ error);
+			}
+		});
+		
+	}
 </script>
 </head>
 <body> 
 	
  	<h3>모집글 상세조회 페이지</h3>
 	
-	<div>
+	<div id="board">
 		<a href="/TMS/board?ct_idx=${board.ct_idx }&nowPage=${nowPage }&cntPerPage=${cntPerPage}" style="font-size: 0.8em;"><strong id="boardType"></strong></a>
 		<h3>${board.b_title }</h3>
 		<a href="#">${board.id }</a> 
@@ -50,16 +117,13 @@ $(document).ready(function(){
 		<hr>
 		<div id="content">${board.b_content }</div>
 		<br><br><br>
-	</div>	
-	
-	<div>
-		
 		<c:if test="${(sessionScope.usersVO.id == board.id) || sessionScope.usersVO.rank == 1 }">
 			<button onclick="modify()">수정하기</button>
 			<button onclick="deleteRec()">삭제하기</button>
 		</c:if>
-		
-	</div>
+	</div>	
+
+	
 	<div id="comments">
 		<h4>댓글</h4>
 		<hr>
@@ -97,6 +161,14 @@ $(document).ready(function(){
 			<input type="button" onclick="registerComm()" value="댓글단다">
 		</form>
 	</div>
+	
+	<br>
+	<br>
+	<br>
+	<!-- 글 목록 보여주기 (5개씩만) -->
+	<div id="boardListAjax">
+	</div>	
+	
 	
 <script>
 	/* 글 삭제 */
@@ -137,29 +209,30 @@ $(document).ready(function(){
 				window.start = page.start;
 				window.end = page.end;
 				
-				var html = "";
-				
-				if (chkStartPage){
-					html += "<li><a href='#' onclick='paging("+startPage-1+")'><button>&lt;</button></a></li>"
-				}
-				for (var i = startPage; i <= endPage; i++){
-					if (startPage == 1 && endPage == 1){
-						html += "";
-					} else if (i == nowPage){
-						html += "<li>";
-						html += "<a class='now marginLi' href='#'>"+i+"</a>";
-						html += "</li>";					
-					} else if (i != nowPage){
-						html += "<li>";
-						html += "<a class='marginLi' href='#' onclick='paging("+i+")'>"+i+"</a>";
-						html += "</li>";
+				if (endPage != 1){
+					var html = "";
+					if (chkStartPage){
+						html += "<li><a href='#' onclick='paging("+startPage-1+")'><button>&lt;</button></a></li>"
 					}
+					for (var i = startPage; i <= endPage; i++){
+						if (startPage == 1 && endPage == 1){
+							html += "";
+						} else if (i == nowPage){
+							html += "<li>";
+							html += "<a class='now marginLi' href='#'>"+i+"</a>";
+							html += "</li>";					
+						} else if (i != nowPage){
+							html += "<li>";
+							html += "<a class='marginLi' href='#' onclick='paging("+i+")'>"+i+"</a>";
+							html += "</li>";
+						}
+					}
+					if (chkEndPage){
+						html += "<li><a href='#'onclick='paging("+endPage+1+")'><button>&gt;</button></a></li>";
+					}
+					
+					$("#pagingList").html(html);
 				}
-				if (chkEndPage){
-					html += "<li><a href='#'onclick='paging("+endPage+1+")'><button>&gt;</button></a></li>";
-				}
-				
-				$("#pagingList").html(html);
 				
 				commAjax();
 			}, error: function(){
@@ -186,7 +259,7 @@ $(document).ready(function(){
 					var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
 				    if (value.level == 1){
 					    html += "<div class='comm comment' id='comm"+value.c_idx+"'>";
-						html += "<div class='comm_id'><strong id='' class='"+value.c_idx+"'>"+value.id+"</strong></div>";
+						html += "<div class='comm_id'><strong id='' class=''>"+value.id+"</strong></div>";
 						html += "<div>"+value.c_content+"</div>";
 						arrC_idx.push(value.c_idx);
 						arrId.push(value.id);
