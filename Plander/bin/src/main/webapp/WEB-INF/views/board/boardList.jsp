@@ -91,14 +91,17 @@
 	
 	
 	<!--  -->
-	<form action="#">
+	<form action="/TMS/searchList">
 		<input type="text" name="keyword">	<!-- 검색창 -->
 		<select name="target">
-			<option value="title">제목</option>
-			<option value="content">내용</option>
-			<option value="title_content">제목 & 내용</option>
+			<option value="t">제목</option>
+			<option value="c">내용</option>
+			<option value="tc">제목 & 내용</option>
+			<option value="w">작성자</option>
 		</select>
 		<input type="submit" value="검색">
+		<input type="hidden" name="ct_idx" value="${boardList[0].ct_idx}">
+		<input type="hidden" name="cntPerPage" value="${page.cntPerPage }">
 	</form>
 	<!--  -->
 	

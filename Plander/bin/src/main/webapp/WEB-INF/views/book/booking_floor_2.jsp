@@ -23,7 +23,7 @@
 		
 		<c:forEach var='k' items='${booklist }'>
 			var bookseat = '${k.s_col }';
-			console.log("s_col : " + bookseat);
+			//console.log("s_col : " + bookseat);
 				
 			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
@@ -38,14 +38,20 @@
 		
 		//선택한 인원 수와 체크된 박스 수가 같을 때 나머지 체크박스 disabled
 		$(":checkbox").change(function() {
+			console.log("체크된 좌석 : " + $(":checkbox:checked").val() ); //체크값 확인ok
+			$("#msg").html("<span>A-" + $(":checkbox:checked").val() + "&nbsp;</span>");
+			
 			var cnt = $("#people").val(); //선택된 인원 수
 			if (cnt == $(":checkbox:checked").length) {
 				$(":checkbox:not(:checked)").attr("disabled", true);
+				
 			} else {
 				$(":checkbox").removeAttr("disabled");
+				$("#msg").html("");
+				
 				<c:forEach var='k' items='${booklist }'>
 					var bookseat = '${k.s_col }';
-					console.log("s_col : " + bookseat);
+					//console.log("s_col : " + bookseat);
 					
 					for (var i=0; i<= size; i++) {
 						//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
@@ -66,6 +72,7 @@
 	$("#people").change(function() {
 		$(":checkbox").removeAttr("checked");
 		$(":checkbox").removeAttr("disabled");
+		$("#msg").html("");
 		
 		var size = document.getElementsByName('s_col').length;
 		alert("size : " + size);
@@ -84,6 +91,15 @@
 		</c:forEach>
 		
 	});
+
+</script>
+
+<script>
+	function next(frm) {
+		
+		frm.action="/TMS/book/pay"
+		frm.submit();
+	}
 
 </script>
 
@@ -109,27 +125,103 @@
 	#row { padding: 10px; }
 	#allseat, #myselect { width: 93%; margin-left: auto; margin-right: auto; }
 	
+	/* 여기 밑으로 예약 헤더 CSS */
+	#chk a { text-decoration: none; }
+	#chk { width: 100%; margin-left: auto; margin-right: auto; }
+	ul>li {
+		float: left;
+		list-style-type: none;
+		padding: 0 5% 0 5.5%;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	ul>li>a { font-size: 1.1em; }
+	
+	#chk::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 선택 안할 시 */
+	.select { color: gray; }
+	.back {
+		background-color: gray;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	
+	/* 현재 페이지 */
+	.click { color: black; }
+	.noback {
+		background-color: rebeccapurple;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	/* 예약 헤더 CSS 끝 */
+	/* 버튼 */
+	button {
+		display: inline-block;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 14px;
+		text-align: center;
+		background-color: white;
+		border: 1px solid rebeccapurple;cursor: pointer;
+	}
+	button:hover {
+		border: 1px solid rebeccapurple;
+		background-color: rebeccapurple;
+		color: white;
+	}
+	/* 버튼 끝 */
 </style>
 
 </head>
 <body>
 <div id="container" style="box-sizing: border-box;">
-	<h4><a href="/TMS/book/booking">날짜 선택</a></h4>
-	<hr>
+	<br><br><br>
+	<!-- 예약 헤더 -->
+	<div id="chk">
+		<ul>
+			<li>
+				<a class="menu" href="/TMS/book/booking">
+					<b><span id="num" class="back">STEP1</span>
+					<span id="select" class="select">날짜선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu">
+					<b><span id="num" class="noback">STEP2</span>
+					<span id="select" class="click">좌석선택</span></b>
+				</a>
+			</li>
+			<li>&gt;</li>
+			<li>
+				<a class="menu">
+					<b> <span id="num" class="back">STEP3</span>
+					<span id="select" class="select">결제하기</span></b>
+				</a>
+			</li>
+		</ul>
+	</div> <!-- 예약 헤더끝 -->
 	
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
-		<form method="post" action="/TMS/book/pay">
-			
+		<form method="post">
 			<div>
-				<h4><a href="">1층</a>&nbsp;&nbsp;&nbsp;
-				<a href="">2층</a></h4>
-				<p style="font-style: italic;">1인 2석까지 예약 가능합니다.</p>
-				<span>인원 수 선택 : </span>
-				<select id="people">
-					<option value="1">1명</option>
-					<option value="2">2명</option>
-				</select>
+				<h5>☑ 1인 2석까지 예약 가능합니다.</h5>
+				<div>
+					<span>☑ 인원 수 선택 : </span>
+					<select id="people">
+						<option value="1">1명</option>
+						<option value="2">2명</option>
+					</select>
+				</div>
 			</div>
 			<hr>
 			
@@ -264,46 +356,42 @@
 								<td><label><input type="checkbox" name="s_col" value="${i }">A-${i }</label></td>
 							</c:forEach>
 						</tr>
-						
 					</table>
 				</div>
 			</div> <!-- 4번 열 끝 -->
+		</div> <!-- allseat 끝 -->
 			
-		</div>
-		
 			<!-- 선택 정보 -->
-			<p>선택 정보</p>
-			<table border="1px solid;" class="table table-bordered" style="width: 55%;">
+			<hr>
+			<table class="table center" style="width: 100%; margin-left: auto; margin-right: auto;">
 				<tr>
-					<td width="30%">날짜/시간</td>
-					<td width="25%">선택 좌석정보</td>
+					<th width="50%" class="center">날짜/시간</th>
+					<th width="50%" class="center">선택 좌석정보</th>
 				</tr>
 				<tr>
 					<td>${bvo.start_time } ~ ${bvo.end_time }</td>
 					<td id="msg"></td>
 				</tr>
-				<tfoot>
-					<tr>
-						<td colspan="3" style="text-align: center;">
-							<button type="button" class="btn btn-default" onclick="history.back(); return false;">이전단계</button>&nbsp;
-							<button type="submit" class="btn btn-default">다음단계</button>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
-			<br>
-			예약한 새럼들 : ${booklist }
-			<hr>
-			지금 예약하는애 : ${bvo }
-			<script>
-				
-			</script>
+				<tr><td colspan="2"></td></tr>
+			</table> <!-- 선택 정보 끝 -->
 			
+			<div class="center" style="padding: 10px;">
+				<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
+				<button type="button" onclick="next(this.form)">다음단계</button>
+			</div><br><br>
+			
+			<input type="hidden" name="br_idx" value="${bvo.br_idx }">
+			<input type="hidden" name="roomnum" value="${bvo.roomnum }">
+			<input type="hidden" name="sct_idx" value="1">
+			<input type="hidden" name="sct_name" value="1인실">
+			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
+			<input type="hidden" name="cabinet" value="${bvo.cabinet }">
+			<input type="hidden" name="start_time" value="${bvo.start_time }">
+			<input type="hidden" name="end_time" value="${bvo.end_time }">
+			<input type="hidden" name="s_idx" value="${bvo.s_idx }">
 		</form>
-		
 		</div> <!-- 박스 아웃사이드 끝 -->
-	</div> <!-- 티켓 끝 -->
-
+	</div> <!-- 티켓 끝 --><br><br><br>
 
 </div> <!-- 바디 콘테이너 끝 -->
 </body>

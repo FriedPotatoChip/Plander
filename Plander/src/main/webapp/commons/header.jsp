@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 
-<!-- 구글 로그인 -->
 <script src="https://apis.google.com/js/platform.js?onload=init" async
 	defer></script>
 <!-- 네이버 로그인 -->
@@ -11,6 +10,7 @@
 	charset="utf-8"></script>
 <!-- 카카오 로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 	<!-- <a class="navbar-brand" href="/TMS"><img
@@ -37,23 +37,23 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
 				<!-- 삭제 -->
 				<!-- <li class="nav-item"><a class="nav-link" href="#">모집하기</a></li> -->
 				<!-- 이용안내에 넣기 -->
 				<!-- <li class="nav-item"><a class="nav-link" href="#">세부공간보기</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">찾아오시는길</a></li> -->
 				<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
-				<div class="dropdown">
-					<button class="btn btn-light dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">게시판</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">공지사항</a> <a
-							class="dropdown-item" href="#">자유게시판</a> <a
-							class="dropdown-item" href="#">FAQ</a>
+					<div class="dropdown">
+						<button class="btn btn-light dropdown-toggle" type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">게시판</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">공지사항</a> <a
+								class="dropdown-item" href="#">자유게시판</a> <a
+								class="dropdown-item" href="#">FAQ</a>
+						</div>
 					</div>
-				</div> 
 			</ul>
 		</div>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">

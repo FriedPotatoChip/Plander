@@ -25,29 +25,29 @@
 	<table>
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="id" id="id" onkeypress="chkFalse()"></td>
+			<td><input type="text" name="id" id="id" onkeypress="chkFalse()" required></td>
 			<td><input type="button" id="chkId" value="id 중복체크" onClick="idChkBtn()"></td>  
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><input type="text" name="phone" id="phone"></td>
+			<td><input type="text" name="phone" id="phone" required></td>
 		</tr>
 		<tr>
 			<th>우편번호</th>
 			<td>
-			    <input type="hidden" id="confmKey" name="confmKey" value=""  >
+			    <input type="hidden" id="confmKey" name="confmKey" value="" >
 				<input type="text" id="zipNo" name="zipNo" readonly style="width:100px"><!-- 우편번호 -->
 				<input type="button"  value="주소검색" onclick="goPopup();">
 			</td>
 		</tr>
 		<tr>
 			<th>도로명주소</th>
-			<td><input type="text" name="roadAddrPart1" id="roadAddrPart1" style="width:85%"></td>	<!-- 도로명 주소 -->
+			<td><input type="text" name="roadAddrPart1" id="roadAddrPart1" style="width:85%" readonly></td>	<!-- 도로명 주소 -->
 		</tr>
 		<tr>
 			<th>상세주소</th>
 			<td> 
-				<input type="text" name="addrDetail" id="addrDetail" style="width:85%" value="">	<!-- 상세주소 -->
+				<input type="text" name="addrDetail" id="addrDetail" style="width:85%" value="" required>	<!-- 상세주소 -->
 			</td>
 		</tr>
 		<tr>
@@ -67,6 +67,9 @@ function join() {
 	
 	var frm = document.joinform;
 	
+	var testPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+	var tel = frm.phone.value;
+	
 	if (!frm.id.value) {
 		alert("아이디를 입력해주세요.");
 		frm.id.focus();
@@ -77,6 +80,12 @@ function join() {
 		alert("핸드폰 번호를 입력해주세요.");
 		frm.phone.focus();
 		return false;
+	}
+	if( !testPhone.test(tel) ) {
+	    alert('유효하지 않은 번호입니다.');
+	    frm.phone.value = "";
+	    frm.phone.focus();
+	    return false;
 	}
 	
 	if (!frm.roadAddrPart1.value) {

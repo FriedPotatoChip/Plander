@@ -72,6 +72,18 @@
 	}
 	/* 버튼 끝 */
 </style>
+
+<script>
+	function main() {
+		window.opener.top.location.href="/TMS/book";
+		window.close();
+	}
+	
+	function mypage() {
+		window.opener.top.location.href="/TMS/my";
+		window.close();
+	}
+</script>
 </head>
 <body>
 <div id="container">
@@ -105,7 +117,7 @@
 	<div class="center boxoutside" style="border: 1px solid;">
 		<br><br><br>
 		<img src="/resources/images/turtle.png" alt="거북이">
-		<h4>도경수 님 예약이 완료되었습니다!</h4>
+		<h4>${uservo.name } 님 예약이 완료되었습니다!</h4>
 		
 		<p>문의사항이 있으시다면 [ Q&A ] 로 문의하시기 바랍니다.</p>
 		
@@ -122,20 +134,20 @@
 						<td width="10%">금액</td>
 					</tr>
 					<tr>
-						<td id="booknum"></td>
+						<td id="booknum">${bvo.booknum }</td>
 						<td>${uservo.name }</td>
 						<td>${uservo.phone }</td>
 						<td>${bvo.start_time } ~ ${bvo.end_time }</td>
 						<td>${bvo.sct_name } - ${bvo.s_col }</td>
-						<td id="bookprice"></td>
+						<td id="bookprice">${bvo.price }</td>
 					</tr>
 				</tbody>
 			</table>
 		</div> <!-- 나의 예약 정보 끝 -->
 		
 		<div class="center" style="padding: 10px;">
-			<button type="button" onclick="">메인으로</button>
-			<button type="button" onclick="">마이페이지</button>
+			<button type="button" onclick="main()">메인으로</button>
+			<button type="button" onclick="mypage()">마이페이지</button>
 		</div>
 		<br><br><br>
 	</div>
