@@ -20,12 +20,12 @@ public class BookServiceImpl implements BookService {
 	
 	//전체 좌석 수 확인
 	@Override
-	public int seatCnt(int br_idx, int sct_idx) {
+	public int seatCnt(int br_idx, int roomnum) {
 		System.out.println("seatCnt() : Impl 까지 옴!");
-		System.out.println("br_idx : " + br_idx + ", sct_idx : " + sct_idx);
+		System.out.println("br_idx : " + br_idx + ", roomnum : " + roomnum);
 		Map<String, Integer> map = new HashMap<>();
 		map.put("br_idx", br_idx);
-		map.put("sct_idx", sct_idx);
+		map.put("roomnum", roomnum);
 		
 		return bookmapper.seatCnt(map);
 	}
