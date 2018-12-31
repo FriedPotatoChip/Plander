@@ -8,7 +8,7 @@ import com.bit.domain.SeatsVO;
 public interface BookService {
 	
 	//전체 좌석 수 확인
-	public int seatCnt(int br_idx, int sct_idx);
+	public int seatCnt(int br_idx, int roomnum);
 	
 	//예약된 좌석 수(개인실)
 	public int bookoneCnt(BookingVO bvo);

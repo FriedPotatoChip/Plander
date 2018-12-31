@@ -51,7 +51,7 @@
 	margin: 0;
 }
 
-.normal {
+.normal { 
 	font-weight: 400
 }
 
