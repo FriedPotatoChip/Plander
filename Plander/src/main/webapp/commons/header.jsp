@@ -115,7 +115,7 @@
 					alert("아이디와 비밀번호가 일치하지 않습니다.");
 				} else if (result == 'admin') {
 					alert("관리자 로그인에 성공하였습니다");
-					location.href = "/TMS"
+					location.href = "/TMS";
 				}
 			},
 			error : function(result) {
@@ -333,8 +333,8 @@
 				<hr>
 
 				<div class="center">
-					<a href="/Plander/findIdPw">아이디 찾기</a>&nbsp; <a
-						href="/Plander/findIdPw">비밀번호 찾기</a>&nbsp; <a data-toggle="modal"
+					<a href="/TMS/findIdPw">아이디 찾기</a>&nbsp; <a
+						href="/TMS/findIdPw">비밀번호 찾기</a>&nbsp; <a data-toggle="modal"
 						href="#joinModal" data-dismiss="modal">회원가입</a>
 				</div>
 			</div>

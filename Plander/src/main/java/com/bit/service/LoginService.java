@@ -14,4 +14,9 @@ public interface LoginService {
 	
 	public boolean signUp(UsersVO vo);
 	
+	public UsersVO findId(UsersVO vo);
+
+	public UsersVO findPw(UsersVO vo);
+	
+	public boolean tmpPwd(UsersVO vo);
 }
