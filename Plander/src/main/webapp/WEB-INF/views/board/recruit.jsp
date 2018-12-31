@@ -90,9 +90,10 @@
 		<input type="submit" value="검색">
 		<input type="hidden" name="cntPerPage" value="${page.cntPerPage }">
 	</form>
-	<!--  -->
-	
-	<input type="button" value="글쓰기" id="write" onclick="write_go()">
+	<!-- 글쓰기 -->
+	<c:if test="${not empty usersVO }">
+		<input type="button" value="글쓰기" id="write" onclick="write_go()">
+	</c:if>
 	<br> 
 	<!-- 페이징 시작 -->
 	<div id="paging">

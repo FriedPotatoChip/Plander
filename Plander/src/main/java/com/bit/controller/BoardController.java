@@ -72,11 +72,11 @@ public class BoardController {
 	
 	// 글목록 출력 ajax
 	@RequestMapping("/boardListAjax")
-	public @ResponseBody List<BoardVO> boardListAjax(@RequestParam("nowPage")int nowPage, @RequestParam("ct_idx")int ct_idx){
+	public @ResponseBody List<BoardVO> boardListAjax(@RequestParam("nowPage")int nowPage, @RequestParam("ct_idx")int ct_idx, @RequestParam("cntPerPage")int cntPerPage){
 		
 		Map<String, Integer> map = new HashMap<>();
 		PagingVO page = new PagingVO(nowPage, 5, service.getTotal(ct_idx));
-		page.CalcPage(nowPage, 5);
+		page.CalcPage(nowPage, cntPerPage);
 		
 		map.put("start", page.getStart());
 		map.put("end", page.getEnd());

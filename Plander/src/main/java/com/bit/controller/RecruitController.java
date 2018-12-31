@@ -3,6 +3,7 @@ package com.bit.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit.domain.BoardVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
 import com.bit.domain.UsersVO;
@@ -164,7 +166,36 @@ public class RecruitController {
 		return "board/recruit";
 	}
 	
+	// 글목록 출력 ajax
+	@RequestMapping("/recruitListAjax")
+	public @ResponseBody List<RecruitVO> boardListAjax(@RequestParam("nowPage")int nowPage, @RequestParam("cntPerPage")int cntPerPage){
+		
+		Map<String, Integer> map = new HashMap<>();
+		PagingVO page = new PagingVO(nowPage, 5, service.getTotal());
+		page.CalcPage(nowPage, cntPerPage);
+		
+		
+		List<RecruitVO> list = new ArrayList<>();
+		RecruitVO vo = new RecruitVO();
+		String chkEndPage = "false";
+		String chkStartPage = "false";
+		if (page.getNowPage() != 1) {
+			chkStartPage = "true";
+		}
+		if (page.getNowPage() != page.getLastPage()) {
+			chkEndPage = "true";
+		}
+		vo.setRc_title(chkEndPage);
+		vo.setRc_content(chkStartPage);
+		list.add(vo);
+		
+		List<RecruitVO> listPage = service.getListPage(page);
+		list.addAll(listPage);
+		
+		return list;
+	}
 	
+	/* 댓글 관련 시작 */
 	// 모집글 댓글 입력
 	@PostMapping("/registerComm")
 	public @ResponseBody String registerComm(CommentsVO vo) {
@@ -244,6 +275,7 @@ public class RecruitController {
 			return "fail";
 		}
 	}
+	/* 댓글 관련 끝 */
 	
 	
 	
