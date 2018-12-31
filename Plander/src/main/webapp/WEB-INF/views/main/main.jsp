@@ -4,14 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Main 화면</title>
 
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link href="/resources/css/map.css">
 <link href="/resources/css/main.css" rel="stylesheet">
 
 
@@ -23,14 +21,14 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
-
 <style>
-/* body {
+body {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
 	font-size: 1.2rem;
-} */
+}
+
 .page-content {
 	overflow-y: hidden;
 	width: 100%;
@@ -122,29 +120,56 @@
 .p {
 	font-size: 90%;
 }
-</style>
-</head>
-<!-- <body>
-	<div class="page-content home-1 active"
-		style="height: -webkit-fill-available;">
-		<div class="content">
-			<h1>거북이의 기적에 오신걸 환영합니다~!!!</h1>
-			<h2>
-				스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
-			</h2>
-			<div class="button">
-				<a href="#"> 
-					<span class="text1">Login</span>
-				</a> 
-				<a href="#"> 
-					<span class="text2">Learn More</span>
-				</a>
-			</div>
-		</div>
-	</div>
 
-</body> -->
-<body onload="initialize()">
+#map {
+	height: 400px;
+	width: 70%;
+	margin:auto;
+}
+
+.controls {
+	margin-top: 10px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input, #destination-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 200px;
+}
+
+#origin-input:focus, #destination-input:focus {
+	border-color: #4d90fe;
+}
+
+#mode-selector {
+	color: #fff;
+	background-color: #4d90fe;
+	margin-left: 12px;
+	padding: 5px 11px 0px 11px;
+}
+
+#mode-selector label {
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 300;
+}
+</style>
+
+</head>
+
+<body>
 	<!-- Header -->
 	<c:if test="${empty sessionScope.usersVO }">
 		<jsp:include page="/commons/header.jsp" />
@@ -157,17 +182,7 @@
 			<jsp:include page="/commons/adminLoginheader.jsp" />
 		</c:if>
 	</c:if>
-	<%-- <c:choose>
-		<c:when test="${not empty user }">
-			<jsp:include page="/commons/loginheader.jsp" />
-		</c:when>
-		<c:when test="${not empty admin }">
-			<jsp:include page="/commons/adminLoginheader.jsp" />
-		</c:when>
-		<c:otherwise>
-			<jsp:include page="/commons/header.jsp" />
-		</c:otherwise>
-	</c:choose> --%>
+
 
 	<!-- Navigation -->
 	<!-- <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -272,13 +287,17 @@
 				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
 					height="auto">
 				<h3>지점 B</h3>
-				<p>Built with the latest version of Bootstrap, Bootstrap</p>
+				<p>
+					서울 서대문구 연세로5나길 8, <br> <strong>지번</strong> 서울 서대문구 창천동 57-23
+				</p>
 			</div>
 			<div class="col-sm-12 col-md-4">
 				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
 					height="auto">
 				<h3>지점 C</h3>
-				<p>Built with the latest version of CSS, CSS3</p>
+				<p>
+					서울 서대문구 연세로5나길 14 지하 1층, <br> <strong>지번</strong> 서울 서대문구 창천동 62-59 지하 1층
+				</p>
 			</div>
 		</div>
 		<hr class="my-4">
@@ -313,29 +332,34 @@
 	</figure>  -->
 
 	<!--- Emoji Section -->
-	<button class="fun" data-toggle="collapse" data-target="#emoji">click
-		for fun</button>
+	<button class="fun" data-toggle="collapse" data-target="#emoji">본인의 집에서 스터디룸까지 오는 방법은?</button>
 	<div id="emoji" class="collapse">
 		<div class="container-fluid padding">
 			<div class="row text-center">
-				<div class="col-sm-6 col-md-3">
-					<!-- <img class="gif" src="img/gif/panda.gif"> -->
-					<div id="Map">
-						<div id="map_canvas" style="width: auto; height: auto; margin: auto"></div>
+				<div class="col-sm-6 col-md-4">
+					<input id="origin-input" class="controls" type="text"
+						placeholder="Enter an origin location"> <input
+						id="destination-input" class="controls" type="text"
+						placeholder="Enter a destination location">
+
+					<div id="mode-selector" class="controls">
+						<input type="radio" name="type" id="changemode-walking" checked="checked"> 
+						<label for="changemode-walking">Walking</label>
+
+						<input type="radio" name="type" id="changemode-transit" checked="checked"> 
+						<label for="changemode-transit">Transit</label> 
+						
+						<input type="radio" name="type" id="changemode-driving">
+						<label for="changemode-driving">Driving</label>
 					</div>
 				</div>
-				<div class="col-sm-6 col-md-3">
-					<img class="gif" src="img/gif/poo.gif">
-				</div>
-				<div class="col-sm-6 col-md-3">
-					<img class="gif" src="img/gif/unicorn.gif">
-				</div>
-				<div class="col-sm-6 col-md-3">
-					<img class="gif" src="img/gif/chicken.gif">
-				</div>
+				<div id="map"></div>
 			</div>
+			<div class="col-sm-6 col-md-4"></div>
+			<div class="col-sm-6 col-md-4"></div>
 		</div>
 	</div>
+
 	<!--- Meet the team -->
 	<div class="container-fluid padding">
 		<div class="row welcome text-center">
@@ -459,9 +483,154 @@
 		</div>
 	</div>
 	</footer>
+	<script>
+		function initialize() {
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJlm_fQlgR8usBba9QaWXX_p2jM7gpfrc&sensor=false&libraries=places"></script>
-<script src="/resources/js/map.js"></script>
-<script src="/resources/js/map2.js"></script>
+			var LatLng = new google.maps.LatLng(37.5582, 126.9376);
+
+			var mapProp = {
+
+				center : LatLng, // 위치
+
+				zoom : 17, // 어느정도까지 세세하게 볼 것인지.
+
+				mapTypeControl : false,
+
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+
+			};
+
+			var map = new google.maps.Map(document.getElementById("map"),
+					mapProp);
+
+			new AutocompleteDirectionsHandler(map);
+
+			var contentString = '<h5>TMS 스터디룸</h5><br><p>공부하러오세요~</p>';
+
+			var infowindow = new google.maps.InfoWindow({
+				content : contentString
+			});
+
+			var myIcon = new google.maps.MarkerImage(
+					"/resources/images/student.png", null, null, null,
+					new google.maps.Size(40, 40));
+
+			var marker = new google.maps.Marker({
+
+				position : LatLng,
+
+				map : map,
+
+				icon : myIcon,
+
+				draggable : true,
+				animation : google.maps.Animation.DROP
+
+			});
+
+			marker.addListener('click', function() {
+				infowindow.open(map, marker);
+			});
+
+		}
+		function AutocompleteDirectionsHandler(map) {
+			this.map = map;
+			this.originPlaceId = null;
+			this.destinationPlaceId = null;
+			this.travelMode = 'WALKING';
+			var originInput = document.getElementById('origin-input');
+			var destinationInput = document.getElementById('destination-input');
+			var modeSelector = document.getElementById('mode-selector');
+			this.directionsService = new google.maps.DirectionsService;
+			this.directionsDisplay = new google.maps.DirectionsRenderer;
+			this.directionsDisplay.setMap(map);
+
+			var originAutocomplete = new google.maps.places.Autocomplete(
+					originInput, {
+						placeIdOnly : true
+					});
+			var destinationAutocomplete = new google.maps.places.Autocomplete(
+					destinationInput, {
+						placeIdOnly : true
+					});
+
+			this.setupClickListener('changemode-walking', 'WALKING');
+			this.setupClickListener('changemode-transit', 'TRANSIT');
+			this.setupClickListener('changemode-driving', 'DRIVING');
+
+			this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+			this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+			this.map.controls[google.maps.ControlPosition.TOP_LEFT]
+					.push(originInput);
+			this.map.controls[google.maps.ControlPosition.TOP_LEFT]
+					.push(destinationInput);
+			this.map.controls[google.maps.ControlPosition.TOP_LEFT]
+					.push(modeSelector);
+		}
+
+		// Sets a listener on a radio button to change the filter type on Places
+		// Autocomplete.
+		AutocompleteDirectionsHandler.prototype.setupClickListener = function(
+				id, mode) {
+			var radioButton = document.getElementById(id);
+			var me = this;
+			radioButton.addEventListener('click', function() {
+				me.travelMode = mode;
+				me.route();
+			});
+		};
+
+		AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
+				autocomplete, mode) {
+			var me = this;
+			autocomplete.bindTo('bounds', this.map);
+			autocomplete
+					.addListener(
+							'place_changed',
+							function() {
+								var place = autocomplete.getPlace();
+								if (!place.place_id) {
+									window
+											.alert("Please select an option from the dropdown list.");
+									return;
+								}
+								if (mode === 'ORIG') {
+									me.originPlaceId = place.place_id;
+								} else {
+									me.destinationPlaceId = place.place_id;
+								}
+								me.route();
+							});
+
+		};
+
+		AutocompleteDirectionsHandler.prototype.route = function() {
+			if (!this.originPlaceId || !this.destinationPlaceId) {
+				return;
+			}
+			var me = this;
+
+			this.directionsService.route({
+				origin : {
+					'placeId' : this.originPlaceId
+				},
+				destination : {
+					'placeId' : this.destinationPlaceId
+				},
+				travelMode : this.travelMode
+			}, function(response, status) {
+				if (status === 'OK') {
+					me.directionsDisplay.setDirections(response);
+				} else {
+					window.alert('Directions request failed due to ' + status);
+				}
+			});
+		};
+	</script>
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6yCulCcEhKXGw1lWxeRZ8_qyDmiB5Ttk&libraries=places&callback=initialize"
+		async defer></script>
 </body>
 </html>
