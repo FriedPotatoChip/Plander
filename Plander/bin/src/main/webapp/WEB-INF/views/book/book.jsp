@@ -58,29 +58,64 @@
 	<table border="1px solid" style="width: 100%;">
 		<thead>
 			<tr>
-				<td width="30%;"></td>
-				<th width="35%;" class="center">개인석(1인)</th>
-				<th width="35%;" class="center">4인/8인/12인</th>
+				<td width="10%;"></td>
+				<th width="10%;" class="center">개인석(1인)</th>
+				<th width="10%;" class="center">4인실</th>
+				<th width="10%;" class="center">8인실</th>
+				<th width="10%;" class="center">12인실</th>
 			</tr>
 		</thead>
 		<tr>
 			<td>평일 8:00 ~ 18:00</td>
-			<td class="center">1시간 1,900원</td>
 			<td class="center">1시간 1,500원</td>
+			<td class="center">1시간 1,800원</td>
+			<td class="center">1시간 2,000원</td>
+			<td class="center">1시간 2,200원</td>
 		</tr>
 		<tr>
-			<td>평일 18:00 이후</td>
+			<td>평일 18:00 ~ 22:00</td>
 			<td class="center">1시간 1,800원</td>
-			<td class="center">1시간 2,500원</td>
+			<td class="center">1시간 2,000원</td>
+			<td class="center">1시간 2,000원</td>
+			<td class="center">1시간 2,200원</td>
 		</tr>
 		<tr>
-			<td>주말/공휴일</td>
-			<td class="center">1시간 2,500원</td>
+			<td>주말(토,일)</td>
 			<td class="center">1시간 1,800원</td>
+			<td class="center">1시간 2,000원</td>
+			<td class="center">1시간 2,300원</td>
+			<td class="center">1시간 2,500원</td>
+		</tr>
+	</table>
+	<hr>
+	<p>정기 이용권(1인실)</p>
+	<table style="width: 100%;">
+		<tr>
+			<th width="25%">정기권 2주</th>
+			<td width="75%">18,000원 (사물함 선택 시 +2,000원)</td>
+		</tr>
+		<tr>
+			<th>정기권 1개월</th>
+			<td>45,000원 (사물함 제공)</td>
+		</tr>
+		<tr>
+			<th>야간권(22:00 ~ 다음날 8:00)</th>
+			<td>12,000원</td>
 		</tr>
 	</table>
 </div>
 <br>
+<script>
+	function book(frm) {
+		var title = "bookingPage";
+		window.open("", title, "width=1200, height=700");
+		
+		frm.target = title;
+		frm.action = "/TMS/book/booking";
+		frm.submit();
+	}
+
+</script>
 
 <div style="box-sizing: border-box;">
 	<h3>1호점</h3>
@@ -90,9 +125,10 @@
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do1.jpg" style="width: auto; height: auto;">
 		</div>
 		<br>
-		<form method="post" action="/TMS/book/booking" onsubmit="">
+		<form method="post">
 			<input type="hidden" name="br_idx" value="1">
-			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+			<button type="button" class="btn btn-outline-secondary"
+				style="float: right;" onclick="book(this.form)">예약하기</button>
 		</form>
 	</div> <!-- boxoutside 끝 -->
 </div> <!-- 1 호점 끝 -->
@@ -106,9 +142,10 @@
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do2.jpg" style="width: auto; height: auto;">
 		</div>
 		<br>
-		<form method="post" action="/TMS/book/booking" onsubmit="">
+		<form method="post">
 			<input type="hidden" name="br_idx" value="2">
-			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+			<button type="button" class="btn btn-outline-secondary"
+				style="float: right;" onclick="book(this.form)">예약하기</button>
 		</form>
 	</div> <!-- boxoutside 끝 -->
 </div> <!-- 2 호점 끝 -->
@@ -122,9 +159,10 @@
 			<img alt="힘이없을때는 경수를 보자" src="/resources/images/do3.jpeg" style="width: auto; height: auto;">
 		</div>
 		<br>
-		<form method="post" action="/TMS/book/booking" onsubmit="">
-			<input type="hidden" name="br_idx" value="3">
-			<button type="submit" class="btn btn-outline-secondary" style="float: right;">예약하기</button>
+		<form method="post">
+			<input type="button" name="br_idx" value="3">
+			<button type="submit" class="btn btn-outline-secondary"
+				style="float: right;" onclick="book(this.form)">예약하기</button>
 		</form>
 	</div> <!-- boxoutside 끝 -->
 </div> <!-- 3 호점 끝 -->

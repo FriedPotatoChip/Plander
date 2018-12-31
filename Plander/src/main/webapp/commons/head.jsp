@@ -34,8 +34,9 @@
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 
 <!-- 제이쿼리 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
 	function list(page) {
 		location.href = "/TMS/my/my_recruit?curPage=" + page;
@@ -50,7 +51,7 @@
 	margin: 0;
 }
 
-.normal {
+.normal { 
 	font-weight: 400
 }
 

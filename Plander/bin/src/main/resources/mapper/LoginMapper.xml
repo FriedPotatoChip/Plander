@@ -17,14 +17,17 @@
 		SELECT * FROM USERS WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
 	
-	
-	
+	<!-- 일반 회원가입 -->
+	<insert id="insertUser" parameterType="com.bit.domain.UsersVO">
+		INSERT INTO USERS(U_IDX, ID, PASSWORD, NAME, REGDATE, PHONE, EMAIL, ZIPNO, ROADADDRPART1, ADDRDETAIL)
+					VALUES(USERS_SEQ.NEXTVAL, #{id}, #{password}, #{name}, sysdate, #{phone}, #{email}, #{zipNo}, #{roadAddrPart1}, #{addrDetail})
+	</insert>
+		
 	<!-- api 회원가입 -->
 	<insert id="insertApi" parameterType="com.bit.domain.UsersVO">
 		INSERT INTO USERS (U_IDX, ID, NAME, REGDATE, PHONE, EMAIL, API_ID, ZIPNO, ROADADDRPART1, ADDRDETAIL)
 		VALUES (USERS_SEQ.NEXTVAL, #{id}, #{name}, sysdate, #{phone}, #{email}, #{api_id}, #{zipNo}, #{roadAddrPart1}, #{addrDetail})
 	</insert>	
-	
 	
 	
 	

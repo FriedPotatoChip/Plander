@@ -7,11 +7,11 @@
 	<thead>
 		<tr>
 			<th>예약번호</th>
-			<th>좌석번호</th>
-			<th>지점명</th>
+			<th>지점</th>
 			<th>좌석종류</th>
-			<th>사용기한</th>
+			<th>좌석번호</th>
 			<th>등록일</th>
+			<th>사용기한</th>
 		</tr>
 	</thead>
 
@@ -28,15 +28,16 @@
 				<c:forEach var="seat" items="${list }">
 					<tr>
 						<td>${seat.booknum }</td>
-						<td>${seat.s_col } ${seat.s_row }</td>
 						<td>${seat.br_name }</td>
 						<td>${seat.sct_name }</td>
-						<td>${seat.start_time } - ${seat.end_time }</td>
+						<td>${seat.s_col } ${seat.s_row }</td>
 						<td>${seat.bk_regdate }</td>
+						<td>${seat.start_time } - ${seat.end_time }</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 	</tbody>
+
 </body>
 </html>
