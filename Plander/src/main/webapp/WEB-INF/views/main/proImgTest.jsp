@@ -6,12 +6,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/js/Jcrop.js"></script>
-<link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/css/Jcrop.css" type="text/css">
+<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
+<link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css" type="text/css" />
 <script>
+	
+$(document).ready(function() {
+    $("#imgInput").on("change", fileChange);
+});
+	var jcrop_api;
+	var target;
 //callback function
-$(document).ready(function(){
-	var showCoords = function(c)
+	var showCoords = function(c) 
 	{
 	    $('#x').val(c.x);
 	    $('#y').val(c.y);
@@ -21,24 +26,11 @@ $(document).ready(function(){
 	    window.y = c.y;
 	    window.w = c.w;
 	    window.h = c.h;
-	};
-	
-	// JCrop 호출
-	$('#img').Jcrop({
-	    setSelect: [0,0,100,100],
-	    onChange: showCoords, 
-	    onSelect: showCoords,
-		aspectRatio: 1
-	});
-	
-	
-	//
-$(document).ready(function() {
-    $("#imgInput").on("change", fileChange);
-});
+	}; 
 
 	function fileChange(e) {
 		e.preventDefault();
+		console.log("이미지 온체인지"); 
 	
 	
 		var files = e.target.files;
@@ -47,7 +39,7 @@ $(document).ready(function() {
 	    filesArr.forEach(function(f) {
 	        if(!f.type.match("image.*")) {
 	            alert("확장자는 이미지 확장자만 가능합니다.");
-	            return;
+	            return false;
 	        }
 	
 	        sel_file = f;
@@ -55,69 +47,48 @@ $(document).ready(function() {
 	        var reader = new FileReader();
 	        reader.onload = function(e) {
 	            $("#profileImg").attr("src", e.target.result);
-	            
-	        }
+	            target = e.target.result;
+	        } 
 	        reader.readAsDataURL(f); 
-	        
-	    	$('#profileImg').Jcrop({
+
+	    }); 
+	}
+$(function(){
+	 var cnt = 1;
+	$("#profileImg").on("load", function(){
+		console.log("jcrop: "+ jcrop_api); 
+		console.log("이미지 온로드");
+		
+		if (cnt == 1){
+	        $('#profileImg').Jcrop({
 	    	    setSelect: [0,0,100,100],
 	    	    onChange: showCoords, 
 	    	    onSelect: showCoords,
 	    		aspectRatio: 1
-	    	});
-	    });
-	    
-	    window.file = files[0]
-	    console.log("파일: "+ file);
-	    
-
-	    
-	    
-	}
-})
-</script>
-<script>
-function sendFile() {
-    var form_data = new FormData();
-    form_data.append('file', file);
-	form_data.append('x', x);
-	
-	
-    console.log("폼데이터: "+ form_data);
-    $.ajax({
-        data: form_data, 
-        type: "POST",
-        url: '/TMS/profileUpload',
-        cache: false,
-        contentType: false,
-        enctype: 'multipart/form-data',
-        processData: false,
-        success: function(url) {
-        	setTimeout(function(){
-	        	url = '/resources/upload'+url;
-	        	console.log("url: "+ url);
-	          $(el).summernote('editor.insertImage', url);
-	          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        	}, 3000)
-        }
-      });
-  }
-</script>
+	        }, function(){
+	        	jcrop_api = this;
+	        })
+		} else {
+			jcrop_api.setImage(target);
+		}
+        cnt ++;
+	})
+});
+</script> 
 </head>
 <body>
-<form action="/crop">
-</form>
 
-
-<form id="form" name="imgForm">
-    <input type='file' name="file" id="imgInput" />
-     <input type="text" name="x" id="x" />
-     <input type="text" name="y" id="y" />
-     <input type="text" name="w" id="w" />
-     <input type="text" name="h" id="h" />
-</form>
-    <img id="profileImg" src="#" alt="your image" />
- <input type="button" value="전송" onclick="sendFile()">
+<form id="form" action="/TMS/profileUpload" name="imgForm" method="post" enctype="multipart/form-data" onclick="">
+	<input type='file' name="file" id="imgInput" />
+	<input type="text" name="x" id="x" />
+	<input type="text" name="y" id="y" />
+	<input type="text" name="w" id="w" />
+	<input type="text" name="h" id="h" />
+	<input type="submit" value="수정">
+</form> 
+	<img id="profileImg" src="#">
+	
+	<input type="button" value="전송" onclick="sendFile()">
 
 
 </body>

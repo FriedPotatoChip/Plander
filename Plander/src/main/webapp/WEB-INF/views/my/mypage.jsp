@@ -3,10 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
+<!-- Ajax -->
+<!-- Jcrop(사진 크롭) -->
+<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
+<link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css" type="text/css" />
+<!-- Jcrop 끝 -->
 <style>
 .navs {
 	height: 60px;
-}
+} 
 
 .nav_btn {
 	margin-right: 10px;
@@ -32,6 +37,7 @@ h3 {
 .user:hover {
 	opacity: 0.5;
 }
+.user {  border-radius: 50%; }
 
 .user_name {
 	margin-top: 10px;
@@ -78,6 +84,7 @@ h3 {
 #modal_table td {
 	width: 50%;
 }
+.description { font-size: 0.7em; color: gray; }
 </style>
 </head>
 
@@ -91,9 +98,15 @@ h3 {
 
 	<div class="profile">
 		<hr>
+		<c:if test='${empty usersVO.user_profileImagePath }'>
 		<img class="user" src="/resources/images/users.png" alt="user"
 			data-toggle="modal" data-target="#profileModal" />
-		<h5 class="user_name">${user.name }님</h5>
+		</c:if>
+		<c:if test='${not empty usersVO.user_profileImagePath }'>
+		<img class="user" src="${usersVO.user_profileImagePath }" alt="user"
+			data-toggle="modal" data-target="#profileModal" />
+		</c:if> 
+		<h5 class="user_name">${usersVO.name }님</h5>
 		<hr>
 	</div>
 
@@ -110,13 +123,23 @@ h3 {
 					</button>
 				</div>
 				<div class="modal-body mx-auto">
-					<img class="user" src="/resources/images/users.png" alt="user"
-						onclick="changeProfile()" />
+					<c:if test='${empty usersVO.user_profileImagePath }'>
+						<img class="user hideFade" src="/resources/images/users.png" alt="user"
+							data-toggle="modal" data-target="#updateProfile" />
+					</c:if>
+					<c:if test='${not empty usersVO.user_profileImagePath }'>
+						<img class="user hideFade" src="${usersVO.user_profileImagePath }" alt="user"
+							data-toggle="modal" data-target="#updateProfile" />
+					</c:if> 
 				</div>
 				<div class="modal-footer mx-auto">
-					<button type="button" class="btn btn-outline-danger mx-1">사진변경</button>
+					<button type="button" class="btn btn-outline-danger mx-1 hideFade" data-toggle="modal" data-target="#updateProfile">사진변경</button>
 					<button type="button" class="btn btn-outline-warning mx-1">삭제</button>
 				</div>
+				<div>
+					
+				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -259,11 +282,63 @@ h3 {
 		</div>
 	</div>
 
+
+
+
+
+<!-- 프로필 사진 업로드 모달 -->
+<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content"> 	
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">프로필 사진 업로드</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body centerModal">
+      		
+			<form id="form" action="/TMS/profileUpload" name="imgForm" method="post" enctype="multipart/form-data" onclick="">
+				<input type='file' name="file" id="imgInput" />
+				<p class="description">
+					프로필 사진은 jpg, png, jpeg파일만 가능<br>
+					업로드 가능한 원본 이미지 사이즈는 최대 5MB<br>
+					가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br>
+					프로필 이미지로 적용할 범위를 <b>반드시</b> 선택하여 주세요
+				</p> 
+				<hr> 
+				<input type="hidden" name="x" id="x" />
+				<input type="hidden" name="y" id="y" />
+				<input type="hidden" name="w" id="w" />
+				<input type="hidden" name="h" id="h" />
+				<input type="hidden" name="u_idx" value="${usersVO.u_idx }">
+			</form>
+
+			 
+			<c:if test='${empty usersVO.user_profileImagePath }'>
+				<img id="profileImg" src="/resources/images/users.png" alt="user" />
+			</c:if>
+			<c:if test='${not empty usersVO.user_profileImagePath }'>
+				<img id="profileImg" src="${usersVO.user_profileImagePath }" alt="user" />
+			</c:if> 
+      </div>
+      <div class="modal-footer">
+        <input type="button" class="btn btn-secondary" data-dismiss="modal" value="닫기">
+        <input type="button" class="btn btn-primary" value="수정" onclick="submitProfile()">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 프로필 사진 업로드 모달 끝 -->
+
+
+
+
+
+
+
+
 	<script>
-		//프로필 사진 변경
-		function changeProfile(){
-			
-		}
 	
 		//주소검색
 		function goPopup() {
@@ -318,6 +393,91 @@ h3 {
 			});
 		}
 	</script>
+	<!-- 프로필 사진 업로드 -->
+	<script>
+	var jcrop_api;
+	var target;	
+	//callback function
+		var showCoords = function(c)
+		{
+		    $('#x').val(c.x);
+		    $('#y').val(c.y);
+		    $('#w').val(c.w);
+		    $('#h').val(c.h);
+		    window.x = c.x;
+		    window.y = c.y;
+		    window.w = c.w;
+		    window.h = c.h;
+		};
+			
+		$(document).ready(function() {
+		    $("#imgInput").on("change", fileChange);
+		    
+		    $(".hideFade").on("click", function(){
+		    	$(".fade").hide();
+		    })
+		});
+		
+		function fileChange(e) {
+			e.preventDefault();
+			var files = e.target.files;
+		    var filesArr = Array.prototype.slice.call(files);
+		
+		    filesArr.forEach(function(f) {
+		        if(!(f.type.match("image/png")||f.type.match("image/jpeg")||f.type.match("image/jpg"))) {
+		            alert("프로필 이미지는 jpg, jpeg, png 파일만 가능합니다.");
+		            return false;
+		        }
+		        if (f.size > (5 * 1024 * 1024)) {
+		        	alert("업로드 가능한 최대 크기는 5MB입니다")
+		        	return false;
+		        }
+		        sel_file = f;
+				
+		        var reader = new FileReader();
+		        reader.onload = function(e) {
+		        	var imgPre = new Image();
+		        	imgPre.src = e.target.result;
+		        	imgPre.onload = function(){
+			        	if (this.width > 1100){
+			        		alert("업로드 가능한 이미지의 최대 가로크기는 1100px입니다")
+			        		return false;
+			        	}else {
+				            $("#profileImg").attr("src", e.target.result);
+				            target = e.target.result;
+			        	} 
+		        	}
+		        } 
+		        reader.readAsDataURL(f); 
 
+		    }); 
+		}
+			
+		$(function(){
+			 var cnt = 1;
+			 var width = this.width;
+			 var height = this.height;
+
+			$("#profileImg").on("load", function(){
+				if (cnt == 1){
+			        $('#profileImg').Jcrop({
+			    	    setSelect: [0,0,100,100],
+			    	    onChange: showCoords, 
+			    	    onSelect: showCoords,
+			    		aspectRatio: 1
+			        }, function(){
+			        	jcrop_api = this;
+			        })
+				} else {
+					jcrop_api.setImage(target);
+				}
+		        cnt ++;
+			})
+		});
+		
+		function submitProfile(){
+			$("form[name='imgForm']").submit();
+		}
+	</script>
 </body>
 </html>

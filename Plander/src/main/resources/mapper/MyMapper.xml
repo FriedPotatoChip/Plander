@@ -207,5 +207,13 @@
 		ct_idx = 2
 		and b_idx = #{b_idx}
 	</select>
-
+	
+	<!-- 프로필 사진 업데이트 -->
+	<update id="updateProfileImg" parameterType="com.bit.domain.UsersVO">
+		UPDATE USERS SET USER_PROFILEIMAGEPATH = #{user_profileImagePath} WHERE U_IDX = #{u_idx}
+	</update>
+	
+	
+	
+	
 </mapper>

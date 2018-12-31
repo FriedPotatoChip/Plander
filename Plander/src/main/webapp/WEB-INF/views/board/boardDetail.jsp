@@ -16,67 +16,127 @@
 	.marginLi { margin-left: 5px; margin-right: 5px; }	
 	.now { background-color: orange; }
 	.commDate { font-size: 0.75em; color: gray;}
+	.hoverPointer:hover{ cursor: pointer; }
+	#board, #comments { border: 1px solid black; }
+	.comm { border: 1px solid blue; }
+	.user { width: 30px; height: 30px; border-radius: 50%; }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
 
 $(document).ready(function(){
-	
+	window.category = ""; 
 	if ('${board.ct_idx}' == 1){
 		$("#boardType").html("공지사항");
+		category = "공지사항";
 	}else if ('${board.ct_idx}' == 2){
 		$("#boardType").html("자유게시판");	
+		category = "자유게시판";
 	}else if ('${board.ct_idx}' == 3){
 		$("#boardType").html("후기게시판");	
+		category = "후기게시판";
 	}else if ('${board.ct_idx}' == 4){
-		$("#boardType").html("QNA");
+		category = "QNA";
 	}
+		$("#boardType").html(category);
 	<!-- 댓글 페이징 -->
 	paging(1);
-
+	
+	
+	boardList(${nowPage});
+	
+	
 });
+	<!-- 상세글 하단에 글목록 출력 -->
+	function boardList(nowPage){
+
+		$.ajax({
+			url: "/boardListAjax",
+			type: 'get',
+			dataType: "json",
+			data: {'nowPage':nowPage, 'ct_idx':'${board.ct_idx}', 'cntPerPage':${cntPerPage}},
+			success: function(list){
+				
+				var html = "";
+				html += "<b>"+ category+ "</b><hr>";
+				html += "<table>"
+				$.each(list,function(index, value){
+					if (index == 0){ 
+						window.chkEndPage = value.b_title;
+						window.chkStartPage = value.b_content;
+					} else{
+						var regdate = new Date(value.b_regdate);
+						var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
+						html += "<tr>";
+						html += "<td width='80%'>";
+						if ('${board.b_idx}' == value.b_idx){
+							html += "<b>";
+						}
+						html += "<a href='/TMS/boardDetail?idx="+value.b_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
+						html += value.b_title;
+						if (value.cnt != 0){
+							html += "["+value.cnt+"]";
+						} 
+						html += "</a>";
+						if ('${board.b_idx}' == value.b_idx){
+							html += "</b>";
+						}
+						html += "</td>";
+						html += "<td>"; 
+						html += date; 					
+						html += "</td>";
+						html += "</tr>";
+					}
+				})
+				html += "</table>";
+				html += "<hr>";
+				if (chkStartPage == "true"){
+					html += "<a class='hoverPointer' onclick='boardList("+(nowPage - 1)+")'>&lt;이전</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+				}
+				if (chkEndPage == "true"){
+					html += "<a class='hoverPointer' onclick='boardList("+(nowPage + 1)+")'>다음&gt;</a>";
+				}
+				
+				
+				$("#boardListAjax").html(html);
+				
+			}, error: function(error){
+				console.log("error발생: "+ error);
+			}
+		});
+		
+	}
 </script>
 </head>
 <body> 
 	
  	<h3>모집글 상세조회 페이지</h3>
 	
-	<div>
+	<div id="board">
 		<a href="/TMS/board?ct_idx=${board.ct_idx }&nowPage=${nowPage }&cntPerPage=${cntPerPage}" style="font-size: 0.8em;"><strong id="boardType"></strong></a>
 		<h3>${board.b_title }</h3>
-		<a href="#">${board.id }</a> 
+		<div>
+			<c:if test='${empty board.user_profileImagePath }'>
+				<img class="user" src="/resources/images/users.png" alt="user"/>
+			</c:if>
+			<c:if test='${not empty board.user_profileImagePath }'>
+				<img class="user" src="${board.user_profileImagePath }" alt="user"/>
+			</c:if> 
+			<span>${board.id }</span>
+		</div> 
 		<p><fmt:formatDate value="${board.b_regdate }" pattern="yyyy.MM.dd HH:mm"/></p>
 		<hr>
 		<div id="content">${board.b_content }</div>
 		<br><br><br>
-	</div>	
-	
-	<div>
-		
 		<c:if test="${(sessionScope.usersVO.id == board.id) || sessionScope.usersVO.rank == 1 }">
 			<button onclick="modify()">수정하기</button>
 			<button onclick="deleteRec()">삭제하기</button>
 		</c:if>
-		
-	</div>
+	</div>	
+
+	<!-- 댓글 출력 -->
 	<div id="comments">
-		<h4>댓글</h4>
-		<hr>
-		<div class="comm comment">
-			<div><strong>작성자</strong></div>
-			<div>댓글 내용</div>
-			<div>작성일</div>
-			<div><button>답글</button></div>
-		</div>
-		
-		<div class="comm c-comment">
-		
-			<div>&rdsh; <strong>작성자</strong></div>
-			<div>댓글 내용</div>
-			<div>작성일</div>
-			<div><button>답글</button></div>
-		</div>
 	</div>
 	
 	<!-- 페이징 시작 -->
@@ -89,14 +149,30 @@ $(document).ready(function(){
 	<br>
 	
 	<!-- 댓글 작성 -->
-	<div>
-		<form name="commentAjax">
-			<input type="text" value="${usersVO.id }" name="id" readonly><br>
-			<textarea rows="8" cols="80" name="c_content" id="c_content" required></textarea>
-			<input type="hidden" value="${board.b_idx }" name="b_idx">
-			<input type="button" onclick="registerComm()" value="댓글단다">
-		</form>
-	</div>
+	<c:if test="${not empty usersVO }">
+		<div>
+			<form name="commentAjax">
+				<c:if test='${empty usersVO.user_profileImagePath }'>
+					<img class="user" src="/resources/images/users.png" alt="user"/>
+				</c:if>
+				<c:if test='${not empty usersVO.user_profileImagePath }'>
+					<img class="user" src="${usersVO.user_profileImagePath }" alt="user"/>
+				</c:if> 
+				<input type="text" value="${usersVO.id }" name="id" readonly><br>
+				<textarea rows="8" cols="80" name="c_content" id="c_content" required></textarea>
+				<input type="hidden" value="${board.b_idx }" name="b_idx">
+				<input type="button" onclick="registerComm()" value="댓글단다">
+			</form>
+		</div>
+	</c:if>
+	
+	<br>
+	<br>
+	<br>
+	<!-- 글 목록 보여주기 (5개씩만) -->
+	<div id="boardListAjax">
+	</div>	
+	
 	
 <script>
 	/* 글 삭제 */
@@ -187,13 +263,25 @@ $(document).ready(function(){
 					var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
 				    if (value.level == 1){
 					    html += "<div class='comm comment' id='comm"+value.c_idx+"'>";
-						html += "<div class='comm_id'><strong id='' class='"+value.c_idx+"'>"+value.id+"</strong></div>";
+						html += "<div class='comm_id'>";
+						if (value.user_profileImagePath == null){
+							html += "<img class='user' src='/resources/images/users.png' alt='user'/>";
+						} else {
+							html += "<img class='user' src='"+value.user_profileImagePath+"' alt='user'/>";
+						}
+						html += "<strong id='' class=''>"+value.id+"</strong></div>";
 						html += "<div>"+value.c_content+"</div>";
 						arrC_idx.push(value.c_idx);
 						arrId.push(value.id);
 				    } else {
 				    	html += "<div class='comm c-comment' id='comm"+value.c_idx+"'>";
-				    	html += "<div>&rdsh; <strong id=''>"+value.id+"</strong></div>";
+				    	html += "<div>&rdsh; ";
+						if (value.user_profileImagePath == null){
+							html += "<img class='user' src='/resources/images/users.png' alt='user'/>";
+						} else {
+							html += "<img class='user' src='"+value.user_profileImagePath+"' alt='user'/>";
+						}
+				    	html += "<strong id=''>"+value.id+"</strong></div>";
 				    	html += "<div><strong class='"+value.rp_idx+"'></strong>"+value.c_content+"</div>";
 						arrC_idx.push(value.c_idx);
 						arrId.push(value.id);
