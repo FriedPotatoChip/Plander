@@ -39,17 +39,18 @@
 </head>
 <body>
 <!-- 헤더 -->
-<c:choose>
-	<c:when test="${not empty usersVO }">
+<!-- Header -->
+<c:if test="${empty sessionScope.usersVO }">
+	<jsp:include page="/commons/header.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.usersVO }">
+	<c:if test="${sessionScope.usersVO.id != 'admin' }">
 		<jsp:include page="/commons/loginheader.jsp" />
-	</c:when>
-	<c:when test="${not empty admin }">
+	</c:if>
+	<c:if test="${sessionScope.usersVO.id == 'admin' }">
 		<jsp:include page="/commons/adminLoginheader.jsp" />
-	</c:when>
-	<c:otherwise>
-		<jsp:include page="/commons/header.jsp" />
-	</c:otherwise>
-</c:choose>
+	</c:if>
+</c:if>
 <!-- 헤더 끝 --><br><br><br>
 
 <div id="container">
