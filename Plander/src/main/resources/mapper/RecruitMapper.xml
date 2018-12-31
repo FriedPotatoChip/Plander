@@ -14,10 +14,13 @@
 		<select id="getListPage" resultType="com.bit.domain.RecruitVO" parameterType="com.bit.utils.PagingVO">
 		<![CDATA[
 			SELECT * FROM (
-							SELECT ROWNUM RN, R.*, CNT 
+				SELECT ROWNUM RN, A.*
+					FROM (
+							SELECT R.*, CNT 
 							FROM RECRUIT R LEFT OUTER JOIN (SELECT RC_IDX, COUNT(*) CNT FROM COMMENTS GROUP BY RC_IDX) C
 							ON R.RC_IDX = C.RC_IDX
 							ORDER BY R.RC_IDX DESC
+						  ) A
 						  )
 			WHERE RN BETWEEN #{start} AND #{end}
 		]]>
@@ -25,7 +28,10 @@
 		
 		<!-- 글 상세 조회 -->
 		<select id="getOne" resultType="com.bit.domain.RecruitVO">
-			SELECT * FROM RECRUIT WHERE RC_IDX = #{rc_idx}
+			SELECT R.*, U.USER_PROFILEIMAGEPATH
+				FROM RECRUIT R, USERS U 
+				WHERE RC_IDX = #{rc_idx}
+				AND R.ID = U.ID
 		</select>
 		
 		<!-- 전체 글 갯수 조회 -->

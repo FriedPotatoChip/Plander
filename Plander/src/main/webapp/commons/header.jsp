@@ -37,7 +37,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
 				<!-- 삭제 -->
 				<!-- <li class="nav-item"><a class="nav-link" href="#">모집하기</a></li> -->
 				<!-- 이용안내에 넣기 -->

@@ -13,11 +13,14 @@
 		<!-- 페이징 처리 후 조회 -->
 		<select id="getListPage" resultType="com.bit.domain.BoardVO" parameterType="map">
 			SELECT * FROM (
-							SELECT ROWNUM RN, B.*, CNT
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT B.*, CNT
 							FROM BOARD B LEFT OUTER JOIN (SELECT B_IDX, COUNT(*) CNT FROM COMMENTS GROUP BY B_IDX) C
 							ON B.B_IDX = C.B_IDX
 							WHERE CT_IDX = #{ct_idx}
 							ORDER BY B.B_IDX DESC
+		     				) A
 						  )
 			WHERE RN BETWEEN #{start} AND #{end}
 		</select>
@@ -87,7 +90,10 @@
 		
 		<!-- 글 상세 조회 -->
 		<select id="getOne" resultType="com.bit.domain.BoardVO">
-			SELECT * FROM BOARD WHERE B_IDX = #{b_idx}
+			SELECT B.*, U.USER_PROFILEIMAGEPATH FROM 
+					BOARD B, USERS U 
+					WHERE B_IDX = #{b_idx}
+					AND B.ID = U.ID
 		</select>
 		
 		<!-- 전체 글 갯수 조회 -->
@@ -99,9 +105,10 @@
 				<!-- 페이징 처리 댓글 출력 -->
 		<select id="getCommList" resultType="com.bit.domain.CommentsVO" parameterType="map">
 		SELECT * FROM (
-						SELECT ROWNUM RN, LEVEL, C.* 
-						FROM COMMENTS C 
+						SELECT ROWNUM RN, LEVEL, C.*, U.USER_PROFILEIMAGEPATH
+						FROM COMMENTS C, USERS U
 						WHERE B_IDX = #{b_idx}
+						AND C.ID = U.ID
 						START WITH RP_IDX IS NULL 
 						CONNECT BY PRIOR C_IDX = RP_IDX 
 						ORDER SIBLINGS BY C_IDX ASC

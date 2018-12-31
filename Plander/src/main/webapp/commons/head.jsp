@@ -34,9 +34,8 @@
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 
 <!-- 제이쿼리 -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	crossorigin="anonymous"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
 	function list(page) {
@@ -52,7 +51,7 @@
 	margin: 0;
 }
 
-.normal {
+.normal { 
 	font-weight: 400
 }
 

@@ -24,9 +24,10 @@
 
 <script>
 	$(function() {
-		//정기권 2주 체크시 endtime 자동으로 2주 뒤 날짜 클릭 생성
-		$('#2weeks').click(function() {
-			//alert("정기권 2주 클릭");
+		$(document.getElementsByName('cabinet')).attr('disabled', true);
+		
+		//정기권 1일권 체크
+		$('#oneday').click(function() {
 			var startTime = $(document.getElementsByName('start_time')).val();
 			console.log('start_time : ' + startTime);
 			
@@ -35,6 +36,52 @@
 				$(document.getElementsByName('start_time')).focus();
 				return false;
 			} else {
+				//시작값이 있을 때
+				function getTimeStamp() {
+		
+					var d = new Date(startTime);
+					console.log('new date : ' + d);
+					console.log('date 확인 : ' + d.toLocaleString());
+					d.setDate(d.getDate() + 1);
+					var day = d.toLocaleString();
+					
+					var s = leadingZeros(d.getFullYear(), 4) + '-'
+							+ leadingZeros(d.getMonth() + 1, 2) + '-'
+							+ leadingZeros(d.getDate(), 2) + ' '
+							+ leadingZeros(d.getHours(), 2) + ':'
+							+ leadingZeros(d.getMinutes(), 2);
+		
+					return s;
+				}
+		
+				function leadingZeros(n, digits) {
+					var zero = '';
+					n = n.toString();
+		
+					if (n.length < digits) {
+						for (i = 0; i < digits - n.length; i++)
+							zero += '0';
+					}
+					return zero + n;
+				}
+				
+				console.log('1일 뒤 날짜 확인 : ' + getTimeStamp());
+				$("input[name='end_time']").prop('value', getTimeStamp());
+				$(document.getElementsByName('cabinet')).attr('disabled', true);
+			}
+		});
+		
+		//정기권 2주 체크: endtime 자동으로 2주 뒤 날짜 클릭 생성
+		$('#2weeks').click(function() {
+			var startTime = $(document.getElementsByName('start_time')).val();
+			console.log('start_time : ' + startTime);
+			
+			if (startTime =="") {
+				alert('시작 날짜를 먼저 선택해주세요.');
+				$(document.getElementsByName('start_time')).focus();
+				return false;
+			} else {
+				//시작값이 있을 때
 				function getTimeStamp() {
 		
 					var d = new Date(startTime);
@@ -62,13 +109,14 @@
 					}
 					return zero + n;
 				}
-		
+				
 				console.log('2주 뒤 날짜 확인 : ' + getTimeStamp());
-				$("input[name='end_time']").attr('value', getTimeStamp());
+				$("input[name='end_time']").prop('value', getTimeStamp());
+				$(document.getElementsByName('cabinet')).removeAttr("disabled");
 			}
 		});
 		
-		//정기권 1개월 체크시 endtime 자동으로 30일 뒤 날짜 클릭 생성
+		//정기권 1개월 체크: endtime 자동으로 30일 뒤 날짜 클릭 생성
 		$('#1month').click(function() {
 			//alert("정기권 1개월 클릭");
 			var startTime = $(document.getElementsByName('start_time')).val();
@@ -108,18 +156,22 @@
 				}
 		
 				console.log('30일 뒤 날짜 확인 : ' + getTimeStamp());
-				$("input[name='end_time']").attr('value', getTimeStamp());
+				$("input[name='end_time']").prop('value', getTimeStamp());
+				$(document.getElementsByName('cabinet')).attr('disabled', true);
 			}
 		});
 		
 		//야간권 클릭시 
 		$('#night').click(function() {
 			//일단 빈문자열 !!
-			$("input[name='end_time']").attr('value', '');
+			$("input[name='end_time']").prop('value', '');
+			$(document.getElementsByName('cabinet')).attr('disabled', true);
 		});
+		
 		//정기권 사용 안함 클릭 시 
 		$('#nope').click(function() {
-			$("input[name='end_time']").attr('value', '');
+			$("input[name='end_time']").prop('value', '');
+			$(document.getElementsByName('cabinet')).attr('disabled', true);
 		});
 		
 	});
@@ -160,7 +212,7 @@
 		
 		var chk = $(":input:radio[name=roomnum]:checked").val();
 		if (chk==null) {
-			alert("개인실/랩실 선택은 필수입니다.");
+			alert("좌석 종류(개인실/랩실) 선택은 필수입니다.");
 			return false;
 		} else if (chk==1) {
 			frm.action = "/TMS/book/oneseat";
@@ -305,40 +357,48 @@
 				</div> <!-- 달력 div -->
 			
 				<!-- 좌석 선택 -->
-				<div id="selectSeat" class="">
-					<h4>좌석 종류 선택</h4>
+				<div id="selectSeat">
+					<h4><b>이용안내</b></h4>
+				    <span>*** <b>[ 정기권 2주 ]</b> 를 구입하시는 분들 중 사물함 사용을 원하시는 분들만 체크 바랍니다.</span><br>
+				    <span>☑︎ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
+				    <span>☑ 취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
+				    <span>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</span><hr>
+					
 					<input type="hidden" name="br_idx" value="${svo.br_idx }">
 					
-					<!-- <h4><b>이용안내</b></h4>
-    <span>*** <b>[ 정기권 2주 ]</b> 를 구입하시는 분들 중 사물함 사용을 원하시는 분들만 체크 바랍니다.</span><br>
-    <span>☑︎ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
-    <span>☑ 취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
-    <span>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</span><br><br>
-    
-    <table border="1px solid;" style="width: 100%;">
-        <tr>
-            <th style="text-align: center;">좌석 종류 선택 </th>
-            <th style="text-align: center;">정기 이용권(1인실)</th>
-            <th style="text-align: center;">사물함 선택여부</th>
-        </tr>
-        <tr style="text-align: center;">
-            <td>
-                <input type="radio" id="2weeks" name="time_idx" value="100">개인석&nbsp;
-                <input type="radio" id="month" name="time_idx" value="100">랩실
-            </td>
-            <td>
-                <input type="radio" id="2weeks" name="time_idx" value="100">1일권&nbsp;
-                <input type="radio" id="month" name="time_idx" value="100">정기권 2주
-                <input type="radio" id="month" name="time_idx" value="100">정기권 1개월
-                <input type="radio" id="month" name="time_idx" value="100">야간권(22:00~08:00)
-            </td>
-            <td>
-                <input type="radio" id="2weeks" name="time_idx" value="100">사용&nbsp;
-                <input type="radio" id="2weeks" name="time_idx" value="100">사용안함
-            </td>
-        </tr>
-    </table> -->
-					
+					<table class="table table-bordered" style="width: 100%;">
+						<tr>
+							<th style="text-align: center;">좌석 종류 선택</th>
+							<th style="text-align: center;">정기 이용권(1인실)</th>
+							<th style="text-align: center;">사물함 사용여부</th>
+						</tr>
+						<tr height="70">
+							<td>
+								<div class="radio">
+									<label><input type="radio" name="roomnum" value="1">개인석</label><br>
+									<label><input type="radio" name="roomnum" value="2">랩실</label>
+								</div>
+							</td>
+							<td>
+								<div class="radio">
+									<label><input type="radio" id="nope" name="time_idx" value="0" checked="checked">정기권 사용안함</label><br>
+									<label><input type="radio" id="oneday" name="time_idx" value="100">1일권</label><br>
+									<label><input type="radio" id="2weeks" name="time_idx" value="100">정기권 2주</label><br>
+									<label><input type="radio" id="1month" name="time_idx" value="101">정기권 1개월</label><br>
+									<label><input type="radio" id="night" name="time_idx" value="102">야간권(22:00~08:00)</label>
+								</div>
+							</td>
+							<td>
+								<div>
+									<label><input type="radio" name="cabinet" value="y">사용</label><br>
+							<label><input type="radio" name="cabinet" value="n" checked="checked">사용안함</label>
+								</div>
+							</td>
+						</tr>
+						
+					</table>
+					<!-- 
+					<h4>좌석 종류 선택</h4>
 					<div class="radio">
 						<label><input type="radio" name="roomnum" value="1">개인석</label>&nbsp;
 						<label><input type="radio" name="roomnum" value="2">랩실</label>
@@ -359,6 +419,7 @@
 						<label><input type="radio" name="cabinet" value="n" checked="checked">사용안함</label><br>
 					</div>
 					<hr>
+					 -->
 					<div class="center" style="padding: 10px;">
 						<button type="button" class="btn btn-default" disabled="disabled">이전단계</button>&nbsp;
 						<button type="button" onclick="floorChk(this.form)">다음단계</button>

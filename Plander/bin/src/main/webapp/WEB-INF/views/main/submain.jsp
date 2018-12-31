@@ -1,9 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/commons/head.jsp"></jsp:include>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<meta charset="UTF-8">
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css?family=Gugi|Noto+Sans+KR"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gamja+Flower"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+<!-- 폰트 사용하기
+	font-family: 'Gugi', cursive;
+	font-family: 'Noto Sans KR', sans-serif; 
+	font-family: 'Jua', sans-serif;
+	font-family: 'Gamja Flower', cursive;
+	font-family: 'Do Hyeon', sans-serif;
+-->
 <title>거북이의기적</title>
 <style>
+body {
+	font-family: 'NanumSquare', sans-serif;
+}
+
+#title_name {
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+.normal {
+	font-weight: 400
+}
+
+.bold {
+	font-weight: 700
+}
+
+.bolder {
+	font-weight: 800
+}
+
+.light {
+	font-weight: 300
+}
 
 #linker a {
 	color: #002054;
@@ -30,7 +83,7 @@
 	<c:if test="${empty sessionScope.usersVO }">
 		<jsp:include page="/commons/header.jsp" />
 	</c:if>
-	<c:if test="${not empty sessionScope.usersVO }">
+	 <c:if test="${not empty sessionScope.usersVO }">
 		<jsp:include page="/commons/loginheader.jsp" />
 	</c:if>
 
@@ -38,7 +91,7 @@
 		style="padding-top: 10px; padding-bottom: 10px;">
 		<a class="nav-link active" href="#">운영안내</a> <a class="nav-link"
 			href="#">이용안내</a> <a class="nav-link" href="#">모집하기</a> <a
-			class="nav-link" href="#">게시판</a> <a class="nav-link" href="#">예약하기</a>
+			class="nav-link" href="#">게시판</a> <a class="nav-link" href="/TMS/book">예약하기</a>
 		<a class="nav-link" href="#">세부공간보기</a> <a class="nav-link" href="#">찾아오시는길</a>
 		<a class="nav-link" href="#" onclick="chkLogin()">모집게시판</a>
 	</div>
@@ -93,6 +146,7 @@
 				location.href = "/TMS/recruit";
 			}
 		}
+
 	</script>
 </body>
 </html>

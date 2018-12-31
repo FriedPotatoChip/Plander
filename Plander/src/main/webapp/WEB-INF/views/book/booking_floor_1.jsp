@@ -69,25 +69,28 @@
 <script>
 	$(function() {
 		var val = "";
-		$("#4room").change(function() {
+		$(".4room").change(function() {
 			document.getElementsByName('sct_idx').value = 2;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
 			$("input[name='sct_name']").attr('value', '4인실');
+			console.log("확인 : " + val);
 		});
 		
-		$("#8room").change(function() {
+		$(".8room").change(function() {
 			document.getElementsByName('sct_idx').value = 3;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
 			$("input[name='sct_name']").attr('value', '8인실');
+			console.log("확인 : " + val);
 		});
 		
-		$("#12room").change(function() {
+		$(".12room").change(function() {
 			document.getElementsByName('sct_idx').value = 4;
 			val = document.getElementsByName('sct_idx').value;
 			$("input[name='sct_idx']").attr('value', val);
 			$("input[name='sct_name']").attr('value', '12인실');
+			console.log("확인 : " + val);
 		});
 		
 	});
@@ -218,26 +221,26 @@
 			<div>
 				<div class="checkbox" style="width: 100%; display: table;">
 					<div id="4people" style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="4room" name="s_col" value="201">201호(4인실)</label></p>
+						<p><label><input type="checkbox" class="4room" name="s_col" value="201">201호(4인실)</label></p>
 					</div>
 					
 					<div id="8people" style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="8room" name="s_col" value="301">301호(8인실)</label></p>
+						<p><label><input type="checkbox" class="8room" name="s_col" value="301">301호(8인실)</label></p>
 					</div>
 					
 					<div id="8people" style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="8room" name="s_col" value="302">302호(8인실)</label></p>
+						<p><label><input type="checkbox" class="8room" name="s_col" value="302">302호(8인실)</label></p>
 					</div>
 				</div>
 				<br>
 				
 				<div class="checkbox" style="width: 100%; display: table;">
 					<div id="4people" style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="4room" name="s_col" value="202">202호(4인실)</label></p>
+						<p><label><input type="checkbox" class="4room" name="s_col" value="202">202호(4인실)</label></p>
 					</div>
 					
 					<div id="12people" style="display: inline-table; width: 53%; height: 100px; margin-right: 3%; border: 1px solid;">
-						<p><label><input type="checkbox" id="12room" name="s_col" value="401">401호(12인실)</label></p>
+						<p><label><input type="checkbox" class="12room" name="s_col" value="401">401호(12인실)</label></p>
 					</div>
 					
 					<div id="4people" style="display: inline-table; width: 15%; height: 100px; margin-right: 3%; border: 1px solid;">
@@ -274,6 +277,7 @@
 			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
+			<input type="hidden" name="s_idx" value="${bvo.s_idx }">
 		</form>
 		
 		</div> <!-- 박스 아웃사이드 끝 -->

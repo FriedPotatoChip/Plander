@@ -262,7 +262,7 @@ $(document).ready(function(){
 				var arrC_idx = new Array();
 				var arrId = new Array();
 				
-				$.each(data,function(index, value){ 
+				$.each(data,function(index, value){
 					var regdate = new Date(value.c_regdate);
 					var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
 				    if (value.level == 1){

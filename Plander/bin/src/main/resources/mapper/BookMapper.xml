@@ -34,7 +34,6 @@
 		AND SV.SCT_IDX = #{sct_idx}
 	</select>
 	
-	
 	<select id="bookroomCnt" resultType="int" parameterType="com.bit.domain.BookingVO">
 		SELECT NVL(COUNT(*),0) FROM (
 			SELECT distinct sv.* FROM SEATS_VIEW SV, BOOKING B 
@@ -45,10 +44,11 @@
 					or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
 				]]>
 			)
-			and sv.sct_idx between 2 and 4
+			and sv.roomnum = 2
 			order by sv.s_idx )
 	</select>
 	
+	<!-- 예약된 랩실 -->
 	<select id="bookroom" resultType="com.bit.domain.BookingVO">
 		SELECT distinct sv.* FROM SEATS_VIEW SV, BOOKING B 
 		WHERE sv.s_idx = b.s_idx
@@ -58,17 +58,31 @@
 				or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
 			]]>
 		)
-		and sv.sct_idx between 2 and 4
+		and sv.roomnum = 2
 		order by sv.s_idx
 	</select>	
 	
 	
-	
-	
-	<!-- 내 선택 정보 조회 -->
+	<!-- 오늘 예매자 선택 정보 조회 -->
 	<select id="myseat" resultType="com.bit.domain.BookingVO">
-		SELECT B.*, S.BR_IDX, S.S_COL, S.SCT_IDX FROM BOOKING B, SEATS S
-		WHERE B.S_IDX = S.S_IDX AND B.ID = #{id}
+		SELECT distinct sv.*, B.ID, B.START_TIME, B.END_TIME, B.BK_REGDATE, B.BOOKNUM
+		FROM SEATS_VIEW SV, BOOKING B 
+		WHERE sv.s_idx = B.S_IDX
+		AND id=#{id} and to_char(b.bk_regdate, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+	</select>
+	
+	<!-- 예약완료 -->
+	<insert id="bookOk" parameterType="com.bit.domain.BookingVO">
+		INSERT INTO BOOKING (bk_idx, id, s_idx, start_time, end_time, bk_regdate, booknum, price)
+			VALUES (
+			(select NVL(MAX(bk_idx),0)+1 from booking), #{id}, #{s_idx},
+			to_date(#{start_time}, 'YYYY-MM-DD HH24:MI'), to_date(#{end_time},'YYYY-MM-DD HH24:MI'),
+			SYSDATE, #{booknum}, #{price})
+	</insert>
+	
+	<!-- s_idx -->
+	<select id="seatnum" resultType="com.bit.domain.SeatsVO">
+		SELECT S_IDX FROM SEATS WHERE S_COL = #{s_col} AND BR_IDX = #{br_idx}
 	</select>
 	
 

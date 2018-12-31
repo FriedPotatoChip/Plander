@@ -16,6 +16,7 @@
 	.marginLi { margin-left: 5px; margin-right: 5px; }	
 	.now { background-color: orange; }
 	.commDate { font-size: 0.75em; color: gray;}
+	.user { width: 30px; height: 30px; border-radius: 50%; }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -54,8 +55,69 @@ $(document).ready(function(){
 	
 	<!-- 댓글 페이징 -->
 	paging(1);
+	<!-- 목록 출력 ajax -->
+	boardList(${nowPage});
 
 });
+<!-- 상세글 하단에 글목록 출력 -->
+function boardList(nowPage){
+
+	$.ajax({
+		url: "/recruitListAjax",
+		type: 'get',
+		dataType: "json",
+		data: {'nowPage':nowPage, 'cntPerPage':${cntPerPage}},
+		success: function(list){
+			
+			var html = "";
+			html += "<b>모집게시판</b><hr>";
+			html += "<table>"
+			$.each(list,function(index, value){
+				if (index == 0){ 
+					window.chkEndPage = value.rc_title;
+					window.chkStartPage = value.rc_content;
+				} else{
+					var regdate = new Date(value.rc_regdate);
+					var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
+					html += "<tr>";
+					html += "<td width='80%'>";
+					if ('${board.b_idx}' == value.rc_idx){
+						html += "<b>";
+					}
+					html += "<a href='/TMS/recruitDetail?idx="+value.rc_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
+					html += value.rc_title;
+					if (value.cnt != 0){
+						html += "["+value.cnt+"]";
+					} 
+					html += "</a>";
+					if ('${board.rc_idx}' == value.rc_idx){
+						html += "</b>";
+					}
+					html += "</td>";
+					html += "<td>"; 
+					html += date; 					
+					html += "</td>";
+					html += "</tr>";
+				}
+			})
+			html += "</table>";
+			html += "<hr>";
+			if (chkStartPage == "true"){
+				html += "<a class='hoverPointer' onclick='boardList("+(nowPage - 1)+")'>&lt;이전</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+			}
+			if (chkEndPage == "true"){
+				html += "<a class='hoverPointer' onclick='boardList("+(nowPage + 1)+")'>다음&gt;</a>";
+			}
+			
+			
+			$("#recruitListAjax").html(html);
+			
+		}, error: function(error){
+			console.log("error발생: "+ error);
+		}
+	});
+	
+}
 </script>
 </head>
 <body> 
@@ -65,7 +127,15 @@ $(document).ready(function(){
 	<div>
 		<a href="/TMS/recruit?nowPage=${nowPage }&cntPerPage=${cntPerPage}" style="font-size: 0.8em;"><strong>모집 게시판</strong></a>
 		<h3>${rc_board.rc_title }</h3>
-		<a href="#">${rc_board.id }</a> 
+		<div>
+			<c:if test='${empty rc_board.user_profileImagePath }'>
+				<img class="user" src="/resources/images/users.png" alt="user"/>
+			</c:if>
+			<c:if test='${not empty rc_board.user_profileImagePath }'>
+				<img class="user" src="${rc_board.user_profileImagePath }" alt="user"/>
+			</c:if>
+			<span>${rc_board.id }</span> 
+		</div>
 		<p><fmt:formatDate value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm"/></p>
 		<hr>
 		<div id="content">${rc_board.rc_content }</div>
@@ -87,23 +157,8 @@ $(document).ready(function(){
 		</c:if>
 		
 	</div>
+	<!-- 댓글 출력 -->
 	<div id="comments">
-		<h4>댓글</h4>
-		<hr>
-		<div class="comm comment">
-			<div><strong>작성자</strong></div>
-			<div>댓글 내용</div>
-			<div>작성일</div>
-			<div><button>답글</button></div>
-		</div>
-		
-		<div class="comm c-comment">
-		
-			<div>&rdsh; <strong>작성자</strong></div>
-			<div>댓글 내용</div>
-			<div>작성일</div>
-			<div><button>답글</button></div>
-		</div>
 	</div>
 	
 	<!-- 페이징 시작 -->
@@ -116,14 +171,29 @@ $(document).ready(function(){
 	<br>
 	
 	<!-- 댓글 작성 -->
-	<div>
-		<form name="commentAjax">
-			<input type="text" value="${usersVO.id }" name="id" readonly><br>
-			<textarea rows="8" cols="80" name="c_content" id="c_content" required></textarea>
-			<input type="hidden" value="${rc_board.rc_idx }" name="rc_idx">
-			<input type="button" onclick="registerComm()" value="댓글단다">
-		</form>
-	</div>
+	<c:if test="${not empty usersVO }">
+		<div>
+			<form name="commentAjax">
+				<c:if test='${empty usersVO.user_profileImagePath }'>
+					<img class="user" src="/resources/images/users.png" alt="user"/>
+				</c:if>
+				<c:if test='${not empty usersVO.user_profileImagePath }'>
+					<img class="user" src="${usersVO.user_profileImagePath }" alt="user"/>
+				</c:if>
+				<input type="text" value="${usersVO.id }" name="id" readonly><br>
+				<textarea rows="8" cols="80" name="c_content" id="c_content" required></textarea>
+				<input type="hidden" value="${rc_board.rc_idx }" name="rc_idx">
+				<input type="button" onclick="registerComm()" value="댓글단다">
+			</form>
+		</div>
+	</c:if>
+	<br>
+	<br>
+	<br>
+	
+	<!-- 글 목록 보여주기 (5개씩만) -->
+	<div id="recruitListAjax">
+	</div>	
 	
 <script>
 	/* 신청하기 */
@@ -263,17 +333,30 @@ $(document).ready(function(){
 				var arrId = new Array();
 				
 				$.each(data,function(index, value){
+					console.log("패스: "+ value.user_profileImagePath);
 					var regdate = new Date(value.c_regdate);
 					var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
 				    if (value.level == 1){
 					    html += "<div class='comm comment' id='comm"+value.c_idx+"'>";
-						html += "<div class='comm_id'><strong id='' class='"+value.c_idx+"'>"+value.id+"</strong></div>";
+						html += "<div class='comm_id'>";
+						if (value.user_profileImagePath == null){
+							html += "<img class='user' src='/resources/images/users.png' alt='user'/>";
+						}else {
+							html += "<img class='user' src='"+value.user_profileImagePath+"' alt='user'/>";
+						}
+						html += "<strong id='' class=''>"+value.id+"</strong></div>";
 						html += "<div>"+value.c_content+"</div>";
 						arrC_idx.push(value.c_idx);
 						arrId.push(value.id);
 				    } else {
 				    	html += "<div class='comm c-comment' id='comm"+value.c_idx+"'>";
-				    	html += "<div>&rdsh; <strong id=''>"+value.id+"</strong></div>";
+				    	html += "<div>&rdsh; ";
+						if (value.user_profileImagePath == null){
+							html += "<img class='user' src='/resources/images/users.png' alt='user'/>";
+						}else {
+							html += "<img class='user' src='"+value.user_profileImagePath+"' alt='user'/>";
+						}
+				    	html += "<strong id=''>"+value.id+"</strong></div>";
 				    	html += "<div><strong class='"+value.rp_idx+"'></strong>"+value.c_content+"</div>";
 						arrC_idx.push(value.c_idx);
 						arrId.push(value.id);
