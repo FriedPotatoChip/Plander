@@ -391,7 +391,7 @@
 							<td>
 								<div>
 									<label><input type="radio" name="cabinet" value="y">사용</label><br>
-							<label><input type="radio" name="cabinet" value="n" checked="checked">사용안함</label>
+									<label><input type="radio" name="cabinet" value="n" checked="checked">사용안함</label>
 								</div>
 							</td>
 						</tr>
