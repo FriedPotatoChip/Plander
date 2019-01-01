@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
+<style>
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+</style>
 <script src="https://apis.google.com/js/platform.js?onload=init" async
 	defer></script>
 <!-- 네이버 로그인 -->
@@ -127,9 +132,14 @@
 	//아이디 중복확인
 	function idchk() {
 		var inputed = $('#id').val();
+		var testId = /^[a-zA-Z0-9]+$/;
+		if (!testId.test(inputed)){
+			$('#idMsg').html("<span style='color: red'>영문, 숫자 조합만 사용 가능합니다.</span>");
+			$("#id").focus();
+			return false;
+		}
 		window.chkIdChk = false;
-		$
-				.ajax({
+		$.ajax({
 					data : {
 						'id' : inputed
 					},
@@ -179,10 +189,14 @@
 		var password = frm.password.value;
 		var tel = frm.phone.value;
 		var email = frm.email.value;
+		var name = frm.name.value;
+		var id = frm.id.value;
 
 		var testPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 		var testPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,16}$/;
 		var testEmail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+		var testId = /^[a-zA-Z0-9]+$/;
+		var testName = /^[가-힣a-zA-Z]+$/;
 
 		var checkNumber = password.search(/[0-9]/g);
 		var checkEnglish = password.search(/[a-z]/ig);
@@ -197,6 +211,11 @@
 			alert("아이디를 입력해주세요.");
 			frm.id.focus();
 			return false;
+		}
+		if (!testId.test(id)){
+			alert("아이디는 영문, 숫자 조합만 가능합니다.");
+			frm.id.focus();
+			return;
 		}
 
 		if (!frm.password.value) {
@@ -230,6 +249,11 @@
 			frm.name.focus();
 			return false;
 		}
+		if (!testName.test(name)){
+			alert("한글 또는 문만 사용 가능합니다.");
+			return false;
+		}
+		
 
 		if (!frm.phone.value) {
 			alert("핸드폰 번호를 입력해주세요.");
@@ -345,12 +369,11 @@
 <!-- 로그인 모달창 끝 -->
 
 <!-- 회원가입 모달창 -->
-<div class="modal fade" id="joinModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 
-			<div class="modal-header">
+			<div class="modal-header"> 
 				<h4 class="modal-title" id="myModalLabel">
 					<b>JOIN US !</b>
 				</h4>
