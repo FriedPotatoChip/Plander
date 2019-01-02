@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class BookingVO {
 	private int bk_idx;
-	private String id, s_row, booknum;
+	private String id, booknum;
 	
 	//좌석 조회
 	private int br_idx, s_col, s_idx, sct_idx, time_idx, roomnum, price;

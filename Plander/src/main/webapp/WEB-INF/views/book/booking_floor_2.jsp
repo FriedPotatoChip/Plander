@@ -18,7 +18,7 @@
 	//DB에서 예약된 좌석이랑 비교해서 체크박스 disabled
 	$().ready(function(){
 		var size = document.getElementsByName('s_col').length;
-		alert("size : " + size);
+		console.log("size : " + size);
 		var booklist = '<c:out value='${booklist}' />';
 		
 		<c:forEach var='k' items='${booklist }'>
@@ -27,7 +27,7 @@
 			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 				if ( bookseat == document.getElementsByName('s_col')[i].value) {
-					alert("예약된 값 : " + bookseat );
+					console.log("예약된 값 : " + bookseat );
 					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
 					break;
 				}
@@ -93,7 +93,7 @@
 			$("#msg").html("");
 			
 			var size = document.getElementsByName('s_col').length;
-			alert("size : " + size);
+			console.log("size : " + size);
 			var booklist = '<c:out value='${booklist}' />';
 			
 			<c:forEach var='k' items='${booklist }'>

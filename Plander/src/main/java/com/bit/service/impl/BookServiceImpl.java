@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
+import com.bit.domain.CabinetVO;
 import com.bit.domain.SeatsVO;
 import com.bit.mapper.BookMapper;
 import com.bit.service.BookService;
@@ -69,7 +71,15 @@ public class BookServiceImpl implements BookService {
 		System.out.println("bookOk() : Impl 까지 옴!");
 		return bookmapper.bookOk(bvo);
 	}
-
+	
+	//사물함 예약
+	@Override
+	public int bookCabinet(BookingCbVO cb_bvo) {
+		System.out.println("bookCabinet() : Impl 까지 옴!");
+		return bookmapper.bookCabinet(cb_bvo);
+	}
+	
+	//s_idx
 	@Override
 	public SeatsVO seatnum(int s_col, int br_idx) {
 		System.out.println("seatnum() : Impl 까지 옴!");
@@ -80,6 +90,14 @@ public class BookServiceImpl implements BookService {
 		
 		return bookmapper.seatnum(map);
 	}
+
+	//예약 안된 사물함 조회 
+	@Override
+	public List<CabinetVO> not_bookCb(CabinetVO cvo) {
+		System.out.println("not_bookCb() : Impl 까지 옴!");
+		return bookmapper.not_bookCb(cvo);
+	}
+	
 
 
 }

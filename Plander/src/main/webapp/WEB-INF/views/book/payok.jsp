@@ -126,11 +126,12 @@
 			<table border="1px solid;" class="table table-bordered" style="width: 100%; text-align: center;">
 				<tbody>
 					<tr>
-						<td width="15%">예매번호</td>
+						<td width="13%">예매번호</td>
 						<td width="10%">예약자 이름</td>
-						<td width="15%">연락처</td>
-						<td width="35%">예약 날짜 및 시간</td>
+						<td width="12%">연락처</td>
+						<td width="30%">예약 날짜 및 시간</td>
 						<td width="15%">선택 좌석정보</td>
+						<td width="10%">사물함</td>
 						<td width="10%">금액</td>
 					</tr>
 					<tr>
@@ -139,6 +140,7 @@
 						<td>${uservo.phone }</td>
 						<td>${bvo.start_time } ~ ${bvo.end_time }</td>
 						<td>${bvo.sct_name } - ${bvo.s_col }</td>
+						<td>${cb.cb_idx }</td>
 						<td id="bookprice">${bvo.price }</td>
 					</tr>
 				</tbody>

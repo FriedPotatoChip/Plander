@@ -20,7 +20,7 @@
 	$().ready(function(){
 		var size = document.getElementsByName('s_col').length; //6개
 		var bookroomlist = '<c:out value='${bookroomlist}' />'; //예약된 좌석 리스트 
-		alert("총 좌석 수  : " + size + ", 예약된 좌석 : " + bookroomlist);
+		console.log("총 좌석 수  : " + size + ", 예약된 좌석 : " + bookroomlist);
 		
 		<c:forEach var='k' items='${bookroomlist }'>
 			var bookseat = '${k.s_col }'; //예약된 좌석 번호
@@ -29,7 +29,7 @@
 			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 				if ( bookseat == document.getElementsByName('s_col')[i].value) {
-					alert("예약된 값 : " + bookseat );
+					console.log("예약된 값 : " + bookseat );
 					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
 					break;
 				} 

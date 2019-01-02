@@ -89,6 +89,17 @@
 						+ '${bvo.getStart_time() }'.substring(14,16) + '${bvo.s_col}';
 		$("input[name='booknum']").attr('value', bookval);
 		
+		//사물함 사용여부
+		var bookCab = '${cb.cb_idx }';
+		console.log("cb_idx 확인 : " + bookCab);
+		
+		if (bookCab != 'null') {
+			$('#cb_idx').html('<span>'+ bookCab + '번</span>');
+		}
+		$("input[name='cb_idx']").attr('value', bookCab);
+		
+		
+		
 		//시간에 따른 가격계산
 		var startdate = new Date('${bvo.start_time }');
 		var enddate = new Date('${bvo.end_time }');
@@ -249,11 +260,12 @@
 				<table border="1px solid;" class="table table-bordered" style="width: 100%; text-align: center;">
 					<tbody>
 						<tr>
-							<td width="15%">예매번호</td>
+							<td width="13%">예매번호</td>
 							<td width="10%">예약자 이름</td>
-							<td width="15%">연락처</td>
-							<td width="35%">예약 날짜 및 시간</td>
+							<td width="12%">연락처</td>
+							<td width="30%">예약 날짜 및 시간</td>
 							<td width="15%">선택 좌석정보</td>
+							<td width="10%">사물함</td>
 							<td width="10%">금액</td>
 						</tr>
 						<tr>
@@ -262,6 +274,7 @@
 							<td>${uservo.phone }</td>
 							<td>${bvo.start_time } ~ ${bvo.end_time }</td>
 							<td>${bvo.sct_name } - ${bvo.s_col }</td>
+							<td id="cb_idx"></td>
 							<td id="bookprice"></td>
 						</tr>
 					</tbody>
@@ -287,11 +300,12 @@
 				<input type="hidden" name="price" value="">
 				<input type="hidden" name="s_col" value="${bvo.s_col }">
 				<input type="hidden" name="sct_name" value="${bvo.sct_name }">
+				<input type="hidden" name="cb_idx" value="">
 			</div> <!-- 결제방식 선택 끝  -->
 		</form>
 		
 	</div> <!-- 박스 아웃사이드 끝 --><br><br><br>
-	<!--  -->지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }
+	<!--  -->지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb }
 	
 </div> <!-- 바디 콘테이너 끝 -->
 
