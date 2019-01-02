@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
 .modal-body {
@@ -49,6 +50,9 @@
 	display: block;
 }
 </style>
+	
+	
+<!-- 구글 로그인 -->
 <script src="https://apis.google.com/js/platform.js?onload=init" async
 	defer></script>
 <!-- 네이버 로그인 -->
@@ -84,7 +88,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" onclick="loginChk()">예약하기</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
 				<li class="nav-item">
 					<div class="dropdown">
@@ -109,6 +113,18 @@
 
 
 <script>
+	function loginChk(){
+		console.log("여기 들어옴");
+		if ('${empty usersVO}' == 'true'){
+			alert("로그인 후 이용해주세요");
+			$("#myModal").modal();
+		} else {
+			location.href="/TMS/book";
+		}
+	}
+$(function(){
+})
+
 	function enterLogin() {
 		chk();
 	}
@@ -491,7 +507,7 @@
 <!-- 카카오 로그인 api -->
 <script type='text/javascript'>
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('카카오 자바스크립트 키'); /* 클라이언트 id 숨겨두기 */
+	Kakao.init('카카오클라이언트ID'); /* 클라이언트 id 숨겨두기 */
 	// 카카오 로그인 버튼을 생성합니다.
 	Kakao.Auth.createLoginButton({
 		container : '#kakao-login-btn',
@@ -555,7 +571,7 @@
 		console.log("구글 로그인 시작");
 		gapi.load('auth2', function() {
 			var gauth = gapi.auth2.init({
-				client_id : '구글 클라이언트 키'/* 구글 클라이언트 키 */
+				client_id : '구글 클라이언트 ID'/* 구글 클라이언트 키 */
 			})
 			gauth.signIn()
 					.then(
