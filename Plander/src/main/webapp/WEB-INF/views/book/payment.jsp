@@ -92,15 +92,20 @@
 		//시간에 따른 가격계산
 		var startdate = new Date('${bvo.start_time }');
 		var enddate = new Date('${bvo.end_time }');
-		
+		var startday = startdate.getDay();
+		var endday = enddate.getDay();
 		var start = startdate.toLocaleString('en-GB').substring(12,14);
 		var end = enddate.toLocaleString('en-GB').substring(12,14);
+		
+		console.log("시작요일: "+ startday);
+		console.log("끝요일: "+ endday);
+		console.log("start: "+ start);
+		console.log("end: "+ end);
 		
 		var sum = 0;
 		var sct_idx = '${bvo.sct_idx }'; //방번호 확인
 		var time_idx = '${bvo.time_idx }'; //정기권 확인
 		var cabinet = '${bvo.cabinet }'; //사물함 사용여부 y/n
-        
         //1. 1인실 sct_idx=1일 때
         if (sct_idx == 1) {
         	console.log('sct_idx : ' + sct_idx);
@@ -126,67 +131,310 @@
 				sum = 30000;
 			}
 			else {
-				//정기권 X
-				for (var i=start; i<end; i++) {
-					console.log('i : ' + i);
-					if (8 <= i && i < 18) {
-						var price = 1500;
-						sum += price;
-						console.log('8시~18시 : ' + price);
-						console.log('i : ' + i + ', sum : ' + sum);
-					} else if (i >= 18 && i <= 22) {
-						price = 1800;
-						sum += price;
-						console.log('18시~22시 : ' + price);
-						console.log('i : ' + i + ', sum : ' + sum);
+				//정기권 X 평일일때
+				if (startday != 0 && startday != 6 && endday != 0 && endday != 6){
+					if (end > start){
+						for (var i=start; i<end; i++) {
+							console.log('i : ' + i);
+							if (8 <= i && i < 18) {
+								var price = 1500;
+								sum += price;
+								console.log('8시~18시 : ' + price);
+								console.log('i : ' + i + ', sum : ' + sum);
+							} else if (i >= 18 && i < 22) {
+								price = 1800;
+								sum += price;
+								console.log('18시~22시 : ' + price);
+								console.log('i : ' + i + ', sum : ' + sum);
+							} else {
+								sum += 1200;
+								console.log('여기까지 확인');
+							}
+						} //for문 끝
 					} else {
-						console.log('여기까지 확인');
+						for (var i=start; i<24; i++) {
+							console.log('i : ' + i);
+							if (8 <= i && i < 18) {
+								var price = 1500;
+								sum += price;
+								console.log('8시~18시 : ' + price);
+								console.log('i : ' + i + ', sum : ' + sum);
+							} else if (i >= 18 && i < 22) {
+								price = 1800;
+								sum += price;
+								console.log('18시~22시 : ' + price);
+								console.log('i : ' + i + ', sum : ' + sum);
+							} else {
+								sum += 1200;
+								console.log('여기까지 확인');
+							}
+						} //for문 끝
+						for (var i=0; i<end; i++) {
+							console.log('i : ' + i);
+							if (8 <= i && i < 18) {
+								var price = 1500;
+								sum += price;
+								console.log('8시~18시 : ' + price);
+								console.log('i : ' + i + ', sum : ' + sum);
+							} else if (i >= 18 && i < 22) {
+								price = 1800;
+								sum += price;
+								console.log('18시~22시 : ' + price);
+								console.log('i : ' + i + ', sum : ' + sum);
+							} else {
+								sum += 1200;
+								console.log('여기까지 확인');
+							}
+						} //for문 끝
+					} // 평일 계산 끝
+				} else if ((startday == 6 && endday == 0) || (startday == 6 && endday == 6) || (startday == 0 && endday == 0)){ // (토, 일), 토, 일 일때
+					if (end > start){
+						for (var i=start; i<end; i++) {
+							var price = 1800;
+							sum += price;
+						} //for문 끝
+					} else {
+						for (var i=start; i<24; i++){
+							sum += 1800;
+						}
+						for (var i=0; i<end; i++){
+							sum += 1800;
+						}
 					}
-				} //for문 끝
+				} else if (endday == 6 && startday == 5){ // 금, 토 일때
+					for (var i=start; i<24; i++) {
+						console.log('i : ' + i);
+						console.log("금, 토 들어옴");
+						if (8 <= i && i < 18) {
+							var price = 1500;
+							sum += price;
+							console.log('8시~18시 : ' + price);
+							console.log('i : ' + i + ', sum : ' + sum);
+						} else if (i >= 18 && i < 22) {
+							price = 1800;
+							sum += price;
+							console.log('18시~22시 : ' + price);
+							console.log('i : ' + i + ', sum : ' + sum);
+						} else {
+							sum += 1200;
+							console.log('여기까지 확인');
+						}
+					} //for문 끝
+					for (var i=0; i<end; i++){
+						sum += 1800;
+					}
+				} else if (startday == 0 && endday == 1){ // 일, 월 일때
+					for (var i=0; i<end; i++) {
+						console.log('i : ' + i);
+						if (8 <= i && i < 18) {
+							var price = 1500;
+							sum += price;
+							console.log('8시~18시 : ' + price);
+							console.log('i : ' + i + ', sum : ' + sum);
+						} else if (i >= 18 && i < 22) {
+							price = 1800;
+							sum += price;
+							console.log('18시~22시 : ' + price);
+							console.log('i : ' + i + ', sum : ' + sum);
+						} else {
+							sum += 1200;
+							console.log('여기까지 확인');
+						}
+					} //for문 끝
+					for (var i=start; i<24; i++){
+						sum += 1800;
+					}
+				}
 			}
 
 		} else if (sct_idx == 2) {
 			//4인실 일 때
 			console.log('4인실 sct_idx : ' + sct_idx);
-			for (var i = start; i < end; i++) {
-				console.log('i : ' + i);
-				if (8 <= i && i <= 22) {
-					var price = 1800;
-					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
+			if (startday != 0 && startday != 6 && endday != 0 && endday != 6){ // 평일일때
+				if (end > start){
+					for (var i = start; i < end; i++) {
+						console.log('i : ' + i);
+						if (8 <= i && i < 22) {
+							var price = 1800;
+							sum += price;
+							console.log('평일 8시~22 시 : ' + price);
+							console.log('i : ' + i + ', sum : ' + sum);
+						} else {
+							sum += 1500;
+							console.log('4인실 여기까지 확인');
+						}
+					}
 				} else {
-					console.log('4인실 여기까지 확인');
+					for (var i=start; i<24; i++){
+						sum += 1800;
+					}
+					for (var i=0; i<end; i++){
+						sum += 1800;
+					}
+				}
+			} else if ((startday == 6 && endday == 0) || (startday == 6 && endday == 6) || (startday == 0 && endday == 0)){ // (토, 일), 토, 일 일때
+				if (end > start){
+					for (var i=start; i<end; i++){
+						sum += 2000;
+					}
+				} else {
+					for (var i=start; i<24; i++){
+						sum += 2000;
+					}
+					for (var i=0; i<end; i++){
+						sum += 2000;
+					}
+				}
+			} else if (endday == 6 && startday == 5){ // 금, 토 일때
+				for (var i=start; i<24; i++){
+					if (8 <= i && i < 22) {
+						var price = 1800;
+						sum += price;
+						console.log('평일 8시~22 시 : ' + price);
+						console.log('i : ' + i + ', sum : ' + sum);
+					} else {
+						sum += 1500;
+						console.log('4인실 여기까지 확인');
+					}
+				}
+				for (var i=0; i<end; i++){
+					sum += 2000;
+				}
+			} else if (startday == 0 && endday == 1){ // 일, 월 일때
+				for (var i=0; i<end; i++){
+					if (8 <= i && i < 22) {
+						var price = 1800;
+						sum += price;
+						console.log('평일 8시~22 시 : ' + price);
+						console.log('i : ' + i + ', sum : ' + sum);
+					} else {
+						sum += 1500;
+						console.log('4인실 여기까지 확인');
+					}
+				}
+				for (var i=start; i<24; i++){
+					sum += 2000;
 				}
 			}
-			
 		} else if (sct_idx == 3) {
 			//8인실 일 때
 			console.log('8인실 sct_idx : ' + sct_idx);
-			for (var i = start; i < end; i++) {
-				console.log('i : ' + i);
-				if (8 <= i && i <= 22) {
-					var price = 2000;
-					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
+			if (startday != 0 && startday != 6 && endday != 0 && endday != 6){ // 평일일때
+					for (var i = start; i < end; i++) {
+						console.log('i : ' + i);
+						if (8 <= i && i < 22) {
+							var price = 2000;
+							sum += price;
+							console.log('평일 8시~22 시 : ' + price);
+							console.log('i : ' + i + ', sum : ' + sum);
+						} else {
+							sum += 1800;
+							console.log('8인실 여기까지 확인');
+						}
+					}
+			} else if ((startday == 6 && endday == 0) || (startday == 6 && endday == 6) || (startday == 0 && endday == 0)){ // (토, 일), 토, 일 일때
+				if (end > start){
+					for (var i=start; i<end; i++){
+						sum += 2300;
+					}
 				} else {
-					console.log('8인실 여기까지 확인');
+					for (var i=start; i<24; i++){
+						sum += 2300;
+					}
+					for (var i=0; i<end; i++){
+						sum += 2300;
+					}
+				}
+			} else if (endday == 6 && startday == 5){ // 금, 토 일때
+				for (var i=start; i<24; i++){
+					if (8 <= i && i < 22) {
+						var price = 2000;
+						sum += price;
+						console.log('평일 8시~22 시 : ' + price);
+						console.log('i : ' + i + ', sum : ' + sum);
+					} else {
+						sum += 1800;
+						console.log('8인실 여기까지 확인');
+					}
+				}
+				for (var i=0; i<end; i++){
+					sum += 2300;
+				}
+			} else if (startday == 0 && endday == 1){ // 일, 월 일때
+				for (var i=0; i<end; i++){
+					if (8 <= i && i < 22) {
+						var price = 2000;
+						sum += price;
+						console.log('평일 8시~22 시 : ' + price);
+						console.log('i : ' + i + ', sum : ' + sum);
+					} else {
+						sum += 1800;
+						console.log('8인실 여기까지 확인');
+					}
+				}
+				for (var i=start; i<24; i++){
+					sum += 2300;
 				}
 			}
 			
 		} else if (sct_idx == 4) {
 			//12인실 일 때
 			console.log('12인실 sct_idx : ' + sct_idx);
-			for (var i = start; i < end; i++) {
-				console.log('i : ' + i);
-				if (8 <= i && i <= 22) {
-					var price = 2200;
-					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
+			if (startday != 0 && startday != 6 && endday != 0 && endday != 6){ // 평일일때
+					for (var i = start; i < end; i++) {
+						console.log('i : ' + i);
+						if (8 <= i && i < 22) {
+							var price = 2200;
+							sum += price;
+							console.log('평일 8시~22 시 : ' + price);
+							console.log('i : ' + i + ', sum : ' + sum);
+						} else {
+							sum += 2000;
+							console.log('12인실 여기까지 확인');
+						}
+					}
+			} else if ((startday == 6 && endday == 0) || (startday == 6 && endday == 6) || (startday == 0 && endday == 0)){ // (토, 일), 토, 일 일때
+				if (end > start){
+					for (var i=start; i<end; i++){
+						sum += 2500;
+					}
 				} else {
-					console.log('12인실 여기까지 확인');
+					for (var i=start; i<24; i++){
+						sum += 2500;
+					}
+					for (var i=0; i<end; i++){
+						sum += 2500;
+					}
+				}
+			} else if (endday == 6 && startday == 5){ // 금, 토 일때
+				for (var i=start; i<24; i++){
+					if (8 <= i && i < 22) {
+						var price = 2200;
+						sum += price;
+						console.log('평일 8시~22 시 : ' + price);
+						console.log('i : ' + i + ', sum : ' + sum);
+					} else {
+						sum += 2000;
+						console.log('12인실 여기까지 확인');
+					}
+				}
+				for (var i=0; i<end; i++){
+					sum += 2500;
+				}
+			} else if (startday == 0 && endday == 1){ // 일, 월 일때
+				for (var i=0; i<end; i++){
+					if (8 <= i && i < 22) {
+						var price = 2200;
+						sum += price;
+						console.log('평일 8시~22 시 : ' + price);
+						console.log('i : ' + i + ', sum : ' + sum);
+					} else {
+						sum += 2000;
+						console.log('12인실 여기까지 확인');
+					}
+				}
+				for (var i=start; i<24; i++){
+					sum += 2500;
 				}
 			}
 			
