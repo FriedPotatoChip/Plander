@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:include page="/commons/head.jsp"></jsp:include>
+<!DOCTYPE html>
+<html>
+<head>
 <title>예약 페이지</title>
-
+<jsp:include page="/commons/head.jsp" />
 <style>
 	#container { width: 90%; margin: auto; }
 	* { text-decoration: none; }
@@ -35,7 +37,6 @@
 	}
 	
 </style>
-
 </head>
 <body>
 <!-- 헤더 -->
@@ -44,10 +45,10 @@
 	<jsp:include page="/commons/header.jsp" />
 </c:if>
 <c:if test="${not empty sessionScope.usersVO }">
-	<c:if test="${sessionScope.usersVO.id != 'admin' }">
+	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
 		<jsp:include page="/commons/loginheader.jsp" />
 	</c:if>
-	<c:if test="${sessionScope.usersVO.id == 'admin' }">
+	<c:if test="${sessionScope.usersVO.rank == 1 }">
 		<jsp:include page="/commons/adminLoginheader.jsp" />
 	</c:if>
 </c:if>
@@ -112,6 +113,10 @@
 <br>
 <script>
 	function book(frm) {
+		if ('${empty usersVO}' == 'true'){
+			loginChk();
+			return false;
+		}
 		var title = "bookingPage";
 		window.open("", title, "width=1200, height=700, scrollbars=yes");
 		
