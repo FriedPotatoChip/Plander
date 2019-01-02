@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
+import com.bit.domain.CabinetVO;
 import com.bit.domain.SeatsVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.BookService;
@@ -124,14 +126,18 @@ public class BookController {
 		return idx;
 	}
 	
+	
+	public int cbchk(CabinetVO cb) {
+		return 0;
+	}
+	
+	
 	//결제 페이지
 	@RequestMapping("/pay")
-	public String pay(BookingVO bvo, Model model, UsersVO uservo, SeatsVO svo) {
+	public String pay(BookingVO bvo, BookingCbVO cb_bvo, Model model,
+					UsersVO uservo, SeatsVO svo, CabinetVO cvo) {
 		System.out.println("/pay");
 		
-//		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
-//		Date date = new Date();
-//		String today = format.format(date);
 		bvo.setBk_regdate(today); //예약날짜
 		bvo.setId(uservo.getId());
 		
@@ -140,7 +146,20 @@ public class BookController {
 		bvo.setS_idx(idx);
 		svo.setS_idx(idx);
 		
+		System.out.println("사물함 사용여부 확인(yes/no) : " + cb_bvo.getCabinet());
+		if (cb_bvo.getCabinet().equals("y")) {
+			//사물함 사용하면
+			//예약안된 사물함 리스트를 뽑아서 차례대로 cb_idx에 값 넣기
+			
+			List<CabinetVO> notbookCb = bookService.not_bookCb(cvo);
+			System.out.println("예약안된사물함 확인 : " + notbookCb);
+			cb_bvo.setCb_idx(notbookCb.get(0).getCb_idx());
+			System.out.println("cb_idx 확인 : " + cb_bvo.getCb_idx());
+			
+		}
+		
 		model.addAttribute("bvo", bvo);
+		model.addAttribute("cb", cb_bvo);
 		model.addAttribute("uservo", uservo);
 		model.addAttribute("svo", svo);
 		return "book/payment";
@@ -148,22 +167,30 @@ public class BookController {
 	
 	//예약완료
 	@RequestMapping("/payok")
-	public String bookOk(BookingVO bvo, Model model, UsersVO uservo) {
+	public String bookOk(BookingVO bvo, BookingCbVO cb_bvo, Model model, UsersVO uservo) {
 		System.out.println("/payok");
 		
-//		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
-//		Date date = new Date();
-//		String today = format.format(date);
 		bvo.setBk_regdate(today); //예약날짜
 		bvo.setId(uservo.getId());
+
+		cb_bvo.setCkb_regdate(today);
+		cb_bvo.setId(uservo.getId());
+		cb_bvo.setStart_date(bvo.getStart_time());
+		cb_bvo.setEnd_date(bvo.getEnd_time());
+		
+		System.out.println("cb_bvo : " + cb_bvo);
 		
 		int booked = bookService.bookOk(bvo);
-		System.out.println("예약완료 : " + uservo.getId() + ", " + booked);
+		int bookCb = bookService.bookCabinet(cb_bvo);
+		System.out.println("예약완료 : " + uservo.getId() + ", " + booked + ", 사물함 예약 : " + bookCb);
 		
 		model.addAttribute("bvo", bvo);
+		model.addAttribute("cb", cb_bvo);
 		model.addAttribute("uservo", uservo);
 		return "book/payok";
 	}
+	
+	
 	
 	
 	
