@@ -1,21 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <style>
 .modal-body {
     max-height: calc(100vh - 210px);
     overflow-y: auto;
 }
-</style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script> 
-
-
+</style> 
+	
+	
+<!-- 구글 로그인 -->
 <script src="https://apis.google.com/js/platform.js?onload=init" async
 	defer></script>
 <!-- 네이버 로그인 -->
@@ -99,9 +95,6 @@
 
 
 <script>
-$(function(){
-	
-})
 	function loginChk(){
 		console.log("여기 들어옴");
 		if ('${empty usersVO}' == 'true'){
@@ -111,6 +104,8 @@ $(function(){
 			location.href="/TMS/book";
 		}
 	}
+$(function(){
+})
 	function enterLogin() {
 		chk();
 	}
