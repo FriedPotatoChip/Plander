@@ -16,6 +16,11 @@ public class AskController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@GetMapping("")
+	public String ask() {
+		return "ask/ask";
+	}
 
 	@GetMapping("mail")
 	public String mail() {
@@ -44,7 +49,7 @@ public class AskController {
 			messageHelper.setFrom(email); // 보내는사람 생략하거나 하면 정상작동을 안함
 			messageHelper.setTo("tutlestudy@gmail.com"); // 받는사람 이메일
 			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-			messageHelper.setText(content); // 메일 내용
+			messageHelper.setText("보내는 사람: " + name + ", 이메일 주소: " + email + ", 내용: " + content); // 메일 내용
 
 			mailSender.send(message);
 		} catch (Exception e) {

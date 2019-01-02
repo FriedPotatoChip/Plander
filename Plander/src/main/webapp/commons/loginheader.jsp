@@ -9,7 +9,6 @@
 	border-radius: 50%;
 }
 
-
 .dropbtn {
 	cursor: pointer;
 }
@@ -69,12 +68,12 @@
 					<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="/TMS/recruit">모집게시판</a></li>
 					<li class="nav-item">
 						<div class="dropdown">
 							<a class="nav-link dropbtn" href="#">게시판</a>
 							<div class="dropdown-content">
-								<a href="#">공지사항</a> <a href="#">자유게시판</a> <a href="#">FAQ</a>
+								<a href="#">공지사항</a> <a href="#">자유게시판</a> <a href="/TMS/ask">문의하기</a>
 							</div>
 						</div>
 					</li>
@@ -89,7 +88,7 @@
 									</c:if> <c:if test='${not empty usersVO.user_profileImagePath }'>
 										<img class="user" src="${usersVO.user_profileImagePath }"
 											alt="user" />
-									</c:if> <b>&nbsp;&nbsp;&nbsp;${usersVO.id }&nbsp;님 </b>
+									</c:if> <b>&nbsp;&nbsp;&nbsp;${usersVO.name }&nbsp;님 </b>
 								</a>
 								<div class="dropdown-content" style="right: 0;">
 									<div class="my_cur" style="text-align: center;">
@@ -103,7 +102,7 @@
 											<c:when test='${not empty seat }'>
 												<c:forEach var="seat" items="${seat }">
 													<p>${seat.br_name }&nbsp;${seat.sct_name }&nbsp;${seat.s_col }
-														${seat.s_row }</p>
+													</p>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>

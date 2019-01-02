@@ -47,7 +47,7 @@ tr:last-child td {
 						<td>${seat.booknum }</td>
 						<td>${seat.br_name }</td>
 						<td>${seat.sct_name }</td>
-						<td>${seat.s_col }${seat.s_row }</td>
+						<td>${seat.s_col }</td>
 						<td>${seat.start_time }<br>- ${seat.end_time }</td>
 						<td><button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='/TMS/my/delSeat?bk_idx=${seat.bk_idx }'">예약취소</button></td>
 					</tr>
