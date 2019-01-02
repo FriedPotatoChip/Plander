@@ -141,5 +141,15 @@ public class MyServiceImpl implements MyService {
 	public boolean updateProfileImg(UsersVO vo) {
 		return mapper.updateProfileImg(vo);
 	}
+
+	@Override
+	public int delSeat(int bk_idx) {
+		return mapper.delSeat(bk_idx);
+	}
+
+	@Override
+	public int delCabinet(int ckb_idx) {
+		return mapper.delCabinet(ckb_idx);
+	}
 	
 }

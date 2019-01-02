@@ -3,6 +3,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/commons/head.jsp"></jsp:include>
+<style>
+body {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+tr, td {
+	border-bottom: 1px solid #000;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+tr:last-child td {
+	border-bottom: none;
+}
+</style>
 </head>
 <body>
 	<thead>
@@ -35,8 +52,5 @@
 			</c:otherwise>
 		</c:choose>
 	</tbody>
-
-	<!-- 페이징 -->
-	<jsp:include page="/commons/paging.jsp"></jsp:include>
 </body>
 </html>

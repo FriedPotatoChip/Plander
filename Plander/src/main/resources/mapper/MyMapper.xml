@@ -8,6 +8,16 @@
 		#{id}
 	</select>
 
+	<!-- 예약좌석 삭제 -->
+	<delete id="delSeat" parameterType="int">
+		delete from booking where bk_idx = #{bk_idx}
+	</delete>
+
+	<!-- 예약사물함 삭제 -->
+	<delete id="delCabinet" parameterType="int">
+		delete from booking_cb where ckb_idx = #{ckb_idx}
+	</delete>
+
 	<!-- 전체 모집글 갯수 조회 --><!-- 페이징처리용 -->
 	<select id="getTotal" resultType="int">
 		select count(*) from recruit
@@ -115,7 +125,7 @@
 		a, recruit rc
 		where a.rc_idx = rc.rc_idx
 		and rc.rc_idx = (select rc_idx
-		from recruit where id = 'test')
+		from recruit where rc.id = #{id})
 	</select>
 
 	<!-- 내 좌석 예약내역 -->
@@ -133,7 +143,8 @@
 		from booking_cb b, cabinet c, branches br
 		where b.cb_idx =
 		c.cb_idx
-		and c.br_idx = br.br_idx
+		and
+		c.br_idx = br.br_idx
 		and b.id = #{id}
 	</select>
 
@@ -207,13 +218,15 @@
 		ct_idx = 2
 		and b_idx = #{b_idx}
 	</select>
-	
+
 	<!-- 프로필 사진 업데이트 -->
-	<update id="updateProfileImg" parameterType="com.bit.domain.UsersVO">
-		UPDATE USERS SET USER_PROFILEIMAGEPATH = #{user_profileImagePath} WHERE U_IDX = #{u_idx}
+	<update id="updateProfileImg"
+		parameterType="com.bit.domain.UsersVO">
+		UPDATE USERS SET USER_PROFILEIMAGEPATH =
+		#{user_profileImagePath} WHERE U_IDX = #{u_idx}
 	</update>
-	
-	
-	
-	
+
+
+
+
 </mapper>
