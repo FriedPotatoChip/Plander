@@ -185,12 +185,12 @@ style>body, html {
 
 							<div id="allseat">
 								<div id="row" class="box">
-									<div id="seat" class="checkbox">
+									<div id="seat" class="button">
 										<table border="1px solid;" class="table table-bordered">
 											<tr>
 												<c:forEach var="i" begin="1" end="5" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td><input type="checkbox" name="s_col"
+															value="${i }">A-${i }</td>
 												</c:forEach>
 											</tr>
 											<tr>

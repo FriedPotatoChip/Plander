@@ -56,8 +56,8 @@
 		resultType="com.bit.domain.BookingCbVO">
 		select *
 		from booking_cb bc, cabinet c
-		where c.cb_number =
-		bc.cb_number
+		where c.cb_idx =
+		bc.cb_idx
 		and sysdate between bc.start_date and end_date
 		and br_idx=
 		#{br_idx}
@@ -68,8 +68,8 @@
 		select
 		count(bc.ckb_idx)
 		from booking_cb bc, cabinet c
-		where c.cb_number =
-		bc.cb_number
+		where c.cb_idx =
+		bc.cb_idx
 		and sysdate between bc.start_date and end_date
 		and br_idx=
 		#{br_idx}

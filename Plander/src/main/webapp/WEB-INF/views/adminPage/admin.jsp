@@ -255,14 +255,14 @@ input[type=submit]:hover {
 							aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>
 						</a>
 
-						<c:if test="${page.chkStartPage }">
+						<%-- <c:if test="${page.chkStartPage }">
 							<li class="page-item"><a
 								href="/TMS/admin?nowPage=1&cntPerPage=${page.cntPerPage}"
 								class="page-link"><button>&lt;&lt;</button></a></li>
 							<li class="page-item"><a
 								href="/TMS/admin?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
 								class="page-link"><button>&lt;</button></a></li>
-						</c:if>
+						</c:if> --%>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
@@ -279,14 +279,14 @@ input[type=submit]:hover {
 
 						</c:forEach>
 
-						<c:if test="${page.chkEndPage }">
+						<%-- <c:if test="${page.chkEndPage }">
 							<li class="page-item"><a
 								href="/TMS/admin?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
 								class="page-link"><button>&gt;</button></a></li>
 							<li class="page-item"><a
 								href="/TMS/admin?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
 								class="page-link"><button>&gt;&gt;</button></a></li>
-						</c:if>
+						</c:if> --%>
 
 						<li class="page-item"><a class="page-link" href="#"
 							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
