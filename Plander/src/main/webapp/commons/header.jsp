@@ -3,8 +3,50 @@
 
 <style>
 .modal-body {
-    max-height: calc(100vh - 210px);
-    overflow-y: auto;
+	max-height: calc(100vh - 210px);
+	overflow-y: auto;
+}
+
+.dropbtn {
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content2 {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #e9ecef
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
 }
 </style>
 <script src="https://apis.google.com/js/platform.js?onload=init" async
@@ -43,49 +85,26 @@
 				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
-				<!-- 삭제 -->
-				<!-- <li class="nav-item"><a class="nav-link" href="#">모집하기</a></li> -->
-				<!-- 이용안내에 넣기 -->
-				<!-- <li class="nav-item"><a class="nav-link" href="#">세부공간보기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">찾아오시는길</a></li> -->
 				<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
+				<li class="nav-item">
 					<div class="dropdown">
-						<button class="btn btn-light dropdown-toggle" type="button"
-							id="dropdownMenuButton" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">게시판</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="#">공지사항</a> <a
-								class="dropdown-item" href="#">자유게시판</a> <a
-								class="dropdown-item" href="#">FAQ</a>
+						<a class="nav-link dropbtn" href="#">게시판</a>
+						<div class="dropdown-content">
+							<a href="#">공지사항</a> <a href="#">자유게시판</a> <a href="#">FAQ</a>
 						</div>
 					</div>
-			</ul>
-		</div>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-
+				</li>
 			</ul>
 
-			<!-- 로그인 -->
-			<ul class="nav justify-content-end" id="primaryNav">
+			<ul class="navbar-nav ml-auto" id="primaryNav">
 				<li class="nav-item"><a class="nav-link active"
 					data-toggle="modal" href="#myModal"><h5>로그인</h5></a></li>
-				<!-- <li class="nav-item"><a class="nav-link" data-toggle="modal"
-					href="#joinModal"><h5>회원가입</h5></a></li> -->
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><img src="/resources/images/global.png"></a>
-					<div class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#"><h5>한국어</h5></a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#"><h5>English</h5></a>
-					</div></li>
+				<li class="nav-item"><a class="nav-link"
+					data-toggle="modal" href="#joinModal"><h5>회원가입</h5></a></li>
 			</ul>
+
 		</div>
-		</div>
+	</div>
 </nav>
 
 
@@ -133,13 +152,15 @@
 	function idchk() {
 		var inputed = $('#id').val();
 		var testId = /^[a-zA-Z0-9]+$/;
-		if (!testId.test(inputed)){
-			$('#idMsg').html("<span style='color: red'>영문, 숫자 조합만 사용 가능합니다.</span>");
+		if (!testId.test(inputed)) {
+			$('#idMsg').html(
+					"<span style='color: red'>영문, 숫자 조합만 사용 가능합니다.</span>");
 			$("#id").focus();
 			return false;
 		}
 		window.chkIdChk = false;
-		$.ajax({
+		$
+				.ajax({
 					data : {
 						'id' : inputed
 					},
@@ -212,7 +233,7 @@
 			frm.id.focus();
 			return false;
 		}
-		if (!testId.test(id)){
+		if (!testId.test(id)) {
 			alert("아이디는 영문, 숫자 조합만 가능합니다.");
 			frm.id.focus();
 			return;
@@ -249,11 +270,10 @@
 			frm.name.focus();
 			return false;
 		}
-		if (!testName.test(name)){
+		if (!testName.test(name)) {
 			alert("한글 또는 문만 사용 가능합니다.");
 			return false;
 		}
-		
 
 		if (!frm.phone.value) {
 			alert("핸드폰 번호를 입력해주세요.");
@@ -357,9 +377,9 @@
 				<hr>
 
 				<div class="center">
-					<a href="/TMS/findIdPw">아이디 찾기</a>&nbsp; <a
-						href="/TMS/findIdPw">비밀번호 찾기</a>&nbsp; <a data-toggle="modal"
-						href="#joinModal" data-dismiss="modal">회원가입</a>
+					<a href="/TMS/findIdPw">아이디 찾기</a>&nbsp; <a href="/TMS/findIdPw">비밀번호
+						찾기</a>&nbsp; <a data-toggle="modal" href="#joinModal"
+						data-dismiss="modal">회원가입</a>
 				</div>
 			</div>
 
@@ -369,11 +389,12 @@
 <!-- 로그인 모달창 끝 -->
 
 <!-- 회원가입 모달창 -->
-<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="joinModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 
-			<div class="modal-header"> 
+			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel">
 					<b>JOIN US !</b>
 				</h4>

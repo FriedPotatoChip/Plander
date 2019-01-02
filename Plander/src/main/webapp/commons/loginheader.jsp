@@ -1,74 +1,103 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="/commons/head.jsp"></jsp:include>
+<style>
+.user {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
 
-<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-	<div class="container-fluid">
+.dropbtn {
+	cursor: pointer;
+}
 
-		<a class="navbar-brand" href="#"><img
-			src="/resources/images/logo.png" width="150px" height="50px"></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarResponsive">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
 
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
-				<!-- 삭제 -->
-				<!-- <li class="nav-item"><a class="nav-link" href="#">모집하기</a></li> -->
-				<!-- 이용안내에 넣기 -->
-				<!-- <li class="nav-item"><a class="nav-link" href="#">세부공간보기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">찾아오시는길</a></li> -->
-				<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
-				<div class="dropdown">
-					<button class="btn btn-light dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">게시판</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">공지사항</a> <a
-							class="dropdown-item" href="#">자유게시판</a> <a class="dropdown-item"
-							href="#">FAQ</a>
-					</div>
-				</div>
-			</ul>
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content2 {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #e9ecef
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+		<div class="container-fluid">
+
+			<a class="navbar-brand" href="/TMS"><img
+				src="/resources/images/logo.png" width="150px" height="50px"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
+					<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
+					<li class="nav-item">
+						<div class="dropdown">
+							<a class="nav-link dropbtn" href="#">게시판</a>
+							<div class="dropdown-content">
+								<a href="#">공지사항</a> <a href="#">자유게시판</a> <a href="#">FAQ</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><c:if test="${not empty usersVO }">
+							<div class="dropdown">
+								<a class="nav-link dropbtn" href="#"> <c:if
+										test='${empty usersVO.user_profileImagePath }'>
+										<img class="user" src="/resources/images/users.png" alt="user" />
+									</c:if> <c:if test='${not empty usersVO.user_profileImagePath }'>
+										<img class="user" src="${usersVO.user_profileImagePath }"
+											alt="user" />
+									</c:if> <b>&nbsp;&nbsp;&nbsp;${usersVO.id }&nbsp;님 </b>
+								</a>
+								<div class="dropdown-content" style="right: 0;">
+									<a href="/TMS/my" style="text-align: center;">마이페이지</a> <a href="/TMS/logout" style="text-align: center;">로그아웃</a>
+								</div>
+							</div>
+						</c:if></li>
+				</ul>
+			</div>
+
 		</div>
-		<!-- <a class="navbar-brand" href="/TMS"><img
-		src="/resources/images/turtle.png" width="30" height="30"
-		class="d-inline-block align-top ml-4" alt="거북이">
-		<h1 class="light ml-3" id="title_name">거북이의기적</h1></a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarSupportedContent"
-		aria-controls="navbarSupportedContent" aria-expanded="false"
-		aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button> -->
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-
-			</ul>
-			<ul class="nav justify-content-end" id="primaryNav">
-				<li class="nav-item"><a class="nav-link" href="/TMS/my"><h5>마이페이지</h5></a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS/logout"><h5>로그아웃</h5></a></li>
-				</li>
-
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><img src="/resources/images/global.png"></a>
-					<div class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#"><h5>한국어</h5></a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#"><h5>English</h5></a>
-					</div></li>
-			</ul>
-		</div>
-</nav>
-
-<!-- 		<select name="language">
-			<option value="ko">한국어</option>
-			<option value="en">영어</option>
-		</select> -->
+	</nav>
+</body>
