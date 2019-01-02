@@ -90,14 +90,16 @@
 		$("input[name='booknum']").attr('value', bookval);
 		
 		//사물함 사용여부
+		
 		var bookCab = '${cb.cb_idx }';
 		console.log("cb_idx 확인 : " + bookCab);
 		
-		if (bookCab != 'null') {
+		if (bookCab = '0') {
+			$('#cb_idx').html('<span>사용안함</span>');
+		} else {
 			$('#cb_idx').html('<span>'+ bookCab + '번</span>');
+			$("input[name='cb_idx']").attr('value', bookCab);
 		}
-		$("input[name='cb_idx']").attr('value', bookCab);
-		
 		
 		
 		//시간에 따른 가격계산
@@ -143,13 +145,15 @@
 					if (8 <= i && i < 18) {
 						var price = 1500;
 						sum += price;
-						console.log('8시~18시 : ' + price);
-						console.log('i : ' + i + ', sum : ' + sum);
-					} else if (i >= 18 && i <= 22) {
+						console.log('i : ' + i + ', 8시~18시 : ' + price + ',sum : ' + sum);
+					} else if (18 <= i && i <= 22) {
 						price = 1800;
 						sum += price;
-						console.log('18시~22시 : ' + price);
-						console.log('i : ' + i + ', sum : ' + sum);
+						console.log('i : ' + i + ', 18시~22시 : ' + price + ',sum : ' + sum);
+					} else if (i < 8 && 22 < i ) {
+						price = 1200;
+						sum += price;
+						console.log('i : ' + i + ', 22~8시 : ' + price + ',sum : ' + sum);
 					} else {
 						console.log('여기까지 확인');
 					}
@@ -164,8 +168,11 @@
 				if (8 <= i && i <= 22) {
 					var price = 1800;
 					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
+					console.log('i : ' + i + ', 8시~18시 : ' + price + ',sum : ' + sum);
+				} else if (i < 8 && 22 < i ) {
+					price = 1500;
+					sum += price;
+					console.log('i : ' + i + ', 22~8시 : ' + price + ',sum : ' + sum);
 				} else {
 					console.log('4인실 여기까지 확인');
 				}
@@ -179,8 +186,11 @@
 				if (8 <= i && i <= 22) {
 					var price = 2000;
 					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
+					console.log('i : ' + i + ', 8시~18시 : ' + price + ',sum : ' + sum);
+				} else if (i < 8 && 22 < i ) {
+					price = 1500;
+					sum += price;
+					console.log('i : ' + i + ', 22~8시 : ' + price + ',sum : ' + sum);
 				} else {
 					console.log('8인실 여기까지 확인');
 				}
@@ -194,8 +204,11 @@
 				if (8 <= i && i <= 22) {
 					var price = 2200;
 					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
+					console.log('i : ' + i + ', 8시~18시 : ' + price + ',sum : ' + sum);
+				} else if (i < 8 && 22 < i ) {
+					price = 1500;
+					sum += price;
+					console.log('i : ' + i + ', 22~8시 : ' + price + ',sum : ' + sum);
 				} else {
 					console.log('12인실 여기까지 확인');
 				}

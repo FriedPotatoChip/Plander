@@ -74,6 +74,17 @@
 </style>
 
 <script>
+	$(function() {
+		var cb_idx = '${cb.cb_idx }';
+		if (cb_idx = '0') {
+			$('#cb_idx').html('<span>사용안함</span>');
+		} else {
+			$('#cb_idx').html('<span>' + cb_idx + '</span>')
+		}
+	});
+</script>
+
+<script>
 	function main() {
 		window.opener.top.location.href="/TMS/book";
 		window.close();
@@ -140,7 +151,7 @@
 						<td>${uservo.phone }</td>
 						<td>${bvo.start_time } ~ ${bvo.end_time }</td>
 						<td>${bvo.sct_name } - ${bvo.s_col }</td>
-						<td>${cb.cb_idx }</td>
+						<td id="cb_idx"></td>
 						<td id="bookprice">${bvo.price }</td>
 					</tr>
 				</tbody>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -92,9 +93,6 @@ public class BookController {
 	public String roomseat(BookingVO bvo, Model model, UsersVO uservo) {
 		System.out.println("/roomseat");
 		
-//		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
-//		Date date = new Date();
-//		String today = format.format(date);
 		bvo.setBk_regdate(today);
 		
 		System.out.println("예약날짜(regdate) : " + bvo.getBk_regdate());
@@ -126,17 +124,12 @@ public class BookController {
 		return idx;
 	}
 	
-	
-	public int cbchk(CabinetVO cb) {
-		return 0;
-	}
-	
-	
 	//결제 페이지
 	@RequestMapping("/pay")
 	public String pay(BookingVO bvo, BookingCbVO cb_bvo, Model model,
 					UsersVO uservo, SeatsVO svo, CabinetVO cvo) {
 		System.out.println("/pay");
+		System.out.println(bvo);
 		
 		bvo.setBk_regdate(today); //예약날짜
 		bvo.setId(uservo.getId());
@@ -155,7 +148,6 @@ public class BookController {
 			System.out.println("예약안된사물함 확인 : " + notbookCb);
 			cb_bvo.setCb_idx(notbookCb.get(0).getCb_idx());
 			System.out.println("cb_idx 확인 : " + cb_bvo.getCb_idx());
-			
 		}
 		
 		model.addAttribute("bvo", bvo);
@@ -172,17 +164,23 @@ public class BookController {
 		
 		bvo.setBk_regdate(today); //예약날짜
 		bvo.setId(uservo.getId());
-
-		cb_bvo.setCkb_regdate(today);
-		cb_bvo.setId(uservo.getId());
-		cb_bvo.setStart_date(bvo.getStart_time());
-		cb_bvo.setEnd_date(bvo.getEnd_time());
 		
-		System.out.println("cb_bvo : " + cb_bvo);
+		if (cb_bvo.getCabinet().equals("n")) {
+			
+		}
 		
-		int booked = bookService.bookOk(bvo);
-		int bookCb = bookService.bookCabinet(cb_bvo);
-		System.out.println("예약완료 : " + uservo.getId() + ", " + booked + ", 사물함 예약 : " + bookCb);
+		if (cb_bvo.getCabinet().equals("y")) {
+			cb_bvo.setCkb_regdate(today);
+			cb_bvo.setId(uservo.getId());
+			cb_bvo.setStart_date(bvo.getStart_time());
+			cb_bvo.setEnd_date(bvo.getEnd_time());
+			
+			System.out.println("cb_bvo : " + cb_bvo);
+			
+			int booked = bookService.bookOk(bvo);
+			int bookCb = bookService.bookCabinet(cb_bvo);
+			System.out.println("예약완료 : " + uservo.getId() + ", " + booked + ", 사물함 예약 : " + bookCb);
+		}
 		
 		model.addAttribute("bvo", bvo);
 		model.addAttribute("cb", cb_bvo);

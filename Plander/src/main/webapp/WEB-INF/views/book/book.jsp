@@ -82,6 +82,13 @@
 			<td class="center">1시간 2,200원</td>
 		</tr>
 		<tr>
+			<td>심야 22:00 ~ 다음날 8:00</td>
+			<td class="center">1시간 1,200원</td>
+			<td class="center">1시간 1,500원</td>
+			<td class="center">1시간 1,500원</td>
+			<td class="center">1시간 1,500원</td>
+		</tr>
+		<tr>
 			<td>주말(토,일)</td>
 			<td class="center">1시간 1,800원</td>
 			<td class="center">1시간 2,000원</td>

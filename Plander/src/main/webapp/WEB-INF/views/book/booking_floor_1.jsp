@@ -275,6 +275,7 @@
 			<input type="hidden" name="sct_idx" value="">
 			<input type="hidden" name="sct_name" value="">
 			<input type="hidden" name="time_idx" value="${bvo.time_idx }">
+			<input type="hidden" name="cabinet" value="${bvo.cabinet }">
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
 			<input type="hidden" name="s_idx" value="${bvo.s_idx }">
