@@ -44,4 +44,22 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 
+	@Override
+	public UsersVO findId(UsersVO vo) {
+		return mapper.findId(vo);
+	}
+
+
+	@Override
+	public UsersVO findPw(UsersVO vo) {
+		return mapper.findPw(vo);
+	}
+
+
+	@Override
+	public boolean tmpPwd(UsersVO vo) {
+		return mapper.tmpPwd(vo);
+	}
+
+
 }

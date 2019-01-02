@@ -1,13 +1,19 @@
 package com.bit.controller;
 
+import java.util.UUID;
+
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,6 +25,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService service;
+	
+	@Autowired
+	private JavaMailSender mailSender;	
 	
 	@RequestMapping("/TMS/naverCallback")
 	public String naverCallback() {
@@ -164,6 +173,73 @@ public class LoginController {
 			
 			return "redirect: /TMS";
 		}	
+	
+	// email
+	@RequestMapping("/TMS/findIdPw")
+	public String findIdPw() {
+		return "login/findIdPw";
+	}
+	
+	@PostMapping("/TMS/findId")
+	public String findId(UsersVO vo, Model model, RedirectAttributes rttr) {
+		UsersVO user = service.findId(vo);
+		if (user == null) {
+			return "redirect: /TMS/findIdPwFail";
+		} else {
+			rttr.addAttribute("findId", user.getId());
+			return "redirect: /TMS/findIdOk";
+		}
+	}
+	@PostMapping("/TMS/findPw")
+	public String findPw(UsersVO vo, Model model, RedirectAttributes rttr) {
+		UsersVO user = service.findPw(vo);
+		
+		if (user == null) {
+			return "redirect: /TMS/findIdPwFail";
+		} else {
+			String setfrom = "tutlestudy@gmail.com";
+		    String tomail  = vo.getEmail();     // 받는 사람 이메일
+		    String title   = "[TMS]거북이의 기적 스터디카페 임시 비밀번호";      // 제목
+		    String content = "회원님의 임시 비밀번호 \n<b>";    // 내용
+		    String tmpPwd = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
+		    content += tmpPwd;
+		    content += "</b>";
+		    user.setPassword(tmpPwd);
+		   service.tmpPwd(user);
+		   rttr.addAttribute("findpw", "success");
+		    try {
+		      MimeMessage message = mailSender.createMimeMessage();
+		      MimeMessageHelper messageHelper 
+		                        = new MimeMessageHelper(message, true, "UTF-8");
+		 
+		      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+		      messageHelper.setTo(tomail);     // 받는사람 이메일
+		      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+		      messageHelper.setText(content);  // 메일 내용
+		     
+		      mailSender.send(message);
+		    } catch(Exception e){
+		      System.out.println(e);
+		    }
+	    return "redirect: /TMS/findOk";
+		}
+	}
+	
+	@GetMapping("/TMS/findOk")
+	public String findOk(@RequestParam("findpw")String pw, Model model) {
+		model.addAttribute("findpw", "success");
+		return "login/findOk";
+	}
+	@GetMapping("/TMS/findIdOk")
+	public String findIdOk(@RequestParam("findId")String id, Model model) {
+		model.addAttribute("findId", id);
+		return "login/findOk";
+	}
+	@RequestMapping("/TMS/findIdPwFail")
+	public String findIdPwFail(Model model) {
+		model.addAttribute("result", "fail");
+		return "login/findIdPw";
+	}
 	
 	
 	

@@ -109,7 +109,7 @@
         	//정기권 2주 time_idx ==100
         	//사물함 선택 유무확인, 사물함 선택시 +2000
         	if (time_idx == 100) {
-        		price = 18000;
+        		price = 70000;
 				if (cabinet == 'y') {
 					sum = price + 2000;
 				} else {
@@ -117,25 +117,27 @@
 				}
 			} else if (time_idx == 101) {
 				//정기권 1개월
-				price = 45000;
-				sum = price;
+				sum = 150000;
 			} else if (time_idx == 102) {
 				//야간권 10:00 ~ 8:00
-				price = 12000;
-				sum = price;
-			} else {
+				sum = 15000;
+			} else if (time_idx == 103) {
+				//1일권
+				sum = 30000;
+			}
+			else {
 				//정기권 X
 				for (var i=start; i<end; i++) {
 					console.log('i : ' + i);
 					if (8 <= i && i < 18) {
 						var price = 1500;
 						sum += price;
-						console.log('8시~18 시 : ' + price);
+						console.log('8시~18시 : ' + price);
 						console.log('i : ' + i + ', sum : ' + sum);
 					} else if (i >= 18 && i <= 22) {
-						price = 2000;
+						price = 1800;
 						sum += price;
-						console.log('18 시 이후 : ' + price);
+						console.log('18시~22시 : ' + price);
 						console.log('i : ' + i + ', sum : ' + sum);
 					} else {
 						console.log('여기까지 확인');
@@ -237,7 +239,7 @@
 
 			<div style="padding: 10px;">
 				<h5>예매자 확인</h5>
-				<span>☑︎ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
+				<span>☑ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
 				<span>☑ 취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
 				<span>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</span>
 			</div> <!-- 예매자 확인 끝 -->
