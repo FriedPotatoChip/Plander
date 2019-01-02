@@ -1,12 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .modal-body {
     max-height: calc(100vh - 210px);
     overflow-y: auto;
 }
 </style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script> 
+
+
 <script src="https://apis.google.com/js/platform.js?onload=init" async
 	defer></script>
 <!-- 네이버 로그인 -->
@@ -42,7 +51,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" onclick="loginChk()">예약하기</a></li>
 				<!-- 삭제 -->
 				<!-- <li class="nav-item"><a class="nav-link" href="#">모집하기</a></li> -->
 				<!-- 이용안내에 넣기 -->
@@ -90,6 +99,18 @@
 
 
 <script>
+$(function(){
+	
+})
+	function loginChk(){
+		console.log("여기 들어옴");
+		if ('${empty usersVO}' == 'true'){
+			alert("로그인 후 이용해주세요");
+			$("#myModal").modal();
+		} else {
+			location.href="/TMS/book";
+		}
+	}
 	function enterLogin() {
 		chk();
 	}
@@ -470,7 +491,7 @@
 <!-- 카카오 로그인 api -->
 <script type='text/javascript'>
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('카카오 자바스크립트 키'); /* 클라이언트 id 숨겨두기 */
+	Kakao.init('카카오클라이언트ID'); /* 클라이언트 id 숨겨두기 */
 	// 카카오 로그인 버튼을 생성합니다.
 	Kakao.Auth.createLoginButton({
 		container : '#kakao-login-btn',
@@ -513,7 +534,7 @@
 <!-- 네이버 로그인 api -->
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId({
-		clientId : "네이버 클라이언트 아이디", /* 클라이언트 ID (숨겨두기) */
+		clientId : "네이버클라이언트ID", /* 클라이언트 ID (숨겨두기) */
 		callbackUrl : "http://localhost:8095/TMS/naverCallback",
 		isPopup : true, /* 팝업을 통한 연동처리 여부 */
 		callbackHandle : true,
@@ -534,7 +555,7 @@
 		console.log("구글 로그인 시작");
 		gapi.load('auth2', function() {
 			var gauth = gapi.auth2.init({
-				client_id : '구글 클라이언트 키'/* 구글 클라이언트 키 */
+				client_id : '구글클라이언트ID'/* 구글 클라이언트 키 */
 			})
 			gauth.signIn()
 					.then(

@@ -108,6 +108,10 @@
 <br>
 <script>
 	function book(frm) {
+		if ('${empty usersVO}' == 'true'){
+			loginChk();
+			return false;
+		}
 		var title = "bookingPage";
 		window.open("", title, "width=1200, height=700, scrollbars=yes");
 		
