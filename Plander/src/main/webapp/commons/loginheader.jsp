@@ -91,7 +91,43 @@
 									</c:if> <b>&nbsp;&nbsp;&nbsp;${usersVO.id }&nbsp;님 </b>
 								</a>
 								<div class="dropdown-content" style="right: 0;">
-									<a href="/TMS/my" style="text-align: center;">마이페이지</a> <a href="/TMS/logout" style="text-align: center;">로그아웃</a>
+									<div class="my_cur" style="text-align: center;">
+										<h6 style="margin-top: 20px;" class="bold">예약내역</h6>
+										<hr>
+										<h6>
+											좌석<b style="color: red;"><c:if
+													test='${not empty seatcnt }'>&nbsp;${seatcnt }</c:if></b>
+										</h6>
+										<c:choose>
+											<c:when test='${not empty seat }'>
+												<c:forEach var="seat" items="${seat }">
+													<p>${seat.br_name }&nbsp;${seat.sct_name }&nbsp;${seat.s_col }
+														${seat.s_row }</p>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<p>예약된 좌석 없음</p>
+											</c:otherwise>
+										</c:choose>
+										<hr>
+										<h6>
+											사물함<b style="color: red;"><c:if
+													test='${not empty cabinetcnt }'>&nbsp;${cabinetcnt}</c:if></b>
+										</h6>
+										<c:choose>
+											<c:when test='${not empty cabinet }'>
+												<c:forEach var="cabinet" items="${cabinet }">
+													<p>${cabinet.br_name }&nbsp;${cabinet.cb_number }</p>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<p>예약된 사물함 없음</p>
+											</c:otherwise>
+										</c:choose>
+										<hr>
+									</div>
+									<a href="/TMS/my" style="text-align: center;">마이페이지</a><a
+										href="/TMS/logout" style="text-align: center;">로그아웃</a>
 								</div>
 							</div>
 						</c:if></li>

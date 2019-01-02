@@ -131,8 +131,8 @@
 	<select id="my_cabinet" resultType="com.bit.domain.BookingCbVO">
 		select b.*, c.*, br.br_name
 		from booking_cb b, cabinet c, branches br
-		where b.cb_number =
-		c.cb_number
+		where b.cb_idx =
+		c.cb_idx
 		and c.br_idx = br.br_idx
 		and b.id = #{id}
 	</select>

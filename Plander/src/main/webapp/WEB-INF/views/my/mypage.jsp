@@ -19,7 +19,13 @@
 	float: right;
 }
 
-h3, th {
+h3 {
+	text-align: center;
+	background-color: #1864ab;
+	color: white;
+}
+
+th {
 	text-align: center;
 }
 
@@ -46,6 +52,7 @@ h3 {
 .my_info {
 	width: 48%;
 	float: left;
+	margin-bottom: 30px;
 }
 
 .myBook {
@@ -63,8 +70,9 @@ h3 {
 }
 
 .myRecruit {
-	width: 96%;
+	width: 100%;
 	clear: left;
+	margin: 0 auto;
 }
 
 #my_info_table {
@@ -204,6 +212,7 @@ h3 {
 		</div>
 		<table id="myRecruit"></table>
 	</div>
+	<br><br><br><br><br><br><br><br><br><br>
 
 	<!-- 모달창 -->
 	<div class="modal" tabindex="-1" role="dialog" id="myModal">
