@@ -157,13 +157,12 @@
 		
 				console.log('30일 뒤 날짜 확인 : ' + getTimeStamp());
 				$("input[name='end_time']").prop('value', getTimeStamp());
-				$(document.getElementsByName('cabinet')).attr('disabled', true);
+				$(document.getElementsByName('cabinet')[0]).checked;
 			}
 		});
 		
 		//야간권 클릭시 
 		$('#night').click(function() {
-			//일단 빈문자열 !!
 			$("input[name='end_time']").prop('value', '');
 			$(document.getElementsByName('cabinet')).attr('disabled', true);
 		});
@@ -360,7 +359,7 @@
 				<div id="selectSeat">
 					<h4><b>이용안내</b></h4>
 				    <span>*** <b>[ 정기권 2주 ]</b> 를 구입하시는 분들 중 사물함 사용을 원하시는 분들만 체크 바랍니다.</span><br>
-				    <span>☑︎ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
+				    <span>☑ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
 				    <span>☑ 취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
 				    <span>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</span><hr>
 					
@@ -382,7 +381,7 @@
 							<td>
 								<div class="radio">
 									<label><input type="radio" id="nope" name="time_idx" value="0" checked="checked">정기권 사용안함</label><br>
-									<label><input type="radio" id="oneday" name="time_idx" value="100">1일권</label><br>
+									<label><input type="radio" id="oneday" name="time_idx" value="103">1일권</label><br>
 									<label><input type="radio" id="2weeks" name="time_idx" value="100">정기권 2주</label><br>
 									<label><input type="radio" id="1month" name="time_idx" value="101">정기권 1개월</label><br>
 									<label><input type="radio" id="night" name="time_idx" value="102">야간권(22:00~08:00)</label>
@@ -397,29 +396,7 @@
 						</tr>
 						
 					</table>
-					<!-- 
-					<h4>좌석 종류 선택</h4>
-					<div class="radio">
-						<label><input type="radio" name="roomnum" value="1">개인석</label>&nbsp;
-						<label><input type="radio" name="roomnum" value="2">랩실</label>
-					</div>
-					<hr>
 					
-					<h4>정기 이용권(1인실)</h4>
-					<div class="radio">
-						<label><input type="radio" id="nope" name="time_idx" value="0" checked="checked">정기권 사용안함</label>&nbsp;
-						<label><input type="radio" id="oneday" name="time_idx" value="100">1일권</label>&nbsp;
-						<label><input type="radio" id="2weeks" name="time_idx" value="100">정기권 2주</label>&nbsp;
-						<label><input type="radio" id="1month" name="time_idx" value="101">정기권 1개월</label>&nbsp;
-						<label><input type="radio" id="night" name="time_idx" value="102">야간권(22:00~08:00)</label>
-						<hr>
-						<h4>사물함 사용여부</h4>
-						<p>*** <b>[ 정기권 2주 ]</b> 를 구입하시는 분들 중 사물함 사용을 원하시는 분들만 체크 바랍니다.</p>
-						<label><input type="radio" name="cabinet" value="y">사용</label>&nbsp;
-						<label><input type="radio" name="cabinet" value="n" checked="checked">사용안함</label><br>
-					</div>
-					<hr>
-					 -->
 					<div class="center" style="padding: 10px;">
 						<button type="button" class="btn btn-default" disabled="disabled">이전단계</button>&nbsp;
 						<button type="button" onclick="floorChk(this.form)">다음단계</button>
