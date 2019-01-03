@@ -302,7 +302,7 @@
 				<label class="radio-inline"><input type="radio" name="pay" id="naverpay" value="2">네이버페이</label>
 				<br>
 				<div class="center" style="padding: 10px;">
-					<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
+					<button type="button" onclick="redirect:/TMS/book/selectSeat">이전단계</button>&nbsp;
 					<button type="submit">다음단계</button>
 				</div>
 				

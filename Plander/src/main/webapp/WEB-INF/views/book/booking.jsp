@@ -213,11 +213,8 @@
 		if (chk==null) {
 			alert("좌석 종류(개인실/랩실) 선택은 필수입니다.");
 			return false;
-		} else if (chk==1) {
-			frm.action = "/TMS/book/oneseat";
-			frm.submit();
 		} else {
-			frm.action = "/TMS/book/roomseat";
+			frm.action = "/TMS/book/selectSeat";
 			frm.submit();
 		}
 	}

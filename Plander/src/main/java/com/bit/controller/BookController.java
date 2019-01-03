@@ -53,6 +53,61 @@ public class BookController {
 	Date date = new Date();
 	String today = format.format(date);
 	
+	
+	@RequestMapping("/selectSeat")
+	public String selectSeat(BookingVO bvo, Model model, UsersVO uservo) {
+		System.out.println("/selectSeat");
+		
+		bvo.setBk_regdate(today);
+		System.out.println("예약날짜(regdate) : " + bvo.getBk_regdate());
+		System.out.println("시작날짜 : " + bvo.getStart_time());
+		System.out.println("끝 날짜 : " + bvo.getEnd_time());
+		System.out.println("***** 지점번호 : " + bvo.getBr_idx() + ", 방 번호 : " + bvo.getRoomnum()
+				+ ", 정기권 확인 : " + bvo.getTime_idx());
+		
+		bvo.setId(uservo.getId());
+		
+		if (bvo.getRoomnum() == 1) {
+			//좌석조회 개인실
+			
+			int allseat = bookService.seatCnt(bvo.getBr_idx(), bvo.getRoomnum()); //전체 좌석 
+			int bookseat = bookService.bookoneCnt(bvo); //예약 좌석
+			int leaveseat = (allseat - bookseat); //남은 좌석 수
+			System.out.println("전체 좌석 수 : " + allseat + "예약된 좌석 수 : " + bookseat + "남은 좌석 수 : " + leaveseat);
+			List<BookingVO> booklist = bookService.bookone(bvo);
+			
+			System.out.println("booklist : " + booklist);
+			System.out.println("bvo : " + bvo);
+			
+			model.addAttribute("booklist", booklist);
+			model.addAttribute("bvo", bvo);
+			return "book/booking_floor_2";
+			
+		} else if (bvo.getRoomnum() == 2) {
+			//좌석조회 랩실
+			//전체 좌석 : 5
+			//예약된 좌석
+			int roomseat = bookService.bookroomCnt(bvo);
+			int leaveroomseat = (5 - roomseat); //남은 좌석 수
+			System.out.println("랩실 남은 좌석 수 : " + leaveroomseat);
+			List<BookingVO> bookroomlist = bookService.bookroom(bvo);
+			
+			System.out.println("bookroomlist : " + bookroomlist);
+			System.out.println("bvo : " + bvo);
+			
+			model.addAttribute("bookroomlist", bookroomlist);
+			model.addAttribute("bvo", bvo);
+			return "book/booking_floor_1";
+			
+		} else {
+			return "book/booking";
+		}
+		
+	}
+	
+	
+	
+	
 	//좌석 조회(개인실)
 	@RequestMapping("/oneseat")
 	public String oneseat(BookingVO bvo, Model model, UsersVO uservo) {
