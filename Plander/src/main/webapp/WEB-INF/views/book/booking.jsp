@@ -208,6 +208,16 @@
 			frm.end_time.focus();
 			return false;
 		}
+		var ti_idx = $("input:radio[name=time_idx]:checked").val();
+		var startGetTime = new Date($(document.getElementsByName('start_time')).val()).getTime();
+		var endGetTime = new Date($(document.getElementsByName('end_time')).val()).getTime();
+		if (ti_idx == 0){
+			if ((endGetTime - startGetTime) > 86400000){
+				alert("정기권을 이용하지 않을 시 최대 24시간까지 예약하실 수 있습니다.")
+				$("input[name='end_time']").prop('value', '');
+				return false;
+			}
+		}
 		
 		var chk = $(":input:radio[name=roomnum]:checked").val();
 		if (chk==null) {
