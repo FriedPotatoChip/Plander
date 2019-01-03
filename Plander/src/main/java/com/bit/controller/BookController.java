@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,10 +125,11 @@ public class BookController {
 	}
 	
 	
+	
 	//결제 페이지
 	@RequestMapping("/pay")
 	public String pay(BookingVO bvo, BookingCbVO cb_bvo, Model model,
-					UsersVO uservo, SeatsVO svo, CabinetVO cvo) {
+					UsersVO uservo, SeatsVO svo, HttpServletRequest request, CabinetVO cvo) {
 		System.out.println("/pay");
 		System.out.println(bvo);
 		
@@ -138,6 +140,9 @@ public class BookController {
 		System.out.println("idx 확인 : " + idx);
 		bvo.setS_idx(idx);
 		svo.setS_idx(idx);
+		
+		String test = request.getParameter("test");
+		System.out.println("test: " + test);
 		
 		boolean cab = cab(bvo.getCabinet());
 		System.out.println("사물함 사용여부 확인 : " + bvo.getCabinet() + ", t/f : " + cab);
@@ -153,9 +158,14 @@ public class BookController {
 			model.addAttribute("cb", cb_bvo);
 		} 
 		
+		String chkLen = request.getParameter("chkLen");
+		System.out.println("chkLen: " + chkLen);
+		
 		model.addAttribute("bvo", bvo);
 		model.addAttribute("uservo", uservo);
+		model.addAttribute("test", test);
 		model.addAttribute("svo", svo);
+		model.addAttribute("chkLen", chkLen);
 		return "book/payment";
 	}
 	

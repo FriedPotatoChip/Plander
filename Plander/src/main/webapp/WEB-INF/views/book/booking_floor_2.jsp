@@ -45,17 +45,25 @@
 			if (cnt == 1){
 				$("#msg").html("<span>A-" + $(":checkbox:checked").val() + "</span>");
 			} else {
-				if (chkLen == 2){
+				if (chkLen == 2) {
 					var test = "";
-					for (var i = 0; i < 2; i ++){
-						if (i == 0){
-							test += chkVal[i].value + ", A-";
+					for (var i = 0; i < 2; i ++) {
+						if (i == 0) {
+							test += chkVal[i].value + ", ";
 						} else {
-							test += chkVal[i].value+"";
+							test += chkVal[i].value + "";
 						}
 					}
 					$("#msg").html("<span>A-" + test + "</span>");
-					console.log("선택한 좌석: "+ test);
+					console.log("선택한 좌석: " +  test);
+					
+					document.form1.test.value = test;
+					document.form1.chkLen.value = chkLen;
+					
+// 					var arr = new Array();
+// 					arr += test;
+// 					console.log("arr : " + arr);
+					
 				}
 				
 			}
@@ -80,7 +88,7 @@
 				</c:forEach>
 			}
 		});
-		
+
 	});
 
 </script>
@@ -231,7 +239,7 @@
 	
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
-		<form method="post">
+		<form method="post" name="form1">
 			<div>
 				<h5>☑ 1인 2석까지 예약 가능합니다.</h5>
 				<div>
@@ -408,6 +416,9 @@
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
 			<input type="hidden" name="s_idx" value="${bvo.s_idx }">
+			<input type="hidden" name="test" value="">
+			<input type="hidden" name="chkLen" value="">
+				
 		</form>
 		</div> <!-- 박스 아웃사이드 끝 -->
 	</div> <!-- 티켓 끝 --><br><br><br>

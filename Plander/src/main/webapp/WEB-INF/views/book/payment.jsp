@@ -390,7 +390,12 @@
 				}
 				
 				console.log('최종 가격 확인 sum : ' + sum);
-				$('#bookprice').html('<span>' + sum + '원</span>');
+				if(chkLen == 2){
+					$('#bookprice').html('<span>' + (sum * 2) + '원</span>');
+				} else {
+					$('#bookprice').html('<span>' + sum + '원</span>');
+				}
+				
 				
 				$("input[name='price']").attr('value', sum);
 				console.log("확인 price : " + sum + ", booknum : " + bookval);
@@ -462,7 +467,7 @@
 							<td>${uservo.name }</td>
 							<td>${uservo.phone }</td>
 							<td>${bvo.start_time } ~ ${bvo.end_time }</td>
-							<td>${bvo.sct_name } - ${bvo.s_col }</td>
+							<td>${bvo.sct_name } - ${test }</td>
 							<td id="cb_idx"></td>
 							<td id="bookprice"></td>
 						</tr>

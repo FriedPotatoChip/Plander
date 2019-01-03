@@ -17,4 +17,5 @@ public class BookingVO {
 	private String br_name, sct_name;
 	//날짜 선택
 	private String start_time, end_time, bk_regdate;
+	
 }
