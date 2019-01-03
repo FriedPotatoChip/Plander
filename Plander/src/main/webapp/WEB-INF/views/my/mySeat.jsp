@@ -18,6 +18,29 @@ tr, td {
 tr:last-child td {
 	border-bottom: none;
 }
+
+/* 페이징 시작 */
+#pagingList {
+	list-style: none;
+}
+
+#pagingList li {
+	display: inline;
+}
+
+.marginLi {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.now {
+	background-color: orange;
+}
+/* 페이징 끝 */
 </style>
 </head>
 <body>
@@ -57,6 +80,33 @@ tr:last-child td {
 								onclick="location.href='/TMS/my/delSeat?bk_idx=${seat.bk_idx }'">예약취소</button></td>
 					</tr>
 				</c:forEach>
+				
+				<!-- 페이징 시작 -->
+				<div id="paging">
+					<ul id="pagingList">
+						<c:if test="${page.chkStartPage }">
+							<li><a href="/TMS/my/my_recruit?nowPage=1"><button>&lt;&lt;</button></a></li>
+							<li><a href="/TMS/my/my_recruit?nowPage=${page.startPage-1 }"><button>&lt;</button></a></li>
+						</c:if>
+						<c:forEach var="p" begin="${page.startPage }"
+							end="${page.endPage }">
+							<c:if test="${p == page.nowPage }">
+								<li><a class="now marginLi"
+									href="/TMS/my/my_recruit?nowPage=${p }">${p }</a></li>
+							</c:if>
+							<c:if test="${p != page.nowPage }">
+								<li><a class="marginLi"
+									href="/TMS/my/my_recruit?nowPage=${p }">${p }</a></li>
+							</c:if>
+
+						</c:forEach>
+						<c:if test="${page.chkEndPage }">
+							<li><a href="/TMS/my/my_recruit?nowPage=${page.endPage+1 }"><button>&gt;</button></a></li>
+							<li><a href="/TMS/my/my_recruit?nowPage=${page.lastPage }"><button>&gt;&gt;</button></a></li>
+						</c:if>
+					</ul>
+				</div>
+				
 			</c:otherwise>
 		</c:choose>
 	</tbody>

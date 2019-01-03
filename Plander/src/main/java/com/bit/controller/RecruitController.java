@@ -67,9 +67,7 @@ public class RecruitController {
 	@GetMapping("/TMS/recruit")
 	public String recruit(Model model, PagingVO page) {
 		
-		
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal());
-		
 		
 		page.CalcPage(page.getNowPage(), page.getCntPerPage());
 		model.addAttribute("page", page);
@@ -79,7 +77,7 @@ public class RecruitController {
 	
 	/* 모집글 상세보기 */
 	@GetMapping("/TMS/recruitDetail")
-	public String detailOne(@RequestParam("idx")int rc_idx, Model model, PagingVO page) {
+	public String detailOne(int rc_idx, Model model, PagingVO page) {
 		
 		service.updateHit(rc_idx);
 		model.addAttribute("rc_board", service.detailOne(rc_idx));

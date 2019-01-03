@@ -15,6 +15,7 @@ import com.bit.domain.RecruitVO;
 import com.bit.domain.UsersVO;
 import com.bit.mapper.MyMapper;
 import com.bit.service.MyService;
+import com.bit.utils.PagingVO;
 
 @Service
 public class MyServiceImpl implements MyService {
@@ -113,17 +114,17 @@ public class MyServiceImpl implements MyService {
 	}
 
 	@Override
-	public List<RecruitVO> my_recruit(Map<String, Object> map) {
+	public List<RecruitVO> my_recruit(Map map) {
 		return mapper.my_recruit(map);
 	}
 
 	@Override
-	public List<BoardVO> board(Map<String, Object> map) {
+	public List<BoardVO> board(Map map) {
 		return mapper.board(map);
 	}
 
 	@Override
-	public List<CommentsVO> board_comment(Map<String, Object> map) {
+	public List<CommentsVO> board_comment(Map map) {
 		return mapper.board_comment(map);
 	}
 
