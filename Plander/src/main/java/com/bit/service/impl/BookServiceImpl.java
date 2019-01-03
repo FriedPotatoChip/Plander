@@ -23,7 +23,6 @@ public class BookServiceImpl implements BookService {
 	//전체 좌석 수 확인
 	@Override
 	public int seatCnt(int br_idx, int roomnum) {
-		System.out.println("seatCnt() : Impl 까지 옴!");
 		System.out.println("br_idx : " + br_idx + ", roomnum : " + roomnum);
 		Map<String, Integer> map = new HashMap<>();
 		map.put("br_idx", br_idx);
@@ -35,54 +34,46 @@ public class BookServiceImpl implements BookService {
 	//예약된 좌석 수(개인실)
 	@Override
 	public int bookoneCnt(BookingVO bvo) {
-		System.out.println("***** bookoneCnt() : Impl 까지 옴!");
 		return bookmapper.bookoneCnt(bvo);
 	}
 
 	@Override
 	public List<BookingVO> bookone(BookingVO bvo) {
-		System.out.println("***** bookone() : Impl 까지 옴!");
 		return bookmapper.bookone(bvo);
 	}
 	
 	//예약된 좌석 수(랩실)
 	@Override
 	public int bookroomCnt(BookingVO bvo) {
-		System.out.println("***** bookroomCnt() : Impl 까지 옴!");
 		return bookmapper.bookroomCnt(bvo);
 	}
 
 	@Override
 	public List<BookingVO> bookroom(BookingVO bvo) {
-		System.out.println("***** bookroom() : Impl 까지 옴!");
 		return bookmapper.bookroom(bvo);
 	}
 	
 	//선택 정보 조회
 	@Override
 	public List<BookingVO> myseat(BookingVO bvo) {
-		System.out.println("***** myseat() : Impl 까지 옴!");
 		return bookmapper.myseat(bvo);
 	}
 	
 	//예약완료
 	@Override
 	public int bookOk(BookingVO bvo) {
-		System.out.println("bookOk() : Impl 까지 옴!");
 		return bookmapper.bookOk(bvo);
 	}
 	
 	//사물함 예약
 	@Override
 	public int bookCabinet(BookingCbVO cb_bvo) {
-		System.out.println("bookCabinet() : Impl 까지 옴!");
 		return bookmapper.bookCabinet(cb_bvo);
 	}
 	
 	//s_idx
 	@Override
 	public SeatsVO seatnum(int s_col, int br_idx) {
-		System.out.println("seatnum() : Impl 까지 옴!");
 		System.out.println("s_col : " + s_col + ", br_idx : " + br_idx);
 		Map<String, Integer> map = new HashMap<>();
 		map.put("s_col", s_col);
@@ -94,7 +85,6 @@ public class BookServiceImpl implements BookService {
 	//예약 안된 사물함 조회 
 	@Override
 	public List<CabinetVO> not_bookCb(CabinetVO cvo) {
-		System.out.println("not_bookCb() : Impl 까지 옴!");
 		return bookmapper.not_bookCb(cvo);
 	}
 	

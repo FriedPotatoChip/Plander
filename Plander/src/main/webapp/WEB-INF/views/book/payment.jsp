@@ -90,15 +90,15 @@
 		$("input[name='booknum']").attr('value', bookval);
 		
 		//사물함 사용여부
-		
 		var bookCab = '${cb.cb_idx }';
 		console.log("cb_idx 확인 : " + bookCab);
 		
-		if (bookCab = '0') {
-			$('#cb_idx').html('<span>사용안함</span>');
-		} else {
+		if (bookCab != "") {
 			$('#cb_idx').html('<span>'+ bookCab + '번</span>');
 			$("input[name='cb_idx']").attr('value', bookCab);
+		} else {
+			$('#cb_idx').html('<span>사용안함</span>');
+			$("input[name='cb_idx']").attr('value', 0);
 		}
 		
 		
@@ -302,18 +302,19 @@
 				<label class="radio-inline"><input type="radio" name="pay" id="naverpay" value="2">네이버페이</label>
 				<br>
 				<div class="center" style="padding: 10px;">
-					<button type="button" onclick="redirect:/TMS/book/selectSeat">이전단계</button>&nbsp;
+					<button type="button" onclick="">이전단계</button>&nbsp;
 					<button type="submit">다음단계</button>
 				</div>
 				
-				<input type="hidden" name="s_idx" value="${svo.s_idx }">
-				<input type="hidden" name="start_time" value="${bvo.start_time }">
-				<input type="hidden" name="end_time" value="${bvo.end_time }">
 				<input type="hidden" name="booknum" value="">
 				<input type="hidden" name="price" value="">
-				<input type="hidden" name="s_col" value="${bvo.s_col }">
 				<input type="hidden" name="sct_name" value="${bvo.sct_name }">
+				<input type="hidden" name="s_col" value="${bvo.s_col }">
 				<input type="hidden" name="cb_idx" value="">
+				<input type="hidden" name="cabinet" value="${bvo.cabinet }">
+				<input type="hidden" name="start_time" value="${bvo.start_time }">
+				<input type="hidden" name="end_time" value="${bvo.end_time }">
+				<input type="hidden" name="s_idx" value="${svo.s_idx }">
 			</div> <!-- 결제방식 선택 끝  -->
 		</form>
 		
