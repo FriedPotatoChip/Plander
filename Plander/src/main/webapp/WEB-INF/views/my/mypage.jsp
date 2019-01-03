@@ -229,7 +229,7 @@ h3 {
 	<div class="myBook">
 		<h3>- 내예약 -</h3>
 		<div class="myBook_nav">
-			<strong><a href="#" onclick="fetch_book('/TMS/my/my_seat')">좌석예약내역</a></strong>
+			<strong><a href="#" onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
 			&nbsp;|&nbsp;<strong><a href="#"
 				onclick="fetch_book('/TMS/my/my_cabinet')">사물함예약내역</a></strong>
 			<table id="myBook"></table>
@@ -240,7 +240,7 @@ h3 {
 		<h3>- 내글목록 -</h3>
 		<div class="myRecruit_nav">
 			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/my_recruit')">내모집글</a></strong>&nbsp;|&nbsp;
+				onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
 			<strong><a href="#"
 				onclick="fetch_recruit('/TMS/my/applyList')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
 			<strong><a href="#"
@@ -397,12 +397,6 @@ h3 {
 			document.getElementById("zipNo").value = zipNo;
 		}
 		
-		function to_detail(rc_idx) {
-			console.log("rc_idx: " + rc_idx);
-			location.href = "/TMS/my/detail?rc_idx=" + rc_idx
-					+ "&nowPage=${page.nowPage};
-		}
-
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
