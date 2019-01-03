@@ -102,8 +102,8 @@
 										<c:choose>
 											<c:when test='${not empty seat }'>
 												<c:forEach var="seat" items="${seat }">
-													<p>${seat.br_name }&nbsp;${seat.sct_name }&nbsp;${seat.s_col }
-														${seat.s_row }</p>
+													<%-- <p>${seat.br_name }&nbsp;${seat.sct_name }&nbsp;${seat.s_col }
+														${seat.s_row }</p> --%>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
