@@ -25,8 +25,10 @@ tr:last-child td {
 		<tr>
 			<th>예약번호</th>
 			<th>지점</th>
-			<th>좌석<br>종류</th>
-			<th>좌석<br>번호</th>
+			<th>좌석<br>종류
+			</th>
+			<th>좌석<br>번호
+			</th>
 			<th>등록일</th>
 			<th>사용기한</th>
 		</tr>
@@ -48,8 +50,11 @@ tr:last-child td {
 						<td>${seat.br_name }</td>
 						<td>${seat.sct_name }</td>
 						<td>${seat.s_col }</td>
-						<td>${seat.start_time }<br>- ${seat.end_time }</td>
-						<td><button type="button" class="btn btn-outline-danger btn-sm" onclick="location.href='/TMS/my/delSeat?bk_idx=${seat.bk_idx }'">예약취소</button></td>
+						<td>${seat.start_time }<br>- ${seat.end_time }
+						</td>
+						<td><button type="button"
+								class="btn btn-outline-danger btn-sm"
+								onclick="location.href='/TMS/my/delSeat?bk_idx=${seat.bk_idx }'">예약취소</button></td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

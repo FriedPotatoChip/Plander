@@ -35,24 +35,32 @@ public class MainController {
 	private MyService myService;
 
 	@RequestMapping("")
-	public String main(HttpSession session, Model model) {
+	public String main(HttpSession session) {
 		UsersVO user = (UsersVO) session.getAttribute("usersVO");
 		if(user != null) {
+			
 			//좌석, 사물함 예약 갯수
 			int seatcnt = myService.getTotalSeat(user);
 			int cabinetcnt = myService.getTotalCabinet(user);
-			model.addAttribute("seatcnt", seatcnt);
-			model.addAttribute("cabinetcnt", cabinetcnt);
+			
+			
+			session.setAttribute("seatcnt", seatcnt);
+			session.setAttribute("cabinetcnt", cabinetcnt);
 			
 			//좌석 예약내역
 			List<BookingVO> seat = myService.my_seat(user);
 			System.out.println("seat: " + seat);
-			model.addAttribute("seat", seat);
+			session.setAttribute("seat", seat);
 			
 			//사물함 예약내역
 			List<BookingCbVO> cabinet = myService.my_cabinet(user);
-			model.addAttribute("cabinet", cabinet);
+			session.setAttribute("cabinet", cabinet);
 			System.out.println("cabinet: " + cabinet);
+			
+//			model.addAttribute("seatcnt", session.getAttribute("seatcnt"));
+//			model.addAttribute("cabinetcnt", session.getAttribute("cabinetcnt"));
+//			model.addAttribute("seat", session.getAttribute("seat"));
+//			model.addAttribute("cabinet", session.getAttribute("cabinet"));
 		}
 		return "main/main";
 	}
