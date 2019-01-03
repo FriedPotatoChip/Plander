@@ -242,7 +242,7 @@ body {
 					모집하거나 참여하고 싶으시간요? 그럼 여기로 들어오세요~!!</p>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-				<a href="#"><button type="button"
+				<a href="/TMS/recruit"><button type="button"
 						class="btn btn-outline-secondary btn-lg">모집게시판</button></a>
 			</div>
 		</div>
