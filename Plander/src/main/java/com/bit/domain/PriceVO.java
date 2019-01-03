@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class PriceVO {
-	private int pr_idx, price;
+	private int pr_idx, price, sct_idx, time_idx;
 	private String pr_name;
 
 }
