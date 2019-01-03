@@ -129,6 +129,7 @@ public class MyController {
 	@RequestMapping("applyList")
 	public String applyList(HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
+		System.out.println("vo: " + vo);
 		model.addAttribute("applyList", myService.getApplyList(vo));
 		return "my/applyList";
 	}
@@ -237,6 +238,21 @@ public class MyController {
 		return "my/freeboardDetail";
 	}
 	
+	@RequestMapping("delSeat")
+	public String delSeat(@RequestParam int bk_idx) {
+		System.out.println("bk_idx: " + bk_idx);
+		int result = myService.delSeat(bk_idx);
+		System.out.println("삭제 결과: " + result);
+		return "redirect: /TMS/my";
+	}
+	
+	@RequestMapping("delCabinet")
+	public String delCabinet(@RequestParam int ckb_idx) {
+		System.out.println("ckb_idx: " + ckb_idx);
+		int result = myService.delCabinet(ckb_idx);
+		System.out.println("삭제 결과: " + result);
+		return "redirect: /TMS/my";
+	}
 	
 
 }

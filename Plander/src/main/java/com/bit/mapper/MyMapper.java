@@ -79,4 +79,10 @@ public interface MyMapper {
 	
 	// 프로필 사진 업데이트
 	public boolean updateProfileImg(UsersVO vo);
+	
+	// 예약좌석삭제
+	public int delSeat(int bk_idx);
+	
+	// 예약사물함삭제
+	public int delCabinet(int ckb_idx);
 }
