@@ -191,11 +191,9 @@
 		        	//정기권 2주 time_idx ==100
 		        	//사물함 선택 유무확인, 사물함 선택시 +2000
 		        	if (time_idx == 100) {
-		        		price = ticket2w;
+		        		sum = ticket2w;
 						if (cabinet == 'y') {
-							sum = price + 2000;
-						} else {
-							sum = price;
+							sum += 2000;
 						}
 					} else if (time_idx > 100) {
 						//정기권 1개월
@@ -219,11 +217,9 @@
 									console.log('i : ' + i);
 									if (8 <= i && i < 18) {
 										sum += privateAm;
-										console.log('8시~18시 : ' + price);
 										console.log('i : ' + i + ', sum : ' + sum);
 									} else if (i >= 18 && i < 22) {
 										sum += privatePm;
-										console.log('18시~22시 : ' + price);
 										console.log('i : ' + i + ', sum : ' + sum);
 									} else {
 										sum += privateNight;
@@ -235,11 +231,9 @@
 									console.log('i : ' + i);
 									if (8 <= i && i < 18) {
 										sum += privateAm;
-										console.log('8시~18시 : ' + price);
 										console.log('i : ' + i + ', sum : ' + sum);
 									} else if (i >= 18 && i < 22) {
 										sum += privatePm;
-										console.log('18시~22시 : ' + price);
 										console.log('i : ' + i + ', sum : ' + sum);
 									} else {
 										sum += privateNight;
@@ -250,11 +244,9 @@
 									console.log('i : ' + i);
 									if (8 <= i && i < 18) {
 										sum += privateAm;
-										console.log('8시~18시 : ' + price);
 										console.log('i : ' + i + ', sum : ' + sum);
 									} else if (i >= 18 && i < 22) {
 										sum += privatePm;
-										console.log('18시~22시 : ' + price);
 										console.log('i : ' + i + ', sum : ' + sum);
 									} else {
 										sum += privateNight;
@@ -281,11 +273,9 @@
 								console.log("금, 토 들어옴");
 								if (8 <= i && i < 18) {
 									sum += privateAm;
-									console.log('8시~18시 : ' + price);
 									console.log('i : ' + i + ', sum : ' + sum);
 								} else if (i >= 18 && i < 22) {
 									sum += privatePm;
-									console.log('18시~22시 : ' + price);
 									console.log('i : ' + i + ', sum : ' + sum);
 								} else {
 									sum += privateNight;
@@ -300,11 +290,9 @@
 								console.log('i : ' + i);
 								if (8 <= i && i < 18) {
 									sum += privateAm;
-									console.log('8시~18시 : ' + price);
 									console.log('i : ' + i + ', sum : ' + sum);
 								} else if (i >= 18 && i < 22) {
 									sum += privatePm;
-									console.log('18시~22시 : ' + price);
 									console.log('i : ' + i + ', sum : ' + sum);
 								} else {
 									sum += privateNight;
@@ -327,7 +315,6 @@
 								console.log('i : ' + i);
 								if (8 <= i && i < 22) {
 									sum += labAm;
-									console.log('평일 8시~22 시 : ' + price);
 									console.log('i : ' + i + ', sum : ' + sum);
 								} else {
 									sum += labNight;
@@ -359,7 +346,6 @@
 						for (var i=start; i<24; i++){
 							if (8 <= i && i < 22) {
 								sum += labAm;
-								console.log('평일 8시~22 시 : ' + price);
 								console.log('i : ' + i + ', sum : ' + sum);
 							} else {
 								sum += labNight;
