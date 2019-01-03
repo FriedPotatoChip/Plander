@@ -68,6 +68,7 @@
 	<!-- 내가 쓴 모집글 페이징 처리용 -->
 	<select id="my_recruit" resultType="com.bit.domain.RecruitVO"
 		parameterType="Map">
+		<![CDATA[
 		select * from
 		(
 		select rownum rn, rc.* from recruit rc
@@ -80,6 +81,7 @@
 		where rn between #{start}
 		and
 		#{end}
+		]]>
 	</select>
 
 	<!-- 내가 쓴 모집글 상세 조회 -->
@@ -125,7 +127,7 @@
 		a, recruit rc
 		where a.rc_idx = rc.rc_idx
 		and rc.rc_idx = (select rc_idx
-		from recruit where rc.id = #{id})
+		from recruit where id = #{id})
 	</select>
 
 	<!-- 내 좌석 예약내역 -->
@@ -162,6 +164,7 @@
 	<!-- 자유게시판에 올린 글목록 페이징용 -->
 	<select id="board" resultType="com.bit.domain.BoardVO"
 		parameterType="Map">
+		<![CDATA[
 		select * from
 		(
 		select rownum rn, b.* from board b
@@ -174,6 +177,7 @@
 		where rn between #{start}
 		and
 		#{end}
+		]]>
 	</select>
 
 	<!-- 자유게시판에 달린 댓글목록 -->
@@ -184,6 +188,7 @@
 	<!-- 자유게시판에 달린 댓글목록 페이징용 -->
 	<select id="board_comment"
 		resultType="com.bit.domain.CommentsVO" parameterType="Map">
+		<![CDATA[
 		select *
 		from(
 		select rownum rn, b.b_idx, b.b_title, b.id, b.ct_idx, b.b_regdate,
@@ -198,6 +203,7 @@
 		)
 		where rn between
 		#{start} and #{end}
+		]]>
 	</select>
 
 	<!-- 자유게시판에 달린 댓글목록 갯수 페이징용 -->

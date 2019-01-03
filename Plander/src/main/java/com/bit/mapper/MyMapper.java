@@ -10,6 +10,7 @@ import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
 import com.bit.domain.UsersVO;
+import com.bit.utils.PagingVO;
 
 public interface MyMapper {
 
@@ -25,7 +26,7 @@ public interface MyMapper {
 	// 내가 쓴 모집글
 	/* public List<RecruitVO> my_recruit(UsersVO vo); */
 
-	public List<RecruitVO> my_recruit(Map<String, Object> map);
+	public List<RecruitVO> my_recruit(Map map);
 
 	// 내가 쓴 모집글 상세 조회
 	public RecruitVO getOne(int rc_idx);
@@ -62,7 +63,7 @@ public interface MyMapper {
 
 	// 자유게시판에 올린 글목록
 	/* public List<BoardVO> board(UsersVO vo); */
-	public List<BoardVO> board(Map<String, Object> map);
+	public List<BoardVO> board(Map map);
 
 	// 자유게시판에 올린 글목록 갯수
 	public int board_cnt(UsersVO vo);
@@ -72,7 +73,7 @@ public interface MyMapper {
 
 	// 자유게시판에 달린 댓글목록
 	/* public List<CommentsVO> board_comment(UsersVO vo); */
-	public List<CommentsVO> board_comment(Map<String, Object> map);
+	public List<CommentsVO> board_comment(Map map);
 
 	// 자유게시판 상세보기
 	public BoardVO getBoardOne(int b_idx);
