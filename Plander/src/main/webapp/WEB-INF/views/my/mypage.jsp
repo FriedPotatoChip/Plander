@@ -396,6 +396,12 @@ h3 {
 			document.getElementById("addrDetail").value = addrDetail;
 			document.getElementById("zipNo").value = zipNo;
 		}
+		
+		function to_detail(rc_idx) {
+			console.log("rc_idx: " + rc_idx);
+			location.href = "/TMS/my/detail?rc_idx=" + rc_idx
+					+ "&nowPage=${page.nowPage};
+		}
 
 		//비밀번호 확인
 		function pwchk() {
