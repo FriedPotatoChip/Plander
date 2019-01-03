@@ -44,6 +44,9 @@
 			console.log("chkLen : " + chkLen);
 			if (cnt == 1){
 				$("#msg").html("<span>A-" + $(":checkbox:checked").val() + "</span>");
+				
+				document.form1.test.value = $(":checkbox:checked").val();
+				document.form1.chkLen.value = cnt;
 			} else {
 				if (chkLen == 2) {
 					var test = "";
