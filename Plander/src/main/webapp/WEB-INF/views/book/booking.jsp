@@ -40,7 +40,6 @@
 			$('#1month').attr('disabled', true);
 		});
 		
-		
 		//정기권 1일권 체크
 		$('#oneday').click(function() {
 			var startTime = $(document.getElementsByName('start_time')).val();
