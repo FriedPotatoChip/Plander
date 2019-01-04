@@ -489,9 +489,8 @@
 	
 </div> <!-- 바디 콘테이너 끝 -->
 <script>
-window.finalPrice = 0;
 $(document).ready(function(){
-	
+	window.finalPrice = 0;
 	$.ajax({
 		url: "/couponList",
 		type: "get",
@@ -548,29 +547,41 @@ $("#coupon").on("change", function(){
 })
 
 function nextSubmit(frm){
-	if (fianlPrice == 0){
+	
+	var pay = $("input[name='pay']:checked").val();
+	if (pay == undefined){
+		alert("결제 수단을 선택해주세요");
+		$("input[name='pay']").focus();
+		return false;
+	}
+	
+	if (finalPrice == 0){
 		finalPrice = sum;
 	}
 	$("#hiddenPrice").val(finalPrice);
-	console.log("여긴 온다");
-	$.ajax({
-		url: '/minusCoupon',
-		type: 'get',
-		data: {'cp_idx':cp_idx},
-		dataType: 'text',
-		success: function(result){
-			if (result == 'success'){
-				console.log("성공");
-				frm.submit();
-			} else if(result == 'fail') {
+	var couponVal = $("#coupon").val();
+	if (couponVal != 0){
+		$.ajax({
+			url: '/minusCoupon',
+			type: 'get',
+			data: {'cp_idx':cp_idx},
+			dataType: 'text',
+			success: function(result){
+				if (result == 'success'){
+					console.log("성공");
+					frm.submit();
+				} else if(result == 'fail') {
+					alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+					return false;
+				}
+			}, error: function(error){
 				alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
 				return false;
 			}
-		}, error: function(error){
-			alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
-			return false;
-		}
-	})
+		})
+	} else {
+		frm.submit();
+	}
 }
 </script>
 </body>
