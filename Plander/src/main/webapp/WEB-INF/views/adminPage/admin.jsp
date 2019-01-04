@@ -121,7 +121,7 @@ input[type=submit]:hover {
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="#">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
 		</ul>
 	</nav>
 
@@ -146,7 +146,7 @@ input[type=submit]:hover {
 								Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats?sct_idx=1"> <span
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats?roomnum=1&br_idx=1"> <span
 								data-feather="bar-chart-2"></span> Seats
 						</a></li>
 					</ul>

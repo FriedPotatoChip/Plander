@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bit.domain.BookingCbVO;
+import com.bit.domain.BookingVO;
 import com.bit.domain.DateTimeVO;
 import com.bit.domain.UsersVO;
 import com.bit.utils.PagingVO;
@@ -33,5 +34,8 @@ public interface AdminMapper {
 	
 	//회원 삭제
 	public int userDelete(int u_idx);
+	
+	//좌석별 예약현황
+	public List<BookingVO> BookingSeats(BookingVO bvo);
 	
 }
