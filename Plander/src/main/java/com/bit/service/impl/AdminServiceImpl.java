@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.domain.BookingCbVO;
+import com.bit.domain.BookingVO;
 import com.bit.domain.DateTimeVO;
 import com.bit.domain.UsersVO;
 import com.bit.mapper.AdminMapper;
@@ -61,9 +62,16 @@ public class AdminServiceImpl implements adminService {
 		return mapper.getSearchTotal(map);
 	}
 
+	//회원 삭제
 	@Override
 	public int userDelete(int u_idx) {
 		return mapper.userDelete(u_idx);
+	}
+	
+	//좌석별 예약현황
+	@Override
+	public List<BookingVO> BookingSeats(BookingVO bvo) {
+		return mapper.BookingSeats(bvo);
 	}
 
 

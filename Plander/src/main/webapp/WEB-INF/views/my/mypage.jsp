@@ -3,14 +3,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
-<!-- Ajax -->
-<!-- Jcrop(사진 크롭) -->
-<script
-	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
 <link rel="stylesheet"
 	href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css"
 	type="text/css" />
-<!-- Jcrop 끝 -->
+
+<!-- Jcrop(사진 크롭) -->
+<script
+	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
+	
+<script>
+//비밀번호 확인
+function pwchk() {
+	var pw = $('#password').val();
+	var pwchk = ${user.password};
+
+	if (pw != pwchk || pwchk == "") {
+		//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
+		$('#pwchkMsg').html(
+				"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+		$('#update').prop("disabled", true);
+	} else {
+		$('#pwchkMsg').html(
+				"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+		$('#update').prop("disabled", false);
+	}
+}
+</script>
 <style>
 body {
 	width: 80%;
@@ -29,7 +47,7 @@ body {
 
 h3 {
 	text-align: center;
-	background-color: #1864ab;
+	background-color: #3b5998;
 	color: white;
 }
 
@@ -123,20 +141,11 @@ h3 {
 	color: gray;
 }
 </style>
-<script>
-	$('html, body').css({
-		'overflow' : 'hidden',
-		'height' : '100%'
-	});
-	$('#element').on('scroll touchmove mousewheel', function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		return false;
-	});
-</script>
 </head>
 
+
 <body>
+	<!-- 홈, 로그아웃 버튼 -->
 	<nav class="navs">
 		<button type="button" class="btn btn-outline-danger nav_btn"
 			onclick="location.href='/TMS/logout'">로그아웃</button>
@@ -144,6 +153,8 @@ h3 {
 			onclick="location.href='/TMS'">홈으로가기</button>
 	</nav>
 
+
+	<!-- 회원 프로필 사진 -->
 	<div class="profile">
 		<hr>
 		<c:if test='${empty usersVO.user_profileImagePath }'>
@@ -158,39 +169,8 @@ h3 {
 		<hr>
 	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 수정</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body mx-auto">
-					<c:if test='${empty usersVO.user_profileImagePath }'>
-						<img class="user hideFade" src="/resources/images/users.png"
-							alt="user" data-toggle="modal" data-target="#updateProfile" />
-					</c:if>
-					<c:if test='${not empty usersVO.user_profileImagePath }'>
-						<img class="user hideFade" src="${usersVO.user_profileImagePath }"
-							alt="user" data-toggle="modal" data-target="#updateProfile" />
-					</c:if>
-				</div>
-				<div class="modal-footer mx-auto">
-					<button type="button" class="btn btn-outline-danger mx-1 hideFade"
-						data-toggle="modal" data-target="#updateProfile">사진변경</button>
-					<button type="button" class="btn btn-outline-warning mx-1">삭제</button>
-				</div>
-				<div></div>
 
-			</div>
-		</div>
-	</div>
-
+	<!-- 내정보 -->
 	<div class="my_info">
 		<h3>- 내정보 -</h3>
 		<div class="myinfo_nav">
@@ -226,33 +206,40 @@ h3 {
 		</table>
 	</div>
 
+
+	<!-- 내예약 -->
 	<div class="myBook">
 		<h3>- 내예약 -</h3>
 		<div class="myBook_nav">
-			<strong><a href="#" onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
+			<strong><a href="#"
+				onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
 			&nbsp;|&nbsp;<strong><a href="#"
-				onclick="fetch_book('/TMS/my/my_cabinet')">사물함예약내역</a></strong>
+				onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
 			<table id="myBook"></table>
 		</div>
 	</div>
 
+
+	<!-- 내글목록 -->
 	<div class="myRecruit">
 		<h3>- 내글목록 -</h3>
 		<div class="myRecruit_nav">
 			<strong><a href="#"
 				onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
 			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/applyList')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
+				onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
 			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/my_recruit_comment')">내모집글댓글</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#" onclick="fetch_recruit('/TMS/my/board')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
+				onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=1')">내모집글댓글</a></strong>&nbsp;|&nbsp;
 			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/board_comment')">자유게시판에달린댓글</a></strong>
+				onclick="fetch_recruit('/TMS/my/board?nowPage=1')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
+			<strong><a href="#"
+				onclick="fetch_recruit('/TMS/my/board_comment?nowPage=1')">자유게시판에달린댓글</a></strong>
 		</div>
 		<table id="myRecruit"></table>
 	</div>
 
-	<!-- 모달창 -->
+
+	<!-- 회원정보수정 모달창 -->
 	<div class="modal" tabindex="-1" role="dialog" id="myModal">
 		<div class="modal-dialog" role="document">
 			<form action="/TMS/my/update" method="POST">
@@ -328,9 +315,42 @@ h3 {
 			</form>
 		</div>
 	</div>
+	<!-- 회원정보수정 모달창 끝 -->
 
 
+	<!-- 프로필 사진 수정 모달 -->
+	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 수정</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body mx-auto">
+					<c:if test='${empty usersVO.user_profileImagePath }'>
+						<img class="user hideFade" src="/resources/images/users.png"
+							alt="user" data-toggle="modal" data-target="#updateProfile" />
+					</c:if>
+					<c:if test='${not empty usersVO.user_profileImagePath }'>
+						<img class="user hideFade" src="${usersVO.user_profileImagePath }"
+							alt="user" data-toggle="modal" data-target="#updateProfile" />
+					</c:if>
+				</div>
+				<div class="modal-footer mx-auto">
+					<button type="button" class="btn btn-outline-danger mx-1 hideFade"
+						data-toggle="modal" data-target="#updateProfile">사진변경</button>
+					<button type="button" class="btn btn-outline-warning mx-1">삭제</button>
+				</div>
+				<div></div>
 
+			</div>
+		</div>
+	</div>
+	<!-- 프로필 사진 수정 모달 끝 -->
 
 
 	<!-- 프로필 사진 업로드 모달 -->
@@ -381,6 +401,7 @@ h3 {
 	</div>
 	<!-- 프로필 사진 업로드 모달 끝 -->
 
+
 	<script>
 		//주소검색
 		function goPopup() {
@@ -396,15 +417,11 @@ h3 {
 			document.getElementById("addrDetail").value = addrDetail;
 			document.getElementById("zipNo").value = zipNo;
 		}
-		
+
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
-			var pwchk = $
-			{
-				user.password
-			}
-			;
+			var pwchk = ${user.password};
 
 			if (pw != pwchk || pwchk == "") {
 				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -418,7 +435,7 @@ h3 {
 			}
 		}
 
-		//내용 출력
+		//내용 출력(fetch api)
 		function fetch_book(name) {
 			fetch(name).then(function(response) {
 				response.text().then(function(text) {
@@ -435,8 +452,10 @@ h3 {
 			});
 		}
 	</script>
-	<!-- 프로필 사진 업로드 -->
+
+
 	<script>
+		/* 프로필 사진 업로드 */
 		var jcrop_api;
 		var target;
 		//callback function
@@ -523,6 +542,18 @@ h3 {
 		function submitProfile() {
 			$("form[name='imgForm']").submit();
 		}
+
+		/* 스크롤 고정 */
+		$('html, body').css({
+			'overflow' : 'hidden',
+			'height' : '100%'
+		});
+
+		$('#element').on('scroll touchmove mousewheel', function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			return false;
+		});
 	</script>
 </body>
 </html>

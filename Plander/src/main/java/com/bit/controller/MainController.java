@@ -37,31 +37,27 @@ public class MainController {
 	@RequestMapping("")
 	public String main(HttpSession session) {
 		UsersVO user = (UsersVO) session.getAttribute("usersVO");
-		if(user != null) {
-			
-			//좌석, 사물함 예약 갯수
+		if (user != null) {
+
+			// 전체 좌석, 사물함 예약 갯수
 			int seatcnt = myService.getTotalSeat(user);
 			int cabinetcnt = myService.getTotalCabinet(user);
-			
-			
+
 			session.setAttribute("seatcnt", seatcnt);
 			session.setAttribute("cabinetcnt", cabinetcnt);
-			
-			//좌석 예약내역
-			List<BookingVO> seat = myService.my_seat(user);
+
+			// 현재 좌석 예약내역
+			List<BookingVO> seat = myService.my_seat_header(user);
 			System.out.println("seat: " + seat);
 			session.setAttribute("seat", seat);
-			
-			//사물함 예약내역
-			List<BookingCbVO> cabinet = myService.my_cabinet(user);
+
+			// 현재 사물함 예약내역
+			List<BookingCbVO> cabinet = myService.my_cabinet_header(user);
 			session.setAttribute("cabinet", cabinet);
 			System.out.println("cabinet: " + cabinet);
-			
-//			model.addAttribute("seatcnt", session.getAttribute("seatcnt"));
-//			model.addAttribute("cabinetcnt", session.getAttribute("cabinetcnt"));
-//			model.addAttribute("seat", session.getAttribute("seat"));
-//			model.addAttribute("cabinet", session.getAttribute("cabinet"));
+
 		}
+
 		return "main/main";
 	}
 

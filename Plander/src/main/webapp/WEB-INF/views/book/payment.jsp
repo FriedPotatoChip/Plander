@@ -516,6 +516,12 @@
 
 				<!-- 결제방식 선택 -->
 				<div id="pay" class="radio" style="padding: 10px;">
+					<h5>사용 가능한 쿠폰</h5>
+					<select id="coupon">
+						<option value="0">------</option>
+					</select>
+					<span id="finPrice"></span>
+					
 					<h5>결제방식 선택</h5>
 					<label class="radio-inline">
 						<input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label>
@@ -558,5 +564,101 @@
 	</div>
 	<!-- 바디 콘테이너 끝 -->
 
+<script>
+$(document).ready(function(){
+	window.finalPrice = 0;
+	$.ajax({
+		url: "/couponList",
+		type: "get",
+		data: {"id":"${usersVO.id}"},
+		dataType: "json",
+		success: function(result){
+			
+			var html = "";
+			if (result == ""){
+				html += "<option value='0' type='0' price='0'>없음</option>";
+			}else {
+				$.each(result, function(index, value){
+					if ((value.cb_roomtype == 'LAB' && sct_idx != 1) || (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)){
+						html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
+						if (value.cb_distype == 'PERCENT'){
+							html += "%";
+						}else if (value.cb_idstype == 'PRICE'){
+							html += "원";
+						}
+						html += "("+value.cp_quantity+" 개)";
+						html += "</option>";
+					}
+				});
+			}
+			$("#coupon").append(html);
+			
+		}, error: function(error){
+			
+		}
+	});
+});
+
+$("#coupon").on("change", function(){
+	fianlPrice = sum;
+	var option = $('option:selected', this);
+	window.cp_idx = option.attr("value");
+	var type = option.attr("type");
+	var price = option.attr("price");
+	console.log("cp_idx: "+ cp_idx);
+	var couponPrice = "";
+	// 퍼센트 쿠폰
+	if (type == 'PERCENT'){
+		finalPrice = (finalPrice * (100 - price)) / 100;
+		couponPrice += "쿠폰 적용 가격: "+ sum+ " * "+ ((100 - price) / 100) + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
+	}
+	
+	// 금액 쿠폰
+	if (type == 'PRICE'){
+		finalPrice -= price;
+		couponPrice += "쿠폰 적용 가격: "+ sum+ " - "+ price + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
+	}
+	finalPrice = Math.floor(finalPrice);
+	$("#finPrice").html(couponPrice);
+})
+
+function nextSubmit(frm){
+	
+	var pay = $("input[name='pay']:checked").val();
+	if (pay == undefined){
+		alert("결제 수단을 선택해주세요");
+		$("input[name='pay']").focus();
+		return false;
+	}
+	
+	if (finalPrice == 0){
+		finalPrice = sum;
+	}
+	$("#hiddenPrice").val(finalPrice);
+	var couponVal = $("#coupon").val();
+	if (couponVal != 0){
+		$.ajax({
+			url: '/minusCoupon',
+			type: 'get',
+			data: {'cp_idx':cp_idx},
+			dataType: 'text',
+			success: function(result){
+				if (result == 'success'){
+					console.log("성공");
+					frm.submit();
+				} else if(result == 'fail') {
+					alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+					return false;
+				}
+			}, error: function(error){
+				alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+				return false;
+			}
+		})
+	} else {
+		frm.submit();
+	}
+}
+</script>
 </body>
 </html>

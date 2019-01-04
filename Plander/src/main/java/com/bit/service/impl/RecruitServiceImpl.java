@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bit.domain.ApplyVO;
 import com.bit.domain.CommentsVO;
+import com.bit.domain.CouponVO;
 import com.bit.domain.RecruitVO;
 import com.bit.mapper.RecruitMapper;
 import com.bit.service.RecruitService;
@@ -132,6 +133,16 @@ public class RecruitServiceImpl implements RecruitService {
 	@Override
 	public int getSearchTotal(Map<String, Object> map) {
 		return mapper.getSearchTotal(map);
+	}
+
+	@Override
+	public boolean insertCoupon(String id) {
+		return mapper.insertCoupon(id);
+	}
+
+	@Override
+	public boolean updateOnOff(int rc_idx) {
+		return mapper.updateOnOff(rc_idx);
 	}
 
 }

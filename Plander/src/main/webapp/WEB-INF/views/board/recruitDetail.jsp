@@ -160,11 +160,17 @@ function boardList(nowPage){
 		<!-- 현재원 / 모집정원 -->
 		<p><span id="cur_mem">${rc_board.cur_mem }</span> / <span id="max_mem">${rc_board.max_mem }</span></p>
 		
+		<c:if test="${rc_board.onOff eq 'ON' }">
+			<c:if test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
+				<button onclick="endRecruit()">모집 마감</button><br> 	
+			</c:if>
+		</c:if>
 		<!-- 신청 버튼 시작 -->
 		<button class="appBtn" id="hideApply" style="display:none;" onclick="apply()">신청하기</button>
 		<button class="appBtn" id="hideCancel" style="display:none;" onclick="applyCancel()">신청취소</button>
 		<!-- 신청 버튼 끝 -->
 		
+		<!-- 수정/ 삭제 버튼 -->
 		<c:if test="${(sessionScope.usersVO.id == rc_board.id) || sessionScope.usersVO.rank == 1 }">
 			<button onclick="modify()">수정하기</button>
 			<button onclick="deleteRec()">삭제하기</button>
@@ -416,6 +422,7 @@ function boardList(nowPage){
 			data: commentData,
 			success: function(data){
 				alert("댓글을 남겼습니다");
+				$("#c_content").val("");
 				paging(nowPage);
 			}, error: function(){
 				alert("댓글 달기 실패");
@@ -528,6 +535,29 @@ function boardList(nowPage){
 				alert("댓글 달기 실패");
 			}
 		});
+	}
+	/* 모집마감 클릭시 쿠폰 발행 */
+	function endRecruit(){
+		var confirm = window.confirm("모집을 마감하면 다시 되돌릴 수 없습니다. \n모집마감을 진행하시겠습니까?");
+		if (!confirm){
+			return false;
+		}
+		$.ajax({
+			url: "/endRecruit",
+			type: "get", 
+			data: {"rc_idx":'${rc_board.rc_idx}' ,"id":'${usersVO.id}'},
+			dataType: "text",
+			success: function(result){
+				if (result == 'success'){
+					alert("모집을 성공적으로 마감했습니다.");
+					window.location.reload();
+				} else if (result == 'fail'){
+					alert("모집을 마감하는데 실패했습니다. \n관리자에게 문의 바랍니다.");
+				}
+			}, error: function(error){
+					alert("모집을 마감하는데 실패했습니다. \n관리자에게 문의 바랍니다.");
+			}
+		})
 	}
 </script>
 </body>

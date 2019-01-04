@@ -71,6 +71,7 @@ style>body, html {
 	margin-left: auto;
 	margin-right: auto;
 }
+
 .area_planner {
 	width: 100%;
 	padding: 1%;
@@ -111,8 +112,34 @@ style>body, html {
 }
 
 .h4 h4 {
-	text-align:center;
-	margin-top:1%;
+	text-align: center;
+	margin-top: 1%;
+}
+
+.td a {
+	width: 100%;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+
+.td:hover {
+	background-color: #faa2c1;
+}
+
+.td a:link {
+	color: black;
+}
+
+.td a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+.td a:hover {
+	color: white;
+	text-decoration: none;
+}
 }
 </style>
 </head>
@@ -124,7 +151,7 @@ style>body, html {
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="#">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
 		</ul>
 	</nav>
 
@@ -134,9 +161,9 @@ style>body, html {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin"> <span data-feather="users"></span>
-								Customers <span class="sr-only">(current)</span>
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
+								<span data-feather="users"></span> Customers <span
+								class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
@@ -149,7 +176,8 @@ style>body, html {
 								Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link active" href="#"> <span
+						<li class="nav-item"><a class="nav-link active"
+							href="/TMS/admin/Seats?sct_idx=1"> <span
 								data-feather="bar-chart-2"></span> Seats
 						</a></li>
 					</ul>
@@ -157,16 +185,16 @@ style>body, html {
 			</nav>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<h2 style="text-align:center;" class="mb-5">개인실 좌석 현황</h2>
+			<h2 style="text-align: center;" class="mb-5">개인실 좌석 현황</h2>
 			<div id="container" style="box-sizing: border-box;">
-			
+
 				<div id="ticket">
 					<div class="boxoutside" style="border: 1px solid;">
 						<form method="post">
 							<div class="h4">
 								<h4>
-									<a href="">개인실</a>&nbsp;&nbsp;/&nbsp; 
-									<a href="">랩실</a>
+									<a href="">개인실</a>&nbsp;&nbsp;/&nbsp; <a
+										href="/TMS/admin/LabSeats?roomnum=2&br_idx=1"> 랩실</a>
 								</h4>
 							</div>
 							<div class="area_planner">
@@ -183,20 +211,25 @@ style>body, html {
 							</div>
 							<hr>
 
+
 							<div id="allseat">
 								<div id="row" class="box">
-									<div id="seat" class="checkbox">
-										<table border="1px solid;" class="table table-bordered">
+									<div id="seat" class="button">
+										<table border="1px solid;" class="table table-bordered"
+											style="margin: 1rem">
+
 											<tr>
 												<c:forEach var="i" begin="1" end="5" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"><input
+															type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 												</c:forEach>
 											</tr>
+
 											<tr>
 												<c:forEach var="i" begin="6" end="10" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -205,17 +238,20 @@ style>body, html {
 									<br>
 
 									<div id="seat" class="checkbox">
-										<table border="1px solid;" class="table table-bordered">
+										<table border="1px solid;" class="table table-bordered"
+											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="11" end="15" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="16" end="20" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -224,17 +260,20 @@ style>body, html {
 									<br>
 
 									<div id="seat" class="checkbox">
-										<table border="1px solid;" class="table table-bordered">
+										<table border="1px solid;" class="table table-bordered"
+											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="21" end="25" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="26" end="30" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -245,17 +284,20 @@ style>body, html {
 
 								<div id="row" class="box">
 									<div id="seat" class="checkbox">
-										<table border="1px solid;" class="table table-bordered">
+										<table border="1px solid;" class="table table-bordered"
+											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="31" end="33" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="34" end="36" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -264,17 +306,20 @@ style>body, html {
 									<br>
 
 									<div id="seat" class="checkbox">
-										<table border="1px solid;" class="table table-bordered">
+										<table border="1px solid;" class="table table-bordered"
+											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="49" end="51" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="52" end="54" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -286,17 +331,20 @@ style>body, html {
 
 								<div id="row" class="box">
 									<div id="seat" class="checkbox">
-										<table border="1px solid;" class="table table-bordered">
+										<table border="1px solid;" class="table table-bordered"
+											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="37" end="39" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="40" end="42" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 										</table>
@@ -304,17 +352,20 @@ style>body, html {
 									<br>
 
 									<div id="seat" class="checkbox">
-										<table border="1px solid;" class="table table-bordered">
+										<table border="1px solid;" class="table table-bordered"
+											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="55" end="57" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="58" end="60" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 										</table>
@@ -324,17 +375,20 @@ style>body, html {
 
 								<div id="row" class="box">
 									<div id="seat" class="checkbox">
-										<table border="1px solid;" class="table table-bordered">
+										<table border="1px solid;" class="table table-bordered"
+											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="43" end="45" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="46" end="48" step="1">
-													<td><label><input type="checkbox" name="s_col"
-															value="${i }">A-${i }</label></td>
+													<td class="td" onclick="check(${i })"><a href="#"
+														data-target="#exampleModalLong" data-toggle="modal"
+														name="s_col" value="${i }">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -342,6 +396,227 @@ style>body, html {
 									</div>
 								</div>
 								<!-- 4번 열 끝 -->
+
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModalLong" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalLongTitle"
+									aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+
+											<!-- modal header  -->
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle"></h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+
+											<!-- modal body -->
+											<div class="modal-body">
+												<table border="1" style="text-align: center;">
+													<tr>
+														<th>ID</th>
+														<th>START_TIME</th>
+														<th>END_TIME</th>
+														<th>이동</th>
+													</tr>
+
+													<tbody id="tr">
+													</tbody>
+
+												</table>
+											</div>
+
+											<!-- modal footer -->
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary">Save
+													changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<!-- Large modal -->
+
+								<div class="modal fade bd-example-modal-lg" tabindex="-1"
+									role="dialog" aria-labelledby="myLargeModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+
+										<div class="modal-content">
+											<h2 style="text-align: center;">좌석배치도</h2>
+											<hr style="width: 90%">
+											<div id="allseat">
+												<div id="row" class="box">
+													<div id="seat" class="checkbox">
+														<table border="1px solid;" class="table table-bordered">
+															<tr>
+																<c:forEach var="i" begin="1" end="5" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+															<tr>
+																<c:forEach var="i" begin="6" end="10" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+
+														</table>
+													</div>
+													<br>
+
+													<div id="seat" class="checkbox">
+														<table border="1px solid;" class="table table-bordered">
+															<tr>
+																<c:forEach var="i" begin="11" end="15" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+															<tr>
+																<c:forEach var="i" begin="16" end="20" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+
+														</table>
+													</div>
+													<br>
+
+													<div id="seat" class="checkbox">
+														<table border="1px solid;" class="table table-bordered">
+															<tr>
+																<c:forEach var="i" begin="21" end="25" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+															<tr>
+																<c:forEach var="i" begin="26" end="30" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+
+														</table>
+													</div>
+												</div>
+												<!-- 1번 열 끝 -->
+
+												<div id="row" class="box">
+													<div id="seat" class="checkbox">
+														<table border="1px solid;" class="table table-bordered">
+															<tr>
+																<c:forEach var="i" begin="31" end="33" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+															<tr>
+																<c:forEach var="i" begin="34" end="36" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+
+														</table>
+													</div>
+													<br>
+
+													<div id="seat" class="checkbox">
+														<table border="1px solid;" class="table table-bordered">
+															<tr>
+																<c:forEach var="i" begin="49" end="51" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+															<tr>
+																<c:forEach var="i" begin="52" end="54" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+
+														</table>
+													</div>
+
+												</div>
+												<!-- 2번 열 끝 -->
+
+												<div id="row" class="box">
+													<div id="seat" class="checkbox">
+														<table border="1px solid;" class="table table-bordered">
+															<tr>
+																<c:forEach var="i" begin="37" end="39" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+															<tr>
+																<c:forEach var="i" begin="40" end="42" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+														</table>
+													</div>
+													<br>
+
+													<div id="seat" class="checkbox">
+														<table border="1px solid;" class="table table-bordered">
+															<tr>
+																<c:forEach var="i" begin="55" end="57" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+															<tr>
+																<c:forEach var="i" begin="58" end="60" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+														</table>
+													</div>
+												</div>
+												<!-- 3번 열 끝 -->
+
+												<div id="row" class="box">
+													<div id="seat" class="checkbox">
+														<table border="1px solid;" class="table table-bordered">
+															<tr>
+																<c:forEach var="i" begin="43" end="45" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+															<tr>
+																<c:forEach var="i" begin="46" end="48" step="1">
+																	<td><label><input type="radio"
+																			name="s_col" value="${i }">A-${i }</label></td>
+																</c:forEach>
+															</tr>
+														</table>
+													</div>
+												</div>
+												<!-- 4번 열 끝 -->
+												<button>이동</button>
+
+											</div>
+											<!-- allseat 끝 -->
+										</div>
+									</div>
+								</div>
+
 
 							</div>
 							<!-- 선택 정보 -->
@@ -381,7 +656,88 @@ style>body, html {
 	<script>
 		feather.replace()
 	</script>
+	<script>
+		function check(i) {
+			console.log('안농');
+			
+			/* 클릭 시 해당 좌석 번호 출력 */
+			console.log('scol: ' + i);
+			
+			/* DB에서 긁어온 지점 A의 예약된 모든 좌석과 체크된 좌석이 같을 때 해당 좌석의 예약내역을 보여주는 것! */
+			
+			var html = "";
+			
+			<c:forEach var="s" items="${BookingSeats }">
+				/* DB에서 긁어온 지점 A의 예약된 모든 좌석 */
+				var s_col = "${s.s_col}";
+				console.log(s_col);
+				var id = "${s.id}";
+				var start_time = "${s.start_time}";
+				var end_time = "${s.end_time}";
+				
+				if(i == s_col) {
+					console.log("data" + i + ": " + id + ", " + start_time + ", " + end_time);
+		
+					html += '<tr><td class="id">'+ id + '</td> <td class="start_time">'+ start_time + '</td> <td class="end_time">' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" onclick="change()"><input type="hidden" value="${s.end_time}" id="end_time"><input type="hidden" id="start_time" value="${s.start_time}">좌석이동</button></td></tr>'; 
+				} 
+			</c:forEach>
+			$('#exampleModalLong').modal();
+		    $('#exampleModalLongTitle').text(i + '번 좌석 예약현황');
+			$('#tr').html(html);
+			
+		}
+		
+		function change() {
+			var changePersonEnd_time = $('#end_time').val();
+			var changePersonStart_time = $('#start_time').val();
+			console.log(changePersonEnd_time);
+			console.log(changePersonStart_time);
+			
+			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
+			$('.bd-example-modal-lg').modal();
+			
+			/* modal 안에서 radio를 체크 */
+			$("input[type=radio]").click(function () {
+			    $(this).prop("checked");
+			    	
+			    	/* 체크된 좌석의 번호 */
+			    	var changeScol = $("input[type=radio]:checked").val();
+			    	console.log('asdb : ' + changeScol);
+			    	
+			    	/* 체크가 되었을 때 예약된 좌석이 있는지 없는지 파악 */
+			    	<c:forEach var="s" items="${BookingSeats}">
+			    		/* 예약된 모든 좌석 */
+			    		var s_col = "${s.s_col}";
+			    		var id = "${s.id}";
+						var start_time = "${s.start_time}";
+						var end_time = "${s.end_time}";
+						
+ 			    		console.log('s_col-before : ' + s_col);
+ 			    		console.log('asdb-after : ' + changeScol);
+ 			    		
+ 			    		if(changeScol == s_col) {
+ 			    			alert("이동이 불가능하지만 But");
+ 			    			/* 예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함 */
+ 			    			if(changePersonEnd_time < start_time || end_time < changePersonStart_time) {
+ 			    				alert("이동이 가능합니다.");
+	 			    			return false;
+ 			    			} else {
+ 			    				alert('이동 불가');
+ 			    			}
+ 			    		} else {
+ 			    			alert('이동가능');
+ 			    			return false;
+ 			    		}
+			    		
+			    	</c:forEach>
+		    		/* 좌석 비교 */
 
+			    }
+
+			);
+		}
+		
+	</script>
 
 </body>
 
