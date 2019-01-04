@@ -9,6 +9,7 @@
 		select *    
     		from (select rownum rn, u_idx, id, name, phone, email, rank, regdate, zipno, roadAddrPart1, addrDetail from users)
     		where rn between #{start} and #{end}
+    		order by u_idx
     	]]>
 	</select>
 
@@ -56,8 +57,8 @@
 		resultType="com.bit.domain.BookingCbVO">
 		select *
 		from booking_cb bc, cabinet c
-		where c.cb_number =
-		bc.cb_number
+		where c.cb_idx =
+		bc.cb_idx
 		and sysdate between bc.start_date and end_date
 		and br_idx=
 		#{br_idx}
@@ -68,8 +69,8 @@
 		select
 		count(bc.ckb_idx)
 		from booking_cb bc, cabinet c
-		where c.cb_number =
-		bc.cb_number
+		where c.cb_idx =
+		bc.cb_idx
 		and sysdate between bc.start_date and end_date
 		and br_idx=
 		#{br_idx}
@@ -81,6 +82,21 @@
 			where u_idx = #{u_idx}
 	</delete>
 	
+	<!-- 좌석별 현황  -->
+	<select id="BookingSeats" resultType="com.bit.domain.BookingVO">
+		select distinct b.id, b.start_time, b.end_time, s.s_col
+	    from seats s, booking b
+	    where s.s_idx = b.s_idx
+	    and br_idx = #{br_idx}
+	    <!-- and s_col = #{s_col} -->
+	    and (
+	        (to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
+	        or 
+	        (to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(add_months(sysdate, 1), 'YYYYMM'))
+	        or 
+	        (to_char(start_time, 'YYYYMM') = to_char(add_months(sysdate, -1), 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
+	        )
+	</select>
 </mapper>
 
 
