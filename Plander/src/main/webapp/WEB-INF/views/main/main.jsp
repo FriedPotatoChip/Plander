@@ -1,25 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/commons/head.jsp" />
 <title>Main 화면</title>
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link href="/resources/css/main.css" rel="stylesheet">
-
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 <style>
 body {
@@ -170,18 +157,20 @@ body {
 </head>
 
 <body>
-	<!-- Header -->
-	<c:if test="${empty sessionScope.usersVO }">
-		<jsp:include page="/commons/header.jsp" />
+<!-- 헤더 -->
+<!-- Header -->
+<c:if test="${empty sessionScope.usersVO }">
+	<jsp:include page="/commons/header.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.usersVO }">
+	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+		<jsp:include page="/commons/loginheader.jsp" />
 	</c:if>
-	<c:if test="${not empty sessionScope.usersVO }">
-		<c:if test="${sessionScope.usersVO.id != 'admin' }">
-			<jsp:include page="/commons/loginheader.jsp" />
-		</c:if>
-		<c:if test="${sessionScope.usersVO.id == 'admin' }">
-			<jsp:include page="/commons/adminLoginheader.jsp" />
-		</c:if>
+	<c:if test="${sessionScope.usersVO.rank == 1 }">
+		<jsp:include page="/commons/adminLoginheader.jsp" />
 	</c:if>
+</c:if>
+<!-- 헤더 끝 -->
 
 
 	<!-- Navigation -->
@@ -253,7 +242,7 @@ body {
 					모집하거나 참여하고 싶으시간요? 그럼 여기로 들어오세요~!!</p>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-				<a href="#"><button type="button"
+				<a href="/TMS/recruit"><button type="button"
 						class="btn btn-outline-secondary btn-lg">모집게시판</button></a>
 			</div>
 		</div>

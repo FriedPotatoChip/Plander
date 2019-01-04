@@ -89,120 +89,306 @@
 						+ '${bvo.getStart_time() }'.substring(14,16) + '${bvo.s_col}';
 		$("input[name='booknum']").attr('value', bookval);
 		
+		//사물함 사용여부
+		var bookCab = '${cb.cb_idx }';
+		console.log("cb_idx 확인 : " + bookCab);
+		
+
+		if (bookCab != "") {
+			$('#cb_idx').html('<span>' + bookCab + '번</span>');
+			$("input[name='cb_idx']").attr('value', bookCab);
+		} else {
+			$('#cb_idx').html('<span>사용안함</span>');
+			$("input[name='cb_idx']").attr('value', 0);
+		}
+		
 		//시간에 따른 가격계산
 		var startdate = new Date('${bvo.start_time }');
 		var enddate = new Date('${bvo.end_time }');
+		var startday = startdate.getDay();
+		var endday = enddate.getDay();
 		
 		var start = startdate.toLocaleString('en-GB').substring(12,14);
 		var end = enddate.toLocaleString('en-GB').substring(12,14);
 		
-		var sum = 0;
-		var sct_idx = '${bvo.sct_idx }'; //방번호 확인
+		window.sum = 0;
+		window.sct_idx = '${bvo.sct_idx }'; //방번호 확인
 		var time_idx = '${bvo.time_idx }'; //정기권 확인
 		var cabinet = '${bvo.cabinet }'; //사물함 사용여부 y/n
         
-        //1. 1인실 sct_idx=1일 때
-        if (sct_idx == 1) {
-        	console.log('sct_idx : ' + sct_idx);
-        	console.log('time_idx : ' + time_idx);
-        	//정기권을 구입한 사람들
-        	//정기권 2주 time_idx ==100
-        	//사물함 선택 유무확인, 사물함 선택시 +2000
-        	if (time_idx == 100) {
-        		price = 70000;
-				if (cabinet == 'y') {
-					sum = price + 2000;
-				} else {
-					sum = price;
-				}
-			} else if (time_idx == 101) {
-				//정기권 1개월
-				sum = 150000;
-			} else if (time_idx == 102) {
-				//야간권 10:00 ~ 8:00
-				sum = 15000;
-			} else if (time_idx == 103) {
-				//1일권
-				sum = 30000;
-			}
-			else {
-				//정기권 X
-				for (var i=start; i<end; i++) {
-					console.log('i : ' + i);
-					if (8 <= i && i < 18) {
-						var price = 1500;
-						sum += price;
-						console.log('8시~18시 : ' + price);
-						console.log('i : ' + i + ', sum : ' + sum);
-					} else if (i >= 18 && i <= 22) {
-						price = 1800;
-						sum += price;
-						console.log('18시~22시 : ' + price);
-						console.log('i : ' + i + ', sum : ' + sum);
-					} else {
-						console.log('여기까지 확인');
+		// 가격표 가져오는 ajax
+		$.ajax({
+			url: "/getPrice",
+			type: "get",
+			dataType: 'json',
+			success: function(result){
+				var ticket2w = 0;
+				var ticketMon = 0;
+				var ticketNight = 0;
+				var ticketDay = 0;
+				
+				var privateAm = 0;
+				var privatePm = 0;
+				var privateHoliday = 0;
+				var privateNight = 1200;
+				
+				var labAm = 0;
+				var labPm = 0;
+				var labHoliday = 0;
+				var labNight = 0;
+					
+				$.each(result, function(index, value){
+					
+					// 정기권 가격
+					if (value.time_idx == 100){
+						ticket2w = value.price;
+					} else if (value.time_idx == 101){
+						ticketMon = value.price;
+					} else if (value.time_idx == 102){
+						ticketNight = value.price;
+					} else if (value.time_idx == 103){
+						ticketDay = value.price;
 					}
-				} //for문 끝
-			}
 
-		} else if (sct_idx == 2) {
-			//4인실 일 때
-			console.log('4인실 sct_idx : ' + sct_idx);
-			for (var i = start; i < end; i++) {
-				console.log('i : ' + i);
-				if (8 <= i && i <= 22) {
-					var price = 1800;
-					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
-				} else {
-					console.log('4인실 여기까지 확인');
-				}
-			}
-			
-		} else if (sct_idx == 3) {
-			//8인실 일 때
-			console.log('8인실 sct_idx : ' + sct_idx);
-			for (var i = start; i < end; i++) {
-				console.log('i : ' + i);
-				if (8 <= i && i <= 22) {
-					var price = 2000;
-					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
-				} else {
-					console.log('8인실 여기까지 확인');
-				}
-			}
-			
-		} else if (sct_idx == 4) {
-			//12인실 일 때
-			console.log('12인실 sct_idx : ' + sct_idx);
-			for (var i = start; i < end; i++) {
-				console.log('i : ' + i);
-				if (8 <= i && i <= 22) {
-					var price = 2200;
-					sum += price;
-					console.log('평일 8시~22 시 : ' + price);
-					console.log('i : ' + i + ', sum : ' + sum);
-				} else {
-					console.log('12인실 여기까지 확인');
-				}
-			}
-			
-		} else {
-			alert("담당자에게 연락주세여..");
-		}
+					// 개인실 가격
+					if (value.sct_idx == 1){
+						if (value.time_idx == 1){
+							privateAm = value.price;
+						} else if (value.time_idx == 2){
+							privatePm = value.price;
+						} else if (value.time_idx == 3){
+							privateHoliday = value.price;
+						}
+					}
+					// 랩실 가격
+					if (sct_idx == 2){
+						labNight = 1500;
+					} else if (sct_idx == 3){
+						labNight = 1800;
+					} else if (sct_idx == '4'){
+						labNight = 2000;
+					}
+					if (sct_idx >= 2 && sct_idx <= 4){
+						if (sct_idx == value.sct_idx){
+							if (value.time_idx == 1){
+								labAm = value.price;
+							} else if (value.time_idx == 2){
+								labPm = value.price;
+							} else if (value.time_idx == 3){
+								labHoliday = value.price;
+							}
+						}
+					}
+					
+				})
+				
+				
+		        //1. 1인실 sct_idx=1일 때
+		        if (sct_idx == 1) {
+		        	console.log('sct_idx : ' + sct_idx);
+		        	console.log('time_idx : ' + time_idx);
+		        	//정기권을 구입한 사람들
+		        	//정기권 2주 time_idx ==100
+		        	//사물함 선택 유무확인, 사물함 선택시 +2000
+		        	if (time_idx == 100) {
+		        		sum = ticket2w;
+						if (cabinet == 'y') {
+							sum += 2000;
+						}
+					} else if (time_idx > 100) {
+						//정기권 1개월
+						//야간권 10:00 ~ 8:00
+						//1일권
+						var tic = 0;
+						if (time_idx == 101){
+							tic = ticketMon;
+						} else if (time_idx == 102){
+							tic = ticketNight;
+						} else if (time_idx == 103){
+							tic = ticketDay;
+						}
+						sum = tic;
+					}
+					else {
+						//정기권 X 평일일때
+						if (startday != 0 && startday != 6 && endday != 0 && endday != 6){
+							if (end > start){
+								for (var i=start; i<end; i++) {
+									console.log('i : ' + i);
+									if (8 <= i && i < 18) {
+										sum += privateAm;
+										console.log('i : ' + i + ', sum : ' + sum);
+									} else if (i >= 18 && i < 22) {
+										sum += privatePm;
+										console.log('i : ' + i + ', sum : ' + sum);
+									} else {
+										sum += privateNight;
+										console.log('여기까지 확인');
+									}
+								} //for문 끝
+							} else {
+								for (var i=start; i<24; i++) {
+									console.log('i : ' + i);
+									if (8 <= i && i < 18) {
+										sum += privateAm;
+										console.log('i : ' + i + ', sum : ' + sum);
+									} else if (i >= 18 && i < 22) {
+										sum += privatePm;
+										console.log('i : ' + i + ', sum : ' + sum);
+									} else {
+										sum += privateNight;
+										console.log('여기까지 확인');
+									}
+								} //for문 끝
+								for (var i=0; i<end; i++) {
+									console.log('i : ' + i);
+									if (8 <= i && i < 18) {
+										sum += privateAm;
+										console.log('i : ' + i + ', sum : ' + sum);
+									} else if (i >= 18 && i < 22) {
+										sum += privatePm;
+										console.log('i : ' + i + ', sum : ' + sum);
+									} else {
+										sum += privateNight;
+										console.log('여기까지 확인');
+									}
+								} //for문 끝
+							} // 평일 계산 끝
+						} else if ((startday == 6 && endday == 0) || (startday == 6 && endday == 6) || (startday == 0 && endday == 0)){ // (토, 일), 토, 일 일때
+							if (end > start){
+								for (var i=start; i<end; i++) {
+									sum += privateHoliday;
+								} //for문 끝
+							} else {
+								for (var i=start; i<24; i++){
+									sum += privateHoliday;
+								}
+								for (var i=0; i<end; i++){
+									sum += privateHoliday;
+								}
+							}
+						} else if (endday == 6 && startday == 5){ // 금, 토 일때
+							for (var i=start; i<24; i++) {
+								console.log('i : ' + i);
+								console.log("금, 토 들어옴");
+								if (8 <= i && i < 18) {
+									sum += privateAm;
+									console.log('i : ' + i + ', sum : ' + sum);
+								} else if (i >= 18 && i < 22) {
+									sum += privatePm;
+									console.log('i : ' + i + ', sum : ' + sum);
+								} else {
+									sum += privateNight;
+									console.log('여기까지 확인');
+								}
+							} //for문 끝
+							for (var i=0; i<end; i++){
+								sum += privateHoliday;
+							}
+						} else if (startday == 0 && endday == 1){ // 일, 월 일때
+							for (var i=0; i<end; i++) {
+								console.log('i : ' + i);
+								if (8 <= i && i < 18) {
+									sum += privateAm;
+									console.log('i : ' + i + ', sum : ' + sum);
+								} else if (i >= 18 && i < 22) {
+									sum += privatePm;
+									console.log('i : ' + i + ', sum : ' + sum);
+								} else {
+									sum += privateNight;
+									console.log('여기까지 확인');
+								}
+							} //for문 끝
+							for (var i=start; i<24; i++){
+								sum += privateHoliday;
+							}
+						}
+					}
+
 		
-		console.log('최종 가격 확인 sum : ' + sum);
-		$('#bookprice').html('<span>' + sum + '원</span>');
-		
-		$("input[name='price']").attr('value', sum);
-		console.log("확인 price : " + price + ", booknum : " + bookval);
+		        } else if (sct_idx >= 2 && sct_idx <= 4) {
+					//랩실 일 때
+					console.log('랩실 sct_idx : ' + sct_idx);
+					if (startday != 0 && startday != 6 && endday != 0 && endday != 6){ // 평일일때
+						if (end > start){
+							for (var i = start; i < end; i++) {
+								console.log('i : ' + i);
+								if (8 <= i && i < 22) {
+									sum += labAm;
+									console.log('i : ' + i + ', sum : ' + sum);
+								} else {
+									sum += labNight;
+									console.log('4인실 여기까지 확인');
+								}
+							}
+						} else {
+							for (var i=start; i<24; i++){
+								sum += labAm;
+							}
+							for (var i=0; i<end; i++){
+								sum += labAm;
+							}
+						}
+					} else if ((startday == 6 && endday == 0) || (startday == 6 && endday == 6) || (startday == 0 && endday == 0)){ // (토, 일), 토, 일 일때
+						if (end > start){
+							for (var i=start; i<end; i++){
+								sum += labHoliday;
+							}
+						} else {
+							for (var i=start; i<24; i++){
+								sum += labHoliday;
+							}
+							for (var i=0; i<end; i++){
+								sum += labHoliday;
+							}
+						}
+					} else if (endday == 6 && startday == 5){ // 금, 토 일때
+						for (var i=start; i<24; i++){
+							if (8 <= i && i < 22) {
+								sum += labAm;
+								console.log('i : ' + i + ', sum : ' + sum);
+							} else {
+								sum += labNight;
+								console.log('4인실 여기까지 확인');
+							}
+						}
+						for (var i=0; i<end; i++){
+							sum += labHoliday;
+						}
+					} else if (startday == 0 && endday == 1){ // 일, 월 일때
+						for (var i=0; i<end; i++){
+							if (8 <= i && i < 22) {
+								sum += labAm;
+								console.log('평일 8시~22 시 : ' + price);
+								console.log('i : ' + i + ', sum : ' + sum);
+							} else {
+								sum += labNight;
+								console.log('4인실 여기까지 확인');
+							}
+						}
+						for (var i=start; i<24; i++){
+							sum += labNight;
+						}
+					}
+
+		        } else {
+					alert("담당자에게 연락주세여..");
+				}
+				
+				console.log('최종 가격 확인 sum : ' + sum);
+				$('#bookprice').html('<span>' + sum + '원</span>');
+				
+				$("input[name='price']").attr('value', sum);
+				console.log("확인 price : " + sum + ", booknum : " + bookval);
+					
+
+			}, error: function(error){
+				
+			}
+		})
 
 	});
 </script>
-
 
 </head>
 <body>
@@ -249,11 +435,12 @@
 				<table border="1px solid;" class="table table-bordered" style="width: 100%; text-align: center;">
 					<tbody>
 						<tr>
-							<td width="15%">예매번호</td>
+							<td width="13%">예매번호</td>
 							<td width="10%">예약자 이름</td>
-							<td width="15%">연락처</td>
-							<td width="35%">예약 날짜 및 시간</td>
+							<td width="12%">연락처</td>
+							<td width="30%">예약 날짜 및 시간</td>
 							<td width="15%">선택 좌석정보</td>
+							<td width="10%">사물함</td>
 							<td width="10%">금액</td>
 						</tr>
 						<tr>
@@ -262,38 +449,129 @@
 							<td>${uservo.phone }</td>
 							<td>${bvo.start_time } ~ ${bvo.end_time }</td>
 							<td>${bvo.sct_name } - ${bvo.s_col }</td>
+							<td id="cb_idx"></td>
 							<td id="bookprice"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div> <!-- 나의 예약 정보 끝 -->
 			<!--  -->
-			
 			<!-- 결제방식 선택 -->
 			<div id="pay" class="radio" style="padding: 10px;">
+				<h5>사용 가능한 쿠폰</h5>
+				<select id="coupon">
+					<option value="0">------</option>
+				</select>
+				<span id="finPrice"></span>
 				<h5>결제방식 선택</h5>
 				<label class="radio-inline"><input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label>
 				<label class="radio-inline"><input type="radio" name="pay" id="naverpay" value="2">네이버페이</label>
 				<br>
 				<div class="center" style="padding: 10px;">
 					<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
-					<button type="submit">다음단계</button>
+					<button type="button" onclick="nextSubmit(this.form)">다음단계</button>
 				</div>
 				
 				<input type="hidden" name="s_idx" value="${svo.s_idx }">
 				<input type="hidden" name="start_time" value="${bvo.start_time }">
 				<input type="hidden" name="end_time" value="${bvo.end_time }">
 				<input type="hidden" name="booknum" value="">
-				<input type="hidden" name="price" value="">
+				<input type="hidden" name="price" value="" id="hiddenPrice">
 				<input type="hidden" name="s_col" value="${bvo.s_col }">
 				<input type="hidden" name="sct_name" value="${bvo.sct_name }">
+				<input type="hidden" name="cb_idx" value="">
+				<input type="hidden" name="chkLen" value="">
 			</div> <!-- 결제방식 선택 끝  -->
 		</form>
 		
 	</div> <!-- 박스 아웃사이드 끝 --><br><br><br>
-	<!--  -->지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }
+	<!--  -->지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb }
 	
 </div> <!-- 바디 콘테이너 끝 -->
+<script>
+window.finalPrice = 0;
+$(document).ready(function(){
+	
+	$.ajax({
+		url: "/couponList",
+		type: "get",
+		data: {"id":"${usersVO.id}"},
+		dataType: "json",
+		success: function(result){
+			
+			var html = "";
+			if (result == ""){
+				html += "<option value='0' type='0' price='0'>없음</option>";
+			}else {
+				$.each(result, function(index, value){
+					if ((value.cb_roomtype == 'LAB' && sct_idx != 1) || (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)){
+						html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
+						if (value.cb_distype == 'PERCENT'){
+							html += "%";
+						}else if (value.cb_idstype == 'PRICE'){
+							html += "원";
+						}
+						html += "("+value.cp_quantity+" 개)";
+						html += "</option>";
+					}
+				});
+			}
+			$("#coupon").append(html);
+			
+		}, error: function(error){
+			
+		}
+	});
+});
 
+$("#coupon").on("change", function(){
+	fianlPrice = sum;
+	var option = $('option:selected', this);
+	window.cp_idx = option.attr("value");
+	var type = option.attr("type");
+	var price = option.attr("price");
+	console.log("cp_idx: "+ cp_idx);
+	var couponPrice = "";
+	// 퍼센트 쿠폰
+	if (type == 'PERCENT'){
+		finalPrice = (finalPrice * (100 - price)) / 100;
+		couponPrice += "쿠폰 적용 가격: "+ sum+ " * "+ ((100 - price) / 100) + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
+	}
+	
+	// 금액 쿠폰
+	if (type == 'PRICE'){
+		finalPrice -= price;
+		couponPrice += "쿠폰 적용 가격: "+ sum+ " - "+ price + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
+	}
+	finalPrice = Math.floor(finalPrice);
+	$("#finPrice").html(couponPrice);
+})
+
+function nextSubmit(frm){
+	if (fianlPrice == 0){
+		finalPrice = sum;
+	}
+	$("#hiddenPrice").val(finalPrice);
+	console.log("여긴 온다");
+	$.ajax({
+		url: '/minusCoupon',
+		type: 'get',
+		data: {'cp_idx':cp_idx},
+		dataType: 'text',
+		success: function(result){
+			if (result == 'success'){
+				console.log("성공");
+				frm.submit();
+			} else if(result == 'fail') {
+				alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+				return false;
+			}
+		}, error: function(error){
+			alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+			return false;
+		}
+	})
+}
+</script>
 </body>
 </html>

@@ -2,7 +2,9 @@ package com.bit.service;
 
 import java.util.List;
 
+import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
+import com.bit.domain.CabinetVO;
 import com.bit.domain.SeatsVO;
 
 public interface BookService {
@@ -23,7 +25,13 @@ public interface BookService {
 	public List<BookingVO> myseat(BookingVO bvo);
 	//예약완료
 	public int bookOk(BookingVO bvo);
+	//사물함 예약
+	public int bookCabinet(BookingCbVO cb_bvo);
 	
+	//예약 안된 사물함 조회 
+	public List<CabinetVO> not_bookCb(CabinetVO cvo);
+	
+	//s_idx
 	public SeatsVO seatnum(int s_col, int br_idx);
 	
 }

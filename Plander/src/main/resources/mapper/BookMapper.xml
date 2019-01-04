@@ -21,7 +21,7 @@
 			or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
 				]]>
 		    )
-			AND SV.ROOMNUM = #{roomnum} )
+			AND SV.ROOMNUM = #{roomnum} AND SV.BR_IDX = #{br_idx})
 	</select>
 	
 	<!-- 예약된 좌석 조회 (개인실) -->
@@ -34,7 +34,7 @@
 			or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
 			]]>
 		)
-		AND SV.ROOMNUM = #{roomnum}
+		AND SV.ROOMNUM = #{roomnum} AND SV.BR_IDX = #{br_idx}
 	</select>
 	
 	<select id="bookroomCnt" resultType="int" parameterType="com.bit.domain.BookingVO">
@@ -47,7 +47,7 @@
 					or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
 				]]>
 			)
-			and sv.roomnum = 2
+			and sv.roomnum = 2 AND SV.BR_IDX = #{br_idx}
 			order by sv.s_idx )
 	</select>
 	
@@ -61,7 +61,7 @@
 				or (to_date(#{end_time}, 'YYYY-MM-DD HH24:MI') < b.start_time)
 			]]>
 		)
-		and sv.roomnum = 2
+		and sv.roomnum = 2 AND SV.BR_IDX = #{br_idx}
 		order by sv.s_idx
 	</select>	
 	
@@ -78,6 +78,25 @@
 	<select id="seatnum" resultType="com.bit.domain.SeatsVO">
 		SELECT S_IDX FROM SEATS WHERE S_COL = #{s_col} AND BR_IDX = #{br_idx}
 	</select>
+	
+	<!-- 예약 안 된 좌석 리스트 -->
+	<select id="not_bookCb" resultType="com.bit.domain.CabinetVO">
+		SELECT CB_IDX FROM CABINET 
+			WHERE BR_IDX = #{br_idx}
+			AND CB_IDX NOT IN (SELECT CB_IDX FROM CABINET_VIEW WHERE BR_IDX = #{br_idx})
+			ORDER BY CB_IDX
+	</select>
+	
+	
+	
+	
+	<!-- 사물함 예약 -->
+	<insert id="bookCabinet" parameterType="com.bit.domain.BookingCbVO">
+	INSERT INTO BOOKING_CB (CKB_IDX, ID, START_DATE, END_DATE, CB_IDX, CKB_REGDATE)
+	VALUES ((select NVL(MAX(ckb_idx),0)+1 from booking_cb), 
+	#{id}, to_date(#{start_date}, 'YYYY-MM-DD HH24:MI'), to_date(#{end_date},'YYYY-MM-DD HH24:MI'),
+	#{cb_idx}, SYSDATE)
+	</insert>
 	
 	
 	

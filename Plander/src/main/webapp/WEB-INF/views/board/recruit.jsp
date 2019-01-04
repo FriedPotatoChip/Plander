@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style> 
 	thead, tfoot { background-color: violet; } 
@@ -27,7 +28,21 @@
 	}
 </script>
 </head>
-<body>
+<body> 
+	<!-- 헤더 -->
+<!-- Header -->
+<c:if test="${empty sessionScope.usersVO }">
+	<jsp:include page="/commons/header.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.usersVO }">
+	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+		<jsp:include page="/commons/loginheader.jsp" />
+	</c:if>
+	<c:if test="${sessionScope.usersVO.rank == 1 }">
+		<jsp:include page="/commons/adminLoginheader.jsp" />
+	</c:if>
+</c:if>
+<!-- 헤더 끝 -->
 	<h3>모집 게시판임</h3>
 	
 	<div>

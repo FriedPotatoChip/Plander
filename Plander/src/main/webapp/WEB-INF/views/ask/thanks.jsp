@@ -8,6 +8,6 @@
 </head>
 <body>
 전송 완료
-<button type="button" class="btn btn-dark" onclick="location.href='/TMS'">홈으로가기</button>
+<button type="button" class="btn btn-dark" onclick="location.href='/TMS/ask'">홈으로가기</button>
 </body>
 </html>

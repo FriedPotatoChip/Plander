@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style>
 	h3{ margin-top: 0px; }
@@ -18,7 +19,6 @@
 	.commDate { font-size: 0.75em; color: gray;}
 	.user { width: 30px; height: 30px; border-radius: 50%; }
 </style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 /* 신청하기, 신청 취소를 위한 확인값 설정 */
 	<c:if test="${empty apply}">
@@ -121,6 +121,20 @@ function boardList(nowPage){
 </script>
 </head>
 <body> 
+	<!-- 헤더 -->
+<!-- Header -->
+<c:if test="${empty sessionScope.usersVO }">
+	<jsp:include page="/commons/header.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.usersVO }">
+	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+		<jsp:include page="/commons/loginheader.jsp" />
+	</c:if>
+	<c:if test="${sessionScope.usersVO.rank == 1 }">
+		<jsp:include page="/commons/adminLoginheader.jsp" />
+	</c:if>
+</c:if>
+<!-- 헤더 끝 -->
 	
  	<h3>모집글 상세조회 페이지</h3>
 	
@@ -146,11 +160,17 @@ function boardList(nowPage){
 		<!-- 현재원 / 모집정원 -->
 		<p><span id="cur_mem">${rc_board.cur_mem }</span> / <span id="max_mem">${rc_board.max_mem }</span></p>
 		
+		<c:if test="${rc_board.onOff eq 'ON' }">
+			<c:if test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
+				<button onclick="endRecruit()">모집 마감</button><br> 	
+			</c:if>
+		</c:if>
 		<!-- 신청 버튼 시작 -->
 		<button class="appBtn" id="hideApply" style="display:none;" onclick="apply()">신청하기</button>
 		<button class="appBtn" id="hideCancel" style="display:none;" onclick="applyCancel()">신청취소</button>
 		<!-- 신청 버튼 끝 -->
 		
+		<!-- 수정/ 삭제 버튼 -->
 		<c:if test="${(sessionScope.usersVO.id == rc_board.id) || sessionScope.usersVO.rank == 1 }">
 			<button onclick="modify()">수정하기</button>
 			<button onclick="deleteRec()">삭제하기</button>
@@ -402,6 +422,7 @@ function boardList(nowPage){
 			data: commentData,
 			success: function(data){
 				alert("댓글을 남겼습니다");
+				$("#c_content").val("");
 				paging(nowPage);
 			}, error: function(){
 				alert("댓글 달기 실패");
@@ -414,10 +435,10 @@ function boardList(nowPage){
 		var id = "comm" + data;
 		clickCnt++;
 		$(".replyComm").css("display", "none");
-		var html = "<div class='replyComm'>";
+		var html = "<div class='replyComm c-comment'>";
 		html += "<form name='replyCommAjax"+clickCnt+"'>";
-		html += "&rdsh; <strong>댓글 작성</strong><br>";
-		html += "<textarea rows='8' cols='80' name='c_content'></textarea>";
+		html += "<span style='font-family: 굴림;'>&rdsh;</span> <strong>댓글 작성</strong><br>";
+		html += "<textarea rows='4' cols='80' name='c_content'></textarea>";
 		html += "<input type='hidden' value='${usersVO.id }' name='id'>";
 		html += "<input type='hidden' value='${rc_board.rc_idx }' name='rc_idx'>";
 		html += "<input type='hidden' value='"+data+"' name='rp_idx'>";
@@ -514,6 +535,29 @@ function boardList(nowPage){
 				alert("댓글 달기 실패");
 			}
 		});
+	}
+	/* 모집마감 클릭시 쿠폰 발행 */
+	function endRecruit(){
+		var confirm = window.confirm("모집을 마감하면 다시 되돌릴 수 없습니다. \n모집마감을 진행하시겠습니까?");
+		if (!confirm){
+			return false;
+		}
+		$.ajax({
+			url: "/endRecruit",
+			type: "get", 
+			data: {"rc_idx":'${rc_board.rc_idx}' ,"id":'${usersVO.id}'},
+			dataType: "text",
+			success: function(result){
+				if (result == 'success'){
+					alert("모집을 성공적으로 마감했습니다.");
+					window.location.reload();
+				} else if (result == 'fail'){
+					alert("모집을 마감하는데 실패했습니다. \n관리자에게 문의 바랍니다.");
+				}
+			}, error: function(error){
+					alert("모집을 마감하는데 실패했습니다. \n관리자에게 문의 바랍니다.");
+			}
+		})
 	}
 </script>
 </body>

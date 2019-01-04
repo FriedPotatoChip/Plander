@@ -8,26 +8,6 @@
 		#{id}
 	</select>
 
-	<!-- 전체 모집글 갯수 조회 --><!-- 페이징처리용 -->
-	<select id="getTotal" resultType="int">
-		select count(*) from recruit
-		where id = #{id}
-	</select>
-
-	<!-- 전체 좌석 예약 갯수 조회 -->
-	<select id="getTotalSeat" resultType="int">
-		select count(*) from
-		booking
-		where id = #{id}
-	</select>
-
-	<!-- 전체 사물함 예약 갯수 조회 -->
-	<select id="getTotalCabinet" resultType="int">
-		select count(*) from
-		booking_cb
-		where id = #{id}
-	</select>
-
 	<!-- 내정보수정 -->
 	<update id="userUpdate" parameterType="com.bit.domain.UsersVO">
 		update users set password
@@ -42,6 +22,13 @@
 		where id = #{id}
 	</update>
 
+	<!-- 프로필 사진 업데이트 -->
+	<update id="updateProfileImg"
+		parameterType="com.bit.domain.UsersVO">
+		UPDATE USERS SET USER_PROFILEIMAGEPATH =
+		#{user_profileImagePath} WHERE U_IDX = #{u_idx}
+	</update>
+
 	<!-- 모집글 작성 -->
 	<insert id="insertRecruit"
 		parameterType="com.bit.domain.RecruitVO">
@@ -50,27 +37,6 @@
 		values (recruit_seq.nextval, #{rc_title}, #{rc_content},
 		#{id}, #{max_mem})
 	</insert>
-
-	<!-- 내가 쓴 모집글 -->
-	<!-- <select id="my_recruit" resultType="com.bit.domain.RecruitVO"> select 
-		* from recruit where id = #{id} </select> -->
-
-	<!-- 내가 쓴 모집글 페이징 처리용 -->
-	<select id="my_recruit" resultType="com.bit.domain.RecruitVO"
-		parameterType="Map">
-		select * from
-		(
-		select rownum rn, rc.* from recruit rc
-		where
-		rc.id =
-		#{id}
-		order by
-		rc_idx desc
-		)
-		where rn between #{start}
-		and
-		#{end}
-	</select>
 
 	<!-- 내가 쓴 모집글 상세 조회 -->
 	<select id="getOne" resultType="com.bit.domain.RecruitVO">
@@ -91,64 +57,166 @@
 		rc_idx = #{rc_idx}
 	</delete>
 
-	<!-- 내 모집글에 달린 댓글 -->
-	<select id="my_recruit_comment"
-		resultType="com.bit.domain.CommentsVO">
-		select c.*, rc.*
-		from comments c, recruit rc
-		where c.rc_idx =
-		rc.rc_idx
-		and rc.id = #{id}
+	<!-- 자유게시판 상세보기 -->
+	<select id="getBoardOne" resultType="com.bit.domain.BoardVO">
+		select * from board where
+		ct_idx = 2
+		and b_idx = #{b_idx}
 	</select>
 
-	<!-- 모집글 댓글 등록 -->
-	<insert id="insertComm"
-		parameterType="com.bit.domain.CommentsVO">
-		insert into comments (c_idx, c_content, id, rc_idx)
-		values (comments_seq.nextval, #{c_content}, #{id}, #{rc_idx})
-	</insert>
+	<!-- 예약좌석 삭제 -->
+	<delete id="delSeat" parameterType="int">
+		delete from booking where
+		bk_idx = #{bk_idx}
+	</delete>
 
-	<!-- 내 모집글의 신청자 목록 조회 -->
-	<select id="getApplyList" resultType="com.bit.domain.ApplyVO">
-		select a.*, rc.*
-		from apply
-		a, recruit rc
-		where a.rc_idx = rc.rc_idx
-		and rc.rc_idx = (select rc_idx
-		from recruit where id = 'test')
+	<!-- 예약사물함 삭제 -->
+	<delete id="delCabinet" parameterType="int">
+		delete from booking_cb
+		where ckb_idx = #{ckb_idx}
+	</delete>
+
+	<!-- 여기서부터는 페이징 처리 관련 ================================= -->
+
+	<!-- 전체 좌석 예약 갯수 조회 -->
+	<select id="getTotalSeat" resultType="int">
+		select count(*) from
+		booking
+		where id = #{id}
 	</select>
 
 	<!-- 내 좌석 예약내역 -->
-	<select id="my_seat" resultType="com.bit.domain.BookingVO">
-		select b.*, s.*
-		from booking b,
+	<select id="my_seat" resultType="com.bit.domain.BookingVO"
+		parameterType="Map">
+		select * from (
+		select rownum rn, b.bk_idx, b.id,
+		b.start_time, b.end_time, b.bk_regdate,
+		b.booknum, b.price,
+		s.s_idx,
+		s.br_name, s.br_idx, s.roomnum, s.sct_idx, s.sct_name, s.s_col
+		from
+		booking b,
 		seats_view s
-		where b.s_idx = s.s_idx
-		and b.id = #{id}
+		where b.s_idx
+		= s.s_idx
+		and b.id = #{id} order by
+		b.bk_idx desc)
+		where rn between #{start} and #{end}
+	</select>
+
+	<!-- 전체 사물함 예약 갯수 조회 -->
+	<select id="getTotalCabinet" resultType="int">
+		select count(*) from
+		booking_cb
+		where id = #{id}
 	</select>
 
 	<!-- 내 사물함 예약내역 -->
-	<select id="my_cabinet" resultType="com.bit.domain.BookingCbVO">
-		select b.*, c.*, br.br_name
-		from booking_cb b, cabinet c, branches br
-		where b.cb_number =
-		c.cb_number
-		and c.br_idx = br.br_idx
-		and b.id = #{id}
+	<select id="my_cabinet" resultType="com.bit.domain.BookingCbVO"
+		parameterType="Map">
+		select * from (
+		select rownum rn, b.ckb_idx, b.id,
+		b.start_date, b.end_date, b.ckb_regdate,
+		c.cb_idx, c.br_idx,
+		c.cb_number, br.br_name
+		from booking_cb b, cabinet c,
+		branches br
+		where
+		b.cb_idx =
+		c.cb_idx
+		and
+		c.br_idx = br.br_idx
+		and b.id =
+		#{id} order by
+		b.ckb_idx desc)
+		where rn between #{start} and #{end}
 	</select>
 
-	<!-- 자유게시판에 올린 글목록 -->
-	<!-- <select id="board" resultType="com.bit.domain.BoardVO"> select * from 
-		board where ct_idx = 2 and id = #{id} </select> -->
+	<!-- 전체 모집글 갯수 조회 -->
+	<select id="getTotal" resultType="int">
+		select count(*) from recruit
+		where id = #{id}
+	</select>
 
-	<!-- 자유게시판에 올린 글목록 갯수 페이징용 -->
+	<!-- 내가 쓴 모집글 -->
+	<select id="my_recruit" resultType="com.bit.domain.RecruitVO"
+		parameterType="Map">
+		select * from
+		(
+		select rownum rn, rc.* from recruit rc
+		where
+		rc.id =
+		#{id}
+		order by
+		rc_idx desc
+		)
+		where rn between #{start}
+		and
+		#{end}
+	</select>
+
+	<!-- 내 모집글의 신청자 목록 갯수 -->
+	<select id="getTotalApply" resultType="int">
+		select count(*)
+		from apply
+		where rc_idx in (select rc_idx from recruit
+		where id = #{id})
+	</select>
+
+	<!-- 내 모집글의 신청자 목록 조회 -->
+	<select id="getApplyList" resultType="com.bit.domain.ApplyVO"
+		parameterType="Map">
+		select * from (
+		select rownum rn, a.ap_idx, a.id,
+		a.ap_regdate, rc.rc_idx,
+		rc.rc_title, rc.rc_content, rc.cur_mem,
+		rc.max_mem, rc.rc_regdate, rc.hit
+		from apply a, recruit rc
+		where
+		a.rc_idx =
+		rc.rc_idx
+		and rc.rc_idx in(select rc_idx
+		from recruit where id
+		= #{id}))
+		where rn between #{start} and #{end}
+	</select>
+
+	<!-- 내 모집글에 달린 댓글 갯수 -->
+	<select id="getTotalComment" resultType="int">
+		select count(*)
+		from comments
+		where rc_idx in (select rc_idx
+		from recruit
+		where id = #{id})
+	</select>
+
+	<!-- 내 모집글에 달린 댓글 -->
+	<select id="my_recruit_comment"
+		resultType="com.bit.domain.CommentsVO" parameterType="Map">
+		select * from (
+		select rownum rn, c.c_idx, c.c_content, c.b_idx, c.id, c.c_regdate,
+		c.rp_idx, c.del,
+		rc.rc_idx, rc.rc_title, rc.rc_content, rc.cur_mem,
+		rc.max_mem, rc.rc_regdate,
+		rc.hit
+		from comments c, recruit rc
+		where
+		c.rc_idx =
+		rc.rc_idx
+		and rc.id =
+		#{id} order by c.c_idx desc)
+		where rn
+		between #{start} and #{end}
+	</select>
+
+	<!-- 자유게시판에 올린 글목록 갯수 -->
 	<select id="board_cnt" resultType="int">
 		select count(*) from
 		board
 		where ct_idx = 2 and id = #{id}
 	</select>
 
-	<!-- 자유게시판에 올린 글목록 페이징용 -->
+	<!-- 자유게시판에 올린 글목록 -->
 	<select id="board" resultType="com.bit.domain.BoardVO"
 		parameterType="Map">
 		select * from
@@ -165,12 +233,19 @@
 		#{end}
 	</select>
 
-	<!-- 자유게시판에 달린 댓글목록 -->
-	<!-- <select id="board_comment" resultType="com.bit.domain.CommentsVO"> 
-		select c.*, b.* from comments c, board b where c.b_idx = b.b_idx and b.ct_idx 
-		= 2 and b.id = #{id} </select> -->
+	<!-- 자유게시판에 달린 댓글목록 갯수 -->
+	<select id="board_comment_cnt" resultType="int">
+		select count(*)
+		from
+		comments c, board b
+		where c.b_idx =
+		b.b_idx
+		and b.ct_idx = 2
+		and b.id =
+		#{id}
+	</select>
 
-	<!-- 자유게시판에 달린 댓글목록 페이징용 -->
+	<!-- 자유게시판에 달린 댓글목록 -->
 	<select id="board_comment"
 		resultType="com.bit.domain.CommentsVO" parameterType="Map">
 		select *
@@ -189,31 +264,54 @@
 		#{start} and #{end}
 	</select>
 
-	<!-- 자유게시판에 달린 댓글목록 갯수 페이징용 -->
-	<select id="board_comment_cnt" resultType="int">
-		select count(*)
+	<!-- 여기는 로그인 헤더 관련 ================================= -->
+
+	<!-- 내 좌석 예약내역 -->
+	<select id="my_seat_header"
+		resultType="com.bit.domain.BookingVO">
+	<![CDATA[
+		select * from
+		(select b.bk_idx,
+		b.id,
+		b.start_time, b.end_time, b.bk_regdate,
+		b.booknum, b.price,
+		s.s_idx,
+		s.br_name, s.br_idx, s.roomnum, s.sct_idx, s.sct_name, s.s_col
 		from
-		comments c, board b
-		where c.b_idx =
-		b.b_idx
-		and b.ct_idx = 2
-		and b.id =
-		#{id}
+		booking b,
+		seats_view s
+		where b.s_idx
+		= s.s_idx
+		and b.id = #{id} order
+		by
+		b.bk_idx desc)
+		where start_time < sysdate
+		and end_time > sysdate
+		]]>
 	</select>
 
-	<!-- 자유게시판 상세보기 -->
-	<select id="getBoardOne" resultType="com.bit.domain.BoardVO">
-		select * from board where
-		ct_idx = 2
-		and b_idx = #{b_idx}
+	<!-- 내 사물함 예약내역 -->
+	<select id="my_cabinet_header"
+		resultType="com.bit.domain.BookingCbVO">
+	<![CDATA[
+		select * from (
+		select b.ckb_idx, b.id,
+		b.start_date, b.end_date, b.ckb_regdate,
+		c.cb_idx, c.br_idx,
+		c.cb_number, br.br_name
+		from booking_cb b, cabinet c,
+		branches br
+		where
+		b.cb_idx =
+		c.cb_idx
+		and
+		c.br_idx = br.br_idx
+		and b.id =
+		#{id} order by
+		b.ckb_idx desc)
+		where start_date < sysdate
+		and end_date > sysdate
+		]]>
 	</select>
-	
-	<!-- 프로필 사진 업데이트 -->
-	<update id="updateProfileImg" parameterType="com.bit.domain.UsersVO">
-		UPDATE USERS SET USER_PROFILEIMAGEPATH = #{user_profileImagePath} WHERE U_IDX = #{u_idx}
-	</update>
-	
-	
-	
-	
+
 </mapper>

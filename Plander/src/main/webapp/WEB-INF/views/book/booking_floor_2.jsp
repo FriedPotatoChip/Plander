@@ -18,7 +18,7 @@
 	//DB에서 예약된 좌석이랑 비교해서 체크박스 disabled
 	$().ready(function(){
 		var size = document.getElementsByName('s_col').length;
-		alert("size : " + size);
+		console.log("size : " + size);
 		var booklist = '<c:out value='${booklist}' />';
 		
 		<c:forEach var='k' items='${booklist }'>
@@ -27,7 +27,7 @@
 			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 				if ( bookseat == document.getElementsByName('s_col')[i].value) {
-					alert("예약된 값 : " + bookseat );
+					console.log("예약된 값 : " + bookseat );
 					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
 					break;
 				}
@@ -44,18 +44,29 @@
 			console.log("chkLen : " + chkLen);
 			if (cnt == 1){
 				$("#msg").html("<span>A-" + $(":checkbox:checked").val() + "</span>");
+				
+				document.form1.test.value = $(":checkbox:checked").val();
+				document.form1.chkLen.value = cnt;
 			} else {
-				if (chkLen == 2){
+				if (chkLen == 2) {
 					var test = "";
-					for (var i = 0; i < 2; i ++){
-						if (i == 0){
-							test += chkVal[i].value + ", A-";
+					for (var i = 0; i < 2; i ++) {
+						if (i == 0) {
+							test += chkVal[i].value + ", ";
 						} else {
-							test += chkVal[i].value+"";
+							test += chkVal[i].value + "";
 						}
 					}
 					$("#msg").html("<span>A-" + test + "</span>");
-					console.log("선택한 좌석: "+ test);
+					console.log("선택한 좌석: " +  test);
+					
+					document.form1.test.value = test;
+					document.form1.chkLen.value = chkLen;
+					
+// 					var arr = new Array();
+// 					arr += test;
+// 					console.log("arr : " + arr);
+					
 				}
 				
 			}
@@ -80,7 +91,7 @@
 				</c:forEach>
 			}
 		});
-		
+
 	});
 
 </script>
@@ -93,7 +104,7 @@
 			$("#msg").html("");
 			
 			var size = document.getElementsByName('s_col').length;
-			alert("size : " + size);
+			console.log("size : " + size);
 			var booklist = '<c:out value='${booklist}' />';
 			
 			<c:forEach var='k' items='${booklist }'>
@@ -231,7 +242,7 @@
 	
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
-		<form method="post">
+		<form method="post" name="form1">
 			<div>
 				<h5>☑ 1인 2석까지 예약 가능합니다.</h5>
 				<div>
@@ -395,7 +406,7 @@
 			</table> <!-- 선택 정보 끝 -->
 			
 			<div class="center" style="padding: 10px;">
-				<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
+				<button type="button" onclick="">이전단계</button>&nbsp;
 				<button type="button" onclick="next(this.form)">다음단계</button>
 			</div><br><br>
 			
@@ -408,10 +419,13 @@
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
 			<input type="hidden" name="s_idx" value="${bvo.s_idx }">
+			<input type="hidden" name="test" value="">
+			<input type="hidden" name="chkLen" value="">
+				
 		</form>
 		</div> <!-- 박스 아웃사이드 끝 -->
 	</div> <!-- 티켓 끝 --><br><br><br>
-
+	<!--  -->지금예약 : ${bvo }
 </div> <!-- 바디 콘테이너 끝 -->
 </body>
 </html>

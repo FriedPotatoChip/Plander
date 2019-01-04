@@ -9,12 +9,13 @@ import lombok.ToString;
 @ToString
 public class BookingVO {
 	private int bk_idx;
-	private String id, s_row, booknum;
+	private String id, booknum;
 	
 	//좌석 조회
-	private int br_idx, s_col, s_idx, sct_idx, time_idx, roomnum, price;
+	private int br_idx, s_col, s_idx, sct_idx, time_idx, roomnum, price, cabinet;
 	//SEATS_VIEW
-	private String br_name, sct_name, cabinet;
+	private String br_name, sct_name;
 	//날짜 선택
 	private String start_time, end_time, bk_regdate;
+	
 }

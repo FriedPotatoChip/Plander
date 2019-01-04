@@ -241,6 +241,10 @@ public class LoginController {
 		return "login/findIdPw";
 	}
 	
-	
+	@RequestMapping("/TMS/login")
+	public String TMSlogin(Model model) {
+		model.addAttribute("login", "false");
+		return "main/submain";
+	}
 	
 }

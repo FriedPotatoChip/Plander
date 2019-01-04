@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style>
 	h3{ margin-top: 0px; }
@@ -21,7 +22,6 @@
 	.comm { border: 1px solid blue; }
 	.user { width: 30px; height: 30px; border-radius: 50%; }
 </style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
 
@@ -110,7 +110,20 @@ $(document).ready(function(){
 </script>
 </head>
 <body> 
-	
+	<!-- 헤더 -->
+<!-- Header -->
+<c:if test="${empty sessionScope.usersVO }">
+	<jsp:include page="/commons/header.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.usersVO }">
+	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+		<jsp:include page="/commons/loginheader.jsp" />
+	</c:if>
+	<c:if test="${sessionScope.usersVO.rank == 1 }">
+		<jsp:include page="/commons/adminLoginheader.jsp" />
+	</c:if>
+</c:if>
+<!-- 헤더 끝 -->
  	<h3>모집글 상세조회 페이지</h3>
 	
 	<div id="board">
@@ -327,6 +340,7 @@ $(document).ready(function(){
 			data: commentData,
 			success: function(data){
 				alert("댓글을 남겼습니다");
+				$("#c_content").val("");
 				paging(nowPage);
 			}, error: function(){
 				alert("댓글 달기 실패");
