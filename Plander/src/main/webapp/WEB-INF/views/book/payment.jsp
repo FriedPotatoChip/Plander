@@ -112,7 +112,7 @@
 		var end = enddate.toLocaleString('en-GB').substring(12,14);
 		
 		window.sum = 0;
-		var sct_idx = '${bvo.sct_idx }'; //방번호 확인
+		window.sct_idx = '${bvo.sct_idx }'; //방번호 확인
 		var time_idx = '${bvo.time_idx }'; //정기권 확인
 		var cabinet = '${bvo.cabinet }'; //사물함 사용여부 y/n
         
@@ -489,6 +489,7 @@
 	
 </div> <!-- 바디 콘테이너 끝 -->
 <script>
+window.finalPrice = 0;
 $(document).ready(function(){
 	
 	$.ajax({
@@ -503,13 +504,16 @@ $(document).ready(function(){
 				html += "<option value='0' type='0' price='0'>없음</option>";
 			}else {
 				$.each(result, function(index, value){
-					html += "<option value='"+value.cb_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
-					if (value.cb_distype == 'PERCENT'){
-						html += "%";
-					}else if (value.cb_idstype == 'PRICE'){
-						html += "원";
+					if ((value.cb_roomtype == 'LAB' && sct_idx != 1) || (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)){
+						html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
+						if (value.cb_distype == 'PERCENT'){
+							html += "%";
+						}else if (value.cb_idstype == 'PRICE'){
+							html += "원";
+						}
+						html += "("+value.cp_quantity+" 개)";
+						html += "</option>";
 					}
-					html += "</option>";
 				});
 			}
 			$("#coupon").append(html);
@@ -521,11 +525,12 @@ $(document).ready(function(){
 });
 
 $("#coupon").on("change", function(){
-	window.finalPrice = sum;
+	fianlPrice = sum;
 	var option = $('option:selected', this);
+	window.cp_idx = option.attr("value");
 	var type = option.attr("type");
 	var price = option.attr("price");
-	
+	console.log("cp_idx: "+ cp_idx);
 	var couponPrice = "";
 	// 퍼센트 쿠폰
 	if (type == 'PERCENT'){
@@ -543,8 +548,29 @@ $("#coupon").on("change", function(){
 })
 
 function nextSubmit(frm){
+	if (fianlPrice == 0){
+		finalPrice = sum;
+	}
 	$("#hiddenPrice").val(finalPrice);
-	frm.submit();
+	console.log("여긴 온다");
+	$.ajax({
+		url: '/minusCoupon',
+		type: 'get',
+		data: {'cp_idx':cp_idx},
+		dataType: 'text',
+		success: function(result){
+			if (result == 'success'){
+				console.log("성공");
+				frm.submit();
+			} else if(result == 'fail') {
+				alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+				return false;
+			}
+		}, error: function(error){
+			alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+			return false;
+		}
+	})
 }
 </script>
 </body>

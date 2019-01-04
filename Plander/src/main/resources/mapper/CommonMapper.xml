@@ -9,12 +9,15 @@
 	<!-- 보유 쿠폰 출력 -->
 	<select id="getUserCoupon" resultType="com.bit.domain.CouponVO" parameterType="String"> 
 		<![CDATA[
-			SELECT C.*, CB_NAME, CB_DISCOUNT, CB_DISTYPE 
+			SELECT *
 				FROM COUPON C, COUPON_TABLE CB 
 				WHERE C.CB_IDX = CB.CB_IDX AND ID = #{id} AND CP_QUANTITY != 0 AND SYSDATE <= CP_ENDDATE
 		]]>
 	</select>
 	
+	<update id="minusCoupon" parameterType="int">
+		UPDATE COUPON SET CP_QUANTITY = CP_QUANTITY - 1 WHERE CP_IDX = #{cp_idx}
+	</update>	
 </mapper>
 
 

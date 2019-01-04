@@ -42,4 +42,14 @@ public class AjaxController {
 		return comService.getUserCoupon(id);
 	}
 	
+	@RequestMapping("/minusCoupon")
+	public String minusCoupon(@RequestParam("cp_idx")int cp_idx) {
+		boolean chkMin = comService.minusCoupon(cp_idx);
+		if (chkMin) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 }

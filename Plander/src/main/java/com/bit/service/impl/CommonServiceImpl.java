@@ -25,6 +25,11 @@ public class CommonServiceImpl implements CommonService {
 	public List<CouponVO> getUserCoupon(String id) {
 		return mapper.getUserCoupon(id);
 	}
+
+	@Override
+	public boolean minusCoupon(int cp_idx) {
+		return mapper.minusCoupon(cp_idx);
+	}
 	
 	
 }

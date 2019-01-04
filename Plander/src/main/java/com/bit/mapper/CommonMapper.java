@@ -12,4 +12,7 @@ public interface CommonMapper {
 	// 보유 쿠폰 출력
 	public List<CouponVO> getUserCoupon(String id);
 	
+	// 쿠폰 갯수 -1
+	public boolean minusCoupon(int cp_idx);
+	
 }
