@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,107 +8,75 @@
 <title>결제하기</title>
 <!-- 부트스트랩 ================================================================================ -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-<link
-	href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR"
-	rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR" rel="stylesheet">
 
 <style>
-body, html {
-	width: 90%;
-	margin: auto;
-}
-
-* {
-	font-family: 'Noto Sans KR', sans-serif;
-	text-decoration: none;
-}
-
-#home {
-	font-family: 'East Sea Dokdo', cursive;
-	font-size: 2em;
-}
-
-.center {
-	text-align: center;
-}
-
-/* 여기 밑으로 예약 헤더 CSS */
-#chk a {
-	text-decoration: none;
-}
-
-#chk {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-ul>li {
-	float: left;
-	list-style-type: none;
-	padding: 0 5% 0 5.5%;
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-ul>li>a {
-	font-size: 1.1em;
-}
-
-#chk::after {
-	content: "";
-	clear: both;
-	display: table;
-}
-/* 선택 안할 시 */
-.select {
-	color: gray;
-}
-
-.back {
-	background-color: gray;
-	color: white;
-	padding: 0 8px 0 8px;
-	border-radius: 25px;
-	font-size: 15px;
-}
-
-/* 현재 페이지 */
-.click {
-	color: black;
-}
-
-.noback {
-	background-color: rebeccapurple;
-	color: white;
-	padding: 0 8px 0 8px;
-	border-radius: 25px;
-	font-size: 15px;
-}
-/* 예약 헤더 CSS 끝 */
-/* 버튼 */
-button {
-	display: inline-block;
-	padding: 6px 12px;
-	border-radius: 4px;
-	font-size: 14px;
-	text-align: center;
-	background-color: white;
-	border: 1px solid rebeccapurple;
-	cursor: pointer;
-}
-
-button:hover {
-	border: 1px solid rebeccapurple;
-	background-color: rebeccapurple;
-	color: white;
-}
-/* 버튼 끝 */
+	body, html { width: 90%; margin: auto; }
+	* { font-family: 'Noto Sans KR', sans-serif; text-decoration: none; }
+	.center { text-align: center; }
+	
+	/* 여기 밑으로 예약 헤더 CSS */
+	#chk a { text-decoration: none; }
+	#chk {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	ul>li {
+		float: left;
+		list-style-type: none;
+		padding: 0 5% 0 5.5%;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	ul>li>a { font-size: 1.1em; }
+	
+	#chk::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 선택 안할 시 */
+	.select { color: gray; }
+	.back {
+		background-color: gray;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	
+	/* 현재 페이지 */
+	.click { color: black; }
+	.noback {
+		background-color: rebeccapurple;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	/* 예약 헤더 CSS 끝 */
+	/* 버튼 */
+	button {
+		display: inline-block;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 14px;
+		text-align: center;
+		background-color: white;
+		border: 1px solid rebeccapurple;
+		cursor: pointer;
+	}
+	
+	button:hover {
+		border: 1px solid rebeccapurple;
+		background-color: rebeccapurple;
+		color: white;
+	}
+	/* 버튼 끝 */
 </style>
 
 <script>
@@ -125,18 +94,6 @@ button:hover {
 				+ '${bvo.getStart_time() }'.substring(11, 13)
 				+ '${bvo.getStart_time() }'.substring(14, 16) + '${bvo.s_col}';
 		$("input[name='booknum']").attr('value', bookval);
-
-		//사물함 사용여부
-		var bookCab = '${cb.cb_idx }';
-		console.log("cb_idx 확인 : " + bookCab);
-
-		if (bookCab != "") {
-			$('#cb_idx').html('<span>' + bookCab + '번</span>');
-			$("input[name='cb_idx']").attr('value', bookCab);
-		} else {
-			$('#cb_idx').html('<span>사용안함</span>');
-			$("input[name='cb_idx']").attr('value', 0);
-		}
 
 		//시간에 따른 가격계산
 		var startdate = new Date('${bvo.start_time }');
@@ -439,31 +396,73 @@ button:hover {
 
 			}
 		})
-
+		
+		//사물함 사용여부
+		var bookCab1 = '${cb.cb_idx }';
+		var bookCab2 = '${cb.cb_idx_2 }';
+		var bookCab = bookCab1 + "," + bookCab2;
+		
+		console.log("cb_idx 확인 : " + bookCab1 + ", cb_idx_2 : " + bookCab2);
+		console.log("bookCab : " + bookCab);
+		
+		var arr = new Array;
+		arr = bookCab.split(',');
+		console.log("arr : " + arr);
+		var fv = arr[0];
+		var sv = arr[1];
+		console.log("fv : " + fv + ", sv : " + sv);
+		
+		var chkLen = "${chkLen}";
+		if (bookCab != ",") {
+			if (chkLen == 2) {
+				//2명 예약
+				$('#cb_idx').html('<span>' + fv + '번, ' + sv + '번</span>');
+				$("input[name='cb_idx']").attr('value', fv); //첫번째 값
+				$("input[name='cb_idx_2']").attr('value', sv); //두번째 값
+				$("input[name='cab']").attr('value', bookCab);
+			} else {
+				$('#cb_idx').html('<span>' + bookCab1 + '번</span>');
+				$("input[name='cb_idx']").attr('value', bookCab1);
+				$("input[name='cab']").attr('value', bookCab1);
+			}
+			
+		} else {
+			$('#cb_idx').html('<span>사용안함</span>');
+			$("input[name='cb_idx']").attr('value', 0);
+			$("input[name='cb_idx_2']").attr('value', 0);
+			$("input[name='cab']").attr('value', 0);
+		}
+		
 	});
 </script>
 
 </head>
 <body>
 	<div id="container">
-		<br>
-		<br>
-		<br>
+		<br><br><br>
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/TMS/book/booking"> <b><span
-							id="num" class="back">STEP1</span> <span id="select"
-							class="select">날짜선택</span></b>
-				</a></li>
+				<li>
+					<a class="menu" href="/TMS/book/booking">
+						<b><span id="num" class="back">STEP1</span>
+						<span id="select" class="select">날짜선택</span></b>
+					</a>
+				</li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b><span id="num" class="back">STEP2</span>
-							<span id="select" class="select">좌석선택</span></b>
-				</a></li>
+				<li>
+					<a class="menu">
+						<b><span id="num" class="back">STEP2</span>
+						<span id="select" class="select">좌석선택</span></b>
+					</a>
+				</li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b> <span id="num" class="noback">STEP3</span>
-							<span id="select" class="click">결제하기</span></b>
-				</a></li>
+				<li>
+					<a class="menu">
+						<b><span id="num" class="noback">STEP3</span>
+						<span id="select" class="click">결제하기</span></b>
+					</a>
+				</li>
 			</ul>
 		</div>
 		<!-- 예약 헤더끝 -->
@@ -473,8 +472,8 @@ button:hover {
 
 				<div style="padding: 10px;">
 					<h5>예매자 확인</h5>
-					<span>☑ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br> <span>☑
-						취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
+					<span>☑ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
+					<span>☑ 취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
 					<span>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</span>
 				</div>
 				<!-- 예매자 확인 끝 -->
@@ -498,7 +497,14 @@ button:hover {
 								<td>${uservo.name }</td>
 								<td>${uservo.phone }</td>
 								<td>${bvo.start_time }~ ${bvo.end_time }</td>
-								<td>${bvo.sct_name }- ${test }</td>
+							<c:choose>
+								<c:when test="${bvo.sct_idx == 1 }">
+									<td>${bvo.sct_name }- ${test }</td>
+								</c:when>
+								<c:otherwise>
+									<td>${bvo.sct_name }- ${bvo.s_col }</td>
+								</c:otherwise>
+							</c:choose>
 								<td id="cb_idx"></td>
 								<td id="bookprice"></td>
 							</tr>
@@ -511,26 +517,32 @@ button:hover {
 				<!-- 결제방식 선택 -->
 				<div id="pay" class="radio" style="padding: 10px;">
 					<h5>결제방식 선택</h5>
-					<label class="radio-inline"><input type="radio" name="pay"
-						id="kakaopay" value="1">카카오페이</label> <label class="radio-inline"><input
-						type="radio" name="pay" id="naverpay" value="2">네이버페이</label> <br>
+					<label class="radio-inline">
+						<input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label>
+					<label class="radio-inline">
+						<input type="radio" name="pay" id="naverpay" value="2">네이버페이</label><br>
 					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="">이전단계</button>
-						&nbsp;
+						<button type="button" onclick="">이전단계</button>&nbsp;
 						<button type="submit">다음단계</button>
 					</div>
 
-					<input type="hidden" name="booknum" value=""> <input
-						type="hidden" name="price" value=""> <input type="hidden"
-						name="sct_name" value="${bvo.sct_name }"> <input
-						type="hidden" name="s_col" value="${bvo.s_col }"> <input
-						type="hidden" name="cb_idx" value=""> <input type="hidden"
-						name="cabinet" value="${bvo.cabinet }"> <input
-						type="hidden" name="start_time" value="${bvo.start_time }">
+					<input type="hidden" name="booknum" value="">
+					<input type="hidden" name="price" value="">
+					<input type="hidden" name="br_idx" value="${bvo.br_idx }">
+					<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
+					<input type="hidden" name="sct_name" value="${bvo.sct_name }">
+					<input type="hidden" name="s_col" value="${bvo.s_col }">
+					<input type="hidden" name="s_col_2" value="${bvo.s_col_2 }">
+					<input type="hidden" name="cb_idx" value="">
+					<input type="hidden" name="cb_idx_2" value="">
+					<input type="hidden" name="cabinet" value="${bvo.cabinet }">
+					<input type="hidden" name="start_time" value="${bvo.start_time }">
 					<input type="hidden" name="end_time" value="${bvo.end_time }">
-					<input type="hidden" name="s_idx" value="${svo.s_idx }"> <input
-						type="hidden" name="test" value="${test }"> <input type="hidden"
-						name="chkLen" value="">
+					<input type="hidden" name="s_idx" value="${svo.s_idx }">
+					<input type="hidden" name="s_idx_2" value="${svo.s_idx_2 }">
+					<input type="hidden" name="test" value="${test }">
+					<input type="hidden" name="chkLen" value="">
+					<input type="hidden" name="cab" value="">
 				</div>
 				<!-- 결제방식 선택 끝  -->
 			</form>

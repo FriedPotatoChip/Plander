@@ -37,6 +37,7 @@
 		AND SV.ROOMNUM = #{roomnum} AND SV.BR_IDX = #{br_idx}
 	</select>
 	
+	<!-- 예약된 좌석 수 (랩실)-->
 	<select id="bookroomCnt" resultType="int" parameterType="com.bit.domain.BookingVO">
 		SELECT NVL(COUNT(*),0) FROM (
 			SELECT distinct sv.* FROM SEATS_VIEW SV, BOOKING B 
@@ -51,7 +52,7 @@
 			order by sv.s_idx )
 	</select>
 	
-	<!-- 예약된 랩실 -->
+	<!-- 예약된 좌석 조회 (랩실) -->
 	<select id="bookroom" resultType="com.bit.domain.BookingVO">
 		SELECT distinct sv.* FROM SEATS_VIEW SV, BOOKING B 
 		WHERE sv.s_idx = b.s_idx
@@ -74,12 +75,19 @@
 			SYSDATE, #{booknum}, #{price})
 	</insert>
 	
+	
 	<!-- s_idx -->
 	<select id="seatnum" resultType="com.bit.domain.SeatsVO">
 		SELECT S_IDX FROM SEATS WHERE S_COL = #{s_col} AND BR_IDX = #{br_idx}
 	</select>
 	
-	<!-- 예약 안 된 좌석 리스트 -->
+	<!-- s_idx 두 명이 예약할 때 -->
+	<select id="some_seatnum" resultType="com.bit.domain.SeatsVO">
+		SELECT S_IDX FROM SEATS WHERE S_COL = #{s_col_2} AND BR_IDX = #{br_idx}
+	</select>
+	
+	
+	<!-- 예약 안 된 사물함 리스트 -->
 	<select id="not_bookCb" resultType="com.bit.domain.CabinetVO">
 		SELECT CB_IDX FROM CABINET 
 			WHERE BR_IDX = #{br_idx}
@@ -87,21 +95,13 @@
 			ORDER BY CB_IDX
 	</select>
 	
-	
-	
-	
 	<!-- 사물함 예약 -->
 	<insert id="bookCabinet" parameterType="com.bit.domain.BookingCbVO">
-	INSERT INTO BOOKING_CB (CKB_IDX, ID, START_DATE, END_DATE, CB_IDX, CKB_REGDATE)
-	VALUES ((select NVL(MAX(ckb_idx),0)+1 from booking_cb), 
-	#{id}, to_date(#{start_date}, 'YYYY-MM-DD HH24:MI'), to_date(#{end_date},'YYYY-MM-DD HH24:MI'),
-	#{cb_idx}, SYSDATE)
+		INSERT INTO BOOKING_CB (CKB_IDX, ID, START_DATE, END_DATE, CB_IDX, CKB_REGDATE)
+			VALUES ((select NVL(MAX(ckb_idx),0)+1 from booking_cb), 
+		#{id}, to_date(#{start_date}, 'YYYY-MM-DD HH24:MI'), to_date(#{end_date},'YYYY-MM-DD HH24:MI'),
+		#{cb_idx}, SYSDATE)
 	</insert>
-	
-	
-	
-	
-	
 	
 	
 	

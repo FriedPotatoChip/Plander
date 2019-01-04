@@ -1,6 +1,7 @@
 package com.bit.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
@@ -33,5 +34,7 @@ public interface BookService {
 	
 	//s_idx
 	public SeatsVO seatnum(int s_col, int br_idx);
+	//s_idx (두명)
+	public SeatsVO some_seatnum(int s_col_2, int br_idx);
 	
 }
