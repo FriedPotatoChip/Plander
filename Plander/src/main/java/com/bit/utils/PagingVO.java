@@ -122,10 +122,10 @@ public class PagingVO {
 		this.startPage = endP - this.cntPage + 1;
 		cntPerPage = 3;
 		
-		this.end = nowPage * 3;
-		this.start = end - 3 + 1;
+		this.end = nowPage * cntPerPage;
+		this.start = end - cntPerPage + 1;
 		
-		this.lastPage = (int) Math.ceil((double)total / (double)3);
+		this.lastPage = (int) Math.ceil((double)total / (double)cntPerPage);
 		
 		if (endP > lastPage) {
 			endP = lastPage;
