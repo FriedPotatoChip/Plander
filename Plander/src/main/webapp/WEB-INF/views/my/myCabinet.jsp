@@ -74,9 +74,13 @@ a {
 						<td>${cabinet.ckb_idx }</td>
 						<td>${cabinet.br_name }</td>
 						<td>${cabinet.cb_number }</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd"
-								value="${cabinet.start_date }" /> - <fmt:formatDate
-								pattern="yyyy-MM-dd" value="${cabinet.end_date }" /></td>
+						<td><fmt:parseDate value='${cabinet.start_date}'
+								pattern='yyyy-MM-dd' />
+<%-- 							<fmt:formatDate pattern="yyyy-MM-dd"
+								value="${cabinet.start_date }" /> --%> <br> - <fmt:parseDate
+								value='${cabinet.end_date}' pattern='yyyy-MM-dd' />
+<%-- 							<fmt:formatDate pattern="yyyy-MM-dd" value="${cabinet.end_date }" /> --%>
+						</td>
 						<td><button type="button"
 								class="btn btn-outline-danger btn-sm"
 								onclick="location.href='/TMS/my/delCabinet?ckb_idx=${cabinet.ckb_idx }'">예약취소</button></td>
@@ -87,8 +91,10 @@ a {
 				<div id="paging">
 					<ul id="pagingList">
 						<c:if test="${page.chkStartPage }">
-							<li><a href="#" onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li><a href="#" onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+							<li><a href="#"
+								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')"><button>&lt;&lt;</button></a></li>
+							<li><a href="#"
+								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
@@ -104,8 +110,10 @@ a {
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
-							<li><a href="#" onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
-							<li><a href="#" onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+							<li><a href="#"
+								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
+							<li><a href="#"
+								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
 						</c:if>
 					</ul>
 				</div>

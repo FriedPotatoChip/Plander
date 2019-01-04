@@ -32,7 +32,7 @@ body {
 
 h3 {
 	text-align: center;
-	background-color: #1864ab;
+	background-color: #3b5998;
 	color: white;
 }
 
