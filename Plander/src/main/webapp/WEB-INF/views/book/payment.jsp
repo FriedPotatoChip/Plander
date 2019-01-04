@@ -111,7 +111,7 @@
 		var start = startdate.toLocaleString('en-GB').substring(12,14);
 		var end = enddate.toLocaleString('en-GB').substring(12,14);
 		
-		var sum = 0;
+		window.sum = 0;
 		var sct_idx = '${bvo.sct_idx }'; //방번호 확인
 		var time_idx = '${bvo.time_idx }'; //정기권 확인
 		var cabinet = '${bvo.cabinet }'; //사물함 사용여부 y/n
@@ -456,23 +456,27 @@
 				</table>
 			</div> <!-- 나의 예약 정보 끝 -->
 			<!--  -->
-			
 			<!-- 결제방식 선택 -->
 			<div id="pay" class="radio" style="padding: 10px;">
+				<h5>사용 가능한 쿠폰</h5>
+				<select id="coupon">
+					<option value="0">------</option>
+				</select>
+				<span id="finPrice"></span>
 				<h5>결제방식 선택</h5>
 				<label class="radio-inline"><input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label>
 				<label class="radio-inline"><input type="radio" name="pay" id="naverpay" value="2">네이버페이</label>
 				<br>
 				<div class="center" style="padding: 10px;">
 					<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
-					<button type="submit">다음단계</button>
+					<button type="button" onclick="nextSubmit(this.form)">다음단계</button>
 				</div>
 				
 				<input type="hidden" name="s_idx" value="${svo.s_idx }">
 				<input type="hidden" name="start_time" value="${bvo.start_time }">
 				<input type="hidden" name="end_time" value="${bvo.end_time }">
 				<input type="hidden" name="booknum" value="">
-				<input type="hidden" name="price" value="">
+				<input type="hidden" name="price" value="" id="hiddenPrice">
 				<input type="hidden" name="s_col" value="${bvo.s_col }">
 				<input type="hidden" name="sct_name" value="${bvo.sct_name }">
 				<input type="hidden" name="cb_idx" value="">
@@ -483,6 +487,64 @@
 	<!--  -->지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb }
 	
 </div> <!-- 바디 콘테이너 끝 -->
+<script>
+$(document).ready(function(){
+	
+	$.ajax({
+		url: "/couponList",
+		type: "get",
+		data: {"id":"${usersVO.id}"},
+		dataType: "json",
+		success: function(result){
+			
+			var html = "";
+			if (result == ""){
+				html += "<option value='0' type='0' price='0'>없음</option>";
+			}else {
+				$.each(result, function(index, value){
+					html += "<option value='"+value.cb_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
+					if (value.cb_distype == 'PERCENT'){
+						html += "%";
+					}else if (value.cb_idstype == 'PRICE'){
+						html += "원";
+					}
+					html += "</option>";
+				});
+			}
+			$("#coupon").append(html);
+			
+		}, error: function(error){
+			
+		}
+	});
+});
 
+$("#coupon").on("change", function(){
+	window.finalPrice = sum;
+	var option = $('option:selected', this);
+	var type = option.attr("type");
+	var price = option.attr("price");
+	
+	var couponPrice = "";
+	// 퍼센트 쿠폰
+	if (type == 'PERCENT'){
+		finalPrice = (finalPrice * (100 - price)) / 100;
+		couponPrice += "쿠폰 적용 가격: "+ sum+ " * "+ ((100 - price) / 100) + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
+	}
+	
+	// 금액 쿠폰
+	if (type == 'PRICE'){
+		finalPrice -= price;
+		couponPrice += "쿠폰 적용 가격: "+ sum+ " - "+ price + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
+	}
+	finalPrice = Math.floor(finalPrice);
+	$("#finPrice").html(couponPrice);
+})
+
+function nextSubmit(frm){
+	$("#hiddenPrice").val(finalPrice);
+	frm.submit();
+}
+</script>
 </body>
 </html>

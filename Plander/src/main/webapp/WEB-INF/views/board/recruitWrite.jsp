@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <jsp:include page="/commons/head.jsp" />
-<title>Insert title here</title>
 <!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
 <!-- include summernote-ko-KR -->
 <script src="/resources/js/summernote-ko-KR.js"></script> 
+<title>Insert title here</title>
 
 
 <style>
@@ -39,12 +40,14 @@
 	<table>
 		<tr>
 			<td>
-				<div class="col-xs-9 zeroPad">
-					<input type="text" class="form-control" id="rc_title" name="rc_title" placeholder="제목" required>
-				</div>
-				<div class="col-xs-3 zeroPad">
-					<input type="number" class="form-control" placeholder="최대인원" name="max_mem" required>
-				</div>
+	 			<div class="form-row"> 
+					<div class="form-group col-md-9 zeroPad">
+						<input type="text" class="form-control" id="rc_title" name="rc_title" placeholder="제목" required>
+					</div>
+					<div class="form-group col-md-3 zeroPad">
+						<input type="number" class="form-control" placeholder="최대인원" name="max_mem" required>
+					</div>
+	 			</div>
 			</td>
 		</tr>  
 		<tr>
@@ -66,12 +69,15 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+    	
+    	$("#rc_title").focus();
+    	
       $('#summernote').summernote({
     	placeholder: 'content',
         height: 350,
         minHeight: null,
         maxHeight: null,
-        focus: true,
+        focus: false,
         lang : 'ko-KR',
         callbacks: {
           onImageUpload: function(files, editor, welEditable) {
@@ -103,6 +109,7 @@
         	}, 3000)
         }
       });
+      $(".popover").attr("style", "display: none;"); 
     }
 </script>
 

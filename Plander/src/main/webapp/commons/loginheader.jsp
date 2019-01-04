@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/commons/head.jsp"></jsp:include>
+<%-- <jsp:include page="/commons/head.jsp"></jsp:include> --%>
 <style>
 .user {
 	width: 30px;
@@ -73,7 +73,7 @@
 						<div class="dropdown">
 							<a class="nav-link dropbtn" href="#">게시판</a>
 							<div class="dropdown-content">
-								<a href="#">공지사항</a> <a href="#">자유게시판</a> <a href="/TMS/ask">문의하기</a>
+								<a href="/TMS/board?ct_idx=1">공지사항</a> <a href="/TMS/board?ct_idx=2">자유게시판</a><a href="/TMS/board?ct_idx=3">후기게시판</a> <a href="/TMS/ask">문의하기</a>
 							</div>
 						</div>
 					</li>

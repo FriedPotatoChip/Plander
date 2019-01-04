@@ -16,7 +16,6 @@
 	a { text-decoration: none; }
 	.now { background-color: orange; }
 </style> 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 	
 <script> 
 	function selChange(){
 		var cntPerPage = document.getElementById("cntPerPage").value;

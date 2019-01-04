@@ -42,8 +42,8 @@
 						id="dropdownMenuButton" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">게시판</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">공지사항</a> <a
-							class="dropdown-item" href="#">자유게시판</a> <a class="dropdown-item"
+						<a class="dropdown-item" href="/TMS/board?ct_idx=1">공지사항</a> <a
+							class="dropdown-item" href="/TMS/board?ct_idx=2">자유게시판</a> <a class="dropdown-item"
 							href="#">FAQ</a>
 					</div>
 				</div>

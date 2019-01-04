@@ -94,7 +94,7 @@
 					<div class="dropdown">
 						<a class="nav-link dropbtn" href="#">게시판</a>
 						<div class="dropdown-content">
-							<a href="#">공지사항</a> <a href="#">자유게시판</a> <a href="/TMS/ask">문의하기</a>
+							<a href="/TMS/board?ct_idx=1">공지사항</a> <a href="/TMS/board?ct_idx=2">자유게시판</a><a href="/TMS/board?ct_idx=3">후기게시판</a> <a href="/TMS/ask">문의하기</a>
 						</div>
 					</div>
 				</li>
@@ -118,6 +118,7 @@
 		if ('${empty usersVO}' == 'true') {
 			alert("로그인 후 이용해주세요");
 			$("#myModal").modal();
+			$("#idInput").focus();
 		} else {
 			location.href = "/TMS/book";
 		}
@@ -366,7 +367,7 @@
 			<div class="modal-body center">
 				<form name="frm" action="#" method="post">
 					<input type="text" name="id" class="form-control" placeholder="아이디"
-						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
+						onKeyPress="if (event.keyCode==13){enterLogin()}" id="idInput" required>
 					<input type="text" name="password" class="form-control"
 						style="margin-top: 1.5%;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>

@@ -340,6 +340,7 @@ $(document).ready(function(){
 			data: commentData,
 			success: function(data){
 				alert("댓글을 남겼습니다");
+				$("#c_content").val("");
 				paging(nowPage);
 			}, error: function(){
 				alert("댓글 달기 실패");

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
 import com.bit.mapper.CommonMapper;
 import com.bit.service.CommonService;
@@ -18,6 +19,11 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public List<PriceVO> getPriceList() {
 		return mapper.getPriceList();
+	}
+
+	@Override
+	public List<CouponVO> getUserCoupon(String id) {
+		return mapper.getUserCoupon(id);
 	}
 	
 	

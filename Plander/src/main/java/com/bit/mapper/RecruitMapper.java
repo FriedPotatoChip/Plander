@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.bit.domain.ApplyVO;
-import com.bit.domain.BoardVO;
 import com.bit.domain.CommentsVO;
+import com.bit.domain.CouponVO;
 import com.bit.domain.RecruitVO;
 import com.bit.utils.PagingVO;
 
@@ -79,4 +79,9 @@ public interface RecruitMapper {
 	// 검색 게시물수 조회
 	public int getSearchTotal(Map<String, Object> map);
 	
+	// 쿠폰 인서트
+	public boolean insertCoupon(String id);
+	
+	// 모집마감 후 onOff update
+	public boolean updateOnOff(int rc_idx);
 }

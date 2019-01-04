@@ -5,6 +5,16 @@
 	<select id="getPriceList" resultType="com.bit.domain.PriceVO">
 		SELECT * FROM PRICE ORDER BY SCT_IDX, TIME_IDX		
 	</select>
+	
+	<!-- 보유 쿠폰 출력 -->
+	<select id="getUserCoupon" resultType="com.bit.domain.CouponVO" parameterType="String"> 
+		<![CDATA[
+			SELECT C.*, CB_NAME, CB_DISCOUNT, CB_DISTYPE 
+				FROM COUPON C, COUPON_TABLE CB 
+				WHERE C.CB_IDX = CB.CB_IDX AND ID = #{id} AND CP_QUANTITY != 0 AND SYSDATE <= CP_ENDDATE
+		]]>
+	</select>
+	
 </mapper>
 
 
