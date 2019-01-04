@@ -12,18 +12,18 @@ import com.bit.domain.RecruitVO;
 import com.bit.domain.UsersVO;
 
 public interface MyService {
+
 	// 내정보
 	public UsersVO user(UsersVO vo);
 
 	// 내정보수정
 	public int userUpdate(UsersVO vo);
 
+	// 프로필 사진 업데이트
+	public boolean updateProfileImg(UsersVO vo);
+
 	// 모집글 작성
 	public boolean insertRecruit(RecruitVO vo);
-
-	// 내가 쓴 모집글
-//	public List<RecruitVO> my_recruit(UsersVO vo);
-	public List<RecruitVO> my_recruit(Map<String, Object> map);
 
 	// 내가 쓴 모집글 상세 조회
 	public RecruitVO getOne(int rc_idx);
@@ -34,52 +34,65 @@ public interface MyService {
 	// 내가 쓴 모집글 삭제
 	public boolean deleteRec(int rc_idx);
 
-	// 내 모집글에 달린 댓글
-	public List<CommentsVO> my_recruit_comment(UsersVO vo);
+	// 자유게시판 상세보기
+	public BoardVO getBoardOne(int b_idx);
 
-	// 모집글 댓글 등록
-	public boolean insertComm(CommentsVO vo);
+	// 예약좌석삭제
+	public int delSeat(int bk_idx);
 
-	// 내 모집글의 신청자 목록 조회
-	public List<ApplyVO> getApplyList(UsersVO vo);
+	// 예약사물함삭제
+	public int delCabinet(int ckb_idx);
 
-	// 내 좌석 예약내역
-	public List<BookingVO> my_seat(UsersVO vo);
-
-	// 내 사물함 예약내역
-	public List<BookingCbVO> my_cabinet(UsersVO vo);
-
-	// 전체 모집글 갯수 조회
-	public int getTotal(UsersVO vo);
+//	여기서부터는 페이징 처리 관련 ---------------------------
 
 	// 전체 좌석 예약 갯수 조회
 	public int getTotalSeat(UsersVO vo);
 
+	// 내 좌석 예약내역
+	public List<BookingVO> my_seat(Map map);
+
 	// 전체 사물함 예약 갯수 조회
 	public int getTotalCabinet(UsersVO vo);
 
-	// 자유게시판에 올린 글목록
-	/* public List<BoardVO> board(UsersVO vo); */
-	public List<BoardVO> board(Map<String, Object> map);
+	// 내 사물함 예약내역
+	public List<BookingCbVO> my_cabinet(Map map);
 
-	// 자유게시판에 달린 댓글목록
-	/* public List<CommentsVO> board_comment(UsersVO vo); */
-	public List<CommentsVO> board_comment(Map<String, Object> map);
+	// 전체 모집글 갯수 조회
+	public int getTotal(UsersVO vo);
+
+	// 내가 쓴 모집글
+	public List<RecruitVO> my_recruit(Map map);
+
+	// 내 모집글의 신청자 목록 갯수
+	public int getTotalApply(UsersVO vo);
+
+	// 내 모집글의 신청자 목록 조회
+	public List<ApplyVO> getApplyList(Map map);
+
+	// 내 모집글에 달린 댓글 갯수
+	public int getTotalComment(UsersVO vo);
+
+	// 내 모집글에 달린 댓글
+	public List<CommentsVO> my_recruit_comment(Map map);
 
 	// 자유게시판에 올린 글목록 갯수
 	public int board_cnt(UsersVO vo);
 
+	// 자유게시판에 올린 글목록
+	public List<BoardVO> board(Map map);
+
 	// 자유게시판에 달린 댓글목록 갯수
 	public int board_comment_cnt(UsersVO vo);
 
-	// 자유게시판 상세보기
-	public BoardVO getBoardOne(int b_idx);
-	
-	// 프로필 사진 업데이트
-	public boolean updateProfileImg(UsersVO vo);
-	// 예약좌석삭제
-	public int delSeat(int bk_idx);
-	
-	// 예약사물함삭제
-	public int delCabinet(int ckb_idx);
+	// 자유게시판에 달린 댓글목록
+	public List<CommentsVO> board_comment(Map map);
+
+//	여기서부터는 로그인 헤더 관련 ---------------------------
+
+	// 내 좌석 예약내역
+	public List<BookingVO> my_seat_header(UsersVO vo);
+
+	// 내 사물함 예약내역
+	public List<BookingCbVO> my_cabinet_header(UsersVO vo);
+
 }

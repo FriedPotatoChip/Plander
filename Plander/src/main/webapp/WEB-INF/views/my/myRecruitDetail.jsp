@@ -5,7 +5,7 @@
 <jsp:include page="/commons/head.jsp"></jsp:include>
 </head>
 <body>
-	${rc_board }
+	${vo }
 	<button type="button" class="btn btn-outline-success nav_btn"
 		onclick="history.back(-1);">뒤로가기</button>
 </body>

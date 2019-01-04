@@ -49,7 +49,7 @@ public class PagingVO {
 	
 */	
 	
-	private int nowPage;
+	private int nowPage = 1;
 	private int cntPerPage;
 	private int total;
 	private int cntPage;
@@ -118,13 +118,14 @@ public class PagingVO {
 		
 		boolean chkSP = true;
 		boolean chkEP = true;
-		int endP = (int)Math.ceil((double)nowPage / 3) * getCntPage();
-		this.startPage = endP - 3 + 1;
+		int endP = (int)Math.ceil((double)nowPage / (double)this.cntPage) * getCntPage();
+		this.startPage = endP - this.cntPage + 1;
+		cntPerPage = 3;
 		
-		this.end = nowPage * 5;
-		this.start = end - 5 + 1;
+		this.end = nowPage * cntPerPage;
+		this.start = end - cntPerPage + 1;
 		
-		this.lastPage = (int) Math.ceil((double)total / 5);
+		this.lastPage = (int) Math.ceil((double)total / (double)cntPerPage);
 		
 		if (endP > lastPage) {
 			endP = lastPage;
@@ -139,6 +140,7 @@ public class PagingVO {
 		setChkStartPage(chkSP);
 		setChkEndPage(chkEP);
 	}
+	
 	
 	
 }

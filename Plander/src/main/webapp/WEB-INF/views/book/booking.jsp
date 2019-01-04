@@ -26,6 +26,20 @@
 	$(function() {
 		$(document.getElementsByName('cabinet')).attr('disabled', true);
 		
+		var room = document.getElementsByName('roomnum');
+		//개인석 클릭시 
+		$(room[0]).click(function(){
+			$('#oneday').removeAttr("disabled");
+			$('#2weeks').removeAttr("disabled");
+			$('#1month').removeAttr("disabled");
+		});
+		//랩실 클릭시
+		$(room[1]).click(function(){
+			$('#oneday').attr('disabled', true);
+			$('#2weeks').attr('disabled', true);
+			$('#1month').attr('disabled', true);
+		});
+		
 		//정기권 1일권 체크
 		$('#oneday').click(function() {
 			var startTime = $(document.getElementsByName('start_time')).val();
@@ -67,6 +81,7 @@
 				
 				console.log('1일 뒤 날짜 확인 : ' + getTimeStamp());
 				$("input[name='end_time']").prop('value', getTimeStamp());
+				$(document.getElementsByName('cabinet')[1]).prop("checked", true);
 				$(document.getElementsByName('cabinet')).attr('disabled', true);
 			}
 		});
@@ -157,19 +172,21 @@
 		
 				console.log('30일 뒤 날짜 확인 : ' + getTimeStamp());
 				$("input[name='end_time']").prop('value', getTimeStamp());
-				$(document.getElementsByName('cabinet')[0]).checked;
+				$(document.getElementsByName('cabinet')).removeAttr("disabled");
 			}
 		});
 		
 		//야간권 클릭시 
 		$('#night').click(function() {
 			$("input[name='end_time']").prop('value', '');
+			$(document.getElementsByName('cabinet')[1]).prop("checked", true);
 			$(document.getElementsByName('cabinet')).attr('disabled', true);
 		});
 		
 		//정기권 사용 안함 클릭 시 
 		$('#nope').click(function() {
 			$("input[name='end_time']").prop('value', '');
+			$(document.getElementsByName('cabinet')[1]).prop("checked", true);
 			$(document.getElementsByName('cabinet')).attr('disabled', true);
 		});
 		
@@ -223,11 +240,8 @@
 		if (chk==null) {
 			alert("좌석 종류(개인실/랩실) 선택은 필수입니다.");
 			return false;
-		} else if (chk==1) {
-			frm.action = "/TMS/book/oneseat";
-			frm.submit();
 		} else {
-			frm.action = "/TMS/book/roomseat";
+			frm.action = "/TMS/book/selectSeat";
 			frm.submit();
 		}
 	}
@@ -399,8 +413,8 @@
 							</td>
 							<td>
 								<div>
-									<label><input type="radio" name="cabinet" value="y">사용</label><br>
-									<label><input type="radio" name="cabinet" value="n" checked="checked">사용안함</label>
+									<label><input type="radio" name="cabinet" value="1">사용</label><br>
+									<label><input type="radio" name="cabinet" value="0" checked="checked">사용안함</label>
 								</div>
 							</td>
 						</tr>

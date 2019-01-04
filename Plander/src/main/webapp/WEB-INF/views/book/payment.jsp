@@ -90,17 +90,17 @@
 		$("input[name='booknum']").attr('value', bookval);
 		
 		//사물함 사용여부
-		
 		var bookCab = '${cb.cb_idx }';
 		console.log("cb_idx 확인 : " + bookCab);
 		
-		if (bookCab = '0') {
-			$('#cb_idx').html('<span>사용안함</span>');
-		} else {
-			$('#cb_idx').html('<span>'+ bookCab + '번</span>');
+
+		if (bookCab != "") {
+			$('#cb_idx').html('<span>' + bookCab + '번</span>');
 			$("input[name='cb_idx']").attr('value', bookCab);
+		} else {
+			$('#cb_idx').html('<span>사용안함</span>');
+			$("input[name='cb_idx']").attr('value', 0);
 		}
-		
 		
 		//시간에 따른 가격계산
 		var startdate = new Date('${bvo.start_time }');
@@ -480,6 +480,7 @@
 				<input type="hidden" name="s_col" value="${bvo.s_col }">
 				<input type="hidden" name="sct_name" value="${bvo.sct_name }">
 				<input type="hidden" name="cb_idx" value="">
+				<input type="hidden" name="chkLen" value="">
 			</div> <!-- 결제방식 선택 끝  -->
 		</form>
 		

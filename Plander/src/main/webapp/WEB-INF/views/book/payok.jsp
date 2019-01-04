@@ -72,18 +72,20 @@
 	}
 	/* 버튼 끝 */
 </style>
-
 <script>
 	$(function() {
-		var cb_idx = '${cb.cb_idx }';
-		if (cb_idx = '0') {
-			$('#cb_idx').html('<span>사용안함</span>');
+		//사물함 사용여부
+		var bookCab = '${cb.cb_idx }';
+		console.log("cb_idx 확인 : " + bookCab);
+		
+		if (bookCab != "") {
+			$('#cb_idx').html('<span>'+ bookCab + '번</span>');
 		} else {
-			$('#cb_idx').html('<span>' + cb_idx + '</span>')
+			$('#cb_idx').html('<span>사용안함</span>');
 		}
 	});
-</script>
 
+</script>
 <script>
 	function main() {
 		window.opener.top.location.href="/TMS/book";
@@ -166,6 +168,7 @@
 	</div>
 	
 </div> <!-- 바디 콘테이너 끝 -->
+<!--  -->지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb }
 
 </body>
 </html>
