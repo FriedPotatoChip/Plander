@@ -3,17 +3,32 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
-
-
-<!-- Jcrop(사진 크롭) -->
-<script
-	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
 <link rel="stylesheet"
 	href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css"
 	type="text/css" />
-<!-- Jcrop 끝 -->
 
+<!-- Jcrop(사진 크롭) -->
+<script
+	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
+	
+<script>
+//비밀번호 확인
+function pwchk() {
+	var pw = $('#password').val();
+	var pwchk = ${user.password};
 
+	if (pw != pwchk || pwchk == "") {
+		//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
+		$('#pwchkMsg').html(
+				"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+		$('#update').prop("disabled", true);
+	} else {
+		$('#pwchkMsg').html(
+				"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+		$('#update').prop("disabled", false);
+	}
+}
+</script>
 <style>
 body {
 	width: 80%;
@@ -406,11 +421,7 @@ h3 {
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
-			var pwchk = $
-			{
-				user.password
-			}
-			;
+			var pwchk = ${user.password};
 
 			if (pw != pwchk || pwchk == "") {
 				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
