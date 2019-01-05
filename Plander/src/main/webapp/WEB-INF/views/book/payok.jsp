@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -72,20 +73,7 @@
 	}
 	/* 버튼 끝 */
 </style>
-<script>
-	$(function() {
-		//사물함 사용여부
-		var bookCab = '${cb.cb_idx }';
-		console.log("cb_idx 확인 : " + bookCab);
-		
-		if (bookCab != "") {
-			$('#cb_idx').html('<span>'+ bookCab + '번</span>');
-		} else {
-			$('#cb_idx').html('<span>사용안함</span>');
-		}
-	});
 
-</script>
 <script>
 	function main() {
 		window.opener.top.location.href="/TMS/book";
@@ -152,8 +140,24 @@
 						<td>${uservo.name }</td>
 						<td>${uservo.phone }</td>
 						<td>${bvo.start_time } ~ ${bvo.end_time }</td>
-						<td>${bvo.sct_name } - ${bvo.s_col }</td>
-						<td id="cb_idx"></td>
+						<!-- 좌석 -->
+						<c:choose>
+							<c:when test="${bvo.sct_idx == 1 }">
+								<td>${bvo.sct_name }- ${test }</td>
+							</c:when>
+							<c:otherwise>
+								<td>${bvo.sct_name }- ${bvo.s_col }</td>
+							</c:otherwise>
+						</c:choose>
+						<!-- 사물함 -->
+						<c:choose>
+							<c:when test="${cab == '0' }">
+								<td id="cb_idx">사용안함</td>
+							</c:when>
+							<c:otherwise>
+								<td id="cb_idx">${cab }번</td>
+							</c:otherwise>
+						</c:choose>
 						<td id="bookprice">${bvo.price }</td>
 					</tr>
 				</tbody>

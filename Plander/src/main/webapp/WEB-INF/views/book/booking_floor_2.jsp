@@ -47,12 +47,14 @@
 				
 				document.form1.test.value = $(":checkbox:checked").val();
 				document.form1.chkLen.value = cnt;
+				document.form1.s_col_2.value = 0; //두번째 값
+				
 			} else {
 				if (chkLen == 2) {
 					var test = "";
 					for (var i = 0; i < 2; i ++) {
 						if (i == 0) {
-							test += chkVal[i].value + ", ";
+							test += chkVal[i].value + ",";
 						} else {
 							test += chkVal[i].value + "";
 						}
@@ -63,9 +65,14 @@
 					document.form1.test.value = test;
 					document.form1.chkLen.value = chkLen;
 					
-// 					var arr = new Array();
-// 					arr += test;
-// 					console.log("arr : " + arr);
+					var arr = new Array;
+					arr = test.split(',');
+					console.log("arr : " + arr);
+					var fv = arr[0];
+					var sv = arr[1];
+					console.log("fv : " + fv + ", sv : " + sv);
+					
+					document.form1.s_col_2.value = sv; //두번째 값
 					
 				}
 				
@@ -126,7 +133,6 @@
 
 <script>
 	function next(frm) {
-		
 		frm.action="/TMS/book/pay"
 		frm.submit();
 	}
@@ -233,7 +239,7 @@
 			<li>&gt;</li>
 			<li>
 				<a class="menu">
-					<b> <span id="num" class="back">STEP3</span>
+					<b><span id="num" class="back">STEP3</span>
 					<span id="select" class="select">결제하기</span></b>
 				</a>
 			</li>
@@ -421,6 +427,7 @@
 			<input type="hidden" name="s_idx" value="${bvo.s_idx }">
 			<input type="hidden" name="test" value="">
 			<input type="hidden" name="chkLen" value="">
+			<input type="hidden" name="s_col_2" value="">
 				
 		</form>
 		</div> <!-- 박스 아웃사이드 끝 -->
