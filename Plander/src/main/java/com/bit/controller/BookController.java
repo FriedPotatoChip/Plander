@@ -142,24 +142,23 @@ public class BookController {
 		int[] idx = idx(svo);
 		System.out.println("idx.length 길이 : " + idx.length);
 		
-		if (idx.length==1) {
-			//1명예약
-			int chk = idx[0];
-			System.out.println("chk : " + chk );
-			bvo.setS_idx(chk);
-			svo.setS_idx(chk);
-		} else {
-			//2명예약
-			int chk = idx[0]; //s_idx
-			int chk1 = idx[1];
-			System.out.println("chk : " + chk + ", chk1 : " + chk1);
-			
-			bvo.setS_idx(chk);
-			bvo.setS_idx_2(chk1);
-			svo.setS_idx(chk);
-			svo.setS_idx_2(chk1);
-			
-		}
+//		if (idx.length==1) {
+//			//1명예약
+//			int chk = idx[0];
+//			System.out.println("chk : " + chk );
+//			bvo.setS_idx(chk);
+//			svo.setS_idx(chk);
+//		} else {
+//			//2명예약
+//			int chk = idx[0]; //s_idx
+//			int chk1 = idx[1];
+//			System.out.println("chk : " + chk + ", chk1 : " + chk1);
+//			
+//			bvo.setS_idx(chk);
+//			bvo.setS_idx_2(chk1);
+//			svo.setS_idx(chk);
+//			svo.setS_idx_2(chk1);
+//		}
 		
 		String test = request.getParameter("test");
 		System.out.println("test: " + test);
@@ -172,17 +171,32 @@ public class BookController {
 		if (cab == true) {
 			// 사물함 사용하면
 			// 예약안된 사물함 리스트를 뽑아서 차례대로 cb_idx에 값 넣기
-			
 			List<CabinetVO> notbookCb = bookService.not_bookCb(cvo);
 			System.out.println("예약안된사물함 확인 : " + notbookCb);
 			
 			if (idx.length==1) {
+				//1명예약
+				int chk = idx[0];
+				System.out.println("chk : " + chk );
+				bvo.setS_idx(chk);
+				svo.setS_idx(chk);
+				
 				cb_bvo.setCb_idx(notbookCb.get(0).getCb_idx());
 			} else {
+				//2명예약
+				int chk = idx[0]; //s_idx
+				int chk1 = idx[1];
+				System.out.println("chk : " + chk + ", chk1 : " + chk1);
+				
+				bvo.setS_idx(chk);
+				bvo.setS_idx_2(chk1);
+				svo.setS_idx(chk);
+				svo.setS_idx_2(chk1);
 				
 				cb_bvo.setCb_idx(notbookCb.get(0).getCb_idx());
 				cb_bvo.setCb_idx_2(notbookCb.get(1).getCb_idx());
 			}
+			
 			cb_bvo.setBr_idx(bvo.getBr_idx());
 			System.out.println("cb_idx 확인 : " + cb_bvo.getCb_idx() + ", cb_idx_2 : " + cb_bvo.getCb_idx_2());
 			model.addAttribute("cb", cb_bvo);

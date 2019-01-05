@@ -423,6 +423,7 @@
 			} else {
 				$('#cb_idx').html('<span>' + bookCab1 + '번</span>');
 				$("input[name='cb_idx']").attr('value', bookCab1);
+				$("input[name='cb_idx_2']").attr('value', 0);
 				$("input[name='cab']").attr('value', bookCab1);
 			}
 			
