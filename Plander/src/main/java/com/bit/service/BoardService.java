@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.bit.domain.ApplyVO;
 import com.bit.domain.BoardVO;
+import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
 import com.bit.utils.PagingVO;
@@ -66,4 +67,10 @@ public interface BoardService {
 	
 	// 댓글 수정
 	public boolean updateComm(CommentsVO vo);
+	
+	// 후기 남길 수 있는 예약 조회
+	public List<BookingVO> searchBooking(String id);
+	
+	// 리뷰 -1
+	public boolean minusReview(int bk_idx);
 }

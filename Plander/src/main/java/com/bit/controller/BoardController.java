@@ -5,17 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bit.domain.BoardVO;
+import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
+import com.bit.domain.UsersVO;
 import com.bit.service.BoardService;
 import com.bit.utils.PagingVO;
 
@@ -35,20 +41,28 @@ public class BoardController {
 		Map<String, Integer> map = new HashMap<>();
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal(ct_idx));
 		page.CalcPage(page.getNowPage(), page.getCntPerPage());
-		
 		model.addAttribute("page", page);
 		map.put("start", page.getStart());
 		map.put("end", page.getEnd());
 		map.put("ct_idx", ct_idx);
 		model.addAttribute("boardList", service.getListPage(map));
 		model.addAttribute("ct_idx", ct_idx);
+		
 		return "board/boardList";
 	}
 	
 	@GetMapping("/TMS/boardWrite")
-	public String recruitWrite(Model model, @RequestParam("ct_idx")int ct_idx) {
+	public String recruitWrite(Model model, @RequestParam("ct_idx")int ct_idx, HttpSession session) {
 		model.addAttribute("ct_idx", ct_idx);
-		return "board/boardWrite";
+		
+		if (ct_idx == 3) {
+			UsersVO user = (UsersVO) session.getAttribute("usersVO");
+			List<BookingVO> bookList = service.searchBooking(user.getId());
+			model.addAttribute("bookList", bookList);
+			return "board/boardWrite";
+		}else {
+			return "board/boardWrite";
+		}
 	}
 	
 	@PostMapping("/TMS/boardWrite")

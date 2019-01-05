@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,7 @@
 
 <style>
 	.zeroPad { padding: 0px; }
+	.smallDate { color: gray; font-size: 0.7em;}
 </style>
 </head>
 <body> 
@@ -32,10 +34,32 @@
 </c:if>
 <!-- 헤더 끝 -->
 	<h3>게시판 글 작성 페이지</h3>
-	
 <form id="articleForm" role="form" action="/TMS/boardWrite" method="post"><!--  -->
  <br style="clear: both">
  <input type="hidden" name="ct_idx" value="${ct_idx }">
+	<!-- 후기 내역 시작 -->
+	<c:if test="${ct_idx == 3 }">
+		<select id="bk_idx">
+		<c:forEach var='list' items='${bookList }'>
+			<option value="${list.bk_idx }">
+			<c:if test="${list.sct_idx == 1 }"> 
+				개인실 (${list.s_col } 번)		
+			</c:if>
+			<c:if test="${list.sct_idx == 2 }">
+				4인실				
+			</c:if>
+			<c:if test="${list.sct_idx == 3 }">
+				8인실				
+			</c:if>
+			<c:if test="${list.sct_idx == 4 }">
+				12인실				
+			</c:if>
+			(${list.start_time.substring(0,16) } ~ ${list.end_time.substring(0,16) })
+			</option>
+		</c:forEach>
+		</select>
+	</c:if>
+	<!-- 후기 내역 끝 -->
 	<table>
 		<tr>
 			<td>
@@ -52,16 +76,38 @@
 		</tr>
 		<tr>
 			<td>
-				<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">글 작성</button>
+				<input type="button" class="btn btn-primary pull-right" onclick="submitBtn(this.form)" value='글 작성'>
 			</td>
 		</tr>
 	</table>
 	<input type="hidden" name="id" value="${usersVO.id }">
-		
 </form>
 
 
 <script type="text/javascript">
+	function submitBtn(frm){
+		var bk_idx = $("#bk_idx").val();
+		$.ajax({
+			url: '/minusReview',
+			type: 'get',
+			data: {'bk_idx':bk_idx, 'id':'${usersVO.id}'},
+			dataType: 'text', 
+			success: function(result) {
+				if (result == 'success'){
+					document.getElementById("articleForm").submit();
+				} else if (result == 'fail'){
+					alert("리뷰 작성 실패. 관리자에게 문의해주세요.");
+					return false;
+				}
+			}, error: function(error){
+					alert("리뷰 작성 실패. 관리자에게 문의해주세요.");
+					return false;
+			}
+		})
+	}
+	
+	
+	
     $(document).ready(function() {
       $('#summernote').summernote({
     	placeholder: 'content',

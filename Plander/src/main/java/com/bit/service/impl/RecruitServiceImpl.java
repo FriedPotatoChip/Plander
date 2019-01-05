@@ -136,8 +136,8 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 
 	@Override
-	public boolean insertCoupon(String id) {
-		return mapper.insertCoupon(id);
+	public boolean insertCoupon(Map<String, Object> map) {
+		return mapper.insertCoupon(map);
 	}
 
 	@Override

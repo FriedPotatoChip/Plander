@@ -503,11 +503,11 @@ $(document).ready(function(){
 				html += "<option value='0' type='0' price='0'>없음</option>";
 			}else {
 				$.each(result, function(index, value){
-					if ((value.cb_roomtype == 'LAB' && sct_idx != 1) || (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)){
+					if ((value.cb_roomtype == 'LAB' && sct_idx != 1) || (value.cb_roomtype == 'PRIVATE' && sct_idx == 1) || (value.cb_roomtype == 'ALL')){
 						html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
 						if (value.cb_distype == 'PERCENT'){
 							html += "%";
-						}else if (value.cb_idstype == 'PRICE'){
+						}else if (value.cb_distype == 'PRICE'){
 							html += "원";
 						}
 						html += "("+value.cp_quantity+" 개)";
@@ -524,7 +524,7 @@ $(document).ready(function(){
 });
 
 $("#coupon").on("change", function(){
-	fianlPrice = sum;
+	finalPrice = sum;
 	var option = $('option:selected', this);
 	window.cp_idx = option.attr("value");
 	var type = option.attr("type");

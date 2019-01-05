@@ -41,8 +41,8 @@
 
 
 $(document).ready(function(){
-	
-		<!-- 신청 버튼 시작 -->
+
+	<!-- 신청 버튼 시작 -->
 	<c:if test="${usersVO.id != rc_board.id && chkId }">
 		<c:if test="${rc_board.cur_mem < rc_board.max_mem }">
 			$("#hideApply").css("display", "block");
@@ -150,7 +150,8 @@ function boardList(nowPage){
 			</c:if>
 			<span>${rc_board.id }</span> 
 		</div>
-		<p><fmt:formatDate value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm"/></p>
+		<%-- <p><fmt:formatDate value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm"/></p> --%>
+		<p onload="changeDate(${rc_board.rc_regdate})">${rc_board.rc_regdate }</p>
 		<hr>
 		<div id="content">${rc_board.rc_content }</div>
 		<br><br><br>
@@ -559,6 +560,8 @@ function boardList(nowPage){
 			}
 		})
 	}
+	
+
 </script>
 </body>
 </html>

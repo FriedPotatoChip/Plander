@@ -80,7 +80,7 @@ public interface RecruitMapper {
 	public int getSearchTotal(Map<String, Object> map);
 	
 	// 쿠폰 인서트
-	public boolean insertCoupon(String id);
+	public boolean insertCoupon(Map<String, Object> map);
 	
 	// 모집마감 후 onOff update
 	public boolean updateOnOff(int rc_idx);

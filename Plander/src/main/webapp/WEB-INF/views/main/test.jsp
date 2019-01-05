@@ -3,55 +3,86 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script language="javascript">
-// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
-//document.domain = "abc.go.kr";
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+.imgSelect {
+	cursor: pointer;
+}
 
-function goPopup(){
-	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-    var pop = window.open("/juso","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-    
-	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 160px;
+	padding: 10px; 
 }
-/** API 서비스 제공항목 확대 (2017.02) **/
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
-						, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
-	// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-	document.form.roadAddrPart1.value = roadAddrPart1;
-	document.form.addrDetail.value = addrDetail;
-	document.form.zipNo.value = zipNo;
+.popupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px
 }
+</style>
+<script language="javascript">
+function closeLayer( obj ) {
+	$(obj).parent().parent().hide();
+}
+
+$(function(){
+	/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+	$('.imgSelect').click(function(e)
+	{
+		var sWidth = window.innerWidth;
+		var sHeight = window.innerHeight;
+
+		var oWidth = $('.popupLayer').width();
+		var oHeight = $('.popupLayer').height();
+
+		// 레이어가 나타날 위치를 셋팅한다.
+		var divLeft = e.clientX + 10;
+		var divTop = e.clientY + 5;
+
+		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+		if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+		if( divLeft < 0 ) divLeft = 0;
+		if( divTop < 0 ) divTop = 0;
+
+		$('.popupLayer').css({
+			"top": divTop,
+			"left": divLeft,
+			"position": "absolute"
+		}).show();
+	});
+});
 </script>
 <title>주소 입력 샘플</title>
 </head>
 <body>
-<form name="form" id="form" method="post">
-	<table >
-			<colgroup>
-				<col style="width:20%"><col>
-			</colgroup>
-			<tbody>
-				<tr>
-					<th>우편번호</th>
-					<td>
-					    <input type="hidden" id="confmKey" name="confmKey" value=""  >
-						<input type="text" id="zipNo" name="zipNo" readonly style="width:100px"><!-- 우편번호 -->
-						<input type="button"  value="주소검색" onclick="goPopup();">
-					</td>
-				</tr>
-				<tr>
-					<th>도로명주소</th>
-					<td><input type="text" id="roadAddrPart1" style="width:85%"></td>	<!-- 도로명 주소 -->
-				</tr>
-				<tr>
-					<th>상세주소</th>
-					<td> 
-						<input type="text" id="addrDetail" style="width:85%" value="">	<!-- 상세주소 -->
-					</td>
-				</tr>
-			</tbody>
-		</table>
-</form>
+	<!-- 클릭 이미지 -->
+	<p>
+		<a class="imgSelect">클릭1</a>
+		<a class="imgSelect">클릭2</a>
+		<a class="imgSelect">클릭3</a>
+		<a class="imgSelect">클릭4</a>
+		<a class="imgSelect">클릭5</a>
+		<a class="imgSelect">클릭6</a>
+		<a class="imgSelect">클릭7</a>
+		<a class="imgSelect">클릭8</a>
+		<a class="imgSelect">클릭9</a>
+		<a class="imgSelect">클릭10</a>
+	</p>
+	
+	<div class="popupLayer">
+		<div>
+			<span onClick="closeLayer(this)" style="cursor:pointer;" title="닫기">X</span>
+		</div>
+		<a href="#">쪽지 보내기</a><br>
+		<a href="#">회원 정보 보기</a><br>
+		<a href="#">작성글 보기</a><br>
+	</div>
 </body>
 </html>

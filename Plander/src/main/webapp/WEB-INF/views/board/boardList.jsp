@@ -26,13 +26,13 @@
 		location.href="/TMS/boardDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
 	}
 	$(document).ready(function(){
-		if ('${boardList[0].ct_idx}' == 1){
+		if ('${ct_idx}' == 1){
 			$("#boardType").html("공지사항");
-		}else if ('${boardList[0].ct_idx}' == 2){
+		}else if ('${ct_idx}' == 2){
 			$("#boardType").html("자유게시판");	
-		}else if ('${boardList[0].ct_idx}' == 3){
+		}else if ('${ct_idx}' == 3){
 			$("#boardType").html("후기게시판");	
-		}else if ('${boardList[0].ct_idx}' == 4){
+		}else if ('${ct_idx}' == 4){
 			$("#boardType").html("QNA");
 		}
 	});
@@ -156,8 +156,31 @@
 	
 <script>
 	function write_go(){
-		location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
+		if (${ct_idx == 3}){
+			console.log("여 왔네");
+			$.ajax({
+				url: '/chkBooking',
+				type: 'get',
+				data: {id:'${usersVO.id}'},
+				dataType: 'text',
+				success: function(result){
+					if (result == 'success'){
+						location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
+					} else if (result == 'fail'){
+						alert("TMS 서비스를 이용한 후에 후기를 작설할 수 있습니다.");
+						return false;
+					}
+				}, error: function(error){
+					
+				}
+			})
+		} else {
+			location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
+		}
 	}
+	<c:if test="${not empty chkBooking}">
+		alert("거기스 서비스 이용 후에 후기를 작성할 수 있습니다.");
+	</c:if>
 </script>	
 	
 </body>

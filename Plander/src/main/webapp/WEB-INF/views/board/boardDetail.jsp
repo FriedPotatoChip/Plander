@@ -21,6 +21,21 @@
 	#board, #comments { border: 1px solid black; }
 	.comm { border: 1px solid blue; }
 	.user { width: 30px; height: 30px; border-radius: 50%; }
+.idDiv { cursor: pointer; }
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 160px;
+	padding: 10px; 
+}
+.popupLayer div {
+	position: absolute;
+	top: 5px;
+	right: 5px
+}
 </style>
 <script>
 
@@ -124,12 +139,12 @@ $(document).ready(function(){
 	</c:if>
 </c:if>
 <!-- 헤더 끝 -->
- 	<h3>모집글 상세조회 페이지</h3>
+ 	<h3>게시판 상세조회 페이지</h3>
 	
 	<div id="board">
 		<a href="/TMS/board?ct_idx=${board.ct_idx }&nowPage=${nowPage }&cntPerPage=${cntPerPage}" style="font-size: 0.8em;"><strong id="boardType"></strong></a>
 		<h3>${board.b_title }</h3>
-		<div>
+		<div class="idDiv">
 			<c:if test='${empty board.user_profileImagePath }'>
 				<img class="user" src="/resources/images/users.png" alt="user"/>
 			</c:if>
@@ -454,6 +469,10 @@ $(document).ready(function(){
 			}
 		});
 	}
+	
+	
+
 </script>
+
 </body>
 </html>
