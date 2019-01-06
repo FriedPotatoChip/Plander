@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp"></jsp:include>
 
 <style>
@@ -45,16 +44,14 @@ a {
 /* 페이징 끝 */
 </style>
 </head>
-
-
 <body>
+
 	<thead>
 		<tr>
-			<th>예약번호</th>
-			<th>지점</th>
-			<th>사물함번호</th>
+			<th>쿠폰명</th>
+			<th>할인금액</th>
 			<th>사용기한</th>
-			<th>등록일</th>
+			<th>매수</th>
 		</tr>
 	</thead>
 
@@ -62,29 +59,28 @@ a {
 		<c:choose>
 			<c:when test="${empty list}">
 				<tr>
-					<td colspan="5">
-						<h2>현재 예약된 사물함이 없습니다.</h2>
+					<td colspan="4">
+						<h2>현재 보유하고 계신 쿠폰이 없습니다.</h2>
 					</td>
 				</tr>
 			</c:when>
 
 			<c:otherwise>
-				<c:forEach var="cabinet" items="${list}">
+				<c:forEach var="coupon" items="${list }">
 					<tr>
-						<td>${cabinet.ckb_idx }</td>
-						<td>${cabinet.br_name }</td>
-						<td>${cabinet.cb_number }</td>
-						<td>
-<%-- 						<fmt:parseDate value='${cabinet.start_date}' --%>
-<%-- 								pattern='yyyy-MM-dd' /> --%>
-<%-- 							<fmt:formatDate pattern="yyyy-MM-dd"
-								value="${cabinet.start_date }" /> --%> <br> - <fmt:parseDate
-								value='${cabinet.end_date}' pattern='yyyy-MM-dd' />
-<%-- 							<fmt:formatDate pattern="yyyy-MM-dd" value="${cabinet.end_date }" /> --%>
+						<td>${coupon.cb_name }</td>
+						<td>${coupon.cb_discount }<c:choose>
+								<c:when
+									test="${coupon.cb_distype == percent || coupon.cb_distype == PERCENT }">
+								&nbsp;%
+							</c:when>
+								<c:otherwise>
+							&nbsp;원
+							</c:otherwise>
+							</c:choose>
 						</td>
-						<td><button type="button"
-								class="btn btn-outline-danger btn-sm"
-								onclick="location.href='/TMS/my/delCabinet?ckb_idx=${cabinet.ckb_idx }'">예약취소</button></td>
+						<td>${coupon.cp_enddate }</td>
+						<td>${coupon.cp_quantity }</td>
 					</tr>
 				</c:forEach>
 
@@ -93,28 +89,28 @@ a {
 					<ul id="pagingList">
 						<c:if test="${page.chkStartPage }">
 							<li><a href="#"
-								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')"><button>&lt;&lt;</button></a></li>
+								onclick="fetch_book('/TMS/my/coupon?nowPage=1')"><button>&lt;&lt;</button></a></li>
 							<li><a href="#"
-								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
 								<li><a class="now marginLi" href="#"
-									onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/TMS/my/coupon?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li><a class="marginLi" href="#"
-									onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/TMS/my/coupon?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
 							<li><a href="#"
-								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
+								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
 							<li><a href="#"
-								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -122,6 +118,6 @@ a {
 
 		</c:choose>
 	</tbody>
-
+	
 </body>
 </html>

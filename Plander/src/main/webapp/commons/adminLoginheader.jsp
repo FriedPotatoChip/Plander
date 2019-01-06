@@ -1,25 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!-- <div id="header" class="row">
-	<div class="col-xs-12 col-sm-6 col-md-8">
-		<a href="/Plander" id="home">플랜더</a>&nbsp;&nbsp;
-		<a href="">전체 플래너</a>&nbsp;
-		<a href="">플래너 작성</a>&nbsp;
-		<a href="">이용방법</a>&nbsp;
-	</div>
-	<div class="col-xs-6 col-md-4" style="text-align: right; padding-top: 0.8%;">
-		<a href="">☺ ︎관리자</a>
-		<a href="/Plander/logout">로그아웃</a>&nbsp;
-		<select name="language">
-			<option value="ko">한국어</option>
-			<option value="en">영어</option>
-		</select>
-	</div>
-</div> -->
+	pageEncoding="UTF-8"%>
+<style>
+/* .modal-body {
+	max-height: calc(100vh - 210px);
+	overflow-y: auto;
+} */
+.dropbtn {
+	cursor: pointer;
+}
+
+#navbarResponsive ul li {
+	font-weight: 700;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content2 {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	font-weight: 400;
+}
+
+.dropdown-content a:hover {
+	background-color: #ce181e;
+	color: white;
+	font-weight: 400 !important;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+#primaryNav li a h5 {
+	font-weight: 700;
+}
+</style>
+
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+
 	<div class="container-fluid">
 
-		<a class="navbar-brand" href="#"><img
+		<a class="navbar-brand" href="/TMS"><img
 			src="/resources/images/logo.png" width="150px" height="50px"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive">
@@ -28,56 +72,43 @@
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">예약하기</a></li>
-				<!-- 삭제 -->
-				<!-- <li class="nav-item"><a class="nav-link" href="#">모집하기</a></li> -->
-				<!-- 이용안내에 넣기 -->
-				<!-- <li class="nav-item"><a class="nav-link" href="#">세부공간보기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">찾아오시는길</a></li> -->
-				<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
-				<div class="dropdown">
-					<button class="btn btn-light dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">게시판</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="/TMS/board?ct_idx=1">공지사항</a> <a
-							class="dropdown-item" href="/TMS/board?ct_idx=2">자유게시판</a> <a class="dropdown-item"
-							href="#">FAQ</a>
+				<li class="nav-item"><a class="nav-link" href="#"
+					onclick="loginChk()">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="#"
+					onclick="loginChk()">모집게시판</a></li>
+				<li class="nav-item">
+					<div class="dropdown">
+						<a class="nav-link dropbtn" href="#">게시판</a>
+						<div class="dropdown-content">
+							<a href="/TMS/board?ct_idx=1">공지사항</a> <a
+								href="/TMS/board?ct_idx=2">자유게시판</a><a
+								href="/TMS/board?ct_idx=3">후기게시판</a> <a href="/TMS/ask">문의하기</a>
+						</div>
 					</div>
-				</div>
+				</li>
 			</ul>
-		</div>
-		<!-- <a class="navbar-brand" href="/TMS"><img
-		src="/resources/images/turtle.png" width="30" height="30"
-		class="d-inline-block align-top ml-4" alt="거북이">
-		<h1 class="light ml-3" id="title_name">거북이의기적</h1></a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarSupportedContent"
-		aria-controls="navbarSupportedContent" aria-expanded="false"
-		aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button> -->
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-
-			</ul>
-			<ul class="nav justify-content-end" id="primaryNav">
-				<li class="nav-item"><a class="nav-link" href="/TMS/admin"><h5>관리자페이지</h5></a></li>
+			<ul class="navbar-nav ml-auto" id="primaryNav">
+				<li class="nav-item"><a class="nav-link"
+					style="color: #ce181e;" href="/TMS/admin"><h5>관리자페이지</h5></a></li>
 				<li class="nav-item"><a class="nav-link" href="/TMS/logout"><h5>로그아웃</h5></a></li>
-				
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><img src="/resources/images/global.png"></a>
-					<div class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#"><h5>한국어</h5></a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#"><h5>English</h5></a>
-					</div></li>
 			</ul>
+
 		</div>
+	</div>
 </nav>
+
+<script>
+	function loginChk() {
+		console.log("여기 들어옴");
+		if ('${empty usersVO}' == 'true') {
+			alert("로그인 후 이용해주세요");
+			$("#myModal").modal();
+			$("#idInput").focus();
+		} else {
+			location.href = "/TMS/book";
+		}
+	}
+</script>

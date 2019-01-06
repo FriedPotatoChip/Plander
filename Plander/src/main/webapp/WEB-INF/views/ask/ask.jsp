@@ -6,6 +6,7 @@
 body {
 	width: 80%;
 	margin: 0 auto;
+	background-image: linear-gradient(to left, #00dbde, #505cfd);
 }
 
 .container {
