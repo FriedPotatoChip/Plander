@@ -9,8 +9,16 @@
 	border-radius: 50%;
 }
 
+#navbarResponsive ul li {
+	font-weight: 700;
+}
+
 .dropbtn {
 	cursor: pointer;
+}
+
+#primaryNav li a h5 {
+	font-weight: 700;
 }
 
 .dropdown {
@@ -25,6 +33,7 @@
 	min-width: 160px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
+	font-weight: 400;
 }
 
 .dropdown-content2 {
@@ -44,7 +53,9 @@
 }
 
 .dropdown-content a:hover {
-	background-color: #e9ecef
+	background-color: #3b5998;
+	color: white;
+	font-weight: 400 !important;
 }
 
 .dropdown:hover .dropdown-content {
@@ -65,7 +76,7 @@
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">운영안내</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
 					<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
 					<li class="nav-item"><a class="nav-link" href="/TMS/recruit">모집게시판</a></li>
@@ -73,7 +84,9 @@
 						<div class="dropdown">
 							<a class="nav-link dropbtn" href="#">게시판</a>
 							<div class="dropdown-content">
-								<a href="/TMS/board?ct_idx=1">공지사항</a> <a href="/TMS/board?ct_idx=2">자유게시판</a><a href="/TMS/board?ct_idx=3">후기게시판</a> <a href="/TMS/ask">문의하기</a>
+								<a href="/TMS/board?ct_idx=1">공지사항</a> <a
+									href="/TMS/board?ct_idx=2">자유게시판</a><a
+									href="/TMS/board?ct_idx=3">후기게시판</a> <a href="/TMS/ask">문의하기</a>
 							</div>
 						</div>
 					</li>
@@ -88,7 +101,7 @@
 									</c:if> <c:if test='${not empty usersVO.user_profileImagePath }'>
 										<img class="user" src="${usersVO.user_profileImagePath }"
 											alt="user" />
-									</c:if> <b>&nbsp;&nbsp;&nbsp;${usersVO.name }&nbsp;님 </b>
+									</c:if> <span>&nbsp;&nbsp;&nbsp;${usersVO.name }&nbsp;님 </span>
 								</a>
 								<div class="dropdown-content" style="right: 0;">
 									<div class="my_cur" style="text-align: center;">
@@ -101,12 +114,12 @@
 										<c:choose>
 											<c:when test='${not empty seat }'>
 												<c:forEach var="seat" items="${seat }">
-													<p>${seat.br_name }&nbsp;${seat.sct_name }&nbsp;${seat.s_col }
-													</p>
+													<h6>${seat.br_name }&nbsp;${seat.sct_name }&nbsp;${seat.s_col }
+													</h6>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
-												<p>예약된 좌석 없음</p>
+												<h6>예약된 좌석 없음</h6>
 											</c:otherwise>
 										</c:choose>
 										<hr>
@@ -117,11 +130,11 @@
 										<c:choose>
 											<c:when test='${not empty cabinet }'>
 												<c:forEach var="cabinet" items="${cabinet }">
-													<p>${cabinet.br_name }&nbsp;${cabinet.cb_number }</p>
+													<h6>${cabinet.br_name }&nbsp;${cabinet.cb_number }</h6>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
-												<p>예약된 사물함 없음</p>
+												<h6>예약된 사물함 없음</h6>
 											</c:otherwise>
 										</c:choose>
 										<hr>

@@ -11,6 +11,10 @@
 	cursor: pointer;
 }
 
+#navbarResponsive ul li {
+	font-weight: 700;
+}
+
 .dropdown {
 	position: relative;
 	display: inline-block;
@@ -39,15 +43,23 @@
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
+	font-weight: 400;
 }
 
 .dropdown-content a:hover {
-	background-color: #e9ecef
+	background-color: #3b5998;
+	color: white;
+	font-weight: 400 !important;
 }
 
 .dropdown:hover .dropdown-content {
 	display: block;
 }
+
+#primaryNav li a h5 {
+	font-weight: 700;
+}
+#googleBtn:hover { cursor: pointer; }
 </style>
 
 
@@ -63,17 +75,7 @@
 
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-	<!-- <a class="navbar-brand" href="/TMS"><img
-		src="/resources/images/turtle.png" width="30" height="30"
-		class="d-inline-block align-top ml-4" alt="거북이">
-		<h1 class="light ml-3" id="title_name">거북이의기적</h1></a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarSupportedContent"
-		aria-controls="navbarSupportedContent" aria-expanded="false"
-		aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
- -->
+
 	<div class="container-fluid">
 
 		<a class="navbar-brand" href="/TMS"><img
@@ -85,7 +87,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"
 					onclick="loginChk()">예약하기</a></li>
@@ -101,10 +103,10 @@
 			</ul>
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
-				<li class="nav-item"><a class="nav-link active"
+				<li class="nav-item"><a class="nav-link"
 					data-toggle="modal" href="#myModal"><h5>로그인</h5></a></li>
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target=".bd-example-modal-xl"><h5>회원가입</h5></a></li>
+					data-target=".bd-example-modal-lg"><h5>회원가입</h5></a></li>
 			</ul>
 
 		</div>
@@ -356,7 +358,7 @@
 
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel">
-					<b>로그인</b>
+					로그인
 				</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -366,30 +368,35 @@
 
 			<div class="modal-body center">
 				<form name="frm" action="#" method="post">
-					<input type="text" name="id" class="form-control" placeholder="아이디"
+					<input type="text" name="id" class="form-control my-2" placeholder="아이디"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" id="idInput" required>
-					<input type="password" name="password" class="form-control"
-						style="margin-top: 1.5%; font-family: 굴림;" placeholder="비밀번호" 
+					<input type="text" name="password" class="form-control my-2"
+						style="margin-top: 1.5%;  font-family: 굴림;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
-					<input type="button" style="margin-top: 1.5%;"
-						class="btn btn-outline-primary btn-block form-control" value="로그인"
+					<input type="button" style="background-color: #3b5998; color: white;"
+						class="btn btn-block form-control my-2 bold" value="로그인"
 						onclick="chk()">
 				</form>
 				<hr>
 
-				<form style="width: 50%; margin: 0 auto; text-align: center;">
+				<form style="text-align: center;">
 					<!-- <input type="button" name="googleLogin" class="btn btn-outline-secondary form-control"
 						onclick="" value="구글 로그인"> -->
-					<img src="/resources/images/google.png" id="googleBtn"
-						type="button" onclick="googleLogin()" style="width: 222px; height: 49px;">
+					<img src="/resources/images/google.jpg" id="googleBtn" class="mx-2"
+						type="button" onclick="googleLogin()" style="width: 60px; height: 60px;">
 					<!-- <input type="button" value="구글 로그인" id="googleBtn"
 						onclick="googleLogin()" style="margin: 5% auto;"> -->
 					<!-- 네이버 로그인 -->
-					<div id="naverIdLogin" style="margin: 5% auto; width: 222px; height: 49px;"></div>
+ 					<div id="naverIdLogin" style="display: inline-block; margin-right: 8px;"></div>
 					<!-- <input type="button" name="naverLogin" class=" btn btn-outline-secondary form-control"
 					style="margin-top: 1.5%;" onclick="" id="naverIdLogin" value="네이버 로그인"> -->
 					<!-- 카카오 로그인 -->
-					<a id="kakao-login-btn" style="margin: 5% auto;"></a>
+<!-- 					<img src="/resources/images/kakao.jpg" id="kakao-login-btn" class="mx-2"
+						type="button" style="width: 60px; height: 60px;"  href="javascript:loginWithKakao()"> -->
+ 					<!-- <a id="kakao-login-btn"></a> -->
+ 					<a id="custom-login-btn" href="javascript:loginWithKakao()"> 
+						<img src="/resources/images/kakao.jpg" style="width: 60px; height: 60px;"/>
+					</a>
 					<!-- <input type="button" name="kakaoLogin" class=" btn btn-outline-secondary form-control"
 					style="margin-top: 1.5%;" onclick="" value="카카오톡으로 로그인"> -->
 				</form>
@@ -397,7 +404,7 @@
 
 				<div class="center" style="float: right;">
 					<a href="/TMS/findIdPw">아이디 찾기</a>&nbsp; <a href="/TMS/findIdPw">비밀번호
-						찾기</a>&nbsp; <a data-toggle="modal" href="#joinModal"
+						찾기</a>&nbsp; <a data-toggle=".bd-example-modal-lg" href="#joinModal"
 						data-dismiss="modal">회원가입</a>
 				</div>
 			</div>
@@ -408,14 +415,14 @@
 <!-- 로그인 모달창 끝 -->
 
 <!-- 회원가입 모달창 -->
-<div class="modal fade bd-example-modal-xl" id="joinModal" tabindex="-1"
+<div class="modal fade bd-example-modal-lg" id="joinModal" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-xl" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel">
-					<b>JOIN US !</b>
+					회원가입
 				</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
@@ -428,8 +435,8 @@
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
-								<td width="35%">아이디&nbsp;<b style="color: red;">&#42;</b></td>
-								<td width="65%"><input type="text" name="id" id="id"
+								<td width="30%">아이디&nbsp;<b style="color: red;">&#42;</b></td>
+								<td width="70%"><input type="text" name="id" id="id"
 									oninput="idchk()" class="col-sm-6 form-control" required>
 									<p id="idMsg" style="font-size: 13px;"></p></td>
 							</tr>
@@ -438,7 +445,7 @@
 								<td><input type="password" name="password" id="password"
 									style="font-family: 굴림;" oninput="pwchk()"
 									class="col-sm-6 form-control" required>
-									<p id="pwMsg" style="font-size: 13px;">(영문
+									<p id="pwMsg" style="font-size: 15px; margin-top: 5px;">(영문
 										대소문자/숫자/특수문자(!,@,#,$,%,^,&,*) 조합, 8자~16자)</p></td>
 							</tr>
 							<tr>
@@ -469,34 +476,33 @@
 								<td>주소&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-4 form-control mr-2" name="zipNo"
-									placeholder="zip" readonly>
+									readonly>
 									<button type="button" class="btn btn-danger"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-10 form-control my-2"
-									name="roadAddrPart1" placeholder="기본주소" readonly> <input
+									name="roadAddrPart1" readonly> <input
 									type="text" id="addrDetail" class="col-sm-10 form-control my-2"
 									name="addrDetail" placeholder="상세주소"></td>
 							</tr>
 						</tbody>
 					</table>
-					<br> <br>
-					<p>
-						이미 회원이신가요?&nbsp; <a data-toggle="modal" href="#myModal"
-							data-dismiss="modal">로그인</a>
-					</p>
 					<div id="admit">
 						<div class="checkbox">
 							<label><input type="checkbox" id="chkBox" name="chKBox">&nbsp;<b>거기스</b>에
 								가입하면서 <a>이용약관</a>과 <a>개인정보 취급방침</a>을 확인하고 이에 동의합니다.</label>
 						</div>
 					</div>
+					<p style="float: right;">
+						이미 회원이신가요?&nbsp; <a data-toggle="modal" href="#myModal"
+							data-dismiss="modal">로그인</a>
+					</p>
 				</div>
 				<!-- 모달 바디 끝 -->
 
-				<div class="modal-footer">
+				<div class="modal-footer" style="clear: right;">
 					<div class="center">
-						<button type="button" onclick="join()"
-							class="btn btn-outline-secondary form-control">회원가입</button>
+						<button type="button" onclick="join()" style="background-color: #3b5998; color: white;"
+							class="btn form-control bold">회원가입</button>
 					</div>
 				</div>
 			</form>
@@ -510,12 +516,12 @@
 <!-- 카카오 로그인 api -->
 <script type='text/javascript'>
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('카카오클라이언트ID'); /* 클라이언트 id 숨겨두기 */
+	Kakao.init('카카오클라'); /* 클라이언트 id 숨겨두기 */
 	// 카카오 로그인 버튼을 생성합니다.
-	Kakao.Auth.createLoginButton({
-		container : '#kakao-login-btn',
+    function loginWithKakao() {
+	Kakao.Auth.login({
 		success : function(authObj) {
-			alert(JSON.stringify(authObj));
+			/* alert(JSON.stringify(authObj)); */
 
 			Kakao.API.request({
 				url : '/v1/user/me',
@@ -548,19 +554,20 @@
 			alert(JSON.stringify(err));
 		}
 	});
+	};
 	//_$t
 </script>
 <!-- 네이버 로그인 api -->
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId({
-		clientId : "네이버 클라이언트 아이디", /* 클라이언트 ID (숨겨두기) */
+		clientId : "네이버클라", /* 클라이언트 ID (숨겨두기) */
 		callbackUrl : "http://localhost:8095/TMS/naverCallback",
 		isPopup : true, /* 팝업을 통한 연동처리 여부 */
 		callbackHandle : true,
 		loginButton : {
 			color : "green",
-			type : 3,
-			height : 45
+			type : 1,
+			height : 60
 		}
 	/* 로그인 버튼의 타입을 지정 */
 	});
@@ -574,7 +581,7 @@
 		console.log("구글 로그인 시작");
 		gapi.load('auth2', function() {
 			var gauth = gapi.auth2.init({
-				client_id : '구글 클라이언트 ID'/* 구글 클라이언트 키 */
+				client_id : '구글클라'/* 구글 클라이언트 키 */
 			})
 			gauth.signIn()
 					.then(
