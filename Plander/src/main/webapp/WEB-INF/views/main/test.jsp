@@ -26,7 +26,7 @@
 </style>
 <script language="javascript">
 function closeLayer( obj ) {
-	$(obj).parent().parent().hide();
+	$(".popupLayer").hide();
 }
 
 $(function(){
@@ -56,6 +56,8 @@ $(function(){
 			"left": divLeft,
 			"position": "absolute"
 		}).show();
+		console.log(this);
+		console.log($(this).attr("id")); 
 	});
 });
 </script>
@@ -72,13 +74,13 @@ $(function(){
 		<a class="imgSelect">클릭6</a>
 		<a class="imgSelect">클릭7</a>
 		<a class="imgSelect">클릭8</a>
-		<a class="imgSelect">클릭9</a>
-		<a class="imgSelect">클릭10</a>
+		<a class="imgSelect" id="asdf">클릭9</a>
+		<a class="imgSelect">클릭10</a> 
 	</p>
 	
 	<div class="popupLayer">
 		<div>
-			<span onClick="closeLayer(this)" style="cursor:pointer;" title="닫기">X</span>
+			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
 		<a href="#">쪽지 보내기</a><br>
 		<a href="#">회원 정보 보기</a><br>

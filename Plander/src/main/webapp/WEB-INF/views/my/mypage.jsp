@@ -371,7 +371,7 @@ h3 {
 						method="post" enctype="multipart/form-data" onclick="">
 						<input type='file' name="file" id="imgInput" />
 						<p class="description">
-							프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는 최대 5MB<br>
+							&#8251; 프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는 최대 5MB<br>
 							가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br> 프로필 이미지로 적용할 범위를 <b>반드시</b>
 							선택하여 주세요
 						</p>

@@ -233,7 +233,7 @@
 		var testPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 		var testPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,16}$/;
 		var testEmail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
-		var testId = /^[a-zA-Z0-9]+$/;
+		var testId = /^([a-zA-Z0-9]+){4,20}$/;
 		var testName = /^[가-힣a-zA-Z]+$/;
 
 		var checkNumber = password.search(/[0-9]/g);
@@ -251,7 +251,7 @@
 			return false;
 		}
 		if (!testId.test(id)) {
-			alert("아이디는 영문, 숫자 조합만 가능합니다.");
+			alert("아이디는 영문, 숫자 조합(4-20자)만 가능합니다.");
 			frm.id.focus();
 			return;
 		}
@@ -368,8 +368,8 @@
 				<form name="frm" action="#" method="post">
 					<input type="text" name="id" class="form-control" placeholder="아이디"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" id="idInput" required>
-					<input type="text" name="password" class="form-control"
-						style="margin-top: 1.5%;" placeholder="비밀번호"
+					<input type="password" name="password" class="form-control"
+						style="margin-top: 1.5%; font-family: 굴림;" placeholder="비밀번호" 
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
 					<input type="button" style="margin-top: 1.5%;"
 						class="btn btn-outline-primary btn-block form-control" value="로그인"
