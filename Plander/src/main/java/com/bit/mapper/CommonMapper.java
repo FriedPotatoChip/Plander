@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 
 public interface CommonMapper {
@@ -18,4 +19,13 @@ public interface CommonMapper {
 	
 	// 쪽지 보내기
 	public boolean sendMsg(SendMsgVO vo);
+	
+	// 안읽은 쪽지 확인
+	public List<RecvMsgVO> newRecvMsg(String id);
+	
+	// 쪽지 상세
+	public RecvMsgVO msgDetail(int rm_idx);
+	
+	// 쪽지 읽음 처리
+	public boolean readMsgOne(int rm_idx);
 }

@@ -6,11 +6,6 @@
 
 
 <style>
-body {
-	width: 80%;
-	margin: 0 auto;
-	text-align: center;
-}
 
 tr, td {
 	border-bottom: 1px solid #000;
@@ -60,7 +55,7 @@ a {
 
 	<tbody>
 		<c:choose>
-			<c:when test="${empty applyList}">
+			<c:when test="${empty list}">
 				<tr>
 					<td colspan="4">
 						<h2>신청한 인원이 없습니다.</h2>
@@ -69,7 +64,7 @@ a {
 			</c:when>
 
 			<c:otherwise>
-				<c:forEach var="applyList" items="${applyList }">
+				<c:forEach var="applyList" items="${list }">
 					<tr>
 						<td><a href="/TMS/my/detail?rc_idx=${applyList.rc_idx }">${applyList.rc_title }</a></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -84,25 +79,25 @@ a {
 				<div id="paging">
 					<ul id="pagingList">
 						<c:if test="${page.chkStartPage }">
-							<li><a href="#" onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li><a href="#" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')"><button>&lt;&lt;</button></a></li>
+							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
-								<li><a class="now marginLi" href="#" 
+								<li><a class="now marginLi" href="javascript:click()" 
 									onclick="fetch_recruit('/TMS/my/applyList?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
-								<li><a class="marginLi" href="#" 
+								<li><a class="marginLi" href="javascript:click()" 
 									onclick="fetch_recruit('/TMS/my/applyList?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
-							<li><a href="#" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
-							<li><a href="#" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
+							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
 						</c:if>
 					</ul>
 				</div>

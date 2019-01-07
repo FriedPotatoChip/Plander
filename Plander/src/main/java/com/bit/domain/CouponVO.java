@@ -15,11 +15,10 @@ public class CouponVO {
 	private int cb_idx;
 	private String id;
 	private Date cp_regdate;
-	private Date cp_endDate;
+	private Date cp_enddate;
 	private int cp_quantity;
 	
 	private String cb_name, cb_distype, cb_roomtype;
 	private int cb_discount;
-	
 	
 }

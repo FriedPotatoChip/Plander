@@ -42,7 +42,7 @@ function click() {
 }
 
 body>div {
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 }
 
@@ -57,9 +57,9 @@ body>div {
 }
 
 h3 {
-	padding: 15px 0; text-align : center;
+	padding: 15px 0;
+	text-align: center;
 	background-color: #3b5998;
-	color: white;
 	text-align: center;
 }
 
@@ -74,7 +74,7 @@ h3 {
 
 .profile {
 	width: 100%;
-	margin: 0 auto;
+	margin: 30px auto;
 	text-align: center;
 }
 
@@ -91,13 +91,13 @@ h3 {
 }
 
 .my_info {
-	width: 48%;
+	width: 36%;
 	float: left;
 	margin-bottom: 30px;
 }
 
 .myBook {
-	width: 48%;
+	width: 60%;
 	float: right;
 }
 
@@ -235,6 +235,10 @@ h3 {
 					onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
 					onclick="fetch_book('/TMS/my/coupon?nowPage=1')">내쿠폰</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/sendMsg?nowPage=1')">보낸쪽지</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/recvMsg?nowPage=1')">받은쪽지</a></strong>
 				<table id="myBook"></table>
 			</div>
 		</div>
@@ -308,9 +312,8 @@ h3 {
 							</tr>
 							<tr>
 								<th>회원주소</th>
-								<td><input type="text" class="form-control"
-									id="zipNo" name="zipNo"
-									readonly></td>
+								<td><input type="text" class="form-control" id="zipNo"
+									name="zipNo" readonly></td>
 								<td><input type="button" class="form-control" value="주소검색"
 									onclick="goPopup();"></td>
 							</tr>
@@ -394,9 +397,9 @@ h3 {
 						method="post" enctype="multipart/form-data" onclick="">
 						<input type='file' name="file" id="imgInput" />
 						<p class="description">
-							&#8251; 프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는 최대 5MB<br>
-							가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br> 프로필 이미지로 적용할 범위를 <b>반드시</b>
-							선택하여 주세요
+							&#8251; 프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는
+							최대 5MB<br> 가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br> 프로필
+							이미지로 적용할 범위를 <b>반드시</b> 선택하여 주세요
 						</p>
 						<hr>
 						<input type="hidden" name="x" id="x" /> <input type="hidden"

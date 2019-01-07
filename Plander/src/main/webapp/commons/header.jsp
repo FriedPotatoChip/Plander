@@ -368,9 +368,9 @@
 
 			<div class="modal-body center">
 				<form name="frm" action="#" method="post">
-					<input type="text" name="id" class="form-control my-2" placeholder="아이디"
+					<input type="text" name="id" style="font-family: 굴림;" class="form-control my-2" placeholder="아이디"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" id="idInput" required>
-					<input type="text" name="password" class="form-control my-2"
+					<input type="password" name="password" class="form-control my-2"
 						style="margin-top: 1.5%;  font-family: 굴림;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
 					<input type="button" style="background-color: #3b5998; color: white;"

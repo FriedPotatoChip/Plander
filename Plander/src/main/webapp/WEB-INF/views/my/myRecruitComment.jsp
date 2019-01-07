@@ -6,11 +6,7 @@
 
 
 <style>
-body {
-	width: 80%;
-	margin: 0 auto;
-	text-align: center;
-}
+
 
 tr, td {
 	border-bottom: 1px solid #000;
@@ -61,7 +57,7 @@ a {
 
 	<tbody>
 		<c:choose>
-			<c:when test="${empty my_recruit_comment}">
+			<c:when test="${empty list}">
 				<tr>
 					<td colspan="5">
 						<h2>현재 등록된 댓글이 없습니다.</h2>
@@ -70,7 +66,7 @@ a {
 			</c:when>
 
 			<c:otherwise>
-				<c:forEach var="my_recruit_comment" items="${my_recruit_comment }">
+				<c:forEach var="my_recruit_comment" items="${list }">
 					<tr>
 						<td>${my_recruit_comment.rc_idx }</td>
 						<td><a
@@ -86,25 +82,25 @@ a {
 				<div id="paging">
 					<ul id="pagingList">
 						<c:if test="${page.chkStartPage }">
-							<li><a href="#" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li><a href="#" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=1')"><button>&lt;&lt;</button></a></li>
+							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
 								<li><a class="now marginLi"
-									href="#" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${p }')">${p }</a></li>
+									href="javascript:click()" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li><a class="marginLi"
-									href="#" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${p }')">${p }</a></li>
+									href="javascript:click()" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
-							<li><a href="#" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
-							<li><a href="#" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
+							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
 						</c:if>
 					</ul>
 				</div>

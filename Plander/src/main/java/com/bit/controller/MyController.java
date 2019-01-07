@@ -21,6 +21,8 @@ import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.CouponVO;
 import com.bit.domain.RecruitVO;
+import com.bit.domain.RecvMsgVO;
+import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.MyService;
 import com.bit.utils.PagingVO;
@@ -61,6 +63,52 @@ public class MyController {
 		model.addAttribute("list", list);
 		
 		return "my/coupon";
+	}
+	
+	@RequestMapping("sendMsg")
+	public String sendMsg(PagingVO page, HttpSession session, Model model) {
+		UsersVO vo = (UsersVO) session.getAttribute("user");
+		
+		// 페이징 처리
+		int total = myService.sendMsgCnt(vo);
+		System.out.println("total: " + total);
+		Map<String, Object> m = paging(page, vo, total);
+		page = (PagingVO) m.get("page");
+		model.addAttribute("page", page);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", vo.getId());
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		System.out.println("id: " + vo.getId() + ", start: " + page.getStart() + ", end: " + page.getEnd());
+		List<SendMsgVO> list = myService.sendMsg(map);
+		System.out.println("list: " + list);
+		model.addAttribute("list", list);
+		
+		return "my/sendmsg";
+	}
+	
+	@RequestMapping("recvMsg")
+	public String recvMsg(PagingVO page, HttpSession session, Model model) {
+		UsersVO vo = (UsersVO) session.getAttribute("user");
+		
+		// 페이징 처리
+		int total = myService.recvMsgCnt(vo);
+		System.out.println("total: " + total);
+		Map<String, Object> m = paging(page, vo, total);
+		page = (PagingVO) m.get("page");
+		model.addAttribute("page", page);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", vo.getId());
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		System.out.println("id: " + vo.getId() + ", start: " + page.getStart() + ", end: " + page.getEnd());
+		List<RecvMsgVO> list = myService.recvMsg(map);
+		System.out.println("list: " + list);
+		model.addAttribute("list", list);
+		
+		return "my/recvmsg";
 	}
 
 	// 내정보수정
