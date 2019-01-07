@@ -10,6 +10,6 @@ import lombok.ToString;
 @Getter
 @ToString
 public class SeatsVO {
-	private int s_idx, br_idx, s_col, sct_idx;
+	private int s_idx, s_idx_2, br_idx, sct_idx, s_col, s_col_2;
 	
 }

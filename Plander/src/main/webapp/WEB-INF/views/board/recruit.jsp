@@ -59,6 +59,7 @@
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
+				<th>모집 여부</th>
 				<th>조회수</th>
 			</tr>
 		</thead>
@@ -81,14 +82,27 @@
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${list.rc_regdate }" />
 					</td>
 					<td>
+						<c:if test='${list.onOff eq "ON" }'>
+							모집 중
+						</c:if>
+						<c:if test='${list.onOff eq "OFF" }'>
+							모집 마감
+						</c:if>
+					</td>
+					<td>
 						${list.hit }
 					</td>
 				</tr>
 			</c:forEach>
+			<c:if test="${empty boardList }">
+				<tr>
+					<td colspan="6" style="font-size: 2.0em; font-style: bold;">조회된 게시물이 없습니다.</td>
+				</tr>
+			</c:if>
 		</tbody>
 		<tfoot>
 			<tr> 
-				<td colspan="5">tfoot</td>
+				<td colspan="6">tfoot</td>
 			</tr>
 		</tfoot>
 	</table>
@@ -145,6 +159,11 @@
 <script>
 	function write_go(){
 		location.href="/TMS/recruitWrite";
+	}
+	function calcDate(date){
+		var date = new Date(date);
+		console.log("date: "+ date);
+		return date;
 	}
 </script>	
 	

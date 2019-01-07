@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class BookingCbVO {
-	private int ckb_idx, cb_number, cb_idx, br_idx, cabinet;
+	private int ckb_idx, cb_number, cb_idx, cb_idx_2, br_idx, cabinet;
 	private String id;
 	private String start_date, end_date, ckb_regdate;
 

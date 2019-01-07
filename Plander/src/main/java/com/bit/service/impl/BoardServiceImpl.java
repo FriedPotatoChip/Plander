@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.domain.BoardVO;
+import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
 import com.bit.mapper.BoardMapper;
@@ -111,6 +112,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int getSearchTotal(Map<String, Object> map) {
 		return mapper.getSearchTotal(map);
+	}
+
+	@Override
+	public List<BookingVO> searchBooking(String id) {
+		return mapper.searchBooking(id);
+	}
+
+	@Override
+	public boolean minusReview(int bk_idx) {
+		return mapper.minusReview(bk_idx);
 	}
 
 

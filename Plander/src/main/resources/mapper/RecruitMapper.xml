@@ -191,9 +191,9 @@
 		</update>
 		
 		<!-- 모집 마감 후 쿠폰 발행 -->
-		<insert id="insertCoupon" parameterType="String">
+		<insert id="insertCoupon" parameterType="map">
 			INSERT INTO COUPON (CP_IDX, CB_IDX, CP_REGDATE, CP_ENDDATE, CP_QUANTITY, ID)
-						VALUES (COUPON_SEQ.NEXTVAL, 1, SYSDATE, ADD_MONTHS(SYSDATE, 1), 5, #{id})
+						VALUES (COUPON_SEQ.NEXTVAL, #{cb_idx}, SYSDATE, ADD_MONTHS(SYSDATE, 1), #{cp_quantity}, #{id})
 		</insert>
 		<!-- 모집 마감 후 모집글 OFF처리 -->
 		<update id="updateOnOff" parameterType="int">

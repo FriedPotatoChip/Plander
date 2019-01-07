@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class BoardVO {
 	private int b_idx, ct_idx, cnt, hit;
-	private String b_title, b_content, id, user_profileImagePath;
+	private String b_title, b_content, id, user_profileImagePath, sct_idx, s_col;
 	private Date b_regdate;
 	
 	

@@ -19,6 +19,7 @@ import com.bit.domain.BoardVO;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
+import com.bit.domain.CouponVO;
 import com.bit.domain.RecruitVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.MyService;
@@ -36,6 +37,30 @@ public class MyController {
 	public String mypage(UsersVO vo, HttpSession session) {
 		session.setAttribute("user", vo);
 		return "my/mypage";
+	}
+	
+	// 내쿠폰보유현황(+갯수)
+	@RequestMapping("coupon")
+	public String coupon(PagingVO page, HttpSession session, Model model) {
+		UsersVO vo = (UsersVO) session.getAttribute("user");
+		
+		// 페이징 처리
+		int total = myService.coupon_cnt(vo);
+		System.out.println("total: " + total);
+		Map<String, Object> m = paging(page, vo, total);
+		page = (PagingVO) m.get("page");
+		model.addAttribute("page", page);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", vo.getId());
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		System.out.println("id: " + vo.getId() + ", start: " + page.getStart() + ", end: " + page.getEnd());
+		List<CouponVO> list = myService.coupon(map);
+		System.out.println("list: " + list);
+		model.addAttribute("list", list);
+		
+		return "my/coupon";
 	}
 
 	// 내정보수정

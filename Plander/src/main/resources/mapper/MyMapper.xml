@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="com.bit.mapper.MyMapper">
 
+	<!-- 내보유쿠폰갯수 -->
+	<select id="coupon_cnt" resultType="int">
+		select count(*)
+		from coupon
+		cp, coupon_table cb
+		where cp.cb_idx = cb.cb_idx
+		and cp.id = #{id}
+	</select>
+
+	<!-- 내쿠폰현황 -->
+	<select id="coupon" resultType="com.bit.domain.CouponVO"
+		parameterType="Map">
+		select * from (
+		select rownum rn, cb.cb_name, cb.cb_discount, cb.cb_distype,
+		cp.cp_enddate, cp.cp_quantity
+		from coupon cp, coupon_table cb
+		where cp.cb_idx = cb.cb_idx
+		and cp.id = #{id})
+		where rn between #{start} and #{end}
+	</select>
+
 	<!-- 내정보 -->
 	<select id="user" resultType="com.bit.domain.UsersVO">
 		select * from users where id =
@@ -184,7 +205,8 @@
 	<!-- 내 모집글에 달린 댓글 갯수 -->
 	<select id="getTotalComment" resultType="int">
 		select count(*)
-		from comments
+		from
+		comments
 		where rc_idx in (select rc_idx
 		from recruit
 		where id = #{id})

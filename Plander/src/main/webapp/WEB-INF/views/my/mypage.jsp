@@ -10,7 +10,7 @@
 <!-- Jcrop(사진 크롭) -->
 <script
 	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
-	
+
 <script>
 //비밀번호 확인
 function pwchk() {
@@ -28,9 +28,20 @@ function pwchk() {
 		$('#update').prop("disabled", false);
 	}
 }
+
+// 클릭 시 스크롤이 자동으로 위로 올라가는 현상
+function click() {
+    return;
+}
 </script>
+
+
 <style>
-body {
+#primaryNav li a h5 {
+	font-weight: 700;
+}
+
+body>div {
 	width: 80%;
 	margin: 0 auto;
 }
@@ -46,9 +57,10 @@ body {
 }
 
 h3 {
-	text-align: center;
+	padding: 15px 0; text-align : center;
 	background-color: #3b5998;
 	color: white;
+	text-align: center;
 }
 
 th {
@@ -143,107 +155,117 @@ h3 {
 </style>
 </head>
 
-
 <body>
-	<!-- 홈, 로그아웃 버튼 -->
-	<nav class="navs">
-		<button type="button" class="btn btn-outline-danger nav_btn"
-			onclick="location.href='/TMS/logout'">로그아웃</button>
-		<button type="button" class="btn btn-outline-success nav_btn"
-			onclick="location.href='/TMS'">홈으로가기</button>
+	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+
+		<div class="container-fluid">
+
+			<a class="navbar-brand" href="/TMS"><img
+				src="/resources/images/logo.png" width="150px" height="50px"></a>
+
+			<ul class="navbar-nav ml-auto" id="primaryNav">
+				<li class="nav-item"><a class="nav-link" href="/TMS/logout"><h5>로그아웃</h5></a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS"><h5>홈으로가기</h5></a></li>
+			</ul>
+
+		</div>
 	</nav>
 
-
-	<!-- 회원 프로필 사진 -->
-	<div class="profile">
-		<hr>
-		<c:if test='${empty usersVO.user_profileImagePath }'>
-			<img class="user" src="/resources/images/users.png" alt="user"
-				data-toggle="modal" data-target="#profileModal" />
-		</c:if>
-		<c:if test='${not empty usersVO.user_profileImagePath }'>
-			<img class="user" src="${usersVO.user_profileImagePath }" alt="user"
-				data-toggle="modal" data-target="#profileModal" />
-		</c:if>
-		<h5 class="user_name">${usersVO.name }님</h5>
-		<hr>
-	</div>
-
-
-	<!-- 내정보 -->
-	<div class="my_info">
-		<h3>- 내정보 -</h3>
-		<div class="myinfo_nav">
-			<strong><a href="#" data-toggle="modal"
-				data-target="#myModal">회원정보수정</a></strong>
+	<div class="container">
+		<!-- 회원 프로필 사진 -->
+		<div class="profile">
+			<c:if test='${empty usersVO.user_profileImagePath }'>
+				<img class="user" src="/resources/images/users.png" alt="user"
+					data-toggle="modal" data-target="#profileModal"
+					style="margin-top: 30px;" />
+			</c:if>
+			<c:if test='${not empty usersVO.user_profileImagePath }'>
+				<img class="user" src="${usersVO.user_profileImagePath }" alt="user"
+					data-toggle="modal" data-target="#profileModal" />
+			</c:if>
+			<h5 class="user_name">${usersVO.name }님</h5>
+			<hr>
 		</div>
-		<table class="table" id="my_info_table">
-			<tr>
-				<th>회원아이디</th>
-				<td>${user.id }</td>
-			</tr>
-			<tr>
-				<th>회원명</th>
-				<td>${user.name }</td>
-			</tr>
-			<tr>
-				<th>회원등록일</th>
-				<td><fmt:formatDate pattern="yyyy-MM-dd"
-						value="${user.regdate }" /></td>
-			</tr>
-			<tr>
-				<th>회원연락처</th>
-				<td>${user.phone }</td>
-			</tr>
-			<tr>
-				<th>회원이메일</th>
-				<td>${user.email }</td>
-			</tr>
-			<tr>
-				<th>회원주소</th>
-				<td>${user.roadAddrPart1 }&nbsp;${user.addrDetail }</td>
-			</tr>
-		</table>
-	</div>
 
 
-	<!-- 내예약 -->
-	<div class="myBook">
-		<h3>- 내예약 -</h3>
-		<div class="myBook_nav">
-			<strong><a href="#"
-				onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
-			&nbsp;|&nbsp;<strong><a href="#"
-				onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
-			<table id="myBook"></table>
+		<!-- 내정보 -->
+		<div class="my_info">
+			<h3>- 내정보 -</h3>
+			<div class="myinfo_nav">
+				<strong><a href="#" data-toggle="modal"
+					data-target=".bd-example-modal-lg">회원정보수정</a></strong>
+			</div>
+			<table class="table" id="my_info_table">
+				<tr>
+					<th>회원아이디</th>
+					<td>${user.id }</td>
+				</tr>
+				<tr>
+					<th>회원명</th>
+					<td>${user.name }</td>
+				</tr>
+				<tr>
+					<th>회원등록일</th>
+					<td><fmt:formatDate pattern="yyyy-MM-dd"
+							value="${user.regdate }" /></td>
+				</tr>
+				<tr>
+					<th>회원연락처</th>
+					<td>${user.phone }</td>
+				</tr>
+				<tr>
+					<th>회원이메일</th>
+					<td>${user.email }</td>
+				</tr>
+				<tr>
+					<th>회원주소</th>
+					<td>${user.roadAddrPart1 }&nbsp;${user.addrDetail }</td>
+				</tr>
+			</table>
 		</div>
-	</div>
 
 
-	<!-- 내글목록 -->
-	<div class="myRecruit">
-		<h3>- 내글목록 -</h3>
-		<div class="myRecruit_nav">
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=1')">내모집글댓글</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/board?nowPage=1')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/board_comment?nowPage=1')">자유게시판에달린댓글</a></strong>
+		<!-- 내예약 -->
+		<div class="myBook">
+			<h3>- 내예약 -</h3>
+			<div class="myBook_nav">
+				<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/coupon?nowPage=1')">내쿠폰</a></strong>
+				<table id="myBook"></table>
+			</div>
 		</div>
-		<table id="myRecruit"></table>
+
+
+		<!-- 내글목록 -->
+		<div class="myRecruit">
+			<h3>- 내글목록 -</h3>
+			<div class="myRecruit_nav">
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=1')">내모집글댓글</a></strong>&nbsp;|&nbsp;
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/board?nowPage=1')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/board_comment?nowPage=1')">자유게시판에달린댓글</a></strong>
+			</div>
+			<table id="myRecruit"></table>
+		</div>
 	</div>
 
 
 	<!-- 회원정보수정 모달창 -->
-	<div class="modal" tabindex="-1" role="dialog" id="myModal">
-		<div class="modal-dialog" role="document">
+	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+		id="myModal">
+		<div class="modal-dialog modal-lg" role="document">
 			<form action="/TMS/my/update" method="POST">
-				<div class="modal-content" style="width: 800px;">
+				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">회원정보수정</h5>
 						<button type="button" class="close" data-dismiss="modal"
@@ -251,7 +273,7 @@ h3 {
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body center">
 						<table class="table" id="modal_table">
 							<tr>
 								<th>회원아이디</th>
@@ -271,7 +293,7 @@ h3 {
 							</tr>
 							<tr>
 								<th>회원등록일</th>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
+								<td><fmt:formatDate pattern="yyyy년 MM월 dd일"
 										value="${user.regdate }" /></td>
 							</tr>
 							<tr>
@@ -286,8 +308,9 @@ h3 {
 							</tr>
 							<tr>
 								<th>회원주소</th>
-								<td><input type="text" class="form-control" id="zipNo"
-									name="zipNo" readonly></td>
+								<td><input type="text" class="form-control"
+									id="zipNo" name="zipNo"
+									readonly></td>
 								<td><input type="button" class="form-control" value="주소검색"
 									onclick="goPopup();"></td>
 							</tr>
@@ -295,7 +318,7 @@ h3 {
 								<th></th>
 								<td><input type="text" class="form-control"
 									id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
-									value="${user.roadAddrPart1 }" required></td>
+									value="${user.roadAddrPart1 }" readonly></td>
 							</tr>
 							<tr>
 								<th></th>
@@ -371,7 +394,7 @@ h3 {
 						method="post" enctype="multipart/form-data" onclick="">
 						<input type='file' name="file" id="imgInput" />
 						<p class="description">
-							프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는 최대 5MB<br>
+							&#8251; 프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는 최대 5MB<br>
 							가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br> 프로필 이미지로 적용할 범위를 <b>반드시</b>
 							선택하여 주세요
 						</p>
@@ -542,18 +565,6 @@ h3 {
 		function submitProfile() {
 			$("form[name='imgForm']").submit();
 		}
-
-		/* 스크롤 고정 */
-		$('html, body').css({
-			'overflow' : 'hidden',
-			'height' : '100%'
-		});
-
-		$('#element').on('scroll touchmove mousewheel', function(event) {
-			event.preventDefault();
-			event.stopPropagation();
-			return false;
-		});
 	</script>
 </body>
 </html>

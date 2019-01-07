@@ -34,6 +34,8 @@ public interface BookMapper {
 	
 	//s_idx
 	public SeatsVO seatnum(Map<String, Integer> map);
+	//s_idx (두명)
+	public SeatsVO some_seatnum(Map<String, Integer> map);
 	
 	
 	

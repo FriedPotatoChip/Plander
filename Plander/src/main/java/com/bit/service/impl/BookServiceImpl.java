@@ -71,6 +71,12 @@ public class BookServiceImpl implements BookService {
 		return bookmapper.bookCabinet(cb_bvo);
 	}
 	
+	//예약 안된 사물함 조회 
+	@Override
+	public List<CabinetVO> not_bookCb(CabinetVO cvo) {
+		return bookmapper.not_bookCb(cvo);
+	}
+	
 	//s_idx
 	@Override
 	public SeatsVO seatnum(int s_col, int br_idx) {
@@ -81,11 +87,16 @@ public class BookServiceImpl implements BookService {
 		
 		return bookmapper.seatnum(map);
 	}
-
-	//예약 안된 사물함 조회 
+	
+	//s_idx (두명)
 	@Override
-	public List<CabinetVO> not_bookCb(CabinetVO cvo) {
-		return bookmapper.not_bookCb(cvo);
+	public SeatsVO some_seatnum(int s_col_2, int br_idx) {
+		System.out.println("s_col_2 : " + s_col_2 + ", br_idx : " + br_idx);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("s_col_2", s_col_2);
+		map.put("br_idx", br_idx);
+		
+		return bookmapper.some_seatnum(map);
 	}
 	
 

@@ -179,9 +179,20 @@
 		</delete>
 		
 		
+		<!-- 후기게시판 사용 가능 여부 체크 -->
+		<select id="searchBooking" resultType="com.bit.domain.BookingVO">
+			<![CDATA[
+				SELECT * FROM BOOKING B, SEATS S 
+					WHERE B.S_IDX = S.S_IDX 
+						AND ID = #{id} 
+						AND END_TIME < SYSDATE
+						AND REVIEW = 1
+			]]>
+		</select>
 		
-		
-		
+		<update id="minusReview" parameterType="int">
+			UPDATE BOOKING SET REVIEW = 0 WHERE BK_IDX = #{bk_idx}
+		</update>
 		
 		
 		 

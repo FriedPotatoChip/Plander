@@ -8,11 +8,18 @@ import com.bit.domain.BoardVO;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
+import com.bit.domain.CouponVO;
 import com.bit.domain.RecruitVO;
 import com.bit.domain.UsersVO;
 
 public interface MyService {
 
+	// 내쿠폰보유현황갯수
+	public int coupon_cnt(UsersVO vo);
+	
+	// 내쿠폰보유현황
+	public List<CouponVO> coupon(Map map);
+	
 	// 내정보
 	public UsersVO user(UsersVO vo);
 

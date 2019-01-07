@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.SendMsgVO;
 import com.bit.mapper.CommonMapper;
 import com.bit.service.CommonService;
 
@@ -29,6 +30,11 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public boolean minusCoupon(int cp_idx) {
 		return mapper.minusCoupon(cp_idx);
+	}
+
+	@Override
+	public boolean sendMsg(SendMsgVO vo) {
+		return mapper.sendMsg(vo);
 	}
 	
 	

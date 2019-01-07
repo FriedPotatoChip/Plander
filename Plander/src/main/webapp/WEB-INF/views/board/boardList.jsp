@@ -15,6 +15,23 @@
 	.marginLi { margin-left: 5px; margin-right: 5px; }	
 	a { text-decoration: none; }
 	.now { background-color: orange; }
+/* 클릭시 레이어 */	
+.idDiv { cursor: pointer; }
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 120px;
+	padding: 10px;
+	padding-top: 18px; padding-left: 15px;
+}
+.popupLayer div {
+	position: absolute;
+	top: 0px;
+	right: 5px
+}
 </style> 
 <script> 
 	function selChange(){
@@ -26,13 +43,13 @@
 		location.href="/TMS/boardDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
 	}
 	$(document).ready(function(){
-		if ('${boardList[0].ct_idx}' == 1){
+		if ('${ct_idx}' == 1){
 			$("#boardType").html("공지사항");
-		}else if ('${boardList[0].ct_idx}' == 2){
+		}else if ('${ct_idx}' == 2){
 			$("#boardType").html("자유게시판");	
-		}else if ('${boardList[0].ct_idx}' == 3){
+		}else if ('${ct_idx}' == 3){
 			$("#boardType").html("후기게시판");	
-		}else if ('${boardList[0].ct_idx}' == 4){
+		}else if ('${ct_idx}' == 4){
 			$("#boardType").html("QNA");
 		}
 	});
@@ -53,7 +70,7 @@
 	</c:if>
 </c:if>
 <!-- 헤더 끝 -->
-	<h3 id="boardType"></h3>
+	<a href="/TMS/board?ct_idx=${ct_idx }"><h3 id="boardType"></h3></a>
 	
 	<div>
 	<select id="cntPerPage" onchange="selChange()">
@@ -85,7 +102,7 @@
 						</c:if>
 					</td>
 					<td>
-						${list.id }
+						<div class="idDiv" userId="${list.id }">${list.id }</div>
 					</td>
 					<td>
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${list.b_regdate }" />
@@ -95,6 +112,11 @@
 					</td>
 				</tr>
 			</c:forEach>
+			<c:if test="${empty boardList }">
+				<tr>
+					<td colspan="5" style="font-size: 2.0em; font-style: bold;">조회된 게시물이 없습니다.</td>
+				</tr>
+			</c:if>
 		</tbody>
 		<tfoot>
 			<tr> 
@@ -156,9 +178,96 @@
 	
 <script>
 	function write_go(){
-		location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
+		if (${ct_idx == 3}){
+			console.log("여 왔네");
+			$.ajax({
+				url: '/chkBooking',
+				type: 'get',
+				data: {id:'${usersVO.id}'},
+				dataType: 'text',
+				success: function(result){
+					if (result == 'success'){
+						location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
+					} else if (result == 'fail'){
+						alert("TMS 서비스를 이용한 후에 후기를 작설할 수 있습니다.");
+						return false;
+					}
+				}, error: function(error){
+					
+				}
+			})
+		} else {
+			location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
+		}
 	}
+	<c:if test="${not empty chkBooking}">
+		alert("거기스 서비스 이용 후에 후기를 작성할 수 있습니다.");
+	</c:if>
 </script>	
-	
+	<div class="popupLayer">
+		<div>
+			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+		</div>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br>
+		<a id="userProfile" href="#">회원 정보 보기</a><br>
+		<a id="showWritten" href="#">작성글 보기</a><br>
+	</div>
+<script>
+function closeLayer( obj ) {
+	$(".popupLayer").hide();
+}
+
+$(function(){
+	/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+	$('.idDiv').click(function(e)
+	{
+		var sWidth = window.innerWidth;
+		var sHeight = window.innerHeight;
+
+		var oWidth = $('.popupLayer').width();
+		var oHeight = $('.popupLayer').height();
+
+		// 레이어가 나타날 위치를 셋팅한다.
+		var divLeft = e.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
+		var divTop = e.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
+		console.log("X: "+ e.clientX);
+		console.log("Y: "+ e.clientY);
+
+		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+		if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+		if( divLeft < 0 ) divLeft = 0;
+		if( divTop < 0 ) divTop = 0;
+
+		$('.popupLayer').css({
+			"top": divTop,
+			"left": divLeft,
+			"position": "absolute"
+		}).show();
+		console.log(this);
+		var userId = $(this).attr("userId");
+		console.log($(this).attr("userId"));
+		$("#showWritten").attr("href", "/TMS/searchList?keyword="+userId+"&target=w&ct_idx=${ct_idx}")
+		$("#sendMsg").click(function(){
+			$(".popupLayer").hide();
+			if ('${usersVO.id}' == ''){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			} 
+			window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
+		});
+		$("#userProfile").click(function(){
+			$(".popupLayer").hide();
+			if ('${usersVO.id}' == ''){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			} 
+			window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+		});
+	})
+});
+</script>
 </body>
 </html>

@@ -11,6 +11,7 @@ import com.bit.domain.BoardVO;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
+import com.bit.domain.CouponVO;
 import com.bit.domain.RecruitVO;
 import com.bit.domain.UsersVO;
 import com.bit.mapper.MyMapper;
@@ -21,6 +22,18 @@ public class MyServiceImpl implements MyService {
 
 	@Autowired
 	private MyMapper mapper;
+	
+	// 내쿠폰보유현황갯수
+	@Override
+	public int coupon_cnt(UsersVO vo) {
+		return mapper.coupon_cnt(vo);
+	}
+
+	// 내쿠폰보유현황
+	@Override
+	public List<CouponVO> coupon(Map map) {
+		return mapper.coupon(map);
+	}
 
 	// 내정보
 	@Override
@@ -181,5 +194,5 @@ public class MyServiceImpl implements MyService {
 	public List<BookingCbVO> my_cabinet_header(UsersVO vo) {
 		return mapper.my_cabinet_header(vo);
 	}
-	
+
 }
