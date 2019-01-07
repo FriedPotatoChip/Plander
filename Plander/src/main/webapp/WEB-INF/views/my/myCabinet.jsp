@@ -5,11 +5,7 @@
 <jsp:include page="/commons/head.jsp"></jsp:include>
 
 <style>
-body {
-	width: 80%;
-	margin: 0 auto;
-	text-align: center;
-}
+
 
 tr, td {
 	border-bottom: 1px solid #000;
@@ -74,14 +70,13 @@ a {
 						<td>${cabinet.ckb_idx }</td>
 						<td>${cabinet.br_name }</td>
 						<td>${cabinet.cb_number }</td>
-						<td>
-<%-- 						<fmt:parseDate value='${cabinet.start_date}' --%>
-<%-- 								pattern='yyyy-MM-dd' /> --%>
-<%-- 							<fmt:formatDate pattern="yyyy-MM-dd"
-								value="${cabinet.start_date }" /> --%> <br> - <fmt:parseDate
-								value='${cabinet.end_date}' pattern='yyyy-MM-dd' />
-<%-- 							<fmt:formatDate pattern="yyyy-MM-dd" value="${cabinet.end_date }" /> --%>
-						</td>
+						<td><fmt:parseDate value='${cabinet.start_date}'
+								pattern='yyyy-MM-dd' var="startDate"/>
+								<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
+								 <br> - <fmt:parseDate
+								value='${cabinet.end_date}' pattern='yyyy-MM-dd' var="endDate"/>
+								<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
+								</td>
 						<td><button type="button"
 								class="btn btn-outline-danger btn-sm"
 								onclick="location.href='/TMS/my/delCabinet?ckb_idx=${cabinet.ckb_idx }'">예약취소</button></td>
@@ -92,28 +87,28 @@ a {
 				<div id="paging">
 					<ul id="pagingList">
 						<c:if test="${page.chkStartPage }">
-							<li><a href="#"
+							<li><a href="javascript:click()"
 								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li><a href="#"
+							<li><a href="javascript:click()"
 								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
-								<li><a class="now marginLi" href="#"
+								<li><a class="now marginLi" href="javascript:click()"
 									onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
-								<li><a class="marginLi" href="#"
+								<li><a class="marginLi" href="javascript:click()"
 									onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
-							<li><a href="#"
+							<li><a href="javascript:click()"
 								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
-							<li><a href="#"
+							<li><a href="javascript:click()"
 								onclick="fetch_book('/TMS/my/my_cabinet?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
 						</c:if>
 					</ul>

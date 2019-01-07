@@ -10,6 +10,8 @@ import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.CouponVO;
 import com.bit.domain.RecruitVO;
+import com.bit.domain.RecvMsgVO;
+import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 
 public interface MyMapper {
@@ -19,7 +21,19 @@ public interface MyMapper {
 	
 	// 내쿠폰보유현황
 	public List<CouponVO> coupon(Map map);
-
+	
+	// 보낸쪽지 갯수
+	public int sendMsgCnt(UsersVO vo);
+	
+	// 보낸쪽지
+	public List<SendMsgVO> sendMsg(Map map);
+	
+	// 받은쪽지 갯수
+	public int recvMsgCnt(UsersVO vo);
+	
+	// 받은쪽지
+	public List<RecvMsgVO> recvMsg(Map map);
+	
 	// 내정보
 	public UsersVO user(UsersVO vo);
 
@@ -96,8 +110,14 @@ public interface MyMapper {
 	
 //	여기서부터는 로그인 헤더 관련 ---------------------------
 	
+	// 내 좌석 예약내역 갯수
+	public int my_seat_header_cnt(UsersVO vo);
+	
 	// 내 좌석 예약내역
 	public List<BookingVO> my_seat_header(UsersVO vo);
+	
+	// 내 사물함 예약내역 갯수
+	public int my_cabinet_header_cnt(UsersVO vo);
 	
 	// 내 사물함 예약내역
 	public List<BookingCbVO> my_cabinet_header(UsersVO vo);

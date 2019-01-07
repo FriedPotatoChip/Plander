@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp"></jsp:include>
-
 <style>
+
 
 tr, td {
 	border-bottom: 1px solid #000;
@@ -22,7 +22,7 @@ tr:last-child td {
 }
 
 #pagingList li {
-	display: inline;
+	display: inline; 
 }
 
 .marginLi {
@@ -40,14 +40,14 @@ a {
 /* 페이징 끝 */
 </style>
 </head>
-<body>
 
+<body>
 	<thead>
 		<tr>
-			<th>쿠폰명</th>
-			<th>할인금액</th>
-			<th>사용기한</th>
-			<th>매수</th>
+			<th>제목</th>
+			<th>보낸사람</th>
+			<th>내용</th>
+			<th>날짜</th>
 		</tr>
 	</thead>
 
@@ -56,28 +56,19 @@ a {
 			<c:when test="${empty list}">
 				<tr>
 					<td colspan="4">
-						<h2>현재 보유하고 계신 쿠폰이 없습니다.</h2>
+						<h2>받은 쪽지가 없습니다.</h2>
 					</td>
 				</tr>
 			</c:when>
 
 			<c:otherwise>
-				<c:forEach var="coupon" items="${list }">
+				<c:forEach var="msg" items="${list }">
 					<tr>
-						<td>${coupon.cb_name }</td>
-						<td>${coupon.cb_discount }<c:choose>
-								<c:when
-									test="${coupon.cb_distype == percent || coupon.cb_distype == PERCENT }">
-								%
-							</c:when>
-								<c:otherwise>
-							원
-							</c:otherwise>
-							</c:choose>
-						</td>
+						<td>${msg.title }</td>
+						<td>${msg.send_id }</td>
+						<td>${msg.content }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
-								value="${coupon.cp_enddate }" /></td>
-						<td>${coupon.cp_quantity }</td>
+								value="${msg.regdate }" /></td>
 					</tr>
 				</c:forEach>
 
@@ -86,28 +77,28 @@ a {
 					<ul id="pagingList">
 						<c:if test="${page.chkStartPage }">
 							<li><a href="javascript:click()"
-								onclick="fetch_book('/TMS/my/coupon?nowPage=1')"><button>&lt;&lt;</button></a></li>
+								onclick="fetch_book('/TMS/my/recvMsg?nowPage=1')"><button>&lt;&lt;</button></a></li>
 							<li><a href="javascript:click()"
-								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+								onclick="fetch_book('/TMS/my/recvMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
 								<li><a class="now marginLi" href="javascript:click()"
-									onclick="fetch_book('/TMS/my/coupon?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/TMS/my/recvMsg?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li><a class="marginLi" href="javascript:click()"
-									onclick="fetch_book('/TMS/my/coupon?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/TMS/my/recvMsg?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
 							<li><a href="javascript:click()"
-								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
+								onclick="fetch_book('/TMS/my/recvMsg?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
 							<li><a href="javascript:click()"
-								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+								onclick="fetch_book('/TMS/my/recvMsg?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
 						</c:if>
 					</ul>
 				</div>
