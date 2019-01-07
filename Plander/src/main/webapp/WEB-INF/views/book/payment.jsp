@@ -469,7 +469,7 @@
 		<!-- 예약 헤더끝 -->
 
 		<div class="boxoutside" style="border: 1px solid;">
-			<form method="post" name="form1" action="/TMS/book/payok">
+			<form method="post" name="form1" onsubmit="payment()">
 
 				<div style="padding: 10px;">
 					<h5>예매자 확인</h5>
@@ -524,14 +524,49 @@
 					<span id="finPrice"></span>
 					
 					<h5>결제방식 선택</h5>
+					<!-- <label class="radio-inline">
+						<input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label> -->
 					<label class="radio-inline">
-						<input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label>
+						<input type="radio" name="pay" id="naverPayBtn" value="2">네이버페이</label><br>
 					<label class="radio-inline">
-						<input type="radio" name="pay" id="naverpay" value="2">네이버페이</label><br>
+						<input type="radio" name="pay" id="payTest" value="3">결제</label><br>
 					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="">이전단계</button>&nbsp;
+						<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
 						<button type="submit">다음단계</button>
 					</div>
+					<script>
+						function payment() {
+							var radio = $("input[name='pay']").value;
+							console.log("pay value 값 확인 : " + radio);
+							
+							var bookprice = $("input[name='bookprice']").value;
+							console.log("bookprice 값 확인 : " + bookprice);
+							
+							if (radio == 2) {
+								oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
+									"merchantPayKey" : "partnder-orderkey",
+									"productName" : "[거북이의 기적]",
+									"productCount" : 1,
+									"totalPayAmount" : bookprice,
+									"taxScopeAmount" : bookprice,
+									"taxExScopeAmount" : 0,
+									"returnUrl" : "/TMS/payment/naverPay",
+									"productItems" : [ {
+										"categoryType" : "ETC",
+										"categoryId" : "ETC",
+										"uid" : "1234",
+										"name" : "test",
+										"count" : 1
+									} ]
+								});
+							} else {
+								form1.action="/TMS/book/payok";
+								form1.submit();
+							}
+							
+						}
+					
+					</script>
 
 					<input type="hidden" name="booknum" value="">
 					<input type="hidden" name="price" value="">
@@ -566,100 +601,189 @@
 	<!-- 바디 콘테이너 끝 -->
 
 <script>
-$(document).ready(function(){
-	window.finalPrice = 0;
-	$.ajax({
-		url: "/couponList",
-		type: "get",
-		data: {"id":"${usersVO.id}"},
-		dataType: "json",
-		success: function(result){
-			
-			var html = "";
-			if (result == ""){
-				html += "<option value='0' type='0' price='0'>없음</option>";
-			}else {
-				$.each(result, function(index, value){
-					if ((value.cb_roomtype == 'LAB' && sct_idx != 1) || (value.cb_roomtype == 'PRIVATE' && sct_idx == 1) || (value.cb_roomtype == 'ALL')){
-						html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
-						if (value.cb_distype == 'PERCENT'){
-							html += "%";
-						}else if (value.cb_distype == 'PRICE'){
-							html += "원";
-						}
-						html += "("+value.cp_quantity+" 개)";
-						html += "</option>";
-					}
-				});
-			}
-			$("#coupon").append(html);
-			
-		}, error: function(error){
-			
-		}
-	});
-});
-
-$("#coupon").on("change", function(){
-	finalPrice = sum;
-	var option = $('option:selected', this);
-	window.cp_idx = option.attr("value");
-	var type = option.attr("type");
-	var price = option.attr("price");
-	console.log("cp_idx: "+ cp_idx);
-	var couponPrice = "";
-	// 퍼센트 쿠폰
-	if (type == 'PERCENT'){
-		finalPrice = (finalPrice * (100 - price)) / 100;
-		couponPrice += "쿠폰 적용 가격: "+ sum+ " * "+ ((100 - price) / 100) + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
-	}
-	
-	// 금액 쿠폰
-	if (type == 'PRICE'){
-		finalPrice -= price;
-		couponPrice += "쿠폰 적용 가격: "+ sum+ " - "+ price + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
-	}
-	finalPrice = Math.floor(finalPrice);
-	$("#finPrice").html(couponPrice);
-})
-
-function nextSubmit(frm){
-	
-	var pay = $("input[name='pay']:checked").val();
-	if (pay == undefined){
-		alert("결제 수단을 선택해주세요");
-		$("input[name='pay']").focus();
-		return false;
-	}
-	
-	if (finalPrice == 0){
-		finalPrice = sum;
-	}
-	$("#hiddenPrice").val(finalPrice);
-	var couponVal = $("#coupon").val();
-	if (couponVal != 0){
+	$(document).ready(function(){
+		window.finalPrice = 0;
 		$.ajax({
-			url: '/minusCoupon',
-			type: 'get',
-			data: {'cp_idx':cp_idx},
-			dataType: 'text',
+			url: "/couponList",
+			type: "get",
+			data: {"id":"${usersVO.id}"},
+			dataType: "json",
 			success: function(result){
-				if (result == 'success'){
-					console.log("성공");
-					frm.submit();
-				} else if(result == 'fail') {
+				
+				var html = "";
+				if (result == ""){
+					html += "<option value='0' type='0' price='0'>없음</option>";
+				}else {
+					$.each(result, function(index, value){
+						if ((value.cb_roomtype == 'LAB' && sct_idx != 1) || (value.cb_roomtype == 'PRIVATE' && sct_idx == 1) || (value.cb_roomtype == 'ALL')){
+							html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
+							if (value.cb_distype == 'PERCENT'){
+								html += "%";
+							}else if (value.cb_distype == 'PRICE'){
+								html += "원";
+							}
+							html += "("+value.cp_quantity+" 개)";
+							html += "</option>";
+						}
+					});
+				}
+				$("#coupon").append(html);
+				
+			}, error: function(error){
+				
+			}
+		});
+	});
+	
+	$("#coupon").on("change", function(){
+		finalPrice = sum;
+		var option = $('option:selected', this);
+		window.cp_idx = option.attr("value");
+		var type = option.attr("type");
+		var price = option.attr("price");
+		console.log("cp_idx: "+ cp_idx);
+		var couponPrice = "";
+		// 퍼센트 쿠폰
+		if (type == 'PERCENT'){
+			finalPrice = (finalPrice * (100 - price)) / 100;
+			couponPrice += "쿠폰 적용 가격: "+ sum+ " * "+ ((100 - price) / 100) + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
+		}
+		
+		// 금액 쿠폰
+		if (type == 'PRICE'){
+			finalPrice -= price;
+			couponPrice += "쿠폰 적용 가격: "+ sum+ " - "+ price + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
+		}
+		finalPrice = Math.floor(finalPrice);
+		$("#finPrice").html(couponPrice);
+	})
+	
+	function nextSubmit(frm){
+		
+		var pay = $("input[name='pay']:checked").val();
+		if (pay == undefined){
+			alert("결제 수단을 선택해주세요");
+			$("input[name='pay']").focus();
+			return false;
+		}
+		
+		if (finalPrice == 0){
+			finalPrice = sum;
+		}
+		$("#hiddenPrice").val(finalPrice);
+		var couponVal = $("#coupon").val();
+		if (couponVal != 0){
+			$.ajax({
+				url: '/minusCoupon',
+				type: 'get',
+				data: {'cp_idx':cp_idx},
+				dataType: 'text',
+				success: function(result){
+					if (result == 'success'){
+						console.log("성공");
+						frm.submit();
+					} else if(result == 'fail') {
+						alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+						return false;
+					}
+				}, error: function(error){
 					alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
 					return false;
 				}
-			}, error: function(error){
-				alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
-				return false;
-			}
-		})
-	} else {
-		frm.submit();
+			})
+		} else {
+			frm.submit();
+		}
 	}
-}
+</script>
+<!-- 네이버 페이 -->
+<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
+<script>
+	var oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
+		"clientId": "u86j4ripEt8LRfPGzQ8"
+		//"chainId" : "{그룹형일 경우 chainId를 넣어주세요}"
+	});
+	
+	//직접 만드신 네이버페이 결제버튼에 click Event를 할당하세요
+	
+	var elNaverPayBtn = document.getElementById("naverPayBtn");
+
+    /*
+    merchantPayKey: 가맹점 주문내역 확인 가능한 가맹점 결제번호 또는 주문번호를 전달해야 합니다.
+    productName: 대표 상품명
+    productCount: 상품 수량 예: A 상품 2개 + B 상품 1개의 경우 productCount 3으로 전달
+    totalPayAmount: 총 결제 금액
+    taxScopeAmount: 과세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액
+    taxExScopeAmount: 면세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액
+    returnUrl: 결제 인증 결과 전달 URL, 결제 완료 후 이동할 URL(returnUrl + 가맹점 파라미터 전달이 가능합니다)
+    			네이버페이는 결제 작업 완료 후, 가맹점이 등록한 returnUrl로 리디렉션을 수행합니다 가맹점은 이를 활용하여 내부 처리를 수행하거나
+    			구매자에게 결제 결과 화면을 노출할 수 있습니다
+    productItems(Array): productItem 배열. 자세한 내용은 아래 "표 2 productItem"을 참고 바랍니다
+    
+    --productItem 배열
+    categoryType: 결제 상품 유형
+    categoryId: 결제 상품 유형
+    uid: 결제 상품 유형
+    name: 상품명
+    count: 결제 상품 개수. 기본값은 1
+    */
+    
+    //네이버 페이 결제화면 호출
+    function payment() {
+		var radio = $("input[name='pay']").val();
+		alert("pay value 값 확인 : " + radio);
+		
+		var bookprice = $("input[name='bookprice']").val();
+		alert("bookprice 값 확인 : " + bookprice);
+		
+		if (radio == 2) {
+			alert("여기까지 옴 ");
+			oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
+				"merchantPayKey" : "partnder-orderkey",
+				"productName" : "[거북이의 기적]",
+				"productCount" : 1,
+				"totalPayAmount" : bookprice,
+				"taxScopeAmount" : bookprice,
+				"taxExScopeAmount" : 0,
+				"returnUrl" : "/TMS/payment/naverPay",
+				"productItems" : [ {
+					"categoryType" : "ETC",
+					"categoryId" : "ETC",
+					"uid" : "1234",
+					"name" : "test",
+					"count" : 1
+				} ]
+			});
+		} else {
+			form1.action="/TMS/book/payok";
+			form1.submit();
+		}
+		
+	}
+    
+    /* elNaverPayBtn.addEventListener("click", function() {
+		oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
+			"merchantPayKey" : "partnder-orderkey",
+			"productName" : "커스텀 결제",
+			"productCount" : 1,
+			"totalPayAmount" : 100,
+			"taxScopeAmount" : 100,
+			"taxExScopeAmount" : 0,
+			"returnUrl" : "/TMS/payment/naverPay",
+			"productItems" : [ {
+				"categoryType" : "ETC",
+				"categoryId" : "ETC",
+				"uid" : "1234",
+				"name" : "test",
+				"count" : 1
+			} ]
+		});
+		//oPay.close();
+		
+		 */
+	
+	//}); //결제화면 호출 끝
+	
 </script>
 </body>
 </html>
