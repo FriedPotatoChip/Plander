@@ -4,9 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="/commons/head.jsp" />
+<%-- <jsp:include page="/commons/head.jsp" /> --%>
+
 <title>Main 화면</title>
 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<link href="/resources/css/main.css" rel="stylesheet">
+<!-- 나눔스퀘어  -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 
 <style>
 body {
@@ -111,7 +125,7 @@ body {
 #map {
 	height: 400px;
 	width: 70%;
-	margin:auto;
+	margin: auto;
 }
 
 .controls {
@@ -157,20 +171,20 @@ body {
 </head>
 
 <body>
-<!-- 헤더 -->
-<!-- Header -->
-<c:if test="${empty sessionScope.usersVO }">
-	<jsp:include page="/commons/header.jsp" />
-</c:if>
-<c:if test="${not empty sessionScope.usersVO }">
-	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
-		<jsp:include page="/commons/loginheader.jsp" />
+	<!-- 헤더 -->
+	<!-- Header -->
+	<c:if test="${empty sessionScope.usersVO }">
+		<jsp:include page="/commons/header.jsp" />
 	</c:if>
-	<c:if test="${sessionScope.usersVO.rank == 1 }">
-		<jsp:include page="/commons/adminLoginheader.jsp" />
+	<c:if test="${not empty sessionScope.usersVO }">
+		<c:if test="${sessionScope.usersVO.rank != 1 }">
+			<jsp:include page="/commons/loginheader.jsp" />
+		</c:if>
+		<c:if test="${sessionScope.usersVO.rank == 1 }">
+			<jsp:include page="/commons/adminLoginheader.jsp" />
+		</c:if>
 	</c:if>
-</c:if>
-<!-- 헤더 끝 -->
+	<!-- 헤더 끝 -->
 
 
 	<!-- Navigation -->
@@ -285,7 +299,8 @@ body {
 					height="auto">
 				<h3>지점 C</h3>
 				<p>
-					서울 서대문구 연세로5나길 14 지하 1층, <br> <strong>지번</strong> 서울 서대문구 창천동 62-59 지하 1층
+					서울 서대문구 연세로5나길 14 지하 1층, <br> <strong>지번</strong> 서울 서대문구 창천동
+					62-59 지하 1층
 				</p>
 			</div>
 		</div>
@@ -321,7 +336,8 @@ body {
 	</figure>  -->
 
 	<!--- Emoji Section -->
-	<button class="fun" data-toggle="collapse" data-target="#emoji">본인의 집에서 스터디룸까지 오는 방법은?</button>
+	<button class="fun" data-toggle="collapse" data-target="#emoji">본인의
+		집에서 스터디룸까지 오는 방법은?</button>
 	<div id="emoji" class="collapse">
 		<div class="container-fluid padding">
 			<div class="row text-center">
@@ -332,14 +348,14 @@ body {
 						placeholder="Enter a destination location">
 
 					<div id="mode-selector" class="controls">
-						<input type="radio" name="type" id="changemode-walking" checked="checked"> 
-						<label for="changemode-walking">Walking</label>
+						<input type="radio" name="type" id="changemode-walking"
+							checked="checked"> <label for="changemode-walking">Walking</label>
 
-						<input type="radio" name="type" id="changemode-transit" checked="checked"> 
-						<label for="changemode-transit">Transit</label> 
-						
-						<input type="radio" name="type" id="changemode-driving">
-						<label for="changemode-driving">Driving</label>
+						<input type="radio" name="type" id="changemode-transit"
+							checked="checked"> <label for="changemode-transit">Transit</label>
+
+						<input type="radio" name="type" id="changemode-driving"> <label
+							for="changemode-driving">Driving</label>
 					</div>
 				</div>
 				<div id="map"></div>
@@ -410,7 +426,7 @@ body {
 				<br>
 			</div>
 			<div class="col-lg-6">
-				<iframe width="90%" height="300px"
+				<iframe width="90%" height="400px" style="margin:auto;"
 					src="https://www.youtube.com/embed/egcd1psh81c" frameborder="0"
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>
@@ -437,40 +453,41 @@ body {
 
 	<!--- Footer -->
 	<footer>
-	<div class="container-fluid padding">
-		<div class="row text-center">
-			<div class="col-md-4">
-				<img src="img/w3newbie.png">
-				<hr class="light">
-				<p>555=555=5555</p>
-				<p>email@yemail.com</p>
-				<p>100 Street Name</p>
-				<p>City, State, 00000</p>
-			</div>
-			<div class="col-md-4">
-				<hr class="light">
-				<h5>Our Hours</h5>
-				<hr class="light">
-				<p>Monday: 9am - 5</p>
-				<p>Saturday: 10am - 4px</p>
-				<p>Sunday: closed</p>
-			</div>
-			<div class="col-md-4">
-				<hr class="light">
-				<h5>Service Area</h5>
-				<hr class="light">
-				<p>City, State, 00000</p>
-				<p>City, State, 00000</p>
-				<p>City, State, 00000</p>
-				<p>City, State, 00000</p>
-				<p>City, State, 00000</p>
-			</div>
-			<div class="col-12">
-				<hr class="light-100">
-				<h5>&copy; w3newbie.com</h5>
+		<div class="container-fluid padding">
+			<div class="row text-center">
+				<div class="col-md-4">
+					<img src="/resources/images/logo.png"
+						style="width: 190px; height: auto; vertical-align: middle;">
+					<hr class="light">
+					<p>555=555=5555</p>
+					<p>email@yemail.com</p>
+					<p>100 Street Name</p>
+					<p>City, State, 00000</p>
+				</div>
+				<div class="col-md-4">
+					<hr class="light">
+					<h5>Our Hours</h5>
+					<hr class="light">
+					<p>Monday: 9am - 5</p>
+					<p>Saturday: 10am - 4px</p>
+					<p>Sunday: closed</p>
+				</div>
+				<div class="col-md-4">
+					<hr class="light">
+					<h5>Service Area</h5>
+					<hr class="light">
+					<p>City, State, 00000</p>
+					<p>City, State, 00000</p>
+					<p>City, State, 00000</p>
+					<p>City, State, 00000</p>
+					<p>City, State, 00000</p>
+				</div>
+				<div class="col-12">
+					<hr class="light-100">
+					<h5>&copy; w3newbie.com</h5>
+				</div>
 			</div>
 		</div>
-	</div>
 	</footer>
 	<script>
 		function initialize() {

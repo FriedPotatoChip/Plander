@@ -698,7 +698,7 @@ style>body, html {
 			
 			/* modal 안에서 radio를 체크 */
 			$("input[type=radio]").click(function () {
-			    $(this).prop("checked");
+			    	$("input[type=radio]:checked").prop("checked", true);
 			    	
 			    	/* 체크된 좌석의 번호 */
 			    	var changeScol = $("input[type=radio]:checked").val();
@@ -716,7 +716,6 @@ style>body, html {
  			    		console.log('asdb-after : ' + changeScol);
  			    		
  			    		if(changeScol == s_col) {
- 			    			alert("이동이 불가능하지만 But");
  			    			/* 예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함 */
  			    			if(changePersonEnd_time < start_time || end_time < changePersonStart_time) {
  			    				alert("이동이 가능합니다.");
@@ -725,6 +724,7 @@ style>body, html {
  			    				alert('이동 불가');
  			    			}
  			    		} else {
+ 			    			
  			    			alert('이동가능');
  			    			return false;
  			    		}
