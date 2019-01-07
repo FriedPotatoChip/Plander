@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.SendMsgVO;
 import com.bit.service.BoardService;
 import com.bit.service.CommonService;
 import com.bit.service.RecruitService;
@@ -81,6 +82,17 @@ public class AjaxController {
 		map.put("cp_quantity", 1);
 		boolean chkCou = recService.insertCoupon(map);
 		if (chk && chkCou) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping("/sendMsg")
+	public String sendMsg(SendMsgVO vo) {
+		System.out.println(vo);
+		boolean chkMsg = comService.sendMsg(vo);
+		if (chkMsg) {
 			return "success";
 		} else {
 			return "fail";

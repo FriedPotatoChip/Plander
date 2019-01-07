@@ -59,7 +59,7 @@
 #primaryNav li a h5 {
 	font-weight: 700;
 }
-
+#googleBtn:hover { cursor: pointer; }
 </style>
 
 
@@ -235,7 +235,7 @@
 		var testPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 		var testPwd = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,16}$/;
 		var testEmail = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
-		var testId = /^[a-zA-Z0-9]+$/;
+		var testId = /^([a-zA-Z0-9]+){4,20}$/;
 		var testName = /^[가-힣a-zA-Z]+$/;
 
 		var checkNumber = password.search(/[0-9]/g);
@@ -253,7 +253,7 @@
 			return false;
 		}
 		if (!testId.test(id)) {
-			alert("아이디는 영문, 숫자 조합만 가능합니다.");
+			alert("아이디는 영문, 숫자 조합(4-20자)만 가능합니다.");
 			frm.id.focus();
 			return;
 		}
@@ -371,7 +371,7 @@
 					<input type="text" name="id" class="form-control my-2" placeholder="아이디"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" id="idInput" required>
 					<input type="text" name="password" class="form-control my-2"
-						style="margin-top: 1.5%;" placeholder="비밀번호"
+						style="margin-top: 1.5%;  font-family: 굴림;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
 					<input type="button" style="background-color: #3b5998; color: white;"
 						class="btn btn-block form-control my-2 bold" value="로그인"
@@ -387,15 +387,16 @@
 					<!-- <input type="button" value="구글 로그인" id="googleBtn"
 						onclick="googleLogin()" style="margin: 5% auto;"> -->
 					<!-- 네이버 로그인 -->
-					<img src="/resources/images/naver.jpg" id="naverIdLogin" class="mx-2"
-						type="button" style="width: 60px; height: 60px;">
-<!-- 					<div id="naverIdLogin" ></div> -->
+ 					<div id="naverIdLogin" style="display: inline-block; margin-right: 8px;"></div>
 					<!-- <input type="button" name="naverLogin" class=" btn btn-outline-secondary form-control"
 					style="margin-top: 1.5%;" onclick="" id="naverIdLogin" value="네이버 로그인"> -->
 					<!-- 카카오 로그인 -->
-					<img src="/resources/images/kakao.jpg" id="kakao-login-btn" class="mx-2"
-						type="button" style="width: 60px; height: 60px;">
-<!-- 					<a id="kakao-login-btn"></a> -->
+<!-- 					<img src="/resources/images/kakao.jpg" id="kakao-login-btn" class="mx-2"
+						type="button" style="width: 60px; height: 60px;"  href="javascript:loginWithKakao()"> -->
+ 					<!-- <a id="kakao-login-btn"></a> -->
+ 					<a id="custom-login-btn" href="javascript:loginWithKakao()"> 
+						<img src="/resources/images/kakao.jpg" style="width: 60px; height: 60px;"/>
+					</a>
 					<!-- <input type="button" name="kakaoLogin" class=" btn btn-outline-secondary form-control"
 					style="margin-top: 1.5%;" onclick="" value="카카오톡으로 로그인"> -->
 				</form>
@@ -486,7 +487,7 @@
 						</tbody>
 					</table>
 					<div id="admit">
-						<div class="checkbox" style="float: right;">
+						<div class="checkbox">
 							<label><input type="checkbox" id="chkBox" name="chKBox">&nbsp;<b>거기스</b>에
 								가입하면서 <a>이용약관</a>과 <a>개인정보 취급방침</a>을 확인하고 이에 동의합니다.</label>
 						</div>
@@ -515,12 +516,12 @@
 <!-- 카카오 로그인 api -->
 <script type='text/javascript'>
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('카카오클라이언트ID'); /* 클라이언트 id 숨겨두기 */
+	Kakao.init('카카오클라'); /* 클라이언트 id 숨겨두기 */
 	// 카카오 로그인 버튼을 생성합니다.
-	Kakao.Auth.createLoginButton({
-		container : '#kakao-login-btn',
+    function loginWithKakao() {
+	Kakao.Auth.login({
 		success : function(authObj) {
-			alert(JSON.stringify(authObj));
+			/* alert(JSON.stringify(authObj)); */
 
 			Kakao.API.request({
 				url : '/v1/user/me',
@@ -553,19 +554,20 @@
 			alert(JSON.stringify(err));
 		}
 	});
+	};
 	//_$t
 </script>
 <!-- 네이버 로그인 api -->
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId({
-		clientId : "네이버 클라이언트 아이디", /* 클라이언트 ID (숨겨두기) */
+		clientId : "네이버클라", /* 클라이언트 ID (숨겨두기) */
 		callbackUrl : "http://localhost:8095/TMS/naverCallback",
 		isPopup : true, /* 팝업을 통한 연동처리 여부 */
 		callbackHandle : true,
 		loginButton : {
 			color : "green",
-			type : 3,
-			height : 45
+			type : 1,
+			height : 60
 		}
 	/* 로그인 버튼의 타입을 지정 */
 	});
@@ -579,7 +581,7 @@
 		console.log("구글 로그인 시작");
 		gapi.load('auth2', function() {
 			var gauth = gapi.auth2.init({
-				client_id : '구글 클라이언트 ID'/* 구글 클라이언트 키 */
+				client_id : '구글클라'/* 구글 클라이언트 키 */
 			})
 			gauth.signIn()
 					.then(

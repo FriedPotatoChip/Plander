@@ -18,6 +18,12 @@
 	<update id="minusCoupon" parameterType="int">
 		UPDATE COUPON SET CP_QUANTITY = CP_QUANTITY - 1 WHERE CP_IDX = #{cp_idx}
 	</update>	
+	
+	<!-- 쪽지 보내기 -->
+	<insert id="sendMsg" parameterType="com.bit.domain.SendMsgVO">
+		INSERT INTO SEND_MSG (SM_IDX, SEND_ID, RECV_ID, TITLE, CONTENT, REGDATE)
+				VALUES (SEND_MSG_SEQ.NEXTVAL, #{send_id}, #{recv_id}, #{title}, #{content}, sysdate)
+	</insert>
 </mapper>
 
 

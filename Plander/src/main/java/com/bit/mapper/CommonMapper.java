@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.SendMsgVO;
 
 public interface CommonMapper {
 	
@@ -15,4 +16,6 @@ public interface CommonMapper {
 	// 쿠폰 갯수 -1
 	public boolean minusCoupon(int cp_idx);
 	
+	// 쪽지 보내기
+	public boolean sendMsg(SendMsgVO vo);
 }

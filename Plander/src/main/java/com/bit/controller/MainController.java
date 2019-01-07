@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.UsersVO;
+import com.bit.service.LoginService;
 import com.bit.service.MyService;
 import com.bit.utils.UploadFileUtils;
 
@@ -33,6 +34,8 @@ public class MainController {
 
 	@Autowired
 	private MyService myService;
+	@Autowired
+	private LoginService logService;
 
 	@RequestMapping("")
 	public String main(HttpSession session) {
@@ -103,5 +106,25 @@ public class MainController {
 		session.setAttribute("usersVO", user);
 		return "redirect: /TMS/my";
 	}
-
+	
+	@GetMapping("/sendMsg")
+	public String sendMsg(@RequestParam(value="recv_id", required=false)String recv_id, Model model) {
+		
+		UsersVO vo = new UsersVO();
+		vo.setId(recv_id);
+		vo = logService.chkId(vo);
+		model.addAttribute("recv_user", vo);
+		return "main/sendMsg";
+	}
+	
+	@GetMapping("/profileSummary")
+	public String profileSummary(@RequestParam(value="id", required=false)String id, Model model) {
+		
+		UsersVO vo = new UsersVO();
+		vo.setId(id);
+		vo = logService.chkId(vo);
+		model.addAttribute("profile", vo);
+		return "main/profileSummary";
+	}
+	
 }

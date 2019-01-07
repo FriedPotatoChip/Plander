@@ -94,6 +94,11 @@
 					</td>
 				</tr>
 			</c:forEach>
+			<c:if test="${empty boardList }">
+				<tr>
+					<td colspan="6" style="font-size: 2.0em; font-style: bold;">조회된 게시물이 없습니다.</td>
+				</tr>
+			</c:if>
 		</tbody>
 		<tfoot>
 			<tr> 
