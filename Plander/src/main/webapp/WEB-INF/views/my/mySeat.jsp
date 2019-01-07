@@ -22,6 +22,7 @@ tr:last-child td {
 }
 
 /* 페이징 시작 */
+
 #pagingList {
 	list-style: none;
 }

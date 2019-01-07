@@ -42,7 +42,7 @@ function click() {
 }
 
 body>div {
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 }
 
@@ -91,13 +91,13 @@ h3 {
 }
 
 .my_info {
-	width: 48%;
+	width: 36%;
 	float: left;
 	margin-bottom: 30px;
 }
 
 .myBook {
-	width: 48%;
+	width: 60%;
 	float: right;
 }
 
