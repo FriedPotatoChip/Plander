@@ -138,6 +138,10 @@
 											</c:otherwise>
 										</c:choose>
 										<hr>
+										<h6>쪽지<b style="color: red;" id="almNum"></b></h6>
+											<div style="display: inline-block;" id="msgDiv">
+											</div>
+										<hr>
 									</div>
 									<a href="/TMS/my" style="text-align: center;">마이페이지</a><a
 										href="/TMS/logout" style="text-align: center;">로그아웃</a>
@@ -149,4 +153,41 @@
 
 		</div>
 	</nav>
-</body>
+<script>
+$(function(){
+	newMsgAlarm();
+});
+	function newMsgAlarm(){
+		$.ajax({
+			url: '/newRecvMsg',
+			type: 'post',
+			data: {'id':'${usersVO.id}'},
+			dataType: 'json',
+			success: function(result){
+				console.log("result: "+ result.length);
+				var almNum = result.length
+				var sendId = "";
+				var title = "";
+				$("#almNum").html("&nbsp;" + almNum);
+				var html = "";
+				$.each(result, function(index, value){
+					sendId = value.send_id;
+					if (index == 3){
+						html += "<span style='display: inline-block; float: right; font-size: 0.68em; color: black;'>더보기...</span>";
+					} else if (index < 3){
+						html += "<h6 onclick='msgDetail("+value.rm_idx+")' style='cursor: pointer;'>"+sendId+"&nbsp;님께서 보낸 쪽지가 있습니다.</h6>";
+					}
+				});
+				$("#msgDiv").html(html);
+				
+				setTimeout(newMsgAlarm, 5000);
+			}, error: function(error){
+				
+			}
+		})
+	}
+	
+	function msgDetail(rm_idx){
+		window.open("/TMS/recvMsg?rm_idx="+rm_idx, "받은 쪽지", "width=500, height=500");
+	}
+</script>

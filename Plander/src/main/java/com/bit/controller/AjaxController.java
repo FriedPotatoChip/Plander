@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 import com.bit.service.BoardService;
 import com.bit.service.CommonService;
@@ -97,5 +98,10 @@ public class AjaxController {
 		} else {
 			return "fail";
 		}
+	}
+	
+	@RequestMapping("/newRecvMsg")
+	public List<RecvMsgVO> newRecvMsg(@RequestParam("id")String id){
+		return comService.newRecvMsg(id);
 	}
 }

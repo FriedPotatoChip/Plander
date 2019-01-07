@@ -20,7 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
+import com.bit.domain.RecvMsgVO;
 import com.bit.domain.UsersVO;
+import com.bit.service.CommonService;
 import com.bit.service.LoginService;
 import com.bit.service.MyService;
 import com.bit.utils.UploadFileUtils;
@@ -36,6 +38,8 @@ public class MainController {
 	private MyService myService;
 	@Autowired
 	private LoginService logService;
+	@Autowired
+	private CommonService comService;
 
 	@RequestMapping("")
 	public String main(HttpSession session) {
@@ -125,6 +129,17 @@ public class MainController {
 		vo = logService.chkId(vo);
 		model.addAttribute("profile", vo);
 		return "main/profileSummary";
+	}
+	
+	@GetMapping("/recvMsg")
+	public String recvMsg(@RequestParam("rm_idx")int rm_idx, Model model) {
+		RecvMsgVO vo = new RecvMsgVO();
+		vo = comService.msgDetail(rm_idx);
+		model.addAttribute("msg", vo);
+		if (vo.getChk() == 1) {
+			comService.readMsgOne(rm_idx);
+		}
+		return "main/recvMsg";
 	}
 	
 }

@@ -27,8 +27,6 @@ th, td {
 	<hr>
 	
 	<form action="/TMS/sendMsg" method="post" id="msgForm">
-	<input type="hidden" name="recv_id" value="${recv_user.id }" id="recv_id">
-	<input type="hidden" name="send_id" value="${usersVO.id }" id="send_id">
 		<table>
 			<tr>
 				<th>받는이</th>

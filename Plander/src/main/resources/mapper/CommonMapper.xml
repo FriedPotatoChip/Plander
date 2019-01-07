@@ -24,6 +24,21 @@
 		INSERT INTO SEND_MSG (SM_IDX, SEND_ID, RECV_ID, TITLE, CONTENT, REGDATE)
 				VALUES (SEND_MSG_SEQ.NEXTVAL, #{send_id}, #{recv_id}, #{title}, #{content}, sysdate)
 	</insert>
+	
+	<!-- 안읽은 받은 쪽지함 확인 -->
+	<select id="newRecvMsg" resultType="com.bit.domain.RecvMsgVO">
+		SELECT * FROM RECV_MSG WHERE RECV_ID = #{id} AND CHK = 1 ORDER BY RM_IDX DESC
+	</select>
+	
+	<!-- 쪽지 상세 -->
+	<select id="msgDetail" resultType="com.bit.domain.RecvMsgVO">
+		SELECT M.*, U.USER_PROFILEIMAGEPATH FROM RECV_MSG M, USERS U WHERE M.SEND_ID = U.ID AND RM_IDX = #{rm_idx}
+	</select>
+	
+	<!-- 쪽지 읽음 처리 -->
+	<update id="readMsgOne">
+		UPDATE RECV_MSG SET CHK = 0 WHERE RM_IDX = #{rm_idx}
+	</update>
 </mapper>
 
 
