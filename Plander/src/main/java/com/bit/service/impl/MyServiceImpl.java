@@ -13,6 +13,8 @@ import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.CouponVO;
 import com.bit.domain.RecruitVO;
+import com.bit.domain.RecvMsgVO;
+import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.mapper.MyMapper;
 import com.bit.service.MyService;
@@ -33,6 +35,30 @@ public class MyServiceImpl implements MyService {
 	@Override
 	public List<CouponVO> coupon(Map map) {
 		return mapper.coupon(map);
+	}
+	
+	// 보낸쪽지 갯수
+	@Override
+	public int sendMsgCnt(UsersVO vo) {
+		return mapper.sendMsgCnt(vo);
+	}
+
+	// 보낸쪽지
+	@Override
+	public List<SendMsgVO> sendMsg(Map map) {
+		return mapper.sendMsg(map);
+	}
+
+	// 받은쪽지 갯수
+	@Override
+	public int recvMsgCnt(UsersVO vo) {
+		return mapper.recvMsgCnt(vo);
+	}
+
+	// 받은쪽지
+	@Override
+	public List<RecvMsgVO> recvMsg(Map map) {
+		return mapper.recvMsg(map);
 	}
 
 	// 내정보
@@ -183,10 +209,22 @@ public class MyServiceImpl implements MyService {
 
 //	여기서부터는 로그인 헤더 관련 ---------------------------
 	
+	// 내 좌석 예약내역 갯수
+	@Override
+	public int my_seat_header_cnt(UsersVO vo) {
+		return mapper.my_seat_header_cnt(vo);
+	}
+	
 	// 내 좌석 예약내역
 	@Override
 	public List<BookingVO> my_seat_header(UsersVO vo) {
 		return mapper.my_seat_header(vo);
+	}
+	
+	// 내 사물함 예약내역 갯수
+	@Override
+	public int my_cabinet_header_cnt(UsersVO vo) {
+		return mapper.my_cabinet_header_cnt(vo);
 	}
 
 	// 내 사물함 예약내역

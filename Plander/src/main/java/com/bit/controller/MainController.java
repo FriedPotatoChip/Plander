@@ -47,8 +47,8 @@ public class MainController {
 		if (user != null) {
 
 			// 전체 좌석, 사물함 예약 갯수
-			int seatcnt = myService.getTotalSeat(user);
-			int cabinetcnt = myService.getTotalCabinet(user);
+			int seatcnt = myService.my_seat_header_cnt(user);
+			int cabinetcnt = myService.my_cabinet_header_cnt(user);
 
 			session.setAttribute("seatcnt", seatcnt);
 			session.setAttribute("cabinetcnt", cabinetcnt);
