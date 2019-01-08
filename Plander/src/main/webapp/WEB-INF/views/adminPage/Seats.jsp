@@ -397,6 +397,7 @@ style>body, html {
 								</div>
 								<!-- 4번 열 끝 -->
 
+
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModalLong" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalLongTitle"
@@ -433,8 +434,8 @@ style>body, html {
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
+												<!-- 											<button type="button" class="btn btn-primary">Save
+													changes</button> -->
 											</div>
 										</div>
 									</div>
@@ -457,13 +458,13 @@ style>body, html {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="1" end="5" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="6" end="10" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -472,17 +473,17 @@ style>body, html {
 													</div>
 													<br>
 
-													<div id="seat" class="input-group">
+													<div id="seat" class="button">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="11" end="15" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="16" end="20" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -491,17 +492,17 @@ style>body, html {
 													</div>
 													<br>
 
-													<div id="seat" class="input-group">
+													<div id="seat" class="button">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="21" end="25" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="26" end="30" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -512,17 +513,17 @@ style>body, html {
 												<!-- 1번 열 끝 -->
 
 												<div id="row" class="box">
-													<div id="seat" class="input-group">
+													<div id="seat" class="button">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="31" end="33" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="34" end="36" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -531,17 +532,17 @@ style>body, html {
 													</div>
 													<br>
 
-													<div id="seat" class="input-group">
+													<div id="seat" class="button">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="49" end="51" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="52" end="54" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -553,17 +554,17 @@ style>body, html {
 												<!-- 2번 열 끝 -->
 
 												<div id="row" class="box">
-													<div id="seat" class="input-group">
+													<div id="seat" class="button">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="37" end="39" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="40" end="42" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -571,17 +572,17 @@ style>body, html {
 													</div>
 													<br>
 
-													<div id="seat" class="input-group">
+													<div id="seat" class="button">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="55" end="57" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="58" end="60" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -591,17 +592,17 @@ style>body, html {
 												<!-- 3번 열 끝 -->
 
 												<div id="row" class="box">
-													<div id="seat" class="input-group">
+													<div id="seat" class="button">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="43" end="45" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="46" end="48" step="1">
-																	<td class="td" onclick="check(${i })"><a href="#"><input
+																	<td class="td" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -609,8 +610,6 @@ style>body, html {
 													</div>
 												</div>
 												<!-- 4번 열 끝 -->
-												<button>이동</button>
-
 											</div>
 											<!-- allseat 끝 -->
 										</div>
@@ -678,7 +677,7 @@ style>body, html {
 				if(i == s_col) {
 					console.log("data" + i + ": " + id + ", " + start_time + ", " + end_time);
 		
-					html += '<tr><td class="id">'+ id + '</td> <td class="start_time">'+ start_time + '</td> <td class="end_time">' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" onclick="change()"><input type="hidden" value="${s.end_time}" id="end_time"><input type="hidden" id="start_time" value="${s.start_time}">좌석이동</button></td></tr>'; 
+					html += '<tr><td class="id">'+ id + '</td> <td class="start_time">'+ start_time + '</td> <td class="end_time">' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" onclick="change()"><input type="hidden" value="${s.end_time}" id="end_time"><input type="hidden" id="start_time" value="${s.start_time}"><input type="hidden" id="id" value="${s.id}">좌석이동</button></td></tr>'; 
 				} 
 			</c:forEach>
 			$('#exampleModalLong').modal();
@@ -696,11 +695,13 @@ style>body, html {
 			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
 			$('.bd-example-modal-lg').modal();
 			
-			/* modal 안에서 radio를 체크 */
+			/* modal 안에서 radio를 클릭 */
 			$("input[type=radio]").click(function () {
-			    	$("input[type=radio]:checked").prop("checked", true);
-			    	
-			    	/* 체크된 좌석의 번호 */
+					
+					/* 선택한 좌석 radio 체크표시 */
+		    		$(this).prop("checked", true);
+					
+					/* 체크된 좌석의 번호 */
 			    	var changeScol = $("input[type=radio]:checked").val();
 			    	console.log('asdb : ' + changeScol);
 			    	
@@ -731,10 +732,27 @@ style>body, html {
 			    		
 			    	</c:forEach>
 		    		/* 좌석 비교 */
-
 			    }
-
+				
 			);
+		}
+		
+		/* 이동버튼 후 정보 업데이트 */
+		function move(i) {
+			
+			/* 이동할것인지 묻기 */
+			var r = confirm("이동하시겠습니까?");
+			var br_idx = $('.po_category.on').attr('value');
+
+			var chId = $('#id').val();
+			console.log(chId);
+			
+			var changeScol = i;
+			console.log(changeScol);
+			
+			if(r == true) {
+				location.href = "/TMS/admin/update?id="+ chId + "&br_idx=" + br_idx + "&s_idx=" + changeScol;
+			}
 		}
 		
 	</script>

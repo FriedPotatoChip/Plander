@@ -209,7 +209,8 @@ h3 {
 		});
 		
 	</script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"/>
+	
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	<script>
 		window.jQuery
 				|| document
@@ -222,7 +223,7 @@ h3 {
 	<script>
 		feather.replace()
 	</script>
-	Graphs
+
 	
 </body>
 </html>
