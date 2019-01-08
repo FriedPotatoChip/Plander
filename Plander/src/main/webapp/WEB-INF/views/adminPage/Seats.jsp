@@ -453,18 +453,18 @@ style>body, html {
 											<hr style="width: 90%">
 											<div id="allseat">
 												<div id="row" class="box">
-													<div id="seat" class="checkbox">
+													<div id="seat" class="button">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="1" end="5" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="6" end="10" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 
@@ -472,18 +472,18 @@ style>body, html {
 													</div>
 													<br>
 
-													<div id="seat" class="checkbox">
+													<div id="seat" class="input-group">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="11" end="15" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="16" end="20" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 
@@ -491,18 +491,18 @@ style>body, html {
 													</div>
 													<br>
 
-													<div id="seat" class="checkbox">
+													<div id="seat" class="input-group">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="21" end="25" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="26" end="30" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 
@@ -512,18 +512,18 @@ style>body, html {
 												<!-- 1번 열 끝 -->
 
 												<div id="row" class="box">
-													<div id="seat" class="checkbox">
+													<div id="seat" class="input-group">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="31" end="33" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="34" end="36" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 
@@ -531,18 +531,18 @@ style>body, html {
 													</div>
 													<br>
 
-													<div id="seat" class="checkbox">
+													<div id="seat" class="input-group">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="49" end="51" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="52" end="54" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 
@@ -553,36 +553,36 @@ style>body, html {
 												<!-- 2번 열 끝 -->
 
 												<div id="row" class="box">
-													<div id="seat" class="checkbox">
+													<div id="seat" class="input-group">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="37" end="39" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="40" end="42" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 														</table>
 													</div>
 													<br>
 
-													<div id="seat" class="checkbox">
+													<div id="seat" class="input-group">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="55" end="57" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="58" end="60" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 														</table>
@@ -591,18 +591,18 @@ style>body, html {
 												<!-- 3번 열 끝 -->
 
 												<div id="row" class="box">
-													<div id="seat" class="checkbox">
+													<div id="seat" class="input-group">
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="43" end="45" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="46" end="48" step="1">
-																	<td><label><input type="radio"
-																			name="s_col" value="${i }">A-${i }</label></td>
+																	<td class="td" onclick="check(${i })"><a href="#"><input
+																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 														</table>

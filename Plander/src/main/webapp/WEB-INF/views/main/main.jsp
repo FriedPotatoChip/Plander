@@ -220,13 +220,13 @@ body {
 			<div class="carousel-item active">
 				<img src="/resources/images/main2.jpg">
 				<div class="carousel-caption">
-					<h1>거북이의 기적에 오신걸 환영합니다~!!!</h1>
+					<h1>거북이의 기적에 오신걸 환영합니다.</h1>
 					<h3>
-						스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
+						룸 예약 & 스터디 모집을 도와드립니다.
 					</h3>
 				</div>
 			</div>
-			<div class="carousel-item">
+<!-- 			<div class="carousel-item">
 				<img src="/resources/images/main2.jpg">
 				<div class="carousel-caption">
 					<h1>거북이의 기적에 오신걸 환영합니다~!!!</h1>
@@ -244,7 +244,7 @@ body {
 						스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
 					</h3>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
