@@ -74,5 +74,10 @@ public class AdminServiceImpl implements adminService {
 		return mapper.BookingSeats(bvo);
 	}
 
+	@Override
+	public int changeSeats(Map<String, Object> map) {
+		return mapper.changeSeats(map);
+	}
+
 
 }

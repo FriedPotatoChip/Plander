@@ -146,8 +146,12 @@ input[type=submit]:hover {
 								Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats?roomnum=1&br_idx=1"> <span
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats"> <span
 								data-feather="bar-chart-2"></span> Seats
+						</a></li>
+						
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								data-feather="file"></span> Receipt
 						</a></li>
 					</ul>
 				</div>

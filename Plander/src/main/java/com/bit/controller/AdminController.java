@@ -75,12 +75,31 @@ public class AdminController {
 
 		return "adminPage/Chart";
 	}
-
+	
+	@RequestMapping("/update")
+	public String changeSeats(@RequestParam int s_idx, @RequestParam String id, @RequestParam(value="roomnum", defaultValue="1") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, BookingVO bvo) {
+		System.out.println("roomnum1 : " + roomnum);
+		System.out.println("br_idx : " + br_idx);
+		System.out.println("s_idx : " + s_idx);
+		System.out.println("id : " + id);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("br_idx", br_idx);
+		map.put("s_idx", s_idx);
+		map.put("id", id);
+		System.out.println("--오니?");
+		service.changeSeats(map);
+		System.out.println("오니?--");
+		return "redirect: /TMS/admin/Seats";
+	}
+	
 	@RequestMapping("/Seats")
-	public String SeatsPage(@RequestParam("roomnum") int roomnum, @RequestParam("br_idx") int br_idx, Model model,
+	public String SeatsPage(@RequestParam(value="roomnum", defaultValue="1") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, Model model,
 			BookingVO bvo) {
 		System.out.println("br_idx : " + br_idx);
 		System.out.println("roomnum : " + roomnum);
+		bvo.setBr_idx(br_idx);
+		bvo.setRoomnum(roomnum);
 		System.out.println("bvo : " + bvo);
 		model.addAttribute("BookingSeats", service.BookingSeats(bvo));
 		return "adminPage/Seats";
