@@ -412,7 +412,7 @@
 			</table> <!-- 선택 정보 끝 -->
 			
 			<div class="center" style="padding: 10px;">
-				<button type="button" onclick="">이전단계</button>&nbsp;
+				<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
 				<button type="button" onclick="next(this.form)">다음단계</button>
 			</div><br><br>
 			

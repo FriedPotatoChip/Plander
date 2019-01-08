@@ -232,6 +232,8 @@ h3 {
 		<!-- 내예약 -->
 		<div class="myBook">
 			<h3>- 내예약 -</h3>
+			<span style="float: right;">
+				<button type="button" class="btn btn-warning mr-3" onclick="location.href='/TMS/admin/Seats'">좌석이동</button></span>
 			<div class="myBook_nav">
 				<strong><a href="javascript:click()"
 					onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>

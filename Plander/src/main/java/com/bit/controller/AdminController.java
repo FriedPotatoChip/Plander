@@ -77,7 +77,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/Seats")
-	public String SeatsPage(@RequestParam("roomnum") int roomnum, @RequestParam("br_idx") int br_idx, Model model,
+	public String SeatsPage(@RequestParam(value="roomnum", defaultValue="1") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, Model model,
 			BookingVO bvo) {
 		System.out.println("br_idx : " + br_idx);
 		System.out.println("roomnum : " + roomnum);
