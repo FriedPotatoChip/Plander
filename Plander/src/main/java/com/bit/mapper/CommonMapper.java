@@ -28,4 +28,7 @@ public interface CommonMapper {
 	
 	// 쪽지 읽음 처리
 	public boolean readMsgOne(int rm_idx);
+	
+	// 받은 쪽지 삭제
+	public boolean delRecvMsg(int rm_idx);
 }

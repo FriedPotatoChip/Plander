@@ -6,8 +6,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 나눔스퀘어  -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Insert title here</title>
+<style>
+/* 나눔스퀘어 */
+* {
+	font-family: 'NanumSquare', sans-serif;
+	margin: 0;
+}
+
+.normal { 
+	font-weight: 400
+}
+
+.bold {
+	font-weight: 700
+}
+
+.bolder {
+	font-weight: 800
+}
+
+.light {
+	font-weight: 300
+}
+</style>
 <style>
 table {
   border-collapse: collapse;

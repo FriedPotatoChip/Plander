@@ -52,6 +52,11 @@ public class CommonServiceImpl implements CommonService {
 	public boolean readMsgOne(int rm_idx) {
 		return mapper.readMsgOne(rm_idx);
 	}
+
+	@Override
+	public boolean delRecvMsg(int rm_idx) {
+		return mapper.delRecvMsg(rm_idx);
+	}
 	
 	
 }

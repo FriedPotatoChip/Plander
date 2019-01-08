@@ -104,4 +104,14 @@ public class AjaxController {
 	public List<RecvMsgVO> newRecvMsg(@RequestParam("id")String id){
 		return comService.newRecvMsg(id);
 	}
+	
+	@RequestMapping("/msgDel")
+	public String msgDel(@RequestParam("rm_idx")int rm_idx) {
+		boolean chkDel = comService.delRecvMsg(rm_idx);
+		if (chkDel) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 }

@@ -39,6 +39,11 @@
 	<update id="readMsgOne">
 		UPDATE RECV_MSG SET CHK = 0 WHERE RM_IDX = #{rm_idx}
 	</update>
+	
+	<!-- 받은 쪽지 삭제 -->
+	<delete id="delRecvMsg">
+		DELETE FROM RECV_MSG WHERE RM_IDX = #{rm_idx}
+	</delete>
 </mapper>
 
 

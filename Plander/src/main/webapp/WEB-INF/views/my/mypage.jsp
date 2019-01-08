@@ -8,10 +8,15 @@
 	type="text/css" />
 
 <!-- Jcrop(사진 크롭) -->
-<script
-	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
+<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
 
 <script>
+$(function(){
+	alert("로딩");
+});
+function rkskek(){
+	alert("rkskdk");
+}
 //비밀번호 확인
 function pwchk() {
 	var pw = $('#password').val();
@@ -159,7 +164,6 @@ h3 {
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 
 		<div class="container-fluid">
-
 			<a class="navbar-brand" href="/TMS"><img
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 
@@ -567,6 +571,30 @@ h3 {
 
 		function submitProfile() {
 			$("form[name='imgForm']").submit();
+		}
+	</script>
+	<script>
+		function msgDel(rm_idx, nowPage){
+			console.log("rm_idx: "+ rm_idx);
+			console.log("nowPage: "+ nowPage);
+			
+			$.ajax({
+				url: '/msgDel',
+				type: 'post',
+				data: {'rm_idx':rm_idx},
+				dataType: 'text',
+				success: function(result){
+					if (result == 'success'){
+						alert("쪽지를 삭제했습니다.");
+					}else {
+						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				}, error: function(error){
+					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+			
+			fetch_book('/TMS/my/recvMsg?nowPage='+ nowPage);
 		}
 	</script>
 </body>

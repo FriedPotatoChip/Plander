@@ -58,7 +58,7 @@
 		</tr>
 		<tr>
 			<td>
-				<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">글 작성</button>
+				<button type="button" class="btn btn-primary pull-right" onclick="doSubmit(this.form)">글 작성</button>
 			</td>
 		</tr>
 	</table>
@@ -68,6 +68,16 @@
 
 
 <script type="text/javascript">
+	function doSubmit(frm){
+		var max_mem = frm.max_mem.value;
+		if (max_mem < 3) {
+			alert("최대 인원은 최소 3명 이상이어야 합니다.");
+			frm.max_mem.focus();	
+			return false;
+		} else {
+			frm.submit();
+		}
+	}
     $(document).ready(function() {
     	
     	$("#rc_title").focus();

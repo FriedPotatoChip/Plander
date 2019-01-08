@@ -150,8 +150,7 @@ function boardList(nowPage){
 			</c:if>
 			<span>${rc_board.id }</span> 
 		</div>
-		<%-- <p><fmt:formatDate value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm"/></p> --%>
-		<p onload="changeDate(${rc_board.rc_regdate})">${rc_board.rc_regdate }</p>
+		<p><fmt:formatDate value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm"/></p>
 		<hr>
 		<div id="content">${rc_board.rc_content }</div>
 		<br><br><br>
