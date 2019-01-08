@@ -1,14 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp"></jsp:include>
 
 <style>
-body {
-	width: 80%;
-	margin: 0 auto;
-	text-align: center;
-}
 
 tr, td {
 	border-bottom: 1px solid #000;
@@ -72,14 +68,15 @@ a {
 						<td>${coupon.cb_discount }<c:choose>
 								<c:when
 									test="${coupon.cb_distype == percent || coupon.cb_distype == PERCENT }">
-								&nbsp;%
+								%
 							</c:when>
 								<c:otherwise>
-							&nbsp;원
+							원
 							</c:otherwise>
 							</c:choose>
 						</td>
-						<td>${coupon.cp_enddate }</td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd"
+								value="${coupon.cp_enddate }" /></td>
 						<td>${coupon.cp_quantity }</td>
 					</tr>
 				</c:forEach>
@@ -88,28 +85,28 @@ a {
 				<div id="paging">
 					<ul id="pagingList">
 						<c:if test="${page.chkStartPage }">
-							<li><a href="#"
+							<li><a href="javascript:click()"
 								onclick="fetch_book('/TMS/my/coupon?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li><a href="#"
+							<li><a href="javascript:click()"
 								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
-								<li><a class="now marginLi" href="#"
+								<li><a class="now marginLi" href="javascript:click()"
 									onclick="fetch_book('/TMS/my/coupon?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
-								<li><a class="marginLi" href="#"
+								<li><a class="marginLi" href="javascript:click()"
 									onclick="fetch_book('/TMS/my/coupon?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
-							<li><a href="#"
+							<li><a href="javascript:click()"
 								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
-							<li><a href="#"
+							<li><a href="javascript:click()"
 								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
 						</c:if>
 					</ul>
@@ -118,6 +115,6 @@ a {
 
 		</c:choose>
 	</tbody>
-	
+
 </body>
 </html>

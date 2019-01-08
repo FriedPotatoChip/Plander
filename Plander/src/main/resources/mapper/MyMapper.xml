@@ -15,12 +15,55 @@
 	<select id="coupon" resultType="com.bit.domain.CouponVO"
 		parameterType="Map">
 		select * from (
-		select rownum rn, cb.cb_name, cb.cb_discount, cb.cb_distype,
+		select rownum rn, cb.cb_name,
+		cb.cb_discount, cb.cb_distype,
 		cp.cp_enddate, cp.cp_quantity
-		from coupon cp, coupon_table cb
+		from coupon
+		cp, coupon_table cb
 		where cp.cb_idx = cb.cb_idx
 		and cp.id = #{id})
-		where rn between #{start} and #{end}
+		where
+		rn between #{start} and #{end}
+	</select>
+
+	<!-- 보낸쪽지 갯수 -->
+	<select id="sendMsgCnt" resultType="int">
+		select count(*)
+		from send_msg
+		where send_id = #{id}
+	</select>
+
+	<!-- 보낸쪽지 -->
+	<select id="sendMsg" resultType="com.bit.domain.SendMsgVO"
+		parameterType="Map">
+		select * from (
+		select rownum rn, m.*
+		from send_msg m where send_id =
+		#{id}
+		order by sm_idx desc 
+		)
+		where rn between
+		#{start} and #{end}
+	</select>
+
+	<!-- 받은쪽지 갯수 -->
+	<select id="recvMsgCnt" resultType="int">
+		select count(*)
+		from recv_msg
+		where recv_id = #{id}
+	</select>
+
+	<!-- 받은쪽지 -->
+	<select id="recvMsg" resultType="com.bit.domain.RecvMsgVO"
+		parameterType="Map">
+		select * 
+		from (
+			select rownum rn, m.*
+			from recv_msg m where recv_id = #{id}
+			order by rm_idx desc
+			)
+		where rn
+		between #{start} and #{end}
 	</select>
 
 	<!-- 내정보 -->
@@ -288,6 +331,29 @@
 
 	<!-- 여기는 로그인 헤더 관련 ================================= -->
 
+	<!-- 내 좌석 예약내역 갯수 -->
+	<select id="my_seat_header_cnt" resultType="int">
+	<![CDATA[
+		select count(*) from
+		(select b.bk_idx,
+		b.id,
+		b.start_time, b.end_time, b.bk_regdate,
+		b.booknum, b.price,
+		s.s_idx,
+		s.br_name, s.br_idx, s.roomnum, s.sct_idx, s.sct_name, s.s_col
+		from
+		booking b,
+		seats_view s
+		where b.s_idx
+		= s.s_idx
+		and b.id = #{id} order
+		by
+		b.bk_idx desc)
+		where start_time < sysdate
+		and end_time > sysdate
+		]]>
+	</select>
+
 	<!-- 내 좌석 예약내역 -->
 	<select id="my_seat_header"
 		resultType="com.bit.domain.BookingVO">
@@ -309,6 +375,30 @@
 		b.bk_idx desc)
 		where start_time < sysdate
 		and end_time > sysdate
+		]]>
+	</select>
+
+	<!-- 내 사물함 예약내역 갯수 -->
+	<select id="my_cabinet_header_cnt"
+		resultType="int">
+	<![CDATA[
+		select count(*) from (
+		select b.ckb_idx, b.id,
+		b.start_date, b.end_date, b.ckb_regdate,
+		c.cb_idx, c.br_idx,
+		c.cb_number, br.br_name
+		from booking_cb b, cabinet c,
+		branches br
+		where
+		b.cb_idx =
+		c.cb_idx
+		and
+		c.br_idx = br.br_idx
+		and b.id =
+		#{id} order by
+		b.ckb_idx desc)
+		where start_date < sysdate
+		and end_date > sysdate
 		]]>
 	</select>
 

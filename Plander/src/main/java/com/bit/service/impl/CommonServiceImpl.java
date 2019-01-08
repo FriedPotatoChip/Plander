@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 import com.bit.mapper.CommonMapper;
 import com.bit.service.CommonService;
@@ -35,6 +36,26 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public boolean sendMsg(SendMsgVO vo) {
 		return mapper.sendMsg(vo);
+	}
+
+	@Override
+	public List<RecvMsgVO> newRecvMsg(String id) {
+		return mapper.newRecvMsg(id);
+	}
+
+	@Override
+	public RecvMsgVO msgDetail(int rm_idx) {
+		return mapper.msgDetail(rm_idx);
+	}
+
+	@Override
+	public boolean readMsgOne(int rm_idx) {
+		return mapper.readMsgOne(rm_idx);
+	}
+
+	@Override
+	public boolean delRecvMsg(int rm_idx) {
+		return mapper.delRecvMsg(rm_idx);
 	}
 	
 	

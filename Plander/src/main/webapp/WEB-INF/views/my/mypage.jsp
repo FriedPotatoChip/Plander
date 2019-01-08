@@ -8,10 +8,15 @@
 	type="text/css" />
 
 <!-- Jcrop(사진 크롭) -->
-<script
-	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
+<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
 
 <script>
+$(function(){
+	alert("로딩");
+});
+function rkskek(){
+	alert("rkskdk");
+}
 //비밀번호 확인
 function pwchk() {
 	var pw = $('#password').val();
@@ -42,7 +47,7 @@ function click() {
 }
 
 body>div {
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 }
 
@@ -57,9 +62,9 @@ body>div {
 }
 
 h3 {
-	padding: 15px 0; text-align : center;
+	padding: 15px 0;
+	text-align: center;
 	background-color: #3b5998;
-	color: white;
 	text-align: center;
 }
 
@@ -74,7 +79,7 @@ h3 {
 
 .profile {
 	width: 100%;
-	margin: 0 auto;
+	margin: 30px auto;
 	text-align: center;
 }
 
@@ -91,13 +96,13 @@ h3 {
 }
 
 .my_info {
-	width: 48%;
+	width: 36%;
 	float: left;
 	margin-bottom: 30px;
 }
 
 .myBook {
-	width: 48%;
+	width: 60%;
 	float: right;
 }
 
@@ -159,7 +164,6 @@ h3 {
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 
 		<div class="container-fluid">
-
 			<a class="navbar-brand" href="/TMS"><img
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 
@@ -228,6 +232,8 @@ h3 {
 		<!-- 내예약 -->
 		<div class="myBook">
 			<h3>- 내예약 -</h3>
+			<span style="float: right;">
+				<button type="button" class="btn btn-warning mr-3" onclick="location.href='/TMS/admin/Seats'">좌석이동</button></span>
 			<div class="myBook_nav">
 				<strong><a href="javascript:click()"
 					onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
@@ -235,6 +241,10 @@ h3 {
 					onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
 					onclick="fetch_book('/TMS/my/coupon?nowPage=1')">내쿠폰</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/sendMsg?nowPage=1')">보낸쪽지</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/recvMsg?nowPage=1')">받은쪽지</a></strong>
 				<table id="myBook"></table>
 			</div>
 		</div>
@@ -308,9 +318,8 @@ h3 {
 							</tr>
 							<tr>
 								<th>회원주소</th>
-								<td><input type="text" class="form-control"
-									id="zipNo" name="zipNo"
-									readonly></td>
+								<td><input type="text" class="form-control" id="zipNo"
+									name="zipNo" readonly></td>
 								<td><input type="button" class="form-control" value="주소검색"
 									onclick="goPopup();"></td>
 							</tr>
@@ -394,9 +403,9 @@ h3 {
 						method="post" enctype="multipart/form-data" onclick="">
 						<input type='file' name="file" id="imgInput" />
 						<p class="description">
-							&#8251; 프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는 최대 5MB<br>
-							가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br> 프로필 이미지로 적용할 범위를 <b>반드시</b>
-							선택하여 주세요
+							&#8251; 프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는
+							최대 5MB<br> 가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br> 프로필
+							이미지로 적용할 범위를 <b>반드시</b> 선택하여 주세요
 						</p>
 						<hr>
 						<input type="hidden" name="x" id="x" /> <input type="hidden"
@@ -564,6 +573,30 @@ h3 {
 
 		function submitProfile() {
 			$("form[name='imgForm']").submit();
+		}
+	</script>
+	<script>
+		function msgDel(rm_idx, nowPage){
+			console.log("rm_idx: "+ rm_idx);
+			console.log("nowPage: "+ nowPage);
+			
+			$.ajax({
+				url: '/msgDel',
+				type: 'post',
+				data: {'rm_idx':rm_idx},
+				dataType: 'text',
+				success: function(result){
+					if (result == 'success'){
+						alert("쪽지를 삭제했습니다.");
+					}else {
+						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				}, error: function(error){
+					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+			
+			fetch_book('/TMS/my/recvMsg?nowPage='+ nowPage);
 		}
 	</script>
 </body>

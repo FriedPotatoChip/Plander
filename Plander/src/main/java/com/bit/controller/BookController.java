@@ -139,26 +139,9 @@ public class BookController {
 		bvo.setBk_regdate(today); // 예약날짜
 		bvo.setId(uservo.getId());
 		
-		int[] idx = idx(svo);
+		int[] idx = idx(svo); //여기 오류뜸 수정 
 		System.out.println("idx.length 길이 : " + idx.length);
-		
-//		if (idx.length==1) {
-//			//1명예약
-//			int chk = idx[0];
-//			System.out.println("chk : " + chk );
-//			bvo.setS_idx(chk);
-//			svo.setS_idx(chk);
-//		} else {
-//			//2명예약
-//			int chk = idx[0]; //s_idx
-//			int chk1 = idx[1];
-//			System.out.println("chk : " + chk + ", chk1 : " + chk1);
-//			
-//			bvo.setS_idx(chk);
-//			bvo.setS_idx_2(chk1);
-//			svo.setS_idx(chk);
-//			svo.setS_idx_2(chk1);
-//		}
+		System.out.println("idx : " + idx);
 		
 		String test = request.getParameter("test");
 		System.out.println("test: " + test);
@@ -233,8 +216,6 @@ public class BookController {
 
 		boolean cab = cab(cb_bvo.getCabinet());
 		System.out.println("사물함 사용여부 확인 : " + cb_bvo.getCabinet() + ", t/f : " + cab);
-		
-		
 		
 		//2명예약 
 		if (bvo.getS_col_2() !=0) {

@@ -12,6 +12,6 @@ import lombok.ToString;
 public class RecvMsgVO {
 	
 	private int rm_idx, chk;
-	private String send_id, recv_id, title, content;
+	private String send_id, recv_id, title, content, user_profileImagePath;
 	private Date regdate;
 }
