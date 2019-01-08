@@ -8,15 +8,9 @@
 	type="text/css" />
 
 <!-- Jcrop(사진 크롭) -->
-<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
+<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" ></script>
 
 <script>
-$(function(){
-	alert("로딩");
-});
-function rkskek(){
-	alert("rkskdk");
-}
 //비밀번호 확인
 function pwchk() {
 	var pw = $('#password').val();
@@ -157,6 +151,7 @@ h3 {
 	font-size: 0.7em;
 	color: gray;
 }
+table, tr, th, td { text-align: center;}
 </style>
 </head>
 
@@ -375,7 +370,7 @@ h3 {
 				<div class="modal-footer mx-auto">
 					<button type="button" class="btn btn-outline-danger mx-1 hideFade"
 						data-toggle="modal" data-target="#updateProfile">사진변경</button>
-					<button type="button" class="btn btn-outline-warning mx-1">삭제</button>
+					<button type="button" class="btn btn-outline-warning mx-1" onclick="imgDel()">삭제</button>
 				</div>
 				<div></div>
 
@@ -575,6 +570,32 @@ h3 {
 			$("form[name='imgForm']").submit();
 		}
 	</script>
+	<!-- 프로필 이미지 삭제 -->
+	<script> 
+		function imgDel(){
+			if ('${usersVO.user_profileImagePath}' == ""){
+				alert("프로필 이미지를 먼저 등록해주세요.");
+				return false;
+			} else {
+				$.ajax({
+					url: '/imgDel',
+					type: 'post',
+					dataType: 'text',
+					success: function(result) {
+						if (result == 'success') {
+							alert("프로필 이미지 삭제에 성공했습니다.");
+							window.location.reload();
+						} else {
+							alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
+						}
+					}, error: function(error) {
+						alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
+					}
+				})
+			}
+		}
+	</script>
+	<!-- 쪽지 삭제 -->
 	<script>
 		function msgDel(rm_idx, nowPage){
 			console.log("rm_idx: "+ rm_idx);

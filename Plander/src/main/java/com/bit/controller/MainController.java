@@ -108,6 +108,10 @@ public class MainController {
 		UsersVO user = (UsersVO) session.getAttribute("usersVO");
 		user.setUser_profileImagePath(vo.getUser_profileImagePath());
 		session.setAttribute("usersVO", user);
+		
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) { }
 		return "redirect: /TMS/my";
 	}
 	

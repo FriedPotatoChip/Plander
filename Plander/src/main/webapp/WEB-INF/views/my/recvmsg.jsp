@@ -78,7 +78,7 @@ a {
 							<span style="color: red; ">&#10004;</span>
 						</c:if>
 						</td>
-						<td><button onclick="msgDel('${msg.rm_idx}', '${page.nowPage }')">삭제</button></td>
+						<td><button class="btn btn-outline-danger" onclick="msgDel('${msg.rm_idx}', '${page.nowPage }')">삭제</button></td>
 					</tr>
 				</c:forEach>
 
