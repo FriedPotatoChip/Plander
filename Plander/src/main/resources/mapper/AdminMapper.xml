@@ -106,6 +106,8 @@
 		     where b.s_idx = s.s_idx
 		     and b.id = #{id}
 		     and s.br_idx = #{br_idx}
+		     and b.start_time = #{start_time}
+		     and b.end_time = #{end_time}
 		)
 		set s_idx = #{s_idx}
 	</update>

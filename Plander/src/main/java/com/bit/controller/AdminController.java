@@ -1,5 +1,8 @@
 package com.bit.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,8 +68,10 @@ public class AdminController {
 
 	@RequestMapping("/Cabinet")
 	public String CabitnetPage(BookingCbVO bcvo, Model model) {
+		System.out.println("여긴오잖아1");
 		model.addAttribute("cabinet", service.bookingCabinet(bcvo));
 		model.addAttribute("count", service.bookingCabinet_count(bcvo));
+		System.out.println("여긴오잖아@");
 		return "adminPage/Cabinet";
 	}
 
@@ -77,19 +82,32 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/update")
-	public String changeSeats(@RequestParam int s_idx, @RequestParam String id, @RequestParam(value="roomnum", defaultValue="1") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, BookingVO bvo) {
+	public String changeSeats(@RequestParam String start_time, @RequestParam String end_time , @RequestParam int s_idx, @RequestParam String id, @RequestParam(value="roomnum", defaultValue="1") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, BookingVO bvo) throws ParseException {
 		System.out.println("roomnum1 : " + roomnum);
 		System.out.println("br_idx : " + br_idx);
 		System.out.println("s_idx : " + s_idx);
 		System.out.println("id : " + id);
+		System.out.println("start_time : " + start_time);
+		System.out.println("end_time : " + end_time);
+		
+		String startTime = start_time;
+		String EndTime = end_time;
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss"); 
+		Date to = sdf.parse(startTime);
+		Date to2 = sdf.parse(EndTime);
+		
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("br_idx", br_idx);
 		map.put("s_idx", s_idx);
 		map.put("id", id);
+		map.put("start_time", to);
+		map.put("end_time", to2);
+		
 		System.out.println("--오니?");
 		service.changeSeats(map);
 		System.out.println("오니?--");
+		
 		return "redirect: /TMS/admin/Seats";
 	}
 	
@@ -114,4 +132,11 @@ public class AdminController {
 		model.addAttribute("BookingSeats", service.BookingSeats(bvo));
 		return "adminPage/LabSeats";
 	}
+	
+	@RequestMapping("/Receipt")
+	public String Receipt(Model model) {
+		
+		return "adminPage/receipt";
+	}
+	
 }
