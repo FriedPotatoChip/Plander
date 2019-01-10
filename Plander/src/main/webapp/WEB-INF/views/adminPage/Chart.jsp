@@ -134,8 +134,12 @@ h3 {
 								Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats?sct_idx=1"> <span
-								data-feather="bar-chart-2"></span> Visitors
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats"> <span
+								data-feather="bar-chart-2"></span> Seats
+						</a></li>
+						
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								data-feather="file"></span> Receipt
 						</a></li>
 					</ul>
 				</div>

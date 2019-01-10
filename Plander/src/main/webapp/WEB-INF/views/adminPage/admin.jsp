@@ -21,9 +21,7 @@
 <link href="/resources/css/dashboard.css" rel="stylesheet">
 
 <!-- 버튼 아이콘 링크 -->
-<link
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- ======================================================================================== -->
 <style>
 #cntPerpage {
@@ -150,7 +148,7 @@ input[type=submit]:hover {
 								data-feather="bar-chart-2"></span> Seats
 						</a></li>
 						
-						<li class="nav-item"><a class="nav-link" href="#"> <span
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Receipt"> <span
 								data-feather="file"></span> Receipt
 						</a></li>
 					</ul>
@@ -310,11 +308,7 @@ input[type=submit]:hover {
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
+
 	<script src="/resources/js/popper.min.js"></script>
 	<script src="/resources/js/bootstrap.min2.js"></script>
 	Icons

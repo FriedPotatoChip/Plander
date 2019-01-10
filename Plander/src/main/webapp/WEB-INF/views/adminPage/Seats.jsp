@@ -177,8 +177,12 @@ style>body, html {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Seats?sct_idx=1"> <span
+							href="/TMS/admin/Seats"> <span
 								data-feather="bar-chart-2"></span> Seats
+						</a></li>
+						
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								data-feather="file"></span> Receipt
 						</a></li>
 					</ul>
 				</div>
@@ -636,6 +640,8 @@ style>body, html {
 			<!-- 바디 콘테이너 끝 --> </main>
 		</div>
 	</div>
+	<input type = "hidden" id = "start_time" value = "1">
+	<input type = "hidden" id = "end_time" value = "1">
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -665,7 +671,8 @@ style>body, html {
 			/* DB에서 긁어온 지점 A의 예약된 모든 좌석과 체크된 좌석이 같을 때 해당 좌석의 예약내역을 보여주는 것! */
 			
 			var html = "";
-			
+			var count = 0;
+			var temp = "";
 			<c:forEach var="s" items="${BookingSeats }">
 				/* DB에서 긁어온 지점 A의 예약된 모든 좌석 */
 				var s_col = "${s.s_col}";
@@ -673,12 +680,16 @@ style>body, html {
 				var id = "${s.id}";
 				var start_time = "${s.start_time}";
 				var end_time = "${s.end_time}";
+				temp = id;
+				count++;
+				temp += count;
 				
 				if(i == s_col) {
 					console.log("data" + i + ": " + id + ", " + start_time + ", " + end_time);
 		
-					html += '<tr><td class="id">'+ id + '</td> <td class="start_time">'+ start_time + '</td> <td class="end_time">' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" onclick="change()"><input type="hidden" value="${s.end_time}" id="end_time"><input type="hidden" id="start_time" value="${s.start_time}"><input type="hidden" id="id" value="${s.id}">좌석이동</button></td></tr>'; 
+					html += '<tr><td class="id">'+ id + '</td> <td class="start_time" id = '+(temp+"_s")+'>'+ start_time + '</td> <td class="end_time" id = '+(temp+"_e")+'>' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" id ="'+temp+'" onclick="change(\''+temp+'\')">좌석이동</button></td></tr>'; 
 				} 
+				
 			</c:forEach>
 			$('#exampleModalLong').modal();
 		    $('#exampleModalLongTitle').text(i + '번 좌석 예약현황');
@@ -686,11 +697,21 @@ style>body, html {
 			
 		}
 		
-		function change() {
-			var changePersonEnd_time = $('#end_time').val();
-			var changePersonStart_time = $('#start_time').val();
-			console.log(changePersonEnd_time);
-			console.log(changePersonStart_time);
+		function change(a) {
+			console.log("target : "+a);
+			var target = a;
+			
+			var start_time = target+'_s';
+			var end_time = target+'_e';
+			
+			console.log("start_time : "+start_time);
+			
+			var start_time_value = document.getElementById(start_time).innerHTML;
+			
+			var end_time_value = document.getElementById(end_time).innerHTML;
+			
+			console.log("start_time : "+ start_time_value+", end_time_value : "+ end_time_value );
+			
 			
 			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
 			$('.bd-example-modal-lg').modal();
@@ -707,6 +728,7 @@ style>body, html {
 			    	
 			    	/* 체크가 되었을 때 예약된 좌석이 있는지 없는지 파악 */
 			    	<c:forEach var="s" items="${BookingSeats}">
+			    	
 			    		/* 예약된 모든 좌석 */
 			    		var s_col = "${s.s_col}";
 			    		var id = "${s.id}";
@@ -743,15 +765,25 @@ style>body, html {
 			/* 이동할것인지 묻기 */
 			var r = confirm("이동하시겠습니까?");
 			var br_idx = $('.po_category.on').attr('value');
-
-			var chId = $('#id').val();
-			console.log(chId);
 			
+			/* 이동을 원하는 사람의 아이디 */
+			var chId = target;
+			console.log('chId : ' + chId);
+			
+			/* 이동을 원하는 사람의 START_TIME, END_TIME */
+			var chStartTime = $('#start_time').val();
+			console.log(chStartTime);
+			
+			var chEndTime = $('#end_time').val();
+			console.log(chEndTime);
+			
+			/* 옮기기를 원하는 좌석의 번호 */
 			var changeScol = i;
 			console.log(changeScol);
 			
+			
 			if(r == true) {
-				location.href = "/TMS/admin/update?id="+ chId + "&br_idx=" + br_idx + "&s_idx=" + changeScol;
+				location.href = "/TMS/admin/update?id="+ chId + "&br_idx=" + br_idx + "&s_idx=" + changeScol +"&start_time=" + chStartTime + "&end_time=" + chEndTime;
 			}
 		}
 		
