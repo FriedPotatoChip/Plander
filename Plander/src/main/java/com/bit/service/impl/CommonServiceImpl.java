@@ -57,6 +57,11 @@ public class CommonServiceImpl implements CommonService {
 	public boolean delRecvMsg(int rm_idx) {
 		return mapper.delRecvMsg(rm_idx);
 	}
+
+	@Override
+	public boolean imgDel(String id) {
+		return mapper.imgDel(id);
+	}
 	
 	
 }

@@ -31,4 +31,7 @@ public interface CommonService {
 	
 	// 받은 쪽지 삭제
 	public boolean delRecvMsg(int rm_idx);
+	
+	// 프로필 이미지 삭제
+	public boolean imgDel(String id);
 }
