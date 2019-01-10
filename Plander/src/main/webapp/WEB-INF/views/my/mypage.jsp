@@ -152,6 +152,23 @@ h3 {
 	color: gray;
 }
 table, tr, th, td { text-align: center;}
+/* 클릭시 레이어 */	
+.idDiv { cursor: pointer; }
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 120px;
+	padding: 10px;
+	padding-top: 18px; padding-left: 15px;
+}
+.popupLayer div {
+	position: absolute;
+	top: 0px;
+	right: 5px
+}
 </style>
 </head>
 
@@ -598,9 +615,6 @@ table, tr, th, td { text-align: center;}
 	<!-- 쪽지 삭제 -->
 	<script>
 		function msgDel(rm_idx, nowPage){
-			console.log("rm_idx: "+ rm_idx);
-			console.log("nowPage: "+ nowPage);
-			
 			$.ajax({
 				url: '/msgDel',
 				type: 'post',
@@ -620,5 +634,64 @@ table, tr, th, td { text-align: center;}
 			fetch_book('/TMS/my/recvMsg?nowPage='+ nowPage);
 		}
 	</script>
+		<div class="popupLayer">
+		<div>
+			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+		</div>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br>
+		<a id="userProfile" href="#">회원 정보 보기</a><br>
+	</div>
+	<script>
+function closeLayer( obj ) {
+	$(".popupLayer").hide();
+}
+function showBox(e, tag){
+		console.log("idDiv 클릭됨");
+		var sWidth = window.innerWidth;
+		var sHeight = window.innerHeight;
+
+		var oWidth = $('.popupLayer').width();
+		var oHeight = $('.popupLayer').height();
+
+		// 레이어가 나타날 위치를 셋팅한다.
+		var divLeft = e.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
+		var divTop = e.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
+		console.log("X: "+ e.clientX);
+		console.log("Y: "+ e.clientY);
+
+		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+		if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+		if( divLeft < 0 ) divLeft = 0;
+		if( divTop < 0 ) divTop = 0;
+
+		$('.popupLayer').css({
+			"top": divTop,
+			"left": divLeft,
+			"position": "absolute"
+		}).show();
+		console.log(this);
+		var userId = $(tag).attr("userId");
+		console.log($(tag).attr("userId"));
+		$("#sendMsg").click(function(){
+			$(".popupLayer").hide();
+			if ('${usersVO.id}' == ''){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			} 
+			window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
+		});
+		$("#userProfile").click(function(){
+			$(".popupLayer").hide();
+			if ('${usersVO.id}' == ''){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			} 
+			window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+		});
+}
+</script>
 </body>
 </html>

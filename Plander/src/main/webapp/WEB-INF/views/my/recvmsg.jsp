@@ -70,7 +70,7 @@ a {
 						<td>
 							<a href="#" onclick="window.open('/TMS/recvMsg?rm_idx=${msg.rm_idx }', '받은 쪽지', 'width=500, height=500'); return false;">${msg.title }</a>
 						</td>
-						<td>${msg.send_id }</td>
+						<td><div class="idDiv" onclick="showBox(event, this)" userId="${msg.send_id }">${msg.send_id }</div></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${msg.regdate }" /></td>
 						<td>
