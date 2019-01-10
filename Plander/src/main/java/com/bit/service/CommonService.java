@@ -28,4 +28,10 @@ public interface CommonService {
 	
 	// 쪽지 읽음 처리
 	public boolean readMsgOne(int rm_idx);
+	
+	// 받은 쪽지 삭제
+	public boolean delRecvMsg(int rm_idx);
+	
+	// 프로필 이미지 삭제
+	public boolean imgDel(String id);
 }

@@ -61,6 +61,8 @@
 .dropdown:hover .dropdown-content {
 	display: block;
 }
+.sendId { color: #198CFF; }
+.pointer:hover { cursor: pointer; }
 </style>
 </head>
 <body>
@@ -138,15 +140,28 @@
 											</c:otherwise>
 										</c:choose>
 										<hr>
-										<h6>쪽지<b style="color: red;" id="almNum"></b></h6>
-											<div style="display: inline-block;" id="msgDiv">
-											</div>
-										<hr>
 									</div>
 									<a href="/TMS/my" style="text-align: center;">마이페이지</a><a
 										href="/TMS/logout" style="text-align: center;">로그아웃</a>
 								</div>
 							</div>
+<div class="btn-group">
+  <div class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-bottom: 4px;"	>
+    <div id="almDivHide" style="display: inline-block; border-radius: 5px; font-size: 0.8em; color: white; text-align: center;" class="pointer">
+    	<div id="almSpan" style="padding-right: 5px; padding-top: 1px;"></div>
+    </div>
+  </div>
+  <div class="dropdown-menu dropdown-menu-right">
+	<div class="my_cur" style="text-align: center; width: 200px; padding-left: 15px; padding-right: 15px;">
+		<h6 style="margin-top: 10px;" class="bold"><b>읽지 않은 쪽지</b></h6>
+		<hr>
+	<h6>쪽지<b style="color: red;" id="almNum"></b></h6>
+	<div style="display: inline-block; text-align: center;" id="msgDiv">
+	</div>
+<hr>
+</div>	
+  </div>
+</div>
 						</c:if></li>
 				</ul>
 			</div>
@@ -169,13 +184,18 @@ $(function(){
 				var sendId = "";
 				var title = "";
 				$("#almNum").html("&nbsp;" + almNum);
+				$("#almDivHide").css("background-color", "none");
+				if (almNum != 0){
+					$("#almSpan").html("&nbsp;" + almNum);
+					$("#almDivHide").css("background-color", "#E566FF");
+				}
 				var html = "";
 				$.each(result, function(index, value){
 					sendId = value.send_id;
 					if (index == 3){
-						html += "<span style='display: inline-block; float: right; font-size: 0.68em; color: black;'>더보기...</span>";
+						html += "<span style='cursor: pointer; display: inline-block; float: right; font-size: 0.68em; color: black;' onclick='goMypage()'>더보기...</span>";
 					} else if (index < 3){
-						html += "<h6 onclick='msgDetail("+value.rm_idx+")' style='cursor: pointer;'>"+sendId+"&nbsp;님께서 보낸 쪽지가 있습니다.</h6>";
+						html += "<h6 onclick='msgDetail("+value.rm_idx+")' style='cursor: pointer;'>'<span class='sendId'>"+sendId+"</span>'&nbsp;님께서 보낸 쪽지가 있습니다.</h6>";
 					}
 				});
 				$("#msgDiv").html(html);
@@ -189,5 +209,8 @@ $(function(){
 	
 	function msgDetail(rm_idx){
 		window.open("/TMS/recvMsg?rm_idx="+rm_idx, "받은 쪽지", "width=500, height=500");
+	}
+	function goMypage(){
+		location.href="/TMS/my";
 	}
 </script>

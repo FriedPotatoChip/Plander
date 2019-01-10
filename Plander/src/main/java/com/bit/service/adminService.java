@@ -37,4 +37,7 @@ public interface adminService {
 
 	// 좌석별 예약현황
 	public List<BookingVO> BookingSeats(BookingVO bvo);
+
+	// 좌석이동
+	public int changeSeats(Map<String, Object> map);
 }

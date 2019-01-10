@@ -112,11 +112,18 @@ input[type=submit] {
 input[type=submit]:hover {
 	background-color: #45a049;
 }
+
+.marginLi:hover {
+	background-color: black;
+	color: white;
+}
+
 </style>
 </head>
 
 <body>
-	<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+	<nav
+		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin page</a>
 
 
@@ -146,8 +153,14 @@ input[type=submit]:hover {
 								Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats?roomnum=1&br_idx=1"> <span
-								data-feather="bar-chart-2"></span> Seats
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+								Seats
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+								Receipt
 						</a></li>
 					</ul>
 				</div>
@@ -222,8 +235,8 @@ input[type=submit]:hover {
 										data-toggle="modal" data-target="#exampleModal${user.u_idx }">삭제</button></td>
 							</tr>
 							<!-- Modal -->
-							<div class="modal fade" id="exampleModal${user.u_idx }" tabindex="-1"
-								role="dialog" aria-labelledby="exampleModalLabel"
+							<div class="modal fade" id="exampleModal${user.u_idx }"
+								tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 								aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -251,10 +264,22 @@ input[type=submit]:hover {
 				<!-- 페이징 시작 -->
 				<div id="paging" aria-label="Page navigation example">
 					<ul id="pagingList" class="pagination">
-						<a class="page-link" href="#" aria-label="Previous"> <span
-							aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>
-						</a>
-
+						<c:choose>
+							<c:when test="${page.chkStartPage }">
+								<li class="page-item"><a class="page-link"
+									href="/TMS/admin?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+								</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="/TMS/admin?nowPage=1&cntPerPage=${page.cntPerPage}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+								</a></li>
+							</c:otherwise>
+						</c:choose>
 						<%-- <c:if test="${page.chkStartPage }">
 							<li class="page-item"><a
 								href="/TMS/admin?nowPage=1&cntPerPage=${page.cntPerPage}"
@@ -288,10 +313,23 @@ input[type=submit]:hover {
 								class="page-link"><button>&gt;&gt;</button></a></li>
 						</c:if> --%>
 
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-								class="sr-only">Next</span>
-						</a></li>
+						<c:choose>
+							<c:when test="${page.chkEndPage }">
+								<li class="page-item"><a class="page-link"
+									href="/TMS/admin?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+								</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="/TMS/admin?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+								</a></li>
+							</c:otherwise>
+
+						</c:choose>
 					</ul>
 				</div>
 				<!-- 페이징 끝 -->
@@ -306,11 +344,7 @@ input[type=submit]:hover {
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
+
 	<script src="/resources/js/popper.min.js"></script>
 	<script src="/resources/js/bootstrap.min2.js"></script>
 	Icons

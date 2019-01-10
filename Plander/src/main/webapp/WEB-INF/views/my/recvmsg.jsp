@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="/commons/head.jsp"></jsp:include>
+<%-- <jsp:include page="/commons/head.jsp"></jsp:include> --%>
 <style>
 
 
@@ -39,6 +39,8 @@ a {
 }
 /* 페이징 끝 */
 </style>
+<script>
+</script>
 </head>
 
 <body>
@@ -46,8 +48,9 @@ a {
 		<tr>
 			<th>제목</th>
 			<th>보낸사람</th>
-			<th>내용</th>
 			<th>날짜</th>
+			<th>확인 여부</th>
+			<th></th>
 		</tr>
 	</thead>
 
@@ -64,11 +67,18 @@ a {
 			<c:otherwise>
 				<c:forEach var="msg" items="${list }">
 					<tr>
-						<td>${msg.title }</td>
-						<td>${msg.send_id }</td>
-						<td>${msg.content }</td>
+						<td>
+							<a href="#" onclick="window.open('/TMS/recvMsg?rm_idx=${msg.rm_idx }', '받은 쪽지', 'width=500, height=500'); return false;">${msg.title }</a>
+						</td>
+						<td><div class="idDiv" onclick="showBox(event, this)" userId="${msg.send_id }">${msg.send_id }</div></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${msg.regdate }" /></td>
+						<td>
+						<c:if test="${msg.chk == 0 }">
+							<span style="color: red; ">&#10004;</span>
+						</c:if>
+						</td>
+						<td><button class="btn btn-outline-danger" onclick="msgDel('${msg.rm_idx}', '${page.nowPage }')">삭제</button></td>
 					</tr>
 				</c:forEach>
 
@@ -106,6 +116,5 @@ a {
 
 		</c:choose>
 	</tbody>
-
 </body>
 </html>

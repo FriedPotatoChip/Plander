@@ -97,6 +97,20 @@
 	        (to_char(start_time, 'YYYYMM') = to_char(add_months(sysdate, -1), 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
 	        )
 	</select>
+	
+	<!-- 좌석이동 -->
+	<update id="changeSeats" parameterType="Map">
+		update (
+		     select b.s_idx as s_idx
+		     from booking b, seats s
+		     where b.s_idx = s.s_idx
+		     and b.id = #{id}
+		     and s.br_idx = #{br_idx}
+		     and b.start_time = #{start_time}
+		     and b.end_time = #{end_time}
+		)
+		set s_idx = #{s_idx}
+	</update>
 </mapper>
 
 

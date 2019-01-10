@@ -8,8 +8,7 @@
 	type="text/css" />
 
 <!-- Jcrop(사진 크롭) -->
-<script
-	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" />
+<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" ></script>
 
 <script>
 //비밀번호 확인
@@ -152,6 +151,24 @@ h3 {
 	font-size: 0.7em;
 	color: gray;
 }
+table, tr, th, td { text-align: center;}
+/* 클릭시 레이어 */	
+.idDiv { cursor: pointer; }
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 120px;
+	padding: 10px;
+	padding-top: 18px; padding-left: 15px;
+}
+.popupLayer div {
+	position: absolute;
+	top: 0px;
+	right: 5px
+}
 </style>
 </head>
 
@@ -159,7 +176,6 @@ h3 {
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 
 		<div class="container-fluid">
-
 			<a class="navbar-brand" href="/TMS"><img
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 
@@ -228,6 +244,8 @@ h3 {
 		<!-- 내예약 -->
 		<div class="myBook">
 			<h3>- 내예약 -</h3>
+			<span style="float: right;">
+				<button type="button" class="btn btn-warning mr-3" onclick="location.href='/TMS/admin/Seats'">좌석이동</button></span>
 			<div class="myBook_nav">
 				<strong><a href="javascript:click()"
 					onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
@@ -369,7 +387,7 @@ h3 {
 				<div class="modal-footer mx-auto">
 					<button type="button" class="btn btn-outline-danger mx-1 hideFade"
 						data-toggle="modal" data-target="#updateProfile">사진변경</button>
-					<button type="button" class="btn btn-outline-warning mx-1">삭제</button>
+					<button type="button" class="btn btn-outline-warning mx-1" onclick="imgDel()">삭제</button>
 				</div>
 				<div></div>
 
@@ -569,5 +587,111 @@ h3 {
 			$("form[name='imgForm']").submit();
 		}
 	</script>
+	<!-- 프로필 이미지 삭제 -->
+	<script> 
+		function imgDel(){
+			if ('${usersVO.user_profileImagePath}' == ""){
+				alert("프로필 이미지를 먼저 등록해주세요.");
+				return false;
+			} else {
+				$.ajax({
+					url: '/imgDel',
+					type: 'post',
+					dataType: 'text',
+					success: function(result) {
+						if (result == 'success') {
+							alert("프로필 이미지 삭제에 성공했습니다.");
+							window.location.reload();
+						} else {
+							alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
+						}
+					}, error: function(error) {
+						alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
+					}
+				})
+			}
+		}
+	</script>
+	<!-- 쪽지 삭제 -->
+	<script>
+		function msgDel(rm_idx, nowPage){
+			$.ajax({
+				url: '/msgDel',
+				type: 'post',
+				data: {'rm_idx':rm_idx},
+				dataType: 'text',
+				success: function(result){
+					if (result == 'success'){
+						alert("쪽지를 삭제했습니다.");
+					}else {
+						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				}, error: function(error){
+					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+			
+			fetch_book('/TMS/my/recvMsg?nowPage='+ nowPage);
+		}
+	</script>
+		<div class="popupLayer">
+		<div>
+			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+		</div>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br>
+		<a id="userProfile" href="#">회원 정보 보기</a><br>
+	</div>
+	<script>
+function closeLayer( obj ) {
+	$(".popupLayer").hide();
+}
+function showBox(e, tag){
+		console.log("idDiv 클릭됨");
+		var sWidth = window.innerWidth;
+		var sHeight = window.innerHeight;
+
+		var oWidth = $('.popupLayer').width();
+		var oHeight = $('.popupLayer').height();
+
+		// 레이어가 나타날 위치를 셋팅한다.
+		var divLeft = e.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
+		var divTop = e.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
+		console.log("X: "+ e.clientX);
+		console.log("Y: "+ e.clientY);
+
+		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+		if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+		if( divLeft < 0 ) divLeft = 0;
+		if( divTop < 0 ) divTop = 0;
+
+		$('.popupLayer').css({
+			"top": divTop,
+			"left": divLeft,
+			"position": "absolute"
+		}).show();
+		console.log(this);
+		var userId = $(tag).attr("userId");
+		console.log($(tag).attr("userId"));
+		$("#sendMsg").click(function(){
+			$(".popupLayer").hide();
+			if ('${usersVO.id}' == ''){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			} 
+			window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
+		});
+		$("#userProfile").click(function(){
+			$(".popupLayer").hide();
+			if ('${usersVO.id}' == ''){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			} 
+			window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+		});
+}
+</script>
 </body>
 </html>

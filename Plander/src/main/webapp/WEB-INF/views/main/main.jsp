@@ -124,47 +124,81 @@ body {
 
 #map {
 	height: 400px;
-	width: 70%;
+	width: 90%;
 	margin: auto;
 }
-
-.controls {
-	margin-top: 10px;
-	border: 1px solid transparent;
-	border-radius: 2px 0 0 2px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	height: 32px;
-	outline: none;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-#origin-input, #destination-input {
-	background-color: #fff;
-	font-family: Roboto;
-	font-size: 15px;
-	font-weight: 300;
-	margin-left: 12px;
-	padding: 0 11px 0 13px;
-	text-overflow: ellipsis;
+/* The location pointed to by the popup tip. */
+.popup-tip-anchor {
+	height: 0;
+	position: absolute;
+	/* The max width of the info window. */
 	width: 200px;
 }
-
-#origin-input:focus, #destination-input:focus {
-	border-color: #4d90fe;
+/* The bubble is anchored above the tip. */
+.popup-bubble-anchor {
+	position: absolute;
+	width: 100%;
+	bottom: /* TIP_HEIGHT= */ 8px;
+	left: 0;
 }
-
-#mode-selector {
-	color: #fff;
-	background-color: #4d90fe;
-	margin-left: 12px;
-	padding: 5px 11px 0px 11px;
+/* Draw the tip. */
+.popup-bubble-anchor::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* Center the tip horizontally. */
+	transform: translate(-50%, 0);
+	/* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+	width: 0;
+	height: 0;
+	/* The tip is 8px high, and 12px wide. */
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: /* TIP_HEIGHT= */ 8px solid white;
 }
-
-#mode-selector label {
-	font-family: Roboto;
-	font-size: 13px;
-	font-weight: 300;
+/* The popup bubble itself. */
+.popup-bubble-content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translate(-50%, 0);
+	/* Style the info window. */
+	background-color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-family: sans-serif;
+	overflow-y: auto;
+	max-height: 60px;
+	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+}
+.popup-bubble-content1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translate(-50%, -100%;);
+	/* Style the info window. */
+	background-color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-family: sans-serif;
+	overflow-y: auto;
+	max-height: 60px;
+	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
+}
+.popup-bubble-content2 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform: translate(-50%, 50%);
+	/* Style the info window. */
+	background-color: white;
+	padding: 5px;
+	border-radius: 5px;
+	font-family: sans-serif;
+	overflow-y: auto;
+	max-height: 60px;
+	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
 </style>
 
@@ -186,31 +220,6 @@ body {
 	</c:if>
 	<!-- 헤더 끝 -->
 
-
-	<!-- Navigation -->
-	<!-- <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-	 <div class="container-fluid">
-		<a class="navbar-brand" href="#"><img
-			src="/resources/images/logo.png" width="150px" height="50px"></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarResponsive">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">운영안내</a>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">예약하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">모집하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">세부공간보기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">찾아오시는길</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">모집게시판</a></li>
-			</ul>
-		</div> 
-	</nav> -->
-
 	<!--- Image Slider -->
 	<div id="slides" class="carousel slide" data-ride="carousel">
 		<ul class="carousel-indicators">
@@ -220,29 +229,8 @@ body {
 			<div class="carousel-item active">
 				<img src="/resources/images/main2.jpg">
 				<div class="carousel-caption">
-					<h1>거북이의 기적에 오신걸 환영합니다~!!!</h1>
-					<h3>
-						스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
-					</h3>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img src="/resources/images/main2.jpg">
-				<div class="carousel-caption">
-					<h1>거북이의 기적에 오신걸 환영합니다~!!!</h1>
-					<h3>
-						스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
-					</h3>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img src="/resources/images/main2.jpg">
-				<div class="carousel-caption">
-					<h1>거북이의 기적에 오신걸 환영합니다~!!!</h1>
-					<br>
-					<h3>
-						스터디 모집 <br> & <br> 룸 예약을 도와드립니다.
-					</h3>
+					<h1>거북이의 기적에 오신걸 환영합니다.</h1>
+					<h3>룸 예약 & 스터디 모집을 도와드립니다.</h3>
 				</div>
 			</div>
 		</div>
@@ -307,33 +295,6 @@ body {
 		<hr class="my-4">
 	</div>
 
-	<!--- Two Column Section -->
-	<!-- <div class="container-fluid padding">
-		<div class="row padding">
-			<div class="col-lg-6">
-				<h2>If you build it...</h2>
-				<p>The colums will automatically stack on top of each other when
-					the screen is less than 576px wide.</p>
-				<p>Resize the browser window to see the effect. Responsive web
-					design has become more important as the amount of mobile traffic
-					now accounts for more than half of total internet traffic.</p>
-				<p>It can also display the web page differently depending on the
-					screen size or viewing device.</p>
-				<br> <a href="#" class="btn btn-primary">Learn More</a>
-			</div>
-			<div class="col-lg-6">
-				<img src="img/desk.png" class="img-fluid">
-			</div>
-		</div>
-	</div>
-
-	<hr class="my-4">
-	- Fixed background
-	<figure>
-	<div class="fixed-wrap">
-		<div id="fixed"></div>
-	</div>
-	</figure>  -->
 
 	<!--- Emoji Section -->
 	<button class="fun" data-toggle="collapse" data-target="#emoji">본인의
@@ -342,26 +303,19 @@ body {
 		<div class="container-fluid padding">
 			<div class="row text-center">
 				<div class="col-sm-6 col-md-4">
-					<input id="origin-input" class="controls" type="text"
-						placeholder="Enter an origin location"> <input
-						id="destination-input" class="controls" type="text"
-						placeholder="Enter a destination location">
-
-					<div id="mode-selector" class="controls">
-						<input type="radio" name="type" id="changemode-walking"
-							checked="checked"> <label for="changemode-walking">Walking</label>
-
-						<input type="radio" name="type" id="changemode-transit"
-							checked="checked"> <label for="changemode-transit">Transit</label>
-
-						<input type="radio" name="type" id="changemode-driving"> <label
-							for="changemode-driving">Driving</label>
-					</div>
+					<img src="/resources/css/p1.png" alt="" width="60%" height="auto">
 				</div>
-				<div id="map"></div>
+				<div class="col-sm-6 col-md-4">
+					<img src="/resources/css/p2.png" alt="" width="60%" height="auto">
+				</div>
+				<div class="col-sm-6 col-md-4">
+					<img src="/resources/css/p3.png" alt="" width="60%" height="auto">
+				</div>
+					<div id="map"></div>
+					<div id="content">신촌점</div>
+					<div id="content1">강남점</div>
+					<div id="content2">종로점</div>
 			</div>
-			<div class="col-sm-6 col-md-4"></div>
-			<div class="col-sm-6 col-md-4"></div>
 		</div>
 	</div>
 
@@ -426,7 +380,7 @@ body {
 				<br>
 			</div>
 			<div class="col-lg-6">
-				<iframe width="90%" height="400px" style="margin:auto;"
+				<iframe width="90%" height="400px" style="margin: auto;"
 					src="https://www.youtube.com/embed/egcd1psh81c" frameborder="0"
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>
@@ -490,10 +444,10 @@ body {
 		</div>
 	</footer>
 	<script>
-		function initialize() {
+		/* function initialize() {
 
 			var LatLng = new google.maps.LatLng(37.5582, 126.9376);
-
+			
 			var mapProp = {
 
 				center : LatLng, // 위치
@@ -507,136 +461,164 @@ body {
 			};
 
 			var map = new google.maps.Map(document.getElementById("map"),
-					mapProp);
+					mapProp); */
 
-			new AutocompleteDirectionsHandler(map);
+		/* new AutocompleteDirectionsHandler(map); */
 
-			var contentString = '<h5>TMS 스터디룸</h5><br><p>공부하러오세요~</p>';
+		/* var contentString = '<h5>TMS 스터디룸</h5><br><p>공부하러오세요~</p>';
 
-			var infowindow = new google.maps.InfoWindow({
-				content : contentString
+		var infowindow = new google.maps.InfoWindow({
+			content : contentString
+		});
+
+		var myIcon = new google.maps.MarkerImage(
+				"/resources/images/student.png", null, null, null,
+				new google.maps.Size(40, 40));
+
+		var marker = new google.maps.Marker({
+
+			position : LatLng,
+
+			map : map,
+
+			icon : myIcon,
+
+			draggable : true,
+			animation : google.maps.Animation.DROP
+
+		});
+
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		});
+
+		} */
+		var popup, Popup;
+		function initMap() {
+			definePopupClass();
+			
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 12,
+				center : {
+					lat : 37.55,
+					lng : 126.95
+				}
 			});
+			 popup = new Popup(
+				      new google.maps.LatLng(37.5582, 126.9376),
+				      document.getElementById('content'));
+			popup.setMap(map);
+			 popup = new Popup(
+				      new google.maps.LatLng(37.499591, 127.029247),
+				      document.getElementById('content1'));
+			popup.setMap(map);
+			 
+			 popup = new Popup(
+				      new google.maps.LatLng(37.570851, 126.985228),
+				      document.getElementById('content2'));
+			popup.setMap(map);
+			setMarkers(map);
+		}
+
+		var beaches = [ [ '지점 A', 37.5582, 126.9376 ],
+				[ '지점 B', 37.499591, 127.029247 ],
+				[ '지점 C', 37.570851, 126.985228 ] ];
+
+		function setMarkers(map) {
 
 			var myIcon = new google.maps.MarkerImage(
 					"/resources/images/student.png", null, null, null,
 					new google.maps.Size(40, 40));
 
-			var marker = new google.maps.Marker({
-
-				position : LatLng,
-
-				map : map,
-
-				icon : myIcon,
-
-				draggable : true,
-				animation : google.maps.Animation.DROP
-
-			});
-
-			marker.addListener('click', function() {
-				infowindow.open(map, marker);
-			});
-
-		}
-		function AutocompleteDirectionsHandler(map) {
-			this.map = map;
-			this.originPlaceId = null;
-			this.destinationPlaceId = null;
-			this.travelMode = 'WALKING';
-			var originInput = document.getElementById('origin-input');
-			var destinationInput = document.getElementById('destination-input');
-			var modeSelector = document.getElementById('mode-selector');
-			this.directionsService = new google.maps.DirectionsService;
-			this.directionsDisplay = new google.maps.DirectionsRenderer;
-			this.directionsDisplay.setMap(map);
-
-			var originAutocomplete = new google.maps.places.Autocomplete(
-					originInput, {
-						placeIdOnly : true
-					});
-			var destinationAutocomplete = new google.maps.places.Autocomplete(
-					destinationInput, {
-						placeIdOnly : true
-					});
-
-			this.setupClickListener('changemode-walking', 'WALKING');
-			this.setupClickListener('changemode-transit', 'TRANSIT');
-			this.setupClickListener('changemode-driving', 'DRIVING');
-
-			this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
-			this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
-
-			this.map.controls[google.maps.ControlPosition.TOP_LEFT]
-					.push(originInput);
-			this.map.controls[google.maps.ControlPosition.TOP_LEFT]
-					.push(destinationInput);
-			this.map.controls[google.maps.ControlPosition.TOP_LEFT]
-					.push(modeSelector);
-		}
-
-		// Sets a listener on a radio button to change the filter type on Places
-		// Autocomplete.
-		AutocompleteDirectionsHandler.prototype.setupClickListener = function(
-				id, mode) {
-			var radioButton = document.getElementById(id);
-			var me = this;
-			radioButton.addEventListener('click', function() {
-				me.travelMode = mode;
-				me.route();
-			});
-		};
-
-		AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(
-				autocomplete, mode) {
-			var me = this;
-			autocomplete.bindTo('bounds', this.map);
-			autocomplete
-					.addListener(
-							'place_changed',
-							function() {
-								var place = autocomplete.getPlace();
-								if (!place.place_id) {
-									window
-											.alert("Please select an option from the dropdown list.");
-									return;
-								}
-								if (mode === 'ORIG') {
-									me.originPlaceId = place.place_id;
-								} else {
-									me.destinationPlaceId = place.place_id;
-								}
-								me.route();
-							});
-
-		};
-
-		AutocompleteDirectionsHandler.prototype.route = function() {
-			if (!this.originPlaceId || !this.destinationPlaceId) {
-				return;
+			for (var i = 0; i < beaches.length; i++) {
+				var beach = beaches[i];
+				var marker = new google.maps.Marker({
+					position : {
+						lat : beach[1],
+						lng : beach[2]
+					},
+					map : map,
+					icon : myIcon,
+					title : beach[0],
+				});
 			}
-			var me = this;
+		}
 
-			this.directionsService.route({
-				origin : {
-					'placeId' : this.originPlaceId
-				},
-				destination : {
-					'placeId' : this.destinationPlaceId
-				},
-				travelMode : this.travelMode
-			}, function(response, status) {
-				if (status === 'OK') {
-					me.directionsDisplay.setDirections(response);
-				} else {
-					window.alert('Directions request failed due to ' + status);
+		/** Defines the Popup class. */
+		function definePopupClass() {
+			/**
+			 * A customized popup on the map.
+			 * @param {!google.maps.LatLng} position
+			 * @param {!Element} content
+			 * @constructor
+			 * @extends {google.maps.OverlayView}
+			 */
+			Popup = function(position, content) {
+				this.position = position;
+
+				content.classList.add('popup-bubble-content');
+
+				var pixelOffset = document.createElement('div');
+				pixelOffset.classList.add('popup-bubble-anchor');
+				pixelOffset.appendChild(content);
+
+				this.anchor = document.createElement('div');
+				this.anchor.classList.add('popup-tip-anchor');
+				this.anchor.appendChild(pixelOffset);
+
+				// Optionally stop clicks, etc., from bubbling up to the map.
+				this.stopEventPropagation();
+			};
+			// NOTE: google.maps.OverlayView is only defined once the Maps API has
+			// loaded. That is why Popup is defined inside initMap().
+			Popup.prototype = Object.create(google.maps.OverlayView.prototype);
+
+			/** Called when the popup is added to the map. */
+			Popup.prototype.onAdd = function() {
+				this.getPanes().floatPane.appendChild(this.anchor);
+			};
+
+			/** Called when the popup is removed from the map. */
+			Popup.prototype.onRemove = function() {
+				if (this.anchor.parentElement) {
+					this.anchor.parentElement.removeChild(this.anchor);
 				}
-			});
-		};
+			};
+
+			/** Called when the popup needs to draw itself. */
+			Popup.prototype.draw = function() {
+				var divPosition = this.getProjection().fromLatLngToDivPixel(
+						this.position);
+				// Hide the popup when it is far out of view.
+				var display = Math.abs(divPosition.x) < 4000
+						&& Math.abs(divPosition.y) < 4000 ? 'block' : 'none';
+
+				if (display === 'block') {
+					this.anchor.style.left = divPosition.x + 'px';
+					this.anchor.style.top = divPosition.y + 'px';
+				}
+				if (this.anchor.style.display !== display) {
+					this.anchor.style.display = display;
+				}
+			};
+
+			/** Stops clicks/drags from bubbling up to the map. */
+			Popup.prototype.stopEventPropagation = function() {
+				var anchor = this.anchor;
+				anchor.style.cursor = 'auto';
+
+				[ 'click', 'dblclick', 'contextmenu', 'wheel', 'mousedown',
+						'touchstart', 'pointerdown' ].forEach(function(event) {
+					anchor.addEventListener(event, function(e) {
+						e.stopPropagation();
+					});
+				});
+			};
+		}
 	</script>
 
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6yCulCcEhKXGw1lWxeRZ8_qyDmiB5Ttk&libraries=places&callback=initialize"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6yCulCcEhKXGw1lWxeRZ8_qyDmiB5Ttk&libraries=places&callback=initMap"
 		async defer></script>
 </body>
 </html>

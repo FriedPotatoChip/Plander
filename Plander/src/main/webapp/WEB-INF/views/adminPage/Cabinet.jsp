@@ -14,7 +14,6 @@
 
 <!-- Custom styles for this template -->
 <link href="/resources/css/dashboard.css" rel="stylesheet">
-
 <!-- ======================================================================================== -->
 
 <style>
@@ -119,7 +118,7 @@ h3 {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active" 
-							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
+							href="/TMS/admin/Cabinet?br_idx"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
@@ -127,8 +126,12 @@ h3 {
 								data-feather="home"></span> Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats?sct_idx=1"> <span
-								data-feather="bar-chart-2"></span> Visitors
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats"> <span
+								data-feather="bar-chart-2"></span> Seats
+						</a></li>
+						
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								data-feather="file"></span> Receipt
 						</a></li>
 					</ul>
 				</div>
@@ -180,9 +183,24 @@ h3 {
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-
-	<script>
 	
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+	<script>
+		window.jQuery || document.write('_$tag____________________________________________________$tag_____')
+	</script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
+	<script src="/resources/js/popper.min.js"></script>
+	<script src="/resources/js/bootstrap.min2.js"></script>
+	Icons
+	<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+	<script>
+		feather.replace()
+	</script>
+	<script>
 		$(document).ready(function() {
 			
 			$('.po_category').click(function() {
@@ -209,20 +227,6 @@ h3 {
 		});
 		
 	</script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"/>
-	<script>
-		window.jQuery
-				|| document
-						.write('_$tag____________________________________________________$tag_____')
-	</script>
-	<script src="/resources/js/popper.min.js"></script>
-	<script src="/resources/js/bootstrap.min2.js"></script>
-	Icons
-	<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-	<script>
-		feather.replace()
-	</script>
-	Graphs
 	
 </body>
 </html>

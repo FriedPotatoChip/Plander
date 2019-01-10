@@ -37,11 +37,11 @@
 	<select id="sendMsg" resultType="com.bit.domain.SendMsgVO"
 		parameterType="Map">
 		select * from (
-		select rownum rn,
-		send_id, recv_id, title,
-		content, regdate
-		from send_msg where send_id =
-		#{id} )
+		select rownum rn, m.*
+		from send_msg m where send_id =
+		#{id}
+		order by sm_idx desc 
+		)
 		where rn between
 		#{start} and #{end}
 	</select>
@@ -56,9 +56,12 @@
 	<!-- 받은쪽지 -->
 	<select id="recvMsg" resultType="com.bit.domain.RecvMsgVO"
 		parameterType="Map">
-		select * from (select rownum rn, send_id, recv_id,
-		title, content, regdate
-		from recv_msg where recv_id = #{id})
+		select * 
+		from (
+			select rownum rn, m.*
+			from recv_msg m where recv_id = #{id}
+			order by rm_idx desc
+			)
 		where rn
 		between #{start} and #{end}
 	</select>
@@ -313,7 +316,7 @@
 		select *
 		from(
 		select rownum rn, b.b_idx, b.b_title, b.id, b.ct_idx, b.b_regdate,
-		c.c_idx,
+		c.c_idx, c.c_content,
 		c.c_regdate
 		from board b, comments c
 		where c.b_idx = b.b_idx
