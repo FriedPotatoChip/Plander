@@ -71,7 +71,7 @@ a {
 						<td><a
 							href="/TMS/my/boardDetail?b_idx=${board_comment.b_idx }">${board_comment.b_title }</a></td>
 						<td>${board_comment.c_content }</td>
-						<td>${board_comment.id }</td>
+						<td class="idDiv" onclick="showBox(event)">${board_comment.id }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${board_comment.c_regdate }" /></td>
 					</tr>
