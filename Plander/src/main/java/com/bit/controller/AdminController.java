@@ -14,15 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
+import com.bit.domain.RecruitVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.BookService;
+import com.bit.service.CommonService;
 import com.bit.service.adminService;
 import com.bit.utils.PagingVO;
 
 @Controller
 @RequestMapping("/TMS/admin")
 public class AdminController {
-
+	
 	@Autowired
 	private BookService bookservice;
 
@@ -35,7 +37,7 @@ public class AdminController {
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal());
 
 		page.CalcPage(page.getNowPage(), page.getCntPerPage());
-
+		
 		model.addAttribute("page", page);
 		model.addAttribute("user", service.getUserList(page));
 		return "adminPage/admin";

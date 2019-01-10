@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style>
 	h3{ margin-top: 0px; }
@@ -19,10 +20,26 @@
 	.hoverPointer:hover{ cursor: pointer; }
 	#board, #comments { border: 1px solid black; }
 	.comm { border: 1px solid blue; }
+	.user { width: 30px; height: 30px; border-radius: 50%; }
+/* 클릭시 레이어 */	
+.idDiv { cursor: pointer; display: inline-block; }
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 120px;
+	padding: 10px;
+	padding-top: 18px; padding-left: 15px;
+}
+.popupLayer div {
+	position: absolute;
+	top: 0px;
+	right: 5px
+}
 </style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-
 
 $(document).ready(function(){
 	window.category = ""; 
@@ -54,7 +71,7 @@ $(document).ready(function(){
 			url: "/boardListAjax",
 			type: 'get',
 			dataType: "json",
-			data: {'nowPage':nowPage, 'ct_idx':'${board.ct_idx}'},
+			data: {'nowPage':nowPage, 'ct_idx':'${board.ct_idx}', 'cntPerPage':${cntPerPage}},
 			success: function(list){
 				
 				var html = "";
@@ -74,6 +91,9 @@ $(document).ready(function(){
 						}
 						html += "<a href='/TMS/boardDetail?idx="+value.b_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
 						html += value.b_title;
+						if (value.cnt != 0){
+							html += "["+value.cnt+"]";
+						} 
 						html += "</a>";
 						if ('${board.b_idx}' == value.b_idx){
 							html += "</b>";
@@ -88,15 +108,14 @@ $(document).ready(function(){
 				html += "</table>";
 				html += "<hr>";
 				if (chkStartPage == "true"){
-					html += "<a class='hoverPointer' onclick='boardList(${nowPage - 1})'>&lt;이전</a>&nbsp;&nbsp;&nbsp;&nbsp;";
+					html += "<a class='hoverPointer' onclick='boardList("+(nowPage - 1)+")'>&lt;이전</a>&nbsp;&nbsp;&nbsp;&nbsp;";
 				}
 				if (chkEndPage == "true"){
-					html += "<a class='hoverPointer' onclick='boardList(${nowPage + 1})'>다음&gt;</a>";
+					html += "<a class='hoverPointer' onclick='boardList("+(nowPage + 1)+")'>다음&gt;</a>";
 				}
 				
 				
 				$("#boardListAjax").html(html);
-				
 			}, error: function(error){
 				console.log("error발생: "+ error);
 			}
@@ -106,13 +125,34 @@ $(document).ready(function(){
 </script>
 </head>
 <body> 
-	
- 	<h3>모집글 상세조회 페이지</h3>
+	<!-- 헤더 -->
+<!-- Header -->
+<c:if test="${empty sessionScope.usersVO }">
+	<jsp:include page="/commons/header.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.usersVO }">
+	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+		<jsp:include page="/commons/loginheader.jsp" />
+	</c:if>
+	<c:if test="${sessionScope.usersVO.rank == 1 }">
+		<jsp:include page="/commons/adminLoginheader.jsp" />
+	</c:if>
+</c:if>
+<!-- 헤더 끝 -->
+ 	<h3>게시판 상세조회 페이지</h3>
 	
 	<div id="board">
 		<a href="/TMS/board?ct_idx=${board.ct_idx }&nowPage=${nowPage }&cntPerPage=${cntPerPage}" style="font-size: 0.8em;"><strong id="boardType"></strong></a>
 		<h3>${board.b_title }</h3>
-		<a href="#">${board.id }</a> 
+		<div class="idDiv" userId="${board.id }">
+			<c:if test='${empty board.user_profileImagePath }'>
+				<img class="user" src="/resources/images/users.png" alt="user"/>
+			</c:if>
+			<c:if test='${not empty board.user_profileImagePath }'>
+				<img class="user" src="${board.user_profileImagePath }" alt="user"/>
+			</c:if> 
+			<span>${board.id }</span>
+		</div> 
 		<p><fmt:formatDate value="${board.b_regdate }" pattern="yyyy.MM.dd HH:mm"/></p>
 		<hr>
 		<div id="content">${board.b_content }</div>
@@ -123,24 +163,8 @@ $(document).ready(function(){
 		</c:if>
 	</div>	
 
-	
+	<!-- 댓글 출력 -->
 	<div id="comments">
-		<h4>댓글</h4>
-		<hr>
-		<div class="comm comment">
-			<div><strong>작성자</strong></div>
-			<div>댓글 내용</div>
-			<div>작성일</div>
-			<div><button>답글</button></div>
-		</div>
-		
-		<div class="comm c-comment">
-		
-			<div>&rdsh; <strong>작성자</strong></div>
-			<div>댓글 내용</div>
-			<div>작성일</div>
-			<div><button>답글</button></div>
-		</div>
 	</div>
 	
 	<!-- 페이징 시작 -->
@@ -153,14 +177,22 @@ $(document).ready(function(){
 	<br>
 	
 	<!-- 댓글 작성 -->
-	<div>
-		<form name="commentAjax">
-			<input type="text" value="${usersVO.id }" name="id" readonly><br>
-			<textarea rows="8" cols="80" name="c_content" id="c_content" required></textarea>
-			<input type="hidden" value="${board.b_idx }" name="b_idx">
-			<input type="button" onclick="registerComm()" value="댓글단다">
-		</form>
-	</div>
+	<c:if test="${not empty usersVO }">
+		<div>
+			<form name="commentAjax">
+				<c:if test='${empty usersVO.user_profileImagePath }'>
+					<img class="user" src="/resources/images/users.png" alt="user"/>
+				</c:if>
+				<c:if test='${not empty usersVO.user_profileImagePath }'>
+					<img class="user" src="${usersVO.user_profileImagePath }" alt="user"/>
+				</c:if> 
+				<input type="text" value="${usersVO.id }" name="id" readonly><br>
+				<textarea rows="8" cols="80" name="c_content" id="c_content" required></textarea>
+				<input type="hidden" value="${board.b_idx }" name="b_idx">
+				<input type="button" onclick="registerComm()" value="댓글단다">
+			</form>
+		</div>
+	</c:if>
 	
 	<br>
 	<br>
@@ -259,13 +291,25 @@ $(document).ready(function(){
 					var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
 				    if (value.level == 1){
 					    html += "<div class='comm comment' id='comm"+value.c_idx+"'>";
-						html += "<div class='comm_id'><strong id='' class=''>"+value.id+"</strong></div>";
+						html += "<div class='comm_id idDiv' userId='"+value.id+"'>";
+						if (value.user_profileImagePath == null){
+							html += "<img class='user' src='/resources/images/users.png' alt='user'/>";
+						} else {
+							html += "<img class='user' src='"+value.user_profileImagePath+"' alt='user'/>";
+						}
+						html += "<strong id='' class=''>"+value.id+"</strong></div>";
 						html += "<div>"+value.c_content+"</div>";
 						arrC_idx.push(value.c_idx);
 						arrId.push(value.id);
 				    } else {
 				    	html += "<div class='comm c-comment' id='comm"+value.c_idx+"'>";
-				    	html += "<div>&rdsh; <strong id=''>"+value.id+"</strong></div>";
+				    	html += "<div class='idDiv' userId='"+value.id+"'><span style='font-family: 굴림;'>&rdsh;</span> ";
+						if (value.user_profileImagePath == null){
+							html += "<img class='user' src='/resources/images/users.png' alt='user'/>";
+						} else {
+							html += "<img class='user' src='"+value.user_profileImagePath+"' alt='user'/>";
+						}
+				    	html += "<strong id=''>"+value.id+"</strong></div>";
 				    	html += "<div><strong class='"+value.rp_idx+"'></strong>"+value.c_content+"</div>";
 						arrC_idx.push(value.c_idx);
 						arrId.push(value.id);
@@ -287,6 +331,48 @@ $(document).ready(function(){
 					$("."+ arrC_idx[i]).html("["+arrId[i]+"]");
 					console.log(arrId[i]); 
 				}
+				
+				/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+				$('.idDiv').click(function(e)
+				{
+					var sWidth = window.innerWidth;
+					var sHeight = window.innerHeight;
+
+					var oWidth = $('.popupLayer').width();
+					var oHeight = $('.popupLayer').height();
+
+					// 레이어가 나타날 위치를 셋팅한다.
+					var divLeft = e.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
+					var divTop = e.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
+					console.log("X: "+ e.clientX);
+					console.log("Y: "+ e.clientY);
+
+					// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+					if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+					if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+					// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+					if( divLeft < 0 ) divLeft = 0;
+					if( divTop < 0 ) divTop = 0;
+
+					$('.popupLayer').css({
+						"top": divTop,
+						"left": divLeft,
+						"position": "absolute"
+					}).show();
+					console.log(this);
+					var userId = $(this).attr("userId");
+					console.log($(this).attr("userId"));
+					$("#showWritten").attr("href", "/TMS/searchList?keyword="+userId+"&target=w&ct_idx=${board.ct_idx}");
+					$("#sendMsg").click(function(){
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == ''){
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						} 
+						window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
+					});
+				});
 			}, error: function(){
 				alert("댓글 로딩 실패");
 			}
@@ -311,6 +397,7 @@ $(document).ready(function(){
 			data: commentData,
 			success: function(data){
 				alert("댓글을 남겼습니다");
+				$("#c_content").val("");
 				paging(nowPage);
 			}, error: function(){
 				alert("댓글 달기 실패");
@@ -424,6 +511,22 @@ $(document).ready(function(){
 			}
 		});
 	}
+	
+	
+
+</script>
+	<div class="popupLayer">
+		<div>
+			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+		</div>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br>
+		<a id="userProfile" href="#">회원 정보 보기</a><br>
+		<a id="showWritten" href="#">작성글 보기</a><br>
+	</div>
+<script>
+function closeLayer() {
+	$(".popupLayer").hide();
+}
 </script>
 </body>
 </html>

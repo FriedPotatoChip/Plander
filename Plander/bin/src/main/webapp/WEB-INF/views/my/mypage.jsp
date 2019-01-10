@@ -3,15 +3,51 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
-<!-- Ajax -->
+<link rel="stylesheet"
+	href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css"
+	type="text/css" />
+
 <!-- Jcrop(사진 크롭) -->
-<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
-<link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v0.9.12/css/jquery.Jcrop.css" type="text/css" />
-<!-- Jcrop 끝 -->
+<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" ></script>
+
+<script>
+//비밀번호 확인
+function pwchk() {
+	var pw = $('#password').val();
+	var pwchk = ${user.password};
+
+	if (pw != pwchk || pwchk == "") {
+		//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
+		$('#pwchkMsg').html(
+				"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+		$('#update').prop("disabled", true);
+	} else {
+		$('#pwchkMsg').html(
+				"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+		$('#update').prop("disabled", false);
+	}
+}
+
+// 클릭 시 스크롤이 자동으로 위로 올라가는 현상
+function click() {
+    return;
+}
+</script>
+
+
 <style>
+#primaryNav li a h5 {
+	font-weight: 700;
+}
+
+body>div {
+	width: 90%;
+	margin: 0 auto;
+}
+
 .navs {
 	height: 60px;
-} 
+}
 
 .nav_btn {
 	margin-right: 10px;
@@ -19,7 +55,14 @@
 	float: right;
 }
 
-h3, th {
+h3 {
+	padding: 15px 0;
+	text-align: center;
+	background-color: #3b5998;
+	text-align: center;
+}
+
+th {
 	text-align: center;
 }
 
@@ -30,51 +73,70 @@ h3 {
 
 .profile {
 	width: 100%;
-	margin: 0 auto;
+	margin: 30px auto;
 	text-align: center;
 }
 
 .user:hover {
 	opacity: 0.5;
 }
-.user {  border-radius: 50%; }
+
+.user {
+	border-radius: 50%;
+}
 
 .user_name {
 	margin-top: 10px;
 }
 
 .my_info {
-	width: 48%;
+	width: 36%;
 	float: left;
+	margin-bottom: 30px;
 }
 
 .myBook {
-	width: 48%;
+	width: 60%;
 	float: right;
 }
 
-#myBook, #myRecruit {
-	margin-top: 10px;
-}
-
-#myRecruit {
-	width: 80%;
+.myRecruit {
+	width: 100%;
+	clear: left;
 	margin: 0 auto;
 }
 
-.myRecruit {
-	width: 96%;
-	clear: left;
+#myBook, #myRecruit {
+	width: 100%;
+	margin: 30px auto;
 }
 
 #my_info_table {
-	width: 80%;
+	width: 100%;
 	margin: 0 auto;
+}
+
+#my_info_table table, #my_info_table tr, #my_info_table th,
+	#my_info_table td {
+	border-bottom: 1px solid #000;
+}
+
+#my_info_table tr:first-child td, #my_info_table tr:first-child th {
+	border-top: 1px solid #000;
 }
 
 .myinfo_nav, .myBook_nav, .myRecruit_nav {
 	text-align: center;
-	margin-bottom: 20px;
+	margin: 20px auto;
+	width: 100%;
+}
+
+#modal_table table, #modal_table tr, #modal_table th, #modal_table td {
+	border-bottom: 1px solid lightgray;
+}
+
+#modal_table tr:first-child td, #modal_table tr:first-child th {
+	border-top: 1px solid lightgray;
 }
 
 #modal_table th {
@@ -84,132 +146,131 @@ h3 {
 #modal_table td {
 	width: 50%;
 }
-.description { font-size: 0.7em; color: gray; }
+
+.description {
+	font-size: 0.7em;
+	color: gray;
+}
+table, tr, th, td { text-align: center;}
 </style>
 </head>
 
 <body>
-	<nav class="navs">
-		<button type="button" class="btn btn-outline-danger nav_btn"
-			onclick="location.href='/TMS/logout'">로그아웃</button>
-		<button type="button" class="btn btn-outline-success nav_btn"
-			onclick="location.href='/TMS'">홈으로가기</button>
+	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/TMS"><img
+				src="/resources/images/logo.png" width="150px" height="50px"></a>
+
+			<ul class="navbar-nav ml-auto" id="primaryNav">
+				<li class="nav-item"><a class="nav-link" href="/TMS/logout"><h5>로그아웃</h5></a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS"><h5>홈으로가기</h5></a></li>
+			</ul>
+
+		</div>
 	</nav>
 
-	<div class="profile">
-		<hr>
-		<c:if test='${empty usersVO.user_profileImagePath }'>
-		<img class="user" src="/resources/images/users.png" alt="user"
-			data-toggle="modal" data-target="#profileModal" />
-		</c:if>
-		<c:if test='${not empty usersVO.user_profileImagePath }'>
-		<img class="user" src="${usersVO.user_profileImagePath }" alt="user"
-			data-toggle="modal" data-target="#profileModal" />
-		</c:if> 
-		<h5 class="user_name">${usersVO.name }님</h5>
-		<hr>
-	</div>
+	<div class="container">
+		<!-- 회원 프로필 사진 -->
+		<div class="profile">
+			<c:if test='${empty usersVO.user_profileImagePath }'>
+				<img class="user" src="/resources/images/users.png" alt="user"
+					data-toggle="modal" data-target="#profileModal"
+					style="margin-top: 30px;" />
+			</c:if>
+			<c:if test='${not empty usersVO.user_profileImagePath }'>
+				<img class="user" src="${usersVO.user_profileImagePath }" alt="user"
+					data-toggle="modal" data-target="#profileModal" />
+			</c:if>
+			<h5 class="user_name">${usersVO.name }님</h5>
+			<hr>
+		</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 수정</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body mx-auto">
-					<c:if test='${empty usersVO.user_profileImagePath }'>
-						<img class="user hideFade" src="/resources/images/users.png" alt="user"
-							data-toggle="modal" data-target="#updateProfile" />
-					</c:if>
-					<c:if test='${not empty usersVO.user_profileImagePath }'>
-						<img class="user hideFade" src="${usersVO.user_profileImagePath }" alt="user"
-							data-toggle="modal" data-target="#updateProfile" />
-					</c:if> 
-				</div>
-				<div class="modal-footer mx-auto">
-					<button type="button" class="btn btn-outline-danger mx-1 hideFade" data-toggle="modal" data-target="#updateProfile">사진변경</button>
-					<button type="button" class="btn btn-outline-warning mx-1">삭제</button>
-				</div>
-				<div>
-					
-				</div>
-				
+
+		<!-- 내정보 -->
+		<div class="my_info">
+			<h3>- 내정보 -</h3>
+			<div class="myinfo_nav">
+				<strong><a href="#" data-toggle="modal"
+					data-target=".bd-example-modal-lg">회원정보수정</a></strong>
+			</div>
+			<table class="table" id="my_info_table">
+				<tr>
+					<th>회원아이디</th>
+					<td>${user.id }</td>
+				</tr>
+				<tr>
+					<th>회원명</th>
+					<td>${user.name }</td>
+				</tr>
+				<tr>
+					<th>회원등록일</th>
+					<td><fmt:formatDate pattern="yyyy-MM-dd"
+							value="${user.regdate }" /></td>
+				</tr>
+				<tr>
+					<th>회원연락처</th>
+					<td>${user.phone }</td>
+				</tr>
+				<tr>
+					<th>회원이메일</th>
+					<td>${user.email }</td>
+				</tr>
+				<tr>
+					<th>회원주소</th>
+					<td>${user.roadAddrPart1 }&nbsp;${user.addrDetail }</td>
+				</tr>
+			</table>
+		</div>
+
+
+		<!-- 내예약 -->
+		<div class="myBook">
+			<h3>- 내예약 -</h3>
+			<span style="float: right;">
+				<button type="button" class="btn btn-warning mr-3" onclick="location.href='/TMS/admin/Seats'">좌석이동</button></span>
+			<div class="myBook_nav">
+				<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/coupon?nowPage=1')">내쿠폰</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/sendMsg?nowPage=1')">보낸쪽지</a></strong>
+				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/TMS/my/recvMsg?nowPage=1')">받은쪽지</a></strong>
+				<table id="myBook"></table>
 			</div>
 		</div>
-	</div>
 
-	<div class="my_info">
-		<h3>- 내정보 -</h3>
-		<div class="myinfo_nav">
-			<strong><a href="#" data-toggle="modal"
-				data-target="#myModal">회원정보수정</a></strong>
-		</div>
-		<table class="table" id="my_info_table">
-			<tr>
-				<th>회원아이디</th>
-				<td>${user.id }</td>
-			</tr>
-			<tr>
-				<th>회원명</th>
-				<td>${user.name }</td>
-			</tr>
-			<tr>
-				<th>회원등록일</th>
-				<td><fmt:formatDate pattern="yyyy-MM-dd"
-						value="${user.regdate }" /></td>
-			</tr>
-			<tr>
-				<th>회원연락처</th>
-				<td>${user.phone }</td>
-			</tr>
-			<tr>
-				<th>회원이메일</th>
-				<td>${user.email }</td>
-			</tr>
-			<tr>
-				<th>회원주소</th>
-				<td>${user.roadAddrPart1 }&nbsp;${user.addrDetail }</td>
-			</tr>
-		</table>
-	</div>
 
-	<div class="myBook">
-		<h3>- 내예약 -</h3>
-		<div class="myBook_nav">
-			<strong><a href="#" onclick="fetch_book('/TMS/my/my_seat')">좌석예약내역</a></strong>
-			&nbsp;|&nbsp;<strong><a href="#"
-				onclick="fetch_book('/TMS/my/my_cabinet')">사물함예약내역</a></strong>
-			<table id="myBook"></table>
+		<!-- 내글목록 -->
+		<div class="myRecruit">
+			<h3>- 내글목록 -</h3>
+			<div class="myRecruit_nav">
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=1')">내모집글댓글</a></strong>&nbsp;|&nbsp;
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/board?nowPage=1')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
+				<strong><a href="javascript:click()"
+					onclick="fetch_recruit('/TMS/my/board_comment?nowPage=1')">자유게시판에달린댓글</a></strong>
+			</div>
+			<table id="myRecruit"></table>
 		</div>
 	</div>
 
-	<div class="myRecruit">
-		<h3>- 내글목록 -</h3>
-		<div class="myRecruit_nav">
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/my_recruit')">내모집글</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/applyList')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/my_recruit_comment')">내모집글댓글</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#" onclick="fetch_recruit('/TMS/my/board')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
-			<strong><a href="#"
-				onclick="fetch_recruit('/TMS/my/board_comment')">자유게시판에달린댓글</a></strong>
-		</div>
-		<table id="myRecruit"></table>
-	</div>
 
-	<!-- 모달창 -->
-	<div class="modal" tabindex="-1" role="dialog" id="myModal">
-		<div class="modal-dialog" role="document">
+	<!-- 회원정보수정 모달창 -->
+	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+		id="myModal">
+		<div class="modal-dialog modal-lg" role="document">
 			<form action="/TMS/my/update" method="POST">
-				<div class="modal-content" style="width: 800px;">
+				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">회원정보수정</h5>
 						<button type="button" class="close" data-dismiss="modal"
@@ -217,7 +278,7 @@ h3 {
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body center">
 						<table class="table" id="modal_table">
 							<tr>
 								<th>회원아이디</th>
@@ -237,7 +298,7 @@ h3 {
 							</tr>
 							<tr>
 								<th>회원등록일</th>
-								<td><fmt:formatDate pattern="yyyy-MM-dd"
+								<td><fmt:formatDate pattern="yyyy년 MM월 dd일"
 										value="${user.regdate }" /></td>
 							</tr>
 							<tr>
@@ -261,7 +322,7 @@ h3 {
 								<th></th>
 								<td><input type="text" class="form-control"
 									id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
-									value="${user.roadAddrPart1 }" required></td>
+									value="${user.roadAddrPart1 }" readonly></td>
 							</tr>
 							<tr>
 								<th></th>
@@ -281,65 +342,94 @@ h3 {
 			</form>
 		</div>
 	</div>
+	<!-- 회원정보수정 모달창 끝 -->
 
 
+	<!-- 프로필 사진 수정 모달 -->
+	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 수정</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body mx-auto">
+					<c:if test='${empty usersVO.user_profileImagePath }'>
+						<img class="user hideFade" src="/resources/images/users.png"
+							alt="user" data-toggle="modal" data-target="#updateProfile" />
+					</c:if>
+					<c:if test='${not empty usersVO.user_profileImagePath }'>
+						<img class="user hideFade" src="${usersVO.user_profileImagePath }"
+							alt="user" data-toggle="modal" data-target="#updateProfile" />
+					</c:if>
+				</div>
+				<div class="modal-footer mx-auto">
+					<button type="button" class="btn btn-outline-danger mx-1 hideFade"
+						data-toggle="modal" data-target="#updateProfile">사진변경</button>
+					<button type="button" class="btn btn-outline-warning mx-1" onclick="imgDel()">삭제</button>
+				</div>
+				<div></div>
+
+			</div>
+		</div>
+	</div>
+	<!-- 프로필 사진 수정 모달 끝 -->
 
 
+	<!-- 프로필 사진 업로드 모달 -->
+	<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 업로드</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body centerModal">
 
-<!-- 프로필 사진 업로드 모달 -->
-<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content"> 	
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">프로필 사진 업로드</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body centerModal">
-      		
-			<form id="form" action="/TMS/profileUpload" name="imgForm" method="post" enctype="multipart/form-data" onclick="">
-				<input type='file' name="file" id="imgInput" />
-				<p class="description">
-					프로필 사진은 jpg, png, jpeg파일만 가능<br>
-					업로드 가능한 원본 이미지 사이즈는 최대 5MB<br>
-					가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br>
-					프로필 이미지로 적용할 범위를 <b>반드시</b> 선택하여 주세요
-				</p> 
-				<hr> 
-				<input type="hidden" name="x" id="x" />
-				<input type="hidden" name="y" id="y" />
-				<input type="hidden" name="w" id="w" />
-				<input type="hidden" name="h" id="h" />
-				<input type="hidden" name="u_idx" value="${usersVO.u_idx }">
-			</form>
-
-			 
-			<c:if test='${empty usersVO.user_profileImagePath }'>
-				<img id="profileImg" src="/resources/images/users.png" alt="user" />
-			</c:if>
-			<c:if test='${not empty usersVO.user_profileImagePath }'>
-				<img id="profileImg" src="${usersVO.user_profileImagePath }" alt="user" />
-			</c:if> 
-      </div>
-      <div class="modal-footer">
-        <input type="button" class="btn btn-secondary" data-dismiss="modal" value="닫기">
-        <input type="button" class="btn btn-primary" value="수정" onclick="submitProfile()">
-      </div>
-    </div>
-  </div>
-</div>
-<!-- 프로필 사진 업로드 모달 끝 -->
+					<form id="form" action="/TMS/profileUpload" name="imgForm"
+						method="post" enctype="multipart/form-data" onclick="">
+						<input type='file' name="file" id="imgInput" />
+						<p class="description">
+							&#8251; 프로필 사진은 jpg, png, jpeg파일만 가능<br> 업로드 가능한 원본 이미지 사이즈는
+							최대 5MB<br> 가로 사이즈가 1100px을 초과하는 이미지는 업로드 불가<br> 프로필
+							이미지로 적용할 범위를 <b>반드시</b> 선택하여 주세요
+						</p>
+						<hr>
+						<input type="hidden" name="x" id="x" /> <input type="hidden"
+							name="y" id="y" /> <input type="hidden" name="w" id="w" /> <input
+							type="hidden" name="h" id="h" /> <input type="hidden"
+							name="u_idx" value="${usersVO.u_idx }">
+					</form>
 
 
-
-
-
-
+					<c:if test='${empty usersVO.user_profileImagePath }'>
+						<img id="profileImg" src="/resources/images/users.png" alt="user" />
+					</c:if>
+					<c:if test='${not empty usersVO.user_profileImagePath }'>
+						<img id="profileImg" src="${usersVO.user_profileImagePath }"
+							alt="user" />
+					</c:if>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-secondary" data-dismiss="modal"
+						value="닫기"> <input type="button" class="btn btn-primary"
+						value="수정" onclick="submitProfile()">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 프로필 사진 업로드 모달 끝 -->
 
 
 	<script>
-	
 		//주소검색
 		function goPopup() {
 			var pop = window.open("/juso", "pop",
@@ -358,11 +448,7 @@ h3 {
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
-			var pwchk = $
-			{
-				user.password
-			}
-			;
+			var pwchk = ${user.password};
 
 			if (pw != pwchk || pwchk == "") {
 				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -376,7 +462,7 @@ h3 {
 			}
 		}
 
-		//내용 출력
+		//내용 출력(fetch api)
 		function fetch_book(name) {
 			fetch(name).then(function(response) {
 				response.text().then(function(text) {
@@ -393,90 +479,145 @@ h3 {
 			});
 		}
 	</script>
-	<!-- 프로필 사진 업로드 -->
+
+
 	<script>
-	var jcrop_api;
-	var target;	
-	//callback function
-		var showCoords = function(c)
-		{
-		    $('#x').val(c.x);
-		    $('#y').val(c.y);
-		    $('#w').val(c.w);
-		    $('#h').val(c.h);
-		    window.x = c.x;
-		    window.y = c.y;
-		    window.w = c.w;
-		    window.h = c.h;
+		/* 프로필 사진 업로드 */
+		var jcrop_api;
+		var target;
+		//callback function
+		var showCoords = function(c) {
+			$('#x').val(c.x);
+			$('#y').val(c.y);
+			$('#w').val(c.w);
+			$('#h').val(c.h);
+			window.x = c.x;
+			window.y = c.y;
+			window.w = c.w;
+			window.h = c.h;
 		};
-			
+
 		$(document).ready(function() {
-		    $("#imgInput").on("change", fileChange);
-		    
-		    $(".hideFade").on("click", function(){
-		    	$(".fade").hide();
-		    })
+			$("#imgInput").on("change", fileChange);
+
+			$(".hideFade").on("click", function() {
+				$(".fade").hide();
+			})
 		});
-		
+
 		function fileChange(e) {
 			e.preventDefault();
 			var files = e.target.files;
-		    var filesArr = Array.prototype.slice.call(files);
-		
-		    filesArr.forEach(function(f) {
-		        if(!(f.type.match("image/png")||f.type.match("image/jpeg")||f.type.match("image/jpg"))) {
-		            alert("프로필 이미지는 jpg, jpeg, png 파일만 가능합니다.");
-		            return false;
-		        }
-		        if (f.size > (5 * 1024 * 1024)) {
-		        	alert("업로드 가능한 최대 크기는 5MB입니다")
-		        	return false;
-		        }
-		        sel_file = f;
-				
-		        var reader = new FileReader();
-		        reader.onload = function(e) {
-		        	var imgPre = new Image();
-		        	imgPre.src = e.target.result;
-		        	imgPre.onload = function(){
-			        	if (this.width > 1100){
-			        		alert("업로드 가능한 이미지의 최대 가로크기는 1100px입니다")
-			        		return false;
-			        	}else {
-				            $("#profileImg").attr("src", e.target.result);
-				            target = e.target.result;
-			        	} 
-		        	}
-		        } 
-		        reader.readAsDataURL(f); 
+			var filesArr = Array.prototype.slice.call(files);
 
-		    }); 
+			filesArr
+					.forEach(function(f) {
+						if (!(f.type.match("image/png")
+								|| f.type.match("image/jpeg") || f.type
+								.match("image/jpg"))) {
+							alert("프로필 이미지는 jpg, jpeg, png 파일만 가능합니다.");
+							return false;
+						}
+						if (f.size > (5 * 1024 * 1024)) {
+							alert("업로드 가능한 최대 크기는 5MB입니다")
+							return false;
+						}
+						sel_file = f;
+
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							var imgPre = new Image();
+							imgPre.src = e.target.result;
+							imgPre.onload = function() {
+								if (this.width > 1100) {
+									alert("업로드 가능한 이미지의 최대 가로크기는 1100px입니다")
+									return false;
+								} else {
+									$("#profileImg").attr("src",
+											e.target.result);
+									target = e.target.result;
+								}
+							}
+						}
+						reader.readAsDataURL(f);
+
+					});
 		}
-			
-		$(function(){
-			 var cnt = 1;
-			 var width = this.width;
-			 var height = this.height;
 
-			$("#profileImg").on("load", function(){
-				if (cnt == 1){
-			        $('#profileImg').Jcrop({
-			    	    setSelect: [0,0,100,100],
-			    	    onChange: showCoords, 
-			    	    onSelect: showCoords,
-			    		aspectRatio: 1
-			        }, function(){
-			        	jcrop_api = this;
-			        })
+		$(function() {
+			var cnt = 1;
+			var width = this.width;
+			var height = this.height;
+
+			$("#profileImg").on("load", function() {
+				if (cnt == 1) {
+					$('#profileImg').Jcrop({
+						setSelect : [ 0, 0, 100, 100 ],
+						onChange : showCoords,
+						onSelect : showCoords,
+						aspectRatio : 1
+					}, function() {
+						jcrop_api = this;
+					})
 				} else {
 					jcrop_api.setImage(target);
 				}
-		        cnt ++;
+				cnt++;
 			})
 		});
-		
-		function submitProfile(){
+
+		function submitProfile() {
 			$("form[name='imgForm']").submit();
+		}
+	</script>
+	<!-- 프로필 이미지 삭제 -->
+	<script> 
+		function imgDel(){
+			if ('${usersVO.user_profileImagePath}' == ""){
+				alert("프로필 이미지를 먼저 등록해주세요.");
+				return false;
+			} else {
+				$.ajax({
+					url: '/imgDel',
+					type: 'post',
+					dataType: 'text',
+					success: function(result) {
+						if (result == 'success') {
+							alert("프로필 이미지 삭제에 성공했습니다.");
+							window.location.reload();
+						} else {
+							alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
+						}
+					}, error: function(error) {
+						alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
+					}
+				})
+			}
+		}
+	</script>
+	<!-- 쪽지 삭제 -->
+	<script>
+		function msgDel(rm_idx, nowPage){
+			console.log("rm_idx: "+ rm_idx);
+			console.log("nowPage: "+ nowPage);
+			
+			$.ajax({
+				url: '/msgDel',
+				type: 'post',
+				data: {'rm_idx':rm_idx},
+				dataType: 'text',
+				success: function(result){
+					if (result == 'success'){
+						alert("쪽지를 삭제했습니다.");
+					}else {
+						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				}, error: function(error){
+					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+			
+			fetch_book('/TMS/my/recvMsg?nowPage='+ nowPage);
 		}
 	</script>
 </body>
