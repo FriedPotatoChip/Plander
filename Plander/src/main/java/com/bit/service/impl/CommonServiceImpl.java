@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.RecruitVO;
 import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 import com.bit.mapper.CommonMapper;
@@ -61,6 +62,11 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public boolean imgDel(String id) {
 		return mapper.imgDel(id);
+	}
+
+	@Override
+	public List<RecruitVO> RandomRecruit() {
+		return mapper.RandomRecruit();
 	}
 	
 	

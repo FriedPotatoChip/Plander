@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style> 
 	thead, tfoot { background-color: violet; } 
@@ -27,7 +28,21 @@
 	}
 </script>
 </head>
-<body>
+<body> 
+	<!-- 헤더 -->
+<!-- Header -->
+<c:if test="${empty sessionScope.usersVO }">
+	<jsp:include page="/commons/header.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.usersVO }">
+	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+		<jsp:include page="/commons/loginheader.jsp" />
+	</c:if>
+	<c:if test="${sessionScope.usersVO.rank == 1 }">
+		<jsp:include page="/commons/adminLoginheader.jsp" />
+	</c:if>
+</c:if>
+<!-- 헤더 끝 -->
 	<h3>모집 게시판임</h3>
 	
 	<div>
@@ -44,6 +59,7 @@
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
+				<th>모집 여부</th>
 				<th>조회수</th>
 			</tr>
 		</thead>
@@ -66,14 +82,27 @@
 						<fmt:formatDate pattern="yyyy-MM-dd" value="${list.rc_regdate }" />
 					</td>
 					<td>
+						<c:if test='${list.onOff eq "ON" }'>
+							모집 중
+						</c:if>
+						<c:if test='${list.onOff eq "OFF" }'>
+							모집 마감
+						</c:if>
+					</td>
+					<td>
 						${list.hit }
 					</td>
 				</tr>
 			</c:forEach>
+			<c:if test="${empty boardList }">
+				<tr>
+					<td colspan="6" style="font-size: 2.0em; font-style: bold;">조회된 게시물이 없습니다.</td>
+				</tr>
+			</c:if>
 		</tbody>
 		<tfoot>
 			<tr> 
-				<td colspan="5">tfoot</td>
+				<td colspan="6">tfoot</td>
 			</tr>
 		</tfoot>
 	</table>
@@ -90,9 +119,10 @@
 		<input type="submit" value="검색">
 		<input type="hidden" name="cntPerPage" value="${page.cntPerPage }">
 	</form>
-	<!--  -->
-	
-	<input type="button" value="글쓰기" id="write" onclick="write_go()">
+	<!-- 글쓰기 -->
+	<c:if test="${not empty usersVO }">
+		<input type="button" value="글쓰기" id="write" onclick="write_go()">
+	</c:if>
 	<br> 
 	<!-- 페이징 시작 -->
 	<div id="paging">
@@ -129,6 +159,11 @@
 <script>
 	function write_go(){
 		location.href="/TMS/recruitWrite";
+	}
+	function calcDate(date){
+		var date = new Date(date);
+		console.log("date: "+ date);
+		return date;
 	}
 </script>	
 	

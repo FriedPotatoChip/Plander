@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -72,6 +73,18 @@
 	}
 	/* 버튼 끝 */
 </style>
+
+<script>
+	function main() {
+		window.opener.top.location.href="/TMS/book";
+		window.close();
+	}
+	
+	function mypage() {
+		window.opener.top.location.href="/TMS/my";
+		window.close();
+	}
+</script>
 </head>
 <body>
 <div id="container">
@@ -105,7 +118,7 @@
 	<div class="center boxoutside" style="border: 1px solid;">
 		<br><br><br>
 		<img src="/resources/images/turtle.png" alt="거북이">
-		<h4>도경수 님 예약이 완료되었습니다!</h4>
+		<h4>${uservo.name } 님 예약이 완료되었습니다!</h4>
 		
 		<p>문의사항이 있으시다면 [ Q&A ] 로 문의하시기 바랍니다.</p>
 		
@@ -114,33 +127,52 @@
 			<table border="1px solid;" class="table table-bordered" style="width: 100%; text-align: center;">
 				<tbody>
 					<tr>
-						<td width="15%">예매번호</td>
+						<td width="13%">예매번호</td>
 						<td width="10%">예약자 이름</td>
-						<td width="15%">연락처</td>
-						<td width="35%">예약 날짜 및 시간</td>
+						<td width="12%">연락처</td>
+						<td width="30%">예약 날짜 및 시간</td>
 						<td width="15%">선택 좌석정보</td>
+						<td width="10%">사물함</td>
 						<td width="10%">금액</td>
 					</tr>
 					<tr>
-						<td id="booknum"></td>
+						<td id="booknum">${bvo.booknum }</td>
 						<td>${uservo.name }</td>
 						<td>${uservo.phone }</td>
 						<td>${bvo.start_time } ~ ${bvo.end_time }</td>
-						<td>${bvo.sct_name } - ${bvo.s_col }</td>
-						<td id="bookprice"></td>
+						<!-- 좌석 -->
+						<c:choose>
+							<c:when test="${bvo.sct_idx == 1 }">
+								<td>${bvo.sct_name }- ${test }</td>
+							</c:when>
+							<c:otherwise>
+								<td>${bvo.sct_name }- ${bvo.s_col }</td>
+							</c:otherwise>
+						</c:choose>
+						<!-- 사물함 -->
+						<c:choose>
+							<c:when test="${cab == '0' }">
+								<td id="cb_idx">사용안함</td>
+							</c:when>
+							<c:otherwise>
+								<td id="cb_idx">${cab }번</td>
+							</c:otherwise>
+						</c:choose>
+						<td id="bookprice">${bvo.price }</td>
 					</tr>
 				</tbody>
 			</table>
 		</div> <!-- 나의 예약 정보 끝 -->
 		
 		<div class="center" style="padding: 10px;">
-			<button type="button" onclick="">메인으로</button>
-			<button type="button" onclick="">마이페이지</button>
+			<button type="button" onclick="main()">메인으로</button>
+			<button type="button" onclick="mypage()">마이페이지</button>
 		</div>
 		<br><br><br>
 	</div>
 	
 </div> <!-- 바디 콘테이너 끝 -->
+<!--  -->지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb }
 
 </body>
 </html>

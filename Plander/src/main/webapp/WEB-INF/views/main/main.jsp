@@ -332,12 +332,24 @@ body {
 	<!--- Cards -->
 	<div class="container-fluid padding">
 		<div class="row padding">
-			<div class="col-md-4">
+			<c:forEach var="ran" items="${RandomRecruit }" varStatus="status">
+				<div class="col-md-4">
+					<div class="card" style="width: 480px; height: 500px;">
+						<img class="card-img-top" src="/resources/images/recruit${status.count }.jpg">
+						<div class="card-body">
+							<h4 class="card-title">${ran.id }</h4>
+							<p class="card-text">${ran.rc_title }</p>
+							<a href="#" class="btn btn-outline-secondary">보러가기</a>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+			<!-- <div class="col-md-4">
 				<div class="card" style="width: 480px; height: 500px;">
 					<img class="card-img-top" src="/resources/images/recruit1.jpg">
 					<div class="card-body">
-						<h4 class="card-title">bitcamp</h4>
-						<p class="card-text">스프링 스터디 모집합니다.</p>
+						<h4 class="card-title"></h4>
+						<p class="card-text"></p>
 						<a href="#" class="btn btn-outline-secondary">보러가기</a>
 					</div>
 				</div>
@@ -347,7 +359,7 @@ body {
 					<img class="card-img-top" src="/resources/images/sr1.jpg">
 					<div class="card-body">
 						<h4 class="card-title">test</h4>
-						<p class="card-text">매주 일요일 오전 11시부터 저녁 7시까지 열코딩하기</p>
+						<p class="card-text">asdf</p>
 						<a href="#" class="btn btn-outline-secondary">보러가기</a>
 					</div>
 				</div>
@@ -356,13 +368,12 @@ body {
 				<div class="card" style="width: 480px; height: 500px;">
 					<img class="card-img-top" src="/resources/images/recruit3.jpg">
 					<div class="card-body">
-						<h4 class="card-title">Phil Ho</h4>
-						<p class="card-text">Phil is a developer wuth over 5 years old
-							web development experience.</p>
-						<a href="#" class="btn btn-outline-secondary">See Profile</a>
+						<h4 class="card-title">test</h4>
+						<p class="card-text">asdf</p>
+						<a href="#" class="btn btn-outline-secondary">보러가기</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<!--- Two Column Section -->

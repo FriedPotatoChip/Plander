@@ -6,6 +6,8 @@ import java.util.Map;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.DateTimeVO;
+import com.bit.domain.RecvMsgVO;
+import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.utils.PagingVO;
 
@@ -40,4 +42,16 @@ public interface AdminMapper {
 	
 	//좌석이동
 	public int changeSeats(Map<String, Object> map);
+	
+	// 보낸쪽지 갯수
+	public int sendMsgCnt(UsersVO vo);
+	
+	// 보낸쪽지
+	public List<SendMsgVO> sendMsg(Map map);
+	
+	// 받은쪽지 갯수
+	public int recvMsgCnt(UsersVO vo);
+	
+	// 받은쪽지
+	public List<RecvMsgVO> recvMsg(Map map);
 }

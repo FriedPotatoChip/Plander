@@ -47,7 +47,7 @@
 }
 
 .dropdown-content a:hover {
-	background-color: #3b5998;
+	background-color: #629aa9;
 	color: white;
 	font-weight: 400 !important;
 }
@@ -373,7 +373,7 @@
 					<input type="password" name="password" class="form-control my-2"
 						style="margin-top: 1.5%;  font-family: 맑은 고딕;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
-					<input type="button" style="background-color: #3b5998; color: white;"
+					<input type="button" style="background-color: #6762a6; color: white;"
 						class="btn btn-block form-control my-2 bold" value="로그인"
 						onclick="chk()">
 				</form>

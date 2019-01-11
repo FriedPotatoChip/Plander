@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bit.domain.CouponVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.RecruitVO;
 import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 
@@ -34,4 +35,8 @@ public interface CommonMapper {
 	
 	// 프로필 이미지 삭제
 	public boolean imgDel(String id);
+	
+	//모집글 랜덤 추출(메인 카드형식)
+	public List<RecruitVO> RandomRecruit();
+	
 }

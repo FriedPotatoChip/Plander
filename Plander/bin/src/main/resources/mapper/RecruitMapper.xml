@@ -14,10 +14,13 @@
 		<select id="getListPage" resultType="com.bit.domain.RecruitVO" parameterType="com.bit.utils.PagingVO">
 		<![CDATA[
 			SELECT * FROM (
-							SELECT ROWNUM RN, R.*, CNT 
+				SELECT ROWNUM RN, A.*
+					FROM (
+							SELECT R.*, CNT 
 							FROM RECRUIT R LEFT OUTER JOIN (SELECT RC_IDX, COUNT(*) CNT FROM COMMENTS GROUP BY RC_IDX) C
 							ON R.RC_IDX = C.RC_IDX
 							ORDER BY R.RC_IDX DESC
+						  ) A
 						  )
 			WHERE RN BETWEEN #{start} AND #{end}
 		]]>
@@ -25,7 +28,10 @@
 		
 		<!-- 글 상세 조회 -->
 		<select id="getOne" resultType="com.bit.domain.RecruitVO">
-			SELECT * FROM RECRUIT WHERE RC_IDX = #{rc_idx}
+			SELECT R.*, U.USER_PROFILEIMAGEPATH
+				FROM RECRUIT R, USERS U 
+				WHERE RC_IDX = #{rc_idx}
+				AND R.ID = U.ID
 		</select>
 		
 		<!-- 전체 글 갯수 조회 -->
@@ -184,6 +190,15 @@
 			UPDATE COMMENTS SET C_CONTENT = #{c_content} WHERE C_IDX = #{c_idx}
 		</update>
 		
+		<!-- 모집 마감 후 쿠폰 발행 -->
+		<insert id="insertCoupon" parameterType="map">
+			INSERT INTO COUPON (CP_IDX, CB_IDX, CP_REGDATE, CP_ENDDATE, CP_QUANTITY, ID)
+						VALUES (COUPON_SEQ.NEXTVAL, #{cb_idx}, SYSDATE, ADD_MONTHS(SYSDATE, 1), #{cp_quantity}, #{id})
+		</insert>
+		<!-- 모집 마감 후 모집글 OFF처리 -->
+		<update id="updateOnOff" parameterType="int">
+			UPDATE RECRUIT SET ONOFF = 'OFF' WHERE RC_IDX = #{rc_idx}
+		</update>
 </mapper>
 
 
