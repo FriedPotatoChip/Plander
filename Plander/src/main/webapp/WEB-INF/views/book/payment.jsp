@@ -104,8 +104,8 @@
 		var start = startdate.toLocaleString('en-GB').substring(12, 14);
 		var end = enddate.toLocaleString('en-GB').substring(12, 14);
 
-		var sum = 0;
-		var sct_idx = '${bvo.sct_idx }'; //방번호 확인
+		window.sum = 0;
+		window.sct_idx = '${bvo.sct_idx }'; //방번호 확인
 		var time_idx = '${bvo.time_idx }'; //정기권 확인
 		var cabinet = '${bvo.cabinet }'; //사물함 사용여부 y/n
 

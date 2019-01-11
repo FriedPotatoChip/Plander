@@ -206,7 +206,7 @@ table, tr, th, td { text-align: center;}
 
 		<!-- 내정보 -->
 		<div class="my_info">
-			<h3>- 내정보 -</h3>
+			<h3 style="color: white;">- 내정보 -</h3>
 			<div class="myinfo_nav">
 				<strong><a href="#" data-toggle="modal"
 					data-target=".bd-example-modal-lg">회원정보수정</a></strong>
@@ -243,7 +243,7 @@ table, tr, th, td { text-align: center;}
 
 		<!-- 내예약 -->
 		<div class="myBook">
-			<h3>- 내예약 -</h3>
+			<h3 style="color: white;">- 내예약 -</h3>
 			<span style="float: right;">
 				<button type="button" class="btn btn-warning mr-3" onclick="location.href='/TMS/admin/Seats'">좌석이동</button></span>
 			<div class="myBook_nav">

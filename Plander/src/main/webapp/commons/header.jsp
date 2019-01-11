@@ -368,10 +368,10 @@
 
 			<div class="modal-body center">
 				<form name="frm" action="#" method="post">
-					<input type="text" name="id" style="font-family: 굴림;" class="form-control my-2" placeholder="아이디"
+					<input type="text" name="id" style="font-family: 맑은 고딕;" class="form-control my-2" placeholder="아이디"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" id="idInput" required>
 					<input type="password" name="password" class="form-control my-2"
-						style="margin-top: 1.5%;  font-family: 굴림;" placeholder="비밀번호"
+						style="margin-top: 1.5%;  font-family: 맑은 고딕;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
 					<input type="button" style="background-color: #3b5998; color: white;"
 						class="btn btn-block form-control my-2 bold" value="로그인"
@@ -443,7 +443,7 @@
 							<tr>
 								<td>비밀번호&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="password" name="password" id="password"
-									style="font-family: 굴림;" oninput="pwchk()"
+									style="font-family: 맑은 고딕;" oninput="pwchk()"
 									class="col-sm-6 form-control" required>
 									<p id="pwMsg" style="font-size: 15px; margin-top: 5px;">(영문
 										대소문자/숫자/특수문자(!,@,#,$,%,^,&,*) 조합, 8자~16자)</p></td>
@@ -451,7 +451,7 @@
 							<tr>
 								<td>비밀번호 확인&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="password" name="passwordchk"
-									style="font-family: 굴림;" id="passwordchk" oninput="pwchk()"
+									style="font-family: 맑은 고딕;" id="passwordchk" oninput="pwchk()"
 									class="col-sm-6 form-control" required>
 									<p id="pwchkMsg" style="font-size: 13px;"></p> <!-- 비밀번호가 일치하지 않습니다. -->
 								</td>

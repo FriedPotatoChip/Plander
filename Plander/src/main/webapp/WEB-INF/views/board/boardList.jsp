@@ -235,11 +235,11 @@ $(function(){
 
 		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
 		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
-		if( divTop + oHeight > sHeight ) divTop -= oHeight;
+		/* if( divTop + oHeight > sHeight ) divTop -= oHeight; */
 
 		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
 		if( divLeft < 0 ) divLeft = 0;
-		if( divTop < 0 ) divTop = 0;
+		/* if( divTop < 0 ) divTop = 0; */
 
 		$('.popupLayer').css({
 			"top": divTop,
