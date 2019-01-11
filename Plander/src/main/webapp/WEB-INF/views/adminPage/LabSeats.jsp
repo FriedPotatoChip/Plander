@@ -140,7 +140,6 @@ style>body, html {
 	color: white;
 	text-decoration: none;
 }
-}
 </style>
 </head>
 
@@ -151,7 +150,7 @@ style>body, html {
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -167,7 +166,7 @@ style>body, html {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet?br_idx=1"> <span data-feather="file"></span>
+							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
@@ -177,7 +176,7 @@ style>body, html {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Seats?sct_idx=1"> <span
+							href="/TMS/admin/Seats"> <span
 								data-feather="bar-chart-2"></span> Seats
 						</a></li>
 					</ul>
@@ -193,7 +192,7 @@ style>body, html {
 						<form method="post">
 							<div class="h4">
 								<h4>
-									<a href="">개인실</a>&nbsp;&nbsp;/&nbsp; <a href=""> 랩실</a>
+									<a href="/TMS/admin/Seats">개인실</a>&nbsp;&nbsp;/&nbsp; <a href="/TMS/admin/LabSeats"> 랩실</a>
 								</h4>
 							</div>
 							<div class="area_planner">
@@ -286,7 +285,7 @@ style>body, html {
 
 											<!-- modal body -->
 											<div class="modal-body">
-												<table border="1" style="text-align: center;">
+												<table class="table" style="text-align: center;">
 													<tr>
 														<th>ID</th>
 														<th>START_TIME</th>
@@ -304,8 +303,6 @@ style>body, html {
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
 											</div>
 										</div>
 									</div>
@@ -355,15 +352,25 @@ style>body, html {
 			var html = "";
 			console.log(i);
 			
+			var html = "";
+			var count = 0;
+			var temp = "";
+			
 			<c:forEach var="s" items="${BookingSeats }">
+				/* DB에서 긁어온 지점 A의 예약된 모든 좌석 */
 				var s_col = "${s.s_col}";
+				console.log(s_col);
 				var id = "${s.id}";
 				var start_time = "${s.start_time}";
 				var end_time = "${s.end_time}";
-				console.log(s_col);
+				temp = id;
+				count++;
+				temp += count;
 				
 				if(i == s_col) {
-					html += '<tr><td class="id">'+ id + '</td> <td class="start_time">'+ start_time + '</td> <td class="end_time">' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger">이동</button></td></tr>';
+					console.log("data" + i + ": " + id + ", " + start_time + ", " + end_time);
+					
+					html += '<tr><td class="id">'+ id + '</td> <td class="start_time" id = '+(temp+"_s")+'>'+ start_time + '</td> <td class="end_time" id = '+(temp+"_e")+'>' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" id ="'+temp+'" onclick="change(\''+temp+'\')"><input type="hidden" name="nid" value="${s.id}">좌석이동</button></td></tr>';
 				}
 			</c:forEach>
 			$('#exampleModalLong').modal();

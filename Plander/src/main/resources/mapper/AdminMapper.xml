@@ -106,8 +106,8 @@
 		     where b.s_idx = s.s_idx
 		     and b.id = #{id}
 		     and s.br_idx = #{br_idx}
-		     and b.start_time = #{start_time}
-		     and b.end_time = #{end_time}
+		     and b.start_time = to_date(#{start_time}, 'YYYY-MM-DD HH24:MI:SS')
+		     and b.end_time = to_date(#{end_time}, 'YYYY-MM-DD HH24:MI:SS')
 		)
 		set s_idx = #{s_idx}
 	</update>
