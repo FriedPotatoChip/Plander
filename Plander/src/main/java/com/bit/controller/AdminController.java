@@ -141,11 +141,11 @@ public class AdminController {
 	}
 
 	@RequestMapping("/Cabinet")
-	public String CabitnetPage(BookingCbVO bcvo, Model model) {
-		System.out.println("여긴오잖아1");
+	public String CabitnetPage(@RequestParam(value="br_idx", defaultValue="1") int br_idx, BookingCbVO bcvo, Model model) {
+		bcvo.setBr_idx(br_idx);
+		System.out.println("bcvo : " + bcvo);
 		model.addAttribute("cabinet", service.bookingCabinet(bcvo));
 		model.addAttribute("count", service.bookingCabinet_count(bcvo));
-		System.out.println("여긴오잖아@");
 		return "adminPage/Cabinet";
 	}
 
@@ -156,31 +156,22 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/update")
-	public String changeSeats(@RequestParam String start_time, @RequestParam String end_time , @RequestParam int s_idx, @RequestParam String id, @RequestParam(value="roomnum", defaultValue="1") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, BookingVO bvo) throws ParseException {
+	public String changeSeats(@RequestParam int br_idx, @RequestParam String start_time, @RequestParam String end_time, @RequestParam String id, @RequestParam int s_idx, @RequestParam(value="roomnum", defaultValue="1") int roomnum, BookingVO bvo) throws ParseException {
 		System.out.println("roomnum1 : " + roomnum);
+
 		System.out.println("br_idx : " + br_idx);
+		System.out.println("Start_time : " + start_time);
+		System.out.println("End_time : " + end_time);
 		System.out.println("s_idx : " + s_idx);
 		System.out.println("id : " + id);
-		System.out.println("start_time : " + start_time);
-		System.out.println("end_time : " + end_time);
-		
-		String startTime = start_time;
-		String EndTime = end_time;
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss"); 
-		Date to = sdf.parse(startTime);
-		Date to2 = sdf.parse(EndTime);
-		
-		
+
 		Map<String, Object> map = new HashMap<>();
 		map.put("br_idx", br_idx);
+		map.put("start_time", start_time);
+		map.put("end_time", end_time);
 		map.put("s_idx", s_idx);
-		map.put("id", id);
-		map.put("start_time", to);
-		map.put("end_time", to2);
-		
-		System.out.println("--오니?");
+		map.put("id",id);
 		service.changeSeats(map);
-		System.out.println("오니?--");
 		
 		return "redirect: /TMS/admin/Seats";
 	}
@@ -198,7 +189,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/LabSeats")
-	public String LabSeatsPage(@RequestParam("roomnum") int roomnum, @RequestParam("br_idx") int br_idx, Model model,
+	public String LabSeatsPage(@RequestParam(value="roomnum", defaultValue="2") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, Model model,
 			BookingVO bvo) {
 		System.out.println("br_idx : " + br_idx);
 		System.out.println("roomnum : " + roomnum);

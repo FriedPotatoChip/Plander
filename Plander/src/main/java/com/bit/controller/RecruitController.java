@@ -142,7 +142,7 @@ public class RecruitController {
 	@PostMapping("/TMS/modifyRec")
 	public String modifyRecruit(RecruitVO vo) {
 		service.modifyRec(vo);
-		return "redirect: /TMS/detail?idx="+vo.getRc_idx();
+		return "redirect: /TMS/recruitDetail?idx="+vo.getRc_idx();
 	}
 	/* 수정, 삭제 끝 */
 	
