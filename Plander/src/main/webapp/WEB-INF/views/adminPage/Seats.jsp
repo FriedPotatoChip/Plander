@@ -140,7 +140,7 @@ style>body, html {
 	color: white;
 	text-decoration: none;
 }
-}
+
 </style>
 </head>
 
@@ -151,7 +151,7 @@ style>body, html {
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -177,10 +177,10 @@ style>body, html {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Seats"> <span
-								data-feather="bar-chart-2"></span> Seats
+							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+								Seats
 						</a></li>
-						
+
 						<li class="nav-item"><a class="nav-link" href="#"> <span
 								data-feather="file"></span> Receipt
 						</a></li>
@@ -197,8 +197,8 @@ style>body, html {
 						<form method="post">
 							<div class="h4">
 								<h4>
-									<a href="">개인실</a>&nbsp;&nbsp;/&nbsp; <a
-										href="/TMS/admin/LabSeats?roomnum=2&br_idx=1"> 랩실</a>
+									<a href="/TMS/admin/Seats">개인실</a>&nbsp;&nbsp;/&nbsp; <a
+										href="/TMS/admin/LabSeats"> 랩실</a>
 								</h4>
 							</div>
 							<div class="area_planner">
@@ -420,7 +420,7 @@ style>body, html {
 
 											<!-- modal body -->
 											<div class="modal-body">
-												<table border="1" style="text-align: center;">
+												<table class="table" style="text-align: center;">
 													<tr>
 														<th>ID</th>
 														<th>START_TIME</th>
@@ -640,8 +640,8 @@ style>body, html {
 			<!-- 바디 콘테이너 끝 --> </main>
 		</div>
 	</div>
-	<input type = "hidden" id = "start_time" value = "1">
-	<input type = "hidden" id = "end_time" value = "1">
+	<input type="hidden" id="start_time" value="1">
+	<input type="hidden" id="end_time" value="1">
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
@@ -686,10 +686,9 @@ style>body, html {
 				
 				if(i == s_col) {
 					console.log("data" + i + ": " + id + ", " + start_time + ", " + end_time);
-		
-					html += '<tr><td class="id">'+ id + '</td> <td class="start_time" id = '+(temp+"_s")+'>'+ start_time + '</td> <td class="end_time" id = '+(temp+"_e")+'>' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" id ="'+temp+'" onclick="change(\''+temp+'\')">좌석이동</button></td></tr>'; 
-				} 
-				
+					
+					html += '<tr><td class="id">'+ id + '</td> <td class="start_time" id = '+(temp+"_s")+'>'+ start_time + '</td> <td class="end_time" id = '+(temp+"_e")+'>' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" id ="'+temp+'" onclick="change(\''+temp+'\')"><input type="hidden" name="nid" value="${s.id}">좌석이동</button></td></tr>';
+				}
 			</c:forEach>
 			$('#exampleModalLong').modal();
 		    $('#exampleModalLongTitle').text(i + '번 좌석 예약현황');
@@ -700,15 +699,19 @@ style>body, html {
 		function change(a) {
 			console.log("target : "+a);
 			var target = a;
-			
+			var chid = $("input[name=nid]").val();
 			var start_time = target+'_s';
 			var end_time = target+'_e';
 			
+			console.log('nid : ' + chid);
 			console.log("start_time : "+start_time);
 			
 			var start_time_value = document.getElementById(start_time).innerHTML;
 			
 			var end_time_value = document.getElementById(end_time).innerHTML;
+			window.tar = chid;
+			window.stv = start_time_value;
+			window.etv = end_time_value;
 			
 			console.log("start_time : "+ start_time_value+", end_time_value : "+ end_time_value );
 			
@@ -740,7 +743,7 @@ style>body, html {
  			    		
  			    		if(changeScol == s_col) {
  			    			/* 예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함 */
- 			    			if(changePersonEnd_time < start_time || end_time < changePersonStart_time) {
+ 			    			if(end_time_value < start_time || end_time < start_time_value) {
  			    				alert("이동이 가능합니다.");
 	 			    			return false;
  			    			} else {
@@ -761,32 +764,42 @@ style>body, html {
 		
 		/* 이동버튼 후 정보 업데이트 */
 		function move(i) {
-			
+			console.log("tar: "+ tar);
+			console.log("stv: "+ stv);
+			console.log("etv: "+ etv);
 			/* 이동할것인지 묻기 */
 			var r = confirm("이동하시겠습니까?");
+			
+			/* 지점번호 */
 			var br_idx = $('.po_category.on').attr('value');
+			console.log(br_idx);
 			
 			/* 이동을 원하는 사람의 아이디 */
-			var chId = target;
-			console.log('chId : ' + chId);
+			var chId = tar;
+			console.log('chId : ' + tar);
 			
 			/* 이동을 원하는 사람의 START_TIME, END_TIME */
-			var chStartTime = $('#start_time').val();
+			var chStartTime = stv;
 			console.log(chStartTime);
 			
-			var chEndTime = $('#end_time').val();
+			var chEndTime = etv;
 			console.log(chEndTime);
 			
 			/* 옮기기를 원하는 좌석의 번호 */
 			var changeScol = i;
 			console.log(changeScol);
 			
+			try {
+				if(r == true) {
+					location.href = "/TMS/admin/update?id="+ chId + "&br_idx=" + br_idx + "&s_idx=" + changeScol +"&start_time=" + chStartTime + "&end_time=" + chEndTime;
+				}
+				alert("성공적으로 이동되었습니다.");
+			} catch (e) {
+				alert("좌석이동이 실패했습니다.");
+				location.href="/TMS/admin/Seats";
+			} 
 			
-			if(r == true) {
-				location.href = "/TMS/admin/update?id="+ chId + "&br_idx=" + br_idx + "&s_idx=" + changeScol +"&start_time=" + chStartTime + "&end_time=" + chEndTime;
-			}
 		}
-		
 	</script>
 
 </body>

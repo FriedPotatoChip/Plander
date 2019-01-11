@@ -49,13 +49,7 @@ a {
 	width: 50%;
 }
 
-#select {
-	width: 10%;
-}
-
 .container-1 {
-	width: 300px;
-	vertical-align: middle;
 	white-space: nowrap;
 	position: relative;
 }
@@ -103,7 +97,6 @@ input[type=submit] {
 	background-color: #4CAF50;
 	color: white;
 	padding: 10px 10px;
-	margin: 5px 0 0 5px;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
@@ -127,7 +120,7 @@ input[type=submit]:hover {
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -143,7 +136,7 @@ input[type=submit]:hover {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet?br_idx=1"> <span data-feather="file"></span>
+							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
@@ -176,21 +169,32 @@ input[type=submit]:hover {
 			<div class="table-responsive" style="margin-top: 3rem;">
 
 				<form action="/TMS/admin/searchList">
-					<select class="form-control d-inline-flex ml-1" name="target"
-						id="select">
-						<option value="id">ID</option>
-						<option value="name">NAME</option>
-					</select>
-					<!-- <input class="form-control m-1 d-inline-flex" type="text"
-						placeholder="Search" aria-label="Search" id="search" name="keyword">  -->
-					<div class="box m-1">
-						<div class="container-1">
-							<span class="icon"><i class="fa fa-search"></i></span> <input
-								type="search" id="search" placeholder="search..." name="keyword">
-							<!-- <button class="btn btn-outline-danger">검색</button> -->
+					<div class="row m-0" style="width: 50%;">
+						<div class="col-3 p-0">
+							<select class="form-control d-block" name="target" id="select" style="height: 44px; margin-right: 2px">
+								<option value="id">ID</option>
+								<option value="name">NAME</option>
+							</select>
 						</div>
-						<input type="submit" value="검색" id="submit" class="d-inline-block">
-						<input type="hidden" name="cntPerPage" value="${page.cntPerPage }">
+						<!-- <input class="form-control m-1 d-inline-flex" type="text"
+						placeholder="Search" aria-label="Search" id="search" name="keyword">  -->
+						<div class="col-9 p-0">
+							<div class="row">
+								<div class="col-9">
+									<div class="container-1">
+										<span class="icon"><i class="fa fa-search"></i></span> <input
+											type="search" class="d-inline" style="width: 100%;" id="search" placeholder="search..."
+											name="keyword">
+										<!-- <button class="btn btn-outline-danger">검색</button> -->
+									</div>
+								</div>
+								<div class="col-3 p-0">
+									<input type="submit" value="검색" id="submit" style="float: left; height: 44px;"
+										> <input type="hidden"
+										name="cntPerPage" value="${page.cntPerPage }">
+								</div>
+							</div>
+						</div>
 					</div>
 				</form>
 

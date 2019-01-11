@@ -2,12 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자</title>
-
+	
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <!-- Bootstrap core CSS -->
 <link href="/resources/css/bootstrap.min2.css" rel="stylesheet">
@@ -95,7 +97,32 @@ h3 {
 }
 </style>
 </head>
-
+	<script>
+	$(document).ready(function() {
+		$('.po_category').click(function() {
+			
+			//색변환
+			$('.po_category').removeClass('on');
+			$(this).addClass('on');
+			
+			var code = $(this).attr('value');
+			console.log('code : ' + code);
+			
+			location.href = '/TMS/admin/Cabinet?br_idx='+ code;
+		});
+		
+		var list = new Array();
+		<c:forEach var = "item" items="${cabinet}"> 
+			var cb_num = '${item.cb_number}';
+			var id = '${item.id}';
+			var start = '${item.start_date.substring(0,10) }';
+			var end = '${item.end_date.substring(0,10) }';
+			$("#"+cb_num+"").attr("style", "background-color:#d0bfff;");
+			$("#"+cb_num+"").html("<div><p>"+cb_num+". &nbsp&nbsp;<strong>"+id+"</strong></p> <i>"+start+"<br><span class='right'> ~ "+end+"</span></i></div>");
+		</c:forEach>
+	});
+	
+	</script>
 <body>
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -103,7 +130,7 @@ h3 {
 		<input class="form-control form-control-dark w-100" type="text"
 			placeholder="Search" aria-label="Search">
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -118,7 +145,7 @@ h3 {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active" 
-							href="/TMS/admin/Cabinet?br_idx"> <span data-feather="file"></span>
+							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
@@ -157,7 +184,7 @@ h3 {
 					<div class="clear" />
 				</div>
 			</div>
-
+			
 			<div class="table-responsive" style="margin-top: 1rem;">
 				<div class="box">
 					<c:forEach var="i" begin="1" end="40" step="1">
@@ -176,22 +203,15 @@ h3 {
 			</main>
 		</div>
 	</div>
-
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+		crossorigin="anonymous"></script> -->
+
 	<script>
 		window.jQuery || document.write('_$tag____________________________________________________$tag_____')
-	</script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
 	</script>
 	<script src="/resources/js/popper.min.js"></script>
 	<script src="/resources/js/bootstrap.min2.js"></script>
@@ -200,33 +220,6 @@ h3 {
 	<script>
 		feather.replace()
 	</script>
-	<script>
-		$(document).ready(function() {
-			
-			$('.po_category').click(function() {
-				
-				//색변환
-				$('.po_category').removeClass('on');
-				$(this).addClass('on');
-				
-				var code = $(this).attr('value');
-				console.log('code : ' + code);
-				
-				location.href = '/TMS/admin/Cabinet?br_idx='+ code;
-			});
-			
-			var list = new Array();
-			<c:forEach var = "item" items="${cabinet}"> 
-				var cb_num = '${item.cb_number}';
-				var id = '${item.id}';
-				var start = '<fmt:formatDate value="${item.start_date }" pattern="yyyy-MM-dd" />';
-				var end = '<fmt:formatDate value="${item.end_date }" pattern="yyyy-MM-dd" />';
-				$("#"+cb_num+"").attr("style", "background-color:#d0bfff;");
-				$("#"+cb_num+"").html("<div><p>"+cb_num+". &nbsp&nbsp;<strong>"+id+"</strong></p> <i>"+start+"<br><span class='right'> ~ "+end+"</span></i></div>");
-			</c:forEach>
-		});
-		
-	</script>
-	
+
 </body>
 </html>

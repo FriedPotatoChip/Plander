@@ -67,7 +67,7 @@
 
 <br><br><br><br>
 <!-- 풋터 -->
-<jsp:include page="/commons/footer.jsp"/>
+<%-- <jsp:include page="/commons/footer.jsp"/> --%>
 </div> <!-- 바디 콘테이너 끝 -->
 
 </body>

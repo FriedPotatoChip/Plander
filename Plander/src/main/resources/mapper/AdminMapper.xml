@@ -17,8 +17,7 @@
 		parameterType="map">
 		select *
 		from (
-		select rownum rn, u_idx, id, name, phone, email, rank,
-		regdate, zipno,
+		select rownum rn, u_idx, id, name, phone, email, rank, regdate, zipno,
 		roadAddrPart1, addrDetail
 		from users
 		where
@@ -47,7 +46,7 @@
 			</when>
 		</choose>
 	</select>
-
+	
 	<!-- 전체 회원 수 -->
 	<select id="getTotal" resultType="int">
 		SELECT count(*) FROM USERS
@@ -76,96 +75,42 @@
 		and br_idx=
 		#{br_idx}
 	</select>
-
+	
 	<!-- 회원삭제 -->
 	<delete id="userDelete" parameterType="int">
 		delete from users
-		where
-		u_idx = #{u_idx}
+			where u_idx = #{u_idx}
 	</delete>
-
-	<!-- 좌석별 현황 -->
+	
+	<!-- 좌석별 현황  -->
 	<select id="BookingSeats" resultType="com.bit.domain.BookingVO">
 		select distinct b.id, b.start_time, b.end_time, s.s_col
-		from seats s,
-		booking b
-		where s.s_idx = b.s_idx
-		and br_idx = #{br_idx}
-		<!-- and s_col = #{s_col} -->
-		and (
-		(to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and
-		to_char(end_time,
-		'YYYYMM') = to_char(sysdate, 'YYYYMM'))
-		or
-		(to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and
-		to_char(end_time,
-		'YYYYMM') = to_char(add_months(sysdate, 1),
-		'YYYYMM'))
-		or
-		(to_char(start_time, 'YYYYMM') =
-		to_char(add_months(sysdate, -1), 'YYYYMM') and
-		to_char(end_time,
-		'YYYYMM') = to_char(sysdate, 'YYYYMM'))
-		)
+	    from seats s, booking b
+	    where s.s_idx = b.s_idx
+	    and br_idx = #{br_idx}
+	    <!-- and s_col = #{s_col} -->
+	    and (
+	        (to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
+	        or 
+	        (to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(add_months(sysdate, 1), 'YYYYMM'))
+	        or 
+	        (to_char(start_time, 'YYYYMM') = to_char(add_months(sysdate, -1), 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
+	        )
 	</select>
-
+	
 	<!-- 좌석이동 -->
 	<update id="changeSeats" parameterType="Map">
 		update (
-		select b.s_idx as
-		s_idx
-		from booking b, seats s
-		where b.s_idx = s.s_idx
-		and b.id = #{id}
-		and s.br_idx = #{br_idx}
-		and b.start_time = #{start_time}
-		and b.end_time
-		= #{end_time}
+		     select b.s_idx as s_idx
+		     from booking b, seats s
+		     where b.s_idx = s.s_idx
+		     and b.id = #{id}
+		     and s.br_idx = #{br_idx}
+		     and b.start_time = to_date(#{start_time}, 'YYYY-MM-DD HH24:MI:SS')
+		     and b.end_time = to_date(#{end_time}, 'YYYY-MM-DD HH24:MI:SS')
 		)
 		set s_idx = #{s_idx}
 	</update>
-
-	<!-- 보낸쪽지 갯수 -->
-	<select id="sendMsgCnt" resultType="int" parameterType="Map">
-		select
-		count(*)
-		from send_msg
-		where send_id = 'admin'
-	</select>
-
-	<!-- 보낸쪽지 -->
-	<select id="sendMsg" resultType="com.bit.domain.SendMsgVO">
-		select * from (
-		select rownum rn,
-		m.*
-		from send_msg m where send_id =
-		'admin'
-		order by sm_idx desc
-		)
-		where rn
-		between
-		#{start} and #{end}
-	</select>
-
-	<!-- 받은쪽지 갯수 -->
-	<select id="recvMsgCnt" resultType="int" parameterType="Map">
-		select
-		count(*)
-		from recv_msg
-		where recv_id = 'admin'
-	</select>
-
-	<!-- 받은쪽지 -->
-	<select id="recvMsg" resultType="com.bit.domain.RecvMsgVO">
-		select *
-		from (
-		select rownum rn, m.*
-		from recv_msg m where recv_id = 'admin'
-		order by rm_idx desc
-		)
-		where rn
-		between #{start} and #{end}
-	</select>
 </mapper>
 
 

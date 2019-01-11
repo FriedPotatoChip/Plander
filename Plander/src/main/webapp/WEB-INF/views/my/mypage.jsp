@@ -8,7 +8,8 @@
 	type="text/css" />
 
 <!-- Jcrop(사진 크롭) -->
-<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" ></script>
+<script
+	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
 
 <script>
 //비밀번호 확인
@@ -151,9 +152,15 @@ h3 {
 	font-size: 0.7em;
 	color: gray;
 }
-table, tr, th, td { text-align: center;}
-/* 클릭시 레이어 */	
-.idDiv { cursor: pointer; }
+
+table, tr, th, td {
+	text-align: center;
+}
+/* 클릭시 레이어 */
+.idDiv {
+	cursor: pointer;
+}
+
 .popupLayer {
 	position: absolute;
 	display: none;
@@ -162,8 +169,10 @@ table, tr, th, td { text-align: center;}
 	width: 130px;
 	height: 120px;
 	padding: 10px;
-	padding-top: 18px; padding-left: 15px;
+	padding-top: 18px;
+	padding-left: 15px;
 }
+
 .popupLayer div {
 	position: absolute;
 	top: 0px;
@@ -348,6 +357,7 @@ table, tr, th, td { text-align: center;}
 						</table>
 					</div>
 					<div class="modal-footer">
+						<a href="/TMS/dropout" class="mr-3" data-toggle="modal" data-target=".bd-example-modal-sm">회원탈퇴</a>
 						<button type="reset" class="btn btn-outline-secondary"
 							data-dismiss="modal">초기화</button>
 						<input type="hidden" name="id" value="${user.id }" />
@@ -358,6 +368,30 @@ table, tr, th, td { text-align: center;}
 		</div>
 	</div>
 	<!-- 회원정보수정 모달창 끝 -->
+
+	<!-- 회원탈퇴 모달 -->
+	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">회원탈퇴</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>회원 탈퇴 시 모든 데이터가 삭제되며 한 달간 재가입이 불가능합니다.<br>
+					그래도 탈퇴하시겠습니까?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">창닫기</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='/TMS/my/dropout'">탈퇴하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- 프로필 사진 수정 모달 -->
@@ -385,7 +419,8 @@ table, tr, th, td { text-align: center;}
 				<div class="modal-footer mx-auto">
 					<button type="button" class="btn btn-outline-danger mx-1 hideFade"
 						data-toggle="modal" data-target="#updateProfile">사진변경</button>
-					<button type="button" class="btn btn-outline-warning mx-1" onclick="imgDel()">삭제</button>
+					<button type="button" class="btn btn-outline-warning mx-1"
+						onclick="imgDel()">삭제</button>
 				</div>
 				<div></div>
 
@@ -632,12 +667,13 @@ table, tr, th, td { text-align: center;}
 			fetch_book('/TMS/my/recvMsg?nowPage='+ nowPage);
 		}
 	</script>
-		<div class="popupLayer">
+	<div class="popupLayer">
 		<div>
-			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+			<span onClick="closeLayer()"
+				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br>
-		<a id="userProfile" href="#">회원 정보 보기</a><br>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br> <a id="userProfile"
+			href="#">회원 정보 보기</a><br>
 	</div>
 	<script>
 function closeLayer( obj ) {

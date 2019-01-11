@@ -23,52 +23,53 @@ import com.bit.service.RecruitService;
 
 @RestController
 public class AjaxController {
-	
+
 	@Autowired
 	private CommonService comService;
 	@Autowired
 	private RecruitService recService;
 	@Autowired
 	private BoardService boardService;
-	
+
 	@RequestMapping("/getPrice")
 	public List<PriceVO> getPrice() {
 		return comService.getPriceList();
 	}
-	
+
 	@RequestMapping("/endRecruit")
-	public String endRecruit(@RequestParam("rc_idx")int rc_idx, @RequestParam("id")String id, @RequestParam("cb_idx")int cb_idx) {
+	public String endRecruit(@RequestParam("rc_idx") int rc_idx, @RequestParam("id") String id,
+			@RequestParam("cb_idx") int cb_idx) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", id);
 		map.put("cb_idx", cb_idx);
 		map.put("cp_quantity", 5);
 		boolean chkOn = recService.updateOnOff(rc_idx);
 		boolean chkCou = recService.insertCoupon(map);
-		
+
 		if (chkOn && chkCou) {
 			return "success";
-		}else {
+		} else {
 			return "fail";
 		}
 	}
-	
+
 	@RequestMapping("/couponList")
-	public List<CouponVO> couponList(@RequestParam("id")String id){
+	public List<CouponVO> couponList(@RequestParam("id") String id) {
 		return comService.getUserCoupon(id);
 	}
-	
+
 	@RequestMapping("/minusCoupon")
-	public String minusCoupon(@RequestParam("cp_idx")int cp_idx) {
+	public String minusCoupon(@RequestParam("cp_idx") int cp_idx) {
 		boolean chkMin = comService.minusCoupon(cp_idx);
 		if (chkMin) {
 			return "success";
-		}else {
+		} else {
 			return "fail";
 		}
 	}
-	
+
 	@RequestMapping("/chkBooking")
-	public String chkBooking(@RequestParam("id")String id) {
+	public String chkBooking(@RequestParam("id") String id) {
 		List<BookingVO> bookList = boardService.searchBooking(id);
 		if (bookList.size() == 0) {
 			return "fail";
@@ -76,9 +77,9 @@ public class AjaxController {
 			return "success";
 		}
 	}
-	
+
 	@RequestMapping("/minusReview")
-	public String minusReview(@RequestParam("bk_idx")int bk_idx, @RequestParam("id")String id) {
+	public String minusReview(@RequestParam("bk_idx") int bk_idx, @RequestParam("id") String id) {
 		Map<String, Object> map = new HashMap<>();
 		boolean chk = boardService.minusReview(bk_idx);
 		map.put("id", id);
@@ -91,28 +92,25 @@ public class AjaxController {
 			return "fail";
 		}
 	}
-	
+
 	@RequestMapping("/sendMsg")
 	public String sendMsg(SendMsgVO vo) {
 		System.out.println(vo);
 		boolean chkMsg = comService.sendMsg(vo);
 		if (chkMsg) {
-			if(vo.getRecv_id() == "admin") {
-				return "/TMS/ask";
-			}
 			return "success";
 		} else {
 			return "fail";
 		}
 	}
-	
+
 	@RequestMapping("/newRecvMsg")
-	public List<RecvMsgVO> newRecvMsg(@RequestParam("id")String id){
+	public List<RecvMsgVO> newRecvMsg(@RequestParam("id") String id) {
 		return comService.newRecvMsg(id);
 	}
-	
+
 	@RequestMapping("/msgDel")
-	public String msgDel(@RequestParam("rm_idx")int rm_idx) {
+	public String msgDel(@RequestParam("rm_idx") int rm_idx) {
 		boolean chkDel = comService.delRecvMsg(rm_idx);
 		if (chkDel) {
 			return "success";
@@ -120,14 +118,14 @@ public class AjaxController {
 			return "fail";
 		}
 	}
-	
+
 	@RequestMapping("/imgDel")
 	public String imgDel(HttpSession session) {
 		UsersVO user = (UsersVO) session.getAttribute("usersVO");
 		boolean chkDel = comService.imgDel(user.getId());
 		user.setUser_profileImagePath(null);
 		session.setAttribute("usersVO", user);
-		
+
 		if (chkDel) {
 			return "success";
 		} else {

@@ -47,7 +47,7 @@
 }
 
 .dropdown-content a:hover {
-	background-color: #629aa9;
+	background-color: #8a7967;
 	color: white;
 	font-weight: 400 !important;
 }
@@ -116,9 +116,8 @@
 
 <script>
 	function loginChk() {
-		console.log("여기 들어옴");
 		if ('${empty usersVO}' == 'true') {
-			alert("로그인 후 이용해주세요");
+			alert("로그인 후 이용해주세요.");
 			$("#myModal").modal();
 			$("#idInput").focus();
 		} else {
@@ -152,12 +151,12 @@
 			data : data,
 			success : function(result) {
 				if (result == 'success') {
-					alert("거기스에 오신것을 환영합니다!");
+					alert("환영합니다. 거북이의 기적입니다.");
 					window.location.reload();
 				} else if (result == 'fail') {
 					alert("아이디와 비밀번호가 일치하지 않습니다.");
 				} else if (result == 'admin') {
-					alert("관리자 로그인에 성공하였습니다");
+					alert("관리자 로그인에 성공하였습니다.");
 					location.href = "/TMS";
 				}
 			},
@@ -243,7 +242,7 @@
 		var checkSpe = password.search(/[!@#$%^&*]/gi);
 
 		if (!chkBox) {
-			alert("이용 약관에 동의해주세요");
+			alert("이용 약관에 동의해주세요.");
 			frm.chkBox.focus();
 			return false;
 		}
@@ -290,7 +289,7 @@
 			return false;
 		}
 		if (!testName.test(name)) {
-			alert("한글 또는 문만 사용 가능합니다.");
+			alert("한글 또는 영문만 사용 가능합니다.");
 			return false;
 		}
 
@@ -374,7 +373,7 @@
 						style="margin-top: 1.5%;  font-family: 맑은 고딕;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
 					<input type="button" style="background-color: #6762a6; color: white;"
-						class="btn btn-block form-control my-2 bold" value="로그인"
+						class="btn btn-block form-control btn-lg my-2 bolder" value="로그인"
 						onclick="chk()">
 				</form>
 				<hr>
@@ -476,13 +475,13 @@
 								<td>주소&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-4 form-control mr-2" name="zipNo"
-									readonly required>
-									<button type="button" class="btn btn-danger"
+									readonly>
+									<button type="button" class="btn bolder" style="background-color: #6762a6; color: white;"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-10 form-control my-2"
-									name="roadAddrPart1" readonly required> <input
+									name="roadAddrPart1" readonly> <input
 									type="text" id="addrDetail" class="col-sm-10 form-control my-2"
-									name="addrDetail" placeholder="상세주소" required></td>
+									name="addrDetail" placeholder="상세주소"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -501,8 +500,8 @@
 
 				<div class="modal-footer" style="clear: right;">
 					<div class="center">
-						<button type="button" onclick="join()" style="background-color: #3b5998; color: white;"
-							class="btn form-control bold">회원가입</button>
+						<button type="button" onclick="join()" style="background-color: #6762a6; color: white;"
+							class="btn form-control bolder">회원가입</button>
 					</div>
 				</div>
 			</form>

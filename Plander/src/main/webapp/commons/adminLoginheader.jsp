@@ -45,7 +45,7 @@
 }
 
 .dropdown-content a:hover {
-	background-color: #ce181e;
+	background-color: #8a7967;
 	color: white;
 	font-weight: 400 !important;
 }
