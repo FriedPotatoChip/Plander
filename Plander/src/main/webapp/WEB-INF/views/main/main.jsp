@@ -4,10 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <jsp:include page="/commons/head.jsp" /> --%>
-
-<title>Main 화면</title>
-
+<title>거북이의기적</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script
@@ -18,10 +15,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 <link href="/resources/css/main.css" rel="stylesheet">
-<!-- 나눔스퀘어  -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-
 <style>
 body {
 	font-family: 'NanumSquare', sans-serif;
@@ -127,6 +122,7 @@ body {
 	width: 90%;
 	margin: auto;
 }
+
 /* The location pointed to by the popup tip. */
 .popup-tip-anchor {
 	height: 0;
@@ -134,6 +130,7 @@ body {
 	/* The max width of the info window. */
 	width: 200px;
 }
+
 /* The bubble is anchored above the tip. */
 .popup-bubble-anchor {
 	position: absolute;
@@ -141,6 +138,7 @@ body {
 	bottom: /* TIP_HEIGHT= */ 8px;
 	left: 0;
 }
+
 /* Draw the tip. */
 .popup-bubble-anchor::after {
 	content: "";
@@ -157,6 +155,7 @@ body {
 	border-right: 6px solid transparent;
 	border-top: /* TIP_HEIGHT= */ 8px solid white;
 }
+
 /* The popup bubble itself. */
 .popup-bubble-content {
 	position: absolute;
@@ -172,6 +171,7 @@ body {
 	max-height: 60px;
 	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
+
 .popup-bubble-content1 {
 	position: absolute;
 	top: 0;
@@ -186,6 +186,7 @@ body {
 	max-height: 60px;
 	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
+
 .popup-bubble-content2 {
 	position: absolute;
 	top: 0;
@@ -201,11 +202,9 @@ body {
 	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
 </style>
-
 </head>
 
 <body>
-	<!-- 헤더 -->
 	<!-- Header -->
 	<c:if test="${empty sessionScope.usersVO }">
 		<jsp:include page="/commons/header.jsp" />
@@ -218,7 +217,6 @@ body {
 			<jsp:include page="/commons/adminLoginheader.jsp" />
 		</c:if>
 	</c:if>
-	<!-- 헤더 끝 -->
 
 	<!--- Image Slider -->
 	<div id="slides" class="carousel slide" data-ride="carousel">
@@ -238,14 +236,14 @@ body {
 
 	<!--- Jumbotron -->
 	<div class="container-fluid">
-		<div class="row jumbotron">
-			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
-				<p class="lead m-2" style="text-align: center;">같이 공부할 사람들을
-					모집하거나 참여하고 싶으시간요? 그럼 여기로 들어오세요~!!</p>
+		<div class="row jumbotron" >
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10" >
+				<h5 class="display-5 m-2" style="text-align: center;">같이 공부할 사람들을
+					모집하거나 참여하고 싶으신가요? 그럼 여기로 들어오세요~!!</h5>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
 				<a href="/TMS/recruit"><button type="button"
-						class="btn btn-outline-secondary btn-lg">모집게시판</button></a>
+						class="btn btn-lg" style="background-color: #6762a6; color: white;">모집게시판</button></a>
 			</div>
 		</div>
 	</div>
@@ -421,13 +419,11 @@ body {
 		<div class="container-fluid padding">
 			<div class="row text-center">
 				<div class="col-md-4">
-					<img src="/resources/images/logo.png"
-						style="width: 190px; height: auto; vertical-align: middle;">
+					<h3 class="bolder">거북이의 기적</h3>
 					<hr class="light">
-					<p>555=555=5555</p>
-					<p>email@yemail.com</p>
-					<p>100 Street Name</p>
-					<p>City, State, 00000</p>
+					<p>02-111-1111</p>
+					<p>turtlesmiracle@gmail.com</p>
+					<p>서울특별시 마포구 백범로 23 구프라자 3층</p>
 				</div>
 				<div class="col-md-4">
 					<hr class="light">

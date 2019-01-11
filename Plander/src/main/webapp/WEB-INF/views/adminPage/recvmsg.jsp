@@ -2,10 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%-- <jsp:include page="/commons/head.jsp"></jsp:include> --%>
+<jsp:include page="/commons/head.jsp"></jsp:include>
 <style>
-
-
 tr, td {
 	border-bottom: 1px solid #000;
 	padding-top: 10px;
@@ -22,7 +20,7 @@ tr:last-child td {
 }
 
 #pagingList li {
-	display: inline; 
+	display: inline;
 }
 
 .marginLi {
@@ -39,8 +37,7 @@ a {
 }
 /* 페이징 끝 */
 </style>
-<script>
-</script>
+
 </head>
 
 <body>
@@ -67,18 +64,18 @@ a {
 			<c:otherwise>
 				<c:forEach var="msg" items="${list }">
 					<tr>
-						<td>
-							<a href="#" onclick="window.open('/TMS/recvMsg?rm_idx=${msg.rm_idx }', '받은 쪽지', 'width=500, height=500'); return false;">${msg.title }</a>
+						<td><a href="#"
+							onclick="window.open('/TMS/recvMsg?rm_idx=${msg.rm_idx }', '받은 쪽지', 'width=500, height=500'); return false;">${msg.title }</a>
 						</td>
-						<td><div class="idDiv" onclick="showBox(event, this)" userId="${msg.send_id }">${msg.send_id }</div></td>
+						<td><div class="idDiv" onclick="showBox(event, this)"
+								userId="${msg.send_id }">${msg.send_id }</div></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${msg.regdate }" /></td>
-						<td>
-						<c:if test="${msg.chk == 0 }">
-							<span style="color: red; ">&#10004;</span>
-						</c:if>
-						</td>
-						<td><button class="btn btn-outline-danger" onclick="msgDel('${msg.rm_idx}', '${page.nowPage }')">삭제</button></td>
+						<td><c:if test="${msg.chk == 0 }">
+								<span style="color: red;">&#10004;</span>
+							</c:if></td>
+						<td><button class="btn btn-outline-danger"
+								onclick="msgDel('${msg.rm_idx}', '${page.nowPage }')">삭제</button></td>
 					</tr>
 				</c:forEach>
 
@@ -112,9 +109,87 @@ a {
 						</c:if>
 					</ul>
 				</div>
+
 			</c:otherwise>
 
 		</c:choose>
 	</tbody>
+
+	<div class="popupLayer">
+		<div>
+			<span onClick="closeLayer()"
+				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+		</div>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br> <a id="userProfile"
+			href="#">회원 정보 보기</a><br>
+	</div>
+
+	<script>
+		function closeLayer(obj) {
+			$(".popupLayer").hide();
+		}
+
+		function showBox(e, tag) {
+			console.log("idDiv 클릭됨");
+			var sWidth = window.innerWidth;
+			var sHeight = window.innerHeight;
+
+			var oWidth = $('.popupLayer').width();
+			var oHeight = $('.popupLayer').height();
+
+			// 레이어가 나타날 위치를 셋팅한다.
+			var divLeft = e.clientX
+					+ 10
+					+ (document.documentElement.scrollLeft ? document.documentElement.scrollLeft
+							: document.body.scrollLeft);
+			var divTop = e.clientY
+					+ 5
+					+ (document.documentElement.scrollTop ? document.documentElement.scrollTop
+							: document.body.scrollTop);
+			console.log("X: " + e.clientX);
+			console.log("Y: " + e.clientY);
+
+			// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+			if (divLeft + oWidth > sWidth)
+				divLeft -= oWidth;
+			if (divTop + oHeight > sHeight)
+				divTop -= oHeight;
+
+			// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+			if (divLeft < 0)
+				divLeft = 0;
+			if (divTop < 0)
+				divTop = 0;
+
+			$('.popupLayer').css({
+				"top" : divTop,
+				"left" : divLeft,
+				"position" : "absolute"
+			}).show();
+			console.log(this);
+			var userId = $(tag).attr("userId");
+			console.log($(tag).attr("userId"));
+			$("#sendMsg").click(
+					function() {
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == '') {
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						}
+						window.open("/TMS/sendMsg?recv_id=" + userId, "쪽지 보내기",
+								"width=500, height=500");
+					});
+			$("#userProfile").click(
+					function() {
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == '') {
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						}
+						window.open("/TMS/profileSummary?id=" + userId,
+								"회원 정보", "width=500, height=500");
+					});
+		}
+	</script>
 </body>
 </html>

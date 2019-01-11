@@ -133,8 +133,15 @@
 
 <script>
 	function next(frm) {
-		frm.action="/TMS/book/pay"
-		frm.submit();
+		var chk = $('input:checkbox[name="s_col"]').is(":checked");
+		
+		if (!chk) {
+			alert('좌석을 선택해주세요.');
+			return false;
+		} else {
+			frm.action="/TMS/book/pay"
+			frm.submit();
+		}
 	}
 
 </script>

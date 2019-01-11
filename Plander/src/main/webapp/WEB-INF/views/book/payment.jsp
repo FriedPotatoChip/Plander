@@ -398,10 +398,9 @@
 
 			}
 		})
-		
+
 		//네이버 페이 결제화면 호출
 		//여기 확인 
-		
 		var oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
 			"clientId" : "u86j4ripEt8LRfPGzQ8"
 			//"chainId" : "{그룹형일 경우 chainId를 넣어주세요}"
@@ -410,17 +409,13 @@
 		//직접 만드신 네이버페이 결제버튼에 click Event를 할당하세요
 		var elNaverPayBtn = document.getElementById("naverpay");
 
-		//var bookprice = $("input[name='price']").val();
-		var bookprice = sum;
-		alert("bookprice 값 확인 : " + bookprice);
-
 		elNaverPayBtn.addEventListener("click", function() {
 			oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
 				"merchantPayKey" : "partnder-orderkey",
 				"productName" : "[거북이의 기적]",
 				"productCount" : 1,
-				"totalPayAmount" : bookprice,
-				"taxScopeAmount" : bookprice,
+				"totalPayAmount" : sum,
+				"taxScopeAmount" : sum,
 				"taxExScopeAmount" : 0,
 				"returnUrl" : "/TMS/payment/payok",
 				"productItems" : [ {
