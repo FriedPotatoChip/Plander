@@ -178,9 +178,67 @@
 		
 		//야간권 클릭시 
 		$('#night').click(function() {
-			$("input[name='end_time']").prop('value', '');
-			$(document.getElementsByName('cabinet')[1]).prop("checked", true);
-			$(document.getElementsByName('cabinet')).attr('disabled', true);
+			//시작날짜 오늘 22:00
+			//끝나는 날짜 다음 날 8:00
+			var startTime = $(document.getElementsByName('start_time')).val();
+			console.log('start_time : ' + startTime);
+			
+			if (startTime =="") {
+				alert('시작 날짜를 먼저 선택해주세요.');
+				$(document.getElementsByName('start_time')).focus();
+				return false;
+			} else {
+				var d = new Date(startTime);
+				
+				function getTimeStamp() {
+					d.setHours(22);
+					console.log("시간확인 : " + d.getHours());
+					
+					var day = d.toLocaleString();
+					var s = leadingZeros(d.getFullYear(), 4) + '-'
+							+ leadingZeros(d.getMonth() + 1, 2) + '-'
+							+ leadingZeros(d.getDate(), 2) + ' '
+							+ leadingZeros(d.getHours(), 2) + ':'
+							+ leadingZeros(d.getMinutes(), 2);
+		
+					return s;
+				}
+				
+				//마감 날짜 세팅
+				function getEndTimeStamp() {
+					d.setDate(d.getDate()+1);
+					d.setHours(8);
+					console.log("날짜(일)확인 : " + d.getDate() + ", 시간확인 : " + d.getHours());
+					
+					var day = d.toLocaleString();
+					var s = leadingZeros(d.getFullYear(), 4) + '-'
+							+ leadingZeros(d.getMonth() + 1, 2) + '-'
+							+ leadingZeros(d.getDate(), 2) + ' '
+							+ leadingZeros(d.getHours(), 2) + ':'
+							+ leadingZeros(d.getMinutes(), 2);
+		
+					return s;
+				}
+				
+				function leadingZeros(n, digits) {
+					var zero = '';
+					n = n.toString();
+		
+					if (n.length < digits) {
+						for (i = 0; i < digits - n.length; i++)
+							zero += '0';
+					}
+					return zero + n;
+				}
+		
+				console.log('야간권 : ' + getTimeStamp());
+				$("input[name='start_time']").prop('value', getTimeStamp());
+				$("input[name='end_time']").prop('value', getEndTimeStamp());
+				
+				$(document.getElementsByName('cabinet')[1]).prop("checked", true);
+				$(document.getElementsByName('cabinet')).attr('disabled', true);
+			}
+			
 		});
 		
 		//정기권 사용 안함 클릭 시 
