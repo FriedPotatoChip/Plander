@@ -133,6 +133,7 @@
 
 <script>
 	function next(frm) {
+		
 		frm.action="/TMS/book/pay"
 		frm.submit();
 	}
