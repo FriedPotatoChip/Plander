@@ -38,7 +38,7 @@ body {
 					<h5 class="card-title text-center">전화문의</h5>
 					<hr>
 					<p class="card-text">
-						가장 빠르고 정확하게<br> 24시간 언제든지 가능합니다.
+						가장 빠르고 정확하게<br> 심야를 제외하고 언제든지 가능합니다.
 					</p>
 					<button type="button" class="btn btn-primary btn-lg btn-block"
 						data-toggle="modal" data-target="#exampleModalCenter">문의하기</button>
@@ -60,10 +60,11 @@ body {
 				<img src="/resources/images/chat.png" class="card-img-top ask"
 					alt="chat">
 				<div class="card-body">
-					<h5 class="card-title text-center">챗봇문의</h5>
+					<h5 class="card-title text-center">쪽지문의</h5>
 					<hr>
-					<p class="card-text">자주 묻는 질문에 한하여 챗봇에게 질문할 수 있습니다.</p>
-					<button type="button" class="btn btn-primary btn-lg btn-block">문의하기</button>
+					<p class="card-text">쪽지로도 빠르게 질문할 수 있습니다.</p>
+					<button type="button" class="btn btn-primary btn-lg btn-block"
+					onclick="location.href='/TMS/sendMsg?recv_id=admin'">문의하기</button>
 				</div>
 			</div>
 		</div>

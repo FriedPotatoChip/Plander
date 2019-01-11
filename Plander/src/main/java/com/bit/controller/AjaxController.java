@@ -97,6 +97,9 @@ public class AjaxController {
 		System.out.println(vo);
 		boolean chkMsg = comService.sendMsg(vo);
 		if (chkMsg) {
+			if(vo.getRecv_id() == "admin") {
+				return "/TMS/ask";
+			}
 			return "success";
 		} else {
 			return "fail";
