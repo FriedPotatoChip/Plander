@@ -69,6 +69,20 @@
 
 <script type="text/javascript">
 	function doSubmit(frm){
+		
+		var title = frm.rc_title.value;
+		if (title == ''){
+			alert("제목을 입력해 주세요");
+			$("#rc_title").focus();
+			return false;
+		}
+		
+		var content = frm.rc_content.value;
+		if (content == ''){
+			alert("내용을 입력해 주세요");
+			$('#summernote').summernote('focus');
+			return false;
+		}
 		var max_mem = frm.max_mem.value;
 		if (max_mem < 3) {
 			alert("최대 인원은 최소 3명 이상이어야 합니다.");

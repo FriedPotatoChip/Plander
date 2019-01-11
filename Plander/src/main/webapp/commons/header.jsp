@@ -476,13 +476,13 @@
 								<td>주소&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-4 form-control mr-2" name="zipNo"
-									readonly>
+									readonly required>
 									<button type="button" class="btn btn-danger"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-10 form-control my-2"
-									name="roadAddrPart1" readonly> <input
+									name="roadAddrPart1" readonly required> <input
 									type="text" id="addrDetail" class="col-sm-10 form-control my-2"
-									name="addrDetail" placeholder="상세주소"></td>
+									name="addrDetail" placeholder="상세주소" required></td>
 							</tr>
 						</tbody>
 					</table>
