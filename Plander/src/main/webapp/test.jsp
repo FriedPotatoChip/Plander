@@ -16,15 +16,7 @@
 		frm.submit();
 	}
 </script>
-<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"
-    data-client-id="u86j4ripEt8LRfPGzQ8"
-    data-merchant-user-key="가맹점 사용자 식별키"
-    data-merchant-pay-key="가맹점 주문 번호"
-    data-product-name="상품명을 입력하세요"
-    data-total-pay-amount="1000"
-    data-tax-scope-amount="1000"
-    data-tax-ex-scope-amount="0"
-    data-return-url="사용자 결제 완료 후 결제 결과를 받을 URL"/>
+   
 </head>
 <body>
 <%-- 카카오페이 
@@ -40,6 +32,19 @@
 	fail_url			결제 실패시 redirect url. 최대 255자	O	String
 
  --%>
+ 
+ 
+ <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"
+    data-client-id="u86j4ripEt8LRfPGzQ8"
+    data-merchant-pay-key="partnder-orderkey"
+    data-product-name="네이버페이 테스트"
+    data-total-pay-amount="100"
+    data-tax-scope-amount="100"
+    data-tax-ex-scope-amount="0"
+    
+    data-return-url="/TMS/payment/naverPay">
+</script>
+<hr>
 
 
 <form method="post" name="frm" onsubmit="payTest()" >
