@@ -242,11 +242,6 @@
 		var checkEnglish = password.search(/[a-z]/ig);
 		var checkSpe = password.search(/[!@#$%^&*]/gi);
 
-		if (!chkBox) {
-			alert("이용 약관에 동의해주세요");
-			frm.chkBox.focus();
-			return false;
-		}
 		if (!frm.id.value) {
 			alert("아이디를 입력해주세요.");
 			frm.id.focus();
@@ -317,6 +312,11 @@
 			frm.email.focus();
 			return false;
 		}
+		
+		if (!frm.zipNo.value) {
+			alert("주소를 입력해 주세요.");
+			return false;
+		}		
 
 		if (!chkIdChk) {
 			alert("이미 사용중인 ID 입니다.");
@@ -329,8 +329,15 @@
 		} else if (!chkPwdChk) {
 			alert("비밀번호가 일치하지 않습니다.");
 			frm.password.focus();
+			return false;
 		}
-
+		
+		if (!chkBox) {
+			alert("이용 약관에 동의해주세요");
+			frm.chkBox.focus();
+			return false;
+		}
+		
 	}
 
 	// 주소 api
@@ -477,8 +484,8 @@
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-4 form-control mr-2" name="zipNo"
 									readonly required>
-									<button type="button" class="btn btn-danger"
-										onclick="goPopup()">주소검색</button> <input type="text"
+									<input type="button" class="btn btn-danger"
+										onclick="goPopup()" id="searchBtn" value="주소 검색"> <input type="text"
 									id="roadAddrPart1" class="col-sm-10 form-control my-2"
 									name="roadAddrPart1" readonly required> <input
 									type="text" id="addrDetail" class="col-sm-10 form-control my-2"
@@ -501,8 +508,8 @@
 
 				<div class="modal-footer" style="clear: right;">
 					<div class="center">
-						<button type="button" onclick="join()" style="background-color: #3b5998; color: white;"
-							class="btn form-control bold">회원가입</button>
+						<input type="button" onclick="join()" style="background-color: #3b5998; color: white;"
+							class="btn form-control bold" value="회원가입">
 					</div>
 				</div>
 			</form>
