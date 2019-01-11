@@ -16,7 +16,7 @@
 		function click() {
 			return;
 		}
-		
+
 		//내용 출력(fetch api)
 		function fetch_book(name) {
 			fetch(name).then(function(response) {
@@ -25,6 +25,30 @@
 				});
 			});
 		}
+
+		function msgDel(rm_idx, nowPage) {
+			$.ajax({
+				url : '/msgDel',
+				type : 'post',
+				data : {
+					'rm_idx' : rm_idx
+				},
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
+						alert("쪽지를 삭제했습니다.");
+					} else {
+						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				},
+				error : function(error) {
+					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+
+			fetch_book('/TMS/admin/recvMsg?nowPage=' + nowPage);
+		}
 	</script>
+
 </body>
 </html>

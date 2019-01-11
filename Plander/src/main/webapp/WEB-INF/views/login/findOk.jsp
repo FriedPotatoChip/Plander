@@ -59,6 +59,6 @@
 
 <br><br><br><br>
 <!-- 풋터 -->
-<jsp:include page="/commons/footer.jsp"/>
+<%-- <jsp:include page="/commons/footer.jsp"/> --%>
 </body>
 </html>

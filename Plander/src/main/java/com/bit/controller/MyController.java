@@ -25,6 +25,7 @@ import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.MyService;
+import com.bit.service.adminService;
 import com.bit.utils.PagingVO;
 
 @Controller
@@ -34,11 +35,23 @@ public class MyController {
 
 	@Autowired
 	MyService myService;
+	
+	@Autowired
+	private adminService service;
 
 	@RequestMapping("")
 	public String mypage(UsersVO vo, HttpSession session) {
 		session.setAttribute("user", vo);
 		return "my/mypage";
+	}
+	
+	// 회원탈퇴
+	@RequestMapping("dropout")
+	public String dropout(HttpSession session) {
+		UsersVO vo = (UsersVO) session.getAttribute("user");
+		service.userDelete(vo.getU_idx());
+		
+		return "redirect: /TMS/logout";
 	}
 	
 	// 내쿠폰보유현황(+갯수)
