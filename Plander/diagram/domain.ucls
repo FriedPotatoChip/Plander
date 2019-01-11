@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.bit.domain.CabinetVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/CabinetVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="268" width="158" x="635" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.bit.domain.BookingCbVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/BookingCbVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="700" width="185" x="3479" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.bit.domain.ApplyVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/ApplyVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="430" width="171" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.bit.domain.CommentsVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/CommentsVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="754" width="242" x="3197" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.bit.domain.SeatsVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/SeatsVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="430" width="139" x="456" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.bit.domain.RecruitVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/RecruitVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="700" width="242" x="2265" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.bit.domain.BranchesVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/BranchesVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="430" width="177" x="1037" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.bit.domain.SeatsCategoryVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/SeatsCategoryVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="268" width="171" x="3874" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.bit.domain.PaymentVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/PaymentVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="430" width="164" x="4303" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.bit.domain.ReplyVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/ReplyVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="484" width="178" x="1254" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.bit.domain.RecvMsgVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/RecvMsgVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="538" width="242" x="1983" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.bit.domain.BoardVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/BoardVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="808" width="242" x="2915" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.bit.domain.UsersVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/UsersVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="916" width="242" x="1701" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.bit.domain.PriceVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/PriceVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="376" width="164" x="833" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.bit.domain.BookingVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/BookingVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1132" width="178" x="4085" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.bit.domain.CategoryVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/CategoryVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="214" width="164" x="252" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.bit.domain.CouponVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/CouponVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="646" width="189" x="1472" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.bit.domain.SendMsgVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/SendMsgVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="430" width="159" x="2547" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.bit.domain.DateTimeVO" project="Plander" 
+    file="/Plander/src/main/java/com/bit/domain/DateTimeVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1834" width="129" x="2746" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="20" language="java" name="com.bit.domain" project="Plander" file="/Plander/src/main/java/com/bit/domain" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="130" x="3704" y="37"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

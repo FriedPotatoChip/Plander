@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.DateTimeVO;
+import com.bit.domain.RecvMsgVO;
+import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.mapper.AdminMapper;
 import com.bit.service.adminService;
@@ -77,6 +79,30 @@ public class AdminServiceImpl implements adminService {
 	@Override
 	public int changeSeats(Map<String, Object> map) {
 		return mapper.changeSeats(map);
+	}
+
+	// 보낸쪽지 갯수
+	@Override
+	public int sendMsgCnt(UsersVO vo) {
+		return mapper.sendMsgCnt(vo);
+	}
+
+	// 보낸쪽지
+	@Override
+	public List<SendMsgVO> sendMsg(Map map) {
+		return mapper.sendMsg(map);
+	}
+
+	// 받은쪽지 갯수
+	@Override
+	public int recvMsgCnt(UsersVO vo) {
+		return mapper.recvMsgCnt(vo);
+	}
+
+	// 받은쪽지
+	@Override
+	public List<RecvMsgVO> recvMsg(Map map) {
+		return mapper.recvMsg(map);
 	}
 
 

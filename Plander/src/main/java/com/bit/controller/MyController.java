@@ -68,6 +68,7 @@ public class MyController {
 	@RequestMapping("sendMsg")
 	public String sendMsg(PagingVO page, HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
+		System.out.println("user: " + vo);
 		
 		// 페이징 처리
 		int total = myService.sendMsgCnt(vo);

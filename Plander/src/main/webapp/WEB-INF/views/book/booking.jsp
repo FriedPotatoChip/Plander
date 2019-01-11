@@ -235,7 +235,6 @@
 				return false;
 			}
 		}
-		
 		var chk = $(":input:radio[name=roomnum]:checked").val();
 		if (chk==null) {
 			alert("좌석 종류(개인실/랩실) 선택은 필수입니다.");

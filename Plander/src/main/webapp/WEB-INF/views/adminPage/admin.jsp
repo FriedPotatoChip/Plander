@@ -117,7 +117,6 @@ input[type=submit]:hover {
 	background-color: black;
 	color: white;
 }
-
 </style>
 </head>
 
@@ -161,6 +160,11 @@ input[type=submit]:hover {
 						<li class="nav-item"><a class="nav-link"
 							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
+						</a></li>
+						
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Message"> <span data-feather="file"></span>
+								Message
 						</a></li>
 					</ul>
 				</div>

@@ -86,24 +86,42 @@
 
 <script type="text/javascript">
 	function submitBtn(frm){
-		var bk_idx = $("#bk_idx").val();
-		$.ajax({
-			url: '/minusReview',
-			type: 'get',
-			data: {'bk_idx':bk_idx, 'id':'${usersVO.id}'},
-			dataType: 'text', 
-			success: function(result) {
-				if (result == 'success'){
-					document.getElementById("articleForm").submit();
-				} else if (result == 'fail'){
-					alert("리뷰 작성 실패. 관리자에게 문의해주세요.");
-					return false;
+		var title = frm.b_title.value;
+		if (title == ''){
+			alert("제목을 입력해 주세요");
+			$("#b_title").focus();
+			return false;
+		}
+		
+		var content = frm.b_content.value;
+		if (content == ''){
+			alert("내용을 입력해 주세요");
+			$('#summernote').summernote('focus');
+			return false;
+		}
+		if ('${ct_idx}' == 3){
+			
+			var bk_idx = $("#bk_idx").val();
+			$.ajax({
+				url: '/minusReview',
+				type: 'get',
+				data: {'bk_idx':bk_idx, 'id':'${usersVO.id}'},
+				dataType: 'text', 
+				success: function(result) {
+					if (result == 'success'){
+						document.getElementById("articleForm").submit();
+					} else if (result == 'fail'){
+						alert("리뷰 작성 실패. 관리자에게 문의해주세요.");
+						return false;
+					}
+				}, error: function(error){
+						alert("리뷰 작성 실패. 관리자에게 문의해주세요.");
+						return false;
 				}
-			}, error: function(error){
-					alert("리뷰 작성 실패. 관리자에게 문의해주세요.");
-					return false;
-			}
-		})
+			})
+		} else {
+			document.getElementById("articleForm").submit();
+		}
 	}
 	
 	

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.bit.service" project="Plander" file="/Plander/src/main/java/com/bit/service" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="132" x="609" y="37"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="2" language="java" name="com.bit.service.CommonService" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/CommonService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="261" x="2100" y="795"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" language="java" name="com.bit.service.RecruitService" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/RecruitService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="520" width="351" x="1399" y="795"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="com.bit.service.BoardService" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/BoardService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="448" width="351" x="781" y="795"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="com.bit.service.LoginService" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/LoginService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="214" width="187" x="1172" y="795"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="com.bit.service.BookService" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/BookService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="268" width="270" x="1790" y="795"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="com.bit.service.adminService" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/adminService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="322" width="328" x="2401" y="795"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" language="java" name="com.bit.service.MyService" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/MyService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="682" width="323" x="246" y="795"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <package id="9" language="java" name="com.bit.service.impl" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/impl" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="165" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="10" language="java" name="com.bit.service.impl.MyServiceImpl" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/impl/MyServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="718" width="323" x="246" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.bit.service.impl.RecruitServiceImpl" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/impl/RecruitServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="556" width="351" x="1399" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.bit.service.impl.LoginServiceImpl" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/impl/LoginServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="187" x="1172" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.bit.service.impl.CommonServiceImpl" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/impl/CommonServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="286" width="261" x="2100" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.bit.service.impl.AdminServiceImpl" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/impl/AdminServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="358" width="328" x="2401" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.bit.service.impl.BoardServiceImpl" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/impl/BoardServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="484" width="351" x="781" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.bit.service.impl.BookServiceImpl" project="Plander" 
+    file="/Plander/src/main/java/com/bit/service/impl/BookServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="304" width="270" x="1790" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="17">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="18">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="19">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="20">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="21">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="22">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="23">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

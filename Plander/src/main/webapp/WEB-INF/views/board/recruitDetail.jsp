@@ -18,6 +18,23 @@
 	.now { background-color: orange; }
 	.commDate { font-size: 0.75em; color: gray;}
 	.user { width: 30px; height: 30px; border-radius: 50%; }
+	/* 클릭시 레이어 */	
+.idDiv { cursor: pointer; display: inline-block; }
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 120px;
+	padding: 10px;
+	padding-top: 18px; padding-left: 15px;
+}
+.popupLayer div {
+	position: absolute;
+	top: 0px;
+	right: 5px
+}
 </style>
 <script>
 /* 신청하기, 신청 취소를 위한 확인값 설정 */
@@ -141,7 +158,7 @@ function boardList(nowPage){
 	<div>
 		<a href="/TMS/recruit?nowPage=${nowPage }&cntPerPage=${cntPerPage}" style="font-size: 0.8em;"><strong>모집 게시판</strong></a>
 		<h3>${rc_board.rc_title }</h3>
-		<div>
+		<div class='idDiv' userId='${rc_board.id }'>
 			<c:if test='${empty rc_board.user_profileImagePath }'>
 				<img class="user" src="/resources/images/users.png" alt="user"/>
 			</c:if>
@@ -358,7 +375,7 @@ function boardList(nowPage){
 					var date = regdate.getFullYear() + "."+ (regdate.getMonth()+1) + "."+ regdate.getDate()+ " "+ regdate.getHours()+ ":"+ regdate.getMinutes();
 				    if (value.level == 1){
 					    html += "<div class='comm comment' id='comm"+value.c_idx+"'>";
-						html += "<div class='comm_id'>";
+						html += "<div class='comm_id idDiv' userId='"+value.id+"'>";
 						if (value.user_profileImagePath == null){
 							html += "<img class='user' src='/resources/images/users.png' alt='user'/>";
 						}else {
@@ -370,7 +387,7 @@ function boardList(nowPage){
 						arrId.push(value.id);
 				    } else {
 				    	html += "<div class='comm c-comment' id='comm"+value.c_idx+"'>";
-				    	html += "<div>&rdsh; ";
+				    	html += "<div class='idDiv' userId='"+value.id+"'><span style='font-family: 맑은 고딕;'>&rdsh;</span> ";
 						if (value.user_profileImagePath == null){
 							html += "<img class='user' src='/resources/images/users.png' alt='user'/>";
 						}else {
@@ -398,6 +415,57 @@ function boardList(nowPage){
 					$("."+ arrC_idx[i]).html("["+arrId[i]+"]");
 					console.log(arrId[i]); 
 				}
+				
+				/* 클릭 클릭시 클릭을 클릭한 위치 근처에 레이어가 나타난다. */
+				$('.idDiv').click(function(e)
+				{
+					var sWidth = window.innerWidth;
+					var sHeight = window.innerHeight;
+
+					var oWidth = $('.popupLayer').width();
+					var oHeight = $('.popupLayer').height();
+
+					// 레이어가 나타날 위치를 셋팅한다.
+					var divLeft = e.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
+					var divTop = e.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
+					console.log("X: "+ e.clientX);
+					console.log("Y: "+ e.clientY);
+
+					// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+					if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+					/* if( divTop + oHeight > sHeight ) divTop -= oHeight; */
+
+					// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+					if( divLeft < 0 ) divLeft = 0;
+					/* if( divTop < 0 ) divTop = 0; */
+
+					$('.popupLayer').css({
+						"top": divTop,
+						"left": divLeft,
+						"position": "absolute"
+					}).show();
+					console.log(this);
+					var userId = $(this).attr("userId");
+					console.log($(this).attr("userId"));
+					$("#showWritten").attr("href", "/TMS/searchRecruitList?keyword="+userId+"&target=w")
+					$("#sendMsg").click(function(){
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == ''){
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						} 
+						window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
+					});
+					$("#userProfile").click(function(){
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == ''){
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						} 
+						window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+						$('html, body').animate(divTop, 0);
+					});
+				});
 			}, error: function(){
 				alert("댓글 로딩 실패");
 			}
@@ -561,6 +629,19 @@ function boardList(nowPage){
 	}
 	
 
+</script>
+	<div class="popupLayer">
+		<div>
+			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+		</div>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br>
+		<a id="userProfile" href="#">회원 정보 보기</a><br>
+		<a id="showWritten" href="#">작성글 보기</a><br>
+	</div>
+<script>
+function closeLayer() {
+	$(".popupLayer").hide();
+}
 </script>
 </body>
 </html>
