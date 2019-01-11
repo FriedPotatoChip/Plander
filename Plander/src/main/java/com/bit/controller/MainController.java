@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
+import com.bit.domain.RecruitVO;
 import com.bit.domain.RecvMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.CommonService;
@@ -42,7 +43,7 @@ public class MainController {
 	private CommonService comService;
 
 	@RequestMapping("")
-	public String main(HttpSession session) {
+	public String main(HttpSession session, Model model) {
 		UsersVO user = (UsersVO) session.getAttribute("usersVO");
 		if (user != null) {
 
@@ -62,8 +63,11 @@ public class MainController {
 			List<BookingCbVO> cabinet = myService.my_cabinet_header(user);
 			session.setAttribute("cabinet", cabinet);
 			System.out.println("cabinet: " + cabinet);
-
+			
 		}
+		List<RecruitVO> lrvo = comService.RandomRecruit();
+		System.out.println("lrvo : " + lrvo);
+		model.addAttribute("RandomRecruit", comService.RandomRecruit());
 
 		return "main/main";
 	}

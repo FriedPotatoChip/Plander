@@ -29,8 +29,17 @@
 		VALUES (USERS_SEQ.NEXTVAL, #{id}, #{name}, sysdate, #{phone}, #{email}, #{api_id}, #{zipNo}, #{roadAddrPart1}, #{addrDetail})
 	</insert>	
 	
-	
-	
+	<!-- Id찾기 -->
+	<select id="findId" resultType="com.bit.domain.UsersVO" parameterType="com.bit.domain.UsersVO">
+		SELECT * FROM USERS WHERE NAME = #{name} AND EMAIL = #{email}
+	</select>
+	<select id="findPw" resultType="com.bit.domain.UsersVO" parameterType="com.bit.domain.UsersVO">
+		SELECT * FROM USERS WHERE ID = #{id} AND EMAIL = #{email}
+	</select>
+	<!-- 임시 비밀번호 업데이트 -->
+	<update id="tmpPwd" parameterType="com.bit.domain.UsersVO">
+		UPDATE USERS SET PASSWORD = #{password} WHERE ID = #{id} AND EMAIL = #{email}
+	</update>
 	
 </mapper>
 

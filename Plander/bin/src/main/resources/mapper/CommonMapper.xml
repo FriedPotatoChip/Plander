@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.bit.mapper.CommonMapper">
+
+	<select id="getPriceList" resultType="com.bit.domain.PriceVO">
+		SELECT * FROM PRICE ORDER BY SCT_IDX, TIME_IDX		
+	</select>
+	
+	<!-- 보유 쿠폰 출력 -->
+	<select id="getUserCoupon" resultType="com.bit.domain.CouponVO" parameterType="String"> 
+		<![CDATA[
+			SELECT *
+				FROM COUPON C, COUPON_TABLE CB 
+				WHERE C.CB_IDX = CB.CB_IDX AND ID = #{id} AND CP_QUANTITY != 0 AND SYSDATE <= CP_ENDDATE
+		]]>
+	</select>
+	
+	<update id="minusCoupon" parameterType="int">
+		UPDATE COUPON SET CP_QUANTITY = CP_QUANTITY - 1 WHERE CP_IDX = #{cp_idx}
+	</update>	
+	
+	<!-- 쪽지 보내기 -->
+	<insert id="sendMsg" parameterType="com.bit.domain.SendMsgVO">
+		INSERT INTO SEND_MSG (SM_IDX, SEND_ID, RECV_ID, TITLE, CONTENT, REGDATE)
+				VALUES (SEND_MSG_SEQ.NEXTVAL, #{send_id}, #{recv_id}, #{title}, #{content}, sysdate)
+	</insert>
+	
+	<!-- 안읽은 받은 쪽지함 확인 -->
+	<select id="newRecvMsg" resultType="com.bit.domain.RecvMsgVO">
+		SELECT * FROM RECV_MSG WHERE RECV_ID = #{id} AND CHK = 1 ORDER BY RM_IDX DESC
+	</select>
+	
+	<!-- 쪽지 상세 -->
+	<select id="msgDetail" resultType="com.bit.domain.RecvMsgVO">
+		SELECT M.*, U.USER_PROFILEIMAGEPATH FROM RECV_MSG M, USERS U WHERE M.SEND_ID = U.ID AND RM_IDX = #{rm_idx}
+	</select>
+	
+	<!-- 쪽지 읽음 처리 -->
+	<update id="readMsgOne">
+		UPDATE RECV_MSG SET CHK = 0 WHERE RM_IDX = #{rm_idx}
+	</update>
+	
+	<!-- 받은 쪽지 삭제 -->
+	<delete id="delRecvMsg">
+		DELETE FROM RECV_MSG WHERE RM_IDX = #{rm_idx}
+	</delete>
+	
+	<!-- 이미지 널 처리(삭제) -->
+	<update id="imgDel">
+		UPDATE USERS SET USER_PROFILEIMAGEPATH = NULL WHERE ID = #{id}
+	</update>
+</mapper>
+
+
+

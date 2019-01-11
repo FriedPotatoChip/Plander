@@ -47,7 +47,7 @@
 }
 
 .dropdown-content a:hover {
-	background-color: #3b5998;
+	background-color: #629aa9;
 	color: white;
 	font-weight: 400 !important;
 }
@@ -242,11 +242,6 @@
 		var checkEnglish = password.search(/[a-z]/ig);
 		var checkSpe = password.search(/[!@#$%^&*]/gi);
 
-		if (!chkBox) {
-			alert("이용 약관에 동의해주세요");
-			frm.chkBox.focus();
-			return false;
-		}
 		if (!frm.id.value) {
 			alert("아이디를 입력해주세요.");
 			frm.id.focus();
@@ -317,6 +312,11 @@
 			frm.email.focus();
 			return false;
 		}
+		
+		if (!frm.zipNo.value) {
+			alert("주소를 입력해 주세요.");
+			return false;
+		}		
 
 		if (!chkIdChk) {
 			alert("이미 사용중인 ID 입니다.");
@@ -329,8 +329,15 @@
 		} else if (!chkPwdChk) {
 			alert("비밀번호가 일치하지 않습니다.");
 			frm.password.focus();
+			return false;
 		}
-
+		
+		if (!chkBox) {
+			alert("이용 약관에 동의해주세요");
+			frm.chkBox.focus();
+			return false;
+		}
+		
 	}
 
 	// 주소 api
@@ -368,12 +375,12 @@
 
 			<div class="modal-body center">
 				<form name="frm" action="#" method="post">
-					<input type="text" name="id" style="font-family: 굴림;" class="form-control my-2" placeholder="아이디"
+					<input type="text" name="id" style="font-family: 맑은 고딕;" class="form-control my-2" placeholder="아이디"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" id="idInput" required>
 					<input type="password" name="password" class="form-control my-2"
-						style="margin-top: 1.5%;  font-family: 굴림;" placeholder="비밀번호"
+						style="margin-top: 1.5%;  font-family: 맑은 고딕;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
-					<input type="button" style="background-color: #3b5998; color: white;"
+					<input type="button" style="background-color: #6762a6; color: white;"
 						class="btn btn-block form-control my-2 bold" value="로그인"
 						onclick="chk()">
 				</form>
@@ -443,7 +450,7 @@
 							<tr>
 								<td>비밀번호&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="password" name="password" id="password"
-									style="font-family: 굴림;" oninput="pwchk()"
+									style="font-family: 맑은 고딕;" oninput="pwchk()"
 									class="col-sm-6 form-control" required>
 									<p id="pwMsg" style="font-size: 15px; margin-top: 5px;">(영문
 										대소문자/숫자/특수문자(!,@,#,$,%,^,&,*) 조합, 8자~16자)</p></td>
@@ -451,7 +458,7 @@
 							<tr>
 								<td>비밀번호 확인&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="password" name="passwordchk"
-									style="font-family: 굴림;" id="passwordchk" oninput="pwchk()"
+									style="font-family: 맑은 고딕;" id="passwordchk" oninput="pwchk()"
 									class="col-sm-6 form-control" required>
 									<p id="pwchkMsg" style="font-size: 13px;"></p> <!-- 비밀번호가 일치하지 않습니다. -->
 								</td>
@@ -476,13 +483,13 @@
 								<td>주소&nbsp;<b style="color: red;">&#42;</b></td>
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-4 form-control mr-2" name="zipNo"
-									readonly>
-									<button type="button" class="btn btn-danger"
-										onclick="goPopup()">주소검색</button> <input type="text"
+									readonly required>
+									<input type="button" class="btn btn-danger"
+										onclick="goPopup()" id="searchBtn" value="주소 검색"> <input type="text"
 									id="roadAddrPart1" class="col-sm-10 form-control my-2"
-									name="roadAddrPart1" readonly> <input
+									name="roadAddrPart1" readonly required> <input
 									type="text" id="addrDetail" class="col-sm-10 form-control my-2"
-									name="addrDetail" placeholder="상세주소"></td>
+									name="addrDetail" placeholder="상세주소" required></td>
 							</tr>
 						</tbody>
 					</table>
@@ -501,8 +508,8 @@
 
 				<div class="modal-footer" style="clear: right;">
 					<div class="center">
-						<button type="button" onclick="join()" style="background-color: #3b5998; color: white;"
-							class="btn form-control bold">회원가입</button>
+						<input type="button" onclick="join()" style="background-color: #3b5998; color: white;"
+							class="btn form-control bold" value="회원가입">
 					</div>
 				</div>
 			</form>

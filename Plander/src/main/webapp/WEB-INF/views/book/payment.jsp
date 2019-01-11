@@ -79,6 +79,8 @@
 	/* 버튼 끝 */
 </style>
 
+<!-- 네이버 페이 -->
+<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
 <script>
 	$(function() {
 		$('#booknum').html(
@@ -104,8 +106,8 @@
 		var start = startdate.toLocaleString('en-GB').substring(12, 14);
 		var end = enddate.toLocaleString('en-GB').substring(12, 14);
 
-		var sum = 0;
-		var sct_idx = '${bvo.sct_idx }'; //방번호 확인
+		window.sum = 0;
+		window.sct_idx = '${bvo.sct_idx }'; //방번호 확인
 		var time_idx = '${bvo.time_idx }'; //정기권 확인
 		var cabinet = '${bvo.cabinet }'; //사물함 사용여부 y/n
 
@@ -397,21 +399,58 @@
 			}
 		})
 		
+		//네이버 페이 결제화면 호출
+		//여기 확인 
+		
+		var oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
+			"clientId" : "u86j4ripEt8LRfPGzQ8"
+			//"chainId" : "{그룹형일 경우 chainId를 넣어주세요}"
+		});
+
+		//직접 만드신 네이버페이 결제버튼에 click Event를 할당하세요
+		var elNaverPayBtn = document.getElementById("naverpay");
+
+		//var bookprice = $("input[name='price']").val();
+		var bookprice = sum;
+		alert("bookprice 값 확인 : " + bookprice);
+
+		elNaverPayBtn.addEventListener("click", function() {
+			oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
+				"merchantPayKey" : "partnder-orderkey",
+				"productName" : "[거북이의 기적]",
+				"productCount" : 1,
+				"totalPayAmount" : bookprice,
+				"taxScopeAmount" : bookprice,
+				"taxExScopeAmount" : 0,
+				"returnUrl" : "/TMS/payment/payok",
+				"productItems" : [ {
+					"categoryType" : "ETC",
+					"categoryId" : "ETC",
+					"uid" : "1234",
+					"name" : "test",
+					"count" : 1
+				} ]
+			});
+
+		});
+
+		oPay.close(); //결제화면 호출 끝
+
 		//사물함 사용여부
 		var bookCab1 = '${cb.cb_idx }';
 		var bookCab2 = '${cb.cb_idx_2 }';
 		var bookCab = bookCab1 + "," + bookCab2;
-		
+
 		console.log("cb_idx 확인 : " + bookCab1 + ", cb_idx_2 : " + bookCab2);
 		console.log("bookCab : " + bookCab);
-		
+
 		var arr = new Array;
 		arr = bookCab.split(',');
 		console.log("arr : " + arr);
 		var fv = arr[0];
 		var sv = arr[1];
 		console.log("fv : " + fv + ", sv : " + sv);
-		
+
 		var chkLen = "${chkLen}";
 		if (bookCab != ",") {
 			if (chkLen == 2) {
@@ -426,15 +465,23 @@
 				$("input[name='cb_idx_2']").attr('value', 0);
 				$("input[name='cab']").attr('value', bookCab1);
 			}
-			
+
 		} else {
 			$('#cb_idx').html('<span>사용안함</span>');
 			$("input[name='cb_idx']").attr('value', 0);
 			$("input[name='cb_idx_2']").attr('value', 0);
 			$("input[name='cab']").attr('value', 0);
 		}
-		
+
 	});
+
+	//네이버페이
+</script>
+<script>
+	function payment() {
+		form1.action="/TMS/book/payok";
+		form1.submit();
+	}
 </script>
 
 </head>
@@ -524,50 +571,21 @@
 					<span id="finPrice"></span>
 					
 					<h5>결제방식 선택</h5>
+					<div>
+						<button type="button" id="naverpay">네이버 페이로 결제하기</button>
+					</div>
+					
 					<!-- <label class="radio-inline">
 						<input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label> -->
-					<label class="radio-inline">
-						<input type="radio" name="pay" id="naverPayBtn" value="2">네이버페이</label><br>
-					<label class="radio-inline">
-						<input type="radio" name="pay" id="payTest" value="3">결제</label><br>
+					<!-- <label class="radio-inline">
+						<input type="radio" name="pay" id="naverpay" value="2">네이버페이</label><br> -->
+					<!-- <label class="radio-inline">
+						<input type="radio" name="pay" id="payTest" value="3">결제</label><br> -->
 					<div class="center" style="padding: 10px;">
 						<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
-						<button type="submit">다음단계</button>
+						<button type="submit">결제하기</button>
 					</div>
-					<script>
-						function payment() {
-							var radio = $("input[name='pay']").value;
-							console.log("pay value 값 확인 : " + radio);
-							
-							var bookprice = $("input[name='bookprice']").value;
-							console.log("bookprice 값 확인 : " + bookprice);
-							
-							if (radio == 2) {
-								oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
-									"merchantPayKey" : "partnder-orderkey",
-									"productName" : "[거북이의 기적]",
-									"productCount" : 1,
-									"totalPayAmount" : bookprice,
-									"taxScopeAmount" : bookprice,
-									"taxExScopeAmount" : 0,
-									"returnUrl" : "/TMS/payment/naverPay",
-									"productItems" : [ {
-										"categoryType" : "ETC",
-										"categoryId" : "ETC",
-										"uid" : "1234",
-										"name" : "test",
-										"count" : 1
-									} ]
-								});
-							} else {
-								form1.action="/TMS/book/payok";
-								form1.submit();
-							}
-							
-						}
 					
-					</script>
-
 					<input type="hidden" name="booknum" value="">
 					<input type="hidden" name="price" value="">
 					<input type="hidden" name="br_idx" value="${bvo.br_idx }">
@@ -696,80 +714,51 @@
 		}
 	}
 </script>
-<!-- 네이버 페이 -->
-<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
+<!-- 
 <script>
+$(function(){
+	
+	/*
+	merchantPayKey: 가맹점 주문내역 확인 가능한 가맹점 결제번호 또는 주문번호를 전달해야 합니다.
+	productName: 대표 상품명
+	productCount: 상품 수량 예: A 상품 2개 + B 상품 1개의 경우 productCount 3으로 전달
+	totalPayAmount: 총 결제 금액
+	taxScopeAmount: 과세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액
+	taxExScopeAmount: 면세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액
+	returnUrl: 결제 인증 결과 전달 URL, 결제 완료 후 이동할 URL(returnUrl + 가맹점 파라미터 전달이 가능합니다)
+				네이버페이는 결제 작업 완료 후, 가맹점이 등록한 returnUrl로 리디렉션을 수행합니다 가맹점은 이를 활용하여 내부 처리를 수행하거나
+				구매자에게 결제 결과 화면을 노출할 수 있습니다
+	productItems(Array): productItem 배열. 자세한 내용은 아래 "표 2 productItem"을 참고 바랍니다
+	
+	--productItem 배열
+	categoryType: 결제 상품 유형
+	categoryId: 결제 상품 유형
+	uid: 결제 상품 유형
+	name: 상품명
+	count: 결제 상품 개수. 기본값은 1
+	*/
+
+	//네이버 페이 결제화면 호출
 	var oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
 		"clientId": "u86j4ripEt8LRfPGzQ8"
 		//"chainId" : "{그룹형일 경우 chainId를 넣어주세요}"
 	});
 	
 	//직접 만드신 네이버페이 결제버튼에 click Event를 할당하세요
+	var elNaverPayBtn = document.getElementById("naverpay");
 	
-	var elNaverPayBtn = document.getElementById("naverPayBtn");
-
-    /*
-    merchantPayKey: 가맹점 주문내역 확인 가능한 가맹점 결제번호 또는 주문번호를 전달해야 합니다.
-    productName: 대표 상품명
-    productCount: 상품 수량 예: A 상품 2개 + B 상품 1개의 경우 productCount 3으로 전달
-    totalPayAmount: 총 결제 금액
-    taxScopeAmount: 과세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액
-    taxExScopeAmount: 면세 대상 금액. 과세 대상 금액 + 면세 대상 금액 = 총 결제 금액
-    returnUrl: 결제 인증 결과 전달 URL, 결제 완료 후 이동할 URL(returnUrl + 가맹점 파라미터 전달이 가능합니다)
-    			네이버페이는 결제 작업 완료 후, 가맹점이 등록한 returnUrl로 리디렉션을 수행합니다 가맹점은 이를 활용하여 내부 처리를 수행하거나
-    			구매자에게 결제 결과 화면을 노출할 수 있습니다
-    productItems(Array): productItem 배열. 자세한 내용은 아래 "표 2 productItem"을 참고 바랍니다
-    
-    --productItem 배열
-    categoryType: 결제 상품 유형
-    categoryId: 결제 상품 유형
-    uid: 결제 상품 유형
-    name: 상품명
-    count: 결제 상품 개수. 기본값은 1
-    */
-    
-    //네이버 페이 결제화면 호출
-    function payment() {
-		var radio = $("input[name='pay']").val();
-		alert("pay value 값 확인 : " + radio);
-		
-		var bookprice = $("input[name='bookprice']").val();
-		alert("bookprice 값 확인 : " + bookprice);
-		
-		if (radio == 2) {
-			alert("여기까지 옴 ");
-			oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
-				"merchantPayKey" : "partnder-orderkey",
-				"productName" : "[거북이의 기적]",
-				"productCount" : 1,
-				"totalPayAmount" : bookprice,
-				"taxScopeAmount" : bookprice,
-				"taxExScopeAmount" : 0,
-				"returnUrl" : "/TMS/payment/naverPay",
-				"productItems" : [ {
-					"categoryType" : "ETC",
-					"categoryId" : "ETC",
-					"uid" : "1234",
-					"name" : "test",
-					"count" : 1
-				} ]
-			});
-		} else {
-			form1.action="/TMS/book/payok";
-			form1.submit();
-		}
-		
-	}
-    
-    /* elNaverPayBtn.addEventListener("click", function() {
+	var bookprice = $("input[name='price']").val();
+	alert("bookprice 값 확인 : " + bookprice);
+	
+	elNaverPayBtn.addEventListener("click", function() {
 		oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
 			"merchantPayKey" : "partnder-orderkey",
-			"productName" : "커스텀 결제",
+			"productName" : "[거북이의 기적]",
 			"productCount" : 1,
-			"totalPayAmount" : 100,
-			"taxScopeAmount" : 100,
+			"totalPayAmount" : bookprice,
+			"taxScopeAmount" : bookprice,
 			"taxExScopeAmount" : 0,
-			"returnUrl" : "/TMS/payment/naverPay",
+			"returnUrl" : "/TMS/payment/payok",
 			"productItems" : [ {
 				"categoryType" : "ETC",
 				"categoryId" : "ETC",
@@ -778,12 +767,12 @@
 				"count" : 1
 			} ]
 		});
-		//oPay.close();
 		
-		 */
+	});
 	
-	//}); //결제화면 호출 끝
-	
+	oPay.close(); //결제화면 호출 끝
+});
 </script>
+ -->
 </body>
 </html>

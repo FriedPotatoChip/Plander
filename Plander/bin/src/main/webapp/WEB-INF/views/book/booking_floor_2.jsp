@@ -18,18 +18,16 @@
 	//DB에서 예약된 좌석이랑 비교해서 체크박스 disabled
 	$().ready(function(){
 		var size = document.getElementsByName('s_col').length;
-		alert("size : " + size);
+		console.log("size : " + size);
 		var booklist = '<c:out value='${booklist}' />';
 		
 		<c:forEach var='k' items='${booklist }'>
 			var bookseat = '${k.s_col }';
-			//console.log("s_col : " + bookseat);
 				
 			for (var i=0; i<= size; i++) {
 				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 				if ( bookseat == document.getElementsByName('s_col')[i].value) {
-					alert("예약된 값 : " + bookseat );
-					//$('#seatinfo').html("<span>A-" + document.getElementsByName('s_col')[i].value + "</span>");
+					console.log("예약된 값 : " + bookseat );
 					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
 					break;
 				}
@@ -38,10 +36,48 @@
 		
 		//선택한 인원 수와 체크된 박스 수가 같을 때 나머지 체크박스 disabled
 		$(":checkbox").change(function() {
-			console.log("체크된 좌석 : " + $(":checkbox:checked").val() ); //체크값 확인ok
-			$("#msg").html("<span>A-" + $(":checkbox:checked").val() + "&nbsp;</span>");
-			
 			var cnt = $("#people").val(); //선택된 인원 수
+			console.log("체크된 좌석 : " + $(":checkbox:checked").val() ); //체크값 확인ok
+			
+			var chkVal = $(":checkbox:checked");
+			var chkLen = $(":checkbox:checked").length;
+			console.log("chkLen : " + chkLen);
+			if (cnt == 1){
+				$("#msg").html("<span>A-" + $(":checkbox:checked").val() + "</span>");
+				
+				document.form1.test.value = $(":checkbox:checked").val();
+				document.form1.chkLen.value = cnt;
+				document.form1.s_col_2.value = 0; //두번째 값
+				
+			} else {
+				if (chkLen == 2) {
+					var test = "";
+					for (var i = 0; i < 2; i ++) {
+						if (i == 0) {
+							test += chkVal[i].value + ",";
+						} else {
+							test += chkVal[i].value + "";
+						}
+					}
+					$("#msg").html("<span>A-" + test + "</span>");
+					console.log("선택한 좌석: " +  test);
+					
+					document.form1.test.value = test;
+					document.form1.chkLen.value = chkLen;
+					
+					var arr = new Array;
+					arr = test.split(',');
+					console.log("arr : " + arr);
+					var fv = arr[0];
+					var sv = arr[1];
+					console.log("fv : " + fv + ", sv : " + sv);
+					
+					document.form1.s_col_2.value = sv; //두번째 값
+					
+				}
+				
+			}
+			
 			if (cnt == $(":checkbox:checked").length) {
 				$(":checkbox:not(:checked)").attr("disabled", true);
 				
@@ -51,7 +87,6 @@
 				
 				<c:forEach var='k' items='${booklist }'>
 					var bookseat = '${k.s_col }';
-					//console.log("s_col : " + bookseat);
 					
 					for (var i=0; i<= size; i++) {
 						//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
@@ -63,40 +98,41 @@
 				</c:forEach>
 			}
 		});
-		
+
 	});
 
 </script>
 <script>
-	//인원수를 바꾸면 : db에 값이 있는건 disabled, 나머지는 체크해제
-	$("#people").change(function() {
-		$(":checkbox").removeAttr("checked");
-		$(":checkbox").removeAttr("disabled");
-		$("#msg").html("");
-		
-		var size = document.getElementsByName('s_col').length;
-		alert("size : " + size);
-		var booklist = '<c:out value='${booklist}' />';
-		
-		<c:forEach var='k' items='${booklist }'>
-			var bookseat = '${k.s_col }';
-				
-			for (var i=0; i<= size; i++) {
-				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
-				if ( bookseat == document.getElementsByName('s_col')[i].value) {
-					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-					break;
+	$(function() {
+		//인원수를 바꾸면 : db에 값이 있는건 disabled, 나머지는 체크해제
+		$("#people").change(function() {
+			$(":checkbox").removeAttr("checked");
+			$(":checkbox").removeAttr("disabled");
+			$("#msg").html("");
+			
+			var size = document.getElementsByName('s_col').length;
+			console.log("size : " + size);
+			var booklist = '<c:out value='${booklist}' />';
+			
+			<c:forEach var='k' items='${booklist }'>
+				var bookseat = '${k.s_col }';
+					
+				for (var i=0; i<= size; i++) {
+					//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+					if ( bookseat == document.getElementsByName('s_col')[i].value) {
+						$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+						break;
+					}
 				}
-			}
-		</c:forEach>
-		
+			</c:forEach>
+			
+		});
 	});
 
 </script>
 
 <script>
 	function next(frm) {
-		
 		frm.action="/TMS/book/pay"
 		frm.submit();
 	}
@@ -203,7 +239,7 @@
 			<li>&gt;</li>
 			<li>
 				<a class="menu">
-					<b> <span id="num" class="back">STEP3</span>
+					<b><span id="num" class="back">STEP3</span>
 					<span id="select" class="select">결제하기</span></b>
 				</a>
 			</li>
@@ -212,7 +248,7 @@
 	
 	<div id="ticket">
 		<div class="boxoutside" style="border: 1px solid;">
-		<form method="post">
+		<form method="post" name="form1">
 			<div>
 				<h5>☑ 1인 2석까지 예약 가능합니다.</h5>
 				<div>
@@ -389,10 +425,14 @@
 			<input type="hidden" name="start_time" value="${bvo.start_time }">
 			<input type="hidden" name="end_time" value="${bvo.end_time }">
 			<input type="hidden" name="s_idx" value="${bvo.s_idx }">
+			<input type="hidden" name="test" value="">
+			<input type="hidden" name="chkLen" value="">
+			<input type="hidden" name="s_col_2" value="">
+				
 		</form>
 		</div> <!-- 박스 아웃사이드 끝 -->
 	</div> <!-- 티켓 끝 --><br><br><br>
-
+	<!--  -->지금예약 : ${bvo }
 </div> <!-- 바디 콘테이너 끝 -->
 </body>
 </html>

@@ -104,7 +104,7 @@ h3 {
 		<input class="form-control form-control-dark w-100" type="text"
 			placeholder="Search" aria-label="Search">
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="#">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
 		</ul>
 	</nav>
 
@@ -127,7 +127,7 @@ h3 {
 								data-feather="home"></span> Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="#"> <span
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats?sct_idx=1"> <span
 								data-feather="bar-chart-2"></span> Visitors
 						</a></li>
 					</ul>
@@ -209,7 +209,8 @@ h3 {
 		});
 		
 	</script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"/>
+	
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	<script>
 		window.jQuery
 				|| document
@@ -222,7 +223,7 @@ h3 {
 	<script>
 		feather.replace()
 	</script>
-	Graphs
+
 	
 </body>
 </html>

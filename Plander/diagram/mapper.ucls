@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.bit.mapper" project="Plander" file="/Plander/src/main/java/com/bit/mapper" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="132" x="2037" y="37"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="2" language="java" name="com.bit.mapper.MyMapper" project="Plander" 
+    file="/Plander/src/main/java/com/bit/mapper/MyMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="682" width="323" x="1674" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" language="java" name="com.bit.mapper.RecruitMapper" project="Plander" 
+    file="/Plander/src/main/java/com/bit/mapper/RecruitMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="520" width="351" x="276" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="com.bit.mapper.BoardMapper" project="Plander" 
+    file="/Plander/src/main/java/com/bit/mapper/BoardMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="448" width="351" x="2209" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="com.bit.mapper.LoginMapper" project="Plander" 
+    file="/Plander/src/main/java/com/bit/mapper/LoginMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="214" width="195" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="com.bit.mapper.BookMapper" project="Plander" 
+    file="/Plander/src/main/java/com/bit/mapper/BookMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="268" width="298" x="968" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="com.bit.mapper.AdminMapper" project="Plander" 
+    file="/Plander/src/main/java/com/bit/mapper/AdminMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="322" width="328" x="1306" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" language="java" name="com.bit.mapper.CommonMapper" project="Plander" 
+    file="/Plander/src/main/java/com/bit/mapper/CommonMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="261" x="667" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

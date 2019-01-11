@@ -4,16 +4,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
+import com.bit.domain.RecvMsgVO;
+import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.BookService;
 import com.bit.service.adminService;
@@ -22,7 +28,7 @@ import com.bit.utils.PagingVO;
 @Controller
 @RequestMapping("/TMS/admin")
 public class AdminController {
-
+	
 	@Autowired
 	private BookService bookservice;
 
@@ -30,12 +36,14 @@ public class AdminController {
 	private adminService service;
 
 	@RequestMapping("")
-	public String adminPage(UsersVO vo, Model model, PagingVO page) {
-
+	public String adminPage(UsersVO vo, Model model, PagingVO page, HttpSession session) {
+		session.setAttribute("user", vo);
+		System.out.println("user: " + vo);
+		
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal());
 
 		page.CalcPage(page.getNowPage(), page.getCntPerPage());
-
+		
 		model.addAttribute("page", page);
 		model.addAttribute("user", service.getUserList(page));
 		return "adminPage/admin";
@@ -57,6 +65,72 @@ public class AdminController {
 		model.addAttribute("page", page);
 		model.addAttribute("user", service.getSearchList(map));
 		return "adminPage/admin";
+	}
+	
+	// 페이징
+	public Map<String, Object> paging(PagingVO page, UsersVO vo, int total) {
+
+		page = new PagingVO(page.getNowPage(), total);
+		page.CalcPage(page.getNowPage());
+
+		Map<String, Object> map = new HashMap();
+		map.put("id", vo.getId());
+		map.put("page", page);
+
+		System.out.println("페이징 테스트 map: " + map);
+		return map;
+	}
+	
+	@RequestMapping("Message")
+	public String Message() {
+
+		return "adminPage/Message";
+	}
+	
+	@RequestMapping("recvMsg")
+	public String recvMsg(PagingVO page, HttpSession session, Model model) {
+		UsersVO vo = (UsersVO) session.getAttribute("user");
+		
+		// 페이징 처리
+		int total = service.recvMsgCnt(vo);
+		System.out.println("total: " + total);
+		Map<String, Object> m = paging(page, vo, total);
+		page = (PagingVO) m.get("page");
+		model.addAttribute("page", page);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", vo.getId());
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		System.out.println("id: " + vo.getId() + ", start: " + page.getStart() + ", end: " + page.getEnd());
+		List<RecvMsgVO> list = service.recvMsg(map);
+		System.out.println("list: " + list);
+		model.addAttribute("list", list);
+		
+		return "adminPage/recvmsg";
+	}
+	
+	@RequestMapping("sendMsg")
+	public String sendMsg(PagingVO page, HttpSession session, Model model) {
+		UsersVO vo = (UsersVO) session.getAttribute("user");
+		
+		// 페이징 처리
+		int total = service.sendMsgCnt(vo);
+		System.out.println("total: " + total);
+		Map<String, Object> m = paging(page, vo, total);
+		page = (PagingVO) m.get("page");
+		model.addAttribute("page", page);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", vo.getId());
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+		System.out.println("id: " + vo.getId() + ", start: " + page.getStart() + ", end: " + page.getEnd());
+		List<SendMsgVO> list = service.sendMsg(map);
+		System.out.println("list: " + list);
+		model.addAttribute("list", list);
+		
+		return "adminPage/sendmsg";
 	}
 
 	@RequestMapping("/delete")

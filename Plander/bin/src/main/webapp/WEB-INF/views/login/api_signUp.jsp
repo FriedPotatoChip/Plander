@@ -68,10 +68,18 @@ function join() {
 	var frm = document.joinform;
 	
 	var testPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+	var testId = /^[0-9a-zA-Z]+$/;
+	
 	var tel = frm.phone.value;
+	var id = frm.id.value;
 	
 	if (!frm.id.value) {
 		alert("아이디를 입력해주세요.");
+		frm.id.focus();
+		return false;
+	}
+	if (!testId.test(id)){
+		alert("아이디는 영문, 숫자 조합만 사용 가능합니다.");
 		frm.id.focus();
 		return false;
 	}

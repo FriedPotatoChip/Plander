@@ -112,11 +112,13 @@ public class BookController {
 	
 	//s_idx
 	public int[] idx(SeatsVO svo) {
+		
 		if (svo.getS_col_2()==0) {
 			//1명만 예약할 때
 			SeatsVO chk = bookService.seatnum(svo.getS_col(), svo.getBr_idx());
 			int[] idx = new int[1];
 			idx[0] = chk.getS_idx();
+			
 			return idx;
 		} else {
 			//2명예약 그냥 한명만 예약하자.......1인1좌석..티켓팅도1인1좌석.....
@@ -139,21 +141,23 @@ public class BookController {
 		bvo.setBk_regdate(today); // 예약날짜
 		bvo.setId(uservo.getId());
 		
-		int[] idx = idx(svo); //여기 오류뜸 수정 
+		int[] idx = idx(svo);
+		
 		System.out.println("idx.length 길이 : " + idx.length);
-		System.out.println("idx : " + idx);
+		for (int i=0; i<idx.length; i++) {
+			System.out.println("idx : " + idx[i]);
+		}
 		
 		String test = request.getParameter("test");
 		System.out.println("test: " + test);
 		
-		System.out.println("svo : " + svo);
-		System.out.println("bvo : " + bvo);
-		
 		boolean cab = cab(bvo.getCabinet());
 		System.out.println("사물함 사용여부 확인 : " + bvo.getCabinet() + ", t/f : " + cab);
+		
+		
 		if (cab == true) {
-			// 사물함 사용하면
-			// 예약안된 사물함 리스트를 뽑아서 차례대로 cb_idx에 값 넣기
+			//사물함 사용하면
+			//예약안된 사물함 리스트를 뽑아서 차례대로 cb_idx에 값 넣기
 			List<CabinetVO> notbookCb = bookService.not_bookCb(cvo);
 			System.out.println("예약안된사물함 확인 : " + notbookCb);
 			
@@ -183,8 +187,32 @@ public class BookController {
 			cb_bvo.setBr_idx(bvo.getBr_idx());
 			System.out.println("cb_idx 확인 : " + cb_bvo.getCb_idx() + ", cb_idx_2 : " + cb_bvo.getCb_idx_2());
 			model.addAttribute("cb", cb_bvo);
+		} else {
+			//사물함 사용 안하면
+			//1명예약
+			if (idx.length==1) {
+				int chk = idx[0];
+				System.out.println("chk : " + chk );
+				bvo.setS_idx(chk);
+				svo.setS_idx(chk);
+				
+			} else {
+				//2명예약 
+				int chk = idx[0]; //s_idx
+				int chk1 = idx[1];
+				System.out.println("chk : " + chk + ", chk1 : " + chk1);
+				
+				bvo.setS_idx(chk);
+				bvo.setS_idx_2(chk1);
+				svo.setS_idx(chk);
+				svo.setS_idx_2(chk1);
+			}
+			
 		}
-
+		
+		System.out.println("svo : " + svo);
+		System.out.println("bvo : " + bvo);
+		
 		String chkLen = request.getParameter("chkLen");
 		System.out.println("chkLen: " + chkLen);
 

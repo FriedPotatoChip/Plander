@@ -154,6 +154,11 @@ input[type=submit]:hover {
 							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
 						</a></li>
+						
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Message"> <span data-feather="file"></span>
+								Message
+						</a></li>
 					</ul>
 				</div>
 			</nav>

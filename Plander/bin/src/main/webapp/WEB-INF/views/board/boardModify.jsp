@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
@@ -20,7 +18,21 @@
 	.zeroPad { padding: 0px; }
 </style>
 </head>
-<body>
+<body> 
+	<!-- 헤더 -->
+<!-- Header -->
+<c:if test="${empty sessionScope.usersVO }">
+	<jsp:include page="/commons/header.jsp" />
+</c:if>
+<c:if test="${not empty sessionScope.usersVO }">
+	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+		<jsp:include page="/commons/loginheader.jsp" />
+	</c:if>
+	<c:if test="${sessionScope.usersVO.rank == 1 }">
+		<jsp:include page="/commons/adminLoginheader.jsp" />
+	</c:if>
+</c:if>
+<!-- 헤더 끝 -->
 	<h3>모집 게시판 글 작성 페이지</h3>
 	
 <form id="articleForm" role="form" action="/TMS/modifyBoard" method="post">
