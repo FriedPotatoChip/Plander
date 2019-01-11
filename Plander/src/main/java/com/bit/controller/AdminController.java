@@ -189,11 +189,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/LabSeats")
-	public String LabSeatsPage(@RequestParam(value="roomnum", defaultValue="2") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, Model model,
+	public String LabSeatsPage(@RequestParam(value="roomnum", defaultValue="2") int roomnum, @RequestParam(value="br_idx", defaultValue="1") int br_idx, Model model, 
 			BookingVO bvo) {
 		System.out.println("br_idx : " + br_idx);
 		System.out.println("roomnum : " + roomnum);
 		System.out.println("bvo : " + bvo);
+		bvo.setBr_idx(br_idx);
+		bvo.setRoomnum(roomnum);
 		model.addAttribute("BookingSeats", service.BookingSeats(bvo));
 		return "adminPage/LabSeats";
 	}

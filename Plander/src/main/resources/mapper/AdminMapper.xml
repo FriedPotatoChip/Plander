@@ -85,9 +85,10 @@
 	<!-- 좌석별 현황  -->
 	<select id="BookingSeats" resultType="com.bit.domain.BookingVO">
 		select distinct b.id, b.start_time, b.end_time, s.s_col
-	    from seats s, booking b
+	    from seats_view s, booking b
 	    where s.s_idx = b.s_idx
 	    and br_idx = #{br_idx}
+	    and roomnum = #{roomnum}
 	    <!-- and s_col = #{s_col} -->
 	    and (
 	        (to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
