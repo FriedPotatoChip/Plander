@@ -240,11 +240,6 @@ a, h5 {
 		var checkEnglish = password.search(/[a-z]/ig);
 		var checkSpe = password.search(/[!@#$%^&*]/gi);
 
-		if (!chkBox) {
-			alert("이용 약관에 동의해주세요.");
-			frm.chkBox.focus();
-			return false;
-		}
 
 		if (!frm.id.value) {
 			alert("아이디를 입력해주세요.");
@@ -317,6 +312,11 @@ a, h5 {
 			frm.email.focus();
 			return false;
 		}
+		
+		if (!frm.zipNo.value) {
+			alert("주소를 입력해 주세요.");
+			return false;
+		}
 
 		if (!chkIdChk) {
 			alert("이미 사용중인 ID 입니다.");
@@ -331,6 +331,11 @@ a, h5 {
 			frm.password.focus();
 		}
 
+		if (!chkBox) {
+			alert("이용 약관에 동의해주세요.");
+			frm.chkBox.focus();
+			return false;
+		}
 	}
 
 	// 주소 api
@@ -502,7 +507,7 @@ a, h5 {
 
 				<div class="modal-footer" style="clear: right;">
 					<div class="center">
-						<button type="button" onclick="join()"
+						<button type="button" onclick="join()" id=""
 							style="background-color: #6762a6; color: white;"
 							class="btn btn-lg form-control">회원가입</button>
 					</div>
