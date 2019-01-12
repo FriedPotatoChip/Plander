@@ -35,19 +35,9 @@ function click() {
 }
 </script>
 
-
 <style>
-#primaryNav li a h5 {
+#primaryNav li h5 {
 	font-weight: 700;
-}
-
-body>div {
-	width: 90%;
-	margin: 0 auto;
-}
-
-.navs {
-	height: 60px;
 }
 
 .nav_btn {
@@ -56,20 +46,19 @@ body>div {
 	float: right;
 }
 
+.container {
+	max-width: 1500px;
+}
+
 h3 {
 	padding: 15px 0;
 	text-align: center;
-	background-color: #3b5998;
+	background-color: #008374;
 	text-align: center;
 }
 
 th {
 	text-align: center;
-}
-
-h3 {
-	margin-top: 10px;
-	margin-bottom: 10px;
 }
 
 .profile {
@@ -126,7 +115,7 @@ h3 {
 	border-top: 1px solid #000;
 }
 
-.myinfo_nav, .myBook_nav, .myRecruit_nav {
+.myBook_nav, .myRecruit_nav {
 	text-align: center;
 	margin: 20px auto;
 	width: 100%;
@@ -197,29 +186,26 @@ table, tr, th, td {
 	</nav>
 
 	<div class="container">
-		<!-- 회원 프로필 사진 -->
-		<div class="profile">
-			<c:if test='${empty usersVO.user_profileImagePath }'>
-				<img class="user" src="/resources/images/users.png" alt="user"
-					data-toggle="modal" data-target="#profileModal"
-					style="margin-top: 30px;" />
-			</c:if>
-			<c:if test='${not empty usersVO.user_profileImagePath }'>
-				<img class="user" src="${usersVO.user_profileImagePath }" alt="user"
-					data-toggle="modal" data-target="#profileModal" />
-			</c:if>
-			<h5 class="user_name">${usersVO.name }님</h5>
-			<hr>
-		</div>
-
 
 		<!-- 내정보 -->
 		<div class="my_info">
-			<h3 style="color: white;">- 내정보 -</h3>
-			<div class="myinfo_nav">
-				<strong><a href="#" data-toggle="modal"
-					data-target=".bd-example-modal-lg">회원정보수정</a></strong>
+			<h3 style="color: white; margin-top: 50px;">- 내정보 -</h3>
+			<!-- 회원 프로필 사진 -->
+			<div class="profile">
+				<c:if test='${empty usersVO.user_profileImagePath }'>
+					<img class="user" src="/resources/images/users.png" alt="user"
+						data-toggle="modal" data-target="#profileModal"
+						style="margin-top: 30px;" />
+				</c:if>
+				<c:if test='${not empty usersVO.user_profileImagePath }'>
+					<img class="user" src="${usersVO.user_profileImagePath }"
+						alt="user" data-toggle="modal" data-target="#profileModal" />
+				</c:if>
+				<h5 class="user_name">${usersVO.name }님</h5>
+				<strong style="float: right; margin-bottom: 10px; margin-right: 10px;"><a href="#"
+					data-toggle="modal" data-target=".bd-example-modal-lg">회원정보수정</a></strong>
 			</div>
+
 			<table class="table" id="my_info_table">
 				<tr>
 					<th>회원아이디</th>
@@ -251,7 +237,7 @@ table, tr, th, td {
 
 
 		<!-- 내예약 -->
-		<div class="myBook">
+		<div class="myBook" style="margin-top: 50px;">
 			<h3 style="color: white;">- 내예약 -</h3>
 			<div class="myBook_nav">
 				<strong><a href="javascript:click()"
@@ -271,7 +257,7 @@ table, tr, th, td {
 
 		<!-- 내글목록 -->
 		<div class="myRecruit">
-			<h3>- 내글목록 -</h3>
+			<h3 style="color: white;">- 내글목록 -</h3>
 			<div class="myRecruit_nav">
 				<strong><a href="javascript:click()"
 					onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
@@ -357,7 +343,8 @@ table, tr, th, td {
 						</table>
 					</div>
 					<div class="modal-footer">
-						<a href="/TMS/dropout" class="mr-3" data-toggle="modal" data-target=".bd-example-modal-sm">회원탈퇴</a>
+						<a href="/TMS/dropout" class="mr-3" data-toggle="modal"
+							data-target=".bd-example-modal-sm">회원탈퇴</a>
 						<button type="reset" class="btn btn-outline-secondary"
 							data-dismiss="modal">초기화</button>
 						<input type="hidden" name="id" value="${user.id }" />
@@ -370,7 +357,8 @@ table, tr, th, td {
 	<!-- 회원정보수정 모달창 끝 -->
 
 	<!-- 회원탈퇴 모달 -->
-	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -381,13 +369,15 @@ table, tr, th, td {
 					</button>
 				</div>
 				<div class="modal-body">
-					<p>회원 탈퇴 시 모든 데이터가 삭제되며 한 달간 재가입이 불가능합니다.<br>
-					그래도 탈퇴하시겠습니까?</p>
+					<p>
+						회원 탈퇴 시 모든 데이터가 삭제되며 한 달간 재가입이 불가능합니다.<br> 그래도 탈퇴하시겠습니까?
+					</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">창닫기</button>
-					<button type="button" class="btn btn-primary" onclick="location.href='/TMS/my/dropout'">탈퇴하기</button>
+					<button type="button" class="btn btn-primary"
+						onclick="location.href='/TMS/my/dropout'">탈퇴하기</button>
 				</div>
 			</div>
 		</div>

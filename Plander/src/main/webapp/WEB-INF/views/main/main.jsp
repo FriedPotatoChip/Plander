@@ -131,6 +131,11 @@ body {
 	width: 200px;
 }
 
+#cards, #section1 {
+	width: 80%;
+	margin: 0 auto;
+}
+
 /* The bubble is anchored above the tip. */
 .popup-bubble-anchor {
 	position: absolute;
@@ -186,6 +191,14 @@ body {
 	max-height: 60px;
 	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
+.bolder {
+	font-weight: 700;
+}
+
+.fun:hover {
+	background-color: #008374;
+	color: white;
+}
 
 .popup-bubble-content2 {
 	position: absolute;
@@ -238,8 +251,8 @@ body {
 	<div class="container-fluid">
 		<div class="row jumbotron" >
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10" >
-				<h5 class="display-5 m-2" style="text-align: center;">같이 공부할 사람들을
-					모집하거나 참여하고 싶으신가요? 그럼 여기로 들어오세요~!!</h5>
+				<h3 class="m-2" style="text-align: center;">같이 공부할 사람들을
+					모집하거나 참여하고 싶으신가요? 그럼 여기로 들어오세요~!!</h3>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
 				<a href="/TMS/recruit"><button type="button"
@@ -252,12 +265,12 @@ body {
 	<div class="container-fluid padding">
 		<div class="row welcome text-center">
 			<div class="col-12">
-				<h1 class="display-4">지점소개</h1>
+				<h1 class="display-4 bolder" style="color: #008374;">지점소개</h1>
 			</div>
 			<hr>
 			<div class="col-12">
-				<p class="lead">어떻게 맨날 쓸모있는 일만 하고 사나요? &nbsp;&nbsp;&nbsp; "느려도
-					괜찮아"</p>
+				<h3>어떻게 맨날 쓸모있는 일만 하고 사나요? &nbsp;&nbsp;&nbsp; "느려도
+					괜찮아"</h3>
 			</div>
 		</div>
 	</div>
@@ -267,35 +280,33 @@ body {
 			<div class="col-xs-12 col-sm-6 col-md-4">
 				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
 					height="auto">
-				<h3>지점 A</h3>
+				<h3 class="bolder">종로점</h3>
 				<p>
-					서울 서대문구 명물길 21, <br> <strong>지번</strong> 창천동 41-12 3층
+					서울특별시 종로구 종로 69 YMCA빌딩 7층 <br> (서울특별시 종로구 종로2가 9 YMCA빌딩 7층)
 				</p>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4">
 				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
 					height="auto">
-				<h3>지점 B</h3>
+				<h3 class="bolder">신촌점</h3>
 				<p>
-					서울 서대문구 연세로5나길 8, <br> <strong>지번</strong> 서울 서대문구 창천동 57-23
+					서울 서대문구 연세로5나길 8 <br>  (서울 서대문구 창천동 57-23)
 				</p>
 			</div>
 			<div class="col-sm-12 col-md-4">
 				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
 					height="auto">
-				<h3>지점 C</h3>
+				<h3 class="bolder">강남점</h3>
 				<p>
-					서울 서대문구 연세로5나길 14 지하 1층, <br> <strong>지번</strong> 서울 서대문구 창천동
-					62-59 지하 1층
+					서울특별시 강남구 테헤란로5길 11 YBM빌딩 2층 <br> (서울특별시 강남구 역삼동 819-4 YBM빌딩 2층)
 				</p>
 			</div>
 		</div>
-		<hr class="my-4">
 	</div>
 
 
 	<!--- Emoji Section -->
-	<button class="fun" data-toggle="collapse" data-target="#emoji">본인의
+	<button class="btn btn-lg btn-block fun py-3" data-toggle="collapse" data-target="#emoji">본인의
 		집에서 스터디룸까지 오는 방법은?</button>
 	<div id="emoji" class="collapse">
 		<div class="container-fluid padding">
@@ -328,7 +339,7 @@ body {
 	</div>
 
 	<!--- Cards -->
-	<div class="container-fluid padding">
+	<div class="container-fluid padding" id="cards">
 		<div class="row padding">
 			<c:forEach var="ran" items="${RandomRecruit }" varStatus="status">
 				<div class="col-md-4">
@@ -336,8 +347,9 @@ body {
 						<img class="card-img-top" src="/resources/images/recruit${status.count }.jpg">
 						<div class="card-body">
 							<h4 class="card-title">${ran.id }</h4>
+							<hr>
 							<p class="card-text">${ran.rc_title }</p>
-							<a href="#" class="btn btn-outline-secondary">보러가기</a>
+							<a href="#" class="btn btn-lg btn-block" style="background-color: #6762a6; color: white;">보러가기</a>
 						</div>
 					</div>
 				</div>
@@ -375,21 +387,21 @@ body {
 		</div>
 	</div>
 	<!--- Two Column Section -->
-	<div class="container-fluid padding">
+	<div class="container-fluid padding" id="section1">
 		<div class="row padding">
 			<div class="col-lg-6">
-				<h2>집, 학원, 도서관, 카페가 아닌 스터디 전용 공간_TMS</h2>
-				<p class="p">- &nbsp;TMS는 공부하기 좋은 곳을 찾는 사람이라면 누구든지 이용할 수 있는 24시간
+				<h2 class="text-center mb-4">집, 학원, 도서관, 카페가 아닌<br> 스터디 전용 공간, 거북이의 기적</h2>
+				<p class="p">- &nbsp;거북이의 기적은 공부하기 좋은 곳을 찾는 사람이라면 누구든지 이용할 수 있는 24시간
 					프리미엄 회원제 스터디카페입니다.</p>
 				<p class="p">- &nbsp;전문가의 손길을 거친 인테리어와 조용하지만 답답하지 않은 분위기는 공부하기에
 					더할 나위 없는 환경을 제공합니다.</p>
 				<p class="p">- &nbsp;커피나 차를 마시는 카페가 아닌 공부를 하는 공간에 아메리카노와 차가 더해진
-					공간입니다. 일반 스터디 카페에서 공부를 하게 되면 커피나 음료를 시켜야 그 공간을 이용할 수 있지만 TMS는 공부가
+					공간입니다. 일반 스터디 카페에서 공부를 하게 되면 커피나 음료를 시켜야 그 공간을 이용할 수 있지만 거북이의 기적은 공부가
 					메인인 공간입니다.</p>
 				<br>
 			</div>
 			<div class="col-lg-6">
-				<iframe width="90%" height="400px" style="margin: auto;"
+				<iframe style="width: 100%; height: 400px;" style="margin: auto;"
 					src="https://www.youtube.com/embed/egcd1psh81c" frameborder="0"
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>
@@ -427,25 +439,24 @@ body {
 				</div>
 				<div class="col-md-4">
 					<hr class="light">
-					<h5>Our Hours</h5>
+					<h5>운영시간</h5>
 					<hr class="light">
-					<p>Monday: 9am - 5</p>
-					<p>Saturday: 10am - 4px</p>
-					<p>Sunday: closed</p>
+					<p>오전, 오후: 08am - 06pm</p>
+					<p>저녁: 06pm - 10pm</p>
+					<p>야간: 10pm - 08am</p>
+					<p>365일 24시간 운영합니다.</p>
 				</div>
 				<div class="col-md-4">
 					<hr class="light">
-					<h5>Service Area</h5>
+					<h5>지점</h5>
 					<hr class="light">
-					<p>City, State, 00000</p>
-					<p>City, State, 00000</p>
-					<p>City, State, 00000</p>
-					<p>City, State, 00000</p>
-					<p>City, State, 00000</p>
+					<p>거북이의 기적 신촌점</p>
+					<p>거북이의 기적 종로점</p>
+					<p>거북이의 기적 강남점</p>
 				</div>
 				<div class="col-12">
 					<hr class="light-100">
-					<h5>&copy; w3newbie.com</h5>
+					<h5>&copy; turtlesmiracle</h5>
 				</div>
 			</div>
 		</div>

@@ -5,12 +5,13 @@
 	max-height: calc(100vh - 210px);
 	overflow-y: auto;
 } */
-.dropbtn {
-	cursor: pointer;
+
+a, h5 {
+	font-weight: 700;
 }
 
-#navbarResponsive ul li {
-	font-weight: 700;
+.dropbtn {
+	cursor: pointer;
 }
 
 .dropdown {
@@ -45,7 +46,7 @@
 }
 
 .dropdown-content a:hover {
-	background-color: #8a7967;
+	background-color: #008374;
 	color: white;
 	font-weight: 400 !important;
 }
@@ -54,9 +55,6 @@
 	display: block;
 }
 
-#primaryNav li a h5 {
-	font-weight: 700;
-}
 </style>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -92,7 +90,7 @@
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
 				<li class="nav-item"><a class="nav-link"
-					style="color: #ce181e;" href="/TMS/admin"><h5>관리자페이지</h5></a></li>
+					style="color: #008374;" href="/TMS/admin"><h5>관리자페이지</h5></a></li>
 				<li class="nav-item"><a class="nav-link" href="/TMS/logout"><h5>로그아웃</h5></a></li>
 			</ul>
 
