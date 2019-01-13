@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.bit.controller" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="55" width="148" x="2497" y="37"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="com.bit.controller.RecruitController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/RecruitController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="538" width="474" x="661" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.bit.controller.AdminController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/AdminController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="358" width="382" x="2685" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.bit.controller.AjaxController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/AjaxController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="322" width="257" x="3923" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.bit.controller.MainController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/MainController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="268" width="501" x="3107" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.bit.controller.BookController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/BookController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="286" width="580" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.bit.controller.MyController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/MyController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="448" width="367" x="1578" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.bit.controller.BoardController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/BoardController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="394" width="363" x="1175" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.bit.controller.AskController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/AskController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="235" x="3648" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.bit.controller.PayController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/PayController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="122" x="1985" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.bit.controller.LoginController" project="Plander" 
+    file="/Plander/src/main/java/com/bit/controller/LoginController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="520" width="310" x="2147" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

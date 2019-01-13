@@ -181,7 +181,7 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	transform: translate(-50%, -100%;);
+	transform: translate(-50%, -100%; );
 	/* Style the info window. */
 	background-color: white;
 	padding: 5px;
@@ -191,6 +191,7 @@ body {
 	max-height: 60px;
 	box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
+
 .bolder {
 	font-weight: 700;
 }
@@ -240,37 +241,38 @@ body {
 			<div class="carousel-item active">
 				<img src="/resources/images/main2.jpg">
 				<div class="carousel-caption">
-					<h1>거북이의 기적에 오신걸 환영합니다.</h1>
-					<h3>룸 예약 & 스터디 모집을 도와드립니다.</h3>
+					<h1>24시간 스터디 카페, 거북이의 기적입니다.</h1>
+					<h3>스터디 모집 & 스터디룸 또는 좌석 예약을 도와드립니다.</h3>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!--- Jumbotron -->
-	<div class="container-fluid">
-		<div class="row jumbotron" >
-			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10" >
-				<h3 class="m-2" style="text-align: center;">같이 공부할 사람들을
-					모집하거나 참여하고 싶으신가요? 그럼 여기로 들어오세요~!!</h3>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-				<a href="/TMS/recruit"><button type="button"
-						class="btn btn-lg" style="background-color: #6762a6; color: white;">모집게시판</button></a>
-			</div>
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container my-4">
+			<h3 class="m-2 d-inline" style="text-align: center;">같이 공부할 사람들을
+				모집하거나 참여하고 싶으신가요?</h3>
+			<a href="/TMS/recruit"><button type="button" class="btn btn-lg"
+					style="background-color: #6762a6; color: white;">모집게시판</button></a> <br>
+			<br> <br>
+			<h3 class="m-2 d-inline" style="text-align: center;">그룹 스터디룸이나
+				개인이 이용할 스터디 좌석을 예약하고 싶으신가요?</h3>
+			<a href="/TMS/recruit"><button type="button" class="btn btn-lg"
+					style="background-color: #008374; color: white;">예약하러가기</button></a>
 		</div>
 	</div>
+
 
 	<!--- Welcome Section -->
 	<div class="container-fluid padding">
 		<div class="row welcome text-center">
 			<div class="col-12">
-				<h1 class="display-4 bolder" style="color: #008374;">지점소개</h1>
+				<h1 class="display-4 bold">지점소개</h1>
 			</div>
 			<hr>
 			<div class="col-12">
-				<h3>어떻게 맨날 쓸모있는 일만 하고 사나요? &nbsp;&nbsp;&nbsp; "느려도
-					괜찮아"</h3>
+				<h3>어떻게 맨날 쓸모있는 일만 하고 사나요? &nbsp;&nbsp;&nbsp; "느려도 괜찮아."</h3>
 			</div>
 		</div>
 	</div>
@@ -278,52 +280,56 @@ body {
 	<div class="container-fluid padding">
 		<div class="row text-center padding">
 			<div class="col-xs-12 col-sm-6 col-md-4">
-				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
+				<img src="/resources/images/mainlogo.png" alt="" width="100px"
 					height="auto">
-				<h3 class="bolder">종로점</h3>
+				<h3 class="bolder mt-2">종로점</h3>
 				<p>
 					서울특별시 종로구 종로 69 YMCA빌딩 7층 <br> (서울특별시 종로구 종로2가 9 YMCA빌딩 7층)
 				</p>
+				<p>02-722-1481</p>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4">
-				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
+				<img src="/resources/images/mainlogo.png" alt="" width="100px"
 					height="auto">
-				<h3 class="bolder">신촌점</h3>
+				<h3 class="bolder mt-2">신촌점</h3>
 				<p>
-					서울 서대문구 연세로5나길 8 <br>  (서울 서대문구 창천동 57-23)
+					서울 서대문구 연세로5나길 8 <br> (서울 서대문구 창천동 57-23)
 				</p>
+				<p>010-4434-1507</p>
 			</div>
 			<div class="col-sm-12 col-md-4">
-				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
+				<img src="/resources/images/mainlogo.png" alt="" width="100px"
 					height="auto">
-				<h3 class="bolder">강남점</h3>
+				<h3 class="bolder mt-2">강남점</h3>
 				<p>
-					서울특별시 강남구 테헤란로5길 11 YBM빌딩 2층 <br> (서울특별시 강남구 역삼동 819-4 YBM빌딩 2층)
+					서울특별시 강남구 테헤란로5길 11 YBM빌딩 2층 <br> (서울특별시 강남구 역삼동 819-4 YBM빌딩
+					2층)
 				</p>
+				<p>02-3453-5404</p>
 			</div>
 		</div>
 	</div>
 
 
 	<!--- Emoji Section -->
-	<button class="btn btn-lg btn-block fun py-3" data-toggle="collapse" data-target="#emoji">본인의
-		집에서 스터디룸까지 오는 방법은?</button>
+	<button class="btn btn-lg btn-block fun py-3" data-toggle="collapse"
+		data-target="#emoji">본인의 집에서 스터디룸까지 오는 방법은?</button>
 	<div id="emoji" class="collapse">
 		<div class="container-fluid padding">
-			<div class="row text-center">
+			<div class="row text-center" style="width: 80%; margin: 0 auto;">
 				<div class="col-sm-6 col-md-4">
-					<img src="/resources/css/p1.png" alt="" width="60%" height="auto">
+					<img src="/resources/css/m1.png" alt="" width="80%" height="auto">
 				</div>
 				<div class="col-sm-6 col-md-4">
-					<img src="/resources/css/p2.png" alt="" width="60%" height="auto">
+					<img src="/resources/css/m2.png" alt="" width="80%" height="auto">
 				</div>
-				<div class="col-sm-6 col-md-4">
-					<img src="/resources/css/p3.png" alt="" width="60%" height="auto">
+				<div class="col-sm-6 col-md-4 mb-3">
+					<img src="/resources/css/m3.png" alt="" width="80%" height="auto">
 				</div>
-					<div id="map"></div>
-					<div id="content">신촌점</div>
-					<div id="content1">강남점</div>
-					<div id="content2">종로점</div>
+				<div id="map"></div>
+				<div id="content">신촌점</div>
+				<div id="content1">강남점</div>
+				<div id="content2">종로점</div>
 			</div>
 		</div>
 	</div>
@@ -332,7 +338,7 @@ body {
 	<div class="container-fluid padding">
 		<div class="row welcome text-center">
 			<div class="col-12">
-				<h1 class="dispaly-4">모집 글 보기</h1>
+				<h1 class="display-5 bold">모집 글 보기</h1>
 			</div>
 			<hr>
 		</div>
@@ -343,61 +349,35 @@ body {
 		<div class="row padding">
 			<c:forEach var="ran" items="${RandomRecruit }" varStatus="status">
 				<div class="col-md-4">
-					<div class="card" style="width: 480px; height: 500px;">
-						<img class="card-img-top" src="/resources/images/recruit${status.count }.jpg">
+					<div class="card" style="width: 95%; height: 100%;">
+						<img class="card-img-top"
+							src="/resources/images/recruit${status.count }.jpg">
 						<div class="card-body">
-							<h4 class="card-title">${ran.id }</h4>
+							<h4 class="card-title text-center">${ran.id }</h4>
 							<hr>
-							<p class="card-text">${ran.rc_title }</p>
-							<a href="#" class="btn btn-lg btn-block" style="background-color: #6762a6; color: white;">보러가기</a>
+							<p class="card-text text-center">${ran.rc_title }</p>
+							<a href="#" class="btn btn-lg btn-block"
+								style="background-color: #6762a6; color: white;">보러가기</a>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
-			<!-- <div class="col-md-4">
-				<div class="card" style="width: 480px; height: 500px;">
-					<img class="card-img-top" src="/resources/images/recruit1.jpg">
-					<div class="card-body">
-						<h4 class="card-title"></h4>
-						<p class="card-text"></p>
-						<a href="#" class="btn btn-outline-secondary">보러가기</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card" style="width: 480px; height: 500px;">
-					<img class="card-img-top" src="/resources/images/sr1.jpg">
-					<div class="card-body">
-						<h4 class="card-title">test</h4>
-						<p class="card-text">asdf</p>
-						<a href="#" class="btn btn-outline-secondary">보러가기</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card" style="width: 480px; height: 500px;">
-					<img class="card-img-top" src="/resources/images/recruit3.jpg">
-					<div class="card-body">
-						<h4 class="card-title">test</h4>
-						<p class="card-text">asdf</p>
-						<a href="#" class="btn btn-outline-secondary">보러가기</a>
-					</div>
-				</div>
-			</div> -->
 		</div>
 	</div>
 	<!--- Two Column Section -->
 	<div class="container-fluid padding" id="section1">
 		<div class="row padding">
 			<div class="col-lg-6">
-				<h2 class="text-center mb-4">집, 학원, 도서관, 카페가 아닌<br> 스터디 전용 공간, 거북이의 기적</h2>
-				<p class="p">- &nbsp;거북이의 기적은 공부하기 좋은 곳을 찾는 사람이라면 누구든지 이용할 수 있는 24시간
-					프리미엄 회원제 스터디카페입니다.</p>
+				<h2 class="text-center mb-4">
+					집, 학원, 도서관, 카페가 아닌<br> 스터디 전용 공간, 거북이의 기적
+				</h2>
+				<p class="p">- &nbsp;거북이의 기적은 공부하기 좋은 곳을 찾는 사람이라면 누구든지 이용할 수 있는
+					24시간 프리미엄 회원제 스터디카페입니다.</p>
 				<p class="p">- &nbsp;전문가의 손길을 거친 인테리어와 조용하지만 답답하지 않은 분위기는 공부하기에
 					더할 나위 없는 환경을 제공합니다.</p>
 				<p class="p">- &nbsp;커피나 차를 마시는 카페가 아닌 공부를 하는 공간에 아메리카노와 차가 더해진
-					공간입니다. 일반 스터디 카페에서 공부를 하게 되면 커피나 음료를 시켜야 그 공간을 이용할 수 있지만 거북이의 기적은 공부가
-					메인인 공간입니다.</p>
+					공간입니다. 일반 스터디 카페에서 공부를 하게 되면 커피나 음료를 시켜야 그 공간을 이용할 수 있지만 거북이의 기적은
+					공부가 메인인 공간입니다.</p>
 				<br>
 			</div>
 			<div class="col-lg-6">
@@ -414,7 +394,7 @@ body {
 	<div class="container-fluid padding">
 		<div class=" row text-center padding">
 			<div class="col-12">
-				<h2>Connect</h2>
+				<h2>SNS</h2>
 			</div>
 			<div class="col-12 social padding">
 				<a href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i
@@ -514,7 +494,7 @@ body {
 		var popup, Popup;
 		function initMap() {
 			definePopupClass();
-			
+
 			var map = new google.maps.Map(document.getElementById('map'), {
 				zoom : 12,
 				center : {
@@ -522,18 +502,15 @@ body {
 					lng : 126.95
 				}
 			});
-			 popup = new Popup(
-				      new google.maps.LatLng(37.5582, 126.9376),
-				      document.getElementById('content'));
+			popup = new Popup(new google.maps.LatLng(37.5582, 126.9376),
+					document.getElementById('content'));
 			popup.setMap(map);
-			 popup = new Popup(
-				      new google.maps.LatLng(37.499591, 127.029247),
-				      document.getElementById('content1'));
+			popup = new Popup(new google.maps.LatLng(37.499591, 127.029247),
+					document.getElementById('content1'));
 			popup.setMap(map);
-			 
-			 popup = new Popup(
-				      new google.maps.LatLng(37.570851, 126.985228),
-				      document.getElementById('content2'));
+
+			popup = new Popup(new google.maps.LatLng(37.570851, 126.985228),
+					document.getElementById('content2'));
 			popup.setMap(map);
 			setMarkers(map);
 		}
