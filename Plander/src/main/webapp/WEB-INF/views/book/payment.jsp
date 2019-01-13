@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,75 +8,105 @@
 <title>결제하기</title>
 <!-- 부트스트랩 ================================================================================ -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<link
+	href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR"
+	rel="stylesheet">
 
 <style>
-	body, html { width: 90%; margin: auto; }
-	* { font-family: 'Noto Sans KR', sans-serif; text-decoration: none; }
-	.center { text-align: center; }
-	
-	/* 여기 밑으로 예약 헤더 CSS */
-	#chk a { text-decoration: none; }
-	#chk {
-		width: 100%;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	
-	ul>li {
-		float: left;
-		list-style-type: none;
-		padding: 0 5% 0 5.5%;
-		text-align: center;
-		margin-bottom: 20px;
-	}
-	ul>li>a { font-size: 1.1em; }
-	
-	#chk::after {
-		content: "";
-		clear: both;
-		display: table;
-	}
-	/* 선택 안할 시 */
-	.select { color: gray; }
-	.back {
-		background-color: gray;
-		color: white;
-		padding: 0 8px 0 8px;
-		border-radius: 25px;
-		font-size: 15px;
-	}
-	
-	/* 현재 페이지 */
-	.click { color: black; }
-	.noback {
-		background-color: rebeccapurple;
-		color: white;
-		padding: 0 8px 0 8px;
-		border-radius: 25px;
-		font-size: 15px;
-	}
-	/* 예약 헤더 CSS 끝 */
-	/* 버튼 */
-	button {
-		display: inline-block;
-		padding: 6px 12px;
-		border-radius: 4px;
-		font-size: 14px;
-		text-align: center;
-		background-color: white;
-		border: 1px solid rebeccapurple;
-		cursor: pointer;
-	}
-	
-	button:hover {
-		border: 1px solid rebeccapurple;
-		background-color: rebeccapurple;
-		color: white;
-	}
-	/* 버튼 끝 */
+body {
+	width: 90%;
+	margin: 0 auto;
+	font-family: 'NanumSquare', sans-serif;
+	font-weight: 400;
+	color: black;
+	font-size: 2em;
+}
+
+h5 {
+	font-weight: 700;
+	font-size: 1em;
+}
+
+.center {
+	text-align: center;
+}
+
+/* 여기 밑으로 예약 헤더 CSS */
+#chk a {
+	text-decoration: none;
+}
+
+#chk {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ul>li {
+	float: left;
+	list-style-type: none;
+	padding: 0 5% 0 5.5%;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+ul>li>a {
+	font-size: 1.1em;
+}
+
+#chk::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+/* 선택 안할 시 */
+.select {
+	color: gray;
+}
+
+.back {
+	background-color: gray;
+	color: white;
+	padding: 0 8px 0 8px;
+	border-radius: 25px;
+	font-size: 15px;
+}
+
+/* 현재 페이지 */
+.click {
+	color: black;
+}
+
+.noback {
+	background-color: #6762a6;
+	color: white;
+	padding: 0 8px 0 8px;
+	border-radius: 25px;
+	font-size: 15px;
+}
+/* 예약 헤더 CSS 끝 */
+/* 버튼 */
+button {
+	display: inline-block;
+	padding: 6px 12px;
+	border-radius: 4px;
+	font-size: 14px;
+	text-align: center;
+	background-color: white;
+	border: 1px solid #6762a6;
+	cursor: pointer;
+}
+
+button:hover {
+	border: 1px solid #6762a6;
+	background-color: #6762a6;
+	color: white;
+}
+/* 버튼 끝 */
 </style>
 
 <!-- 네이버 페이 -->
@@ -382,7 +412,7 @@
 				console.log('최종 가격 확인 sum : ' + sum);
 				var chkLen = "${chkLen}";
 				document.form1.chkLen.value = chkLen;
-				
+
 				if (chkLen == 2) {
 					sum *= 2;
 					$('#bookprice').html('<span>' + sum + '원</span>');
@@ -403,7 +433,7 @@
 		//여기 확인 
 		var oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
 			"clientId" : "u86j4ripEt8LRfPGzQ8"
-			//"chainId" : "{그룹형일 경우 chainId를 넣어주세요}"
+		//"chainId" : "{그룹형일 경우 chainId를 넣어주세요}"
 		});
 
 		//직접 만드신 네이버페이 결제버튼에 click Event를 할당하세요
@@ -474,7 +504,7 @@
 </script>
 <script>
 	function payment() {
-		form1.action="/TMS/book/payok";
+		form1.action = "/TMS/book/payok";
 		form1.submit();
 	}
 </script>
@@ -482,30 +512,24 @@
 </head>
 <body>
 	<div id="container">
-		<br><br><br>
+		<br>
+		<br>
+		<br>
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li>
-					<a class="menu" href="/TMS/book/booking">
-						<b><span id="num" class="back">STEP1</span>
-						<span id="select" class="select">날짜선택</span></b>
-					</a>
-				</li>
+				<li><a class="menu" href="/TMS/book/booking"> <b><span
+							id="num" class="back">STEP1</span> <span id="select"
+							class="select">날짜선택</span></b>
+				</a></li>
 				<li>&gt;</li>
-				<li>
-					<a class="menu">
-						<b><span id="num" class="back">STEP2</span>
-						<span id="select" class="select">좌석선택</span></b>
-					</a>
-				</li>
+				<li><a class="menu"> <b><span id="num" class="back">STEP2</span>
+							<span id="select" class="select">좌석선택</span></b>
+				</a></li>
 				<li>&gt;</li>
-				<li>
-					<a class="menu">
-						<b><span id="num" class="noback">STEP3</span>
-						<span id="select" class="click">결제하기</span></b>
-					</a>
-				</li>
+				<li><a class="menu"> <b><span id="num" class="noback">STEP3</span>
+							<span id="select" class="click">결제하기</span></b>
+				</a></li>
 			</ul>
 		</div>
 		<!-- 예약 헤더끝 -->
@@ -515,8 +539,8 @@
 
 				<div style="padding: 10px;">
 					<h5>예매자 확인</h5>
-					<span>☑ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br>
-					<span>☑ 취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
+					<span>☑ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br> <span>☑
+						취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
 					<span>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</span>
 				</div>
 				<!-- 예매자 확인 끝 -->
@@ -539,15 +563,15 @@
 								<td id="booknum"></td>
 								<td>${uservo.name }</td>
 								<td>${uservo.phone }</td>
-								<td>${bvo.start_time }~ ${bvo.end_time }</td>
-							<c:choose>
-								<c:when test="${bvo.sct_idx == 1 }">
-									<td>${bvo.sct_name }- ${test }</td>
-								</c:when>
-								<c:otherwise>
-									<td>${bvo.sct_name }- ${bvo.s_col }</td>
-								</c:otherwise>
-							</c:choose>
+								<td>${bvo.start_time }~${bvo.end_time }</td>
+								<c:choose>
+									<c:when test="${bvo.sct_idx == 1 }">
+										<td>${bvo.sct_name }-${test }</td>
+									</c:when>
+									<c:otherwise>
+										<td>${bvo.sct_name }-${bvo.s_col }</td>
+									</c:otherwise>
+								</c:choose>
 								<td id="cb_idx"></td>
 								<td id="bookprice"></td>
 							</tr>
@@ -562,14 +586,13 @@
 					<h5>사용 가능한 쿠폰</h5>
 					<select id="coupon">
 						<option value="0">------</option>
-					</select>
-					<span id="finPrice"></span>
-					
+					</select> <span id="finPrice"></span>
+					<br><br><br>
 					<h5>결제방식 선택</h5>
 					<div>
 						<button type="button" id="naverpay">네이버 페이로 결제하기</button>
 					</div>
-					
+
 					<!-- <label class="radio-inline">
 						<input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label> -->
 					<!-- <label class="radio-inline">
@@ -577,139 +600,164 @@
 					<!-- <label class="radio-inline">
 						<input type="radio" name="pay" id="payTest" value="3">결제</label><br> -->
 					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
+						<button type="button" onclick="history.back(); return false;">이전단계</button>
+						&nbsp;
 						<button type="submit">결제하기</button>
 					</div>
-					
-					<input type="hidden" name="booknum" value="">
-					<input type="hidden" name="price" value="">
-					<input type="hidden" name="br_idx" value="${bvo.br_idx }">
-					<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
-					<input type="hidden" name="sct_name" value="${bvo.sct_name }">
-					<input type="hidden" name="s_col" value="${bvo.s_col }">
-					<input type="hidden" name="s_col_2" value="${bvo.s_col_2 }">
-					<input type="hidden" name="cb_idx" value="">
-					<input type="hidden" name="cb_idx_2" value="">
-					<input type="hidden" name="cabinet" value="${bvo.cabinet }">
-					<input type="hidden" name="start_time" value="${bvo.start_time }">
+
+					<input type="hidden" name="booknum" value=""> <input
+						type="hidden" name="price" value=""> <input type="hidden"
+						name="br_idx" value="${bvo.br_idx }"> <input type="hidden"
+						name="sct_idx" value="${bvo.sct_idx }"> <input
+						type="hidden" name="sct_name" value="${bvo.sct_name }"> <input
+						type="hidden" name="s_col" value="${bvo.s_col }"> <input
+						type="hidden" name="s_col_2" value="${bvo.s_col_2 }"> <input
+						type="hidden" name="cb_idx" value=""> <input type="hidden"
+						name="cb_idx_2" value=""> <input type="hidden"
+						name="cabinet" value="${bvo.cabinet }"> <input
+						type="hidden" name="start_time" value="${bvo.start_time }">
 					<input type="hidden" name="end_time" value="${bvo.end_time }">
-					<input type="hidden" name="s_idx" value="${svo.s_idx }">
-					<input type="hidden" name="s_idx_2" value="${svo.s_idx_2 }">
-					<input type="hidden" name="test" value="${test }">
-					<input type="hidden" name="chkLen" value="">
-					<input type="hidden" name="cab" value="">
+					<input type="hidden" name="s_idx" value="${svo.s_idx }"> <input
+						type="hidden" name="s_idx_2" value="${svo.s_idx_2 }"> <input
+						type="hidden" name="test" value="${test }"> <input
+						type="hidden" name="chkLen" value=""> <input type="hidden"
+						name="cab" value="">
 				</div>
 				<!-- 결제방식 선택 끝  -->
 			</form>
 
 		</div>
 		<!-- 박스 아웃사이드 끝 -->
-		<br>
-		<br>
-		<br>
-		<!--  -->
-		지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb }
+		<br> <br> <br>
+<%-- 		지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb } --%>
 
 	</div>
 	<!-- 바디 콘테이너 끝 -->
 
-<script>
-	$(document).ready(function(){
-		window.finalPrice = 0;
-		$.ajax({
-			url: "/couponList",
-			type: "get",
-			data: {"id":"${usersVO.id}"},
-			dataType: "json",
-			success: function(result){
-				
-				var html = "";
-				if (result == ""){
-					html += "<option value='0' type='0' price='0'>없음</option>";
-				}else {
-					$.each(result, function(index, value){
-						if ((value.cb_roomtype == 'LAB' && sct_idx != 1) || (value.cb_roomtype == 'PRIVATE' && sct_idx == 1) || (value.cb_roomtype == 'ALL')){
-							html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"+ value.cb_name+ " "+ value.cb_discount;
-							if (value.cb_distype == 'PERCENT'){
-								html += "%";
-							}else if (value.cb_distype == 'PRICE'){
-								html += "원";
-							}
-							html += "("+value.cp_quantity+" 개)";
-							html += "</option>";
-						}
-					});
-				}
-				$("#coupon").append(html);
-				
-			}, error: function(error){
-				
+	<script>
+		$(document)
+				.ready(
+						function() {
+							window.finalPrice = 0;
+							$
+									.ajax({
+										url : "/couponList",
+										type : "get",
+										data : {
+											"id" : "${usersVO.id}"
+										},
+										dataType : "json",
+										success : function(result) {
+
+											var html = "";
+											if (result == "") {
+												html += "<option value='0' type='0' price='0'>없음</option>";
+											} else {
+												$
+														.each(
+																result,
+																function(index,
+																		value) {
+																	if ((value.cb_roomtype == 'LAB' && sct_idx != 1)
+																			|| (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)
+																			|| (value.cb_roomtype == 'ALL')) {
+																		html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"
+																				+ value.cb_name
+																				+ " "
+																				+ value.cb_discount;
+																		if (value.cb_distype == 'PERCENT') {
+																			html += "%";
+																		} else if (value.cb_distype == 'PRICE') {
+																			html += "원";
+																		}
+																		html += "("
+																				+ value.cp_quantity
+																				+ " 개)";
+																		html += "</option>";
+																	}
+																});
+											}
+											$("#coupon").append(html);
+
+										},
+										error : function(error) {
+
+										}
+									});
+						});
+
+		$("#coupon").on(
+				"change",
+				function() {
+					finalPrice = sum;
+					var option = $('option:selected', this);
+					window.cp_idx = option.attr("value");
+					var type = option.attr("type");
+					var price = option.attr("price");
+					console.log("cp_idx: " + cp_idx);
+					var couponPrice = "";
+					// 퍼센트 쿠폰
+					if (type == 'PERCENT') {
+						finalPrice = (finalPrice * (100 - price)) / 100;
+						couponPrice += "쿠폰 적용 가격: " + sum + " * "
+								+ ((100 - price) / 100)
+								+ " = <span style='color: red;'>" + finalPrice
+								+ "</span> 원";
+					}
+
+					// 금액 쿠폰
+					if (type == 'PRICE') {
+						finalPrice -= price;
+						couponPrice += "쿠폰 적용 가격: " + sum + " - " + price
+								+ " = <span style='color: red;'>" + finalPrice
+								+ "</span> 원";
+					}
+					finalPrice = Math.floor(finalPrice);
+					$("#finPrice").html(couponPrice);
+				})
+
+		function nextSubmit(frm) {
+
+			var pay = $("input[name='pay']:checked").val();
+			if (pay == undefined) {
+				alert("결제 수단을 선택해주세요");
+				$("input[name='pay']").focus();
+				return false;
 			}
-		});
-	});
-	
-	$("#coupon").on("change", function(){
-		finalPrice = sum;
-		var option = $('option:selected', this);
-		window.cp_idx = option.attr("value");
-		var type = option.attr("type");
-		var price = option.attr("price");
-		console.log("cp_idx: "+ cp_idx);
-		var couponPrice = "";
-		// 퍼센트 쿠폰
-		if (type == 'PERCENT'){
-			finalPrice = (finalPrice * (100 - price)) / 100;
-			couponPrice += "쿠폰 적용 가격: "+ sum+ " * "+ ((100 - price) / 100) + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
-		}
-		
-		// 금액 쿠폰
-		if (type == 'PRICE'){
-			finalPrice -= price;
-			couponPrice += "쿠폰 적용 가격: "+ sum+ " - "+ price + " = <span style='color: red;'>"+ finalPrice+ "</span> 원";
-		}
-		finalPrice = Math.floor(finalPrice);
-		$("#finPrice").html(couponPrice);
-	})
-	
-	function nextSubmit(frm){
-		
-		var pay = $("input[name='pay']:checked").val();
-		if (pay == undefined){
-			alert("결제 수단을 선택해주세요");
-			$("input[name='pay']").focus();
-			return false;
-		}
-		
-		if (finalPrice == 0){
-			finalPrice = sum;
-		}
-		$("#hiddenPrice").val(finalPrice);
-		var couponVal = $("#coupon").val();
-		if (couponVal != 0){
-			$.ajax({
-				url: '/minusCoupon',
-				type: 'get',
-				data: {'cp_idx':cp_idx},
-				dataType: 'text',
-				success: function(result){
-					if (result == 'success'){
-						console.log("성공");
-						frm.submit();
-					} else if(result == 'fail') {
+
+			if (finalPrice == 0) {
+				finalPrice = sum;
+			}
+			$("#hiddenPrice").val(finalPrice);
+			var couponVal = $("#coupon").val();
+			if (couponVal != 0) {
+				$.ajax({
+					url : '/minusCoupon',
+					type : 'get',
+					data : {
+						'cp_idx' : cp_idx
+					},
+					dataType : 'text',
+					success : function(result) {
+						if (result == 'success') {
+							console.log("성공");
+							frm.submit();
+						} else if (result == 'fail') {
+							alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+							return false;
+						}
+					},
+					error : function(error) {
 						alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
 						return false;
 					}
-				}, error: function(error){
-					alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
-					return false;
-				}
-			})
-		} else {
-			frm.submit();
+				})
+			} else {
+				frm.submit();
+			}
 		}
-	}
-</script>
-<!-- 
+	</script>
+	<!-- 
 <script>
 $(function(){
 	

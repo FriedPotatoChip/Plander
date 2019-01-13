@@ -381,7 +381,7 @@ body {
 				<br>
 			</div>
 			<div class="col-lg-6">
-				<iframe style="width: 100%; height: 400px;" style="margin: auto;"
+				<iframe style="width: 100%; height: 400px; margin: auto;"
 					src="https://www.youtube.com/embed/egcd1psh81c" frameborder="0"
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>
