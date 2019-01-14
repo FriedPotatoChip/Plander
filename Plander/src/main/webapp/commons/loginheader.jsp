@@ -201,6 +201,11 @@ a {
 							var title = "";
 							$("#almNum").html("&nbsp;" + almNum);
 							$("#almDivHide").css("background-color", "none");
+							if (almNum == 0){
+								$("#almSpan").html("");
+								$("#almDivHide").css("background-color",
+										"white");
+							}
 							if (almNum != 0) {
 								$("#almSpan").html("&nbsp;" + almNum);
 								$("#almDivHide").css("background-color",
@@ -224,7 +229,7 @@ a {
 											});
 							$("#msgDiv").html(html);
 
-							setTimeout(newMsgAlarm, 5000);
+							setTimeout(newMsgAlarm, 3000);
 						},
 						error : function(error) {
 

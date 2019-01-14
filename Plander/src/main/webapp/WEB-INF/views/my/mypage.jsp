@@ -29,8 +29,6 @@ function pwchk() {
 	}
 }
 
-
-
 // 클릭 시 스크롤이 자동으로 위로 올라가는 현상
 function click() {
     return;
@@ -38,9 +36,6 @@ function click() {
 </script>
 
 <style>
-#primaryNav li h5 {
-	font-weight: 700;
-}
 
 .nav_btn {
 	margin-right: 10px;
