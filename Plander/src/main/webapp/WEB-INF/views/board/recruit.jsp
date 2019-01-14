@@ -12,8 +12,8 @@
 	}
 	table { text-align: center; }
 	.center { text-align: center; }
-	#write { float: right; }
-	#selectBox::after, #writeBtn::after, #paging::after, #write::after {
+	.write { float: right; }
+	#selectBox::after, #paging::after, .write::after {
 		content: "";
 		clear: both;
 		display: table;
@@ -54,8 +54,8 @@
 		background-color: #685D79;
 		color: white;
 	}
+	/* 페이징 처리 끝 */
 	
-	/* 페이칭처리 끝 */
 	/* select/option */
 	.opt {
 		display: inline-block;
@@ -140,10 +140,8 @@
 	</p>
 	
 <div class="bodyform" style="width: 75%; margin: auto;">
-	<!-- 게시판 테이블 -->
 	<br><br>
-	
-	<div>
+	<div> <!-- 게시판 테이블 -->
 		<!-- 옵션선택 -->
 		<span style="font-size: 17px; color: #4d4d4d; float: left;">&#x2691; ${page.getTotal() } 개의 글</span>
 		<div id="selectBox" style="float: right;">
@@ -166,7 +164,7 @@
 					<th width="5%">No.</th>
 					<th width="55%">제목</th>
 					<th width="12%">작성자</th>
-					<th width="10%">작성일</th>
+					<th width="13%">작성일</th>
 					<th width="8%">모집여부</th>
 					<th width="7%">조회수</th>
 				</tr>
@@ -196,9 +194,7 @@
 				</c:forEach>
 				<c:if test="${empty boardList }">
 					<tr>
-						<td colspan="6" style="font-size: 2.0em; font-style: bold;">
-						조회된 게시물이 없습니다.
-						</td>
+						<td colspan="6" style="font-weight: 700;">조회된 게시물이 없습니다. 새로운 글을 작성해보세요!</td>
 					</tr>
 				</c:if>
 			</tbody>
@@ -222,7 +218,7 @@
 
 		<!-- 검색창 -->
 		<div class="center">
-			<form action="/TMS/searchRecruitList" class="">
+			<form action="/TMS/searchRecruitList">
 				<!-- 검색창 -->
 				<select class="opt" name="target">
 					<option value="t">제목</option>
@@ -276,7 +272,6 @@
 		</nav>
 		</div> <!-- 페이징 끝 -->
 	</div> <!-- 게시판 테이블 div 끝  -->
-	
 	<br><br><br>
 </div> <!-- bodyform 끝 -->
 
