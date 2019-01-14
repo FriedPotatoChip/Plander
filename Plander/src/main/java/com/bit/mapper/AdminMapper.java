@@ -54,4 +54,13 @@ public interface AdminMapper {
 	
 	// 받은쪽지
 	public List<RecvMsgVO> recvMsg(Map map);
+	
+	//결제내역
+	public List<BookingVO> receiptList(PagingVO page);
+	
+	//결제페이지 검색
+	public List<BookingVO> getListSearch(Map<String, Object> map);
+	
+	//결제페이지 검색 후 결과
+	public int getTotalSearch(Map<String, Object> map);
 }
