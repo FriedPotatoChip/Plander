@@ -101,9 +101,12 @@ h3 {
 	$(document).ready(function() {
 		$('.po_category').click(function() {
 			
-			//색변환
 			$('.po_category').removeClass('on');
-			$(this).addClass('on');
+			$("div[value='${br_idx}']").addClass('on')
+			
+			//색변환
+/* 			$('.po_category').removeClass('on');
+			$(this).addClass('on'); */
 			
 			var code = $(this).attr('value');
 			console.log('code : ' + code);

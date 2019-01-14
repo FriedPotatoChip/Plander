@@ -156,24 +156,16 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/update")
-	public String changeSeats(@RequestParam int br_idx, @RequestParam String start_time, @RequestParam String end_time, @RequestParam String id, @RequestParam int s_idx, @RequestParam(value="roomnum", defaultValue="1") int roomnum, BookingVO bvo) throws ParseException {
+	public String changeSeats(@RequestParam int bk_idx, @RequestParam int s_idx, @RequestParam(value="roomnum", defaultValue="1") int roomnum, BookingVO bvo) throws ParseException {
 		System.out.println("roomnum1 : " + roomnum);
 
-		System.out.println("br_idx : " + br_idx);
-		System.out.println("Start_time : " + start_time);
-		System.out.println("End_time : " + end_time);
-		System.out.println("s_idx : " + s_idx);
-		System.out.println("id : " + id);
-
 		Map<String, Object> map = new HashMap<>();
-		map.put("br_idx", br_idx);
-		map.put("start_time", start_time);
-		map.put("end_time", end_time);
+		map.put("bk_idx", bk_idx);
 		map.put("s_idx", s_idx);
-		map.put("id",id);
+
 		service.changeSeats(map);
 		
-		return "redirect: /TMS/admin/Seats";
+		return "redirect: /TMS/admin/Seats?roomnum="+ roomnum;
 	}
 	
 	@RequestMapping("/Seats")
@@ -185,6 +177,7 @@ public class AdminController {
 		bvo.setRoomnum(roomnum);
 		System.out.println("bvo : " + bvo);
 		model.addAttribute("BookingSeats", service.BookingSeats(bvo));
+		model.addAttribute("br_idx", br_idx);
 		return "adminPage/Seats";
 	}
 	

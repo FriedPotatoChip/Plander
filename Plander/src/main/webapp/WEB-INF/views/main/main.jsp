@@ -265,7 +265,7 @@ body {
 	<div class="container-fluid padding">
 		<div class="row text-center padding">
 			<div class="col-xs-12 col-sm-6 col-md-4">
-				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
+				<img src="/resources/images/logo1.jpg" alt="" width="100px"
 					height="auto">
 				<h3>지점 A</h3>
 				<p>
@@ -273,7 +273,7 @@ body {
 				</p>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4">
-				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
+				<img src="/resources/images/logo1.jpg" alt="" width="100px"
 					height="auto">
 				<h3>지점 B</h3>
 				<p>
@@ -281,7 +281,7 @@ body {
 				</p>
 			</div>
 			<div class="col-sm-12 col-md-4">
-				<img src="/resources/images/TMS1.jpg" alt="" width="100px"
+				<img src="/resources/images/logo1.jpg" alt="" width="100px"
 					height="auto">
 				<h3>지점 C</h3>
 				<p>

@@ -140,7 +140,6 @@ style>body, html {
 	color: white;
 	text-decoration: none;
 }
-
 </style>
 </head>
 
@@ -151,7 +150,8 @@ style>body, html {
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS/logout">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link"
+				href="/TMS/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -662,143 +662,189 @@ style>body, html {
 		feather.replace()
 	</script>
 	<script>
-		function check(i) {
+		$(document).ready(function() {
+			
+			$('.po_category').removeClass('on');
+			$("div[value='${br_idx}']").addClass('on')
+/* 				//색변환
+				$('.po_category').removeClass('on');
+				$(this).addClass('on'); */
+			
+			$('.po_category').click(function() {
+
+				
+				var code = $(this).attr('value');
+				console.log('code : ' + code);
+				
+				location.href = '/TMS/admin/Seats?br_idx='+ code;
+			});
+		});
+	</script>
+	
+	<script>
+		function check(a) {
 			console.log('안농');
-			
-			/* 클릭 시 해당 좌석 번호 출력 */
-			console.log('scol: ' + i);
-			
-			/* DB에서 긁어온 지점 A의 예약된 모든 좌석과 체크된 좌석이 같을 때 해당 좌석의 예약내역을 보여주는 것! */
-			
+			var i = a;
+			var html = "";
+			console.log(i);
+	
 			var html = "";
 			var count = 0;
 			var temp = "";
+	
 			<c:forEach var="s" items="${BookingSeats }">
-				/* DB에서 긁어온 지점 A의 예약된 모든 좌석 */
-				var s_col = "${s.s_col}";
-				console.log(s_col);
-				var id = "${s.id}";
-				var start_time = "${s.start_time}";
-				var end_time = "${s.end_time}";
-				temp = id;
-				count++;
-				temp += count;
-				
-				if(i == s_col) {
-					console.log("data" + i + ": " + id + ", " + start_time + ", " + end_time);
-					
-					html += '<tr><td class="id">'+ id + '</td> <td class="start_time" id = '+(temp+"_s")+'>'+ start_time + '</td> <td class="end_time" id = '+(temp+"_e")+'>' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger" id ="'+temp+'" onclick="change(\''+temp+'\')"><input type="hidden" name="nid" value="${s.id}">좌석이동</button></td></tr>';
-				}
+			/* DB에서 긁어온 지점 A의 예약된 모든 좌석 */
+			var s_col = "${s.s_col}";
+			console.log(s_col);
+			var id = "${s.id}";
+			var start_time = "${s.start_time}";
+			var end_time = "${s.end_time}";
+			
+			var bk_idx = "${s.bk_idx}";
+			temp = id;
+			count++;
+			temp += count;
+	
+			if (i == s_col) {
+				console.log("data" + i + ": " + id + ", " + start_time + ", "
+						+ end_time);
+	
+				html += '<tr><td class="id">'
+						+ id
+						+ '</td> <td class="start_time" id = '
+						+ (temp + "_s")
+						+ '>'
+						+ start_time
+						+ '</td> <td class="end_time" id = '
+						+ (temp + "_e")
+						+ '>'
+						+ end_time
+						+ '</td> <td><button type="button" class="btn btn-outline-danger" id ="'
+						+ temp
+						+ '" onclick="change(\''
+						+ bk_idx
+						+ '\')"><input type="hidden" name="nid" value="${s.id}">좌석이동</button></td></tr>';
+			}
 			</c:forEach>
 			$('#exampleModalLong').modal();
-		    $('#exampleModalLongTitle').text(i + '번 좌석 예약현황');
+			$('#exampleModalLongTitle').text(i + '번 좌석 예약현황');
 			$('#tr').html(html);
-			
 		}
 		
 		function change(a) {
-			console.log("target : "+a);
+			console.log("target : " + a);
 			var target = a;
-			var chid = $("input[name=nid]").val();
-			var start_time = target+'_s';
-			var end_time = target+'_e';
 			
-			console.log('nid : ' + chid);
-			console.log("start_time : "+start_time);
-			
+			window.bk_idx = target;
+			/* var chid = $("input[name=nid]").val();
+			var start_time = target + '_s';
+			var end_time = target + '_e'; */
+
+			/* console.log('nid : ' + chid);
+			console.log("start_time : " + start_time);
+
 			var start_time_value = document.getElementById(start_time).innerHTML;
-			
+
 			var end_time_value = document.getElementById(end_time).innerHTML;
+			
 			window.tar = chid;
 			window.stv = start_time_value;
 			window.etv = end_time_value;
-			
-			console.log("start_time : "+ start_time_value+", end_time_value : "+ end_time_value );
-			
-			
+
+			console.log("start_time : " + start_time_value
+					+ ", end_time_value : " + end_time_value); */
+
 			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
 			$('.bd-example-modal-lg').modal();
-			
+
 			/* modal 안에서 radio를 클릭 */
-			$("input[type=radio]").click(function () {
-					
-					/* 선택한 좌석 radio 체크표시 */
-		    		$(this).prop("checked", true);
-					
-					/* 체크된 좌석의 번호 */
-			    	var changeScol = $("input[type=radio]:checked").val();
-			    	console.log('asdb : ' + changeScol);
-			    	
-			    	/* 체크가 되었을 때 예약된 좌석이 있는지 없는지 파악 */
-			    	<c:forEach var="s" items="${BookingSeats}">
-			    	
-			    		/* 예약된 모든 좌석 */
-			    		var s_col = "${s.s_col}";
-			    		var id = "${s.id}";
+			$("input[type=radio]").click(
+					function() {
+
+						/* 선택한 좌석 radio 체크표시 */
+						$(this).prop("checked", true);
+
+						/* 체크된 좌석의 번호 */
+						var changeScol = $("input[type=radio]:checked").val();
+						console.log('asdb : ' + changeScol);
+
+						/* 체크가 되었을 때 예약된 좌석이 있는지 없는지 파악 */
+						<c:forEach var="s" items="${BookingSeats}">
+
+						/* 예약된 모든 좌석 */
+						var s_col = "${s.s_col}";
+						var id = "${s.id}";
 						var start_time = "${s.start_time}";
 						var end_time = "${s.end_time}";
-						
- 			    		console.log('s_col-before : ' + s_col);
- 			    		console.log('asdb-after : ' + changeScol);
- 			    		
- 			    		if(changeScol == s_col) {
- 			    			/* 예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함 */
- 			    			if(end_time_value < start_time || end_time < start_time_value) {
- 			    				alert("이동이 가능합니다.");
-	 			    			return false;
- 			    			} else {
- 			    				alert('이동 불가');
- 			    			}
- 			    		} else {
- 			    			
- 			    			alert('이동가능');
- 			    			return false;
- 			    		}
-			    		
-			    	</c:forEach>
-		    		/* 좌석 비교 */
-			    }
-				
+
+						console.log('s_col-before : ' + s_col);
+						console.log('asdb-after : ' + changeScol);
+
+						if (changeScol == s_col) {
+							/* 예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함 */
+							if (end_time_value < start_time
+									|| end_time < start_time_value) {
+								alert("이동이 가능합니다.");
+								return false;
+							} else {
+								alert('이동 불가');
+							}
+						} else {
+
+							alert('이동가능');
+							return false;
+						}
+
+						</c:forEach>
+						/* 좌석 비교 */
+					}
+
 			);
 		}
 		
 		/* 이동버튼 후 정보 업데이트 */
 		function move(i) {
-			console.log("tar: "+ tar);
-			console.log("stv: "+ stv);
-			console.log("etv: "+ etv);
+			/* console.log("tar: " + tar);
+			console.log("stv: " + stv);
+			console.log("etv: " + etv);
+			 */
+			 
+			
 			/* 이동할것인지 묻기 */
 			var r = confirm("이동하시겠습니까?");
-			
+
 			/* 지점번호 */
 			var br_idx = $('.po_category.on').attr('value');
-			console.log(br_idx);
+			console.log('br_idx : ' + br_idx);
+
+			var CBk_idx = bk_idx;
+			console.log('bk_idx : ' + bk_idx);
 			
 			/* 이동을 원하는 사람의 아이디 */
-			var chId = tar;
-			console.log('chId : ' + tar);
-			
+			/* var chId = tar;
+			console.log('chId : ' + tar); */
+
 			/* 이동을 원하는 사람의 START_TIME, END_TIME */
-			var chStartTime = stv;
-			console.log(chStartTime);
-			
-			var chEndTime = etv;
-			console.log(chEndTime);
-			
+			/* var chStartTime = stv;
+			console.log('start_time : ' + chStartTime); */
+
+			/* var chEndTime = etv;
+			console.log('end_time : ' + chEndTime);
+ */
 			/* 옮기기를 원하는 좌석의 번호 */
 			var changeScol = i;
-			console.log(changeScol);
-			
+			console.log('changeSeats : ' + changeScol);
+
 			try {
-				if(r == true) {
-					location.href = "/TMS/admin/update?id="+ chId + "&br_idx=" + br_idx + "&s_idx=" + changeScol +"&start_time=" + chStartTime + "&end_time=" + chEndTime;
+				if (r == true) {
+					location.href = "/TMS/admin/update?s_idx=" + changeScol + "&bk_idx= " + CBk_idx;
 				}
 				alert("성공적으로 이동되었습니다.");
 			} catch (e) {
 				alert("좌석이동이 실패했습니다.");
-				location.href="/TMS/admin/Seats";
-			} 
-			
+				location.href = "/TMS/admin/Seats";
+			}
+
 		}
 	</script>
 

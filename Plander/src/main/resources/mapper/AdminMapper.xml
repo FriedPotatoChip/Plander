@@ -84,7 +84,7 @@
 	
 	<!-- 좌석별 현황  -->
 	<select id="BookingSeats" resultType="com.bit.domain.BookingVO">
-		select distinct b.id, b.start_time, b.end_time, s.s_col
+		select distinct b.id, b.start_time, b.end_time, s.s_col, b.bk_idx
 	    from seats_view s, booking b
 	    where s.s_idx = b.s_idx
 	    and br_idx = #{br_idx}
@@ -101,7 +101,7 @@
 	
 	<!-- 좌석이동 -->
 	<update id="changeSeats" parameterType="Map">
-		update (
+		<!-- update (
 		     select b.s_idx as s_idx
 		     from booking b, seats s
 		     where b.s_idx = s.s_idx
@@ -110,7 +110,10 @@
 		     and b.start_time = to_date(#{start_time}, 'YYYY-MM-DD HH24:MI:SS')
 		     and b.end_time = to_date(#{end_time}, 'YYYY-MM-DD HH24:MI:SS')
 		)
-		set s_idx = #{s_idx}
+		set s_idx = #{s_idx} -->
+		update booking
+   		 set s_idx = #{s_idx}
+   		 where bk_idx = #{bk_idx}
 	</update>
 </mapper>
 
