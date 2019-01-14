@@ -5,7 +5,6 @@
 	max-height: calc(100vh - 210px);
 	overflow-y: auto;
 } */
-
 a, h5 {
 	font-weight: 700;
 }
@@ -54,7 +53,6 @@ a, h5 {
 .dropdown:hover .dropdown-content {
 	display: block;
 }
-
 </style>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -72,10 +70,8 @@ a, h5 {
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"
-					onclick="loginChk()">예약하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"
-					onclick="loginChk()">모집게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS/recruit">모집게시판</a></li>
 				<li class="nav-item">
 					<div class="dropdown">
 						<a class="nav-link dropbtn" href="#">게시판</a>

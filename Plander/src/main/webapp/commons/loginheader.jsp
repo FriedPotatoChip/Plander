@@ -100,13 +100,13 @@ a, h5 {
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><c:if test="${not empty usersVO }">
 							<div class="dropdown">
-								<a class="nav-link dropbtn" href="#"> <c:if
+								<a class="nav-link dropbtn" href="/TMS/my"> <c:if
 										test='${empty usersVO.user_profileImagePath }'>
 										<img class="user" src="/resources/images/users.png" alt="user" />
 									</c:if> <c:if test='${not empty usersVO.user_profileImagePath }'>
 										<img class="user" src="${usersVO.user_profileImagePath }"
 											alt="user" />
-									</c:if> <span>&nbsp;&nbsp;&nbsp;${usersVO.name }&nbsp;님 </span>
+									</c:if><span>&nbsp;&nbsp;&nbsp;${usersVO.name }&nbsp;님 </span>
 								</a>
 								<div class="dropdown-content" style="right: 0;">
 									<div class="my_cur" style="text-align: center;">
