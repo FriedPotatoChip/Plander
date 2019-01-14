@@ -63,4 +63,5 @@ public interface AdminMapper {
 	
 	//결제페이지 검색 후 결과
 	public int getTotalSearch(Map<String, Object> map);
+	
 }

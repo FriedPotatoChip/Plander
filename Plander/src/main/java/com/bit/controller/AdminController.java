@@ -1,8 +1,6 @@
 package com.bit.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +19,7 @@ import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.BookService;
+import com.bit.service.MyService;
 import com.bit.service.adminService;
 import com.bit.utils.PagingVO;
 
@@ -34,7 +32,8 @@ public class AdminController {
 
 	@Autowired
 	private adminService service;
-
+	
+	
 	@RequestMapping("")
 	public String adminPage(UsersVO vo, Model model, PagingVO page, HttpSession session) {
 		session.setAttribute("user", vo);
@@ -82,7 +81,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("Message")
-	public String Message() {
+	public String Message(HttpSession session) {
 
 		return "adminPage/Message";
 	}
@@ -90,6 +89,7 @@ public class AdminController {
 	@RequestMapping("recvMsg")
 	public String recvMsg(PagingVO page, HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
+		System.out.println("vo admin : " + vo);
 		
 		// 페이징 처리
 		int total = service.recvMsgCnt(vo);

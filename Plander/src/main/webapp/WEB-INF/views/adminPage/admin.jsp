@@ -41,6 +41,11 @@
 	float: left;
 }
 
+h3 {
+	margin-top: 2rem;
+	text-align: center;
+}
+
 a {
 	text-decoration: none;
 }
@@ -117,7 +122,7 @@ input[type=submit]:hover {
 			</nav>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<h2 class="m-auto">[회원관리]</h2>
+			<h3>회원관리</h3>
 
 			<div class="table-responsive" style="margin-top: 3rem;">
 

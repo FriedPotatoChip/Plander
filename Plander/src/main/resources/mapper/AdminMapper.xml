@@ -173,6 +173,46 @@
 			</when>
 		</choose>
 	</select>
+	
+	<!-- 받은쪽지 갯수 -->
+	<select id="recvMsgCnt" resultType="int">
+		select count(*)
+		from recv_msg
+		where recv_id = 'admin'
+	</select>
+
+	<!-- 받은쪽지 -->
+	<select id="recvMsg" resultType="com.bit.domain.RecvMsgVO"
+		parameterType="Map">
+		select * 
+		from (
+			select rownum rn, m.*
+			from recv_msg m where recv_id = 'admin'
+			order by rm_idx desc
+			)
+		where rn
+		between #{start} and #{end}
+	</select>
+	
+	<!-- 보낸쪽지 갯수 -->
+	<select id="sendMsgCnt" resultType="int">
+		select count(*)
+		from send_msg
+		where send_id = 'admin'
+	</select>
+
+	<!-- 보낸쪽지 -->
+	<select id="sendMsg" resultType="com.bit.domain.SendMsgVO"
+		parameterType="Map">
+		select * from (
+		select rownum rn, m.*
+		from send_msg m where send_id =
+		'admin'
+		order by sm_idx desc 
+		)
+		where rn between
+		#{start} and #{end}
+	</select>
 </mapper>
 
 
