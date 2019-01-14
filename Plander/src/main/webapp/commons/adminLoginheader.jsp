@@ -45,8 +45,8 @@ a {
 }
 
 .dropdown-content a:hover {
-	background-color: #475C7A;
-	color: white;
+	background-color: #FCBB6D;
+	color: black;
 	font-weight: 700;
 }
 
@@ -86,7 +86,7 @@ a {
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
 				<li class="nav-item"><a class="nav-link"
-					style="color: #D8737F;" href="/TMS/admin">관리자페이지</a></li>
+					style="color: #FCBB6D;" href="/TMS/admin">관리자페이지</a></li>
 				<li class="nav-item"><a class="nav-link" href="/TMS/logout">로그아웃</a></li>
 			</ul>
 

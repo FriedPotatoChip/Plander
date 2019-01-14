@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <jsp:include page="/commons/head.jsp"></jsp:include> --%>
 <style>
 a {
 	font-weight: 700;
 	font-size: 16px;
 	color: #666;
 }
-
 
 .user {
 	width: 30px;
@@ -60,7 +58,12 @@ a {
 }
 
 .sendId {
-	color: #198CFF;
+	color: #475C7A;
+}
+
+.sendId:hover {
+	color: #475C7A;
+	text-decoration: underline;
 }
 
 .pointer:hover {
@@ -100,7 +103,7 @@ a {
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><c:if test="${not empty usersVO }">
 							<div class="dropdown">
-								<a class="nav-link dropbtn" href="/TMS/my"> <c:if
+								<a class="nav-link dropbtn" href="#"> <c:if
 										test='${empty usersVO.user_profileImagePath }'>
 										<img class="user" src="/resources/images/users.png" alt="user" />
 									</c:if> <c:if test='${not empty usersVO.user_profileImagePath }'>
@@ -110,42 +113,40 @@ a {
 								</a>
 								<div class="dropdown-content" style="right: 0;">
 									<div class="my_cur" style="text-align: center;">
-										<h6 style="margin-top: 20px;" class="bold">예약내역</h6>
-										<hr>
-										<h6>
-											좌석<b style="color: red;"><c:if
+										<a href="/TMS/my" style="border-bottom: 1px solid lightgray;">마이페이지</a>
+										<a href="/TMS/logout"
+											style="border-bottom: 1px solid lightgray;">로그아웃</a>
+										<h6 style="margin-top: 20px; color: #475C7A;" class="bold">[예약내역]</h6>
+										<p>
+											좌석<b style="color: #D8737F;"><c:if
 													test='${not empty seatcnt }'>&nbsp;${seatcnt }</c:if></b>
-										</h6>
+										</p>
 										<c:choose>
 											<c:when test='${not empty seat }'>
 												<c:forEach var="seat" items="${seat }">
-													<h6>${seat.br_name }&nbsp;${seat.sct_name }&nbsp;${seat.s_col }
-													</h6>
+													<p style="text-decoration: underline;">${seat.br_name }&nbsp;${seat.sct_name }&nbsp;${seat.s_col }
+													</p>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
-												<h6>예약된 좌석 없음</h6>
+												<p>예약된 좌석 없음</p>
 											</c:otherwise>
 										</c:choose>
-										<hr>
-										<h6>
-											사물함<b style="color: red;"><c:if
+										<p>
+											사물함<b style="color: #D8737F;"><c:if
 													test='${not empty cabinetcnt }'>&nbsp;${cabinetcnt}</c:if></b>
-										</h6>
+										</p>
 										<c:choose>
 											<c:when test='${not empty cabinet }'>
 												<c:forEach var="cabinet" items="${cabinet }">
-													<h6>${cabinet.br_name }&nbsp;${cabinet.cb_number }</h6>
+													<p style="text-decoration: underline;">${cabinet.br_name }&nbsp;${cabinet.cb_number }</p>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
-												<h6>예약된 사물함 없음</h6>
+												<p>예약된 사물함 없음</p>
 											</c:otherwise>
 										</c:choose>
-										<hr>
 									</div>
-									<a href="/TMS/my" style="text-align: center;">마이페이지</a><a
-										href="/TMS/logout" style="text-align: center;">로그아웃</a>
 								</div>
 							</div>
 							<div class="btn-group">
@@ -161,13 +162,12 @@ a {
 								<div class="dropdown-menu dropdown-menu-right">
 									<div class="my_cur"
 										style="text-align: center; width: 200px; padding-left: 15px; padding-right: 15px;">
-										<h6 style="margin-top: 10px;" class="bold">
-											<b>읽지 않은 쪽지</b>
-										</h6>
+										<p class="bold" style="margin-top: 10px; color: #475C7A;">읽지
+											않은 쪽지</p>
 										<hr>
-										<h6>
-											쪽지<b style="color: red;" id="almNum"></b>
-										</h6>
+										<p class="bold">
+											쪽지<b style="color: #D8737F;" id="almNum"></b>
+										</p>
 										<div style="display: inline-block; text-align: center;"
 											id="msgDiv"></div>
 										<hr>
@@ -203,7 +203,7 @@ a {
 							if (almNum != 0) {
 								$("#almSpan").html("&nbsp;" + almNum);
 								$("#almDivHide").css("background-color",
-										"#E566FF");
+										"#D8737F");
 							}
 							var html = "";
 							$
