@@ -208,13 +208,13 @@ px
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin"> <span data-feather="users"></span>
-								Customers <span class="sr-only">(current)</span>
+						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
+								<span data-feather="users"></span> Customers <span
+								class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet?br_idx=1"> <span data-feather="file"></span>
+							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
@@ -228,8 +228,14 @@ px
 								Seats
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file"></span> Receipt
+						<li class="nav-item"><a class="nav-link active"
+							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+								Receipt
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Message"> <span data-feather="file"></span>
+								Message
 						</a></li>
 					</ul>
 				</div>
@@ -240,168 +246,106 @@ px
 				<div class="container-table100">
 					<div class="wrap-table100">
 						<div class="table100">
-							<div class="s003">
-								<form>
-									<div class="inner-form">
-										<div class="input-field first-wrap">
-											<div class="input-select">
-												<select data-trigger="" name="choices-single-defaul">
-													<option placeholder="">Category</option>
-													<option>New Arrivals</option>
-													<option>Sale</option>
-													<option>Ladies</option>
-													<option>Men</option>
-													<option>Clothing</option>
-													<option>Footwear</option>
-													<option>Accessories</option>
-												</select>
-											</div>
-										</div>
-										<div class="input-field second-wrap">
-											<input id="search" type="text" placeholder="Enter Keywords?" />
-										</div>
-										<div class="input-field third-wrap">
-											<button class="btn-search" type="button">
-												<svg class="svg-inline--fa fa-search fa-w-16"
-													aria-hidden="true" data-prefix="fas" data-icon="search"
-													role="img" xmlns="http://www.w3.org/2000/svg"
-													viewBox="0 0 512 512">
-               									 <path fill="currentColor"
-														d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
-             									 </svg>
-											</button>
-										</div>
-									</div>
+
+							<!-- 검색창 -->
+							<div style="width: 60%; margin: 0 auto; float: left;">
+								<form action="/TMS/admin/ListSearch"
+									class="form-inline my-2 my-lg-0">
+									<select class="custom-select my-1 mr-sm-2" name="target">
+										<option value="id">ID</option>
+										<option value="p_idx">결제번호</option>
+										<option value="payment">결제수단</option>
+									</select> <input class="form-control mr-sm-2" type="search"
+										name="keyword" aria-label="Search" placeholder="search...">
+									<button class="btn btn-outline-success my-2 my-sm-0"
+										id="submit" type="submit">검색</button>
+									<input type="hidden" name="cntPerPage"
+										value="${page.cntPerPage }">
 								</form>
 							</div>
 
+							<!-- 본문시작  -->
 							<table>
 								<thead>
 									<tr class="table100-head">
-										<th class="column1">Date</th>
-										<th class="column2">Order ID</th>
-										<th class="column3">Name</th>
-										<th class="column4">Price</th>
-										<th class="column5">Quantity</th>
-										<th class="column6">Total</th>
+										<th class="column1">결제번호</th>
+										<th class="column2">아이디</th>
+										<th class="column3">내역</th>
+										<th class="column4">거래일시</th>
+										<th class="column5">가격</th>
+										<th class="column6">결제수단</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="column1">2017-09-29 01:22</td>
-										<td class="column2">200398</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-28 05:57</td>
-										<td class="column2">200397</td>
-										<td class="column3">Samsung S8 Black</td>
-										<td class="column4">$756.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$756.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-26 05:57</td>
-										<td class="column2">200396</td>
-										<td class="column3">Game Console Controller</td>
-										<td class="column4">$22.00</td>
-										<td class="column5">2</td>
-										<td class="column6">$44.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-25 23:06</td>
-										<td class="column2">200392</td>
-										<td class="column3">USB 3.0 Cable</td>
-										<td class="column4">$10.00</td>
-										<td class="column5">3</td>
-										<td class="column6">$30.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-24 05:57</td>
-										<td class="column2">200391</td>
-										<td class="column3">Smartwatch 4.0 LTE Wifi</td>
-										<td class="column4">$199.00</td>
-										<td class="column5">6</td>
-										<td class="column6">$1494.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-23 05:57</td>
-										<td class="column2">200390</td>
-										<td class="column3">Camera C430W 4k</td>
-										<td class="column4">$699.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$699.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-22 05:57</td>
-										<td class="column2">200389</td>
-										<td class="column3">Macbook Pro Retina 2017</td>
-										<td class="column4">$2199.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$2199.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-21 05:57</td>
-										<td class="column2">200388</td>
-										<td class="column3">Game Console Controller</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-19 05:57</td>
-										<td class="column2">200387</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-18 05:57</td>
-										<td class="column2">200386</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-22 05:57</td>
-										<td class="column2">200389</td>
-										<td class="column3">Macbook Pro Retina 2017</td>
-										<td class="column4">$2199.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$2199.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-21 05:57</td>
-										<td class="column2">200388</td>
-										<td class="column3">Game Console Controller</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-19 05:57</td>
-										<td class="column2">200387</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
-									</tr>
-									<tr>
-										<td class="column1">2017-09-18 05:57</td>
-										<td class="column2">200386</td>
-										<td class="column3">iPhone X 64Gb Grey</td>
-										<td class="column4">$999.00</td>
-										<td class="column5">1</td>
-										<td class="column6">$999.00</td>
-									</tr>
-
+									<c:forEach var="rl" items="${receipt }">
+										<tr>
+											<td class="column1">${rl.p_idx }</td>
+											<td class="column2">${rl.id }</td>
+											<td class="column3">지점 ${rl.br_idx }, 좌석 : ${rl.s_col }</td>
+											<td class="column4">${rl.bk_regdate }</td>
+											<td class="column5">${rl.price }원</td>
+											<td class="column6">${rl.payment }</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
+							<!-- 본문 끝 -->
+
+							<!-- 페이징 시작 -->
+							<div id="paging" aria-label="Page navigation example">
+								<ul id="pagingList" class="pagination">
+									<c:choose>
+										<c:when test="${page.chkStartPage }">
+											<li class="page-item"><a class="page-link"
+												href="/TMS/admin/Receipt?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+													<span class="sr-only">Previous</span>
+											</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="/TMS/admin/Receipt?nowPage=1&cntPerPage=${page.cntPerPage}"
+												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+													<span class="sr-only">Previous</span>
+											</a></li>
+										</c:otherwise>
+									</c:choose>
+
+									<c:forEach var="p" begin="${page.startPage }"
+										end="${page.endPage }">
+										<c:if test="${p == page.nowPage }">
+											<li class="page-item"><a class="now marginLi page-link"
+												href="/TMS/admin/Receipt?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+											</li class="page-item">
+										</c:if>
+										<c:if test="${p != page.nowPage }">
+											<li class="page-item"><a class="marginLi page-link"
+												href="/TMS/admin/Receipt?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+											</li class="page-item">
+										</c:if>
+
+									</c:forEach>
+
+									<c:choose>
+										<c:when test="${page.chkEndPage }">
+											<li class="page-item"><a class="page-link"
+												href="/TMS/admin/Receipt?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+													<span class="sr-only">Next</span>
+											</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="/TMS/admin/Receipt?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
+												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+													<span class="sr-only">Next</span>
+											</a></li>
+										</c:otherwise>
+
+									</c:choose>
+								</ul>
+							</div>
+							<!-- 페이징 끝 -->
 						</div>
 					</div>
 				</div>

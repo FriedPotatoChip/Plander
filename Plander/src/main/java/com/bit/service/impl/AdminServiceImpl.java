@@ -105,5 +105,20 @@ public class AdminServiceImpl implements adminService {
 		return mapper.recvMsg(map);
 	}
 
+	@Override
+	public List<BookingVO> receiptList(PagingVO page) {
+		return mapper.receiptList(page);
+	}
+
+	@Override
+	public List<BookingVO> getListSearch(Map<String, Object> map) {
+		return mapper.getListSearch(map);
+	}
+
+	@Override
+	public int getTotalSearch(Map<String, Object> map) {
+		return mapper.getTotalSearch(map);
+	}
+
 
 }

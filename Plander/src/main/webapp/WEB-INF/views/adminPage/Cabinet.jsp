@@ -101,9 +101,12 @@ h3 {
 	$(document).ready(function() {
 		$('.po_category').click(function() {
 			
-			//색변환
 			$('.po_category').removeClass('on');
-			$(this).addClass('on');
+			$("div[value='${br_idx}']").addClass('on')
+			
+			//색변환
+/* 			$('.po_category').removeClass('on');
+			$(this).addClass('on'); */
 			
 			var code = $(this).attr('value');
 			console.log('code : ' + code);
@@ -140,25 +143,34 @@ h3 {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin"> <span
-								data-feather="users"></span> Customers <span class="sr-only">(current)</span>
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin"> <span data-feather="users"></span>
+								Customers <span class="sr-only">(current)</span>
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link active" 
+						<li class="nav-item"><a class="nav-link active"
 							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Chart"> <span
-								data-feather="home"></span> Reservation
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+								Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats"> <span
-								data-feather="bar-chart-2"></span> Seats
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+								Seats
 						</a></li>
-						
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file"></span> Receipt
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+								Receipt
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Message"> <span data-feather="file"></span>
+								Message
 						</a></li>
 					</ul>
 				</div>

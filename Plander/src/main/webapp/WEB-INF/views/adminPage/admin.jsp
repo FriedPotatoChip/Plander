@@ -45,54 +45,6 @@ a {
 	text-decoration: none;
 }
 
-#search {
-	width: 50%;
-}
-
-.container-1 {
-	white-space: nowrap;
-	position: relative;
-}
-
-.container-1 input#search {
-	width: 20rem;
-	height: 3rem;
-	background: #fff;
-	border: 1px solid #e9ecef;
-	font-size: 10pt;
-	float: left;
-	color: #63717f;
-	padding-left: 45px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
-
-.container-1 input#search::-webkit-input-placeholder {
-	color: #65737e;
-}
-
-.container-1 input#search:-moz-placeholder { /* Firefox 18- */
-	color: #65737e;
-}
-
-.container-1 input#search::-moz-placeholder { /* Firefox 19+ */
-	color: #65737e;
-}
-
-.container-1 input#search:-ms-input-placeholder {
-	color: #65737e;
-}
-
-.container-1 .icon {
-	position: absolute;
-	top: 50%;
-	margin-left: 17px;
-	margin-top: 17px;
-	z-index: 1;
-	color: #4f5b66;
-}
-
 input[type=submit] {
 	background-color: #4CAF50;
 	color: white;
@@ -120,7 +72,8 @@ input[type=submit]:hover {
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS/logout">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link"
+				href="/TMS/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -154,7 +107,7 @@ input[type=submit]:hover {
 							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
 						</a></li>
-						
+
 						<li class="nav-item"><a class="nav-link"
 							href="/TMS/admin/Message"> <span data-feather="file"></span>
 								Message
@@ -168,35 +121,18 @@ input[type=submit]:hover {
 
 			<div class="table-responsive" style="margin-top: 3rem;">
 
-				<form action="/TMS/admin/searchList">
-					<div class="row m-0" style="width: 50%;">
-						<div class="col-3 p-0">
-							<select class="form-control d-block" name="target" id="select" style="height: 44px; margin-right: 2px">
-								<option value="id">ID</option>
-								<option value="name">NAME</option>
-							</select>
-						</div>
-						<!-- <input class="form-control m-1 d-inline-flex" type="text"
-						placeholder="Search" aria-label="Search" id="search" name="keyword">  -->
-						<div class="col-9 p-0">
-							<div class="row">
-								<div class="col-9">
-									<div class="container-1">
-										<span class="icon"><i class="fa fa-search"></i></span> <input
-											type="search" class="d-inline" style="width: 100%;" id="search" placeholder="search..."
-											name="keyword">
-										<!-- <button class="btn btn-outline-danger">검색</button> -->
-									</div>
-								</div>
-								<div class="col-3 p-0">
-									<input type="submit" value="검색" id="submit" style="float: left; height: 44px;"
-										> <input type="hidden"
-										name="cntPerPage" value="${page.cntPerPage }">
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
+				<div style="width: 60%; margin: 0 auto; float:left;">
+					<form action="/TMS/admin/searchList" class="form-inline my-2 my-lg-0">
+						<!-- 검색창 -->
+						<select class="custom-select my-1 mr-sm-2" name="target">
+							<option value="id">ID</option>
+							<option value="name">이름</option>
+						</select> <input class="form-control mr-sm-2" type="search" name="keyword"
+							aria-label="Search" placeholder="search...">
+						<button class="btn btn-outline-success my-2 my-sm-0" id="submit" type="submit">검색</button>
+						<input type="hidden" name="cntPerPage" value="${page.cntPerPage }">
+					</form>
+				</div>
 
 				<select id="cntPerPage" onchange="selChange()" class="m-1">
 					<option value="5"

@@ -40,6 +40,7 @@
 <style>
 body {
 	font-family: 'NanumSquare', sans-serif;
+	color: #666;
 }
 
 .container {

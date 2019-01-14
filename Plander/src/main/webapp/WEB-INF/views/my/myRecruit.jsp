@@ -42,7 +42,6 @@ a {
 </style>
 </head>
 
-
 <body>
 	<thead>
 		<tr>

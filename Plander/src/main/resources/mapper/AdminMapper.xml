@@ -17,7 +17,8 @@
 		parameterType="map">
 		select *
 		from (
-		select rownum rn, u_idx, id, name, phone, email, rank, regdate, zipno,
+		select rownum rn, u_idx, id, name, phone, email, rank,
+		regdate, zipno,
 		roadAddrPart1, addrDetail
 		from users
 		where
@@ -46,7 +47,7 @@
 			</when>
 		</choose>
 	</select>
-	
+
 	<!-- 전체 회원 수 -->
 	<select id="getTotal" resultType="int">
 		SELECT count(*) FROM USERS
@@ -75,43 +76,103 @@
 		and br_idx=
 		#{br_idx}
 	</select>
-	
+
 	<!-- 회원삭제 -->
 	<delete id="userDelete" parameterType="int">
 		delete from users
-			where u_idx = #{u_idx}
+		where u_idx = #{u_idx}
 	</delete>
-	
-	<!-- 좌석별 현황  -->
+
+	<!-- 좌석별 현황 -->
 	<select id="BookingSeats" resultType="com.bit.domain.BookingVO">
-		select distinct b.id, b.start_time, b.end_time, s.s_col
-	    from seats_view s, booking b
-	    where s.s_idx = b.s_idx
-	    and br_idx = #{br_idx}
-	    and roomnum = #{roomnum}
-	    <!-- and s_col = #{s_col} -->
-	    and (
-	        (to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
-	        or 
-	        (to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(add_months(sysdate, 1), 'YYYYMM'))
-	        or 
-	        (to_char(start_time, 'YYYYMM') = to_char(add_months(sysdate, -1), 'YYYYMM') and to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
-	        )
+		select distinct b.id, b.start_time, b.end_time, s.s_col, b.bk_idx
+		from seats_view s, booking b
+		where s.s_idx = b.s_idx
+		and br_idx = #{br_idx}
+		and roomnum = #{roomnum}
+		<!-- and s_col = #{s_col} -->
+		and (
+		(to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time,
+		'YYYYMM') = to_char(sysdate, 'YYYYMM'))
+		or
+		(to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time,
+		'YYYYMM') = to_char(add_months(sysdate, 1), 'YYYYMM'))
+		or
+		(to_char(start_time, 'YYYYMM') = to_char(add_months(sysdate, -1), 'YYYYMM') and
+		to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
+		)
 	</select>
-	
+
 	<!-- 좌석이동 -->
 	<update id="changeSeats" parameterType="Map">
-		update (
-		     select b.s_idx as s_idx
-		     from booking b, seats s
-		     where b.s_idx = s.s_idx
-		     and b.id = #{id}
-		     and s.br_idx = #{br_idx}
-		     and b.start_time = to_date(#{start_time}, 'YYYY-MM-DD HH24:MI:SS')
-		     and b.end_time = to_date(#{end_time}, 'YYYY-MM-DD HH24:MI:SS')
-		)
+		<!-- update ( select b.s_idx as s_idx from booking b, seats s where b.s_idx 
+			= s.s_idx and b.id = #{id} and s.br_idx = #{br_idx} and b.start_time = to_date(#{start_time}, 
+			'YYYY-MM-DD HH24:MI:SS') and b.end_time = to_date(#{end_time}, 'YYYY-MM-DD 
+			HH24:MI:SS') ) set s_idx = #{s_idx} -->
+		update booking
 		set s_idx = #{s_idx}
+		where bk_idx = #{bk_idx}
 	</update>
+
+	<!-- 결제내역 -->
+	<select id="receiptList" resultType="com.bit.domain.BookingVO"
+		parameterType="com.bit.utils.PagingVO">
+		<![CDATA[
+		select *
+		    from (select rownum rn, p.p_idx, b.id, bk_regdate, price, p.payment, s.s_col, s.br_idx
+		        from booking b, payment p, seats s
+		        where p.bk_idx = b.bk_idx
+		        and s.s_idx = b.s_idx)
+		    where rn between #{start} and #{end}
+    	]]>
+	</select>
+	
+	<!-- 결제내역 검색 후 리스트출력 -->
+	<select id="getListSearch" resultType="com.bit.domain.BookingVO"
+		parameterType="map">
+		select *
+		from (
+			select rownum rn, p.p_idx, b.id, bk_regdate, price, p.payment, s.s_col, s.br_idx
+			from booking b, payment p, seats s
+			where p.bk_idx = b.bk_idx
+	        and s.s_idx = b.s_idx
+	        and
+			<choose>
+				<when test="target == 'id'.toString()">
+					id like '%' || #{keyword} || '%'
+				</when>
+	
+				<when test="target == 'p_idx'.toString()">
+					p_idx like '%' || #{keyword} || '%'
+				</when>
+				
+				<when test="target == 'payment'.toString()">
+					payment like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+			)
+		where rn between #{start} and #{end}
+	</select>
+	
+	<select id="getTotalSearch" resultType="int" parameterType="map">
+		select count(*) from booking b, payment p, seats s 
+		where p.bk_idx = b.bk_idx
+	    and s.s_idx = b.s_idx
+	    and
+		<choose>
+			<when test="target == 'id'.toString()">
+				id like '%' || #{keyword} || '%'
+			</when>
+
+			<when test="target == 'p_idx'.toString()">
+				p_idx like '%' || #{keyword} || '%'
+			</when>
+			
+			<when test="target == 'payment'.toString()">
+				payment like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+	</select>
 </mapper>
 
 

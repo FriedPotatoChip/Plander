@@ -7,8 +7,10 @@
 	max-height: calc(100vh - 210px);
 	overflow-y: auto;
 } */
-a, h5 {
+a {
 	font-weight: 700;
+	font-size: 16px;
+	color: #666;
 }
 
 .dropbtn {
@@ -39,17 +41,15 @@ a, h5 {
 }
 
 .dropdown-content a {
-	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
-	font-weight: 400;
 }
 
 .dropdown-content a:hover {
-	background-color: #008374;
+	background-color: #475C7A;
 	color: white;
-	font-weight: 400 !important;
+	font-weight: 700;
 }
 
 .dropdown:hover .dropdown-content {
@@ -102,9 +102,9 @@ a, h5 {
 
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					href="#login"><h5>로그인</h5></a></li>
+					href="#login">로그인</a></li>
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					href="#join"><h5>회원가입</h5></a></li>
+					href="#join">회원가입</a></li>
 			</ul>
 		</div>
 	</div>
@@ -240,7 +240,6 @@ a, h5 {
 		var checkEnglish = password.search(/[a-z]/ig);
 		var checkSpe = password.search(/[!@#$%^&*]/gi);
 
-
 		if (!frm.id.value) {
 			alert("아이디를 입력해주세요.");
 			frm.id.focus();
@@ -312,7 +311,7 @@ a, h5 {
 			frm.email.focus();
 			return false;
 		}
-		
+
 		if (!frm.zipNo.value) {
 			alert("주소를 입력해 주세요.");
 			return false;
@@ -355,13 +354,13 @@ a, h5 {
 </script>
 
 <!-- 로그인 모달창 시작 -->
-<div class="modal fade" id="login" tabindex="-1" role="dialog"
+<div class="modal fade bd-example-modal-sm" id="login" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 
 			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">로그인</h4>
+				<h5 class="modal-title" id="myModalLabel">로그인</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -371,15 +370,15 @@ a, h5 {
 			<div class="modal-body center">
 				<form name="frm" action="#" method="post">
 					<input type="text" name="id"
-						class="form-control form-control-lg my-2" placeholder="아이디"
+						class="form-control my-2" placeholder="아이디"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" id="idInput"
 						required> <input type="password" name="password"
-						class="form-control form-control-lg my-2"
+						class="form-control my-2"
 						style="margin-top: 1.5%; font-family: 맑은 고딕;" placeholder="비밀번호"
 						onKeyPress="if (event.keyCode==13){enterLogin()}" required>
 					<input type="button"
-						style="background-color: #008374; color: white;"
-						class="btn btn-block form-control btn-lg" value="로그인"
+						style="background-color: #475C7A; color: white;"
+						class="btn btn-block form-control" value="로그인"
 						onclick="chk()">
 				</form>
 				<hr>
@@ -410,10 +409,10 @@ a, h5 {
 				</form>
 				<hr>
 
-				<div class="center" style="float: right;">
+				<div class="text-center">
 					<a href="/TMS/findIdPw">아이디 찾기</a>&nbsp; <a href="/TMS/findIdPw">비밀번호
-						찾기</a>&nbsp; <a data-toggle="modal" data-dismiss="modal"
-						href="#join" data-target="#join">회원가입</a>
+						찾기</a>&nbsp; <a data-toggle="modal" data-dismiss="modal" href="#join"
+						data-target="#join">회원가입</a>
 				</div>
 			</div>
 
@@ -423,13 +422,13 @@ a, h5 {
 <!-- 로그인 모달창 끝 -->
 
 <!-- 회원가입 모달창 -->
-<div class="modal fade bd-example-modal-lg" id="join" tabindex="-1"
+<div class="modal fade" id="join" tabindex="-1"
 	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 
 			<div class="modal-header">
-				<h3 class="modal-title" id="myModalLabel">회원가입</h3>
+				<h5 class="modal-title normal" id="myModalLabel">회원가입</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -443,51 +442,51 @@ a, h5 {
 							<tr>
 								<th width="30%">아이디&nbsp;<b style="color: red;">&#42;</b></th>
 								<td width="70%"><input type="text" name="id" id="id"
-									oninput="idchk()" class="col-sm-8 form-control" required>
-									<p id="idMsg" style="font-size: 15px; margin-top: 5px;"></p></td>
+									oninput="idchk()" class="form-control" required>
+									<p id="idMsg" style="font-size: 13px; margin-top: 5px;"></p></td>
 							</tr>
 							<tr>
 								<th>비밀번호&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="password" name="password" id="password"
 									style="font-family: 맑은 고딕;" oninput="pwchk()"
-									class="col-sm-8 form-control" required>
-									<p id="pwMsg" style="font-size: 15px; margin-top: 5px;">(영문
-										대소문자/숫자/특수문자(!,@,#,$,%,^,&,*) 조합, 8자~16자)</p></td>
+									class="form-control" required>
+									<p id="pwMsg" style="font-size: 13px; margin-top: 5px;">(영문
+										대소문자/숫자/특수문자(!,@,#,$,%,^,&,*) 조합,<br> 8자~16자)</p></td>
 							</tr>
 							<tr>
 								<th>비밀번호 확인&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="password" name="passwordchk"
 									style="font-family: 맑은 고딕;" id="passwordchk" oninput="pwchk()"
-									class="col-sm-8 form-control" required>
+									class="form-control" required>
 									<p id="pwchkMsg" style="font-size: 15px; margin-top: 5px;"></p>
 									<!-- 비밀번호가 일치하지 않습니다. --></td>
 							</tr>
 							<tr>
 								<th>이름&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="text" name="name"
-									class="col-sm-8 form-control" required></td>
+									class="form-control" required></td>
 							</tr>
 
 							<tr>
 								<th>휴대전화&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="tel" name="phone"
-									class="col-sm-8 form-control" required></td>
+									class="form-control" required></td>
 							</tr>
 							<tr>
 								<th>이메일&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="email" name="email"
-									class="col-sm-8 form-control" required></td>
+									class="form-control" required></td>
 							</tr>
 							<tr>
 								<th>주소&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
-									<button type="button" class="btn btn-lg"
-										style="background-color: #008374; color: white;"
+									<button type="button" class="btn"
+										style="background-color: #475C7A; color: white;"
 										onclick="goPopup()">주소검색</button> <input type="text"
-									id="roadAddrPart1" class="col-sm-12 form-control my-2"
+									id="roadAddrPart1" class="form-control my-2"
 									name="roadAddrPart1" readonly> <input type="text"
-									id="addrDetail" class="col-sm-12 form-control my-2"
+									id="addrDetail" class="form-control my-2"
 									name="addrDetail" placeholder="상세주소"></td>
 							</tr>
 						</tbody>
@@ -508,8 +507,8 @@ a, h5 {
 				<div class="modal-footer" style="clear: right;">
 					<div class="center">
 						<button type="button" onclick="join()" id=""
-							style="background-color: #6762a6; color: white;"
-							class="btn btn-lg form-control">회원가입</button>
+							style="background-color: #475C7A; color: white;"
+							class="btn form-control">회원가입</button>
 					</div>
 				</div>
 			</form>

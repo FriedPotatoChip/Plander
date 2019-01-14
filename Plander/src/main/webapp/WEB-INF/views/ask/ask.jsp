@@ -55,38 +55,27 @@ body {
 				<img src="/resources/images/call.png" class="card-img-top ask"
 					alt="call">
 				<div class="card-body">
-					<h5 class="card-title text-center">전화문의</h5>
-					<hr>
-					<p class="card-text center">
-						심야(10pm - 08am)를 제외하고 항상
-					</p>
 					<button type="button" class="btn btn-lg btn-block"
 						data-toggle="modal" data-target="#exampleModalCenter"
-						style="background-color: #6762a6; color: white;">문의하기</button>
+						style="background-color: #6762a6; color: white;">전화 문의</button>
 				</div>
 			</div>
 			<div class="card">
 				<img src="/resources/images/email.png" class="card-img-top ask"
 					alt="email">
 				<div class="card-body">
-					<h5 class="card-title text-center">이메일문의</h5>
-					<hr>
-					<p class="card-text center">최대 2-3일 소요</p>
 					<button type="button" class="btn btn-lg btn-block"
 						onclick="location.href='/TMS/ask/mail'"
-						style="background-color: #6762a6; color: white;">문의하기</button>
+						style="background-color: #6762a6; color: white;">이메일 문의</button>
 				</div>
 			</div>
 			<div class="card">
 				<img src="/resources/images/chat.png" class="card-img-top ask"
 					alt="chat">
 				<div class="card-body">
-					<h5 class="card-title text-center">쪽지문의</h5>
-					<hr>
-					<p class="card-text center">답장이 다소 느릴 수 있음</p>
 					<button type="button" class="btn btn-lg btn-block"
 						onclick="location.href='/TMS/sendMsg?recv_id=admin'"
-						style="background-color: #6762a6; color: white;">문의하기</button>
+						style="background-color: #6762a6; color: white;">쪽지 문의</button>
 				</div>
 			</div>
 		</div>
