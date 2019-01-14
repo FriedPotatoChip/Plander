@@ -326,7 +326,7 @@ h3 {
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
 									<button type="button" class="btn"
-										style="background-color: #475C7A; color: white;"
+										style="background-color: #FCBB6D; color: white;"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
 									name="roadAddrPart1" value="${user.roadAddrPart1 }" readonly>

@@ -7,7 +7,6 @@ body {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
-	font-size: 1.2rem;
 }
 
 .center {
@@ -42,10 +41,10 @@ body {
 	</c:if>
 	<!-- 헤더 끝 -->
 	<div class="jumbotron jumbotron-fluid"
-		style="background-color: #008374;">
+		style="background-color: #F1D1B5; margin-top: 20px;">
 		<div class="container">
 			<%-- 			<a href="/TMS/board?ct_idx=${ct_idx }"> --%>
-			<h1 id="boardType" class="center" style="color: white;">문의하기</h1>
+			<h3 id="boardType" class="center" style="color: white;">문의하기</h3>
 		</div>
 	</div>
 
@@ -55,37 +54,46 @@ body {
 				<img src="/resources/images/call.png" class="card-img-top ask"
 					alt="call">
 				<div class="card-body">
+					<h5 class="card-title">전화 문의</h5>
+					<p class="card-text">Some quick example text to build on the
+						card title and make up the bulk of the card's content.</p>
 					<button type="button" class="btn btn-lg btn-block"
 						data-toggle="modal" data-target="#exampleModalCenter"
-						style="background-color: #6762a6; color: white;">전화 문의</button>
+						style="background-color: #685D79; color: white;">문의하기</button>
 				</div>
 			</div>
 			<div class="card">
 				<img src="/resources/images/email.png" class="card-img-top ask"
 					alt="email">
 				<div class="card-body">
+					<h5 class="card-title">이메일 문의</h5>
+					<p class="card-text">Some quick example text to build on the
+						card title and make up the bulk of the card's content.</p>
 					<button type="button" class="btn btn-lg btn-block"
 						onclick="location.href='/TMS/ask/mail'"
-						style="background-color: #6762a6; color: white;">이메일 문의</button>
+						style="background-color: #685D79; color: white;">문의하기</button>
 				</div>
 			</div>
 			<div class="card">
 				<img src="/resources/images/chat.png" class="card-img-top ask"
 					alt="chat">
 				<div class="card-body">
+					<h5 class="card-title">쪽지 문의</h5>
+					<p class="card-text">Some quick example text to build on the
+						card title and make up the bulk of the card's content.</p>
 					<button type="button" class="btn btn-lg btn-block"
 						onclick="location.href='/TMS/sendMsg?recv_id=admin'"
-						style="background-color: #6762a6; color: white;">쪽지 문의</button>
+						style="background-color: #685D79; color: white;">문의하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- 전화문의 모달 -->
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-		role="dialog" aria-labelledby="exampleModalCenterTitle"
+	<div class="modal fade bd-example-modal-sm" id="exampleModalCenter"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
 		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalCenterTitle">전화문의</h5>
@@ -95,23 +103,17 @@ body {
 					</button>
 				</div>
 				<div class="modal-body" style="text-align: center;">
-					<h3>거기스 신촌점</h3>
-					<p>
-						<a href="#">02-111-1111</a>
-					</p>
+					<p>거북이의기적 신촌점</p>
+					<a href="#" class="bold">010-4434-1507</a>
 					<hr>
-					<h3>거기스 종로점</h3>
-					<p>
-						<a href="#">02-222-2222</a>
-					</p>
+					<p>거북이의기적 종로점</p>
+					<a href="#" class="bold">02-722-1481</a>
 					<hr>
-					<h3>거기스 강남점</h3>
-					<p>
-						<a href="#">02-333-3333</a>
-					</p>
+					<p>거북이의기적 강남점</p>
+					<a href="#" class="bold">02-3453-5404</a>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-dark"
+					<button type="button" class="btn" style="background-color: #685D79; color: white;"
 						data-dismiss="modal">닫기</button>
 				</div>
 			</div>

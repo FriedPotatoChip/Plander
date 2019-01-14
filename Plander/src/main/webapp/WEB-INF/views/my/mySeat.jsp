@@ -2,11 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/commons/head.jsp"></jsp:include>
-
-
 <style>
-
-
 tr, td {
 	border-bottom: 1px solid #000;
 	padding-top: 10px;

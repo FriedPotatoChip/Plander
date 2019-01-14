@@ -5,9 +5,11 @@
 <body>
 	<br>
 	<br>
-	<div class="container">
-		<h1 class="text-center">문의하기</h1>
-		<div style="width: 50%; margin: 40px auto;">
+	<div class="container" style="border: 1px solid lightgray; width: 60%;">
+		<br> <br>
+		<h4 class="text-center bold" style="color: #475C7A; text-decoration: underline;">문의하기</h4>
+		<br>
+		<div>
 			<ul>
 				<li>요금 및 지점 이용과 관련한 문의는 해당 지점으로 유선 문의하시는 것이 빠르고 정확합니다.</li>
 				<li>문의하신 내용의 답변은 입력하신 이메일로 발송 드리오니 정확하게 입력 부탁드립니다.</li>
@@ -15,21 +17,20 @@
 					답변이 늦어질 수 있습니다.</li>
 			</ul>
 		</div>
+		<br>
 		<form action="/TMS/ask/sendMail" method="post"
-			enctype="multipart/form-data" style="width: 50%; margin: 20px auto;">
+			enctype="multipart/form-data" style="width: 80%; margin: 0 auto;">
 			<div class="form-group">
 				<label for="name">이름</label> <input type="text" class="form-control"
-					id="name" name="name" placeholder="이름" required>
+					id="name" name="name" required>
 			</div>
 			<div class="form-group">
 				<label for="phone">연락처</label> <input type="tel"
-					class="form-control" id="phone" name="phone" placeholder="연락처"
-					required>
+					class="form-control" id="phone" name="phone" required>
 			</div>
 			<div class="form-group">
 				<label for="email">이메일</label> <input type="email"
-					class="form-control" name="email" id="email" placeholder="이메일"
-					required>
+					class="form-control" name="email" id="email" required>
 			</div>
 			<div class="form-group">
 				<label for="category">문의유형</label> <select id="category"
@@ -44,8 +45,7 @@
 			</div>
 			<div class="form-group">
 				<label for="title">제목</label> <input type="text"
-					class="form-control" id="title" name="title" placeholder="제목"
-					required>
+					class="form-control" id="title" name="title" required>
 			</div>
 			<div class="form-group">
 				<label for="content">내용</label>
@@ -66,11 +66,12 @@
 					</div>
 					<div style="float: right;">
 						<button type="reset"
-							class="btn btn-outline-primary my-1 btn-inline">초기화</button>
-						<button type="submit" class="btn btn-primary my-1 btn-inline">문의하기</button>
+							class="btn my-1 btn-inline" style="background-color: #F1D1B5; color: white;">초기화</button>
+						<button type="submit" class="btn my-1 btn-inline"
+						style="background-color: #475C7A; color: white;">문의하기</button>
 					</div>
 				</div>
-				<br><br><br>
+				<br> <br> <br>
 			</div>
 		</form>
 	</div>
