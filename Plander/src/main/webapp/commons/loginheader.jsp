@@ -3,9 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- <jsp:include page="/commons/head.jsp"></jsp:include> --%>
 <style>
-a, h5 {
+a {
 	font-weight: 700;
+	font-size: 16px;
+	color: #666;
 }
+
 
 .user {
 	width: 30px;
@@ -29,7 +32,6 @@ a, h5 {
 	min-width: 160px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
-	font-weight: 400;
 }
 
 .dropdown-content2 {
@@ -42,17 +44,15 @@ a, h5 {
 }
 
 .dropdown-content a {
-	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
-	font-weight: 400 !important;
 }
 
 .dropdown-content a:hover {
-	background-color: #008374;
+	background-color: #475C7A;
 	color: white;
-	font-weight: 400 !important;
+	font-weight: 700;
 }
 
 .dropdown:hover .dropdown-content {
