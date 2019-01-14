@@ -72,16 +72,13 @@ body {
 		</c:if>
 	</c:if>
 	<!-- 헤더 끝 -->
-	<br>
-	<br>
-	<br>
+	<br><br><br>
 
 	<div id="container">
-
 		<div class="price">
-			<p class="bold" style="color: #008374;">시간당 가격</p>
+			<p class="bold center" style="background-color: #134080; color: white;">시간당 가격</p>
 			<hr>
-			<table border="1px solid" style="width: 100%;">
+			<table class="table" style="width: 100%; font-size: 1rem;">
 				<thead>
 					<tr>
 						<td width="10%;"></td>
@@ -96,9 +93,12 @@ body {
 				</tbody>
 			</table>
 			<br>
-			<p class="bold" style="color: #6762a6;">정기 이용권(1인실)</p>
+			<p class="bold center" style="background-color: #6762a6; color: white;">정기 이용권(1인실)</p>
 			<hr>
-			<table style="width: 100%;" id="ticket">
+			<style>
+				#ticket td { font-size: 1rem; }
+			</style>
+			<table id="ticket" style="width: 100%;">
 				<!-- 정기권 출력 -->
 			</table>
 		</div>
@@ -110,10 +110,8 @@ body {
 					return false;
 				}
 				var title = "bookingPage";
-				window
-						.open("", title,
-								"width=1200, height=700, scrollbars=yes");
-
+				window.open("", title, "width=1500, height=800, scrollbars=yes");
+				
 				frm.target = title;
 				frm.action = "/TMS/book/booking";
 				frm.submit();
@@ -182,7 +180,8 @@ body {
 		</div>
 		<!-- 3 호점 끝 -->
 
-		<br>
+		<br><br><br><br><br>
+		<br><br><br>
 		<!-- 풋터 -->
 
 	</div>
@@ -192,141 +191,140 @@ body {
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
 		//가격표 가져오는 ajax
-		$
-				.ajax({
-					url : "/getPrice",
-					type : "get",
-					dataType : 'json',
-					success : function(result) {
-						var ticket2w = 0;
-						var ticketMon = 0;
-						var ticketNight = 0;
-						var ticketDay = 0;
+		$.ajax({
+			url : "/getPrice",
+			type : "get",
+			dataType : 'json',
+			success : function(result) {
+				var ticket2w = 0;
+				var ticketMon = 0;
+				var ticketNight = 0;
+				var ticketDay = 0;
 
-						var privateAm = 0;
-						var privatePm = 0;
-						var privateHoliday = 0;
-						var privateNight = 1200;
+				var privateAm = 0;
+				var privatePm = 0;
+				var privateHoliday = 0;
+				var privateNight = 1200;
 
-						var lab4Am = 0;
-						var lab4Pm = 0;
-						var lab4Holiday = 0;
-						var lab4Night = 1500;
+				var lab4Am = 0;
+				var lab4Pm = 0;
+				var lab4Holiday = 0;
+				var lab4Night = 1500;
 
-						var lab8Am = 0;
-						var lab8Pm = 0;
-						var lab8Holiday = 0;
-						var lab8Night = 1800;
+				var lab8Am = 0;
+				var lab8Pm = 0;
+				var lab8Holiday = 0;
+				var lab8Night = 1800;
 
-						var lab12Am = 0;
-						var lab12Pm = 0;
-						var lab12Holiday = 0;
-						var lab12Night = 2000;
+				var lab12Am = 0;
+				var lab12Pm = 0;
+				var lab12Holiday = 0;
+				var lab12Night = 2000;
 
-						$.each(result, function(index, value) {
-							// 정기권 가격
-							if (value.time_idx == 100) {
-								ticket2w = value.price;
-							} else if (value.time_idx == 101) {
-								ticketMon = value.price;
-							} else if (value.time_idx == 102) {
-								ticketNight = value.price;
-							} else if (value.time_idx == 103) {
-								ticketDay = value.price;
-							}
-							// 개인실 가격
-							if (value.sct_idx == 1) {
-								if (value.time_idx == 1) {
-									privateAm = value.price;
-								} else if (value.time_idx == 2) {
-									privatePm = value.price;
-								} else if (value.time_idx == 3) {
-									privateHoliday = value.price;
-								}
-							}
-							// 랩실 가격
-							if (value.sct_idx == 2) {
-								if (value.time_idx == 1) {
-									lab4Am = value.price;
-								} else if (value.time_idx == 2) {
-									lab4Pm = value.price;
-								} else if (value.time_idx == 3) {
-									lab4Holiday = value.price;
-								}
-							}
-							if (value.sct_idx == 3) {
-								if (value.time_idx == 1) {
-									lab8Am = value.price;
-								} else if (value.time_idx == 2) {
-									lab8Pm = value.price;
-								} else if (value.time_idx == 3) {
-									lab8Holiday = value.price;
-								}
-							}
-							if (value.sct_idx == 4) {
-								if (value.time_idx == 1) {
-									lab12Am = value.price;
-								} else if (value.time_idx == 2) {
-									lab12Pm = value.price;
-								} else if (value.time_idx == 3) {
-									lab12Holiday = value.price;
-								}
-							}
-						})
-
-						var ticket = "";
-						ticket += "<tr><th width='25%'>1일권</th><td width='75%'>";
-						ticket += numberWithCommas(ticketDay) + "원";
-						ticket += "</td></tr><tr><th>정기권 2주</th><td>";
-						ticket += numberWithCommas(ticket2w)
-								+ "원 (사물함 선택 시 +2,000원)</td>";
-						ticket += "</tr><tr><th>정기권 1개월</th><td>";
-						ticket += numberWithCommas(ticketMon)
-								+ "원 (사물함 제공)</td>";
-						ticket += "</tr><tr><th>야간권(22:00 <br>~ 익일 오전 8:00)</th><td>";
-						ticket += numberWithCommas(ticketNight) + "원</td></tr>";
-						$("#ticket").html(ticket);
-
-						var price = "";
-						price += "<tr>\<td>평일 8:00 ~ 18:00</td><td class='center'>1시간 "
-								+ numberWithCommas(privateAm) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab4Am) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab8Am) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab12Am) + "원</td>";
-						price += "</tr><tr><td>평일 18:00 ~ 22:00</td><td class='center'>1시간 "
-								+ numberWithCommas(privatePm) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab4Pm) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab8Pm) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab12Pm) + "원</td>";
-						price += "</tr><tr><td>심야 22:00 <br> ~ 익일 오전 8:00</td><td class='center'>1시간 "
-								+ numberWithCommas(privateNight) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab4Night) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab8Night) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab12Night) + "원</td>";
-						price += "</tr><tr><td>주말(토,일)</td><td class='center'>1시간 "
-								+ numberWithCommas(privateHoliday) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab4Holiday) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab8Holiday) + "원</td>";
-						price += "<td class='center'>1시간 "
-								+ numberWithCommas(lab12Holiday)
-								+ "원</td></tr>";
-						$("#priceCell").html(price);
-					},
-					error : function(error) {
-
+				$.each(result, function(index, value) {
+					// 정기권 가격
+					if (value.time_idx == 100) {
+						ticket2w = value.price;
+					} else if (value.time_idx == 101) {
+						ticketMon = value.price;
+					} else if (value.time_idx == 102) {
+						ticketNight = value.price;
+					} else if (value.time_idx == 103) {
+						ticketDay = value.price;
 					}
-				});
+					// 개인실 가격
+					if (value.sct_idx == 1) {
+						if (value.time_idx == 1) {
+							privateAm = value.price;
+						} else if (value.time_idx == 2) {
+							privatePm = value.price;
+						} else if (value.time_idx == 3) {
+							privateHoliday = value.price;
+						}
+					}
+					// 랩실 가격
+					if (value.sct_idx == 2) {
+						if (value.time_idx == 1) {
+							lab4Am = value.price;
+						} else if (value.time_idx == 2) {
+							lab4Pm = value.price;
+						} else if (value.time_idx == 3) {
+							lab4Holiday = value.price;
+						}
+					}
+					if (value.sct_idx == 3) {
+						if (value.time_idx == 1) {
+							lab8Am = value.price;
+						} else if (value.time_idx == 2) {
+							lab8Pm = value.price;
+						} else if (value.time_idx == 3) {
+							lab8Holiday = value.price;
+						}
+					}
+					if (value.sct_idx == 4) {
+						if (value.time_idx == 1) {
+							lab12Am = value.price;
+						} else if (value.time_idx == 2) {
+							lab12Pm = value.price;
+						} else if (value.time_idx == 3) {
+							lab12Holiday = value.price;
+						}
+					}
+				})
+
+				var ticket = "";
+				ticket += "<tr><th width='25%'>1일권</th><td width='75%'>";
+				ticket += numberWithCommas(ticketDay) + "원";
+				ticket += "</td></tr><tr><th>정기권 2주</th><td>";
+				ticket += numberWithCommas(ticket2w)
+						+ "원 (사물함 선택 시 +2,000원)</td>";
+				ticket += "</tr><tr><th>정기권 1개월</th><td>";
+				ticket += numberWithCommas(ticketMon)
+						+ "원 (사물함 제공)</td>";
+				ticket += "</tr><tr><th>야간권(22:00 <br>~ 익일 오전 8:00)</th><td>";
+				ticket += numberWithCommas(ticketNight) + "원</td></tr>";
+				$("#ticket").html(ticket);
+
+				var price = "";
+				price += "<tr>\<td>평일 8:00 ~ 18:00</td><td class='center'>1시간 "
+						+ numberWithCommas(privateAm) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab4Am) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab8Am) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab12Am) + "원</td>";
+				price += "</tr><tr><td>평일 18:00 ~ 22:00</td><td class='center'>1시간 "
+						+ numberWithCommas(privatePm) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab4Pm) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab8Pm) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab12Pm) + "원</td>";
+				price += "</tr><tr><td>심야 22:00 <br> ~ 익일 오전 8:00</td><td class='center'>1시간 "
+						+ numberWithCommas(privateNight) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab4Night) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab8Night) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab12Night) + "원</td>";
+				price += "</tr><tr><td>주말(토,일)</td><td class='center'>1시간 "
+						+ numberWithCommas(privateHoliday) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab4Holiday) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab8Holiday) + "원</td>";
+				price += "<td class='center'>1시간 "
+						+ numberWithCommas(lab12Holiday)
+						+ "원</td></tr>";
+				$("#priceCell").html(price);
+			},
+			error : function(error) {
+
+			}
+		});
 	</script>
 </body>
 </html>
