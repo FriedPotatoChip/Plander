@@ -1,34 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>결제하기</title>
-<!-- 부트스트랩 ================================================================================ -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<link
-	href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR"
-	rel="stylesheet">
-
+<jsp:include page="/commons/head.jsp" />
 <style>
 body {
-	width: 90%;
-	margin: 0 auto;
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
-	color: black;
-	font-size: 2em;
+	color: #666;
 }
 
 h5 {
 	font-weight: 700;
-	font-size: 1em;
+	font-size: 17px;
 }
 
 .center {
@@ -78,15 +61,16 @@ ul>li>a {
 
 /* 현재 페이지 */
 .click {
-	color: black;
+	color: #475C7A;
+	font-size: 17px;
 }
 
 .noback {
-	background-color: #6762a6;
+	background-color: #D8737F;
 	color: white;
 	padding: 0 8px 0 8px;
 	border-radius: 25px;
-	font-size: 15px;
+	font-size: 17px;
 }
 /* 예약 헤더 CSS 끝 */
 /* 버튼 */
@@ -97,13 +81,13 @@ button {
 	font-size: 14px;
 	text-align: center;
 	background-color: white;
-	border: 1px solid #6762a6;
+	border: 1px solid #D8737F;
 	cursor: pointer;
 }
 
 button:hover {
-	border: 1px solid #6762a6;
-	background-color: #6762a6;
+	border: 1px solid #D8737F;
+	background-color: #D8737F;
 	color: white;
 }
 /* 버튼 끝 */
@@ -513,8 +497,6 @@ button:hover {
 <body>
 	<div id="container">
 		<br>
-		<br>
-		<br>
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
@@ -534,23 +516,25 @@ button:hover {
 		</div>
 		<!-- 예약 헤더끝 -->
 
-		<div class="boxoutside" style="border: 1px solid;">
+		<div class="boxoutside" style="border: 1px solid lightgray;">
 			<form method="post" name="form1" onsubmit="payment()">
-
+				<br>
 				<div style="padding: 10px;">
-					<h5>예매자 확인</h5>
-					<span>☑ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</span><br> <span>☑
-						취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야 합니다.</span><br>
-					<span>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</span>
+					<h5 style="color: #475C7A;">예매자 확인</h5>
+					<p>☑ 일정 및 인원에 변동사항이 있는 경우는 가능한 빨리 전화로 알려주세요.</p>
+					<p>☑ 취소의 경우 하루 전 6시까지만 가능하며 당일 취소의 경우 최소 기본비용(최소인원*2시간)을 지불하셔야
+						합니다.</p>
+					<p>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</p>
 				</div>
+				<hr>
 				<!-- 예매자 확인 끝 -->
 
 				<div id="mybookinfo" style="padding: 10px;">
-					<h5>나의 예약 정보</h5>
+					<h5 style="color: #475C7A;">나의 예약 정보</h5>
 					<table border="1px solid;" class="table table-bordered"
 						style="width: 100%; text-align: center;">
 						<tbody>
-							<tr>
+							<tr style="background-color: #FCBB6D;">
 								<td width="13%">예매번호</td>
 								<td width="10%">예약자 이름</td>
 								<td width="12%">연락처</td>
@@ -583,12 +567,13 @@ button:hover {
 
 				<!-- 결제방식 선택 -->
 				<div id="pay" class="radio" style="padding: 10px;">
-					<h5>사용 가능한 쿠폰</h5>
+					<h5 style="color: #475C7A;">사용 가능한 쿠폰</h5>
 					<select id="coupon">
 						<option value="0">------</option>
-					</select> <span id="finPrice"></span>
-					<br><br><br>
-					<h5>결제방식 선택</h5>
+					</select> <span id="finPrice"></span> <br>
+					<br>
+					<br>
+					<h5 style="color: #475C7A;">결제방식 선택</h5>
 					<div>
 						<button type="button" id="naverpay">네이버 페이로 결제하기</button>
 					</div>
@@ -629,7 +614,7 @@ button:hover {
 		</div>
 		<!-- 박스 아웃사이드 끝 -->
 		<br> <br> <br>
-<%-- 		지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb } --%>
+		<%-- 		지금예약 : ${bvo }<br>${uservo }<br>${svo }<br>${idx }<br>${cb } --%>
 
 	</div>
 	<!-- 바디 콘테이너 끝 -->
