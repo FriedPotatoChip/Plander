@@ -88,6 +88,20 @@ function closeMsg(){
 	window.close();
 }	
 function sendMsg(){
+	var title = $("#title").val();
+	var content = $("#content").val();
+	console.log("title: "+ title);
+	console.log("content: "+ content);
+	if (title == ""){
+		alert("제목을 입력해 주세요.");
+		$("#title").focus();
+		return false;
+	}
+	if (content == ""){
+		alert("내용을 입력해 주세요");
+		$("#content").focus();
+		return false;
+	}
 	var formData = $("#msgForm").serialize();
 	$.ajax({
 		url: '/sendMsg',
