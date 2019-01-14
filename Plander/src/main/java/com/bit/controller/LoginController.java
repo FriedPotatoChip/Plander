@@ -34,14 +34,18 @@ public class LoginController {
 		return "login/naverCallback";
 	}
 	
+	@RequestMapping("/signUpSuc")
+	public String signUpSuc() {
+		return "main/joinOk";
+	}
+	
 	@PostMapping("/signUp")
 	public String signUp(UsersVO vo, Model model, HttpSession session) {
 		boolean chkSignUp = service.signUp(vo);
 		if (chkSignUp) {
-			session.setAttribute("usersVO", vo);
-			return "main/joinOk";
+			return "redirect: /signUpSuc";
 		}else {
-			return "main/main";
+			return "redirect: /TMS";
 		}
 	}
 	

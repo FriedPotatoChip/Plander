@@ -15,7 +15,7 @@
 <body>
 	
 	<div id="container">
-		<h2>404 에러페이지에오</h2>
+		<h2>404 에러페이지</h2>
 		<hr>
 		<img alt="뽀호우" src="/resources/images/do2.jpg">
 		<p>관리자에게 연락하세용</p>

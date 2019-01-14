@@ -4,13 +4,14 @@
 <jsp:include page="/commons/head.jsp" />
 <style>
 body {
-	width: 80%;
-	margin: 0 auto;
-	background-image: linear-gradient(to left, #00dbde, #505cfd);
+	font-family: 'NanumSquare', sans-serif;
+	font-weight: 400;
+	color: #666;
+	font-size: 1.2rem;
 }
 
-.container {
-	margin-top: 50px;
+.center {
+	text-align: center;
 }
 
 .ask {
@@ -26,45 +27,55 @@ body {
 </head>
 
 <body>
-	<div class="container">
-		<button type="button" class="btn btn-dark" style="float: right;"
-			onclick="location.href='/TMS'">홈으로가기</button>
-		<h1 style="text-align: center; margin-bottom: 50px;">문의하기</h1>
+	<!-- 헤더 -->
+	<!-- Header -->
+	<c:if test="${empty sessionScope.usersVO }">
+		<jsp:include page="/commons/header.jsp" />
+	</c:if>
+	<c:if test="${not empty sessionScope.usersVO }">
+		<c:if test="${sessionScope.usersVO.rank != 1 }">
+			<jsp:include page="/commons/loginheader.jsp" />
+		</c:if>
+		<c:if test="${sessionScope.usersVO.rank == 1 }">
+			<jsp:include page="/commons/adminLoginheader.jsp" />
+		</c:if>
+	</c:if>
+	<!-- 헤더 끝 -->
+	<div class="jumbotron jumbotron-fluid"
+		style="background-color: #008374;">
+		<div class="container">
+			<%-- 			<a href="/TMS/board?ct_idx=${ct_idx }"> --%>
+			<h1 id="boardType" class="center" style="color: white;">문의하기</h1>
+		</div>
+	</div>
+
+	<div class="container" style="width: 70%; margin: 20px auto;">
 		<div class="card-deck">
 			<div class="card">
 				<img src="/resources/images/call.png" class="card-img-top ask"
 					alt="call">
 				<div class="card-body">
-					<h5 class="card-title text-center">전화문의</h5>
-					<hr>
-					<p class="card-text">
-						가장 빠르고 정확하게<br> 심야를 제외하고 언제든지 가능합니다.
-					</p>
-					<button type="button" class="btn btn-primary btn-lg btn-block"
-						data-toggle="modal" data-target="#exampleModalCenter">문의하기</button>
+					<button type="button" class="btn btn-lg btn-block"
+						data-toggle="modal" data-target="#exampleModalCenter"
+						style="background-color: #6762a6; color: white;">전화 문의</button>
 				</div>
 			</div>
 			<div class="card">
 				<img src="/resources/images/email.png" class="card-img-top ask"
 					alt="email">
 				<div class="card-body">
-					<h5 class="card-title text-center">이메일문의</h5>
-					<hr>
-					<p class="card-text">최대한 빠른 답변을 드리기 위해 노력하고 있으나 다소 시간이 걸릴 수
-						있습니다.</p>
-					<button type="button" class="btn btn-primary btn-lg btn-block"
-						onclick="location.href='/TMS/ask/mail'">문의하기</button>
+					<button type="button" class="btn btn-lg btn-block"
+						onclick="location.href='/TMS/ask/mail'"
+						style="background-color: #6762a6; color: white;">이메일 문의</button>
 				</div>
 			</div>
 			<div class="card">
 				<img src="/resources/images/chat.png" class="card-img-top ask"
 					alt="chat">
 				<div class="card-body">
-					<h5 class="card-title text-center">쪽지문의</h5>
-					<hr>
-					<p class="card-text">쪽지로도 빠르게 질문할 수 있습니다.</p>
-					<button type="button" class="btn btn-primary btn-lg btn-block"
-					onclick="location.href='/TMS/sendMsg?recv_id=admin'">문의하기</button>
+					<button type="button" class="btn btn-lg btn-block"
+						onclick="location.href='/TMS/sendMsg?recv_id=admin'"
+						style="background-color: #6762a6; color: white;">쪽지 문의</button>
 				</div>
 			</div>
 		</div>

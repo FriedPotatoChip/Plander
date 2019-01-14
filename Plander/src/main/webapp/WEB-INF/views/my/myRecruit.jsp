@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp"></jsp:include>
 
-
 <style>
 
 tr, td {
@@ -42,7 +41,6 @@ a {
 /* 페이징 끝 */
 </style>
 </head>
-
 
 <body>
 	<thead>
