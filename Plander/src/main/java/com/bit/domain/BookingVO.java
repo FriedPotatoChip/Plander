@@ -20,4 +20,7 @@ public class BookingVO {
 	
 	private int s_col, s_col_2, s_idx, s_idx_2;
 	
+	//payment 추가 항목
+	private int p_idx;
+	private String payment;
 }

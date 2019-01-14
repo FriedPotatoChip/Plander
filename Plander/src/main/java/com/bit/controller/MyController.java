@@ -182,11 +182,11 @@ public class MyController {
 	
 	// 예약좌석삭제
 	@RequestMapping("delSeat")
-	public String delSeat(@RequestParam int bk_idx) {
+	public String delSeat(@RequestParam int bk_idx, Model model) {
 		
 		int result = myService.delSeat(bk_idx);
 		System.out.println("처리결과: " + result);
-		
+		model.addAttribute("result", result);
 		return "redirect: /TMS/my";
 	}
 
@@ -216,11 +216,12 @@ public class MyController {
 	
 	// 예약사물함삭제
 	@RequestMapping("delCabinet")
-	public String delCabinet(@RequestParam int ckb_idx) {
+	public String delCabinet(@RequestParam int ckb_idx, Model model) {
 		
 		int result = myService.delCabinet(ckb_idx);
 		System.out.println("처리결과: " + result);
 		
+		model.addAttribute("result", result);
 		return "redirect: /TMS/my";
 	}
 

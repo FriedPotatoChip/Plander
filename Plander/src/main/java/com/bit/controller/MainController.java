@@ -72,10 +72,10 @@ public class MainController {
 		return "main/main";
 	}
 
-	@GetMapping("/sub")
+/*	@GetMapping("/sub")
 	public String sub() {
 		return "main/submain";
-	}
+	}*/
 
 	@RequestMapping("/proImgTest")
 	public String proImgTest() {

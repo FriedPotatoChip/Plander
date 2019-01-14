@@ -34,10 +34,16 @@ tr:last-child td {
 
 a {
 	text-decoration: none;
+	padding: 10px;
 }
 
 .now {
-	background-color: orange;
+	background-color: #8a7967;
+	color: white;
+}
+
+#paging {
+	margin-top: 30px;
 }
 /* 페이징 끝 */
 </style>

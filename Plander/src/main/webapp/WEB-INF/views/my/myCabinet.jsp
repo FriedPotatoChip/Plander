@@ -5,8 +5,6 @@
 <jsp:include page="/commons/head.jsp"></jsp:include>
 
 <style>
-
-
 tr, td {
 	border-bottom: 1px solid #000;
 	padding-top: 10px;
@@ -33,10 +31,16 @@ tr:last-child td {
 
 a {
 	text-decoration: none;
+	padding: 10px;
 }
 
 .now {
-	background-color: orange;
+	background-color: #8a7967;
+	color: white;
+}
+
+#paging {
+	margin-top: 30px;
 }
 /* 페이징 끝 */
 </style>
@@ -71,12 +75,10 @@ a {
 						<td>${cabinet.br_name }</td>
 						<td>${cabinet.cb_number }</td>
 						<td><fmt:parseDate value='${cabinet.start_date}'
-								pattern='yyyy-MM-dd' var="startDate"/>
-								<fmt:formatDate value="${startDate}" pattern="yyyy-MM-dd"/>
-								 <br> - <fmt:parseDate
-								value='${cabinet.end_date}' pattern='yyyy-MM-dd' var="endDate"/>
-								<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>
-								</td>
+								pattern='yyyy-MM-dd' var="startDate" /> <fmt:formatDate
+								value="${startDate}" pattern="yyyy-MM-dd" /> <br> - <fmt:parseDate
+								value='${cabinet.end_date}' pattern='yyyy-MM-dd' var="endDate" />
+							<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" /></td>
 						<td><button type="button"
 								class="btn btn-outline-danger btn-sm"
 								onclick="location.href='/TMS/my/delCabinet?ckb_idx=${cabinet.ckb_idx }'">예약취소</button></td>

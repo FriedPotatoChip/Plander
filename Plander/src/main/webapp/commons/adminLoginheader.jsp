@@ -5,9 +5,10 @@
 	max-height: calc(100vh - 210px);
 	overflow-y: auto;
 } */
-
-a, h5 {
+a {
 	font-weight: 700;
+	font-size: 16px;
+	color: #666;
 }
 
 .dropbtn {
@@ -38,23 +39,20 @@ a, h5 {
 }
 
 .dropdown-content a {
-	color: black;
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
-	font-weight: 400;
 }
 
 .dropdown-content a:hover {
-	background-color: #008374;
-	color: white;
-	font-weight: 400 !important;
+	background-color: #FCBB6D;
+	color: black;
+	font-weight: 700;
 }
 
 .dropdown:hover .dropdown-content {
 	display: block;
 }
-
 </style>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -72,10 +70,8 @@ a, h5 {
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"
-					onclick="loginChk()">예약하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"
-					onclick="loginChk()">모집게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS/recruit">모집게시판</a></li>
 				<li class="nav-item">
 					<div class="dropdown">
 						<a class="nav-link dropbtn" href="#">게시판</a>
@@ -90,8 +86,8 @@ a, h5 {
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
 				<li class="nav-item"><a class="nav-link"
-					style="color: #008374;" href="/TMS/admin"><h5>관리자페이지</h5></a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS/logout"><h5>로그아웃</h5></a></li>
+					style="color: #FCBB6D;" href="/TMS/admin">관리자페이지</a></li>
+				<li class="nav-item"><a class="nav-link" href="/TMS/logout">로그아웃</a></li>
 			</ul>
 
 		</div>

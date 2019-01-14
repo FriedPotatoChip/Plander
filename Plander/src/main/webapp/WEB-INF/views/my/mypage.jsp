@@ -29,6 +29,8 @@ function pwchk() {
 	}
 }
 
+
+
 // 클릭 시 스크롤이 자동으로 위로 올라가는 현상
 function click() {
     return;
@@ -51,10 +53,8 @@ function click() {
 }
 
 h3 {
-	padding: 15px 0;
 	text-align: center;
-	background-color: #008374;
-	text-align: center;
+	background-color: #8a7967;
 }
 
 th {
@@ -63,7 +63,7 @@ th {
 
 .profile {
 	width: 100%;
-	margin: 30px auto;
+	margin: 10px auto;
 	text-align: center;
 }
 
@@ -189,21 +189,21 @@ table, tr, th, td {
 
 		<!-- 내정보 -->
 		<div class="my_info">
-			<h3 style="color: white; margin-top: 50px;">- 내정보 -</h3>
+			<h3 style="color: white; margin-top: 30px;">- 내정보 -</h3>
 			<!-- 회원 프로필 사진 -->
-			<div class="profile">
+			<div class="profile" style="margin-top: 20px;">
 				<c:if test='${empty usersVO.user_profileImagePath }'>
 					<img class="user" src="/resources/images/users.png" alt="user"
-						data-toggle="modal" data-target="#profileModal"
-						style="margin-top: 30px;" />
+						data-toggle="modal" data-target="#profileModal" />
 				</c:if>
 				<c:if test='${not empty usersVO.user_profileImagePath }'>
 					<img class="user" src="${usersVO.user_profileImagePath }"
 						alt="user" data-toggle="modal" data-target="#profileModal" />
 				</c:if>
 				<h5 class="user_name">${usersVO.name }님</h5>
-				<strong style="float: right; margin-bottom: 10px; margin-right: 10px;"><a href="#"
-					data-toggle="modal" data-target=".bd-example-modal-lg">회원정보수정</a></strong>
+				<strong
+					style="float: right; margin-bottom: 10px; margin-right: 10px;"><a
+					href="#" data-toggle="modal" data-target=".bd-example-modal-lg">회원정보수정</a></strong>
 			</div>
 
 			<table class="table" id="my_info_table">
@@ -237,7 +237,7 @@ table, tr, th, td {
 
 
 		<!-- 내예약 -->
-		<div class="myBook" style="margin-top: 50px;">
+		<div class="myBook" style="margin-top: 30px;">
 			<h3 style="color: white;">- 내예약 -</h3>
 			<div class="myBook_nav">
 				<strong><a href="javascript:click()"
@@ -322,23 +322,17 @@ table, tr, th, td {
 									name="email" placeholder="이메일" value="${user.email }" required></td>
 							</tr>
 							<tr>
-								<th>회원주소</th>
-								<td><input type="text" class="form-control" id="zipNo"
-									name="zipNo" readonly></td>
-								<td><input type="button" class="form-control" value="주소검색"
-									onclick="goPopup();"></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td><input type="text" class="form-control"
-									id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
-									value="${user.roadAddrPart1 }" readonly></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td><input type="text" class="form-control" id="addrDetail"
-									name="addrDetail" placeholder="상세주소"
-									value="${user.addrDetail }" required></td>
+								<th>회원주소&nbsp;<b style="color: red;">&#42;</b></th>
+								<td><input type="text" id="zipNo" style="display: inline;"
+									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
+									<button type="button" class="btn"
+										style="background-color: #008374; color: white;"
+										onclick="goPopup()">주소검색</button> <input type="text"
+									id="roadAddrPart1" class="col-sm-12 form-control my-2"
+									name="roadAddrPart1" value="${user.roadAddrPart1 }" readonly>
+									<input type="text" id="addrDetail"
+									class="col-sm-12 form-control my-2" name="addrDetail"
+									value="${user.addrDetail }" placeholder="상세주소" required></td>
 							</tr>
 						</table>
 					</div>
@@ -348,7 +342,8 @@ table, tr, th, td {
 						<button type="reset" class="btn btn-outline-secondary"
 							data-dismiss="modal">초기화</button>
 						<input type="hidden" name="id" value="${user.id }" />
-						<button type="submit" id="update" class="btn btn-outline-primary">수정하기</button>
+						<button type="submit" id="update" class="btn"
+							style="background-color: #6762a6; color: white;">수정하기</button>
 					</div>
 				</div>
 			</form>
@@ -423,7 +418,7 @@ table, tr, th, td {
 	<!-- 프로필 사진 업로드 모달 -->
 	<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 업로드</h5>
@@ -611,7 +606,7 @@ table, tr, th, td {
 		}
 	</script>
 	<!-- 프로필 이미지 삭제 -->
-	<script> 
+	<script> 				
 		function imgDel(){
 			if ('${usersVO.user_profileImagePath}' == ""){
 				alert("프로필 이미지를 먼저 등록해주세요.");
@@ -716,6 +711,8 @@ function showBox(e, tag){
 			window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
 		});
 }
+
+
 </script>
 </body>
 </html>
