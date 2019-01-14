@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>404에러페이지</title>
+<title>404에러페이지</title> 
 <style>
 	#container { width: 700px; margin: 0 auto; }
 	h2, p {text-align: center; }

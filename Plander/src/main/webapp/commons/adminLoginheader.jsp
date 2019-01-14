@@ -42,12 +42,13 @@ a {
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
+	font-weight: 400;
 }
 
 .dropdown-content a:hover {
 	background-color: #FCBB6D;
 	color: black;
-	font-weight: 700;
+	font-weight: 400;
 }
 
 .dropdown:hover .dropdown-content {

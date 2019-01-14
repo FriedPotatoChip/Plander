@@ -9,7 +9,7 @@
 } */
 a {
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 17px;
 	color: #666;
 }
 
@@ -44,12 +44,13 @@ a {
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
+	font-weight: 400;
 }
 
 .dropdown-content a:hover {
 	background-color: #475C7A;
 	color: white;
-	font-weight: 700;
+	font-weight: 400;
 }
 
 .dropdown:hover .dropdown-content {
