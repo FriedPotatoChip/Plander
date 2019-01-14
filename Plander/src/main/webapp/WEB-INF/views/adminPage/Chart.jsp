@@ -119,13 +119,13 @@ h3 {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
-								<span data-feather="users"></span> Customers <span
-								class="sr-only">(current)</span>
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin"> <span data-feather="users"></span>
+								Customers <span class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet?br_idx=1"> <span data-feather="file"></span>
+							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
@@ -134,12 +134,19 @@ h3 {
 								Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats"> <span
-								data-feather="bar-chart-2"></span> Seats
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+								Seats
 						</a></li>
-						
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file"></span> Receipt
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+								Receipt
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Message"> <span data-feather="file"></span>
+								Message
 						</a></li>
 					</ul>
 				</div>

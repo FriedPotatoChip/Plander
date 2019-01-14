@@ -194,9 +194,31 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/Receipt")
-	public String Receipt(Model model) {
+	public String Receipt(Model model, BookingVO bvo, PagingVO page) {
+		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal());
+
+		page.CalcPage(page.getNowPage(), page.getCntPerPage());
 		
+		model.addAttribute("page", page);
+		model.addAttribute("receipt", service.receiptList(page));
 		return "adminPage/receipt";
 	}
 	
+	@RequestMapping("/ListSearch")
+	public String ListSearch(@RequestParam("keyword") String keyword, @RequestParam("target") String target,
+			PagingVO page, Model model) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("target", target);
+
+		page = new PagingVO(page.getNowPage(), page.getCntPage(), service.getTotalSearch(map));
+		page.CalcPage(page.getNowPage(), page.getCntPerPage());
+
+		map.put("start", page.getStart());
+		map.put("end", page.getEnd());
+
+		model.addAttribute("page", page);
+		model.addAttribute("receipt", service.getListSearch(map));
+		return "adminPage/receipt";
+	}
 }

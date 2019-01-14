@@ -161,9 +161,9 @@ style>body, html {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
-								<span data-feather="users"></span> Customers <span
-								class="sr-only">(current)</span>
+						<li class="nav-item"><a class="nav-link active"
+							href="/TMS/admin"> <span data-feather="users"></span>
+								Customers <span class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
@@ -179,6 +179,16 @@ style>body, html {
 						<li class="nav-item"><a class="nav-link active"
 							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
 								Seats
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+								Receipt
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Message"> <span data-feather="file"></span>
+								Message
 						</a></li>
 					</ul>
 				</div>
