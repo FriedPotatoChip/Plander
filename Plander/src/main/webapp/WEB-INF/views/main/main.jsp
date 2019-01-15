@@ -396,7 +396,7 @@ body {
 							<h4 class="card-title text-center">${ran.id }</h4>
 							<hr>
 							<p class="card-text text-center">${ran.rc_title }</p>
-							<a href="#" class="btn btn-lg btn-block"
+							<a href="/TMS/recruitDetail?idx=${ran.rc_idx }" class="btn btn-lg btn-block"
 								style="background-color: #D8737F; color: white;">보러가기</a>
 						</div>
 					</div>

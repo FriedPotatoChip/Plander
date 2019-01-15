@@ -205,10 +205,11 @@ a {
 						<c:if test="${page.chkStartPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/recvMsg?nowPage=1')"><button>&lt;&lt;</button></a></li>
+								onclick="fetch_book('/TMS/admin/recvMsg?nowPage=1')">〈</a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/recvMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+								onclick="fetch_book('/TMS/admin/recvMsg?nowPage=${page.startPage-1 }')"><span
+									style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
@@ -228,10 +229,11 @@ a {
 						<c:if test="${page.chkEndPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/recvMsg?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
+								onclick="fetch_book('/TMS/admin/recvMsg?nowPage=${page.endPage+1 }')"><span
+									style="font-size: 0.5em;">…</span></a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/recvMsg?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+								onclick="fetch_book('/TMS/admin/recvMsg?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>

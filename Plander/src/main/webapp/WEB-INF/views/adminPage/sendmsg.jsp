@@ -144,7 +144,6 @@ tr:last-child td {
 	color: #475C7A;
 }
 
-
 #paging {
 	margin: 10px;
 }
@@ -193,31 +192,40 @@ a {
 
 				<!-- 페이징 시작 -->
 				<div id="paging">
-					<ul id="pagingList" class="pagination justify-content-center centered">
+					<ul id="pagingList"
+						class="pagination justify-content-center centered">
 						<c:if test="${page.chkStartPage }">
-							<li class="page_edge"><a  class="p-n" href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li class="page_edge"><a  class="p-n" href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+							<li class="page_edge"><a class="p-n"
+								href="javascript:click()"
+								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=1')">〈</a></li>
+							<li class="page_edge"><a class="p-n"
+								href="javascript:click()"
+								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.startPage-1 }')"><span
+									style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
-								<li class="page_edge now"><a  class="p-n now" href="javascript:click()"
+								<li class="page_edge now"><a class="p-n now"
+									href="javascript:click()"
 									onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
-								<li class="page_edge"><a  class="p-n" href="javascript:click()"
+								<li class="page_edge"><a class="p-n"
+									href="javascript:click()"
 									onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
-							<li class="page_edge"><a  class="p-n" href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
-							<li class="page_edge"><a  class="p-n" href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+							<li class="page_edge"><a class="p-n"
+								href="javascript:click()"
+								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.endPage+1 }')"><span
+									style="font-size: 0.5em;">…</span></a></li>
+							<li class="page_edge"><a class="p-n"
+								href="javascript:click()"
+								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>
