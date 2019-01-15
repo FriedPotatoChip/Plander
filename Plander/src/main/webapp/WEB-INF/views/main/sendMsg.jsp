@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-	width: 40%;
+	width: 80%;
 	margin: 50px auto;
 }
 
