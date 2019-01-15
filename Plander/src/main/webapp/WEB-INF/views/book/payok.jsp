@@ -1,30 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>결제 완료</title>
-<!-- 부트스트랩 ================================================================================ -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-<link
-	href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR"
-	rel="stylesheet">
-
+<jsp:include page="/commons/head.jsp" />
 <style>
 body {
-	width: 90%;
-	margin: 0 auto;
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
-	color: black;
-	font-size: 2em;
+	color: #666;
 }
 
 #home {
@@ -67,6 +49,7 @@ ul>li>a {
 /* 선택 안할 시 */
 .select {
 	color: gray;
+	
 }
 
 .back {
@@ -79,15 +62,16 @@ ul>li>a {
 
 /* 현재 페이지 */
 .click {
-	color: black;
+	color: #475C7A;
+	font-size: 17px;
 }
 
 .noback {
-	background-color: #6762a6;
+	background-color: #D8737F;
 	color: white;
 	padding: 0 8px 0 8px;
 	border-radius: 25px;
-	font-size: 15px;
+	font-size: 17px;
 }
 /* 예약 헤더 CSS 끝 */
 /* 버튼 */
@@ -98,13 +82,13 @@ button {
 	font-size: 14px;
 	text-align: center;
 	background-color: white;
-	border: 1px solid #6762a6;
+	border: 1px solid #D8737F;
 	cursor: pointer;
 }
 
 button:hover {
-	border: 1px solid #6762a6;
-	background-color: #6762a6;
+	border: 1px solid #D8737F;
+	background-color: #D8737F;
 	color: white;
 }
 /* 버튼 끝 */
@@ -146,11 +130,11 @@ button:hover {
 		</div>
 		<!-- 예약 헤더끝 -->
 
-		<div class="center boxoutside" style="border: 1px solid;">
+		<div class="center boxoutside" style="border: 1px solid lightgray;">
 			<br>
 			<br>
 			<br> <img src="/resources/images/turtle.png" alt="거북이">
-			<h4>${uservo.name }님 예약이 완료되었습니다!</h4>
+			<h5 class="bold" style="color: #475C7A;">${uservo.name }님 예약이 완료되었습니다!</h5>
 
 			<p>문의사항이 있으시다면 [ Q&A ] 로 문의하시기 바랍니다.</p>
 
@@ -159,7 +143,7 @@ button:hover {
 				<table border="1px solid;" class="table table-bordered"
 					style="width: 100%; text-align: center;">
 					<tbody>
-						<tr>
+						<tr style="background-color: #FCBB6D;">
 							<td width="13%">예매번호</td>
 							<td width="10%">예약자 이름</td>
 							<td width="12%">연락처</td>

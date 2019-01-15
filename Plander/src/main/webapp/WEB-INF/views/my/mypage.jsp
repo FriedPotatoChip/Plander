@@ -29,8 +29,6 @@ function pwchk() {
 	}
 }
 
-
-
 // 클릭 시 스크롤이 자동으로 위로 올라가는 현상
 function click() {
     return;
@@ -38,8 +36,10 @@ function click() {
 </script>
 
 <style>
-#primaryNav li h5 {
-	font-weight: 700;
+body {
+	font-family: 'NanumSquare', sans-serif;
+	font-weight: 400;
+	color: #666;
 }
 
 .nav_btn {
@@ -49,16 +49,21 @@ function click() {
 }
 
 .container {
-	max-width: 1500px;
+	font-family: 'NanumSquare', sans-serif;
+	font-weight: 400;
+	color: #666;
+	text-decoration: none;
+	width: 80%;
+	margin: auto;
+}
+
+a {
+	color: #475C7A;
 }
 
 h3 {
 	text-align: center;
-	background-color: #8a7967;
-}
-
-th {
-	text-align: center;
+	color: #475C7A;
 }
 
 .profile {
@@ -130,20 +135,16 @@ th {
 }
 
 #modal_table th {
-	width: 50%;
+	width: 30%;
 }
 
 #modal_table td {
-	width: 50%;
+	width: 70%;
 }
 
 .description {
 	font-size: 0.7em;
 	color: gray;
-}
-
-table, tr, th, td {
-	text-align: center;
 }
 /* 클릭시 레이어 */
 .idDiv {
@@ -172,24 +173,28 @@ table, tr, th, td {
 
 <body>
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/TMS"><img
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
-				<li class="nav-item"><a class="nav-link" href="/TMS/logout"><h5>로그아웃</h5></a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS"><h5>홈으로가기</h5></a></li>
+				<li class="nav-item"><a class="nav-link bold"
+					href="/TMS/logout">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link bold" href="/TMS">홈으로가기</a></li>
 			</ul>
-
 		</div>
 	</nav>
 
 	<div class="container">
-
 		<!-- 내정보 -->
-		<div class="my_info">
-			<h3 style="color: white; margin-top: 30px;">- 내정보 -</h3>
+		<div class="my_info"
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
+			<h5 class="d-inline" style="margin-top: 30px; color: #D8737F;">
+				<strong style="color: #475C7A;">${usersVO.name }</strong> 님의 정보
+			</h5>
+			<strong
+				style="float: right; margin-bottom: 10px; margin-right: 10px;"><a
+				href="#" data-toggle="modal" data-target="#myModal">회원정보수정</a></strong>
 			<!-- 회원 프로필 사진 -->
 			<div class="profile" style="margin-top: 20px;">
 				<c:if test='${empty usersVO.user_profileImagePath }'>
@@ -200,12 +205,8 @@ table, tr, th, td {
 					<img class="user" src="${usersVO.user_profileImagePath }"
 						alt="user" data-toggle="modal" data-target="#profileModal" />
 				</c:if>
-				<h5 class="user_name">${usersVO.name }님</h5>
-				<strong
-					style="float: right; margin-bottom: 10px; margin-right: 10px;"><a
-					href="#" data-toggle="modal" data-target=".bd-example-modal-lg">회원정보수정</a></strong>
 			</div>
-
+			<br>
 			<table class="table" id="my_info_table">
 				<tr>
 					<th>회원아이디</th>
@@ -237,9 +238,10 @@ table, tr, th, td {
 
 
 		<!-- 내예약 -->
-		<div class="myBook" style="margin-top: 30px;">
-			<h3 style="color: white;">- 내예약 -</h3>
-			<div class="myBook_nav">
+		<div class="myBook"
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
+			<h5 class="d-inline mr-3" style="color: #D8737F;">내예약</h5>
+			<div class="myBook_nav d-inline">
 				<strong><a href="javascript:click()"
 					onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
@@ -256,9 +258,10 @@ table, tr, th, td {
 
 
 		<!-- 내글목록 -->
-		<div class="myRecruit">
-			<h3 style="color: white;">- 내글목록 -</h3>
-			<div class="myRecruit_nav">
+		<div class="myRecruit"
+			style="border: 1px solid lightgray; padding: 20px;">
+			<h5 class="d-inline mr-3" style="color: #D8737F;">내글목록</h5>
+			<div class="myRecruit_nav d-inline mr-3">
 				<strong><a href="javascript:click()"
 					onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
 				<strong><a href="javascript:click()"
@@ -276,9 +279,8 @@ table, tr, th, td {
 
 
 	<!-- 회원정보수정 모달창 -->
-	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-		id="myModal">
-		<div class="modal-dialog modal-lg" role="document">
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+		<div class="modal-dialog" role="document">
 			<form action="/TMS/my/update" method="POST">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -326,7 +328,7 @@ table, tr, th, td {
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
 									<button type="button" class="btn"
-										style="background-color: #008374; color: white;"
+										style="background-color: #D8737F; color: white;"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
 									name="roadAddrPart1" value="${user.roadAddrPart1 }" readonly>
@@ -339,11 +341,12 @@ table, tr, th, td {
 					<div class="modal-footer">
 						<a href="/TMS/dropout" class="mr-3" data-toggle="modal"
 							data-target=".bd-example-modal-sm">회원탈퇴</a>
-						<button type="reset" class="btn btn-outline-secondary"
+						<button type="reset" class="btn"
+							style="background-color: #FCBB6D; color: white;"
 							data-dismiss="modal">초기화</button>
 						<input type="hidden" name="id" value="${user.id }" />
 						<button type="submit" id="update" class="btn"
-							style="background-color: #6762a6; color: white;">수정하기</button>
+							style="background-color: #D8737F; color: white;">수정하기</button>
 					</div>
 				</div>
 			</form>
@@ -369,9 +372,11 @@ table, tr, th, td {
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
+					<button type="button" class="btn"
+						style="background-color: #FCBB6D; color: white;"
 						data-dismiss="modal">창닫기</button>
-					<button type="button" class="btn btn-primary"
+					<button type="button" class="btn"
+						style="background-color: #D8737F; color: white;"
 						onclick="location.href='/TMS/my/dropout'">탈퇴하기</button>
 				</div>
 			</div>

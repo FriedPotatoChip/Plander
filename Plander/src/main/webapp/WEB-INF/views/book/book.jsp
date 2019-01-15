@@ -3,20 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/commons/head.jsp" />
 <style>
-body {
+#container {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
-	font-size: 1.2rem;
-}
-
-#container {
+	text-decoration: none;
 	width: 80%;
 	margin: auto;
-}
-
-* {
-	text-decoration: none;
 }
 
 .center {
@@ -75,11 +68,10 @@ body {
 	<br>
 	<br>
 	<br>
-
 	<div id="container">
 
 		<div class="price">
-			<p class="bold" style="color: #008374;">시간당 가격</p>
+			<p class="bold" style="color: #475C7A; font-size: 18px;">시간당 가격</p>
 			<hr>
 			<table border="1px solid" style="width: 100%;">
 				<thead>
@@ -96,7 +88,8 @@ body {
 				</tbody>
 			</table>
 			<br>
-			<p class="bold" style="color: #6762a6;">정기 이용권(1인실)</p>
+			<p class="bold" style="color: #475C7A; font-size: 18px;">정기
+				이용권(1인실)</p>
 			<hr>
 			<table style="width: 100%;" id="ticket">
 				<!-- 정기권 출력 -->
@@ -119,14 +112,14 @@ body {
 				frm.submit();
 			}
 		</script>
-
+		<br>
+		<br>
 		<div style="box-sizing: border-box;">
-			<h3 class="text-center">1호점(신촌점)</h3>
+			<h5 class="text-center bold" style="color: #685D79;">신촌점(1호점)</h5>
 			<hr>
 			<div class="boxoutside">
 				<div class="boximg text-center">
-					<img alt="신촌점" src="/resources/images/main.jpg"
-						style="width: 800px;">
+					<img alt="신촌점" src="/resources/images/m0.jpg" style="width: 700px;">
 				</div>
 				<br>
 				<form method="post">
@@ -142,12 +135,11 @@ body {
 
 		<br> <br> <br>
 		<div style="box-sizing: border-box;">
-			<h3 class="text-center">2호점(종로점)</h3>
+			<h5 class="text-center bold" style="color: #685D79;">종로점(2호점)</h5>
 			<hr>
 			<div class="boxoutside">
 				<div class="boximg text-center">
-					<img alt="종로점" src="/resources/images/main2.jpg"
-						style="width: 800px;">
+					<img alt="종로점" src="/resources/images/m1.jpg" style="width: 700px;">
 				</div>
 				<br>
 				<form method="post">
@@ -163,12 +155,11 @@ body {
 
 		<br> <br> <br>
 		<div style="box-sizing: border-box;">
-			<h3 class="text-center">3호점(강남점)</h3>
+			<h5 class="text-center bold" style="color: #685D79;">강남점(3호점)</h5>
 			<hr>
 			<div class="boxoutside">
 				<div class="boximg text-center">
-					<img alt="강남점" src="/resources/images/main3.jpg"
-						style="width: 800px;">
+					<img alt="강남점" src="/resources/images/m3.jpg" style="width: 700px;">
 				</div>
 				<br>
 				<form method="post">
@@ -182,7 +173,7 @@ body {
 		</div>
 		<!-- 3 호점 끝 -->
 
-		<br>
+		<br> <br> <br>
 		<!-- 풋터 -->
 
 	</div>
@@ -275,7 +266,7 @@ body {
 						})
 
 						var ticket = "";
-						ticket += "<tr><th width='25%'>1일권</th><td width='75%'>";
+						ticket += "<tr><th width='30%'>1일권</th><td width='70%'>";
 						ticket += numberWithCommas(ticketDay) + "원";
 						ticket += "</td></tr><tr><th>정기권 2주</th><td>";
 						ticket += numberWithCommas(ticket2w)
@@ -283,7 +274,7 @@ body {
 						ticket += "</tr><tr><th>정기권 1개월</th><td>";
 						ticket += numberWithCommas(ticketMon)
 								+ "원 (사물함 제공)</td>";
-						ticket += "</tr><tr><th>야간권(22:00 <br>~ 익일 오전 8:00)</th><td>";
+						ticket += "</tr><tr><th>야간권(22:00 ~ 익일 오전 8:00)</th><td>";
 						ticket += numberWithCommas(ticketNight) + "원</td></tr>";
 						$("#ticket").html(ticket);
 
@@ -304,7 +295,7 @@ body {
 								+ numberWithCommas(lab8Pm) + "원</td>";
 						price += "<td class='center'>1시간 "
 								+ numberWithCommas(lab12Pm) + "원</td>";
-						price += "</tr><tr><td>심야 22:00 <br> ~ 익일 오전 8:00</td><td class='center'>1시간 "
+						price += "</tr><tr><td>심야 22:00 ~ 익일 오전 8:00</td><td class='center'>1시간 "
 								+ numberWithCommas(privateNight) + "원</td>";
 						price += "<td class='center'>1시간 "
 								+ numberWithCommas(lab4Night) + "원</td>";

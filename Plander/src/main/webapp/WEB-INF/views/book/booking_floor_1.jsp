@@ -2,23 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>좌석 선택</title>
-<!-- 부트스트랩 ================================================================================ -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<!-- ========================================================================================= -->
-
-<link
-	href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR"
-	rel="stylesheet">
-
+<jsp:include page="/commons/head.jsp" />
 <script>
 	//DB에서 예약된 좌석이랑 비교해서 체크박스 disabled
 	$()
@@ -136,12 +120,9 @@
 
 <style>
 body {
-	width: 90%;
-	margin: 0 auto;
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
-	color: black;
-	font-size: 2em;
+	color: #666;
 }
 
 .center {
@@ -213,15 +194,16 @@ ul>li>a {
 
 /* 현재 페이지 */
 .click {
-	color: black;
+	color: #475C7A;
+	font-size: 17px;
 }
 
 .noback {
-	background-color: #6762a6;
+	background-color: #D8737F;
 	color: white;
 	padding: 0 8px 0 8px;
 	border-radius: 25px;
-	font-size: 15px;
+	font-size: 17px;
 }
 /* 예약 헤더 CSS 끝 */
 /* 버튼 */
@@ -232,13 +214,13 @@ button {
 	font-size: 14px;
 	text-align: center;
 	background-color: white;
-	border: 1px solid #6762a6;
+	border: 1px solid #D8737F;
 	cursor: pointer;
 }
 
 button:hover {
-	border: 1px solid #6762a6;
-	background-color: #6762a6;
+	border: 1px solid #D8737F;
+	background-color: #D8737F;
 	color: white;
 }
 /* 버튼 끝 */
@@ -248,8 +230,6 @@ button:hover {
 <body>
 	<div id="container" style="box-sizing: border-box;">
 		<br>
-		<br>
-		<br>
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
@@ -258,19 +238,22 @@ button:hover {
 							class="select">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b><span id="num" class="noback">STEP2</span>
-							<span id="select" class="click">좌석선택</span></b>
+				<li><a class="menu" href="/TMS/book/selectSeat"> <b><span
+							id="num" class="noback">STEP2</span> <span id="select"
+							class="click">좌석선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b> <span id="num" class="back">STEP3</span>
-							<span id="select" class="select">결제하기</span></b>
+				<li><a class="menu" href="#"> <b> <span
+							id="num" class="back">STEP3</span> <span id="select"
+							class="select">결제하기</span></b>
 				</a></li>
 			</ul>
 		</div>
+		<hr>
 		<!-- 예약 헤더끝 -->
 
 		<div id="ticket">
-			<div class="boxoutside" style="border: 1px solid;">
+			<div class="boxoutside" style="border: 1px solid lightgray;">
 				<form method="post">
 					<div>
 						<h5>☑ 랩실은 4인실 기준 최소 3인 이상 단체예약만 가능합니다.</h5>
@@ -344,7 +327,7 @@ button:hover {
 							<th width="50%" class="center">선택 좌석정보</th>
 						</tr>
 						<tr>
-							<td>${bvo.start_time }~ ${bvo.end_time }</td>
+							<td>${bvo.start_time }~${bvo.end_time }</td>
 							<td id="msg"></td>
 						</tr>
 						<tr>
@@ -354,14 +337,14 @@ button:hover {
 					<!-- 선택 정보 끝 -->
 
 					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="history.back(); return false;">이전단계</button>
+						<button type="button" onclick="location.href='/TMS/book/booking'">이전단계</button>
 						&nbsp;
 						<button type="button" onclick="next(this.form)">다음단계</button>
 					</div>
-					<br>
-					<br> <input type="hidden" name="br_idx" value="${bvo.br_idx }">
-					<input type="hidden" name="roomnum" value="${bvo.roomnum }">
-					<input type="hidden" name="sct_idx" value=""> <input
+					<br> <br> <input type="hidden" name="br_idx"
+						value="${bvo.br_idx }"> <input type="hidden"
+						name="roomnum" value="${bvo.roomnum }"> <input
+						type="hidden" name="sct_idx" value=""> <input
 						type="hidden" name="sct_name" value=""> <input
 						type="hidden" name="time_idx" value="${bvo.time_idx }"> <input
 						type="hidden" name="cabinet" value="${bvo.cabinet }"> <input

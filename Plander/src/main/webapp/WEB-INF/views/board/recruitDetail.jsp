@@ -8,33 +8,77 @@
 <jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style>
-	h3{ margin-top: 0px; }
-	a {text-decoration: none;}
+	a { text-decoration: none; color: #4d4d4d; }
+	.up-del::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 버튼 */
+	.button {
+		display: inline-block;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 14px;
+		text-align: center;
+		background-color: white;
+		border: 1px solid #685D79;
+		cursor: pointer;
+	}
+	
+	.button:hover {
+		border: 1px solid #685D79;
+		background-color: #685D79;
+		color: white;
+	}
+	/* 버튼 끝 */
+	
+	/* 페이징 시작 */
+	.p-n {
+		color: #685D79;
+		font-weight: 700;
+	}
+	.page_edge {
+		border: 1px solid #dee2e6;
+		display: block;
+		padding: .5rem .75rem;
+		color: #4d4d4d;
+		line-height: 1.25;
+	}
+	.now {
+		background-color: #685D79;
+		color: white;
+	}
+	/* 페이징 처리 끝 */
+	
 	.c-comment { padding-left: 52px; 	}
-
+	.commDate { font-size: 0.75em; color: gray;}
+	.user { width: 30px; height: 30px; border-radius: 50%; }
+	
 	ul, ol { list-style: none; }
+	/* 
 	#pagingList li { float: left; }
 	.marginLi { margin-left: 5px; margin-right: 5px; }	
 	.now { background-color: orange; }
-	.commDate { font-size: 0.75em; color: gray;}
-	.user { width: 30px; height: 30px; border-radius: 50%; }
+	 */
+	
 	/* 클릭시 레이어 */	
-.idDiv { cursor: pointer; display: inline-block; }
-.popupLayer {
-	position: absolute;
-	display: none;
-	background-color: #ffffff;
-	border: solid 2px #d0d0d0;
-	width: 130px;
-	height: 120px;
-	padding: 10px;
-	padding-top: 18px; padding-left: 15px;
-}
-.popupLayer div {
-	position: absolute;
-	top: 0px;
-	right: 5px
-}
+	.idDiv { cursor: pointer; display: inline-block; }
+	.popupLayer {
+		position: absolute;
+		display: none;
+		background-color: #ffffff;
+		border: solid 2px #d0d0d0;
+		width: 130px;
+		height: 120px;
+		padding: 10px;
+		padding-top: 18px; padding-left: 15px;
+	}
+	.popupLayer div {
+		position: absolute;
+		top: 0px;
+		right: 5px
+	}
 </style>
 <script>
 /* 신청하기, 신청 취소를 위한 확인값 설정 */
@@ -68,7 +112,7 @@ $(document).ready(function(){
 	<c:if test="${not chkId && usersVO.id != rc_board.id }">
 		$("#hideCancel").css("display", "block");
 	</c:if> 
-		<!-- 신청 버튼 끝 -->
+	<!-- 신청 버튼 끝 -->
 	
 	<!-- 댓글 페이징 -->
 	paging(1);
@@ -137,100 +181,120 @@ function boardList(nowPage){
 }
 </script>
 </head>
-<body> 
-	<!-- 헤더 -->
-<!-- Header -->
-<c:if test="${empty sessionScope.usersVO }">
-	<jsp:include page="/commons/header.jsp" />
-</c:if>
-<c:if test="${not empty sessionScope.usersVO }">
-	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
-		<jsp:include page="/commons/loginheader.jsp" />
-	</c:if>
-	<c:if test="${sessionScope.usersVO.rank == 1 }">
-		<jsp:include page="/commons/adminLoginheader.jsp" />
-	</c:if>
-</c:if>
-<!-- 헤더 끝 -->
-	
- 	<h3>모집글 상세조회 페이지</h3>
-	
-	<div>
-		<a href="/TMS/recruit?nowPage=${nowPage }&cntPerPage=${cntPerPage}" style="font-size: 0.8em;"><strong>모집 게시판</strong></a>
-		<h3>${rc_board.rc_title }</h3>
-		<div class='idDiv' userId='${rc_board.id }'>
-			<c:if test='${empty rc_board.user_profileImagePath }'>
-				<img class="user" src="/resources/images/users.png" alt="user"/>
+<body>
+	<div class="header">
+		<!-- 헤더 -->
+		<!-- Header -->
+		<c:if test="${empty sessionScope.usersVO }">
+			<jsp:include page="/commons/header.jsp" />
+		</c:if>
+		<c:if test="${not empty sessionScope.usersVO }">
+			<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+				<jsp:include page="/commons/loginheader.jsp" />
 			</c:if>
-			<c:if test='${not empty rc_board.user_profileImagePath }'>
-				<img class="user" src="${rc_board.user_profileImagePath }" alt="user"/>
-			</c:if>
-			<span>${rc_board.id }</span> 
-		</div>
-		<p><fmt:formatDate value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm"/></p>
-		<hr>
-		<div id="content">${rc_board.rc_content }</div>
-		<br><br><br>
-	</div>	
-	
-	<div>
-		<!-- 현재원 / 모집정원 -->
-		<p><span id="cur_mem">${rc_board.cur_mem }</span> / <span id="max_mem">${rc_board.max_mem }</span></p>
-		
-		<c:if test="${rc_board.onOff eq 'ON' }">
-			<c:if test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
-				<button onclick="endRecruit()">모집 마감</button><br> 	
+			<c:if test="${sessionScope.usersVO.rank == 1 }">
+				<jsp:include page="/commons/adminLoginheader.jsp" />
 			</c:if>
 		</c:if>
-		<!-- 신청 버튼 시작 -->
-		<button class="appBtn" id="hideApply" style="display:none;" onclick="apply()">신청하기</button>
-		<button class="appBtn" id="hideCancel" style="display:none;" onclick="applyCancel()">신청취소</button>
-		<!-- 신청 버튼 끝 -->
-		
-		<!-- 수정/ 삭제 버튼 -->
-		<c:if test="${(sessionScope.usersVO.id == rc_board.id) || sessionScope.usersVO.rank == 1 }">
-			<button onclick="modify()">수정하기</button>
-			<button onclick="deleteRec()">삭제하기</button>
-		</c:if>
-		
-	</div>
-	<!-- 댓글 출력 -->
-	<div id="comments">
-	</div>
-	
-	<!-- 페이징 시작 -->
-	<div id="paging">
-	<ul id="pagingList">
-
-	</ul>
-	</div>
-	<!-- 페이징 끝 -->
+	</div> <!-- 헤더 끝 -->
 	<br>
 	
-	<!-- 댓글 작성 -->
-	<c:if test="${not empty usersVO }">
+	<div class="bodyform" style="width: 75%; margin: auto;">
 		<div>
-			<form name="commentAjax">
-				<c:if test='${empty usersVO.user_profileImagePath }'>
+			<a href="/TMS/recruit?nowPage=${nowPage }&cntPerPage=${cntPerPage}"
+				style="font-size: 0.8em;">
+				<strong>모집 게시판</strong>
+			</a>
+			<span style="font-size: 0.8em;">&nbsp;120 개의 글</span>
+			<br>
+			<!-- 요기 글목록 한번 더 출력 =============================================================== -->
+			<!-- 헤더 아래 글목록 끝 -->
+			<p>=== 글목록 출력자리 !!</p><br>
+			
+			
+			<h4>${rc_board.rc_title }</h4>
+			<div class='idDiv' userId='${rc_board.id }'>
+				<c:if test='${empty rc_board.user_profileImagePath }'>
 					<img class="user" src="/resources/images/users.png" alt="user"/>
 				</c:if>
-				<c:if test='${not empty usersVO.user_profileImagePath }'>
-					<img class="user" src="${usersVO.user_profileImagePath }" alt="user"/>
+				<c:if test='${not empty rc_board.user_profileImagePath }'>
+					<img class="user" src="${rc_board.user_profileImagePath }" alt="user"/>
 				</c:if>
-				<input type="text" value="${usersVO.id }" name="id" readonly><br>
-				<textarea rows="8" cols="80" name="c_content" id="c_content" required></textarea>
-				<input type="hidden" value="${rc_board.rc_idx }" name="rc_idx">
-				<input type="button" onclick="registerComm()" value="댓글단다">
-			</form>
+				<span>${rc_board.id }</span>&nbsp;&nbsp;&nbsp;
+				<span><fmt:formatDate value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm"/></span>
+			</div>
+			
+			<hr>
+			<div id="content">${rc_board.rc_content }</div>
+			<br><br><br>
+		</div>	
+		
+		<div>
+			<!-- 현재원 / 모집정원 -->
+			<p>
+				<span id="cur_mem">${rc_board.cur_mem }</span> / <span id="max_mem">${rc_board.max_mem }</span>
+			</p>
+			
+			<c:if test="${rc_board.onOff eq 'ON' }">
+				<c:if test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
+					<button onclick="endRecruit()">모집 마감</button><br> 	
+				</c:if>
+			</c:if>
+			
+			<!-- 신청 버튼 시작 -->
+			<button class="appBtn button" id="hideApply" style="display:none;" onclick="apply()">신청하기</button>
+			<button class="appBtn button" id="hideCancel" style="display:none;" onclick="applyCancel()">신청취소</button>
+			<!-- 신청 버튼 끝 -->
+			
+			<!-- 수정/ 삭제 버튼 -->
+			<div class="up-del">
+				<c:if test="${(sessionScope.usersVO.id == rc_board.id) || sessionScope.usersVO.rank == 1 }">
+					<button class="button" onclick="modify()">수정하기</button>
+					<button class="button" onclick="deleteRec()">삭제하기</button>
+				</c:if>
+			</div>
+			
 		</div>
-	</c:if>
-	<br>
-	<br>
-	<br>
+		<!-- 댓글 출력 -->
+		<div id="comments">
+		</div>
+		
+		<!-- 페이징 시작 -->
+		<div id="paging">
+			<ul id="pagingList">
+		
+			</ul>
+		</div>
+		<!-- 페이징 끝 -->
+		<br>
+		
+		<!-- 댓글 작성 -->
+		<c:if test="${not empty usersVO }">
+			<div>
+				<form name="commentAjax">
+					<c:if test='${empty usersVO.user_profileImagePath }'>
+						<img class="user" src="/resources/images/users.png" alt="user"/>
+					</c:if>
+					<c:if test='${not empty usersVO.user_profileImagePath }'>
+						<img class="user" src="${usersVO.user_profileImagePath }" alt="user"/>
+					</c:if>
+					<input type="text" value="${usersVO.id }" name="id" readonly><br>
+					<textarea rows="8" cols="80" name="c_content" id="c_content" required></textarea>
+					<input type="hidden" value="${rc_board.rc_idx }" name="rc_idx">
+					<input type="button" onclick="registerComm()" value="댓글단다">
+				</form>
+			</div>
+		</c:if>
+		<br>
+		<br>
+		<br>
+		
+		<!-- 글 목록 보여주기 (5개씩만) -->
+		<div id="recruitListAjax">
+		</div>	
+		
+	</div> <!-- bodyform 끝 -->
 	
-	<!-- 글 목록 보여주기 (5개씩만) -->
-	<div id="recruitListAjax">
-	</div>	
 	
 <script>
 	/* 신청하기 */

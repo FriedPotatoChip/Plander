@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/commons/head.jsp"></jsp:include>
-
-
 <style>
-
+.centered {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
 
 tr, td {
 	border-bottom: 1px solid #000;
@@ -18,34 +20,37 @@ tr:last-child td {
 }
 
 /* 페이징 시작 */
-
-#pagingList {
-	list-style: none;
+.p-n {
+	color: #685D79;
+	font-weight: 700;
 }
 
-#pagingList li {
-	display: inline;
-}
-
-.marginLi {
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-a {
-	text-decoration: none;
-	padding: 10px;
+.page_edge {
+	border: 1px solid #dee2e6;
+	display: block;
+	padding: .5rem .75rem;
+	color: #4d4d4d;
+	line-height: 1.25;
 }
 
 .now {
-	background-color: #8a7967;
+	background-color: #D8737F;
 	color: white;
 }
 
-#paging {
-	margin-top: 30px;
+.now:hover {
+	color: #475C7A;
 }
-/* 페이징 끝 */
+
+#paging {
+	margin: 10px;
+}
+
+/* 페이징 처리 끝 */
+a {
+	text-decoration: none;
+	color: #475C7A;
+}
 </style>
 </head>
 
@@ -91,31 +96,34 @@ a {
 
 				<!-- 페이징 시작 -->
 				<div id="paging">
-					<ul id="pagingList">
+					<ul id="pagingList"
+						class="pagination justify-content-center centered">
 						<c:if test="${page.chkStartPage }">
-							<li><a href="#"
-								onclick="fetch_book('/TMS/my/my_seat?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li><a href="#"
-								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+							<li class="page_edge"><a class="p-n" href="#"
+								onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">〈</a></li>
+							<li class="page_edge"><a class="p-n" href="#"
+								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.startPage-1 }')"><span
+									style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
-								<li><a class="now marginLi" href="#"
+								<li class="page_edge now"><a class="p-n now" href="#"
 									onclick="fetch_book('/TMS/my/my_seat?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
-								<li><a class="marginLi" href="#"
+								<li class="page_edge"><a class="p-n" href="#"
 									onclick="fetch_book('/TMS/my/my_seat?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
-							<li><a href="#"
-								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
-							<li><a href="#"
-								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+							<li class="page_edge"><a class="p-n" href="#"
+								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.endPage+1 }')"><span
+									style="font-size: 0.5em;">…</span></a></li>
+							<li class="page_edge"><a class="p-n" href="#"
+								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>

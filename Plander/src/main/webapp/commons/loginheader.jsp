@@ -45,12 +45,13 @@ a {
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
+	font-weight: 400;
 }
 
 .dropdown-content a:hover {
 	background-color: #475C7A;
 	color: white;
-	font-weight: 700;
+	font-weight: 400;
 }
 
 .dropdown:hover .dropdown-content {
@@ -200,6 +201,11 @@ a {
 							var title = "";
 							$("#almNum").html("&nbsp;" + almNum);
 							$("#almDivHide").css("background-color", "none");
+							if (almNum == 0){
+								$("#almSpan").html("");
+								$("#almDivHide").css("background-color",
+										"white");
+							}
 							if (almNum != 0) {
 								$("#almSpan").html("&nbsp;" + almNum);
 								$("#almDivHide").css("background-color",
@@ -223,7 +229,7 @@ a {
 											});
 							$("#msgDiv").html(html);
 
-							setTimeout(newMsgAlarm, 5000);
+							setTimeout(newMsgAlarm, 3000);
 						},
 						error : function(error) {
 
