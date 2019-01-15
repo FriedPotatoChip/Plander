@@ -154,6 +154,21 @@
 		where rn between #{start} and #{end}
 	</select>
 	
+	<!-- 총 결제내역 -->	
+	<select id="receiptTotal" resultType="int">
+		select count(*)
+	        from booking b, payment p, seats s
+	        where p.bk_idx = b.bk_idx
+	        and s.s_idx = b.s_idx
+	</select>
+	
+	<select id="receiptSum" resultType="int">
+		select sum(price)
+	        from booking b, payment p, seats s
+	        where p.bk_idx = b.bk_idx
+	        and s.s_idx = b.s_idx
+	</select>
+	
 	<select id="getTotalSearch" resultType="int" parameterType="map">
 		select count(*) from booking b, payment p, seats s 
 		where p.bk_idx = b.bk_idx

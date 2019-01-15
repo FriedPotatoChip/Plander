@@ -9,7 +9,7 @@
 } */
 a {
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 17px;
 	color: #666;
 }
 
@@ -423,7 +423,7 @@ a {
 
 <!-- 회원가입 모달창 -->
 <div class="modal fade" id="join" tabindex="-1"
-	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: scroll">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 

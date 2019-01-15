@@ -123,18 +123,21 @@ input[type=submit]:hover {
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 			<h3>회원관리</h3>
+			<hr>
 
-			<div class="table-responsive" style="margin-top: 3rem;">
+			<div class="table-responsive">
 
-				<div style="width: 60%; margin: 0 auto; float:left;">
-					<form action="/TMS/admin/searchList" class="form-inline my-2 my-lg-0">
+				<div style="width: 60%; margin: 0 auto; float: left;">
+					<form action="/TMS/admin/searchList"
+						class="form-inline my-2 my-lg-0">
 						<!-- 검색창 -->
 						<select class="custom-select my-1 mr-sm-2" name="target">
 							<option value="id">ID</option>
 							<option value="name">이름</option>
 						</select> <input class="form-control mr-sm-2" type="search" name="keyword"
 							aria-label="Search" placeholder="search...">
-						<button class="btn btn-outline-success my-2 my-sm-0" id="submit" type="submit">검색</button>
+						<button class="btn btn-outline-success my-2 my-sm-0" id="submit"
+							type="submit">검색</button>
 						<input type="hidden" name="cntPerPage" value="${page.cntPerPage }">
 					</form>
 				</div>
@@ -149,8 +152,8 @@ input[type=submit]:hover {
 					<option value="20"
 						<c:if test="${page.cntPerPage == 20}">selected</c:if>>20</option>
 				</select>
-
-				<table class="table table-striped table-hover"
+				
+				<table class="table table-sm table-striped table-hover"
 					style="text-align: center;">
 					<thead class="thead-light">
 						<tr>
@@ -229,14 +232,6 @@ input[type=submit]:hover {
 								</a></li>
 							</c:otherwise>
 						</c:choose>
-						<%-- <c:if test="${page.chkStartPage }">
-							<li class="page-item"><a
-								href="/TMS/admin?nowPage=1&cntPerPage=${page.cntPerPage}"
-								class="page-link"><button>&lt;&lt;</button></a></li>
-							<li class="page-item"><a
-								href="/TMS/admin?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
-								class="page-link"><button>&lt;</button></a></li>
-						</c:if> --%>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
@@ -252,15 +247,6 @@ input[type=submit]:hover {
 							</c:if>
 
 						</c:forEach>
-
-						<%-- <c:if test="${page.chkEndPage }">
-							<li class="page-item"><a
-								href="/TMS/admin?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
-								class="page-link"><button>&gt;</button></a></li>
-							<li class="page-item"><a
-								href="/TMS/admin?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
-								class="page-link"><button>&gt;&gt;</button></a></li>
-						</c:if> --%>
 
 						<c:choose>
 							<c:when test="${page.chkEndPage }">
@@ -307,10 +293,6 @@ input[type=submit]:hover {
 			location.href = "/TMS/admin?nowPage=${page.nowPage }&cntPerPage="
 					+ cntPerPage;
 		}
-
-		/* function userDelete() {
-			location.href = "/TMS/admin/delete";
-		} */
 	</script>
 
 

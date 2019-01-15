@@ -9,13 +9,16 @@
 <meta charset="UTF-8">
 <title>관리자</title>
 	
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <!-- Bootstrap core CSS -->
 <link href="/resources/css/bootstrap.min2.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="/resources/css/dashboard.css" rel="stylesheet">
+
+<!-- 버튼 아이콘 링크 -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- ======================================================================================== -->
 
 <style>
@@ -177,6 +180,7 @@ h3 {
 			</nav>
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 				<h3 class="h3">개인 사물함 배치도</h3>
+				<hr>
 				<div class="use d-inline-flex"
 					style="width: 4%; height: 3%; background-color: #d0bfff;"></div>
 				<span>&nbsp;: 사용중</span>
@@ -218,13 +222,9 @@ h3 {
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script> -->
-
-	<script>
-		window.jQuery || document.write('_$tag____________________________________________________$tag_____')
-	</script>
 	<script src="/resources/js/popper.min.js"></script>
 	<script src="/resources/js/bootstrap.min2.js"></script>
 	Icons

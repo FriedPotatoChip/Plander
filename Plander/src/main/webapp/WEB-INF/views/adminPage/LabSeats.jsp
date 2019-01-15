@@ -13,6 +13,7 @@
 <meta name="author" content="">
 <title>관리자</title>
 
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <!-- Bootstrap core CSS -->
 <link href="/resources/css/bootstrap.min2.css" rel="stylesheet">
@@ -140,6 +141,10 @@ style>body, html {
 	color: white;
 	text-decoration: none;
 }
+h3 {
+	margin-top: 2rem;
+	text-align: center;
+}
 </style>
 </head>
 
@@ -195,7 +200,8 @@ style>body, html {
 			</nav>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<h2 style="text-align: center;" class="mb-5">개인실 좌석 현황</h2>
+			<h3>개인실 좌석 현황</h3>
+			<br>
 			<div id="container" style="box-sizing: border-box;">
 
 				<div id="ticket">
@@ -413,14 +419,6 @@ style>body, html {
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
 	<script src="/resources/js/popper.min.js"></script>
 	<script src="/resources/js/bootstrap.min2.js"></script>
 	Icons

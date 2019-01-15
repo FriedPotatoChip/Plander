@@ -81,7 +81,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("Message")
-	public String Message(HttpSession session) {
+	public String Message() {
 
 		return "adminPage/Message";
 	}
@@ -201,6 +201,8 @@ public class AdminController {
 		
 		model.addAttribute("page", page);
 		model.addAttribute("receipt", service.receiptList(page));
+		model.addAttribute("count", service.receiptTotal());
+		model.addAttribute("sum", service.receiptSum());
 		return "adminPage/receipt";
 	}
 	

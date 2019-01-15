@@ -64,4 +64,10 @@ public interface AdminMapper {
 	//결제페이지 검색 후 결과
 	public int getTotalSearch(Map<String, Object> map);
 	
+	//총 결제 내역
+	public int receiptTotal();
+	
+	//총 결제금액
+	public int receiptSum();
+	
 }
