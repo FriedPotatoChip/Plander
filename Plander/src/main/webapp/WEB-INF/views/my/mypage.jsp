@@ -187,7 +187,8 @@ h3 {
 
 	<div class="container">
 		<!-- 내정보 -->
-		<div class="my_info" style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
+		<div class="my_info"
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
 			<h5 class="d-inline" style="margin-top: 30px; color: #D8737F;">
 				<strong style="color: #475C7A;">${usersVO.name }</strong> 님의 정보
 			</h5>
@@ -237,7 +238,8 @@ h3 {
 
 
 		<!-- 내예약 -->
-		<div class="myBook" style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
+		<div class="myBook"
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내예약</h5>
 			<div class="myBook_nav d-inline">
 				<strong><a href="javascript:click()"
@@ -256,7 +258,8 @@ h3 {
 
 
 		<!-- 내글목록 -->
-		<div class="myRecruit" style="border: 1px solid lightgray; padding: 20px;">
+		<div class="myRecruit"
+			style="border: 1px solid lightgray; padding: 20px;">
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내글목록</h5>
 			<div class="myRecruit_nav d-inline mr-3">
 				<strong><a href="javascript:click()"
@@ -276,8 +279,7 @@ h3 {
 
 
 	<!-- 회원정보수정 모달창 -->
-	<div class="modal fade" tabindex="-1" role="dialog"
-		id="myModal">
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
 		<div class="modal-dialog" role="document">
 			<form action="/TMS/my/update" method="POST">
 				<div class="modal-content">
@@ -326,7 +328,7 @@ h3 {
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
 									<button type="button" class="btn"
-										style="background-color: #FCBB6D; color: white;"
+										style="background-color: #D8737F; color: white;"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
 									name="roadAddrPart1" value="${user.roadAddrPart1 }" readonly>
@@ -339,11 +341,12 @@ h3 {
 					<div class="modal-footer">
 						<a href="/TMS/dropout" class="mr-3" data-toggle="modal"
 							data-target=".bd-example-modal-sm">회원탈퇴</a>
-						<button type="reset" class="btn btn-light"
+						<button type="reset" class="btn"
+							style="background-color: #FCBB6D; color: white;"
 							data-dismiss="modal">초기화</button>
 						<input type="hidden" name="id" value="${user.id }" />
 						<button type="submit" id="update" class="btn"
-							style="background-color: #475C7A; color: white;">수정하기</button>
+							style="background-color: #D8737F; color: white;">수정하기</button>
 					</div>
 				</div>
 			</form>
@@ -369,9 +372,11 @@ h3 {
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-light"
+					<button type="button" class="btn"
+						style="background-color: #FCBB6D; color: white;"
 						data-dismiss="modal">창닫기</button>
-					<button type="button" class="btn" style="background-color: #475C7A; color: white;"
+					<button type="button" class="btn"
+						style="background-color: #D8737F; color: white;"
 						onclick="location.href='/TMS/my/dropout'">탈퇴하기</button>
 				</div>
 			</div>

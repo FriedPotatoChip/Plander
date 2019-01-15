@@ -6,7 +6,6 @@
 
 
 <style>
-
 tr, td {
 	border-bottom: 1px solid #000;
 	padding-top: 10px;
@@ -18,27 +17,37 @@ tr:last-child td {
 }
 
 /* 페이징 시작 */
-#pagingList {
-	list-style: none;
+.p-n {
+	color: #685D79;
+	font-weight: 700;
 }
 
-#pagingList li {
-	display: inline;
-}
-
-.marginLi {
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-a {
-	text-decoration: none;
+.page_edge {
+	border: 1px solid #dee2e6;
+	display: block;
+	padding: .5rem .75rem;
+	color: #4d4d4d;
+	line-height: 1.25;
 }
 
 .now {
-	background-color: orange;
+	background-color: #D8737F;
+	color: white;
 }
-/* 페이징 끝 */
+
+.now:hover {
+	color: #475C7A;
+}
+
+#paging {
+	margin: 10px;
+}
+
+/* 페이징 처리 끝 */
+a {
+	text-decoration: none;
+	color: #475C7A;
+}
 </style>
 </head>
 
@@ -46,10 +55,10 @@ a {
 <body>
 	<thead>
 		<tr>
-			<th>모집글제목</th>
-			<th>글등록일</th>
-			<th>신청자아이디</th>
-			<th>신청일</th>
+			<th style="width: 30%;">모집글제목</th>
+			<th style="width: 25%;">글등록일</th>
+			<th style="width: 20%;">신청자아이디</th>
+			<th style="width: 25%;">신청일</th>
 		</tr>
 	</thead>
 
@@ -77,27 +86,39 @@ a {
 
 				<!-- 페이징 시작 -->
 				<div id="paging">
-					<ul id="pagingList">
+					<ul id="pagingList"
+						class="pagination justify-content-center centered">
 						<c:if test="${page.chkStartPage }">
-							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+							<li class="page_edge"><a class="p-n"
+								href="javascript:click()"
+								onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')">〈</a></li>
+							<li class="page_edge"><a class="p-n"
+								href="javascript:click()"
+								onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.startPage-1 }')"><span style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
-								<li><a class="now marginLi" href="javascript:click()" 
+								<li class="page_edge now"><a class="p-n now"
+									href="javascript:click()"
 									onclick="fetch_recruit('/TMS/my/applyList?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
-								<li><a class="marginLi" href="javascript:click()" 
+								<li class="page_edge"><a class="p-n"
+									href="javascript:click()"
 									onclick="fetch_recruit('/TMS/my/applyList?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
-							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.endPage+1 }')"><button>&gt;</button></a></li>
-							<li><a href="javascript:click()" onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.lastPage }')"><button>&gt;&gt;</button></a></li>
+							<li class="page_edge"><a class="p-n"
+								href="javascript:click()"
+								onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.endPage+1 }')"><span
+									style="font-size: 0.5em;">…</span></a></li>
+							<li class="page_edge"><a class="p-n"
+								href="javascript:click()"
+								onclick="fetch_recruit('/TMS/my/applyList?nowPage=${page.lastPage }')">〉〉</a></li>
 						</c:if>
 					</ul>
 				</div>
