@@ -249,13 +249,13 @@
 				</c:if>
 				<c:forEach var="p" begin="${page.startPage }" end="${page.endPage }">
 					<c:if test="${p == page.nowPage }">
-						<li class="page_edge">
-							<a class="p-n" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+						<li class="page_edge now">
+							<a style="color: white;" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 						</li>
 					</c:if>
 					<c:if test="${p != page.nowPage }">
 						<li class="page_edge">
-							<a class="p-n" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+							<a href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 						</li>
 					</c:if>
 		
