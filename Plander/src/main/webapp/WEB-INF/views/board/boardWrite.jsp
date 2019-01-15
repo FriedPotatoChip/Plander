@@ -91,13 +91,19 @@
 		</c:if>
 	</div> <!-- 헤더 끝 -->
 	<hr><br>
-	<p class="center" style="font-weight: 700; font-size: 2em;">
-		[ 글쓰기 ]
-	</p>
+	
+	<!-- 후기 게시판일 때 -->
+	<c:if test="${ct_idx == 3 }">
+		<p class="center" style="font-weight: 700; font-size: 2em;">[ REVIEW ]</p>
+	</c:if>
+	<!-- 후기 게시판이 아닐 때  -->
+	<c:if test="${ct_idx != 3 }">
+		<p class="center" style="font-weight: 700; font-size: 2em;">[ 글쓰기 ]</p>
+	</c:if>
 	
 	<div class="bodyform"
-	style="width: 75%; margin: auto; background-color: #e9ecef; padding: 20px;
-	border-radius: 15px;">
+		style="width: 75%; margin: auto; background-color: #e9ecef; padding: 20px;
+		border-radius: 15px;">
 		<div> <!-- 글쓰기 폼 -->
 			<form id="articleForm" role="form" action="/TMS/boardWrite" method="post"><!--  -->
 				<br style="clear: both">
@@ -145,11 +151,13 @@
 					<input class="button" type="reset" value="취소">
 				</div>
 				<br>
+				
 			</form>
 		</div> <!-- 글쓰기 폼 끝 -->
-	<br><hr>
+	<br>
 	</div> <!-- bodyform 끝 -->
 	<br><br><br>
+	<hr>
 	<!-- 허해서 넣은 풋터 -->
 	<p class="center" style="font-size: 17px;">© turtlesmiracle</p><br><br>
 	<!-- 허해서 넣은 풋터 끝 -->
