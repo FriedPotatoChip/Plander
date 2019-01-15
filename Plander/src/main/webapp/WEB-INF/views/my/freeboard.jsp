@@ -74,7 +74,7 @@ a {
 			<c:otherwise>
 				<c:forEach var="board" items="${list }">
 					<tr>
-						<td><a href="/TMS/my/boardDetail?b_idx=${board.b_idx }">${board.b_title }</a></td>
+						<td><a href="/TMS/boardDetail?idx=${board.b_idx }">${board.b_title }</a></td>
 						<td>${board.hit }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${board.b_regdate }" /></td>

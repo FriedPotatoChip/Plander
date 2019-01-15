@@ -73,7 +73,7 @@ a {
 			<c:otherwise>
 				<c:forEach var="my_recruit" items="${list }">
 					<tr>
-						<td><a href="/TMS/my/detail?rc_idx=${my_recruit.rc_idx }">${my_recruit.rc_title }</a>
+						<td><a href="/TMS/recruitDetail?idx=${my_recruit.rc_idx }">${my_recruit.rc_title }</a>
 						</td>
 						<td>${my_recruit.cur_mem }/${my_recruit.max_mem }</td>
 						<td>${my_recruit.hit }</td>

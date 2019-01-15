@@ -78,7 +78,7 @@ a {
 					<tr>
 						<td>${my_recruit_comment.rc_idx }</td>
 						<td><a
-							href="/TMS/my/detail?rc_idx=${my_recruit_comment.rc_idx }">${my_recruit_comment.rc_title }</a></td>
+							href="/TMS/recruitDetail?idx=${my_recruit_comment.rc_idx }">${my_recruit_comment.rc_title }</a></td>
 						<td>${my_recruit_comment.c_content }</td>
 						<td>${my_recruit_comment.id }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"

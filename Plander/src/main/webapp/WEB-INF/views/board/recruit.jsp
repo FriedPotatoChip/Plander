@@ -176,7 +176,8 @@
 						<td>
 							<a href="#" onclick="to_detail(${list.rc_idx})">${list.rc_title }</a>
 							<c:if test="${list.cnt != 0 }">
-								<a href="#" onclick="to_detail(${list.rc_idx})">[${list.cnt }]</a>
+								<a href="#" onclick="to_detail(${list.rc_idx})">
+								<span style='color: #D8737F;'>[${list.cnt }]</span></a>
 							</c:if>
 						</td>
 						<td>

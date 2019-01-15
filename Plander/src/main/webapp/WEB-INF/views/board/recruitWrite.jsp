@@ -91,7 +91,7 @@
 		</c:if>
 	</div> <!-- 헤더 끝 -->
 	
-	<hr><br>
+	<br>
 	<p class="center" style="font-weight: 700; font-size: 2em;">[ 글쓰기 ]</p>
 	
 	<div class="bodyform"
@@ -115,7 +115,6 @@
 					</tr>  
 					<tr>
 						<td>
-							<br>
 							<textarea class="form-control" id="summernote" name="rc_content" placeholder="content" required></textarea>
 						</td>
 					</tr>

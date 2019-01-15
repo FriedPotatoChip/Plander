@@ -75,7 +75,7 @@ a {
 			<c:otherwise>
 				<c:forEach var="applyList" items="${list }">
 					<tr>
-						<td><a href="/TMS/my/detail?rc_idx=${applyList.rc_idx }">${applyList.rc_title }</a></td>
+						<td><a href="/TMS/recruitDetail?idx=${applyList.rc_idx }">${applyList.rc_title }</a></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${applyList.rc_regdate }" /></td>
 						<td>${applyList.id }</td>

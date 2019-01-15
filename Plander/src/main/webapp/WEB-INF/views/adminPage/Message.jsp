@@ -2,13 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>관리자</title>
-
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <!-- Bootstrap core CSS -->
@@ -17,8 +10,36 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/dashboard.css" rel="stylesheet">
 <!-- ======================================================================================== -->
+<!-- fonts -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 
 <style>
+body {
+	font-family: 'NanumSquare', sans-serif;
+	color: #666;
+}
+
+.container {
+	max-width: 1500px;
+}
+
+.normal {
+	font-weight: 400
+}
+
+.bold {
+	font-weight: 700
+}
+
+.bolder {
+	font-weight: 800
+}
+
+.light {
+	font-weight: 300
+}
+
 .box {
 	display: table;
 	table-layout: fixed;
@@ -96,8 +117,15 @@ h3 {
 	clear: both
 }
 
+.centered {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
 .myBook_nav {
-	float: right; position : relative;
+	float: right;
+	position: relative;
 	left: -45%;
 	position: relative;
 }
@@ -176,14 +204,21 @@ h3 {
 				</div>
 			</nav>
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-				<h3>[ 쪽지함 ]</h3>
-				<div class="myBook_nav">
-					<strong><a href="javascript:click()"
-						onclick="fetch_book('/TMS/admin/recvMsg?nowPage=1')">받은쪽지</a></strong>
-					&nbsp;|&nbsp;<strong><a href="javascript:click()"
-						onclick="fetch_book('/TMS/admin/sendMsg?nowPage=1')">보낸쪽지</a></strong>
-					<table id="myBook"></table>
-				</div>
+			<h4 class="text-center mt-5" style="color: #475C7A;">쪽지함</h4>
+			<div style="width: 80%; margin: 0 auto; text-align: center;">
+				<p class="d-inline">
+					<a href="javascript:click()"
+						onclick="fetch_book('/TMS/admin/recvMsg?nowPage=1')">받은쪽지</a>
+				</p>
+				&nbsp;|&nbsp;
+				<p class="d-inline">
+					<a href="javascript:click()"
+						onclick="fetch_book('/TMS/admin/sendMsg?nowPage=1')">보낸쪽지</a>
+				</p>
+			</div>
+			<div class="myBook_nav" style="margin-top: 30px;">
+				<table id="myBook" class="centered" style="width: 800px;"></table>
+			</div>
 			</main>
 		</div>
 	</div>
@@ -197,15 +232,15 @@ h3 {
 	<script>
 		feather.replace()
 	</script>
-	
+
 	<script>
-	$(function() {
-		$('.idDiv').on("click", function() {
-			console.log("asdfas");
+		$(function() {
+			$('.idDiv').on("click", function() {
+				console.log("asdfas");
+			})
 		})
-	})
 	</script>
-	
+
 	<script>
 		// 클릭 시 스크롤이 자동으로 위로 올라가는 현상
 		function click() {
@@ -244,59 +279,72 @@ h3 {
 			fetch_book('/TMS/admin/recvMsg?nowPage=' + nowPage);
 		}
 	</script>
-<script>
-function closeLayer( obj ) {
-	$(".popupLayer").hide();
-}
-function showBox(e, tag){
-		console.log("idDiv 클릭됨");
-		var sWidth = window.innerWidth;
-		var sHeight = window.innerHeight;
-
-		var oWidth = $('.popupLayer').width();
-		var oHeight = $('.popupLayer').height();
-
-		
-		// 레이어가 나타날 위치를 셋팅한다.
-		window.divLeft = event.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
-		window.divTop = event.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
-		console.log("X: "+ e.clientX);
-		console.log("Y: "+ e.clientY);
-
-		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
-		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
-		if( divTop + oHeight > sHeight ) divTop -= oHeight;
-
-		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
-		if( divLeft < 0 ) divLeft = 0;
-		if( divTop < 0 ) divTop = 0;
-
-		$('.popupLayer').css({
-			"top": divTop,
-			"left": divLeft,
-			"position": "absolute"
-		}).show();
-		console.log(this);
-		var userId = $(tag).attr("userId");
-		console.log($(tag).attr("userId"));
-		$("#sendMsg").click(function(){
+	<script>
+		function closeLayer(obj) {
 			$(".popupLayer").hide();
-			if ('${usersVO.id}' == ''){
-				alert("로그인 후 이용 가능합니다.");
-				return false;
-			} 
-			window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
-		});
-		$("#userProfile").click(function(){
-			$(".popupLayer").hide();
-			if ('${usersVO.id}' == ''){
-				alert("로그인 후 이용 가능합니다.");
-				return false;
-			} 
-			window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
-		});
-}
-</script>
+		}
+		function showBox(e, tag) {
+			console.log("idDiv 클릭됨");
+			var sWidth = window.innerWidth;
+			var sHeight = window.innerHeight;
+
+			var oWidth = $('.popupLayer').width();
+			var oHeight = $('.popupLayer').height();
+
+			// 레이어가 나타날 위치를 셋팅한다.
+			window.divLeft = event.clientX
+					+ 10
+					+ (document.documentElement.scrollLeft ? document.documentElement.scrollLeft
+							: document.body.scrollLeft);
+			window.divTop = event.clientY
+					+ 5
+					+ (document.documentElement.scrollTop ? document.documentElement.scrollTop
+							: document.body.scrollTop);
+			console.log("X: " + e.clientX);
+			console.log("Y: " + e.clientY);
+
+			// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+			if (divLeft + oWidth > sWidth)
+				divLeft -= oWidth;
+			if (divTop + oHeight > sHeight)
+				divTop -= oHeight;
+
+			// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+			if (divLeft < 0)
+				divLeft = 0;
+			if (divTop < 0)
+				divTop = 0;
+
+			$('.popupLayer').css({
+				"top" : divTop,
+				"left" : divLeft,
+				"position" : "absolute"
+			}).show();
+			console.log(this);
+			var userId = $(tag).attr("userId");
+			console.log($(tag).attr("userId"));
+			$("#sendMsg").click(
+					function() {
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == '') {
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						}
+						window.open("/TMS/sendMsg?recv_id=" + userId, "쪽지 보내기",
+								"width=500, height=500");
+					});
+			$("#userProfile").click(
+					function() {
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == '') {
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						}
+						window.open("/TMS/profileSummary?id=" + userId,
+								"회원 정보", "width=500, height=500");
+					});
+		}
+	</script>
 	<div class="popupLayer">
 		<div>
 			<span style="cursor: pointer; font-size: 0.85em; color: gray;"
