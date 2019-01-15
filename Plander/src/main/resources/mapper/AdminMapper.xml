@@ -80,26 +80,33 @@
 	<!-- 회원삭제 -->
 	<delete id="userDelete" parameterType="int">
 		delete from users
-		where u_idx = #{u_idx}
+		where
+		u_idx = #{u_idx}
 	</delete>
 
 	<!-- 좌석별 현황 -->
 	<select id="BookingSeats" resultType="com.bit.domain.BookingVO">
 		select distinct b.id, b.start_time, b.end_time, s.s_col, b.bk_idx
-		from seats_view s, booking b
+		from
+		seats_view s, booking b
 		where s.s_idx = b.s_idx
 		and br_idx = #{br_idx}
 		and roomnum = #{roomnum}
 		<!-- and s_col = #{s_col} -->
 		and (
-		(to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time,
+		(to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and
+		to_char(end_time,
 		'YYYYMM') = to_char(sysdate, 'YYYYMM'))
 		or
-		(to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and to_char(end_time,
-		'YYYYMM') = to_char(add_months(sysdate, 1), 'YYYYMM'))
+		(to_char(start_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM') and
+		to_char(end_time,
+		'YYYYMM') = to_char(add_months(sysdate, 1),
+		'YYYYMM'))
 		or
-		(to_char(start_time, 'YYYYMM') = to_char(add_months(sysdate, -1), 'YYYYMM') and
-		to_char(end_time, 'YYYYMM') = to_char(sysdate, 'YYYYMM'))
+		(to_char(start_time, 'YYYYMM') =
+		to_char(add_months(sysdate, -1), 'YYYYMM') and
+		to_char(end_time,
+		'YYYYMM') = to_char(sysdate, 'YYYYMM'))
 		)
 	</select>
 
@@ -126,54 +133,20 @@
 		    where rn between #{start} and #{end}
     	]]>
 	</select>
-	
+
 	<!-- 결제내역 검색 후 리스트출력 -->
 	<select id="getListSearch" resultType="com.bit.domain.BookingVO"
 		parameterType="map">
 		select *
 		from (
-			select rownum rn, p.p_idx, b.id, bk_regdate, price, p.payment, s.s_col, s.br_idx
-			from booking b, payment p, seats s
-			where p.bk_idx = b.bk_idx
-	        and s.s_idx = b.s_idx
-	        and
-			<choose>
-				<when test="target == 'id'.toString()">
-					id like '%' || #{keyword} || '%'
-				</when>
-	
-				<when test="target == 'p_idx'.toString()">
-					p_idx like '%' || #{keyword} || '%'
-				</when>
-				
-				<when test="target == 'payment'.toString()">
-					payment like '%' || #{keyword} || '%'
-				</when>
-			</choose>
-			)
-		where rn between #{start} and #{end}
-	</select>
-	
-	<!-- 총 결제내역 -->	
-	<select id="receiptTotal" resultType="int">
-		select count(*)
-	        from booking b, payment p, seats s
-	        where p.bk_idx = b.bk_idx
-	        and s.s_idx = b.s_idx
-	</select>
-	
-	<select id="receiptSum" resultType="int">
-		select sum(price)
-	        from booking b, payment p, seats s
-	        where p.bk_idx = b.bk_idx
-	        and s.s_idx = b.s_idx
-	</select>
-	
-	<select id="getTotalSearch" resultType="int" parameterType="map">
-		select count(*) from booking b, payment p, seats s 
-		where p.bk_idx = b.bk_idx
-	    and s.s_idx = b.s_idx
-	    and
+		select rownum rn, p.p_idx, b.id, bk_regdate, price,
+		p.payment, s.s_col,
+		s.br_idx
+		from booking b, payment p, seats s
+		where
+		p.bk_idx = b.bk_idx
+		and s.s_idx = b.s_idx
+		and
 		<choose>
 			<when test="target == 'id'.toString()">
 				id like '%' || #{keyword} || '%'
@@ -182,13 +155,54 @@
 			<when test="target == 'p_idx'.toString()">
 				p_idx like '%' || #{keyword} || '%'
 			</when>
-			
+
+			<when test="target == 'payment'.toString()">
+				payment like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+		)
+		where rn between #{start} and #{end}
+	</select>
+
+	<!-- 총 결제내역 -->
+	<select id="receiptTotal" resultType="int">
+		select count(*)
+		from booking
+		b, payment p, seats s
+		where p.bk_idx = b.bk_idx
+		and s.s_idx = b.s_idx
+	</select>
+
+	<!-- 총 결제금액 -->
+	<select id="receiptSum" resultType="int">
+		select sum(price)
+		from booking
+		b, payment p, seats s
+		where p.bk_idx = b.bk_idx
+		and s.s_idx = b.s_idx
+	</select>
+
+	<select id="getTotalSearch" resultType="int" parameterType="map">
+		select count(*) from booking b, payment p, seats s
+		where p.bk_idx =
+		b.bk_idx
+		and s.s_idx = b.s_idx
+		and
+		<choose>
+			<when test="target == 'id'.toString()">
+				id like '%' || #{keyword} || '%'
+			</when>
+
+			<when test="target == 'p_idx'.toString()">
+				p_idx like '%' || #{keyword} || '%'
+			</when>
+
 			<when test="target == 'payment'.toString()">
 				payment like '%' || #{keyword} || '%'
 			</when>
 		</choose>
 	</select>
-	
+
 	<!-- 받은쪽지 갯수 -->
 	<select id="recvMsgCnt" resultType="int">
 		select count(*)
@@ -199,16 +213,18 @@
 	<!-- 받은쪽지 -->
 	<select id="recvMsg" resultType="com.bit.domain.RecvMsgVO"
 		parameterType="Map">
-		select * 
+		select *
 		from (
-			select rownum rn, m.*
-			from recv_msg m where recv_id = 'admin'
-			order by rm_idx desc
-			)
+		select rownum rn, m.*
+		from recv_msg m where
+		recv_id = 'admin'
+		order by rm_idx desc
+		)
 		where rn
-		between #{start} and #{end}
+		between #{start} and
+		#{end}
 	</select>
-	
+
 	<!-- 보낸쪽지 갯수 -->
 	<select id="sendMsgCnt" resultType="int">
 		select count(*)
@@ -221,12 +237,42 @@
 		parameterType="Map">
 		select * from (
 		select rownum rn, m.*
-		from send_msg m where send_id =
+		from send_msg m
+		where send_id =
 		'admin'
-		order by sm_idx desc 
+		order by sm_idx desc
 		)
 		where rn between
-		#{start} and #{end}
+		#{start}
+		and #{end}
+	</select>
+
+	<!-- 지점A 현 시각 이용률 -->
+	<select id="chartA" resultType="double">
+		select ROUND((count(*) * 100) /
+		65, 2)
+		from booking b, seats_view s
+		WHERE s.s_idx = b.s_idx
+		and s.br_idx = 1
+		and sysdate between start_time and end_time
+	</select>
+
+	<select id="chartB" resultType="int">
+		select ROUND((count(*) * 100) /
+		65, 2)
+		from booking b, seats_view s
+		WHERE s.s_idx = b.s_idx
+		and s.br_idx = 2
+		and sysdate between start_time and end_time
+	</select>
+
+	<select id="chartC" resultType="int">
+		select ROUND((count(*) * 100) /
+		65, 2)
+		from booking b, seats_view s
+		WHERE s.s_idx = b.s_idx
+		and s.br_idx= 3
+		and sysdate between start_time and end_time
 	</select>
 </mapper>
 

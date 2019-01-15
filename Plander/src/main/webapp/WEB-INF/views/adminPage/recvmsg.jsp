@@ -136,10 +136,6 @@ a {
 /* 페이징 끝 */
 </style>
 
-<script>
-	
-</script>
-
 </head>
 <body>
 	<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">

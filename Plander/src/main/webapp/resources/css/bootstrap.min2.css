@@ -1503,12 +1503,6 @@ pre code {
 	background-color: transparent
 }
 
-.table td, .table th {
-	padding: .75rem;
-	vertical-align: top;
-	border-top: 1px solid #dee2e6
-}
-
 .table thead th {
 	vertical-align: bottom;
 	border-bottom: 2px solid #dee2e6
@@ -1520,6 +1514,11 @@ pre code {
 
 .table .table {
 	background-color: #fff
+}
+
+.table td, .table th {
+	padding: .75rem;
+	border-top: 1px solid #dee2e6
 }
 
 .table-sm td, .table-sm th {

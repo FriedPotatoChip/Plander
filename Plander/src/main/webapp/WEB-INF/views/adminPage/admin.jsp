@@ -24,6 +24,10 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
+
+<!-- font -->
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <!-- ======================================================================================== -->
 <style>
 #cntPerpage {
@@ -66,6 +70,10 @@ input[type=submit]:hover {
 .marginLi:hover {
 	background-color: black;
 	color: white;
+}
+
+.table td {
+	vertical-align:middle;
 }
 </style>
 </head>
@@ -153,9 +161,9 @@ input[type=submit]:hover {
 						<c:if test="${page.cntPerPage == 20}">selected</c:if>>20</option>
 				</select>
 				
-				<table class="table table-sm table-striped table-hover"
+				<table class="table table-sm table-hover"
 					style="text-align: center;">
-					<thead class="thead-light">
+					<thead class="thead-light" >
 						<tr>
 							<th scope="col">U_IDX</th>
 							<th scope="col">ID</th>

@@ -70,4 +70,12 @@ public interface AdminMapper {
 	//총 결제금액
 	public int receiptSum();
 	
+	//지점 A 현 시각 이용률
+	public double chartA();
+	
+	//지점 B 현 시각 이용률
+	public int chartB();
+	
+	//지점 C 현 시각 이용률
+	public int chartC();
 }

@@ -130,5 +130,20 @@ public class AdminServiceImpl implements adminService {
 		return mapper.receiptSum();
 	}
 
+	@Override
+	public double chartA() {
+		return mapper.chartA();
+	}
+
+	@Override
+	public int chartB() {
+		return mapper.chartB();
+	}
+
+	@Override
+	public int chartC() {
+		return mapper.chartC();
+	}
+
 
 }

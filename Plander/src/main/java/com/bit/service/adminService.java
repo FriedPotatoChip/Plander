@@ -69,4 +69,13 @@ public interface adminService {
 	
 	//총 결제액, 총 결제 내역
 	public int receiptSum();
+	
+	//지점 A 현 시각 이용률
+	public double chartA();
+	
+	//지점 B 현 시각 이용률
+	public int chartB();
+		
+	//지점 C 현 시각 이용률
+	public int chartC();
 }

@@ -151,7 +151,9 @@ public class AdminController {
 
 	@RequestMapping("/Chart")
 	public String ChartPage(Model model) {
-
+		model.addAttribute("chartA", service.chartA());
+		model.addAttribute("chartB", service.chartB());
+		model.addAttribute("chartC", service.chartC());
 		return "adminPage/Chart";
 	}
 	
