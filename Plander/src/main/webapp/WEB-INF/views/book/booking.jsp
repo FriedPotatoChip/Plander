@@ -434,17 +434,17 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/TMS/book/booking"> <b><span
+				<li><a class="menu" href="#"> <b><span
 							id="num" class="noback">STEP1</span> <span id="select"
 							class="click">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b><span id="num" class="back">STEP2</span>
+				<li><a class="menu" href="#"> <b><span id="num" class="back">STEP2</span>
 							<span id="select" class="select">좌석선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b> <span id="num" class="back">STEP3</span>
-							<span id="select" class="select">결제하기</span></b>
+				<li><a class="menu" href="#"> <b> <span id="num"
+							class="back">STEP3</span> <span id="select" class="select">결제하기</span></b>
 				</a></li>
 			</ul>
 		</div>

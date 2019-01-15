@@ -66,9 +66,9 @@
 					</div>
 					<div style="float: right;">
 						<button type="reset"
-							class="btn my-1 btn-inline" style="background-color: #F1D1B5; color: white;">초기화</button>
+							class="btn my-1 btn-inline" style="background-color: #AB6C82; color: white;">초기화</button>
 						<button type="submit" class="btn my-1 btn-inline"
-						style="background-color: #475C7A; color: white;">문의하기</button>
+						style="background-color: #685D79; color: white;">문의하기</button>
 					</div>
 				</div>
 				<br> <br> <br>

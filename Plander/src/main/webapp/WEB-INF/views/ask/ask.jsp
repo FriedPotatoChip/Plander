@@ -40,13 +40,12 @@ body {
 		</c:if>
 	</c:if>
 	<!-- 헤더 끝 -->
-	<div class="jumbotron jumbotron-fluid"
-		style="background-color: #F1D1B5; margin-top: 20px;">
-		<div class="container">
-			<%-- 			<a href="/TMS/board?ct_idx=${ct_idx }"> --%>
-			<h3 id="boardType" class="center" style="color: white;">문의하기</h3>
-		</div>
-	</div>
+	<br>
+	<p class="center jumbotron jumbotron-fluid"
+		style="font-weight: 700; font-size: 2em; background-color: #F1D1B5;
+		color: white;">
+		문의하기
+	</p>
 
 	<div class="container" style="width: 70%; margin: 20px auto;">
 		<div class="card-deck">
@@ -55,8 +54,7 @@ body {
 					alt="call">
 				<div class="card-body">
 					<h5 class="card-title">전화 문의</h5>
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<p class="card-text">심야 시간(당일 10pm - 익일 08am)을 제외하고 언제든지 전화로 문의 가능합니다.</p>
 					<button type="button" class="btn btn-lg btn-block"
 						data-toggle="modal" data-target="#exampleModalCenter"
 						style="background-color: #685D79; color: white;">문의하기</button>
@@ -67,8 +65,7 @@ body {
 					alt="email">
 				<div class="card-body">
 					<h5 class="card-title">이메일 문의</h5>
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<p class="card-text">전화나 쪽지 문의보다 다소 시간이 걸릴 수 있는 점 양해 부탁드립니다.</p>
 					<button type="button" class="btn btn-lg btn-block"
 						onclick="location.href='/TMS/ask/mail'"
 						style="background-color: #685D79; color: white;">문의하기</button>
@@ -79,8 +76,7 @@ body {
 					alt="chat">
 				<div class="card-body">
 					<h5 class="card-title">쪽지 문의</h5>
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<p class="card-text">전화 문의가 어렵거나 메일 문의가 다소 불편하신 분들은 쪽지로 문의 주세요.</p>
 					<button type="button" class="btn btn-lg btn-block"
 						onclick="location.href='/TMS/sendMsg?recv_id=admin'"
 						style="background-color: #685D79; color: white;">문의하기</button>
@@ -113,7 +109,7 @@ body {
 					<a href="#" class="bold">02-3453-5404</a>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn" style="background-color: #685D79; color: white;"
+					<button type="button" class="btn" style="background-color: #AB6C82; color: white;"
 						data-dismiss="modal">닫기</button>
 				</div>
 			</div>

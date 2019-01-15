@@ -287,11 +287,12 @@ button:hover {
 							class="select">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b><span id="num" class="noback">STEP2</span>
-							<span id="select" class="click">좌석선택</span></b>
+				<li><a class="menu" href="#"> <b><span
+							id="num" class="noback">STEP2</span> <span id="select"
+							class="click">좌석선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b><span id="num" class="back">STEP3</span>
+				<li><a class="menu" href="#"> <b><span id="num" class="back">STEP3</span>
 							<span id="select" class="select">결제하기</span></b>
 				</a></li>
 			</ul>
@@ -494,7 +495,7 @@ button:hover {
 			<!-- 선택 정보 끝 -->
 
 			<div class="center" style="padding: 10px;">
-				<button type="button" onclick="history.back(); return false;">이전단계</button>
+				<button type="button" onclick="location.href='/TMS/book/selectSeat'">이전단계</button>
 				&nbsp;
 				<button type="button" onclick="next(this.form)">다음단계</button>
 			</div>

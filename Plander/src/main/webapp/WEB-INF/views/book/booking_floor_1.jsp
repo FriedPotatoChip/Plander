@@ -238,12 +238,14 @@ button:hover {
 							class="select">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b><span id="num" class="noback">STEP2</span>
-							<span id="select" class="click">좌석선택</span></b>
+				<li><a class="menu" href="/TMS/book/selectSeat"> <b><span
+							id="num" class="noback">STEP2</span> <span id="select"
+							class="click">좌석선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b> <span id="num" class="back">STEP3</span>
-							<span id="select" class="select">결제하기</span></b>
+				<li><a class="menu" href="#"> <b> <span
+							id="num" class="back">STEP3</span> <span id="select"
+							class="select">결제하기</span></b>
 				</a></li>
 			</ul>
 		</div>
@@ -325,7 +327,7 @@ button:hover {
 							<th width="50%" class="center">선택 좌석정보</th>
 						</tr>
 						<tr>
-							<td>${bvo.start_time }~ ${bvo.end_time }</td>
+							<td>${bvo.start_time }~${bvo.end_time }</td>
 							<td id="msg"></td>
 						</tr>
 						<tr>
@@ -335,14 +337,14 @@ button:hover {
 					<!-- 선택 정보 끝 -->
 
 					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="history.back(); return false;">이전단계</button>
+						<button type="button" onclick="location.href='/TMS/book/booking'">이전단계</button>
 						&nbsp;
 						<button type="button" onclick="next(this.form)">다음단계</button>
 					</div>
-					<br>
-					<br> <input type="hidden" name="br_idx" value="${bvo.br_idx }">
-					<input type="hidden" name="roomnum" value="${bvo.roomnum }">
-					<input type="hidden" name="sct_idx" value=""> <input
+					<br> <br> <input type="hidden" name="br_idx"
+						value="${bvo.br_idx }"> <input type="hidden"
+						name="roomnum" value="${bvo.roomnum }"> <input
+						type="hidden" name="sct_idx" value=""> <input
 						type="hidden" name="sct_name" value=""> <input
 						type="hidden" name="time_idx" value="${bvo.time_idx }"> <input
 						type="hidden" name="cabinet" value="${bvo.cabinet }"> <input

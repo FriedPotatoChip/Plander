@@ -12,13 +12,13 @@ body {
 }
 
 .container {
-	width: 60%;
+	width: 40%;
 	margin: 50px auto;
 }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 th, td {
@@ -30,9 +30,11 @@ th, td {
 </head>
 
 <body>
-	<div class="container">
-		<h1 class="text-center">쪽지 보내기</h1>
-		<hr>
+	<div class="container"
+		style="border: 1px solid lightgray; padding: 30px;">
+		<h4 class="text-center"
+			style="text-decoration: underline; color: #475C7A; margin-bottom: 20px;">쪽지
+			보내기</h4>
 		<form action="/TMS/sendMsg" method="post" id="msgForm">
 			<input type="hidden" name="send_id" value="${usersVO.id }"> <input
 				type="hidden" name="recv_id" value="${recv_user.id }">
@@ -56,58 +58,65 @@ th, td {
 				<tr>
 					<td colspan="2"><textarea class="form-control" name="content"
 							id="content" rows="10"></textarea> </textarea></td>
-				</tr> 
+				</tr>
 			</table>
-			<div style="float: right; margin-top: 20px;">
-				<button type="reset" onclick="closeMsg()"
-					class="btn btn-outline-primary my-1 btn-inline">초기화</button>
-				<button type="submit" onclick="sendMsg()"
-					class="btn btn-primary my-1 btn-inline">보내기</button>
-			</div>
 			<!-- 			<input type="button" value="닫기" onclick="closeMsg()"> <input
 				type="button" value="보내기" onclick="sendMsg()"> -->
 		</form>
+		<div style="margin-top: 20px;">
+			<p align="right">
+				<button type="reset" onclick="closeMsg()"
+					class="btn my-1 btn-inline"
+					style="background-color: #AB6C82; color: white;">초기화</button>
+				<button type="submit" onclick="sendMsg2()"
+					class="btn my-1 btn-inline"
+					style="background-color: #685D79; color: white;">보내기</button>
+			</p>
+		</div>
 	</div>
-<script>
-$(function(){
-	$("#title").focus();
-});
-function closeMsg(){
-	window.close();
-}	
-function sendMsg(){
-	var title = $("#title").val();
-	var content = $("#content").val();
-	console.log("title: "+ title);
-	console.log("content: "+ content);
-	if (title == ""){
-		alert("제목을 입력해 주세요.");
-		$("#title").focus();
-		return false;
-	}
-	if (content == ""){
-		alert("내용을 입력해 주세요");
-		$("#content").focus();
-		return false;
-	}
-	var formData = $("#msgForm").serialize();
-	$.ajax({
-		url: '/sendMsg',
-		type: 'post',
-		data: formData,
-		dataType: 'text',
-		success: function(result){
-			if (result == 'success'){
-				alert("쪽지를 보냈습니다.");
-				window.close();
-			} else {
-				alert("쪽지를 보내는데 실패했습니다.")
-			}
-		}, error: function(error){
-				alert("쪽지를 보내는데 실패했습니다.")
+
+
+	<script>
+		$(function() {
+			$("#title").focus();
+		});
+		function closeMsg() {
+			window.close();
 		}
-	})
-}
-</script>
+		function sendMsg2() {
+			var title = $("#title").val();
+			var content = $("#content").val();
+			console.log("title: " + title);
+			console.log("content: " + content);
+			if (title == "") {
+				alert("제목을 입력해 주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if (content == "") {
+				alert("내용을 입력해 주세요");
+				$("#content").focus();
+				return false;
+			}
+			var formData = $("#msgForm").serialize();
+			$.ajax({
+				url : '/sendMsg',
+				type : 'post',
+				data : formData,
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
+						alert("쪽지를 보냈습니다.");
+						location.href="/TMS/ask";
+					} else {
+						alert("쪽지를 보내는데 실패했습니다.")
+					}
+				},
+				error : function(error) {
+					alert("쪽지를 보내는데 실패했습니다.")
+				}
+			})
+		}
+	</script>
 </body>
 </html>
