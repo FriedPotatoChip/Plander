@@ -13,6 +13,7 @@
 <meta name="author" content="">
 <title>관리자</title>
 
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <!-- Bootstrap core CSS -->
 <link href="/resources/css/bootstrap.min2.css" rel="stylesheet">
@@ -21,17 +22,24 @@
 <link href="/resources/css/dashboard.css" rel="stylesheet">
 
 <!-- 버튼 아이콘 링크 -->
-<link
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/receipt.css">
-<link href="https://fonts.googleapis.com/css?family=Poppins"
-	rel="stylesheet" />
-<link href="/resources/css/searchbar.css" rel="stylesheet" />
 <!-- ======================================================================================== -->
 <style>
+.container-table100 {
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 33px 30px;
+}
 #cntPerpage {
 	float: right;
 }
@@ -51,58 +59,9 @@ a {
 	text-decoration: none;
 }
 
-#search {
-	width: 50%;
-}
-
-#select {
-	width: 10%;
-}
-
-.container-1 {
-	width: 300px;
-	vertical-align: middle;
-	white-space: nowrap;
-	position: relative;
-}
-
-.container-1 input#search {
-	width: 20rem;
-	height: 3rem;
-	background: #fff;
-	border: 1px solid #e9ecef;
-	font-size: 10pt;
-	float: left;
-	color: #63717f;
-	padding-left: 45px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
-
-.container-1 input#search::-webkit-input-placeholder {
-	color: #65737e;
-}
-
-.container-1 input#search:-moz-placeholder { /* Firefox 18- */
-	color: #65737e;
-}
-
-.container-1 input#search::-moz-placeholder { /* Firefox 19+ */
-	color: #65737e;
-}
-
-.container-1 input#search:-ms-input-placeholder {
-	color: #65737e;
-}
-
-.container-1 .icon {
-	position: absolute;
-	top: 50%;
-	margin-left: 17px;
-	margin-top: 17px;
-	z-index: 1;
-	color: #4f5b66;
+h3 {
+	margin-top: 2rem;
+	text-align: center;
 }
 
 input[type=submit] {
@@ -118,75 +77,13 @@ input[type=submit] {
 input[type=submit]:hover {
 	background-color: #45a049;
 }
-.active-cyan-2
-
- 
-
-input
-
-
-[
-type
-=
-text
-]
-
-
-:focus
-
-
-:not
-
- 
-
-(
-[
-readonly
-]
-
- 
-
-)
-{
-border-bottom
-
-
-:
-
- 
-
-1
-px
-
- 
-
-solid
-
- 
-
-#4dd0e1
-
-
-;
-box-shadow
-
-
-:
-
- 
-
-0
-1
-px
-
- 
-
-0
-0
-#4dd0e1
-
-
-;
+.active-cyan-2 input[type=text]:focus:not([readonly]) {
+	border-bottom:1px solid #4dd0e1;
+	box-shadow: 0 1px 0 0 #4dd0e1;
+}
+.wrap-table100 {
+  width: 90%;
+  margin:auto;
 }
 </style>
 </head>
@@ -242,8 +139,26 @@ px
 			</nav>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+			<h3 class="h3">결제내역 </h3>
+			<div class="container" style="text-align : center;">
+				<div class="row">
+					<div class="col"
+						style="width: 100px; height: 100px; margin:auto; padding-top:1rem;">
+						<span style="font-size:1rem;">
+							<img src="/resources/images/receipt.png" alt="" width="70px" height="auto"><br><b> 총 결제 내역 : ${count }건</b>
+						</span>
+					</div>
+					<div class="col"
+						style="width: 100px; height: 100px; margin:auto; padding-top:1rem;">
+						<span style="font-size:1rem;">
+							<img src="/resources/images/won.png" alt="" width="70px" height="auto"><br><b> 총 수입 : ${sum }원 </b>
+						</span>
+					</div>
+				</div>
+			</div>
+			<hr>
 			<div class="limiter">
-				<div class="container-table100">
+				<div class="container-table10">
 					<div class="wrap-table100">
 						<div class="table100">
 
@@ -357,10 +272,6 @@ px
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-
 	<script src="/resources/js/popper.min.js"></script>
 	<script src="/resources/js/bootstrap.min2.js"></script>
 	Icons

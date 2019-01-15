@@ -63,4 +63,10 @@ public interface adminService {
 	
 	//결제페이지 검색 후 결과
 	public int getTotalSearch(Map<String, Object> map);
+	
+	//총 결제액, 총 결제 내역
+	public int receiptTotal();
+	
+	//총 결제액, 총 결제 내역
+	public int receiptSum();
 }

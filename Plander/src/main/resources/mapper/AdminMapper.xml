@@ -154,6 +154,21 @@
 		where rn between #{start} and #{end}
 	</select>
 	
+	<!-- 총 결제내역 -->	
+	<select id="receiptTotal" resultType="int">
+		select count(*)
+	        from booking b, payment p, seats s
+	        where p.bk_idx = b.bk_idx
+	        and s.s_idx = b.s_idx
+	</select>
+	
+	<select id="receiptSum" resultType="int">
+		select sum(price)
+	        from booking b, payment p, seats s
+	        where p.bk_idx = b.bk_idx
+	        and s.s_idx = b.s_idx
+	</select>
+	
 	<select id="getTotalSearch" resultType="int" parameterType="map">
 		select count(*) from booking b, payment p, seats s 
 		where p.bk_idx = b.bk_idx
@@ -172,6 +187,46 @@
 				payment like '%' || #{keyword} || '%'
 			</when>
 		</choose>
+	</select>
+	
+	<!-- 받은쪽지 갯수 -->
+	<select id="recvMsgCnt" resultType="int">
+		select count(*)
+		from recv_msg
+		where recv_id = 'admin'
+	</select>
+
+	<!-- 받은쪽지 -->
+	<select id="recvMsg" resultType="com.bit.domain.RecvMsgVO"
+		parameterType="Map">
+		select * 
+		from (
+			select rownum rn, m.*
+			from recv_msg m where recv_id = 'admin'
+			order by rm_idx desc
+			)
+		where rn
+		between #{start} and #{end}
+	</select>
+	
+	<!-- 보낸쪽지 갯수 -->
+	<select id="sendMsgCnt" resultType="int">
+		select count(*)
+		from send_msg
+		where send_id = 'admin'
+	</select>
+
+	<!-- 보낸쪽지 -->
+	<select id="sendMsg" resultType="com.bit.domain.SendMsgVO"
+		parameterType="Map">
+		select * from (
+		select rownum rn, m.*
+		from send_msg m where send_id =
+		'admin'
+		order by sm_idx desc 
+		)
+		where rn between
+		#{start} and #{end}
 	</select>
 </mapper>
 

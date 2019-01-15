@@ -120,5 +120,15 @@ public class AdminServiceImpl implements adminService {
 		return mapper.getTotalSearch(map);
 	}
 
+	@Override
+	public int receiptTotal() {
+		return mapper.receiptTotal();
+	}
+
+	@Override
+	public int receiptSum() {
+		return mapper.receiptSum();
+	}
+
 
 }
