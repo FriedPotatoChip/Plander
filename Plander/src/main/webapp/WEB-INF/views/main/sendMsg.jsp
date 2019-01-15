@@ -4,13 +4,6 @@
 <jsp:include page="/commons/head.jsp"></jsp:include>
 
 <style>
-body {
-	font-family: 'NanumSquare', sans-serif;
-	font-weight: 400;
-	color: #666;
-	font-size: 1.2rem;
-}
-
 .container {
 	width: 80%;
 	margin: 50px auto;

@@ -5,19 +5,12 @@
 <jsp:include page="/commons/head.jsp"></jsp:include>
 
 <style>
-body {
-	font-family: 'NanumSquare', sans-serif;
-	font-weight: 400;
-	color: #666;
-	font-size: 1.2rem;
-}
-
 td {
 	padding-left: 50px;
 }
 
 th {
-	background-color: #FCBB6D;
+	background-color: #e9ecef;
 	width: 30%;
 }
 
@@ -58,7 +51,7 @@ th, td {
 						pattern="yyyy-MM-dd HH:mm" /></td>
 			</tr>
 		</table>
-		<input type="button" class="btn" style="background-color: #475C7A; color: white;" value="닫기" onclick="closeWin()">
+		<input type="button" class="btn" style="background-color: #685D79; color: white;" value="닫기" onclick="closeWin()">
 	</div>
 	<script>
 		function closeWin() {

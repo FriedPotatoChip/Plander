@@ -6,8 +6,9 @@
 <jsp:include page="/commons/head.jsp"></jsp:include>
 </head>
 <body>
-	${vo }
-	<button type="button" class="btn btn-outline-success nav_btn"
+	<button type="button" class="btn m-3"
+		style="background-color: #475C7A; color: white;"
 		onclick="history.back(-1);">뒤로가기</button>
+	${vo }
 </body>
 </html>
