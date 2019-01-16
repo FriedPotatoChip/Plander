@@ -452,8 +452,8 @@ h3 {
 					</c:if>
 				</div>
 				<div class="modal-footer">
-					<input type="button" class="btn btn-secondary" data-dismiss="modal"
-						value="닫기"> <input type="button" class="btn btn-primary"
+					<input type="button" class="btn btn-outline-warning" data-dismiss="modal"
+						value="닫기"> <input type="button" class="btn btn-outline-danger"
 						value="수정" onclick="submitProfile()">
 				</div>
 			</div>
