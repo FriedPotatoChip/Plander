@@ -705,7 +705,7 @@ function showBox(e, tag){
 				alert("로그인 후 이용 가능합니다.");
 				return false;
 			} 
-			window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
+			window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
 		});
 		$("#userProfile").click(function(){
 			$(".popupLayer").hide();

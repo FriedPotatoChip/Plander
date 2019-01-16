@@ -22,6 +22,7 @@ body {
 .ask:hover {
 	opacity: 0.5;
 }
+
 </style>
 </head>
 
@@ -42,7 +43,7 @@ body {
 	<!-- 헤더 끝 -->
 	<br>
 	<p class="center jumbotron jumbotron-fluid"
-		style="font-weight: 700; font-size: 2em; background-color: #F1D1B5;
+		style="font-weight: 700; font-size: 2em; background-color: #AB6C82;
 		color: white;">
 		문의하기
 	</p>
@@ -57,7 +58,7 @@ body {
 					<p class="card-text">심야 시간(당일 10pm - 익일 08am)을 제외하고 언제든지 전화로 문의 가능합니다.</p>
 					<button type="button" class="btn btn-lg btn-block"
 						data-toggle="modal" data-target="#exampleModalCenter"
-						style="background-color: #685D79; color: white;">문의하기</button>
+						style="background-color: #AB6C82; color: white;">문의하기</button>
 				</div>
 			</div>
 			<div class="card">
@@ -67,8 +68,8 @@ body {
 					<h5 class="card-title">이메일 문의</h5>
 					<p class="card-text">전화나 쪽지 문의보다 다소 시간이 걸릴 수 있는 점 양해 부탁드립니다.</p>
 					<button type="button" class="btn btn-lg btn-block"
-						onclick="location.href='/TMS/ask/mail'"
-						style="background-color: #685D79; color: white;">문의하기</button>
+						onclick="window.open('/TMS/ask/mail', '이메일 문의', 'width=1100, height=800'); return false;"
+						style="background-color: #AB6C82; color: white;">문의하기</button>
 				</div>
 			</div>
 			<div class="card">
@@ -78,8 +79,8 @@ body {
 					<h5 class="card-title">쪽지 문의</h5>
 					<p class="card-text">전화 문의가 어렵거나 메일 문의가 다소 불편하신 분들은 쪽지로 문의 주세요.</p>
 					<button type="button" class="btn btn-lg btn-block"
-						onclick="location.href='/TMS/sendMsg?recv_id=admin'"
-						style="background-color: #685D79; color: white;">문의하기</button>
+						onclick="window.open('/TMS/sendMsg?recv_id=admin', '쪽지 보내기', 'width=500, height=600'); return false;"
+						style="background-color: #AB6C82; color: white;">문의하기</button>
 				</div>
 			</div>
 		</div>
@@ -115,5 +116,10 @@ body {
 			</div>
 		</div>
 	</div>
+	<br><br>
+	<hr>
+	<!-- 허해서 넣은 풋터 -->
+		<p class="center" style="font-size: 17px;">© turtlesmiracle</p><br><br>
+	<!-- 허해서 넣은 풋터 끝 -->
 </body>
 </html>
