@@ -15,12 +15,7 @@
 <style>
 	.zeroPad { padding: 0px; }
 	.smallDate { color: gray; font-size: 0.7em;}
-	.header {
-		font-family: 'NanumSquare', sans-serif;
-		font-weight: 400;
-		color: #666;
-		font-size: 1.2rem;
-	}
+	
 	.center { text-align: center; }
 	.write { float: right; }
 	.write::after {

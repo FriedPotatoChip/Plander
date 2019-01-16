@@ -8,20 +8,10 @@
 <jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style>
-	.header {
-		font-family: 'NanumSquare', sans-serif;
-		font-weight: 400;
-		color: #666;
-		font-size: 1.2rem;
-	}
 	a { text-decoration: none; color: #4d4d4d; }
 	a:hover { color: #4d4d4d; }
 	.center { text-align: center; }
-	.up-del::after {
-		content: "";
-		clear: both;
-		display: table;
-	}
+	
 	/* 상세보기 페이지 버튼 */
 	.btnOpt {
 		padding: 3px 8px;
@@ -235,32 +225,31 @@ function boardList(nowPage){
 		</div>
 		
 		<div>
+			<span id="cur_mem">${rc_board.cur_mem }</span> / <span id="max_mem">${rc_board.max_mem }</span>
+			&nbsp;&nbsp;
 			<!-- 현재원 / 모집정원 -->
+			
 			<c:if test="${rc_board.onOff eq 'ON' }">
 				<c:if test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
 					<button class="btnOpt" onclick="endRecruit()">모집 마감</button>
 				</c:if>
 			</c:if>
-			&nbsp;&nbsp;
-			
-			<span id="cur_mem">${rc_board.cur_mem }</span> / <span id="max_mem">${rc_board.max_mem }</span>
 			
 			<!-- 신청 버튼 시작 -->
 			<button class="appBtn btnOpt" id="hideApply" style="display:none;" onclick="apply()">신청하기</button>
 			<button class="appBtn btnOpt" id="hideCancel" style="display:none;" onclick="applyCancel()">신청취소</button>
 			<!-- 신청 버튼 끝 -->
+			
 		</div> <!-- 모집인원 버튼 끝 -->
 	
 		<!-- 수정/삭제 버튼 -->
 		<div>
-			<div class="up-del">
-				<c:if test="${(sessionScope.usersVO.id == rc_board.id) || sessionScope.usersVO.rank == 1 }">
-					<p style="text-align: right;">
-						<button class="btnOpt" onclick="modify()">수정</button>
-						<button class="btnOpt" onclick="deleteRec()">삭제</button>
-					</p>
-				</c:if>
-			</div>
+			<c:if test="${(sessionScope.usersVO.id == rc_board.id) || sessionScope.usersVO.rank == 1 }">
+				<p style="text-align: right;">
+					<button class="btnOpt" onclick="modify()">수정</button>
+					<button class="btnOpt" onclick="deleteRec()">삭제</button>
+				</p>
+			</c:if>
 		</div> <!-- 수정 삭제버튼 끝 -->
 		
 		<hr>

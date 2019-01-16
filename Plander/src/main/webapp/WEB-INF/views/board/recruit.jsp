@@ -4,12 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
 <style>
-	.header {
-		font-family: 'NanumSquare', sans-serif;
-		font-weight: 400;
-		color: #666;
-		font-size: 1.2rem;
-	}
 	table { text-align: center; }
 	.center { text-align: center; }
 	.write { float: right; }
