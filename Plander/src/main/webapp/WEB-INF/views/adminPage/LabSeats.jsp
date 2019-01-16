@@ -151,7 +151,7 @@ h3 {
 <body>
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin page</a>
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
 
 
 		<ul class="navbar-nav px-3">
@@ -166,7 +166,7 @@ h3 {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							href="/TMS/admin"> <span data-feather="users"></span>
 								Customers <span class="sr-only">(current)</span>
 						</a></li>

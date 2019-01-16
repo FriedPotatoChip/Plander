@@ -74,8 +74,29 @@ public interface adminService {
 	public double chartA();
 	
 	//지점 B 현 시각 이용률
-	public int chartB();
+	public double chartB();
 		
 	//지점 C 현 시각 이용률
-	public int chartC();
+	public double chartC();
+	
+	//해당월 요일별 예약횟수(월요일)
+	public int monday();
+	
+	//해당월 요일별 예약횟수(화요일)
+	public int Tuesday();
+	
+	//해당월 요일별 예약횟수(화요일)
+	public int Wednesday();
+	
+	//해당월 요일별 예약횟수(목요일)
+	public int Thursday();
+	
+	//해당월 요일별 예약횟수(금요일)
+	public int Friday();
+	
+	//해당월 요일별 예약횟수(토요일)
+	public int Saturday();
+	
+	//해당월 요일별 예약횟수(일요일)
+	public int Sunday();
 }

@@ -154,6 +154,13 @@ public class AdminController {
 		model.addAttribute("chartA", service.chartA());
 		model.addAttribute("chartB", service.chartB());
 		model.addAttribute("chartC", service.chartC());
+		model.addAttribute("monday", service.monday());
+		model.addAttribute("tuesday", service.Tuesday());
+		model.addAttribute("wednesday", service.Wednesday());
+		model.addAttribute("thursday", service.Thursday());
+		model.addAttribute("friday", service.Friday());
+		model.addAttribute("saturday", service.Saturday());
+		model.addAttribute("sunday", service.Sunday());
 		return "adminPage/Chart";
 	}
 	
@@ -197,7 +204,7 @@ public class AdminController {
 	
 	@RequestMapping("/Receipt")
 	public String Receipt(Model model, BookingVO bvo, PagingVO page) {
-		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal());
+		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.receiptTotal());
 
 		page.CalcPage(page.getNowPage(), page.getCntPerPage());
 		

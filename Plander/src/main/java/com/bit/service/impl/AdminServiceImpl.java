@@ -136,13 +136,48 @@ public class AdminServiceImpl implements adminService {
 	}
 
 	@Override
-	public int chartB() {
+	public double chartB() {
 		return mapper.chartB();
 	}
 
 	@Override
-	public int chartC() {
+	public double chartC() {
 		return mapper.chartC();
+	}
+
+	@Override
+	public int monday() {
+		return mapper.monday();
+	}
+
+	@Override
+	public int Tuesday() {
+		return mapper.Tuesday();
+	}
+
+	@Override
+	public int Wednesday() {
+		return mapper.Wednesday();
+	}
+
+	@Override
+	public int Thursday() {
+		return mapper.Thursday();
+	}
+
+	@Override
+	public int Friday() {
+		return mapper.Friday();
+	}
+
+	@Override
+	public int Saturday() {
+		return mapper.Saturday();
+	}
+
+	@Override
+	public int Sunday() {
+		return mapper.Sunday();
 	}
 
 

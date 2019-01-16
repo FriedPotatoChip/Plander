@@ -89,25 +89,11 @@ iframe {
   margin: 0 auto;
 }
 
-table {
-  border-spacing: 1;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-}
 table * {
   position: relative;
 }
 table td, table th {
   padding-left: 8px;
-}
-table thead tr {
-  height: 60px;
-  background: #a61e4d;
 }
 table tbody tr {
   height: 50px;

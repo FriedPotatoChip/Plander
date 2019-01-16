@@ -89,7 +89,7 @@
 		select distinct b.id, b.start_time, b.end_time, s.s_col, b.bk_idx
 		from
 		seats_view s, booking b
-		where s.s_idx = b.s_idx
+		where s.s_col = b.s_idx
 		and br_idx = #{br_idx}
 		and roomnum = #{roomnum}
 		<!-- and s_col = #{s_col} -->
@@ -175,7 +175,7 @@
 
 	<!-- 총 결제금액 -->
 	<select id="receiptSum" resultType="int">
-		select sum(price)
+		select NVL(sum(price), 0)
 		from booking
 		b, payment p, seats s
 		where p.bk_idx = b.bk_idx
@@ -257,7 +257,8 @@
 		and sysdate between start_time and end_time
 	</select>
 
-	<select id="chartB" resultType="int">
+	<!-- 지점B 현 시각 이용률 -->
+	<select id="chartB" resultType="double">
 		select ROUND((count(*) * 100) /
 		65, 2)
 		from booking b, seats_view s
@@ -266,13 +267,71 @@
 		and sysdate between start_time and end_time
 	</select>
 
-	<select id="chartC" resultType="int">
+	<!-- 지점C 현 시각 이용률 -->
+	<select id="chartC" resultType="double">
 		select ROUND((count(*) * 100) /
 		65, 2)
 		from booking b, seats_view s
 		WHERE s.s_idx = b.s_idx
 		and s.br_idx= 3
 		and sysdate between start_time and end_time
+	</select>
+	
+	<!-- 해당월 요일별 예약횟수 -->
+	<!-- 월요일  -->
+	<select id="monday" resultType="int">
+		select count(*)
+		    from booking
+		    where to_char(sysdate, 'YYYYMMDD') between to_char(start_time, 'YYYYMMDD') and to_char(end_time, 'YYYYMMDD')
+		    and (to_char(start_time, 'd') = 2 or to_char(end_time, 'd') = 2)
+	</select>
+	
+	<!-- 화요일  -->
+	<select id="Tuesday" resultType="int">
+		select count(*)
+		    from booking
+		    where to_char(sysdate, 'YYYYMMDD') between to_char(start_time, 'YYYYMMDD') and to_char(end_time, 'YYYYMMDD')
+		    and (to_char(start_time, 'd') = 3 or to_char(end_time, 'd') = 3)
+	</select>
+	
+	<!-- 수요일  -->
+	<select id="Wednesday" resultType="int">
+		select count(*)
+		    from booking
+		    where to_char(sysdate, 'YYYYMMDD') between to_char(start_time, 'YYYYMMDD') and to_char(end_time, 'YYYYMMDD')
+		    and (to_char(start_time, 'd') = 4 or to_char(end_time, 'd') = 4)
+	</select>
+	
+	<!-- 목요일  -->
+	<select id="Thursday" resultType="int">
+		select count(*)
+		    from booking
+		    where to_char(sysdate, 'YYYYMMDD') between to_char(start_time, 'YYYYMMDD') and to_char(end_time, 'YYYYMMDD')
+		    and (to_char(start_time, 'd') = 5 or to_char(end_time, 'd') = 5)
+	</select>
+	
+	<!-- 금요일  -->
+	<select id="Friday" resultType="int">
+		select count(*)
+		    from booking
+		    where to_char(sysdate, 'YYYYMMDD') between to_char(start_time, 'YYYYMMDD') and to_char(end_time, 'YYYYMMDD')
+		    and (to_char(start_time, 'd') = 6 or to_char(end_time, 'd') = 6)
+	</select>
+	
+	<!-- 토요일  -->
+	<select id="Saturday" resultType="int">
+		select count(*)
+		    from booking
+		    where to_char(sysdate, 'YYYYMMDD') between to_char(start_time, 'YYYYMMDD') and to_char(end_time, 'YYYYMMDD')
+		    and (to_char(start_time, 'd') = 7 or to_char(end_time, 'd') = 7)
+	</select>
+	
+	<!-- 일요일  -->
+	<select id="Sunday" resultType="int">
+		select count(*)
+		    from booking
+		    where to_char(sysdate, 'YYYYMMDD') between to_char(start_time, 'YYYYMMDD') and to_char(end_time, 'YYYYMMDD')
+		    and (to_char(start_time, 'd') = 1 or to_char(end_time, 'd') = 1)
 	</select>
 </mapper>
 
