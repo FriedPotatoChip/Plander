@@ -8,12 +8,6 @@
 <jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style>
-	.header {
-		font-family: 'NanumSquare', sans-serif;
-		font-weight: 400;
-		color: #666;
-		font-size: 1.2rem;
-	}
 	a { text-decoration: none; color: #4d4d4d; }
 	a:hover { color: #4d4d4d; }
 	.center { text-align: center; }
@@ -215,8 +209,10 @@ $(document).ready(function(){
 			<br><br><br>
 			
 			<c:if test="${(sessionScope.usersVO.id == board.id) || sessionScope.usersVO.rank == 1 }">
-				<button class="btnOpt" onclick="modify()">수정</button>
-				<button class="btnOpt" onclick="deleteRec()">삭제</button>
+				<p style="text-align: right;">
+					<button class="btnOpt" onclick="modify()">수정</button>
+					<button class="btnOpt" onclick="deleteRec()">삭제</button>
+				</p>
 			</c:if>
 		</div>	
 	
