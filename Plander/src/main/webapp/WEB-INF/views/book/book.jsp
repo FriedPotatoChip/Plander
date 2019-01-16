@@ -275,7 +275,7 @@
 						ticket += numberWithCommas(ticketDay) + "원";
 						ticket += "</td></tr><tr><th>정기권 2주</th><td>";
 						ticket += numberWithCommas(ticket2w)
-								+ "원 (사물함 선택 시 +2,000원)</td>";
+								+ "원 (사물함 선택 시 +5,000원)</td>";
 						ticket += "</tr><tr><th>정기권 1개월</th><td>";
 						ticket += numberWithCommas(ticketMon)
 								+ "원 (사물함 제공)</td>";

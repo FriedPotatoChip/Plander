@@ -223,7 +223,7 @@ button:hover {
 					if (time_idx == 100) {
 						sum = ticket2w;
 						if (cabinet == 'y') {
-							sum += 2000;
+							sum += 5000;
 						}
 					} else if (time_idx > 100) {
 						//정기권 1개월
