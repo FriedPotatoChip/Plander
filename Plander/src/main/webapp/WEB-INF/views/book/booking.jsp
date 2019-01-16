@@ -424,6 +424,10 @@ button:hover {
 	background-color: #D8737F;
 	color: white;
 }
+
+#ticket {
+	
+}
 /* 버튼 끝 */
 </style>
 
