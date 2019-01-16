@@ -1,82 +1,124 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <style>
-	a { text-decoration: none; color: #4d4d4d; }
-	a:hover { color: #4d4d4d; }
-	.center { text-align: center; }
-	
-	/* 상세보기 페이지 버튼 */
-	.btnOpt {
-		padding: 3px 8px;
-		background-color: white;
-		border: 1px solid #ced4da;
-		color: dimgray;
-		font-size: 0.85em;
-	}
-	.btnOpt:hover {
-		padding: 3px 8px;
-		background-color: white;
-		border: 1px solid #ced4da;
-		color: black;
-	}
-	/* 상세보기 버튼 끝 */
-	
-	/* 페이징 시작 */
-	.p-n {
-		color: #685D79;
-		font-weight: 700;
-	}
-	.page_edge {
-		border: 1px solid #dee2e6;
-		display: block;
-		padding: .5rem .75rem;
-		color: #4d4d4d;
-		line-height: 1.25;
-	}
-	.now {
-		background-color: #685D79;
-		color: white;
-	}
-	/* 페이징 처리 끝 */
-	.idBox { border: 1px; border-radius: 3px; }
-	.hoverPointer:hover { cursor: pointer; }
-	
-	.c-comment { padding-left: 52px; 	}
-	.commDate { font-size: 0.75em; color: gray;}
-	.user { width: 30px; height: 30px; border-radius: 50%; }
-	
-	.comm {
-		border-bottom: 1px solid #e6e6e6;
-		padding-bottom: 10px;
-		padding-top: 10px;
-	}
-	
-	ul, ol { list-style: none; }
-	
-	/* 클릭시 레이어 */	
-	.idDiv { cursor: pointer; display: inline-block; }
-	.popupLayer {
-		position: absolute;
-		display: none;
-		background-color: #ffffff;
-		border: solid 2px #d0d0d0;
-		width: 130px;
-		height: 120px;
-		padding: 10px;
-		padding-top: 18px; padding-left: 15px;
-	}
-	.popupLayer div {
-		position: absolute;
-		top: 0px;
-		right: 5px
-	}
+a {
+	text-decoration: none;
+	color: #4d4d4d;
+}
+
+a:hover {
+	color: #4d4d4d;
+}
+
+.center {
+	text-align: center;
+}
+
+.centered {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+/* 상세보기 페이지 버튼 */
+.btnOpt {
+	padding: 3px 8px;
+	background-color: white;
+	border: 1px solid #ced4da;
+	color: dimgray;
+	font-size: 0.85em;
+}
+
+.btnOpt:hover {
+	padding: 3px 8px;
+	background-color: white;
+	border: 1px solid #ced4da;
+	color: black;
+}
+/* 상세보기 버튼 끝 */
+
+/* 페이징 시작 */
+.p-n {
+	color: #685D79;
+	font-weight: 700;
+}
+
+.page_edge {
+	border: 1px solid #dee2e6;
+	display: block;
+	padding: .5rem .75rem;
+	color: #4d4d4d;
+	line-height: 1.25;
+}
+
+.now {
+	background-color: #685D79;
+	color: white;
+}
+/* 페이징 처리 끝 */
+.idBox {
+	border: 1px;
+	border-radius: 3px;
+}
+
+.hoverPointer:hover {
+	cursor: pointer;
+}
+
+.c-comment {
+	padding-left: 52px;
+}
+
+.commDate {
+	font-size: 0.75em;
+	color: gray;
+}
+
+.user {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.comm {
+	border-bottom: 1px solid #e6e6e6;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+/* 클릭시 레이어 */
+.idDiv {
+	cursor: pointer;
+	display: inline-block;
+}
+
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 120px;
+	padding: 10px;
+	padding-top: 18px;
+	padding-left: 15px;
+}
+
+.popupLayer div {
+	position: absolute;
+	top: 0px;
+	right: 5px
+}
 </style>
 <script>
 /* 신청하기, 신청 취소를 위한 확인값 설정 */
@@ -190,120 +232,144 @@ function boardList(nowPage){
 			<jsp:include page="/commons/header.jsp" />
 		</c:if>
 		<c:if test="${not empty sessionScope.usersVO }">
-			<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+			<c:if test="${sessionScope.usersVO.rank != 1 }">
 				<jsp:include page="/commons/loginheader.jsp" />
 			</c:if>
 			<c:if test="${sessionScope.usersVO.rank == 1 }">
 				<jsp:include page="/commons/adminLoginheader.jsp" />
 			</c:if>
 		</c:if>
-	</div> <!-- 헤더 끝 -->
+	</div>
+	<!-- 헤더 끝 -->
 	<br>
-	
+
 	<div class="bodyform" style="width: 55%; margin: auto;">
 		<div>
 			<br>
 			<!-- 요기 글목록 한번 더 출력 =============================================================== -->
 			<!-- 글 목록 보여주기 (5개씩만) -->
 			<!-- 헤더 아래 글목록 끝 -->
-			
+
 			<h4>${rc_board.rc_title }</h4>
 			<div class='idDiv' userId='${rc_board.id }'>
 				<c:if test='${empty rc_board.user_profileImagePath }'>
-					<img class="user" src="/resources/images/users.png" alt="user"/>
+					<img class="user" src="/resources/images/users.png" alt="user" />
 				</c:if>
 				<c:if test='${not empty rc_board.user_profileImagePath }'>
-					<img class="user" src="${rc_board.user_profileImagePath }" alt="user"/>
+					<img class="user" src="${rc_board.user_profileImagePath }"
+						alt="user" />
 				</c:if>
-				<span>${rc_board.id }</span>&nbsp;&nbsp;&nbsp;
-				<span style="font-size: 0.85rem;"><fmt:formatDate value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm"/></span>
+				<span>${rc_board.id }</span>&nbsp;&nbsp;&nbsp; <span
+					style="font-size: 0.85rem;"><fmt:formatDate
+						value="${rc_board.rc_regdate }" pattern="yyyy.MM.dd HH:mm" /></span>
 			</div>
 			<hr>
-			
-			<div id="content">${rc_board.rc_content }</div>
-			<br><br><br>
-		</div>
-		
-		<div>
-			<span id="cur_mem">${rc_board.cur_mem }</span> / <span id="max_mem">${rc_board.max_mem }</span>
-			&nbsp;&nbsp;
-			<!-- 현재원 / 모집정원 -->
-			
+
+			<!-- 모집마감 -->
 			<c:if test="${rc_board.onOff eq 'ON' }">
-				<c:if test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
+				<c:if
+					test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
 					<button class="btnOpt" onclick="endRecruit()">모집 마감</button>
 				</c:if>
 			</c:if>
+			<br>
+
+			<div id="content">${rc_board.rc_content }</div>
+			<br> <br> <br>
+		</div>
+
+		<!-- 모집버튼 -->
+		<div class="center">
+			<table border="1" style="width: 25%; margin: auto; border: 1px solid lightgray;">
+				<tr>
+					<td>현재인원</td>
+					<td>모집정원</td>
+				</tr>
+				<tr>
+					<td><span id="cur_mem">${rc_board.cur_mem }</span></td>
+					<td><span id="max_mem">${rc_board.max_mem }</span></td>
+				</tr>
+			</table>
 			
-			<!-- 신청 버튼 시작 -->
-			<button class="appBtn btnOpt" id="hideApply" style="display:none;" onclick="apply()">신청하기</button>
-			<button class="appBtn btnOpt" id="hideCancel" style="display:none;" onclick="applyCancel()">신청취소</button>
-			<!-- 신청 버튼 끝 -->
-			
-		</div> <!-- 모집인원 버튼 끝 -->
-	
+			<br>
+			<p class="centered">
+				<!-- 신청 버튼 시작 -->
+				<button class="appBtn btnOpt" id="hideApply" style="display: none;"
+					onclick="apply()">신청하기</button>
+				<button class="appBtn btnOpt" id="hideCancel" style="display: none;"
+					onclick="applyCancel()">신청취소</button>
+				<!-- 신청 버튼 끝 -->
+			</p>
+			<br>
+		</div>
+		<!-- 모집인원 버튼 끝 -->
+
 		<!-- 수정/삭제 버튼 -->
-		<div>
-			<c:if test="${(sessionScope.usersVO.id == rc_board.id) || sessionScope.usersVO.rank == 1 }">
+		<div style="margin-top: 40px;">
+			<c:if
+				test="${(sessionScope.usersVO.id == rc_board.id) || sessionScope.usersVO.rank == 1 }">
 				<p style="text-align: right;">
 					<button class="btnOpt" onclick="modify()">수정</button>
 					<button class="btnOpt" onclick="deleteRec()">삭제</button>
 				</p>
 			</c:if>
-		</div> <!-- 수정 삭제버튼 끝 -->
-		
+		</div>
+		<!-- 수정 삭제버튼 끝 -->
+
 		<hr>
 		<!-- 댓글 출력 -->
-		<div id="comments">
-		</div>
-		
+		<div id="comments"></div>
+
 		<br>
 		<!-- 페이징 시작 -->
 		<div id="paging">
 			<ul id="pagingList" class="pagination justify-content-center">
-		
+
 			</ul>
 		</div>
 		<!-- 페이징 끝 -->
 		<br>
-		
+
 		<!-- 댓글 작성 -->
 		<c:if test="${not empty usersVO }">
 			<div>
 				<form name="commentAjax">
 					<c:if test='${empty usersVO.user_profileImagePath }'>
-						<img class="user" src="/resources/images/users.png" alt="user"/>
+						<img class="user" src="/resources/images/users.png" alt="user" />
 					</c:if>
 					<c:if test='${not empty usersVO.user_profileImagePath }'>
-						<img class="user" src="${usersVO.user_profileImagePath }" alt="user"/>
+						<img class="user" src="${usersVO.user_profileImagePath }"
+							alt="user" />
 					</c:if>
-					<input type="text" value="${usersVO.id }" name="id" size="10" class="idBox" readonly><br>
+					<input type="text" value="${usersVO.id }" name="id" size="10"
+						class="idBox" readonly><br>
 					<textarea rows="3" name="c_content" id="c_content" required
 						placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."
-						style="width:100%; overflow:visible; text-overflow:ellipsis;"></textarea>
+						style="width: 100%; overflow: visible; text-overflow: ellipsis;"></textarea>
 					<input type="hidden" value="${rc_board.rc_idx }" name="rc_idx">
-					<input type="button" class='btnOpt' onclick="registerComm()" value="등록">
+					<input type="button" class='btnOpt' onclick="registerComm()"
+						value="등록">
 				</form>
 			</div>
 		</c:if>
-		<br>
-		<br>
-		<br>
-		
+		<br> <br> <br>
+
 		<!-- 글 목록 보여주기 (5개씩만) -->
-		<div id="recruitListAjax">
-		</div>
-		
-		<br><br><br>
-	</div> <!-- bodyform 끝 -->
-	
+		<div id="recruitListAjax"></div>
+
+		<br> <br> <br>
+	</div>
+	<!-- bodyform 끝 -->
+
 	<hr>
 	<!-- 허해서 넣은 풋터 -->
-		<p class="center" style="font-size: 17px;">© turtlesmiracle</p><br><br>
+	<p class="center" style="font-size: 17px;">© turtlesmiracle</p>
+	<br>
+	<br>
 	<!-- 허해서 넣은 풋터 끝 -->
-	
-	
-<script>
+
+
+	<script>
 	/* 신청하기 */
 	function apply(){
 	      $.ajax({
@@ -704,13 +770,14 @@ function boardList(nowPage){
 </script>
 	<div class="popupLayer">
 		<div>
-			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+			<span onClick="closeLayer()"
+				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br>
-		<a id="userProfile" href="#">회원 정보 보기</a><br>
-		<a id="showWritten" href="#">작성글 보기</a><br>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br> <a id="userProfile"
+			href="#">회원 정보 보기</a><br> <a id="showWritten" href="#">작성글
+			보기</a><br>
 	</div>
-<script>
+	<script>
 function closeLayer() {
 	$(".popupLayer").hide();
 }

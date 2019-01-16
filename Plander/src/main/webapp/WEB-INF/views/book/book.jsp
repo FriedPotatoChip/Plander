@@ -173,12 +173,17 @@
 		</div>
 		<!-- 3 호점 끝 -->
 
-		<br> <br> <br>
-		<!-- 풋터 -->
-
-	</div>
-	<!-- 바디 콘테이너 끝 -->
+		<br><br><br>
+	</div> <!-- 바디 콘테이너 끝 -->
+	<hr>
+	<!-- 허해서 넣은 풋터 -->
+	<p class="center" style="font-size: 17px;">© turtlesmiracle</p>
+	<br>
+	<br>
+	<!-- 허해서 넣은 풋터 끝 -->
+	
 	<script>
+	
 		function numberWithCommas(x) {
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
