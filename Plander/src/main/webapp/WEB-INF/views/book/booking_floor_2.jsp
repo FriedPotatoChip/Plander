@@ -237,6 +237,15 @@ button:hover {
 	color: white;
 }
 /* 버튼 끝 */
+.opt {
+	display: inline-block;
+	padding: 1px 2px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #4d4d4d;
+	vertical-align: middle;
+	border-radius: .25rem;
+}
 </style>
 
 </head>
@@ -246,19 +255,23 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/TMS/book/booking"> <b><span
-							id="num" class="back">STEP1</span> <span id="select"
-							class="select">날짜선택</span></b>
-				</a></li>
+				<li><a class="menu" href="/TMS/book/booking">
+						<b><span id="num" class="back">STEP1</span>
+						<span id="select" class="select">날짜선택</span></b>
+					</a>
+				</li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b><span
-							id="num" class="noback">STEP2</span> <span id="select"
-							class="click">좌석선택</span></b>
-				</a></li>
+				<li><a class="menu" href="#">
+						<b><span id="num" class="noback">STEP2</span>
+						<span id="select" class="click">좌석선택</span></b>
+					</a>
+				</li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b><span id="num" class="back">STEP3</span>
-							<span id="select" class="select">결제하기</span></b>
-				</a></li>
+				<li><a class="menu" href="#">
+						<b><span id="num" class="back">STEP3</span>
+						<span id="select" class="select">결제하기</span></b>
+					</a>
+				</li>
 			</ul>
 		</div>
 		<hr>
@@ -269,7 +282,8 @@ button:hover {
 				<div style="margin-left: 20px;">
 					<p>☑ 1인 2석까지 예약 가능합니다.</p>
 					<div>
-						<span>☑ 인원 수 선택 :</span> <select id="people">
+						<span>☑ 인원 수 선택 :</span>
+						<select id="people" class="opt">
 							<option value="1">1명</option>
 							<option value="2">2명</option>
 						</select>
@@ -420,7 +434,7 @@ button:hover {
 			<hr>
 			<table class="table center option"
 				style="width: 100%; margin-left: auto; margin-right: auto;">
-				<tr style="background-color: #FCBB6D;">
+				<tr>
 					<th width="50%" class="center">날짜/시간</th>
 					<th width="50%" class="center">선택 좌석정보</th>
 				</tr>

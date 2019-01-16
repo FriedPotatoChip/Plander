@@ -73,7 +73,7 @@ a {
 				<c:forEach var="msg" items="${list }">
 					<tr>
 						<td><a href="#"
-							onclick="window.open('/TMS/recvMsg?rm_idx=${msg.sm_idx }', '받은 쪽지', 'width=500, height=500'); return false;">${msg.title }</a>
+							onclick="window.open('/TMS/recvMsg?rm_idx=${msg.sm_idx }', '받은 쪽지', 'width=500, height=600'); return false;">${msg.title }</a>
 						</td>
 						<td>${msg.recv_id }</td>
 						<td>${msg.content }</td>

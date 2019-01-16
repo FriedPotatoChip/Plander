@@ -91,6 +91,16 @@ button:hover {
 	color: white;
 }
 /* 버튼 끝 */
+.opt {
+	display: inline-block;
+	padding: .375rem 1.75rem .375rem .75rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #4d4d4d;
+	vertical-align: middle;
+	border-radius: .25rem;
+
+}
 </style>
 
 <!-- 네이버 페이 -->
@@ -534,7 +544,7 @@ button:hover {
 					<table border="1px solid;" class="table table-bordered"
 						style="width: 100%; text-align: center;">
 						<tbody>
-							<tr style="background-color: #FCBB6D;">
+							<tr>
 								<td width="13%">예매번호</td>
 								<td width="10%">예약자 이름</td>
 								<td width="12%">연락처</td>
@@ -568,14 +578,14 @@ button:hover {
 				<!-- 결제방식 선택 -->
 				<div id="pay" class="radio" style="padding: 10px;">
 					<h5 style="color: #475C7A;">사용 가능한 쿠폰</h5>
-					<select id="coupon">
+					<select id="coupon" class="opt">
 						<option value="0">------</option>
 					</select> <span id="finPrice"></span> <br>
 					<br>
 					<br>
 					<h5 style="color: #475C7A;">결제방식 선택</h5>
 					<div>
-						<button type="button" id="naverpay">네이버 페이로 결제하기</button>
+						<button type="button" id="naverpay">네이버 페이</button>
 					</div>
 
 					<!-- <label class="radio-inline">
@@ -620,56 +630,49 @@ button:hover {
 	<!-- 바디 콘테이너 끝 -->
 
 	<script>
-		$(document)
-				.ready(
-						function() {
-							window.finalPrice = 0;
-							$
-									.ajax({
-										url : "/couponList",
-										type : "get",
-										data : {
-											"id" : "${usersVO.id}"
-										},
-										dataType : "json",
-										success : function(result) {
+		$(document).ready(function() {
+			window.finalPrice = 0;
+			$.ajax({
+				url : "/couponList",
+				type : "get",
+				data : {
+					"id" : "${usersVO.id}"
+				},
+				dataType : "json",
+				success : function(result) {
 
-											var html = "";
-											if (result == "") {
-												html += "<option value='0' type='0' price='0'>없음</option>";
-											} else {
-												$
-														.each(
-																result,
-																function(index,
-																		value) {
-																	if ((value.cb_roomtype == 'LAB' && sct_idx != 1)
-																			|| (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)
-																			|| (value.cb_roomtype == 'ALL')) {
-																		html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"
-																				+ value.cb_name
-																				+ " "
-																				+ value.cb_discount;
-																		if (value.cb_distype == 'PERCENT') {
-																			html += "%";
-																		} else if (value.cb_distype == 'PRICE') {
-																			html += "원";
-																		}
-																		html += "("
-																				+ value.cp_quantity
-																				+ " 개)";
-																		html += "</option>";
-																	}
-																});
-											}
-											$("#coupon").append(html);
-
-										},
-										error : function(error) {
-
-										}
-									});
+					var html = "";
+					if (result == "") {
+						html += "<option value='0' type='0' price='0'>없음</option>";
+					} else {
+						$.each(result, function(index, value) {
+							if ((value.cb_roomtype == 'LAB' && sct_idx != 1)
+									|| (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)
+									|| (value.cb_roomtype == 'ALL')) {
+								html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"
+										+ value.cb_name
+										+ " "
+										+ value.cb_discount;
+								if (value.cb_distype == 'PERCENT') {
+									html += "%";
+								} else if (value.cb_distype == 'PRICE') {
+									html += "원";
+								}
+								html += "("
+										+ value.cp_quantity
+										+ " 개)";
+								html += "</option>";
+							}
 						});
+					}
+					$("#coupon").append(html);
+
+				},
+				error : function(error) {
+
+				}
+			});
+		});
 
 		$("#coupon").on(
 				"change",

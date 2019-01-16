@@ -438,41 +438,43 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="#"> <b><span
-							id="num" class="noback">STEP1</span> <span id="select"
-							class="click">날짜선택</span></b>
+				<li><a class="menu" href="#">
+					<b><span id="num" class="noback">STEP1</span>
+					<span id="select" class="click">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b><span id="num" class="back">STEP2</span>
-							<span id="select" class="select">좌석선택</span></b>
+				<li><a class="menu" href="#">
+					<b><span id="num" class="back">STEP2</span>
+					<span id="select" class="select">좌석선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b> <span id="num"
-							class="back">STEP3</span> <span id="select" class="select">결제하기</span></b>
+				<li><a class="menu" href="#">
+					<b><span id="num" class="back">STEP3</span>
+					<span id="select" class="select">결제하기</span></b>
 				</a></li>
 			</ul>
 		</div>
 		<!-- 예약 헤더끝 -->
 
 		<div id="ticket" style="box-sizing: border-box;">
-			<div class="boxoutside" style="border: 1px solid lightgray;">
+			<div class="boxoutside">
 				<form method="post">
 					<!-- 달력 -->
-					<div style="margin: 10px; background-color: #FCBB6D;">
+					<div style="margin: 10px; border: 1px solid lightgray;">
 						<div id="calendar" class="container">
 							<div class="form-group">
 								<div class='input-group date' id='datetimepicker6'>
-									<input type='text' name="start_time" class="form-control" /> <span
-										class="input-group-addon"> <span
-										class="glyphicon glyphicon-calendar"></span>
+									<input type='text' name="start_time" class="form-control" />
+									<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class='input-group date' id='datetimepicker7'>
-									<input type='text' name="end_time" class="form-control" /> <span
-										class="input-group-addon"> <span
-										class="glyphicon glyphicon-calendar"></span>
+									<input type='text' name="end_time" class="form-control" />
+									<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</div>
