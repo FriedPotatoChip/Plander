@@ -13,53 +13,101 @@
 <!-- include summernote-ko-KR -->
 <script src="/resources/js/summernote-ko-KR.js"></script> 
 
-
 <style>
 	.zeroPad { padding: 0px; }
+	.center { text-align: center; }
+	
+	.write { float: right; }
+	.write::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 버튼 */
+	.button {
+		display: inline-block;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 14px;
+		text-align: center;
+		border: 1px solid #685D79;
+		background-color: #685D79;
+		cursor: pointer;
+		color: white;
+	}
+	
+	.button:hover {
+		border: 1px solid #685D79;
+		background-color: white;
+		color: black;
+	}
+	/* 버튼 끝 */
 </style>
 </head>
-<body> 
-	<!-- 헤더 -->
-<!-- Header -->
-<c:if test="${empty sessionScope.usersVO }">
-	<jsp:include page="/commons/header.jsp" />
-</c:if>
-<c:if test="${not empty sessionScope.usersVO }">
-	<c:if test="${sessionScope.usersVO.rank != 1 }"> 
-		<jsp:include page="/commons/loginheader.jsp" />
-	</c:if>
-	<c:if test="${sessionScope.usersVO.rank == 1 }">
-		<jsp:include page="/commons/adminLoginheader.jsp" />
-	</c:if>
-</c:if>
-<!-- 헤더 끝 -->
-	<h3>모집 게시판 글 작성 페이지</h3>
+<body>
+	<div>
+		<!-- 헤더 -->
+		<!-- Header -->
+		<c:if test="${empty sessionScope.usersVO }">
+			<jsp:include page="/commons/header.jsp" />
+		</c:if>
+		<c:if test="${not empty sessionScope.usersVO }">
+			<c:if test="${sessionScope.usersVO.rank != 1 }"> 
+				<jsp:include page="/commons/loginheader.jsp" />
+			</c:if>
+			<c:if test="${sessionScope.usersVO.rank == 1 }">
+				<jsp:include page="/commons/adminLoginheader.jsp" />
+			</c:if>
+		</c:if>
+	</div> <!-- 헤더 끝 -->
 	
-<form id="articleForm" role="form" action="/TMS/modifyBoard" method="post">
- <br style="clear: both">
-	<table>
-		<tr>
-			<td>
-				<div class="col-xs-9 zeroPad">
-					<input type="text" class="form-control" id="b_title" name="b_title" placeholder="제목" value="${board.b_title }"  required>
+	<br>
+	<p class="center" style="font-weight: 700; font-size: 2em;">[ 글수정 ]</p>
+	
+	<div class="bodyform"
+		style="width: 75%; margin: auto; background-color: #e9ecef; padding: 20px;
+		border-radius: 15px;">
+		<div> <!-- 글쓰기 폼  -->
+			<form id="articleForm" role="form" action="/TMS/modifyBoard" method="post">
+				<br style="clear: both">
+				<table style="margin: auto;">
+					<tr>
+						<td>
+							<div class="col-xs-9 zeroPad">
+								<input type="text" class="form-control"
+									id="b_title" name="b_title" placeholder="제목" value="${board.b_title }"  required>
+							</div>
+						</td>
+					</tr>  
+					<tr>
+						<td>
+							<br>
+							<textarea class="form-control" id="summernote"
+								name="b_content" placeholder="content" required></textarea>
+						</td>
+					</tr>
+				</table>
+				<input type="hidden" name="b_idx" value="${board.b_idx }">
+				<br><br>
+				
+				<!-- 글 수정버튼 -->
+				<div class="write">
+					<button class="button" type="submit" id="submit" name="submit">수정하기</button>
+					<input class="button" type="reset" value="취소">
 				</div>
-			</td>
-		</tr>  
-		<tr>
-			<td>
 				<br>
-				<textarea class="form-control" id="summernote" name="b_content" placeholder="content" required></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">수정하기</button>
-			</td>
-		</tr>
-	</table>
-	<input type="hidden" name="b_idx" value="${board.b_idx }">
+					
+			</form>
 		
-</form>
+		</div> <!-- 글쓰기 폼 끝 -->
+	<br>
+	</div> <!-- bodyform 끝 -->
+	<br><br><br>
+	<hr>
+	<!-- 허해서 넣은 풋터 -->
+	<p class="center" style="font-size: 17px;">© turtlesmiracle</p><br><br>
+	<!-- 허해서 넣은 풋터 끝 -->
+		
 
 
 <script type="text/javascript">

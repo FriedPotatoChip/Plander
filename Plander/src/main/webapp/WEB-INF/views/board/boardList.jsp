@@ -4,12 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
 <style>
-	.header {
-		font-family: 'NanumSquare', sans-serif;
-		font-weight: 400;
-		color: #666;
-		font-size: 1.2rem;
-	}
 	table { text-align: center; }
 	.center { text-align: center; }
 	.write { float: right; }
@@ -81,30 +75,27 @@
 	
 	a { text-decoration: none; }
 
-/* 클릭시 레이어 */
-.idDiv { cursor: pointer; }
-
-.popupLayer {
-	position: absolute;
-	display: none;
-	background-color: #ffffff;
-	border: solid 2px #d0d0d0;
-	width: 130px;
-	height: 120px;
-	padding: 10px;
-	padding-top: 18px;
-	padding-left: 15px;
-}
-
-.popupLayer div {
-	position: absolute;
-	top: 0px;
-	right: 5px
-}
-
-.center {
-	text-align: center;
-}
+	/* 클릭시 레이어 */
+	.idDiv { cursor: pointer; }
+	
+	.popupLayer {
+		position: absolute;
+		display: none;
+		background-color: #ffffff;
+		border: solid 2px #d0d0d0;
+		width: 130px;
+		height: 120px;
+		padding: 10px;
+		padding-top: 18px;
+		padding-left: 15px;
+	}
+	
+	.popupLayer div {
+		position: absolute;
+		top: 0px;
+		right: 5px
+	}
+	
 </style>
 <script> 
 	function selChange(){

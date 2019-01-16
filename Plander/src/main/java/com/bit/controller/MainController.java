@@ -152,4 +152,9 @@ public class MainController {
 		return "main/recvMsg";
 	}
 	
+	@RequestMapping("/operation")
+	public String operation() {
+		
+		return "main/operation";
+	}
 }
