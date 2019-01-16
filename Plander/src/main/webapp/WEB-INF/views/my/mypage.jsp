@@ -327,8 +327,7 @@ h3 {
 								<th>회원주소&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="text" id="zipNo" style="display: inline;"
 									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
-									<button type="button" class="btn"
-										style="background-color: #D8737F; color: white;"
+									<button type="button" class="btn btn-outline-danger"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
 									name="roadAddrPart1" value="${user.roadAddrPart1 }" readonly>
@@ -341,12 +340,9 @@ h3 {
 					<div class="modal-footer">
 						<a href="/TMS/dropout" class="mr-3" data-toggle="modal"
 							data-target=".bd-example-modal-sm">회원탈퇴</a>
-						<button type="reset" class="btn"
-							style="background-color: #FCBB6D; color: white;"
-							data-dismiss="modal">초기화</button>
+						<button type="reset" class="btn btn-outline-warning">초기화</button>
 						<input type="hidden" name="id" value="${user.id }" />
-						<button type="submit" id="update" class="btn"
-							style="background-color: #D8737F; color: white;">수정하기</button>
+						<button type="submit" id="update" class="btn btn-outline-danger">수정하기</button>
 					</div>
 				</div>
 			</form>
@@ -372,17 +368,14 @@ h3 {
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn"
-						style="background-color: #FCBB6D; color: white;"
+					<button type="button" class="btn btn-outline-warning"
 						data-dismiss="modal">창닫기</button>
-					<button type="button" class="btn"
-						style="background-color: #D8737F; color: white;"
-						onclick="location.href='/TMS/my/dropout'">탈퇴하기</button>
+					<button type="button" class="btn btn-outline-danger"
+						onclick="dropOut()">탈퇴하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
 
 	<!-- 프로필 사진 수정 모달 -->
 	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog"
@@ -421,9 +414,9 @@ h3 {
 
 
 	<!-- 프로필 사진 업로드 모달 -->
-	<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog"
+	<div class="modal fade bd-example-modal-xl" id="updateProfile" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 업로드</h5>
@@ -459,8 +452,8 @@ h3 {
 					</c:if>
 				</div>
 				<div class="modal-footer">
-					<input type="button" class="btn btn-secondary" data-dismiss="modal"
-						value="닫기"> <input type="button" class="btn btn-primary"
+					<input type="button" class="btn btn-outline-warning" data-dismiss="modal"
+						value="닫기"> <input type="button" class="btn btn-outline-danger"
 						value="수정" onclick="submitProfile()">
 				</div>
 			</div>
@@ -717,7 +710,27 @@ function showBox(e, tag){
 		});
 }
 
-
+function dropOut(){
+	
+	$.ajax({
+		url: "/TMS/my/dropout",
+		type: "post",
+		dataType: "text",
+		success: function(result){
+			if (result == 'success'){
+				alert('회원탈퇴가 정상적으로 완료되었습니다. 그동안 이용해주셔서 감사합니다.');
+				location.href="/TMS/logout";
+			} else if(result == 'fail'){
+				alert('회원탈퇴가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+			} else {
+				alert('정상적인 접근이 아닙니다.');
+			}
+			
+		}, error: function(error) {
+			
+		}
+	})
+}
 </script>
 </body>
 </html>

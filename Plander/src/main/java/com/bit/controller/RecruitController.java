@@ -78,7 +78,7 @@ public class RecruitController {
 	/* 모집글 상세보기 */
 	@GetMapping("/TMS/recruitDetail")
 	public String detailOne(@RequestParam("idx")int rc_idx, Model model, PagingVO page) {
-		
+		System.out.println("rc_idx: " + rc_idx);
 		service.updateHit(rc_idx);
 		model.addAttribute("rc_board", service.detailOne(rc_idx));
 		model.addAttribute("apply", service.getApplyList(rc_idx));

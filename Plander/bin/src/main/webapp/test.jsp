@@ -11,11 +11,12 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Noto+Sans+KR" rel="stylesheet">
 <script>
-	function payTest(frm) {
-		frm.action="";
+	function payTest() {
+		frm.action="/TMS/book";
 		frm.submit();
 	}
 </script>
+   
 </head>
 <body>
 <%-- 카카오페이 
@@ -31,12 +32,36 @@
 	fail_url			결제 실패시 redirect url. 최대 255자	O	String
 
  --%>
+ 
+ 
+ <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"
+    data-client-id="u86j4ripEt8LRfPGzQ8"
+    data-merchant-pay-key="partnder-orderkey"
+    data-product-name="네이버페이 테스트"
+    data-total-pay-amount="100"
+    data-tax-scope-amount="100"
+    data-tax-ex-scope-amount="0"
+    
+    data-return-url="/TMS/payment/naverPay">
+</script>
+<hr>
 
 
-<form method="post">
-	<input type="button" id="naverPayBtn" value="네이버페이 결제 버튼" >
+<form method="post" name="frm" onsubmit="payTest()" >
+<!-- 	<input type="button" id="naverPayBtn" value="네이버페이 결제 버튼" > -->
+<!-- 	<input type="radio" name="pay" id="naverPayBtn" value="2">네이버페이 -->
+	<input type="radio" name="pay" id="testpay" value="3">결제
+	<button type="button">결제테스트</button>
+	<button type="button" id="naverPayBtn">네이버페이</button>
+	<button type="submit" id="pay">결제</button>
 </form>
-<!-- 네이버 페이 -->
+
+
+<!-- <a id="naverPayBtn"><img width="5%" src="/resources/images/turtle.png" alt="네이버페이"></a> -->
+
+<!-- 
+
+네이버 페이
 <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
 <script>
 	var oPay = Naver.Pay.create({ //SDK Parameters를 참고 바랍니다.
@@ -67,9 +92,10 @@
     count: 결제 상품 개수. 기본값은 1
     */
     
-    //네이버 페이 결제화면 호출
+
+	//네이버 페이 결제화면 호출
     elNaverPayBtn.addEventListener("click", function() {
-		oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
+    	oPay.open({ // Pay Reserve Parameters를 참고 바랍니다.
 			"merchantPayKey" : "partnder-orderkey",
 			"productName" : "커스텀 결제",
 			"productCount" : 1,
@@ -85,9 +111,11 @@
 				"count" : 1
 			} ]
 		});
-		//oPay.close();
+		oPay.close();
 	}); //결제화면 호출 끝
 </script>
+
+ -->
 </body>
 
 

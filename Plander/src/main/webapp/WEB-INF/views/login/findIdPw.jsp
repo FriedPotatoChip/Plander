@@ -8,7 +8,6 @@ body {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
-	font-size: 1.2rem;
 }
 
 .center {
@@ -44,12 +43,11 @@ body {
 				<hr>
 				<form method="post" action="/TMS/findId">
 					<div style="border: 1px solid; padding: 20px;">
-						<input type="text" name="name"
-							class="form-control form-control-lg" placeholder="이름"> <input
-							type="text" name="email"
-							class="form-control form-control-lg margintop" placeholder="이메일">
-						<button type="submit" class="btn form-control margintop btn-lg"
-							style="background-color: #008374; color: white;">찾기</button>
+						<input type="text" name="name" class="form-control"
+							placeholder="이름"> <input type="text" name="email"
+							class="form-control margintop" placeholder="이메일">
+						<button type="submit" class="btn form-control margintop"
+							style="background-color: #475C7A; color: white;">찾기</button>
 					</div>
 				</form>
 			</div>
@@ -60,12 +58,12 @@ body {
 				<hr>
 				<form method="post" action="/TMS/findPw">
 					<div style="border: 1px solid; padding: 20px;">
-						<input type="text" name="id" class="form-control form-control-lg"
+						<input type="text" name="id" class="form-control"
 							placeholder="아이디"> <input type="text" name="email"
-							class="form-control form-control-lg margintop" placeholder="이메일">
+							class="form-control margintop" placeholder="이메일">
 						<button type="submit"
-							class="btn btn-outline-secondary form-control btn-lg margintop"
-							style="background-color: #008374; color: white;">찾기</button>
+							class="btn btn-outline-secondary form-control margintop"
+							style="background-color: #475C7A; color: white;">찾기</button>
 					</div>
 				</form>
 			</div>

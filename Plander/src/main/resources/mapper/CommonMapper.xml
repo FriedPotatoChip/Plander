@@ -52,7 +52,7 @@
 	
 	<!-- Main 모집글 랜덤 추출 -->
 	<select id="RandomRecruit" resultType="com.bit.domain.RecruitVO">
-		select id, rc_title
+		select *
 		    from(
 		        select *
 		            from recruit

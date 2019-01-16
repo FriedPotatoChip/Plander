@@ -141,8 +141,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/TMS/logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, @RequestParam(value="chk", required=false) String chk, RedirectAttributes rttr) {
 		session.invalidate();
+		rttr.addAttribute("chk", chk);
+		
 		return "redirect: /TMS";
 	}
 	

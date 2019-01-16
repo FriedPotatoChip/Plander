@@ -17,16 +17,8 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/dashboard.css" rel="stylesheet">
 <!-- ======================================================================================== -->
-<!-- fonts -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 
 <style>
-body {
-	font-family: 'NanumSquare', sans-serif;
-	color: #666;
-}
-
 .box {
 	display: table;
 	table-layout: fixed;
@@ -149,15 +141,11 @@ tr:last-child td {
 }
 
 /* 페이징 처리 끝 */
-a {
-	text-decoration: none;
-	color: #475C7A;
-}
 </style>
 </head>
 
 <body>
-	<thead>
+	<thead style="background-color: #475C7A; color: white;">
 		<tr>
 			<th style="width: 30%;">제목</th>
 			<th style="width: 20%;">받는사람</th>

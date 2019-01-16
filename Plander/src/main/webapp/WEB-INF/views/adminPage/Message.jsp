@@ -10,15 +10,9 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/dashboard.css" rel="stylesheet">
 <!-- ======================================================================================== -->
-<!-- fonts -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 
 <style>
-body {
-	font-family: 'NanumSquare', sans-serif;
-	color: #666;
-}
+
 
 .container {
 	max-width: 1500px;
@@ -206,18 +200,18 @@ h3 {
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 			<h4 class="text-center mt-5" style="color: #475C7A;">쪽지함</h4>
 			<div style="width: 80%; margin: 0 auto; text-align: center;">
-				<p class="d-inline">
+				<h4 class="d-inline">
 					<a href="javascript:click()"
 						onclick="fetch_book('/TMS/admin/recvMsg?nowPage=1')">받은쪽지</a>
-				</p>
+				</h4>
 				&nbsp;|&nbsp;
-				<p class="d-inline">
+				<h4 class="d-inline">
 					<a href="javascript:click()"
 						onclick="fetch_book('/TMS/admin/sendMsg?nowPage=1')">보낸쪽지</a>
-				</p>
+				</h4>
 			</div>
 			<div class="myBook_nav" style="margin-top: 30px;">
-				<table id="myBook" class="centered" style="width: 800px;"></table>
+				<table id="myBook" class="table centered" style="width: 800px;"></table>
 			</div>
 			</main>
 		</div>

@@ -43,7 +43,7 @@ public class MainController {
 	private CommonService comService;
 
 	@RequestMapping("")
-	public String main(HttpSession session, Model model) {
+	public String main(HttpSession session, Model model, @RequestParam(value="chk", required=false) String chk) {
 		UsersVO user = (UsersVO) session.getAttribute("usersVO");
 		if (user != null) {
 
@@ -68,6 +68,8 @@ public class MainController {
 		List<RecruitVO> lrvo = comService.RandomRecruit();
 		System.out.println("lrvo : " + lrvo);
 		model.addAttribute("RandomRecruit", comService.RandomRecruit());
+		
+		model.addAttribute("chk", chk);
 
 		return "main/main";
 	}
@@ -150,4 +152,9 @@ public class MainController {
 		return "main/recvMsg";
 	}
 	
+	@RequestMapping("/operation")
+	public String operation() {
+		
+		return "main/operation";
+	}
 }

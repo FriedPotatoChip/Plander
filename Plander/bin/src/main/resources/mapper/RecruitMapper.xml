@@ -145,9 +145,10 @@
 		<!-- 페이징 처리 댓글 출력 -->
 		<select id="getCommList" resultType="com.bit.domain.CommentsVO" parameterType="map">
 		SELECT * FROM (
-						SELECT ROWNUM RN, LEVEL, C.* 
-						FROM COMMENTS C 
+						SELECT ROWNUM RN, LEVEL, C.*, U.USER_PROFILEIMAGEPATH 
+						FROM COMMENTS C, USERS U 
 						WHERE RC_IDX = #{rc_idx}
+						AND C.ID = U.ID
 						START WITH RP_IDX IS NULL 
 						CONNECT BY PRIOR C_IDX = RP_IDX 
 						ORDER SIBLINGS BY C_IDX ASC
