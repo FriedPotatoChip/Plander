@@ -104,12 +104,21 @@ button:hover {
 #totalTable {
 	background-color: #f8f9fa;
 }
+
 </style>
 
 <!-- 네이버 페이 -->
 <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script>
 <script>
+
 	$(function() {
+		$("#normalpay").click(
+				function() {
+					$("#confirm").removeAttr("disabled").css(
+							'background-color', 'white').css('color', 'black').css('border', '1px solid #D8737F')
+							.attr('type','submit');
+				});
+		
 		$('#booknum').html(
 				'<span>' + '${bvo.getStart_time() }'.substring(2, 4)
 						+ '${bvo.getStart_time() }'.substring(5, 7)
@@ -587,7 +596,7 @@ button:hover {
 						<h5 style="color: #475C7A;">결제방식 선택</h5>
 						<div>
 							<button type="button" id="naverpay">네이버 페이</button>
-							<button type="button" id="normalpay" onclick="normalpay()">일반결제</button>
+							<button type="button" id="normalpay">일반결제</button>
 						</div>
 						<br>
 					</div>
@@ -600,11 +609,11 @@ button:hover {
 
 				</div>
 				<div class="center" style="padding: 10px;">
-				<br>
+					<br>
 					<button type="button" onclick="history.back(); return false;">이전단계</button>
 					&nbsp;
-					<button type="button" disabled="disabled" id="confirm"
-						style="background-color: white; border: 1px solid lightgray; color: lightgray; cursor: not-allowed;">확인</button>
+					<button type="button" id="confirm" disabled="disabled"
+						style="background-color: white; border: 1px solid lightgray; color: lightgray;">확인</button>
 				</div>
 
 				<input type="hidden" name="booknum" value=""> <input
@@ -756,11 +765,6 @@ button:hover {
 			} else {
 				frm.submit();
 			}
-		}
-		
-		function normalpay(){
-			$('#confirm').removeAttr( "disabled" );
-			$('#confirm').removeAttr( "cursor" );
 		}
 	</script>
 	<!-- 
