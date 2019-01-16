@@ -78,7 +78,7 @@ $(function(){
 </head>
 <body>
 
-<form id="form" action="/TMS/profileUpload" name="imgForm" method="post" enctype="multipart/form-data" onclick="">
+<form id="form" action="/profileUpload" name="imgForm" method="post" enctype="multipart/form-data" onclick="">
 	<input type='file' name="file" id="imgInput" />
 	<input type="text" name="x" id="x" />
 	<input type="text" name="y" id="y" />

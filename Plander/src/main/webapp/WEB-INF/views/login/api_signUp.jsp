@@ -25,7 +25,7 @@
 </script>
 </head>
 <body>
-	<form action="/TMS/signUp_api" method="post" name="joinform">
+	<form action="/signUp_api" method="post" name="joinform">
 		<table class="table">
 			<tr>
 				<th>아이디</th>
@@ -133,7 +133,7 @@
 				return false;
 			}
 
-			frm.action = "/TMS/signUp_api";
+			frm.action = "/signUp_api";
 			frm.submit();
 
 		}

@@ -22,7 +22,7 @@ import com.bit.service.BookService;
 
 @Controller
 @SessionAttributes("usersVO")
-@RequestMapping("/TMS/payment")
+@RequestMapping("/payment")
 public class PayController {
 
 //	@Autowired

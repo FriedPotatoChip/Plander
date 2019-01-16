@@ -39,7 +39,7 @@ th, td {
 		<h4 class="text-center"
 			style="text-decoration: underline; color: #475C7A; margin-bottom: 20px;">
 			쪽지</h4>
-		<form action="/TMS/sendMsg" method="post" id="msgForm">
+		<form action="/sendMsg" method="post" id="msgForm">
 			<table>
 				<tr>
 					<th>보낸이</th>

@@ -157,7 +157,7 @@
 			alert('좌석을 선택해주세요.');
 			return false;
 		} else {
-			frm.action = "/TMS/book/pay"
+			frm.action = "/book/pay"
 			frm.submit();
 		}
 	}
@@ -296,7 +296,7 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/TMS/book/booking"> <b><span
+				<li><a class="menu" href="/book/booking"> <b><span
 							id="num" class="back">STEP1</span> <span id="select"
 							class="select">날짜선택</span></b>
 				</a></li>
@@ -504,7 +504,7 @@ button:hover {
 
 					<div class="center" style="padding: 10px;">
 						<button type="button"
-							onclick="location.href='/TMS/book/selectSeat'">이전단계</button>
+							onclick="location.href='/book/selectSeat'">이전단계</button>
 						&nbsp;
 						<button type="button" onclick="next(this.form)">다음단계</button>
 					</div>

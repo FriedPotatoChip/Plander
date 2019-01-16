@@ -13,7 +13,7 @@ function go_init(){
 		gapi.load('auth2', function(){
 			console.log("auth2");
 			var gauth = gapi.auth2.init({
-				client_id:'702849703047-ssi0aumpcmnp5bbdqm24vqem3pn6q1mr.apps.googleusercontent.com',
+				client_id:'구글클라',
 			    fetch_basic_profile: true,
 			    scope: 'profile'
 			}) 

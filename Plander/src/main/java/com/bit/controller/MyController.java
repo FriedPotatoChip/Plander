@@ -32,7 +32,7 @@ import com.bit.utils.PagingVO;
 
 @Controller
 @SessionAttributes("usersVO")
-@RequestMapping("/TMS/my")
+@RequestMapping("/my")
 public class MyController {
 
 	@Autowired
@@ -229,7 +229,7 @@ public class MyController {
 		System.out.println("처리결과: " + result);
 		
 		model.addAttribute("result", result);
-		return "redirect: /TMS/my";
+		return "redirect: /my";
 	}
 
 	// 내모집글

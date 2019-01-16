@@ -95,12 +95,11 @@
 	<c:if test="${ct_idx != 3 }">
 		<p class="center" style="font-weight: 700; font-size: 2em;">[ 글쓰기 ]</p>
 	</c:if>
-	
 	<div class="bodyform"
 		style="width: 75%; margin: auto; background-color: #e9ecef; padding: 20px;
 		border-radius: 15px;">
 		<div> <!-- 글쓰기 폼 -->
-			<form id="articleForm" role="form" action="/TMS/boardWrite" method="post"><!--  -->
+			<form id="articleForm" role="form" action="/boardWrite" method="post"><!--  -->
 				<br style="clear: both">
 				<input type="hidden" name="ct_idx" value="${ct_idx }">
 				
@@ -224,18 +223,16 @@
       $.ajax({
         data: form_data,
         type: "POST",
-        url: '/imageUpload',
+        url: '/uploadAjaxS3',
         cache: false,
         contentType: false,
-        enctype: 'multipart/form-data',
+        enctype: 'multipart/form-data',	
         processData: false,
         success: function(url) {
-        	setTimeout(function(){
-	        	url = '/resources/upload'+url;
-	        	console.log("url: "+ url);
-	          $(el).summernote('editor.insertImage', url);
-	          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        	}, 3000)
+			url = 'https://s3.ap-northeast-2.amazonaws.com/turtlesmiraclebucket/resources/upload'+url;
+			console.log("url: "+ url);
+			$(el).summernote('editor.insertImage', url);
+			$('#imageBoard > ul').append('<li><img src="'+url+'"/></li>');
         }
       });
     }

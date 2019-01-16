@@ -45,7 +45,7 @@ public class LoginController {
 		if (chkSignUp) {
 			return "redirect: /signUpSuc";
 		}else {
-			return "redirect: /TMS";
+			return "redirect: /";
 		}
 	}
 	
@@ -97,14 +97,13 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/ajaxTest")
-	public @ResponseBody UsersVO ajaxTest(UsersVO vo, HttpSession session) {
+	public @ResponseBody UsersVO ajaxTest(UsersVO vo, HttpSession session, Model model) {
 		System.out.println("되냐?");
 		System.out.println("vo: "+ vo);
 		UsersVO result = service.chkApi(vo.getApi_id());
 		
 		if (result == null) {
 			System.out.println("널로 들어옴");
-			session.setAttribute("usersVO", vo);
 			return vo;
 		} else {
 			System.out.println("낫널로 들어옴");
@@ -177,31 +176,31 @@ public class LoginController {
 				return "success";
 			}
 			
-			return "redirect: /TMS";
+			return "redirect: /";
 		}	
 	
 	// email
-	@RequestMapping("/TMS/findIdPw")
+	@RequestMapping("/findIdPw")
 	public String findIdPw() {
 		return "login/findIdPw";
 	}
 	
-	@PostMapping("/TMS/findId")
+	@PostMapping("/findId")
 	public String findId(UsersVO vo, Model model, RedirectAttributes rttr) {
 		UsersVO user = service.findId(vo);
 		if (user == null) {
-			return "redirect: /TMS/findIdPwFail";
+			return "redirect: /findIdPwFail";
 		} else {
 			rttr.addAttribute("findId", user.getId());
-			return "redirect: /TMS/findIdOk";
+			return "redirect: /findIdOk";
 		}
 	}
-	@PostMapping("/TMS/findPw")
+	@PostMapping("/findPw")
 	public String findPw(UsersVO vo, Model model, RedirectAttributes rttr) {
 		UsersVO user = service.findPw(vo);
 		
 		if (user == null) {
-			return "redirect: /TMS/findIdPwFail";
+			return "redirect: /findIdPwFail";
 		} else {
 			String setfrom = "tutlestudy@gmail.com";
 		    String tomail  = vo.getEmail();     // 받는 사람 이메일
@@ -227,27 +226,27 @@ public class LoginController {
 		    } catch(Exception e){
 		      System.out.println(e);
 		    }
-	    return "redirect: /TMS/findOk";
+	    return "redirect: /findOk";
 		}
 	}
 	
-	@GetMapping("/TMS/findOk")
+	@GetMapping("/findOk")
 	public String findOk(@RequestParam("findpw")String pw, Model model) {
 		model.addAttribute("findpw", "success");
 		return "login/findOk";
 	}
-	@GetMapping("/TMS/findIdOk")
+	@GetMapping("/findIdOk")
 	public String findIdOk(@RequestParam("findId")String id, Model model) {
 		model.addAttribute("findId", id);
 		return "login/findOk";
 	}
-	@RequestMapping("/TMS/findIdPwFail")
+	@RequestMapping("/findIdPwFail")
 	public String findIdPwFail(Model model) {
 		model.addAttribute("result", "fail");
 		return "login/findIdPw";
 	}
 	
-	@RequestMapping("/TMS/login")
+	@RequestMapping("/login")
 	public String TMSlogin(Model model) {
 		model.addAttribute("login", "false");
 		return "main/submain";

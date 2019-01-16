@@ -49,22 +49,22 @@ public class RecruitController {
 	private RecruitService service;
 	
 	/* 모집글 작성 시작 */
-	@GetMapping("/TMS/recruitWrite")
+	@GetMapping("/recruitWrite")
 	public String recruitWrite() {
 		return "board/recruitWrite";
 	}
 	
-	@PostMapping("/TMS/recruitWrite")
+	@PostMapping("/recruitWrite")
 	public String recruitWrite(RecruitVO vo) {
 		
 		service.register(vo);
 		
-		return "redirect: /TMS/recruitDetail?idx="+vo.getRc_idx();
+		return "redirect: /recruitDetail?idx="+vo.getRc_idx();
 	}
 	/* 모집글 작성 끝 */
 	
 	/* 모집글 목록 */
-	@GetMapping("/TMS/recruit")
+	@GetMapping("/recruit")
 	public String recruit(Model model, PagingVO page) {
 		
 		page = new PagingVO(page.getNowPage(), page.getCntPerPage(), service.getTotal());
@@ -76,7 +76,7 @@ public class RecruitController {
 	}
 	
 	/* 모집글 상세보기 */
-	@GetMapping("/TMS/recruitDetail")
+	@GetMapping("/recruitDetail")
 	public String detailOne(@RequestParam("idx")int rc_idx, Model model, PagingVO page) {
 		System.out.println("rc_idx: " + rc_idx);
 		service.updateHit(rc_idx);
@@ -130,24 +130,24 @@ public class RecruitController {
 	@GetMapping("/deleteRec")
 	public String deleteRecruit(@RequestParam("rc_idx") int rc_idx) {
 		service.deleteRec(rc_idx);
-		return "redirect: /TMS/recruit";
+		return "redirect: /recruit";
 	}
 	
-	@GetMapping("/TMS/modifyRec")
+	@GetMapping("/modifyRec")
 	public String modifyRecruit(@RequestParam("rc_idx") int rc_idx, Model model) {
 		model.addAttribute("rc_board", service.detailOne(rc_idx));
 		return "board/recruitModify";
 	}
 	
-	@PostMapping("/TMS/modifyRec")
+	@PostMapping("/modifyRec")
 	public String modifyRecruit(RecruitVO vo) {
 		service.modifyRec(vo);
-		return "redirect: /TMS/recruitDetail?idx="+vo.getRc_idx();
+		return "redirect: /recruitDetail?idx="+vo.getRc_idx();
 	}
 	/* 수정, 삭제 끝 */
 	
 	/* 검색 */
-	@GetMapping("/TMS/searchRecruitList")
+	@GetMapping("/searchRecruitList")
 	public String searchList(@RequestParam("keyword")String keyword, @RequestParam("target")String target, PagingVO page, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);

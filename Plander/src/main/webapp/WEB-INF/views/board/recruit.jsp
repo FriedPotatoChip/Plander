@@ -100,12 +100,12 @@
 <script> 
 	function selChange(){
 		var cntPerPage = document.getElementById("cntPerPage").value;
-		location.href= "/TMS/recruit?nowPage=${page.nowPage }&cntPerPage="+cntPerPage;
+		location.href= "/recruit?nowPage=${page.nowPage }&cntPerPage="+cntPerPage;
 		
 	}
 	function to_detail(b_idx){
 		var cntPerPage = document.getElementById("cntPerPage").value;
-		location.href="/TMS/recruitDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
+		location.href="/recruitDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
 	}
 </script>
 </head>
@@ -213,7 +213,7 @@
 
 		<!-- 검색창 -->
 		<div class="center">
-			<form action="/TMS/searchRecruitList">
+			<form action="/searchRecruitList">
 				<!-- 검색창 -->
 				<select class="opt" name="target">
 					<option value="t">제목</option>
@@ -234,33 +234,33 @@
 			<ul id="pagingList" class="pagination justify-content-center">
 				<c:if test="${page.chkStartPage }">
 					<li class="page_edge">
-						<a class="p-n" href="/TMS/recruit?nowPage=1&cntPerPage=${page.cntPerPage}">〈</a>
+						<a class="p-n" href="/recruit?nowPage=1&cntPerPage=${page.cntPerPage}">〈</a>
 					</li>
 					<li class="page_edge">
-						<a class="p-n" href="/TMS/recruit?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}">
+						<a class="p-n" href="/recruit?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}">
 						<span style="font-size: 0.5em;">…</span></a>
 					</li>
 				</c:if>
 				<c:forEach var="p" begin="${page.startPage }" end="${page.endPage }">
 					<c:if test="${p == page.nowPage }">
 						<li class="page_edge now">
-							<a style="color: white;" href="/TMS/recruit?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+							<a style="color: white;" href="/recruit?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 						</li>
 					</c:if>
 					<c:if test="${p != page.nowPage }">
 						<li class="page_edge">
-							<a href="/TMS/recruit?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+							<a href="/recruit?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 						</li>
 					</c:if>
 
 				</c:forEach>
 				<c:if test="${page.chkEndPage }">
 					<li class="page_edge">
-						<a class="p-n" href="/TMS/recruit?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}">
+						<a class="p-n" href="/recruit?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}">
 						<span style="font-size: 0.5em;">…</span></a>
 					</li>
 					<li class="page_edge">
-						<a class="p-n" href="/TMS/recruit?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}">〉</a>
+						<a class="p-n" href="/recruit?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}">〉</a>
 					</li>
 				</c:if>
 			</ul>
@@ -277,7 +277,7 @@
 
 <script>
 	function write_go(){
-		location.href="/TMS/recruitWrite";
+		location.href="/recruitWrite";
 	}
 	function calcDate(date){
 		var date = new Date(date);
@@ -332,14 +332,14 @@
 			console.log(this);
 			var userId = $(this).attr("userId");
 			console.log($(this).attr("userId"));
-			$("#showWritten").attr("href", "/TMS/searchList?keyword="+userId+"&target=w&ct_idx=${ct_idx}")
+			$("#showWritten").attr("href", "/searchList?keyword="+userId+"&target=w&ct_idx=${ct_idx}")
 			$("#sendMsg").click(function(){
 				$(".popupLayer").hide();
 				if ('${usersVO.id}' == ''){
 					alert("로그인 후 이용 가능합니다.");
 					return false;
 				} 
-				window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
+				window.open("/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
 			});
 			$("#userProfile").click(function(){
 				$(".popupLayer").hide();
@@ -347,7 +347,7 @@
 					alert("로그인 후 이용 가능합니다.");
 					return false;
 				} 
-				window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+				window.open("/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
 			});
 		})
 	});

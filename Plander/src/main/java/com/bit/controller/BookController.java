@@ -22,7 +22,7 @@ import com.bit.service.BookService;
 
 @Controller
 @SessionAttributes("usersVO")
-@RequestMapping("/TMS/book")
+@RequestMapping("/book")
 public class BookController {
 
 	@Autowired

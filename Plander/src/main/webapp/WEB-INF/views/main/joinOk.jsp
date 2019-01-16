@@ -36,7 +36,7 @@
 	
 	<p class="center" style="width: 50%; margin: auto;">
 		<button type="button" class="btn btn-outline-secondary"
-				onclick="location.href='/TMS'">메인화면</button>
+				onclick="location.href='/'">메인화면</button>
 	</p>
 	
 	<br><br><br><br>

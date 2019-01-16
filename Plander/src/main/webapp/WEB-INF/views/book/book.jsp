@@ -108,7 +108,7 @@
 								"width=1400, height=700, scrollbars=yes");
 
 				frm.target = title;
-				frm.action = "/TMS/book/booking";
+				frm.action = "/book/booking";
 				frm.submit();
 			}
 		</script>

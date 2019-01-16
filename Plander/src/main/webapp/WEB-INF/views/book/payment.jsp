@@ -453,7 +453,7 @@ button:hover {
 				"totalPayAmount" : sum,
 				"taxScopeAmount" : sum,
 				"taxExScopeAmount" : 0,
-				"returnUrl" : "/TMS/payment/payok",
+				"returnUrl" : "/payment/payok",
 				"productItems" : [ {
 					"categoryType" : "ETC",
 					"categoryId" : "ETC",
@@ -510,7 +510,7 @@ button:hover {
 </script>
 <script>
 	function payment() {
-		form1.action = "/TMS/book/payok";
+		form1.action = "/book/payok";
 		form1.submit();
 	}
 </script>
@@ -522,7 +522,7 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/TMS/book/booking"> <b><span
+				<li><a class="menu" href="/book/booking"> <b><span
 							id="num" class="back">STEP1</span> <span id="select"
 							class="select">날짜선택</span></b>
 				</a></li>

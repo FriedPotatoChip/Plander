@@ -129,7 +129,7 @@ function boardList(nowPage){
 		success: function(list){
 			
 			var html = "";
-			html += "<p style='font-weight: 700;'><a href='/TMS/recruit?nowPage=${nowPage }&cntPerPage=${cntPerPage}'>모집 게시판</a> 카테고리 글</p><hr>";
+			html += "<p style='font-weight: 700;'><a href='/recruit?nowPage=${nowPage }&cntPerPage=${cntPerPage}'>모집 게시판</a> 카테고리 글</p><hr>";
 			html += "<table width='100%'>";
 			$.each(list,function(index, value){
 				if (index == 0){ 
@@ -144,7 +144,7 @@ function boardList(nowPage){
 						if ('${board.b_idx}' == value.rc_idx){
 							html += "<b>";
 						}
-					html += "<a style='font-size: 0.9rem;' href='/TMS/recruitDetail?idx="+value.rc_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
+					html += "<a style='font-size: 0.9rem;' href='/recruitDetail?idx="+value.rc_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
 					html += value.rc_title;
 						if (value.cnt != 0){
 							html += "<span style='color: #D8737F;'>["+value.cnt+"]</span>";
@@ -309,7 +309,7 @@ function boardList(nowPage){
 	      $.ajax({
 	          type: "get",
 	          url: '/apply',
-	          data: {'id':'${usersVO.id}', 'rc_idx':'${rc_board.rc_idx}'},
+	          data: {'id':'${usersVO.id}', 'rc_idx':'${rc_board.rc_idx}', 'cb_idx':'1'},
 	          dataType: 'text',
 	          success: function(result) {
 		        	  var cur_mem = document.getElementById("cur_mem").innerHTML;
@@ -321,7 +321,7 @@ function boardList(nowPage){
 	        		  
 	        		  $(".appBtn").css("display", "none");
 	        		  $("#hideCancel").css("display", "block");
-	        		  
+	        		  alert("모집글에 신청하였습니다.");
 	        	  } else if(result == 'fail'){
 	        		  alert("신청하기에 실패하였습니다.\n관리자에게 문의해주세요.")
 	        	  }
@@ -375,7 +375,7 @@ function boardList(nowPage){
 		var confirm = window.confirm("게시글을 수정하시겠습니까?");
 		
 		if (confirm){
-			location.href="/TMS/modifyRec?rc_idx=${rc_board.rc_idx}";
+			location.href="/modifyRec?rc_idx=${rc_board.rc_idx}";
 		}
 	}
 	
@@ -518,14 +518,14 @@ function boardList(nowPage){
 					console.log(this);
 					var userId = $(this).attr("userId");
 					console.log($(this).attr("userId"));
-					$("#showWritten").attr("href", "/TMS/searchRecruitList?keyword="+userId+"&target=w")
+					$("#showWritten").attr("href", "/searchRecruitList?keyword="+userId+"&target=w")
 					$("#sendMsg").click(function(){
 						$(".popupLayer").hide();
 						if ('${usersVO.id}' == ''){
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						} 
-						window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
+						window.open("/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
 					});
 					$("#userProfile").click(function(){
 						$(".popupLayer").hide();
@@ -533,7 +533,7 @@ function boardList(nowPage){
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						} 
-						window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+						window.open("/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
 						$('html, body').animate(divTop, 0);
 					});
 				});

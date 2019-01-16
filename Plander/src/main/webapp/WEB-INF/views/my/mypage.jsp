@@ -174,13 +174,13 @@ h3 {
 <body>
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/TMS"><img
+			<a class="navbar-brand" href="/"><img
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
 				<li class="nav-item"><a class="nav-link bold"
-					href="/TMS/logout">로그아웃</a></li>
-				<li class="nav-item"><a class="nav-link bold" href="/TMS">홈으로가기</a></li>
+					href="/logout">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link bold" href="/">홈으로가기</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -243,15 +243,15 @@ h3 {
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내예약</h5>
 			<div class="myBook_nav d-inline">
 				<strong><a href="javascript:click()"
-					onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
+					onclick="fetch_book('/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
-					onclick="fetch_book('/TMS/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
+					onclick="fetch_book('/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
-					onclick="fetch_book('/TMS/my/coupon?nowPage=1')">내쿠폰</a></strong>
+					onclick="fetch_book('/my/coupon?nowPage=1')">내쿠폰</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
-					onclick="fetch_book('/TMS/my/sendMsg?nowPage=1')">보낸쪽지</a></strong>
+					onclick="fetch_book('/my/sendMsg?nowPage=1')">보낸쪽지</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
-					onclick="fetch_book('/TMS/my/recvMsg?nowPage=1')">받은쪽지</a></strong>
+					onclick="fetch_book('/my/recvMsg?nowPage=1')">받은쪽지</a></strong>
 				<table id="myBook"></table>
 			</div>
 		</div>
@@ -263,15 +263,15 @@ h3 {
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내글목록</h5>
 			<div class="myRecruit_nav d-inline mr-3">
 				<strong><a href="javascript:click()"
-					onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
+					onclick="fetch_recruit('/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
 				<strong><a href="javascript:click()"
-					onclick="fetch_recruit('/TMS/my/applyList?nowPage=1')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
+					onclick="fetch_recruit('/my/applyList?nowPage=1')">내모집글신청자현황</a></strong>&nbsp;|&nbsp;
 				<strong><a href="javascript:click()"
-					onclick="fetch_recruit('/TMS/my/my_recruit_comment?nowPage=1')">내모집글댓글</a></strong>&nbsp;|&nbsp;
+					onclick="fetch_recruit('/my/my_recruit_comment?nowPage=1')">내모집글댓글</a></strong>&nbsp;|&nbsp;
 				<strong><a href="javascript:click()"
-					onclick="fetch_recruit('/TMS/my/board?nowPage=1')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
+					onclick="fetch_recruit('/my/board?nowPage=1')">자유게시판에올린글</a></strong>&nbsp;|&nbsp;
 				<strong><a href="javascript:click()"
-					onclick="fetch_recruit('/TMS/my/board_comment?nowPage=1')">자유게시판에달린댓글</a></strong>
+					onclick="fetch_recruit('/my/board_comment?nowPage=1')">자유게시판에달린댓글</a></strong>
 			</div>
 			<table id="myRecruit"></table>
 		</div>
@@ -281,7 +281,7 @@ h3 {
 	<!-- 회원정보수정 모달창 -->
 	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
 		<div class="modal-dialog" role="document">
-			<form action="/TMS/my/update" method="POST">
+			<form action="/my/update" method="POST">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title">회원정보수정</h5>
@@ -338,7 +338,7 @@ h3 {
 						</table>
 					</div>
 					<div class="modal-footer">
-						<a href="/TMS/dropout" class="mr-3" data-toggle="modal"
+						<a href="/dropout" class="mr-3" data-toggle="modal"
 							data-target=".bd-example-modal-sm">회원탈퇴</a>
 						<button type="reset" class="btn btn-outline-warning">초기화</button>
 						<input type="hidden" name="id" value="${user.id }" />
@@ -427,7 +427,7 @@ h3 {
 				</div>
 				<div class="modal-body centerModal">
 
-					<form id="form" action="/TMS/profileUpload" name="imgForm"
+					<form id="form" action="/profileUpload" name="imgForm"
 						method="post" enctype="multipart/form-data" onclick="">
 						<input type='file' name="file" id="imgInput" />
 						<p class="description">
@@ -647,7 +647,7 @@ h3 {
 				}
 			})
 			
-			fetch_book('/TMS/my/recvMsg?nowPage='+ nowPage);
+			fetch_book('/my/recvMsg?nowPage='+ nowPage);
 		}
 	</script>
 	<div class="popupLayer">
@@ -698,7 +698,7 @@ function showBox(e, tag){
 				alert("로그인 후 이용 가능합니다.");
 				return false;
 			} 
-			window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
+			window.open("/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
 		});
 		$("#userProfile").click(function(){
 			$(".popupLayer").hide();
@@ -706,20 +706,20 @@ function showBox(e, tag){
 				alert("로그인 후 이용 가능합니다.");
 				return false;
 			} 
-			window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+			window.open("/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
 		});
 }
 
 function dropOut(){
 	
 	$.ajax({
-		url: "/TMS/my/dropout",
+		url: "/my/dropout",
 		type: "post",
 		dataType: "text",
 		success: function(result){
 			if (result == 'success'){
 				alert('회원탈퇴가 정상적으로 완료되었습니다. 그동안 이용해주셔서 감사합니다.');
-				location.href="/TMS/logout";
+				location.href="/logout";
 			} else if(result == 'fail'){
 				alert('회원탈퇴가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
 			} else {

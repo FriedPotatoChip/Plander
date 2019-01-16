@@ -18,7 +18,7 @@
 			</ul>
 		</div>
 		<br>
-		<form action="/TMS/ask/sendMail" method="post"
+		<form action="/ask/sendMail" method="post"
 			enctype="multipart/form-data" style="margin: 0 auto;">
 			<div class="form-group">
 				<label for="name">이름</label> <input type="text" class="form-control"

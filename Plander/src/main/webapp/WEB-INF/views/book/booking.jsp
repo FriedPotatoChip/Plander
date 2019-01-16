@@ -312,7 +312,7 @@
 			alert("좌석 종류(개인실/랩실) 선택은 필수입니다.");
 			return false;
 		} else {
-			frm.action = "/TMS/book/selectSeat";
+			frm.action = "/book/selectSeat";
 			frm.submit();
 		}
 	}

@@ -28,7 +28,7 @@ th, td {
 		<h4 class="text-center"
 			style="text-decoration: underline; color: #475C7A; margin-bottom: 20px;">쪽지
 			보내기</h4>
-		<form action="/TMS/sendMsg" method="post" id="msgForm">
+		<form action="/sendMsg" method="post" id="msgForm">
 			<input type="hidden" name="send_id" value="${usersVO.id }"> <input
 				type="hidden" name="recv_id" value="${recv_user.id }">
 			<table>
@@ -98,7 +98,7 @@ th, td {
 				success : function(result) {
 					if (result == 'success') {
 						alert("쪽지를 보냈습니다.");
-						location.href="/TMS/ask";
+						location.href="/ask";
 					} else {
 						alert("쪽지를 보내는데 실패했습니다.")
 					}

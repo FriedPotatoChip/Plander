@@ -41,7 +41,7 @@ body {
 				<h5>아이디 찾기</h5>
 				<p>이름과 회원정보에 등록한 휴대전화번호를 입력해주세요.</p>
 				<hr>
-				<form method="post" action="/TMS/findId">
+				<form method="post" action="/findId">
 					<div style="border: 1px solid; padding: 20px;">
 						<input type="text" name="name" class="form-control"
 							placeholder="이름"> <input type="text" name="email"
@@ -56,7 +56,7 @@ body {
 				<h5>비밀번호 찾기</h5>
 				<p>비밀번호를 찾고자 하는 아이디를 입력해 주세요.</p>
 				<hr>
-				<form method="post" action="/TMS/findPw">
+				<form method="post" action="/findPw">
 					<div style="border: 1px solid; padding: 20px;">
 						<input type="text" name="id" class="form-control"
 							placeholder="아이디"> <input type="text" name="email"

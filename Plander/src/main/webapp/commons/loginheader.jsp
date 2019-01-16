@@ -76,7 +76,7 @@ a {
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 		<div class="container-fluid">
 
-			<a class="navbar-brand" href="/TMS"><img
+			<a class="navbar-brand" href="/"><img
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive">
@@ -87,15 +87,15 @@ a {
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="#">운영안내</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-					<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
-					<li class="nav-item"><a class="nav-link" href="/TMS/recruit">모집게시판</a></li>
+					<li class="nav-item"><a class="nav-link" href="/book">예약하기</a></li>
+					<li class="nav-item"><a class="nav-link" href="/recruit">모집게시판</a></li>
 					<li class="nav-item">
 						<div class="dropdown">
 							<a class="nav-link dropbtn" href="#">게시판</a>
 							<div class="dropdown-content">
-								<a href="/TMS/board?ct_idx=1">공지사항</a> <a
-									href="/TMS/board?ct_idx=2">자유게시판</a><a
-									href="/TMS/board?ct_idx=3">후기게시판</a> <a href="/TMS/ask">문의하기</a>
+								<a href="/board?ct_idx=1">공지사항</a> <a
+									href="/board?ct_idx=2">자유게시판</a><a
+									href="/board?ct_idx=3">후기게시판</a> <a href="/ask">문의하기</a>
 							</div>
 						</div>
 					</li>
@@ -114,8 +114,8 @@ a {
 								</a>
 								<div class="dropdown-content" style="right: 0;">
 									<div class="my_cur" style="text-align: center;">
-										<a href="/TMS/my" style="border-bottom: 1px solid lightgray;">마이페이지</a>
-										<a href="/TMS/logout"
+										<a href="/my" style="border-bottom: 1px solid lightgray;">마이페이지</a>
+										<a href="/logout"
 											style="border-bottom: 1px solid lightgray;">로그아웃</a>
 										<h6 style="margin-top: 20px; color: #475C7A;" class="bold">[예약내역]</h6>
 										<p>
@@ -238,10 +238,10 @@ a {
 		}
 
 		function msgDetail(rm_idx) {
-			window.open("/TMS/recvMsg?rm_idx=" + rm_idx, "받은 쪽지",
+			window.open("/recvMsg?rm_idx=" + rm_idx, "받은 쪽지",
 					"width=500, height=500");
 		}
 		function goMypage() {
-			location.href = "/TMS/my";
+			location.href = "/my";
 		}
 	</script>

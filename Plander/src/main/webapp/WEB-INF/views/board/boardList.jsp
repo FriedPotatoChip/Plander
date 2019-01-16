@@ -100,11 +100,11 @@
 <script> 
 	function selChange(){
 		var cntPerPage = document.getElementById("cntPerPage").value;
-		location.href= "/TMS/board?ct_idx=${ct_idx}&nowPage=${page.nowPage }&cntPerPage="+cntPerPage;/*  */
+		location.href= "/board?ct_idx=${ct_idx}&nowPage=${page.nowPage }&cntPerPage="+cntPerPage;/*  */
 	}
 	function to_detail(b_idx){
 		var cntPerPage = document.getElementById("cntPerPage").value;
-		location.href="/TMS/boardDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
+		location.href="/boardDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
 	}
 	$(document).ready(function(){
 		if ('${ct_idx}' == 1){
@@ -211,7 +211,7 @@
 		
 		<!-- 검색창 -->
 		<div class="center">
-			<form action="/TMS/searchList">
+			<form action="/searchList">
 				<select class="opt" name="target">
 					<option value="t">제목</option>
 					<option value="c">내용</option>
@@ -231,34 +231,34 @@
 			<ul id="pagingList" class="pagination justify-content-center">
 				<c:if test="${page.chkStartPage }">
 					<li class="page_edge">
-						<a class="p-n" href="/TMS/board?ct_idx=${ct_idx }&nowPage=1&cntPerPage=${page.cntPerPage}">〈</a>
+						<a class="p-n" href="/board?ct_idx=${ct_idx }&nowPage=1&cntPerPage=${page.cntPerPage}">〈</a>
 					</li>
 					<li class="page_edge">
-						<a class="p-n" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}">
+						<a class="p-n" href="/board?ct_idx=${ct_idx }&nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}">
 						<span style="font-size: 0.5em;">…</span></a>
 					</li>
 				</c:if>
 				<c:forEach var="p" begin="${page.startPage }" end="${page.endPage }">
 					<c:if test="${p == page.nowPage }">
 						<li class="page_edge now">
-							<a style="color: white;" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+							<a style="color: white;" href="/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 						</li>
 					</c:if>
 					<c:if test="${p != page.nowPage }">
 						<li class="page_edge">
-							<a href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+							<a href="/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 						</li>
 					</c:if>
 		
 				</c:forEach>
 				<c:if test="${page.chkEndPage }">
 					<li class="page_edge">
-						<a class="p-n" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}">
+						<a class="p-n" href="/board?ct_idx=${ct_idx }&nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}">
 						<span style="font-size: 0.5em;">…</span></a>
 					</li>
 					<!--  -->
 					<li class="page_edge">
-						<a class="p-n" href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}">〉</a></li>
+						<a class="p-n" href="/board?ct_idx=${ct_idx }&nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}">〉</a></li>
 					<!--  -->
 				</c:if>
 			</ul>
@@ -271,29 +271,29 @@
 		<ul id="pagingList">
 			<c:if test="${page.chkStartPage }">
 				<li><a
-					href="/TMS/board?ct_idx=${ct_idx }&nowPage=1&cntPerPage=${page.cntPerPage}"><button>&lt;&lt;</button></a></li>
+					href="/board?ct_idx=${ct_idx }&nowPage=1&cntPerPage=${page.cntPerPage}"><button>&lt;&lt;</button></a></li>
 				<li><a
-					href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"><button>&lt;</button></a></li>
+					href="/board?ct_idx=${ct_idx }&nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"><button>&lt;</button></a></li>
 			</c:if>
 			<c:forEach var="p" begin="${page.startPage }" end="${page.endPage }">
 				<c:if test="${p == page.nowPage }">
 					<li><a class="now marginLi"
-						href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+						href="/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 					</li>
 				</c:if>
 				<c:if test="${p != page.nowPage }">
 					<li><a class="marginLi"
-						href="/TMS/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+						href="/board?ct_idx=${ct_idx }&nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 					</li>
 				</c:if>
 
 			</c:forEach>
 			<c:if test="${page.chkEndPage }">
 				<li><a
-					href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"><button>&gt;</button></a></li>
+					href="/board?ct_idx=${ct_idx }&nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"><button>&gt;</button></a></li>
 				<!--  -->
 				<li><a
-					href="/TMS/board?ct_idx=${ct_idx }&nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"><button>&gt;&gt;</button></a></li>
+					href="/board?ct_idx=${ct_idx }&nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"><button>&gt;&gt;</button></a></li>
 				<!--  -->
 			</c:if>
 		</ul>
@@ -318,7 +318,7 @@
 				dataType: 'text',
 				success: function(result){
 					if (result == 'success'){
-						location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
+						location.href="/boardWrite?ct_idx=${ct_idx}"; /* */
 					} else if (result == 'fail'){
 						alert("TMS 서비스를 이용한 후에 후기를 작설할 수 있습니다.");
 						return false;
@@ -328,7 +328,7 @@
 				}
 			})
 		} else {
-			location.href="/TMS/boardWrite?ct_idx=${ct_idx}"; /* */
+			location.href="/boardWrite?ct_idx=${ct_idx}"; /* */
 		}
 	}
 	<c:if test="${not empty chkBooking}">
@@ -383,14 +383,14 @@
 			console.log(this);
 			var userId = $(this).attr("userId");
 			console.log($(this).attr("userId"));
-			$("#showWritten").attr("href", "/TMS/searchList?keyword="+userId+"&target=w&ct_idx=${ct_idx}")
+			$("#showWritten").attr("href", "/searchList?keyword="+userId+"&target=w&ct_idx=${ct_idx}")
 			$("#sendMsg").click(function(){
 				$(".popupLayer").hide();
 				if ('${usersVO.id}' == ''){
 					alert("로그인 후 이용 가능합니다.");
 					return false;
 				} 
-				window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
+				window.open("/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
 			});
 			$("#userProfile").click(function(){
 				$(".popupLayer").hide();
@@ -398,7 +398,7 @@
 					alert("로그인 후 이용 가능합니다.");
 					return false;
 				} 
-				window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+				window.open("/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
 			});
 		})
 	});

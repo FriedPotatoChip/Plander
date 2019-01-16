@@ -74,7 +74,7 @@ a {
 
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="/TMS"><img
+		<a class="navbar-brand" href="/"><img
 			src="/resources/images/logo.png" width="150px" height="50px"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive">
@@ -83,7 +83,7 @@ a {
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="/TMS/operation">운영안내</a></li>
+				<li class="nav-item"><a class="nav-link" href="/operation">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"
 					onclick="loginChk()">예약하기</a></li>
@@ -93,9 +93,9 @@ a {
 					<div class="dropdown">
 						<a class="nav-link dropbtn" href="#">게시판</a>
 						<div class="dropdown-content">
-							<a href="/TMS/board?ct_idx=1">공지사항</a> <a
-								href="/TMS/board?ct_idx=2">자유게시판</a><a
-								href="/TMS/board?ct_idx=3">후기게시판</a> <a href="/TMS/ask">문의하기</a>
+							<a href="/board?ct_idx=1">공지사항</a> <a
+								href="/board?ct_idx=2">자유게시판</a><a
+								href="/board?ct_idx=3">후기게시판</a> <a href="/ask">문의하기</a>
 						</div>
 					</div>
 				</li>
@@ -120,7 +120,7 @@ a {
 			$("#login").modal();
 			$("#idInput").focus();
 		} else {
-			location.href = "/TMS/book";
+			location.href = "/book";
 		}
 	}
 
@@ -156,7 +156,7 @@ a {
 					alert("아이디와 비밀번호가 일치하지 않습니다.");
 				} else if (result == 'admin') {
 					alert("관리자 로그인에 성공하였습니다.");
-					location.href = "/TMS";
+					location.href = "/";
 				}
 			},
 			error : function(result) {
@@ -411,7 +411,7 @@ a {
 				<hr>
 
 				<div class="text-center">
-					<a href="/TMS/findIdPw">아이디 찾기</a>&nbsp; <a href="/TMS/findIdPw">비밀번호
+					<a href="/findIdPw">아이디 찾기</a>&nbsp; <a href="/findIdPw">비밀번호
 						찾기</a>&nbsp; <a data-toggle="modal" data-dismiss="modal" href="#join"
 						data-target="#join">회원가입</a>
 				</div>
@@ -568,7 +568,7 @@ a {
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId({
 		clientId : "네이버클라", /* 클라이언트 ID (숨겨두기) */
-		callbackUrl : "http://localhost:8095/TMS/naverCallback",
+		callbackUrl : "http://www.turtlesmiracle.ga/TMS/naverCallback",
 		isPopup : true, /* 팝업을 통한 연동처리 여부 */
 		callbackHandle : true,
 		loginButton : {
