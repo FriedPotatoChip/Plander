@@ -229,7 +229,7 @@ a {
 											});
 							$("#msgDiv").html(html);
 
-							setTimeout(newMsgAlarm, 3000);
+							setTimeout(newMsgAlarm, 10000);
 						},
 						error : function(error) {
 

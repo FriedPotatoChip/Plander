@@ -44,19 +44,28 @@ body, html {
 </style>
 </head>
 <body>
-	<div id="container">
-		<!-- 헤더 -->
+	<!-- Header -->
+	<c:if test="${empty sessionScope.usersVO }">
 		<jsp:include page="/commons/header.jsp" />
+	</c:if>
+	<c:if test="${not empty sessionScope.usersVO }">
+		<c:if test="${sessionScope.usersVO.rank != 1 }">
+			<jsp:include page="/commons/loginheader.jsp" />
+		</c:if>
+		<c:if test="${sessionScope.usersVO.rank == 1 }">
+			<jsp:include page="/commons/adminLoginheader.jsp" />
+		</c:if>
+	</c:if>
+	<div id="container">
 		<br><br><br><br><br>
 		<h3 class="center">회원가입 완료</h3>
 		<hr>
 		<p class="center">${name }
 			님, 회원가입을 축하드립니다!<br> 로그인을 해서 플랜더의 다양한 컨텐츠를 이용해보세요.
+			<br><span>(5초 후 메인페이지로 이동합니다.)</span>
 		</p>
 
 		<p class="center" style="width: 50%; margin: auto;">
-			<button type="button" class="btn btn-outline-secondary"
-				data-toggle="modal" href="#login">로그인</button>
 			<button type="button" class="btn btn-outline-secondary"
 				onclick="location.href='/'">메인화면</button>
 		</p>
@@ -66,6 +75,10 @@ body, html {
 		<%-- <jsp:include page="/commons/footer.jsp"/>	 --%>
 	</div>
 	<!-- 바디 콘테이너 끝 -->
-
+<script>
+	setTimeout(function(){
+		location.href="/";
+	}, 5000);
+</script>
 </body>
 </html>
