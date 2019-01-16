@@ -587,7 +587,7 @@ button:hover {
 						<h5 style="color: #475C7A;">결제방식 선택</h5>
 						<div>
 							<button type="button" id="naverpay">네이버 페이</button>
-							<button type="submit">일반결제</button>
+							<button type="button" id="normalpay" onclick="normalpay()">일반결제</button>
 						</div>
 						<br>
 					</div>
@@ -603,7 +603,7 @@ button:hover {
 				<br>
 					<button type="button" onclick="history.back(); return false;">이전단계</button>
 					&nbsp;
-					<button type="button" disabled="disabled"
+					<button type="button" disabled="disabled" id="confirm"
 						style="background-color: white; border: 1px solid lightgray; color: lightgray; cursor: not-allowed;">확인</button>
 				</div>
 
@@ -756,6 +756,11 @@ button:hover {
 			} else {
 				frm.submit();
 			}
+		}
+		
+		function normalpay(){
+			$('#confirm').removeAttr( "disabled" );
+			$('#confirm').removeAttr( "cursor" );
 		}
 	</script>
 	<!-- 
