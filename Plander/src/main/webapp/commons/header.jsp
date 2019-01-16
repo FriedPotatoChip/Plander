@@ -355,9 +355,9 @@ a {
 </script>
 
 <!-- 로그인 모달창 시작 -->
-<div class="modal fade bd-example-modal-sm" id="login" tabindex="-1" role="dialog"
+<div class="modal fade" id="login" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog">
 		<div class="modal-content">
 
 			<div class="modal-header">

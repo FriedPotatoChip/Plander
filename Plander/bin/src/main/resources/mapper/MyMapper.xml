@@ -316,7 +316,7 @@
 		select *
 		from(
 		select rownum rn, b.b_idx, b.b_title, b.id, b.ct_idx, b.b_regdate,
-		c.c_idx,
+		c.c_idx, c.c_content,
 		c.c_regdate
 		from board b, comments c
 		where c.b_idx = b.b_idx

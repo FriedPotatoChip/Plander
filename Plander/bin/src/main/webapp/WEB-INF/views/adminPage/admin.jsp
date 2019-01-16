@@ -24,6 +24,10 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
+
+<!-- font -->
+<link rel="stylesheet" type="text/css"
+href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <!-- ======================================================================================== -->
 <style>
 #cntPerpage {
@@ -41,69 +45,19 @@
 	float: left;
 }
 
+h3 {
+	margin-top: 2rem;
+	text-align: center;
+}
+
 a {
 	text-decoration: none;
-}
-
-#search {
-	width: 50%;
-}
-
-#select {
-	width: 10%;
-}
-
-.container-1 {
-	width: 300px;
-	vertical-align: middle;
-	white-space: nowrap;
-	position: relative;
-}
-
-.container-1 input#search {
-	width: 20rem;
-	height: 3rem;
-	background: #fff;
-	border: 1px solid #e9ecef;
-	font-size: 10pt;
-	float: left;
-	color: #63717f;
-	padding-left: 45px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
-
-.container-1 input#search::-webkit-input-placeholder {
-	color: #65737e;
-}
-
-.container-1 input#search:-moz-placeholder { /* Firefox 18- */
-	color: #65737e;
-}
-
-.container-1 input#search::-moz-placeholder { /* Firefox 19+ */
-	color: #65737e;
-}
-
-.container-1 input#search:-ms-input-placeholder {
-	color: #65737e;
-}
-
-.container-1 .icon {
-	position: absolute;
-	top: 50%;
-	margin-left: 17px;
-	margin-top: 17px;
-	z-index: 1;
-	color: #4f5b66;
 }
 
 input[type=submit] {
 	background-color: #4CAF50;
 	color: white;
 	padding: 10px 10px;
-	margin: 5px 0 0 5px;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
@@ -112,16 +66,27 @@ input[type=submit] {
 input[type=submit]:hover {
 	background-color: #45a049;
 }
+
+.marginLi:hover {
+	background-color: black;
+	color: white;
+}
+
+.table td {
+	vertical-align:middle;
+}
 </style>
 </head>
 
 <body>
-	<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin page</a>
+	<nav
+		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link"
+				href="/TMS/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -137,7 +102,7 @@ input[type=submit]:hover {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet?br_idx=1"> <span data-feather="file"></span>
+							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
@@ -146,40 +111,44 @@ input[type=submit]:hover {
 								Reservation
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin/Seats"> <span
-								data-feather="bar-chart-2"></span> Seats
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+								Seats
 						</a></li>
-						
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								data-feather="file"></span> Receipt
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+								Receipt
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Message"> <span data-feather="file"></span>
+								Message
 						</a></li>
 					</ul>
 				</div>
 			</nav>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<h2 class="m-auto">[회원관리]</h2>
+			<h3>회원관리</h3>
+			<hr>
 
-			<div class="table-responsive" style="margin-top: 3rem;">
+			<div class="table-responsive">
 
-				<form action="/TMS/admin/searchList">
-					<select class="form-control d-inline-flex ml-1" name="target"
-						id="select">
-						<option value="id">ID</option>
-						<option value="name">NAME</option>
-					</select>
-					<!-- <input class="form-control m-1 d-inline-flex" type="text"
-						placeholder="Search" aria-label="Search" id="search" name="keyword">  -->
-					<div class="box m-1">
-						<div class="container-1">
-							<span class="icon"><i class="fa fa-search"></i></span> <input
-								type="search" id="search" placeholder="search..." name="keyword">
-							<!-- <button class="btn btn-outline-danger">검색</button> -->
-						</div>
-						<input type="submit" value="검색" id="submit" class="d-inline-block">
+				<div style="width: 60%; margin: 0 auto; float: left;">
+					<form action="/TMS/admin/searchList"
+						class="form-inline my-2 my-lg-0">
+						<!-- 검색창 -->
+						<select class="custom-select my-1 mr-sm-2" name="target">
+							<option value="id">ID</option>
+							<option value="name">이름</option>
+						</select> <input class="form-control mr-sm-2" type="search" name="keyword"
+							aria-label="Search" placeholder="search...">
+						<button class="btn btn-outline-success my-2 my-sm-0" id="submit"
+							type="submit">검색</button>
 						<input type="hidden" name="cntPerPage" value="${page.cntPerPage }">
-					</div>
-				</form>
+					</form>
+				</div>
 
 				<select id="cntPerPage" onchange="selChange()" class="m-1">
 					<option value="5"
@@ -191,10 +160,10 @@ input[type=submit]:hover {
 					<option value="20"
 						<c:if test="${page.cntPerPage == 20}">selected</c:if>>20</option>
 				</select>
-
-				<table class="table table-striped table-hover"
+				
+				<table class="table table-sm table-hover"
 					style="text-align: center;">
-					<thead class="thead-light">
+					<thead class="thead-light" >
 						<tr>
 							<th scope="col">U_IDX</th>
 							<th scope="col">ID</th>
@@ -226,8 +195,8 @@ input[type=submit]:hover {
 										data-toggle="modal" data-target="#exampleModal${user.u_idx }">삭제</button></td>
 							</tr>
 							<!-- Modal -->
-							<div class="modal fade" id="exampleModal${user.u_idx }" tabindex="-1"
-								role="dialog" aria-labelledby="exampleModalLabel"
+							<div class="modal fade" id="exampleModal${user.u_idx }"
+								tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 								aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -255,18 +224,22 @@ input[type=submit]:hover {
 				<!-- 페이징 시작 -->
 				<div id="paging" aria-label="Page navigation example">
 					<ul id="pagingList" class="pagination">
-						<a class="page-link" href="#" aria-label="Previous"> <span
-							aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>
-						</a>
-
-						<%-- <c:if test="${page.chkStartPage }">
-							<li class="page-item"><a
-								href="/TMS/admin?nowPage=1&cntPerPage=${page.cntPerPage}"
-								class="page-link"><button>&lt;&lt;</button></a></li>
-							<li class="page-item"><a
-								href="/TMS/admin?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
-								class="page-link"><button>&lt;</button></a></li>
-						</c:if> --%>
+						<c:choose>
+							<c:when test="${page.chkStartPage }">
+								<li class="page-item"><a class="page-link"
+									href="/TMS/admin?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+								</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="/TMS/admin?nowPage=1&cntPerPage=${page.cntPerPage}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+								</a></li>
+							</c:otherwise>
+						</c:choose>
 
 						<c:forEach var="p" begin="${page.startPage }"
 							end="${page.endPage }">
@@ -283,19 +256,23 @@ input[type=submit]:hover {
 
 						</c:forEach>
 
-						<%-- <c:if test="${page.chkEndPage }">
-							<li class="page-item"><a
-								href="/TMS/admin?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
-								class="page-link"><button>&gt;</button></a></li>
-							<li class="page-item"><a
-								href="/TMS/admin?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
-								class="page-link"><button>&gt;&gt;</button></a></li>
-						</c:if> --%>
+						<c:choose>
+							<c:when test="${page.chkEndPage }">
+								<li class="page-item"><a class="page-link"
+									href="/TMS/admin?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+								</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link"
+									href="/TMS/admin?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+								</a></li>
+							</c:otherwise>
 
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
-								class="sr-only">Next</span>
-						</a></li>
+						</c:choose>
 					</ul>
 				</div>
 				<!-- 페이징 끝 -->
@@ -310,11 +287,7 @@ input[type=submit]:hover {
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
+
 	<script src="/resources/js/popper.min.js"></script>
 	<script src="/resources/js/bootstrap.min2.js"></script>
 	Icons
@@ -328,10 +301,6 @@ input[type=submit]:hover {
 			location.href = "/TMS/admin?nowPage=${page.nowPage }&cntPerPage="
 					+ cntPerPage;
 		}
-
-		/* function userDelete() {
-			location.href = "/TMS/admin/delete";
-		} */
 	</script>
 
 

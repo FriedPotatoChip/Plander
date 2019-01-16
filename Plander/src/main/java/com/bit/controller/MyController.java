@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bit.domain.ApplyVO;
 import com.bit.domain.BoardVO;
@@ -46,12 +48,17 @@ public class MyController {
 	}
 	
 	// 회원탈퇴
+	@ResponseBody
 	@RequestMapping("dropout")
 	public String dropout(HttpSession session) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
-		service.userDelete(vo.getU_idx());
-		
-		return "redirect: /TMS/logout";
+		System.out.println("탈퇴 컨트롤러");
+		int chk = service.userDelete(vo.getU_idx());
+		if(chk == 1) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	// 내쿠폰보유현황(+갯수)

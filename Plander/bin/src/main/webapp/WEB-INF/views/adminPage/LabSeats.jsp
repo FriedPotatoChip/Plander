@@ -13,6 +13,7 @@
 <meta name="author" content="">
 <title>관리자</title>
 
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <!-- Bootstrap core CSS -->
 <link href="/resources/css/bootstrap.min2.css" rel="stylesheet">
@@ -140,6 +141,9 @@ style>body, html {
 	color: white;
 	text-decoration: none;
 }
+h3 {
+	margin-top: 2rem;
+	text-align: center;
 }
 </style>
 </head>
@@ -147,11 +151,12 @@ style>body, html {
 <body>
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Admin page</a>
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link"
+				href="/TMS/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -161,13 +166,13 @@ style>body, html {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
-								<span data-feather="users"></span> Customers <span
-								class="sr-only">(current)</span>
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin"> <span data-feather="users"></span>
+								Customers <span class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet?br_idx=1"> <span data-feather="file"></span>
+							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
@@ -177,15 +182,26 @@ style>body, html {
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Seats?sct_idx=1"> <span
-								data-feather="bar-chart-2"></span> Seats
+							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+								Seats
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+								Receipt
+						</a></li>
+
+						<li class="nav-item"><a class="nav-link"
+							href="/TMS/admin/Message"> <span data-feather="file"></span>
+								Message
 						</a></li>
 					</ul>
 				</div>
 			</nav>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<h2 style="text-align: center;" class="mb-5">개인실 좌석 현황</h2>
+			<h3>개인실 좌석 현황</h3>
+			<br>
 			<div id="container" style="box-sizing: border-box;">
 
 				<div id="ticket">
@@ -193,7 +209,8 @@ style>body, html {
 						<form method="post">
 							<div class="h4">
 								<h4>
-									<a href="">개인실</a>&nbsp;&nbsp;/&nbsp; <a href=""> 랩실</a>
+									<a href="/TMS/admin/Seats">개인실</a>&nbsp;&nbsp;/&nbsp; <a
+										href="/TMS/admin/LabSeats"> 랩실</a>
 								</h4>
 							</div>
 							<div class="area_planner">
@@ -215,7 +232,7 @@ style>body, html {
 								<div>
 									<div class="checkbox" style="width: 100%; display: table;">
 										<div id="4people" onclick="check(201)"
-											style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor:pointer;">
+											style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="4room"
 													name="s_col" value="201">201호(4인실)</label>
@@ -223,7 +240,7 @@ style>body, html {
 										</div>
 
 										<div id="8people" onclick="check(301)"
-											style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid; cursor:pointer;">
+											style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="8room"
 													name="s_col" value="301">301호(8인실)</label>
@@ -231,7 +248,7 @@ style>body, html {
 										</div>
 
 										<div id="8people" onclick="check(302)"
-											style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid; cursor:pointer;">
+											style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="8room"
 													name="s_col" value="302">302호(8인실)</label>
@@ -242,7 +259,7 @@ style>body, html {
 
 									<div class="checkbox" style="width: 100%; display: table;">
 										<div id="4people" onclick="check(202)"
-											style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor:pointer;">
+											style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="4room"
 													name="s_col" value="202">202호(4인실)</label>
@@ -250,7 +267,7 @@ style>body, html {
 										</div>
 
 										<div id="12people" onclick="check(401)"
-											style="display: inline-table; width: 53%; height: 100px; margin-right: 3%; border: 1px solid; cursor:pointer;">
+											style="display: inline-table; width: 53%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="12room"
 													name="s_col" value="401">401호(12인실)</label>
@@ -258,7 +275,7 @@ style>body, html {
 										</div>
 
 										<div id="4people"
-											style="display: inline-table; width: 15%; height: 100px; margin-right: 3%; border: 1px solid; cursor:pointer;">
+											style="display: inline-table; width: 15%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label>카페 터틀🐢</label>
 											</p>
@@ -267,7 +284,7 @@ style>body, html {
 									<br>
 								</div>
 								<!-- 1번 열 끝 -->
-								
+
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModalLong" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalLongTitle"
@@ -286,7 +303,7 @@ style>body, html {
 
 											<!-- modal body -->
 											<div class="modal-body">
-												<table border="1" style="text-align: center;">
+												<table class="table" style="text-align: center;">
 													<tr>
 														<th>ID</th>
 														<th>START_TIME</th>
@@ -304,10 +321,79 @@ style>body, html {
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
 											</div>
 										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Large modal -->
+
+							<div class="modal fade bd-example-modal-lg" tabindex="-1"
+								role="dialog" aria-labelledby="myLargeModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+
+									<div class="modal-content">
+										<h2 style="text-align: center;">좌석배치도</h2>
+										<hr style="width: 90%">
+										<div id="allseat">
+											<div>
+												<div class="checkbox" style="width: 100%; display: table;">
+													<div id="4people" onclick="move(201)"
+														style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor: pointer;">
+														<p>
+															<label><input type="hidden" class="4room"
+																name="s_col" value="201">201호(4인실)</label>
+														</p>
+													</div>
+
+													<div id="8people" onclick="move(301)"
+														style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
+														<p>
+															<label><input type="hidden" class="8room"
+																name="s_col" value="301">301호(8인실)</label>
+														</p>
+													</div>
+
+													<div id="8people" onclick="move(302)"
+														style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
+														<p>
+															<label><input type="hidden" class="8room"
+																name="s_col" value="302">302호(8인실)</label>
+														</p>
+													</div>
+												</div>
+												<br>
+
+												<div class="checkbox" style="width: 100%; display: table;">
+													<div id="4people" onclick="move(202)"
+														style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor: pointer;">
+														<p>
+															<label><input type="hidden" class="4room"
+																name="s_col" value="202">202호(4인실)</label>
+														</p>
+													</div>
+
+													<div id="12people" onclick="move(401)"
+														style="display: inline-table; width: 53%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
+														<p>
+															<label><input type="hidden" class="12room"
+																name="s_col" value="401">401호(12인실)</label>
+														</p>
+													</div>
+
+													<div id="4people"
+														style="display: inline-table; width: 15%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
+														<p>
+															<label>카페 터틀🐢</label>
+														</p>
+													</div>
+												</div>
+												<br>
+											</div>
+										</div>
+										<!-- allseat 끝 -->
 									</div>
 								</div>
 							</div>
@@ -333,14 +419,6 @@ style>body, html {
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
 	<script src="/resources/js/popper.min.js"></script>
 	<script src="/resources/js/bootstrap.min2.js"></script>
 	Icons
@@ -349,26 +427,189 @@ style>body, html {
 		feather.replace()
 	</script>
 	<script>
+		$(document).ready(function() {
+			
+			$('.po_category').removeClass('on');
+			$("div[value='${br_idx}']").addClass('on')
+/* 				//색변환
+				$('.po_category').removeClass('on');
+				$(this).addClass('on'); */
+			
+			$('.po_category').click(function() {
+
+				
+				var code = $(this).attr('value');
+				console.log('code : ' + code);
+				
+				location.href = '/TMS/admin/LabSeats?br_idx='+ code;
+			});
+		});
+	</script>
+	
+	<script>
 		function check(a) {
 			console.log('안농');
 			var i = a;
 			var html = "";
 			console.log(i);
-			
+
+			var html = "";
+			var count = 0;
+			var temp = "";
+
 			<c:forEach var="s" items="${BookingSeats }">
-				var s_col = "${s.s_col}";
-				var id = "${s.id}";
-				var start_time = "${s.start_time}";
-				var end_time = "${s.end_time}";
-				console.log(s_col);
-				
-				if(i == s_col) {
-					html += '<tr><td class="id">'+ id + '</td> <td class="start_time">'+ start_time + '</td> <td class="end_time">' + end_time + '</td> <td><button type="button" class="btn btn-outline-danger">이동</button></td></tr>';
-				}
+			/* DB에서 긁어온 지점 A의 예약된 모든 좌석 */
+			var s_col = "${s.s_col}";
+			console.log(s_col);
+			var id = "${s.id}";
+			var start_time = "${s.start_time}";
+			var end_time = "${s.end_time}";
+			
+			var bk_idx = "${s.bk_idx}";
+			temp = id;
+			count++;
+			temp += count;
+
+			if (i == s_col) {
+				console.log("data" + i + ": " + id + ", " + start_time + ", "
+						+ end_time);
+
+				html += '<tr><td class="id">'
+						+ id
+						+ '</td> <td class="start_time" id = '
+						+ (temp + "_s")
+						+ '>'
+						+ start_time
+						+ '</td> <td class="end_time" id = '
+						+ (temp + "_e")
+						+ '>'
+						+ end_time
+						+ '</td> <td><button type="button" class="btn btn-outline-danger" id ="'
+						+ temp
+						+ '" onclick="change(\''
+						+ bk_idx
+						+ '\')"><input type="hidden" name="nid" value="${s.id}">좌석이동</button></td></tr>';
+			}
 			</c:forEach>
 			$('#exampleModalLong').modal();
-		    $('#exampleModalLongTitle').text(i + '번 좌석 예약현황');
+			$('#exampleModalLongTitle').text(i + '번 좌석 예약현황');
 			$('#tr').html(html);
+		}
+
+		function change(a) {
+			console.log("target : " + a);
+			var target = a;
+			
+			window.bk_idx = target;
+			/* var chid = $("input[name=nid]").val();
+			var start_time = target + '_s';
+			var end_time = target + '_e'; */
+
+			/* console.log('nid : ' + chid);
+			console.log("start_time : " + start_time);
+
+			var start_time_value = document.getElementById(start_time).innerHTML;
+
+			var end_time_value = document.getElementById(end_time).innerHTML;
+			
+			window.tar = chid;
+			window.stv = start_time_value;
+			window.etv = end_time_value;
+
+			console.log("start_time : " + start_time_value
+					+ ", end_time_value : " + end_time_value); */
+
+			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
+			$('.bd-example-modal-lg').modal();
+
+			/* modal 안에서 radio를 클릭 */
+			$("input[type=radio]").click(
+					function() {
+
+						/* 선택한 좌석 radio 체크표시 */
+						$(this).prop("checked", true);
+
+						/* 체크된 좌석의 번호 */
+						var changeScol = $("input[type=radio]:checked").val();
+						console.log('asdb : ' + changeScol);
+
+						/* 체크가 되었을 때 예약된 좌석이 있는지 없는지 파악 */
+						<c:forEach var="s" items="${BookingSeats}">
+
+						/* 예약된 모든 좌석 */
+						var s_col = "${s.s_col}";
+						var id = "${s.id}";
+						var start_time = "${s.start_time}";
+						var end_time = "${s.end_time}";
+
+						console.log('s_col-before : ' + s_col);
+						console.log('asdb-after : ' + changeScol);
+
+						if (changeScol == s_col) {
+							/* 예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함 */
+							if (end_time_value < start_time
+									|| end_time < start_time_value) {
+								alert("이동이 가능합니다.");
+								return false;
+							} else {
+								alert('이동 불가');
+							}
+						} else {
+
+							alert('이동가능');
+							return false;
+						}
+
+						</c:forEach>
+						/* 좌석 비교 */
+					}
+
+			);
+		}
+
+		/* 이동버튼 후 정보 업데이트 */
+		function move(i) {
+			/* console.log("tar: " + tar);
+			console.log("stv: " + stv);
+			console.log("etv: " + etv);
+			 */
+			 
+			
+			/* 이동할것인지 묻기 */
+			var r = confirm("이동하시겠습니까?");
+
+			/* 지점번호 */
+			var br_idx = $('.po_category.on').attr('value');
+			console.log('br_idx : ' + br_idx);
+
+			var CBk_idx = bk_idx;
+			console.log('bk_idx : ' + bk_idx);
+			
+			/* 이동을 원하는 사람의 아이디 */
+			/* var chId = tar;
+			console.log('chId : ' + tar); */
+
+			/* 이동을 원하는 사람의 START_TIME, END_TIME */
+			/* var chStartTime = stv;
+			console.log('start_time : ' + chStartTime); */
+
+			/* var chEndTime = etv;
+			console.log('end_time : ' + chEndTime);
+ */
+			/* 옮기기를 원하는 좌석의 번호 */
+			var changeScol = i;
+			console.log('changeSeats : ' + changeScol);
+
+			try {
+				if (r == true) {
+					location.href = "/TMS/admin/update?s_idx=" + changeScol + "&bk_idx= " + CBk_idx;
+				}
+				alert("성공적으로 이동되었습니다.");
+			} catch (e) {
+				alert("좌석이동이 실패했습니다.");
+				location.href = "/TMS/admin/Seats";
+			}
+
 		}
 	</script>
 

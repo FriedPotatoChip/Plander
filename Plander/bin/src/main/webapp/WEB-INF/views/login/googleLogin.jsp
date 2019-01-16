@@ -10,9 +10,6 @@ function go_init(){
 	console.log("go_init()"); 
 		console.log("init()");
 		
-		
-		
-		
 		gapi.load('auth2', function(){
 			console.log("auth2");
 			var gauth = gapi.auth2.init({

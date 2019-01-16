@@ -49,6 +49,16 @@
 	<update id="imgDel">
 		UPDATE USERS SET USER_PROFILEIMAGEPATH = NULL WHERE ID = #{id}
 	</update>
+	
+	<!-- Main 모집글 랜덤 추출 -->
+	<select id="RandomRecruit" resultType="com.bit.domain.RecruitVO">
+		select id, rc_title
+		    from(
+		        select *
+		            from recruit
+		            order by dbms_random.value)
+		    where rownum <![CDATA[ <= 3]]>
+	</select>
 </mapper>
 
 
