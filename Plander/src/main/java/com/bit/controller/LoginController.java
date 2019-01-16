@@ -49,12 +49,12 @@ public class LoginController {
 		}
 	}
 	
-	@RequestMapping("/TMS/api_signUp")
+	@RequestMapping("/api_signUp")
 	public String api_signUP(UsersVO vo, HttpSession session) {
 		return "/login/api_signUp";
 	}
 	
-	@PostMapping("/TMS/signUp_api")
+	@PostMapping("/signUp_api")
 	public String signUp_api(UsersVO vo, HttpSession session) {
 		UsersVO sessionUser = (UsersVO) session.getAttribute("usersVO");
 		sessionUser.setId(vo.getId());
@@ -85,13 +85,12 @@ public class LoginController {
 		
 		if (result == null) {
 			System.out.println("널로 들어옴");
-			session.setAttribute("usersVO", vo);
-			return "/TMS/api_signUp";
+			return "/api_signUp";
 		} else {
 			System.out.println("낫널로 들어옴");
 			result.setType(vo.getType());
 			session.setAttribute("usersVO", result);
-			return "/TMS";
+			return "/";
 		}
 		
 	}
@@ -139,12 +138,12 @@ public class LoginController {
 		return "login/googleLogin";
 	}
 	
-	@RequestMapping("/TMS/logout")
+	@RequestMapping("/logout")
 	public String logout(HttpSession session, @RequestParam(value="chk", required=false) String chk, RedirectAttributes rttr) {
 		session.invalidate();
 		rttr.addAttribute("chk", chk);
 		
-		return "redirect: /TMS";
+		return "redirect: /";
 	}
 	
 	@RequestMapping("/test")
