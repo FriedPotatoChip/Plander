@@ -207,17 +207,17 @@
 						var lab4Am = 0;
 						var lab4Pm = 0;
 						var lab4Holiday = 0;
-						var lab4Night = 1500;
+						var lab4Night = 4500;
 
 						var lab8Am = 0;
 						var lab8Pm = 0;
 						var lab8Holiday = 0;
-						var lab8Night = 1800;
+						var lab8Night = 7000;
 
 						var lab12Am = 0;
 						var lab12Pm = 0;
 						var lab12Holiday = 0;
-						var lab12Night = 2000;
+						var lab12Night = 9000;
 
 						$.each(result, function(index, value) {
 							// 정기권 가격

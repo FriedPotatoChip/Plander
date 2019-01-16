@@ -193,11 +193,11 @@ button:hover {
 					}
 					// 랩실 가격
 					if (sct_idx == 2) {
-						labNight = 1500;
+						labNight = 4500;
 					} else if (sct_idx == 3) {
-						labNight = 1800;
+						labNight = 7000;
 					} else if (sct_idx == '4') {
-						labNight = 2000;
+						labNight = 9000;
 					}
 					if (sct_idx >= 2 && sct_idx <= 4) {
 						if (sct_idx == value.sct_idx) {
