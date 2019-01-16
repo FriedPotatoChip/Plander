@@ -105,7 +105,7 @@
 				var title = "bookingPage";
 				window
 						.open("", title,
-								"width=1200, height=700, scrollbars=yes");
+								"width=1400, height=700, scrollbars=yes");
 
 				frm.target = title;
 				frm.action = "/TMS/book/booking";

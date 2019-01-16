@@ -424,6 +424,10 @@ button:hover {
 	background-color: #D8737F;
 	color: white;
 }
+
+#ticket {
+	background-color: #f8f9fa;
+}
 /* 버튼 끝 */
 </style>
 
@@ -453,9 +457,11 @@ button:hover {
 		<!-- 예약 헤더끝 -->
 
 		<div id="ticket" style="box-sizing: border-box;">
+		
 			<div class="boxoutside">
 				<form method="post">
 					<!-- 달력 -->
+					<br>
 					<div style="margin: 10px; border: 1px solid lightgray;">
 						<div id="calendar" class="container">
 							<div class="form-group">
@@ -492,7 +498,7 @@ button:hover {
 
 						<input type="hidden" name="br_idx" value="${svo.br_idx }">
 
-						<table class="table table-bordered" style="width: 100%;">
+						<table class="table table-bordered" style="width: 100%; background-color: white;">
 							<tr>
 								<th style="text-align: center;">좌석 종류 선택</th>
 								<th style="text-align: center;">정기 이용권(1인실)</th>
