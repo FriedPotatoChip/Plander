@@ -382,7 +382,6 @@ body {
 			<hr>
 		</div>
 	</div>
-
 	<!--- Cards -->
 	<div class="container-fluid padding" id="cards">
 		<div class="row padding">
