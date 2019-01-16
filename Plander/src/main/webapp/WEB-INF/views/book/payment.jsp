@@ -99,7 +99,10 @@ button:hover {
 	color: #4d4d4d;
 	vertical-align: middle;
 	border-radius: .25rem;
+}
 
+#totalTable {
+	background-color: #f8f9fa;
 }
 </style>
 
@@ -526,7 +529,7 @@ button:hover {
 		</div>
 		<!-- 예약 헤더끝 -->
 
-		<div class="boxoutside" style="border: 1px solid lightgray;">
+		<div class="boxoutside">
 			<form method="post" name="form1" onsubmit="payment()">
 				<br>
 				<div style="padding: 10px;">
@@ -536,91 +539,94 @@ button:hover {
 						합니다.</p>
 					<p>☑ 시간 추가를 원하시는 경우 반드시 카운터에 문의 바랍니다.</p>
 				</div>
-				<hr>
 				<!-- 예매자 확인 끝 -->
 
-				<div id="mybookinfo" style="padding: 10px;">
-					<h5 style="color: #475C7A;">나의 예약 정보</h5>
-					<table border="1px solid;" class="table table-bordered"
-						style="width: 100%; text-align: center;">
-						<tbody>
-							<tr>
-								<td width="13%">예매번호</td>
-								<td width="10%">예약자 이름</td>
-								<td width="12%">연락처</td>
-								<td width="30%">예약 날짜 및 시간</td>
-								<td width="15%">선택 좌석정보</td>
-								<td width="10%">사물함</td>
-								<td width="10%">금액</td>
-							</tr>
-							<tr>
-								<td id="booknum"></td>
-								<td>${uservo.name }</td>
-								<td>${uservo.phone }</td>
-								<td>${bvo.start_time }~${bvo.end_time }</td>
-								<c:choose>
-									<c:when test="${bvo.sct_idx == 1 }">
-										<td>${bvo.sct_name }-${test }</td>
-									</c:when>
-									<c:otherwise>
-										<td>${bvo.sct_name }-${bvo.s_col }</td>
-									</c:otherwise>
-								</c:choose>
-								<td id="cb_idx"></td>
-								<td id="bookprice"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- 나의 예약 정보 끝 -->
-				<!--  -->
-
-				<!-- 결제방식 선택 -->
-				<div id="pay" class="radio" style="padding: 10px;">
-					<h5 style="color: #475C7A;">사용 가능한 쿠폰</h5>
-					<select id="coupon" class="opt">
-						<option value="0">------</option>
-					</select> <span id="finPrice"></span> <br>
-					<br>
-					<br>
-					<h5 style="color: #475C7A;">결제방식 선택</h5>
-					<div>
-						<button type="button" id="naverpay">네이버 페이</button>
+				<div id="totalTable">
+					<div id="mybookinfo" style="padding: 10px;">
+						<h5 style="color: #475C7A;">나의 예약 정보</h5>
+						<table border="1px solid;" class="table table-bordered"
+							style="width: 100%; text-align: center;">
+							<tbody>
+								<tr>
+									<td width="13%">예매번호</td>
+									<td width="10%">예약자 이름</td>
+									<td width="12%">연락처</td>
+									<td width="30%">예약 날짜 및 시간</td>
+									<td width="15%">선택 좌석정보</td>
+									<td width="10%">사물함</td>
+									<td width="10%">금액</td>
+								</tr>
+								<tr>
+									<td id="booknum"></td>
+									<td>${uservo.name }</td>
+									<td>${uservo.phone }</td>
+									<td>${bvo.start_time }~${bvo.end_time }</td>
+									<c:choose>
+										<c:when test="${bvo.sct_idx == 1 }">
+											<td>${bvo.sct_name }-${test }</td>
+										</c:when>
+										<c:otherwise>
+											<td>${bvo.sct_name }-${bvo.s_col }</td>
+										</c:otherwise>
+									</c:choose>
+									<td id="cb_idx"></td>
+									<td id="bookprice"></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
+					<!-- 나의 예약 정보 끝 -->
+					<!--  -->
 
+					<!-- 결제방식 선택 -->
+					<div id="pay" class="radio" style="padding: 10px;">
+						<h5 style="color: #475C7A;">사용 가능한 쿠폰</h5>
+						<select id="coupon" class="opt">
+							<option value="0">------</option>
+						</select> <span id="finPrice"></span> <br> <br> <br>
+						<h5 style="color: #475C7A;">결제방식 선택</h5>
+						<div>
+							<button type="button" id="naverpay">네이버 페이</button>
+							<button type="submit">일반결제</button>
+						</div>
+						<br>
+					</div>
 					<!-- <label class="radio-inline">
 						<input type="radio" name="pay" id="kakaopay" value="1">카카오페이</label> -->
 					<!-- <label class="radio-inline">
 						<input type="radio" name="pay" id="naverpay" value="2">네이버페이</label><br> -->
 					<!-- <label class="radio-inline">
 						<input type="radio" name="pay" id="payTest" value="3">결제</label><br> -->
-					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="history.back(); return false;">이전단계</button>
-						&nbsp;
-						<button type="submit">결제하기</button>
-					</div>
 
-					<input type="hidden" name="booknum" value=""> <input
-						type="hidden" name="price" value=""> <input type="hidden"
-						name="br_idx" value="${bvo.br_idx }"> <input type="hidden"
-						name="sct_idx" value="${bvo.sct_idx }"> <input
-						type="hidden" name="sct_name" value="${bvo.sct_name }"> <input
-						type="hidden" name="s_col" value="${bvo.s_col }"> <input
-						type="hidden" name="s_col_2" value="${bvo.s_col_2 }"> <input
-						type="hidden" name="cb_idx" value=""> <input type="hidden"
-						name="cb_idx_2" value=""> <input type="hidden"
-						name="cabinet" value="${bvo.cabinet }"> <input
-						type="hidden" name="start_time" value="${bvo.start_time }">
-					<input type="hidden" name="end_time" value="${bvo.end_time }">
-					<input type="hidden" name="s_idx" value="${svo.s_idx }"> <input
-						type="hidden" name="s_idx_2" value="${svo.s_idx_2 }"> <input
-						type="hidden" name="test" value="${test }"> <input
-						type="hidden" name="chkLen" value=""> <input type="hidden"
-						name="cab" value="">
 				</div>
-				<!-- 결제방식 선택 끝  -->
-			</form>
+				<div class="center" style="padding: 10px;">
+				<br>
+					<button type="button" onclick="history.back(); return false;">이전단계</button>
+					&nbsp;
+					<button type="button" disabled="disabled"
+						style="background-color: white; border: 1px solid lightgray; color: lightgray; cursor: not-allowed;">확인</button>
+				</div>
 
+				<input type="hidden" name="booknum" value=""> <input
+					type="hidden" name="price" value=""> <input type="hidden"
+					name="br_idx" value="${bvo.br_idx }"> <input type="hidden"
+					name="sct_idx" value="${bvo.sct_idx }"> <input
+					type="hidden" name="sct_name" value="${bvo.sct_name }"> <input
+					type="hidden" name="s_col" value="${bvo.s_col }"> <input
+					type="hidden" name="s_col_2" value="${bvo.s_col_2 }"> <input
+					type="hidden" name="cb_idx" value=""> <input type="hidden"
+					name="cb_idx_2" value=""> <input type="hidden"
+					name="cabinet" value="${bvo.cabinet }"> <input
+					type="hidden" name="start_time" value="${bvo.start_time }">
+				<input type="hidden" name="end_time" value="${bvo.end_time }">
+				<input type="hidden" name="s_idx" value="${svo.s_idx }"> <input
+					type="hidden" name="s_idx_2" value="${svo.s_idx_2 }"> <input
+					type="hidden" name="test" value="${test }"> <input
+					type="hidden" name="chkLen" value=""> <input type="hidden"
+					name="cab" value="">
+				<!-- 결제방식 선택 끝  -->
+
+			</form>
 		</div>
 		<!-- 박스 아웃사이드 끝 -->
 		<br> <br> <br>
@@ -630,49 +636,56 @@ button:hover {
 	<!-- 바디 콘테이너 끝 -->
 
 	<script>
-		$(document).ready(function() {
-			window.finalPrice = 0;
-			$.ajax({
-				url : "/couponList",
-				type : "get",
-				data : {
-					"id" : "${usersVO.id}"
-				},
-				dataType : "json",
-				success : function(result) {
+		$(document)
+				.ready(
+						function() {
+							window.finalPrice = 0;
+							$
+									.ajax({
+										url : "/couponList",
+										type : "get",
+										data : {
+											"id" : "${usersVO.id}"
+										},
+										dataType : "json",
+										success : function(result) {
 
-					var html = "";
-					if (result == "") {
-						html += "<option value='0' type='0' price='0'>없음</option>";
-					} else {
-						$.each(result, function(index, value) {
-							if ((value.cb_roomtype == 'LAB' && sct_idx != 1)
-									|| (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)
-									|| (value.cb_roomtype == 'ALL')) {
-								html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"
-										+ value.cb_name
-										+ " "
-										+ value.cb_discount;
-								if (value.cb_distype == 'PERCENT') {
-									html += "%";
-								} else if (value.cb_distype == 'PRICE') {
-									html += "원";
-								}
-								html += "("
-										+ value.cp_quantity
-										+ " 개)";
-								html += "</option>";
-							}
+											var html = "";
+											if (result == "") {
+												html += "<option value='0' type='0' price='0'>없음</option>";
+											} else {
+												$
+														.each(
+																result,
+																function(index,
+																		value) {
+																	if ((value.cb_roomtype == 'LAB' && sct_idx != 1)
+																			|| (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)
+																			|| (value.cb_roomtype == 'ALL')) {
+																		html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"
+																				+ value.cb_name
+																				+ " "
+																				+ value.cb_discount;
+																		if (value.cb_distype == 'PERCENT') {
+																			html += "%";
+																		} else if (value.cb_distype == 'PRICE') {
+																			html += "원";
+																		}
+																		html += "("
+																				+ value.cp_quantity
+																				+ " 개)";
+																		html += "</option>";
+																	}
+																});
+											}
+											$("#coupon").append(html);
+
+										},
+										error : function(error) {
+
+										}
+									});
 						});
-					}
-					$("#coupon").append(html);
-
-				},
-				error : function(error) {
-
-				}
-			});
-		});
 
 		$("#coupon").on(
 				"change",
