@@ -43,9 +43,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/")
 public class MainController {
 
-	@Resource(name = "uploadPath")
-	private String uploadPath;
-
 	@Autowired
 	private MyService myService;
 	@Autowired

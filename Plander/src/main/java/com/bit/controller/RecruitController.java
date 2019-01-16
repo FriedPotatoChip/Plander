@@ -296,7 +296,7 @@ public class RecruitController {
 	
 	
 	// 업로드 관련
-	@Resource(name = "uploadPath")
+/*	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
 	@PostMapping("uploadPath")
@@ -322,16 +322,6 @@ public class RecruitController {
 		FileCopyUtils.copy(fileData, target);
 		return saveName;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@ResponseBody
 	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
@@ -415,7 +405,7 @@ public class RecruitController {
 		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
 
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
-	}
+	}*/
 	
 	
 	

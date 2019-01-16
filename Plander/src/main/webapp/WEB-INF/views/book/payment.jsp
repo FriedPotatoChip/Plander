@@ -420,8 +420,8 @@ button:hover {
 				document.form1.chkLen.value = chkLen;
 
 				if (chkLen == 2) {
+					$('#bookprice').html('<span>' + (sum * 2) + '('+sum+' * 2) 원</span>');
 					sum *= 2;
-					$('#bookprice').html('<span>' + sum + '원</span>');
 				} else {
 					$('#bookprice').html('<span>' + sum + '원</span>');
 				}
@@ -450,8 +450,8 @@ button:hover {
 				"merchantPayKey" : "partnder-orderkey",
 				"productName" : "[거북이의 기적]",
 				"productCount" : 1,
-				"totalPayAmount" : sum,
-				"taxScopeAmount" : sum,
+				"totalPayAmount" : finalPrice,
+				"taxScopeAmount" : finalPrice,
 				"taxExScopeAmount" : 0,
 				"returnUrl" : "/payment/payok",
 				"productItems" : [ {

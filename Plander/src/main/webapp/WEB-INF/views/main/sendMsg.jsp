@@ -98,7 +98,7 @@ th, td {
 				success : function(result) {
 					if (result == 'success') {
 						alert("쪽지를 보냈습니다.");
-						location.href="/ask";
+						window.close();
 					} else {
 						alert("쪽지를 보내는데 실패했습니다.")
 					}

@@ -35,14 +35,16 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/signUpSuc")
-	public String signUpSuc() {
+	public String signUpSuc(@RequestParam(value="name", required=false)String name, Model model) {
+		model.addAttribute("name", name);
 		return "main/joinOk";
 	}
 	
 	@PostMapping("/signUp")
-	public String signUp(UsersVO vo, Model model, HttpSession session) {
+	public String signUp(UsersVO vo, RedirectAttributes rttr) {
 		boolean chkSignUp = service.signUp(vo);
 		if (chkSignUp) {
+			rttr.addAttribute("name", vo.getName());
 			return "redirect: /signUpSuc";
 		}else {
 			return "redirect: /";

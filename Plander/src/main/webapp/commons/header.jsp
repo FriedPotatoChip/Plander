@@ -324,18 +324,20 @@ a {
 			return false;
 		}
 
-		if (chkIdChk && chkPwdChk) {
-			frm.submit();
-		} else if (!chkPwdChk) {
-			alert("비밀번호가 일치하지 않습니다.");
-			frm.password.focus();
-		}
-
 		if (!chkBox) {
 			alert("이용 약관에 동의해주세요.");
 			frm.chkBox.focus();
 			return false;
 		}
+		
+		if (chkIdChk && chkPwdChk) {
+			frm.submit();
+		} else if (!chkPwdChk) {
+			alert("비밀번호가 일치하지 않습니다.");
+			frm.password.focus();
+			return false;
+		}
+
 	}
 
 	// 주소 api

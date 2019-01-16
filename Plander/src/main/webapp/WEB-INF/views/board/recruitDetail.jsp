@@ -293,12 +293,17 @@ function boardList(nowPage){
 			
 			<br>
 			<p class="centered">
+			
 				<!-- 신청 버튼 시작 -->
-				<button class="appBtn btnOpt" id="hideApply" style="display: none;"
-					onclick="apply()">신청하기</button>
-				<button class="appBtn btnOpt" id="hideCancel" style="display: none;"
-					onclick="applyCancel()">신청취소</button>
+				<c:if test="${rc_board.onOff == 'ON' }">
+					<button class="appBtn btnOpt" id="hideApply" style="display: none;"
+						onclick="apply()">신청하기</button>
+					<button class="appBtn btnOpt" id="hideCancel" style="display: none;"
+						onclick="applyCancel()">신청취소</button>
+				</c:if>
+					
 				<!-- 신청 버튼 끝 -->
+				
 			</p>
 			<br>
 		</div>
