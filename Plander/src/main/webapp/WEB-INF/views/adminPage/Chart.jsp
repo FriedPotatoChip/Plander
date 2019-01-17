@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" href="/resources/images/favicon-16x16.png" sizes="16x16" />
 <meta charset="UTF-8">
 <title>관리자</title>
 

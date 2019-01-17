@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="icon" type="image/png" href="/resources/images/favicon-16x16.png" sizes="16x16" />
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <!-- Bootstrap core CSS -->
