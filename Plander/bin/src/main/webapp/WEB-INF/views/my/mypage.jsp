@@ -8,7 +8,8 @@
 	type="text/css" />
 
 <!-- Jcrop(사진 크롭) -->
-<script src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js" ></script>
+<script
+	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
 
 <script>
 //비밀번호 확인
@@ -34,19 +35,11 @@ function click() {
 }
 </script>
 
-
 <style>
-#primaryNav li a h5 {
-	font-weight: 700;
-}
-
-body>div {
-	width: 90%;
-	margin: 0 auto;
-}
-
-.navs {
-	height: 60px;
+body {
+	font-family: 'NanumSquare', sans-serif;
+	font-weight: 400;
+	color: #666;
 }
 
 .nav_btn {
@@ -55,25 +48,27 @@ body>div {
 	float: right;
 }
 
-h3 {
-	padding: 15px 0;
-	text-align: center;
-	background-color: #3b5998;
-	text-align: center;
+.container {
+	font-family: 'NanumSquare', sans-serif;
+	font-weight: 400;
+	color: #666;
+	text-decoration: none;
+	width: 80%;
+	margin: auto;
 }
 
-th {
-	text-align: center;
+a {
+	color: #475C7A;
 }
 
 h3 {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	text-align: center;
+	color: #475C7A;
 }
 
 .profile {
 	width: 100%;
-	margin: 30px auto;
+	margin: 10px auto;
 	text-align: center;
 }
 
@@ -125,7 +120,7 @@ h3 {
 	border-top: 1px solid #000;
 }
 
-.myinfo_nav, .myBook_nav, .myRecruit_nav {
+.myBook_nav, .myRecruit_nav {
 	text-align: center;
 	margin: 20px auto;
 	width: 100%;
@@ -140,60 +135,78 @@ h3 {
 }
 
 #modal_table th {
-	width: 50%;
+	width: 30%;
 }
 
 #modal_table td {
-	width: 50%;
+	width: 70%;
 }
 
 .description {
 	font-size: 0.7em;
 	color: gray;
 }
-table, tr, th, td { text-align: center;}
+/* 클릭시 레이어 */
+.idDiv {
+	cursor: pointer;
+}
+
+.popupLayer {
+	position: absolute;
+	display: none;
+	background-color: #ffffff;
+	border: solid 2px #d0d0d0;
+	width: 130px;
+	height: 120px;
+	padding: 10px;
+	padding-top: 18px;
+	padding-left: 15px;
+}
+
+.popupLayer div {
+	position: absolute;
+	top: 0px;
+	right: 5px
+}
 </style>
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/TMS"><img
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
-				<li class="nav-item"><a class="nav-link" href="/TMS/logout"><h5>로그아웃</h5></a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS"><h5>홈으로가기</h5></a></li>
+				<li class="nav-item"><a class="nav-link bold"
+					href="/TMS/logout">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link bold" href="/TMS">홈으로가기</a></li>
 			</ul>
-
 		</div>
 	</nav>
 
 	<div class="container">
-		<!-- 회원 프로필 사진 -->
-		<div class="profile">
-			<c:if test='${empty usersVO.user_profileImagePath }'>
-				<img class="user" src="/resources/images/users.png" alt="user"
-					data-toggle="modal" data-target="#profileModal"
-					style="margin-top: 30px;" />
-			</c:if>
-			<c:if test='${not empty usersVO.user_profileImagePath }'>
-				<img class="user" src="${usersVO.user_profileImagePath }" alt="user"
-					data-toggle="modal" data-target="#profileModal" />
-			</c:if>
-			<h5 class="user_name">${usersVO.name }님</h5>
-			<hr>
-		</div>
-
-
 		<!-- 내정보 -->
-		<div class="my_info">
-			<h3>- 내정보 -</h3>
-			<div class="myinfo_nav">
-				<strong><a href="#" data-toggle="modal"
-					data-target=".bd-example-modal-lg">회원정보수정</a></strong>
+		<div class="my_info"
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
+			<h5 class="d-inline" style="margin-top: 30px; color: #D8737F;">
+				<strong style="color: #475C7A;">${usersVO.name }</strong> 님의 정보
+			</h5>
+			<strong
+				style="float: right; margin-bottom: 10px; margin-right: 10px;"><a
+				href="#" data-toggle="modal" data-target="#myModal">회원정보수정</a></strong>
+			<!-- 회원 프로필 사진 -->
+			<div class="profile" style="margin-top: 20px;">
+				<c:if test='${empty usersVO.user_profileImagePath }'>
+					<img class="user" src="/resources/images/users.png" alt="user"
+						data-toggle="modal" data-target="#profileModal" />
+				</c:if>
+				<c:if test='${not empty usersVO.user_profileImagePath }'>
+					<img class="user" src="${usersVO.user_profileImagePath }"
+						alt="user" data-toggle="modal" data-target="#profileModal" />
+				</c:if>
 			</div>
+			<br>
 			<table class="table" id="my_info_table">
 				<tr>
 					<th>회원아이디</th>
@@ -225,11 +238,10 @@ table, tr, th, td { text-align: center;}
 
 
 		<!-- 내예약 -->
-		<div class="myBook">
-			<h3>- 내예약 -</h3>
-			<span style="float: right;">
-				<button type="button" class="btn btn-warning mr-3" onclick="location.href='/TMS/admin/Seats'">좌석이동</button></span>
-			<div class="myBook_nav">
+		<div class="myBook"
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
+			<h5 class="d-inline mr-3" style="color: #D8737F;">내예약</h5>
+			<div class="myBook_nav d-inline">
 				<strong><a href="javascript:click()"
 					onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">좌석예약내역</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
@@ -246,9 +258,10 @@ table, tr, th, td { text-align: center;}
 
 
 		<!-- 내글목록 -->
-		<div class="myRecruit">
-			<h3>- 내글목록 -</h3>
-			<div class="myRecruit_nav">
+		<div class="myRecruit"
+			style="border: 1px solid lightgray; padding: 20px;">
+			<h5 class="d-inline mr-3" style="color: #D8737F;">내글목록</h5>
+			<div class="myRecruit_nav d-inline mr-3">
 				<strong><a href="javascript:click()"
 					onclick="fetch_recruit('/TMS/my/my_recruit?nowPage=1')">내모집글</a></strong>&nbsp;|&nbsp;
 				<strong><a href="javascript:click()"
@@ -266,9 +279,8 @@ table, tr, th, td { text-align: center;}
 
 
 	<!-- 회원정보수정 모달창 -->
-	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-		id="myModal">
-		<div class="modal-dialog modal-lg" role="document">
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+		<div class="modal-dialog" role="document">
 			<form action="/TMS/my/update" method="POST">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -312,37 +324,64 @@ table, tr, th, td { text-align: center;}
 									name="email" placeholder="이메일" value="${user.email }" required></td>
 							</tr>
 							<tr>
-								<th>회원주소</th>
-								<td><input type="text" class="form-control" id="zipNo"
-									name="zipNo" readonly></td>
-								<td><input type="button" class="form-control" value="주소검색"
-									onclick="goPopup();"></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td><input type="text" class="form-control"
-									id="roadAddrPart1" name="roadAddrPart1" placeholder="주소"
-									value="${user.roadAddrPart1 }" readonly></td>
-							</tr>
-							<tr>
-								<th></th>
-								<td><input type="text" class="form-control" id="addrDetail"
-									name="addrDetail" placeholder="상세주소"
-									value="${user.addrDetail }" required></td>
+								<th>회원주소&nbsp;<b style="color: red;">&#42;</b></th>
+								<td><input type="text" id="zipNo" style="display: inline;"
+									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
+									<button type="button" class="btn"
+										style="background-color: #D8737F; color: white;"
+										onclick="goPopup()">주소검색</button> <input type="text"
+									id="roadAddrPart1" class="col-sm-12 form-control my-2"
+									name="roadAddrPart1" value="${user.roadAddrPart1 }" readonly>
+									<input type="text" id="addrDetail"
+									class="col-sm-12 form-control my-2" name="addrDetail"
+									value="${user.addrDetail }" placeholder="상세주소" required></td>
 							</tr>
 						</table>
 					</div>
 					<div class="modal-footer">
-						<button type="reset" class="btn btn-outline-secondary"
+						<a href="/TMS/dropout" class="mr-3" data-toggle="modal"
+							data-target=".bd-example-modal-sm">회원탈퇴</a>
+						<button type="reset" class="btn"
+							style="background-color: #FCBB6D; color: white;"
 							data-dismiss="modal">초기화</button>
 						<input type="hidden" name="id" value="${user.id }" />
-						<button type="submit" id="update" class="btn btn-outline-primary">수정하기</button>
+						<button type="submit" id="update" class="btn"
+							style="background-color: #D8737F; color: white;">수정하기</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 	<!-- 회원정보수정 모달창 끝 -->
+
+	<!-- 회원탈퇴 모달 -->
+	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">회원탈퇴</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						회원 탈퇴 시 모든 데이터가 삭제되며 한 달간 재가입이 불가능합니다.<br> 그래도 탈퇴하시겠습니까?
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn"
+						style="background-color: #FCBB6D; color: white;"
+						data-dismiss="modal">창닫기</button>
+					<button type="button" class="btn"
+						style="background-color: #D8737F; color: white;"
+						onclick="location.href='/TMS/my/dropout'">탈퇴하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- 프로필 사진 수정 모달 -->
@@ -370,7 +409,8 @@ table, tr, th, td { text-align: center;}
 				<div class="modal-footer mx-auto">
 					<button type="button" class="btn btn-outline-danger mx-1 hideFade"
 						data-toggle="modal" data-target="#updateProfile">사진변경</button>
-					<button type="button" class="btn btn-outline-warning mx-1" onclick="imgDel()">삭제</button>
+					<button type="button" class="btn btn-outline-warning mx-1"
+						onclick="imgDel()">삭제</button>
 				</div>
 				<div></div>
 
@@ -383,7 +423,7 @@ table, tr, th, td { text-align: center;}
 	<!-- 프로필 사진 업로드 모달 -->
 	<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">프로필 사진 업로드</h5>
@@ -571,7 +611,7 @@ table, tr, th, td { text-align: center;}
 		}
 	</script>
 	<!-- 프로필 이미지 삭제 -->
-	<script> 
+	<script> 				
 		function imgDel(){
 			if ('${usersVO.user_profileImagePath}' == ""){
 				alert("프로필 이미지를 먼저 등록해주세요.");
@@ -598,9 +638,6 @@ table, tr, th, td { text-align: center;}
 	<!-- 쪽지 삭제 -->
 	<script>
 		function msgDel(rm_idx, nowPage){
-			console.log("rm_idx: "+ rm_idx);
-			console.log("nowPage: "+ nowPage);
-			
 			$.ajax({
 				url: '/msgDel',
 				type: 'post',
@@ -620,5 +657,67 @@ table, tr, th, td { text-align: center;}
 			fetch_book('/TMS/my/recvMsg?nowPage='+ nowPage);
 		}
 	</script>
+	<div class="popupLayer">
+		<div>
+			<span onClick="closeLayer()"
+				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
+		</div>
+		<a id="sendMsg" href="#">쪽지 보내기</a><br> <a id="userProfile"
+			href="#">회원 정보 보기</a><br>
+	</div>
+	<script>
+function closeLayer( obj ) {
+	$(".popupLayer").hide();
+}
+function showBox(e, tag){
+		console.log("idDiv 클릭됨");
+		var sWidth = window.innerWidth;
+		var sHeight = window.innerHeight;
+
+		var oWidth = $('.popupLayer').width();
+		var oHeight = $('.popupLayer').height();
+
+		// 레이어가 나타날 위치를 셋팅한다.
+		var divLeft = e.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
+		var divTop = e.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
+		console.log("X: "+ e.clientX);
+		console.log("Y: "+ e.clientY);
+
+		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
+		if( divTop + oHeight > sHeight ) divTop -= oHeight;
+
+		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+		if( divLeft < 0 ) divLeft = 0;
+		if( divTop < 0 ) divTop = 0;
+
+		$('.popupLayer').css({
+			"top": divTop,
+			"left": divLeft,
+			"position": "absolute"
+		}).show();
+		console.log(this);
+		var userId = $(tag).attr("userId");
+		console.log($(tag).attr("userId"));
+		$("#sendMsg").click(function(){
+			$(".popupLayer").hide();
+			if ('${usersVO.id}' == ''){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			} 
+			window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
+		});
+		$("#userProfile").click(function(){
+			$(".popupLayer").hide();
+			if ('${usersVO.id}' == ''){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			} 
+			window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+		});
+}
+
+
+</script>
 </body>
 </html>

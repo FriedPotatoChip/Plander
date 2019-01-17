@@ -8,7 +8,6 @@ body {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
-	font-size: 1.2rem;
 }
 
 .center {
@@ -42,14 +41,13 @@ body {
 				<h5>아이디 찾기</h5>
 				<p>이름과 회원정보에 등록한 휴대전화번호를 입력해주세요.</p>
 				<hr>
-				<form method="post" action="/TMS/findId">
+				<form method="post" action="/findId">
 					<div style="border: 1px solid; padding: 20px;">
-						<input type="text" name="name"
-							class="form-control form-control-lg" placeholder="이름"> <input
-							type="text" name="email"
-							class="form-control form-control-lg margintop" placeholder="이메일">
-						<button type="submit" class="btn form-control margintop btn-lg"
-							style="background-color: #008374; color: white;">찾기</button>
+						<input type="text" name="name" class="form-control"
+							placeholder="이름"> <input type="text" name="email"
+							class="form-control margintop" placeholder="이메일">
+						<button type="submit" class="btn form-control margintop"
+							style="background-color: #475C7A; color: white;">찾기</button>
 					</div>
 				</form>
 			</div>
@@ -58,14 +56,14 @@ body {
 				<h5>비밀번호 찾기</h5>
 				<p>비밀번호를 찾고자 하는 아이디를 입력해 주세요.</p>
 				<hr>
-				<form method="post" action="/TMS/findPw">
+				<form method="post" action="/findPw">
 					<div style="border: 1px solid; padding: 20px;">
-						<input type="text" name="id" class="form-control form-control-lg"
+						<input type="text" name="id" class="form-control"
 							placeholder="아이디"> <input type="text" name="email"
-							class="form-control form-control-lg margintop" placeholder="이메일">
+							class="form-control margintop" placeholder="이메일">
 						<button type="submit"
-							class="btn btn-outline-secondary form-control btn-lg margintop"
-							style="background-color: #008374; color: white;">찾기</button>
+							class="btn btn-outline-secondary form-control margintop"
+							style="background-color: #475C7A; color: white;">찾기</button>
 					</div>
 				</form>
 			</div>

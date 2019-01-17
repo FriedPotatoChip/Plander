@@ -90,7 +90,7 @@ a {
 						</td>
 						<td><button type="button"
 								class="btn btn-outline-danger btn-sm"
-								onclick="location.href='/TMS/my/delSeat?bk_idx=${seat.bk_idx }'">예약취소</button></td>
+								onclick="location.href='/my/delSeat?bk_idx=${seat.bk_idx }'">예약취소</button></td>
 					</tr>
 				</c:forEach>
 
@@ -100,9 +100,9 @@ a {
 						class="pagination justify-content-center centered">
 						<c:if test="${page.chkStartPage }">
 							<li class="page_edge"><a class="p-n" href="#"
-								onclick="fetch_book('/TMS/my/my_seat?nowPage=1')">〈</a></li>
+								onclick="fetch_book('/my/my_seat?nowPage=1')">〈</a></li>
 							<li class="page_edge"><a class="p-n" href="#"
-								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.startPage-1 }')"><span
+								onclick="fetch_book('/my/my_seat?nowPage=${page.startPage-1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
@@ -110,20 +110,20 @@ a {
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
 								<li class="page_edge now"><a class="p-n now" href="#"
-									onclick="fetch_book('/TMS/my/my_seat?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/my/my_seat?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li class="page_edge"><a class="p-n" href="#"
-									onclick="fetch_book('/TMS/my/my_seat?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/my/my_seat?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
 							<li class="page_edge"><a class="p-n" href="#"
-								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.endPage+1 }')"><span
+								onclick="fetch_book('/my/my_seat?nowPage=${page.endPage+1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 							<li class="page_edge"><a class="p-n" href="#"
-								onclick="fetch_book('/TMS/my/my_seat?nowPage=${page.lastPage }')">〉</a></li>
+								onclick="fetch_book('/my/my_seat?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>

@@ -129,7 +129,7 @@ $(document).ready(function(){
 						if ('${board.b_idx}' == value.b_idx){
 							html += "<b>";
 						}
-						html += "<a style='font-size: 0.9rem;' href='/TMS/boardDetail?idx="+value.b_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
+						html += "<a style='font-size: 0.9rem;' href='/boardDetail?idx="+value.b_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
 						html += value.b_title;
 						if (value.cnt != 0){
 							html += "<span style='color: #D8737F;'>["+value.cnt+"]</span>";
@@ -186,7 +186,7 @@ $(document).ready(function(){
 	<div class="bodyform" style="width: 55%; margin: auto;">
 		<br>
 		<div id="board">
-			<a href="/TMS/board?ct_idx=${board.ct_idx }&nowPage=${nowPage }&cntPerPage=${cntPerPage}"
+			<a href="/board?ct_idx=${board.ct_idx }&nowPage=${nowPage }&cntPerPage=${cntPerPage}"
 				style="font-size: 0.8em;">
 				<strong id="boardType"></strong>
 			</a>
@@ -284,7 +284,7 @@ $(document).ready(function(){
 		var confirm = window.confirm("게시글을 수정하시겠습니까?");
 		
 		if (confirm){
-			location.href="/TMS/modifyBoard?b_idx=${board.b_idx}";
+			location.href="/modifyBoard?b_idx=${board.b_idx}";
 		}
 	}
 	
@@ -427,15 +427,15 @@ $(document).ready(function(){
 					console.log(this);
 					var userId = $(this).attr("userId");
 					console.log($(this).attr("userId"));
-					$("#showWritten").attr("href", "/TMS/searchList?keyword="+userId+"&target=w&ct_idx=${board.ct_idx}");
-					$("#showWritten").attr("href", "/TMS/searchList?keyword="+userId+"&target=w&ct_idx=${board.ct_idx}")
+					$("#showWritten").attr("href", "/searchList?keyword="+userId+"&target=w&ct_idx=${board.ct_idx}");
+					$("#showWritten").attr("href", "/searchList?keyword="+userId+"&target=w&ct_idx=${board.ct_idx}")
 					$("#sendMsg").click(function(){
 						$(".popupLayer").hide();
 						if ('${usersVO.id}' == ''){
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						} 
-						window.open("/TMS/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=500");
+						window.open("/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
 					});
 					$("#userProfile").click(function(){
 						$(".popupLayer").hide();
@@ -443,7 +443,7 @@ $(document).ready(function(){
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						} 
-						window.open("/TMS/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
+						window.open("/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
 					});
 				});
 			}, error: function(){

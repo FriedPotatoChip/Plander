@@ -60,7 +60,7 @@ a {
 
 	<div class="container-fluid">
 
-		<a class="navbar-brand" href="/TMS"><img
+		<a class="navbar-brand" href="/"><img
 			src="/resources/images/logo.png" width="150px" height="50px"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive">
@@ -71,15 +71,15 @@ a {
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" href="#">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS/book">예약하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS/recruit">모집게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="/book">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="/recruit">모집게시판</a></li>
 				<li class="nav-item">
 					<div class="dropdown">
 						<a class="nav-link dropbtn" href="#">게시판</a>
 						<div class="dropdown-content">
-							<a href="/TMS/board?ct_idx=1">공지사항</a> <a
-								href="/TMS/board?ct_idx=2">자유게시판</a><a
-								href="/TMS/board?ct_idx=3">후기게시판</a> <a href="/TMS/ask">문의하기</a>
+							<a href="/board?ct_idx=1">공지사항</a> <a
+								href="/board?ct_idx=2">자유게시판</a><a
+								href="/board?ct_idx=3">후기게시판</a> <a href="/ask">문의하기</a>
 						</div>
 					</div>
 				</li>
@@ -87,8 +87,8 @@ a {
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
 				<li class="nav-item"><a class="nav-link"
-					style="color: #FCBB6D;" href="/TMS/admin">관리자페이지</a></li>
-				<li class="nav-item"><a class="nav-link" href="/TMS/logout">로그아웃</a></li>
+					style="color: #FCBB6D;" href="/admin">관리자페이지</a></li>
+				<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
 			</ul>
 
 		</div>
@@ -103,7 +103,7 @@ a {
 			$("#myModal").modal();
 			$("#idInput").focus();
 		} else {
-			location.href = "/TMS/book";
+			location.href = "/book";
 		}
 	}
 </script>

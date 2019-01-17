@@ -105,10 +105,10 @@
 				var title = "bookingPage";
 				window
 						.open("", title,
-								"width=1200, height=700, scrollbars=yes");
+								"width=1400, height=700, scrollbars=yes");
 
 				frm.target = title;
-				frm.action = "/TMS/book/booking";
+				frm.action = "/book/booking";
 				frm.submit();
 			}
 		</script>
@@ -173,12 +173,17 @@
 		</div>
 		<!-- 3 호점 끝 -->
 
-		<br> <br> <br>
-		<!-- 풋터 -->
-
-	</div>
-	<!-- 바디 콘테이너 끝 -->
+		<br><br><br>
+	</div> <!-- 바디 콘테이너 끝 -->
+	<hr>
+	<!-- 허해서 넣은 풋터 -->
+	<p class="center" style="font-size: 17px;">© turtlesmiracle</p>
+	<br>
+	<br>
+	<!-- 허해서 넣은 풋터 끝 -->
+	
 	<script>
+	
 		function numberWithCommas(x) {
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
@@ -202,17 +207,17 @@
 						var lab4Am = 0;
 						var lab4Pm = 0;
 						var lab4Holiday = 0;
-						var lab4Night = 1500;
+						var lab4Night = 4500;
 
 						var lab8Am = 0;
 						var lab8Pm = 0;
 						var lab8Holiday = 0;
-						var lab8Night = 1800;
+						var lab8Night = 7000;
 
 						var lab12Am = 0;
 						var lab12Pm = 0;
 						var lab12Holiday = 0;
-						var lab12Night = 2000;
+						var lab12Night = 9000;
 
 						$.each(result, function(index, value) {
 							// 정기권 가격
@@ -270,7 +275,7 @@
 						ticket += numberWithCommas(ticketDay) + "원";
 						ticket += "</td></tr><tr><th>정기권 2주</th><td>";
 						ticket += numberWithCommas(ticket2w)
-								+ "원 (사물함 선택 시 +2,000원)</td>";
+								+ "원 (사물함 선택 시 +5,000원)</td>";
 						ticket += "</tr><tr><th>정기권 1개월</th><td>";
 						ticket += numberWithCommas(ticketMon)
 								+ "원 (사물함 제공)</td>";

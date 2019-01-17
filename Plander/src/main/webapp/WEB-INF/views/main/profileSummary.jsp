@@ -51,7 +51,10 @@ th, td {
 						pattern="yyyy-MM-dd HH:mm" /></td>
 			</tr>
 		</table>
-		<input type="button" class="btn" style="background-color: #685D79; color: white;" value="닫기" onclick="closeWin()">
+		<p style="text-align: right;">
+			<input type="button" class="btn"
+				style="background-color: #685D79; color: white;" value="닫기" onclick="closeWin()">
+		</p>
 	</div>
 	<script>
 		function closeWin() {

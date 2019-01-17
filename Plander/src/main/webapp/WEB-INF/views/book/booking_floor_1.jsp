@@ -5,81 +5,56 @@
 <jsp:include page="/commons/head.jsp" />
 <script>
 	//DB에서 예약된 좌석이랑 비교해서 체크박스 disabled
-	$()
-			.ready(
-					function() {
-						var size = document.getElementsByName('s_col').length; //6개
-						var bookroomlist = '<c:out value='${bookroomlist}' />'; //예약된 좌석 리스트 
-						console.log("총 좌석 수  : " + size + ", 예약된 좌석 : "
-								+ bookroomlist);
+	$().ready(function() {
+		var size = document.getElementsByName('s_col').length; //6개
+		var bookroomlist = '<c:out value='${bookroomlist}' />'; //예약된 좌석 리스트 
+		console.log("총 좌석 수  : " + size + ", 예약된 좌석 : "
+				+ bookroomlist);
 
-						<c:forEach var='k' items='${bookroomlist }'>
-						var bookseat = '${k.s_col }'; //예약된 좌석 번호
-						console.log("s_col : " + bookseat);
+		<c:forEach var='k' items='${bookroomlist }'>
+		var bookseat = '${k.s_col }'; //예약된 좌석 번호
+		console.log("s_col : " + bookseat);
 
-						for (var i = 0; i <= size; i++) {
-							//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
-							if (bookseat == document.getElementsByName('s_col')[i].value) {
-								console.log("예약된 값 : " + bookseat);
-								$(document.getElementsByName('s_col')[i]).attr(
-										'disabled', true);
-								break;
-							}
-						}
-						</c:forEach>
+		for (var i = 0; i <= size; i++) {
+			//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+			if (bookseat == document.getElementsByName('s_col')[i].value) {
+				console.log("예약된 값 : " + bookseat);
+				$(document.getElementsByName('s_col')[i]).attr(
+						'disabled', true);
+				break;
+			}
+		}
+		</c:forEach>
 
-						//체크박스 클릭했을 때 
-						$(":checkbox")
-								.change(
-										function() {
-											var cnt = 1;
+		//체크박스 클릭했을 때 
+		$(":checkbox").change(function() {
+			var cnt = 1;
 
-											//체크된 박스 수가 1일 때 나머지 체크박스 disabled
-											if (cnt == $(":checkbox:checked").length) {
-												$(":checkbox:not(:checked)")
-														.attr("disabled", true); //같으면 나머지 체크박스 disabled
-												console
-														.log("체크된 좌석 : "
-																+ $(
-																		":checkbox:checked")
-																		.val()); //체크값 확인ok
-												$("#msg")
-														.html(
-																"<span>"
-																		+ $(
-																				":checkbox:checked")
-																				.val()
-																		+ "호</span>");
-											} else {
-												$(":checkbox").removeAttr(
-														"disabled");
-												$("#msg").html("");
-												<c:forEach var='k' items='${bookroomlist }'>
-												var bookseat = '${k.s_col }'; //예약된 좌석 번호
-												console.log("s_col : "
-														+ bookseat);
+			//체크된 박스 수가 1일 때 나머지 체크박스 disabled
+			if (cnt == $(":checkbox:checked").length) {
+				$(":checkbox:not(:checked)").attr("disabled", true); //같으면 나머지 체크박스 disabled
+				console.log("체크된 좌석 : "+ $(":checkbox:checked").val()); //체크값 확인ok
+				$("#msg").html("<span>" + $(":checkbox:checked").val() + "호</span>");
+			} else {
+				$(":checkbox").removeAttr("disabled");
+				$("#msg").html("");
+				<c:forEach var='k' items='${bookroomlist }'>
+				var bookseat = '${k.s_col }'; //예약된 좌석 번호
+				console.log("s_col : " + bookseat);
 
-												for (var i = 0; i <= size; i++) {
-													if (bookseat == document
-															.getElementsByName('s_col')[i].value) {
-														$(
-																document
-																		.getElementsByName('s_col')[i])
-																.attr(
-																		'disabled',
-																		true);
-														console
-																.log("if문 안의 s_col : "
-																		+ bookseat);
-														break;
-													}
-												}
-												</c:forEach>
+				for (var i = 0; i <= size; i++) {
+					if (bookseat == document.getElementsByName('s_col')[i].value) {
+						$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+						console.log("if문 안의 s_col : " + bookseat);
+						break;
+					}
+				}
+				</c:forEach>
 
-											}
-										});
+			}
+		});
 
-					});
+	});
 </script>
 <script>
 	$(function() {
@@ -111,8 +86,7 @@
 	});
 
 	function next(frm) {
-
-		frm.action = "/TMS/book/pay";
+		frm.action = "/book/pay";
 		frm.submit();
 	}
 </script>
@@ -224,6 +198,7 @@ button:hover {
 	color: white;
 }
 /* 버튼 끝 */
+
 </style>
 
 </head>
@@ -233,12 +208,12 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/TMS/book/booking"> <b><span
+				<li><a class="menu" href="/book/booking"> <b><span
 							id="num" class="back">STEP1</span> <span id="select"
 							class="select">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu" href="/TMS/book/selectSeat"> <b><span
+				<li><a class="menu" href="/book/selectSeat"> <b><span
 							id="num" class="noback">STEP2</span> <span id="select"
 							class="click">좌석선택</span></b>
 				</a></li>
@@ -253,10 +228,10 @@ button:hover {
 		<!-- 예약 헤더끝 -->
 
 		<div id="ticket">
-			<div class="boxoutside" style="border: 1px solid lightgray;">
+			<div class="boxoutside">
 				<form method="post">
 					<div>
-						<h5>☑ 랩실은 4인실 기준 최소 3인 이상 단체예약만 가능합니다.</h5>
+						<p>☑ 랩실은 4인실 기준 최소 3인 이상 단체예약만 가능합니다.</p>
 					</div>
 					<hr>
 
@@ -337,7 +312,7 @@ button:hover {
 					<!-- 선택 정보 끝 -->
 
 					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="location.href='/TMS/book/booking'">이전단계</button>
+						<button type="button" onclick="location.href='/book/booking'">이전단계</button>
 						&nbsp;
 						<button type="button" onclick="next(this.form)">다음단계</button>
 					</div>

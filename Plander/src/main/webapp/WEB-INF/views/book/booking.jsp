@@ -312,7 +312,7 @@
 			alert("좌석 종류(개인실/랩실) 선택은 필수입니다.");
 			return false;
 		} else {
-			frm.action = "/TMS/book/selectSeat";
+			frm.action = "/book/selectSeat";
 			frm.submit();
 		}
 	}
@@ -424,6 +424,10 @@ button:hover {
 	background-color: #D8737F;
 	color: white;
 }
+
+#ticket {
+	background-color: #f8f9fa;
+}
 /* 버튼 끝 */
 </style>
 
@@ -434,41 +438,45 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="#"> <b><span
-							id="num" class="noback">STEP1</span> <span id="select"
-							class="click">날짜선택</span></b>
+				<li><a class="menu" href="#">
+					<b><span id="num" class="noback">STEP1</span>
+					<span id="select" class="click">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b><span id="num" class="back">STEP2</span>
-							<span id="select" class="select">좌석선택</span></b>
+				<li><a class="menu" href="#">
+					<b><span id="num" class="back">STEP2</span>
+					<span id="select" class="select">좌석선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b> <span id="num"
-							class="back">STEP3</span> <span id="select" class="select">결제하기</span></b>
+				<li><a class="menu" href="#">
+					<b><span id="num" class="back">STEP3</span>
+					<span id="select" class="select">결제하기</span></b>
 				</a></li>
 			</ul>
 		</div>
 		<!-- 예약 헤더끝 -->
 
 		<div id="ticket" style="box-sizing: border-box;">
-			<div class="boxoutside" style="border: 1px solid lightgray;">
+		
+			<div class="boxoutside">
 				<form method="post">
 					<!-- 달력 -->
-					<div style="margin: 10px; background-color: #FCBB6D;">
+					<br>
+					<div style="margin: 10px; border: 1px solid lightgray;">
 						<div id="calendar" class="container">
 							<div class="form-group">
 								<div class='input-group date' id='datetimepicker6'>
-									<input type='text' name="start_time" class="form-control" /> <span
-										class="input-group-addon"> <span
-										class="glyphicon glyphicon-calendar"></span>
+									<input type='text' name="start_time" class="form-control" />
+									<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class='input-group date' id='datetimepicker7'>
-									<input type='text' name="end_time" class="form-control" /> <span
-										class="input-group-addon"> <span
-										class="glyphicon glyphicon-calendar"></span>
+									<input type='text' name="end_time" class="form-control" />
+									<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
 									</span>
 								</div>
 							</div>
@@ -490,7 +498,7 @@ button:hover {
 
 						<input type="hidden" name="br_idx" value="${svo.br_idx }">
 
-						<table class="table table-bordered" style="width: 100%;">
+						<table class="table table-bordered" style="width: 100%; background-color: white;">
 							<tr>
 								<th style="text-align: center;">좌석 종류 선택</th>
 								<th style="text-align: center;">정기 이용권(1인실)</th>

@@ -96,12 +96,12 @@ button:hover {
 
 <script>
 	function main() {
-		window.opener.top.location.href = "/TMS/book";
+		window.opener.top.location.href = "/book";
 		window.close();
 	}
 
 	function mypage() {
-		window.opener.top.location.href = "/TMS/my";
+		window.opener.top.location.href = "/my";
 		window.close();
 	}
 </script>
@@ -114,7 +114,7 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/TMS/book/booking"> <b><span
+				<li><a class="menu" href="/book/booking"> <b><span
 							id="num" class="back">STEP1</span> <span id="select"
 							class="select">날짜선택</span></b>
 				</a></li>

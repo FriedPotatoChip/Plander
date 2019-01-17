@@ -5,8 +5,8 @@
 
 <style>
 .container {
-	width: 80%;
-	margin: 50px auto;
+	width: 90%;
+	margin: 25px auto;
 }
 
 table {
@@ -24,11 +24,11 @@ th, td {
 
 <body>
 	<div class="container"
-		style="border: 1px solid lightgray; padding: 30px;">
+		style="border: 1px solid lightgray; padding: 10px 30px;">
 		<h4 class="text-center"
 			style="text-decoration: underline; color: #475C7A; margin-bottom: 20px;">쪽지
 			보내기</h4>
-		<form action="/TMS/sendMsg" method="post" id="msgForm">
+		<form action="/sendMsg" method="post" id="msgForm">
 			<input type="hidden" name="send_id" value="${usersVO.id }"> <input
 				type="hidden" name="recv_id" value="${recv_user.id }">
 			<table>
@@ -58,12 +58,10 @@ th, td {
 		</form>
 		<div style="margin-top: 20px;">
 			<p align="right">
-				<button type="reset" onclick="closeMsg()"
-					class="btn my-1 btn-inline"
-					style="background-color: #AB6C82; color: white;">초기화</button>
 				<button type="submit" onclick="sendMsg2()"
-					class="btn my-1 btn-inline"
-					style="background-color: #685D79; color: white;">보내기</button>
+					class="btn my-1 btn-inline" style="background-color: #685D79; color: white;">보내기</button>
+				<button type="reset" onclick="closeMsg()"
+					class="btn my-1 btn-inline" style="border: 1px solid #4d4d4d; color: black;">초기화</button>
 			</p>
 		</div>
 	</div>
@@ -100,7 +98,7 @@ th, td {
 				success : function(result) {
 					if (result == 'success') {
 						alert("쪽지를 보냈습니다.");
-						location.href="/TMS/ask";
+						window.close();
 					} else {
 						alert("쪽지를 보내는데 실패했습니다.")
 					}

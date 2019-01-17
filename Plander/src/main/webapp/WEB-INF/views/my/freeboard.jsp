@@ -74,7 +74,7 @@ a {
 			<c:otherwise>
 				<c:forEach var="board" items="${list }">
 					<tr>
-						<td><a href="/TMS/boardDetail?idx=${board.b_idx }">${board.b_title }</a></td>
+						<td><a href="/boardDetail?idx=${board.b_idx }">${board.b_title }</a></td>
 						<td>${board.hit }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${board.b_regdate }" /></td>
@@ -88,10 +88,10 @@ a {
 						<c:if test="${page.chkStartPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_recruit('/TMS/my/board?nowPage=1')">〈</a></li>
+								onclick="fetch_recruit('/my/board?nowPage=1')">〈</a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_recruit('/TMS/my/board?nowPage=${page.startPage-1 }')"><span
+								onclick="fetch_recruit('/my/board?nowPage=${page.startPage-1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
@@ -100,23 +100,23 @@ a {
 							<c:if test="${p == page.nowPage }">
 								<li class="page_edge now"><a class="p-n now"
 									href="javascript:click()"
-									onclick="fetch_recruit('/TMS/my/board?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_recruit('/my/board?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li class="page_edge"><a class="p-n"
 									href="javascript:click()"
-									onclick="fetch_recruit('/TMS/my/board?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_recruit('/my/board?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_recruit('/TMS/my/board?nowPage=${page.endPage+1 }')"><span
+								onclick="fetch_recruit('/my/board?nowPage=${page.endPage+1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_recruit('/TMS/my/board?nowPage=${page.lastPage }')">〉</a></li>
+								onclick="fetch_recruit('/my/board?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>

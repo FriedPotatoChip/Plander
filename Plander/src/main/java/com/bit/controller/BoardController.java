@@ -35,7 +35,7 @@ public class BoardController {
 	private BoardService service;
 	
 	
-	@GetMapping("/TMS/board")
+	@GetMapping("/board")
 	public String freeBoard(Model model, PagingVO page, @RequestParam("ct_idx")int ct_idx) {
 		
 		Map<String, Integer> map = new HashMap<>();
@@ -51,7 +51,7 @@ public class BoardController {
 		return "board/boardList";
 	}
 	
-	@GetMapping("/TMS/boardWrite")
+	@GetMapping("/boardWrite")
 	public String recruitWrite(Model model, @RequestParam("ct_idx")int ct_idx, HttpSession session) {
 		model.addAttribute("ct_idx", ct_idx);
 		
@@ -65,14 +65,14 @@ public class BoardController {
 		}
 	}
 	
-	@PostMapping("/TMS/boardWrite")
+	@PostMapping("/boardWrite")
 	public String recruitWrite(BoardVO vo) {
 		service.register(vo);
-		return "redirect: /TMS/boardDetail?idx="+vo.getB_idx();
+		return "redirect: /boardDetail?idx="+vo.getB_idx();
 		
 	}
 	
-	@GetMapping("/TMS/boardDetail")
+	@GetMapping("/boardDetail")
 	public String detailOne(@RequestParam("idx")int b_idx, Model model, PagingVO page) {
 		
 		service.updateHit(b_idx);
@@ -120,7 +120,7 @@ public class BoardController {
 	
 	
 	/* 검색 */
-	@GetMapping("/TMS/searchList")
+	@GetMapping("/searchList")
 	public String searchList(@RequestParam("keyword")String keyword, @RequestParam("target")String target, BoardVO vo, PagingVO page, Model model) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
@@ -145,19 +145,19 @@ public class BoardController {
 	@GetMapping("/deleteBoard")
 	public String deleteRecruit(@RequestParam("b_idx") int b_idx, @RequestParam("ct_idx")int ct_idx) {
 		service.deleteRec(b_idx);
-		return "redirect: /TMS/board?ct_idx="+ ct_idx;
+		return "redirect: /board?ct_idx="+ ct_idx;
 	}
 	
-	@GetMapping("/TMS/modifyBoard")
+	@GetMapping("/modifyBoard")
 	public String modifyRecruit(@RequestParam("b_idx") int b_idx, Model model) {
 		model.addAttribute("board", service.detailOne(b_idx));
 		return "board/boardModify";
 	}
 	
-	@PostMapping("/TMS/modifyBoard")
+	@PostMapping("/modifyBoard")
 	public String modifyRecruit(BoardVO vo) {
 		service.modifyRec(vo);
-		return "redirect: /TMS/boardDetail?idx="+vo.getB_idx();
+		return "redirect: /boardDetail?idx="+vo.getB_idx();
 	}
 	/* 수정 삭제 끝 */
 	
@@ -245,23 +245,6 @@ public class BoardController {
 		}
 	}	
 	/* 댓글 관련 끝 */
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

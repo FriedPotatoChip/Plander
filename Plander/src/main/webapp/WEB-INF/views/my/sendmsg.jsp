@@ -73,7 +73,7 @@ a {
 				<c:forEach var="msg" items="${list }">
 					<tr>
 						<td><a href="#"
-							onclick="window.open('/TMS/recvMsg?rm_idx=${msg.sm_idx }', '받은 쪽지', 'width=500, height=500'); return false;">${msg.title }</a>
+							onclick="window.open('/recvMsg?rm_idx=${msg.sm_idx }', '받은 쪽지', 'width=500, height=600'); return false;">${msg.title }</a>
 						</td>
 						<td>${msg.recv_id }</td>
 						<td>${msg.content }</td>
@@ -89,10 +89,10 @@ a {
 						<c:if test="${page.chkStartPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/my/sendMsg?nowPage=1')"><button>&lt;&lt;</button></a></li>
+								onclick="fetch_book('/my/sendMsg?nowPage=1')"><button>&lt;&lt;</button></a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/my/sendMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+								onclick="fetch_book('/my/sendMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
 						</c:if>
 
 						<c:forEach var="p" begin="${page.startPage }"
@@ -100,23 +100,23 @@ a {
 							<c:if test="${p == page.nowPage }">
 								<li class="page_edge now"><a class="p-n now"
 									href="javascript:click()"
-									onclick="fetch_book('/TMS/my/sendMsg?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/my/sendMsg?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li class="page_edge"><a class="p-n"
 									href="javascript:click()"
-									onclick="fetch_book('/TMS/my/sendMsg?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/my/sendMsg?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/my/sendMsg?nowPage=${page.endPage+1 }')"><span
+								onclick="fetch_book('/my/sendMsg?nowPage=${page.endPage+1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/my/sendMsg?nowPage=${page.lastPage }')">〉</a></li>
+								onclick="fetch_book('/my/sendMsg?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>

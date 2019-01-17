@@ -93,7 +93,7 @@
 		style="width: 75%; margin: auto; background-color: #e9ecef; padding: 20px;
 		border-radius: 15px;">
 		<div> <!-- 글쓰기 폼 -->
-			<form id="articleForm" role="form" action="/TMS/modifyRec" method="post">
+			<form id="articleForm" role="form" action="/modifyRec" method="post">
 				<br style="clear: both">
 				<table style="margin: auto;">
 					<tr>

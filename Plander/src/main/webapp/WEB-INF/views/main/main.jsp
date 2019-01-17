@@ -288,15 +288,14 @@ body {
 			<div class="col py-3">
 				<h5 class="normal mb-3" style="text-align: center;">같이 공부할 사람들을
 					모집하거나 참여하고 싶으신가요?</h5>
-				<a href="/TMS/recruit"><button type="button"
+				<a href="/recruit"><button type="button"
 						class="btn centered"
 						style="background-color: #475C7A; color: white;">모집게시판</button></a>
 			</div>
 			<div class="col py-3">
 				<h5 class="normal mb-3" style="text-align: center;">그룹 스터디룸이나
 					개인이 이용할 스터디 좌석을 예약하고 싶으신가요?</h5>
-				<a href="/TMS/book"><button type="button"
-						class="btn centered"
+				<a href="/book"><button type="button" class="btn centered"
 						style="background-color: #475C7A; color: white;">예약하러가기</button></a>
 			</div>
 		</div>
@@ -383,7 +382,6 @@ body {
 			<hr>
 		</div>
 	</div>
-
 	<!--- Cards -->
 	<div class="container-fluid padding" id="cards">
 		<div class="row padding">
@@ -396,7 +394,8 @@ body {
 							<h4 class="card-title text-center">${ran.id }</h4>
 							<hr>
 							<p class="card-text text-center">${ran.rc_title }</p>
-							<a href="/TMS/recruitDetail?idx=${ran.rc_idx }" class="btn btn-lg btn-block"
+							<a href="/recruitDetail?idx=${ran.rc_idx }"
+								class="btn btn-lg btn-block"
 								style="background-color: #D8737F; color: white;">보러가기</a>
 						</div>
 					</div>
@@ -604,6 +603,15 @@ body {
 				});
 			};
 		}
+	</script>
+	<script>
+
+	
+		$(document).ready(function() {
+			if(${chk} != null){
+				alert('회원탈퇴가 정상적으로 완료되었습니다. 그동안 이용해주셔서 감사합니다.');	
+			}
+		});
 	</script>
 
 	<script

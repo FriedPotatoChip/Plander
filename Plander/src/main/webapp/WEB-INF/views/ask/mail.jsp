@@ -5,7 +5,7 @@
 <body>
 	<br>
 	<br>
-	<div class="container" style="border: 1px solid lightgray; width: 60%;">
+	<div class="container" style="border: 1px solid lightgray; width: 90%;">
 		<br> <br>
 		<h4 class="text-center bold" style="color: #475C7A; text-decoration: underline;">문의하기</h4>
 		<br>
@@ -18,8 +18,8 @@
 			</ul>
 		</div>
 		<br>
-		<form action="/TMS/ask/sendMail" method="post"
-			enctype="multipart/form-data" style="width: 80%; margin: 0 auto;">
+		<form action="/ask/sendMail" method="post"
+			enctype="multipart/form-data" style="margin: 0 auto;">
 			<div class="form-group">
 				<label for="name">이름</label> <input type="text" class="form-control"
 					id="name" name="name" required>
@@ -65,15 +65,16 @@
 							수집 및 이용에 동의합니다.</label>
 					</div>
 					<div style="float: right;">
-						<button type="reset"
-							class="btn my-1 btn-inline" style="background-color: #AB6C82; color: white;">초기화</button>
 						<button type="submit" class="btn my-1 btn-inline"
-						style="background-color: #685D79; color: white;">문의하기</button>
+						style="background-color: #AB6C82; color: white;">문의하기</button>
+						<button type="reset"
+							class="btn my-1 btn-inline" style="border: 1px solid #4d4d4d; color: black;">초기화</button>
 					</div>
 				</div>
 				<br> <br> <br>
 			</div>
 		</form>
 	</div>
+	<br><br>
 </body>
 </html>

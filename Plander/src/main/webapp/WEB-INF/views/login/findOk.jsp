@@ -41,7 +41,7 @@ body {
 				</p>
 				<div class="center margintop">
 					<button type="button" class="btn btn-outline-dark btn-lg mr-2"
-						onclick="location.href='/TMS'">메인으로가기</button>
+						onclick="location.href='/'">메인으로가기</button>
 					<button type="button" class="btn btn-lg"
 						style="background-color: #008374; color: white;"
 						data-toggle="modal" href="#login">로그인하기</button>
@@ -57,7 +57,7 @@ body {
 				<p class="center">로그인 후 반드시 비밀번호를 변경해주세요.</p>
 				<div class="center margintop">
 					<button type="button" class="btn btn-outline-dark btn-lg mr-2"
-						onclick="location.href='/TMS'">메인으로가기</button>
+						onclick="location.href='/'">메인으로가기</button>
 				</div>
 			</div>
 		</c:if>

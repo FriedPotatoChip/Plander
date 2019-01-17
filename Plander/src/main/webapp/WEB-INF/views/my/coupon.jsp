@@ -97,10 +97,10 @@ a {
 						<c:if test="${page.chkStartPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/my/coupon?nowPage=1')">〈</a></li>
+								onclick="fetch_book('/my/coupon?nowPage=1')">〈</a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.startPage-1 }')"><span
+								onclick="fetch_book('/my/coupon?nowPage=${page.startPage-1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
@@ -109,23 +109,23 @@ a {
 							<c:if test="${p == page.nowPage }">
 								<li class="page_edge now"><a class="p-n now"
 									href="javascript:click()"
-									onclick="fetch_book('/TMS/my/coupon?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/my/coupon?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li class="page_edge"><a class="p-n"
 									href="javascript:click()"
-									onclick="fetch_book('/TMS/my/coupon?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/my/coupon?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.endPage+1 }')"><span
+								onclick="fetch_book('/my/coupon?nowPage=${page.endPage+1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/my/coupon?nowPage=${page.lastPage }')">〉</a></li>
+								onclick="fetch_book('/my/coupon?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>

@@ -78,7 +78,7 @@ a {
 					<tr>
 						<td>${board_comment.b_idx }</td>
 						<td><a
-							href="/TMS/boardDetail?idx=${board_comment.b_idx }">${board_comment.b_title }</a></td>
+							href="/boardDetail?idx=${board_comment.b_idx }">${board_comment.b_title }</a></td>
 						<td>${board_comment.c_content }</td>
 						<td class="idDiv" onclick="showBox(event)">${board_comment.id }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -93,10 +93,10 @@ a {
 						<c:if test="${page.chkStartPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_recruit('/TMS/my/board_comment?nowPage=1')">〈</a></li>
+								onclick="fetch_recruit('/my/board_comment?nowPage=1')">〈</a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_recruit('/TMS/my/board_comment?nowPage=${page.startPage-1 }')"><span
+								onclick="fetch_recruit('/my/board_comment?nowPage=${page.startPage-1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
@@ -105,23 +105,23 @@ a {
 							<c:if test="${p == page.nowPage }">
 								<li class="page_edge now"><a class="p-n now"
 									href="javascript:click()"
-									onclick="fetch_recruit('/TMS/my/board_comment?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_recruit('/my/board_comment?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li class="page_edge"><a class="p-n"
 									href="javascript:click()"
-									onclick="fetch_recruit('/TMS/my/board_comment?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_recruit('/my/board_comment?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_recruit('/TMS/my/board_comment?nowPage=${page.endPage+1 }')"><span
+								onclick="fetch_recruit('/my/board_comment?nowPage=${page.endPage+1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_recruit('/TMS/my/board_comment?nowPage=${page.lastPage }')">〉</a></li>
+								onclick="fetch_recruit('/my/board_comment?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>

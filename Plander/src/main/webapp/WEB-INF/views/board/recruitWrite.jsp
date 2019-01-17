@@ -93,7 +93,7 @@
 		style="width: 75%; margin: auto; background-color: #e9ecef; padding: 20px;
 		border-radius: 15px;">
 		<div> <!-- 글쓰기 폼 -->
-			<form id="articleForm" role="form" action="/TMS/recruitWrite" method="post">
+			<form id="articleForm" role="form" action="/recruitWrite" method="post">
 			<br style="clear: both">
 				<table style="margin: auto;">
 					<tr>
@@ -188,21 +188,18 @@
       $.ajax({
         data: form_data,
         type: "POST",
-        url: '/imageUpload',
+        url: '/uploadAjaxS3',
         cache: false,
         contentType: false,
         enctype: 'multipart/form-data',
         processData: false,
         success: function(url) {
-        	setTimeout(function(){
-	        	url = '/resources/upload'+url;
-	        	console.log("url: "+ url);
-	          $(el).summernote('editor.insertImage', url);
-	          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        	}, 3000)
+			url = 'https://s3.ap-northeast-2.amazonaws.com/turtlesmiraclebucket/resources/upload'+url;
+			console.log("url: "+ url);
+			$(el).summernote('editor.insertImage', url);
+			$('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
         }
       });
-      $(".popover").attr("style", "display: none;"); 
     }
 </script>
 
