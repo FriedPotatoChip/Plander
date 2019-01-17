@@ -89,7 +89,7 @@
 		select distinct b.id, b.start_time, b.end_time, s.s_col, b.bk_idx
 		from
 		seats_view s, booking b
-		where s.s_col = b.s_idx
+		where s.s_idx = b.s_idx
 		and br_idx = #{br_idx}
 		and roomnum = #{roomnum}
 		<!-- and s_col = #{s_col} -->

@@ -485,55 +485,6 @@ body {
 		</div>
 	</footer>
 	<script>
-		/* function initialize() {
-
-			var LatLng = new google.maps.LatLng(37.5582, 126.9376);
-			
-			var mapProp = {
-
-				center : LatLng, // 위치
-
-				zoom : 17, // 어느정도까지 세세하게 볼 것인지.
-
-				mapTypeControl : false,
-
-				mapTypeId : google.maps.MapTypeId.ROADMAP
-
-			};
-
-			var map = new google.maps.Map(document.getElementById("map"),
-					mapProp); */
-
-		/* new AutocompleteDirectionsHandler(map); */
-
-		/* var contentString = '<h5>TMS 스터디룸</h5><br><p>공부하러오세요~</p>';
-
-		var infowindow = new google.maps.InfoWindow({
-			content : contentString
-		});
-
-		var myIcon = new google.maps.MarkerImage(
-				"/resources/images/student.png", null, null, null,
-				new google.maps.Size(40, 40));
-
-		var marker = new google.maps.Marker({
-
-			position : LatLng,
-
-			map : map,
-
-			icon : myIcon,
-
-			draggable : true,
-			animation : google.maps.Animation.DROP
-
-		});
-
-		marker.addListener('click', function() {
-			infowindow.open(map, marker);
-		});
-
-		} */
 		var popup, Popup;
 		function initMap() {
 			definePopupClass();
