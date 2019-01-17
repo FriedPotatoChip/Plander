@@ -69,8 +69,8 @@ a {
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="#">운영안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
+				<li class="nav-item"><a class="nav-link" href="/operation">운영안내</a></li>
+				<li class="nav-item"><a class="nav-link" href="/guide">이용안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="/book">예약하기</a></li>
 				<li class="nav-item"><a class="nav-link" href="/recruit">모집게시판</a></li>
 				<li class="nav-item">
