@@ -142,21 +142,21 @@ h3 {
 		<br> <br>
 		<p class="bold" style="color: #475C7A; font-size: 18px;">건물 내부 사진</p>
 		<hr>
-		<p class="bold" style="color: #FCBB6D; font-size: 17px;">안내데스크</p>
+		<p class="bold" style="color: #D8737F; font-size: 17px;">안내데스크</p>
 		<img src="/resources/images/m0.jpg"> <br> <br>
-		<p class="bold" style="color: #FCBB6D; font-size: 17px;">개인실 좌석</p>
+		<p class="bold" style="color: #D8737F; font-size: 17px;">개인실 좌석</p>
 		<p class="bold">- 오픈형</p>
 		<img src="/resources/images/m1.jpg"> <br> <br>
 		<p class="bold">- 칸막이형</p>
 		<img src="/resources/images/m3.jpg"> <br> <br>
-		<p class="bold" style="color: #FCBB6D; font-size: 17px;">스터디룸</p>
+		<p class="bold" style="color: #D8737F; font-size: 17px;">스터디룸</p>
 		<p class="bold">- 4인실</p>
 		<img src="/resources/images/4seat.jpg"> <br> <br>
 		<p class="bold">- 8인실</p>
-		<img src="/resources/images/8seat.jpg"> <br> <br>
-		<p class="bold">- 12인실</p>
 		<img src="/resources/images/12seat.jpg"> <br> <br>
-		<p class="bold" style="color: #FCBB6D; font-size: 17px;">사물함</p>
+		<p class="bold">- 12인실</p>
+		<img src="/resources/images/8seat.jpg"> <br> <br>
+		<p class="bold" style="color: #D8737F; font-size: 17px;">사물함</p>
 		<img src="/resources/images/cabinet.jpg">
 	</div>
 	<!-- 본문 끝 -->
