@@ -103,11 +103,11 @@ h3 {
 	<script>
 	$(document).ready(function() {
 			
+		$('.po_category').removeClass('on');
+		$("div[value='${br_idx}']").addClass('on');
 			
 		$('.po_category').click(function() {
 			
-			$('.po_category').removeClass('on');
-			$("div[value='${br_idx}']").addClass('on');
 			//색변환
 /* 			$('.po_category').removeClass('on');
 			$(this).addClass('on'); */

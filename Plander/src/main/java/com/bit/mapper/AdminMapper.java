@@ -99,4 +99,7 @@ public interface AdminMapper {
 	
 	//해당월 요일별 예약횟수(일요일)
 	public int Sunday();
+	
+	//s_col -> s_idx
+	public int s_idx(Map map);
 }
