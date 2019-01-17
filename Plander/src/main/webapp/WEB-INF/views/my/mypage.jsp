@@ -12,27 +12,31 @@
 	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
 
 <script>
-//비밀번호 확인
-function pwchk() {
-	var pw = $('#password').val();
-	var pwchk = ${user.password};
+	//비밀번호 확인
+	function pwchk() {
+		var pw = $('#password').val();
+		var pwchk = $
+		{
+			user.password
+		}
+		;
 
-	if (pw != pwchk || pwchk == "") {
-		//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
-		$('#pwchkMsg').html(
-				"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
-		$('#update').prop("disabled", true);
-	} else {
-		$('#pwchkMsg').html(
-				"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
-		$('#update').prop("disabled", false);
+		if (pw != pwchk || pwchk == "") {
+			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
+			$('#pwchkMsg').html(
+					"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+			$('#update').prop("disabled", true);
+		} else {
+			$('#pwchkMsg').html(
+					"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+			$('#update').prop("disabled", false);
+		}
 	}
-}
 
-// 클릭 시 스크롤이 자동으로 위로 올라가는 현상
-function click() {
-    return;
-}
+	// 클릭 시 스크롤이 자동으로 위로 올라가는 현상
+	function click() {
+		return;
+	}
 </script>
 
 <style>
@@ -484,7 +488,11 @@ h3 {
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
-			var pwchk = ${user.password};
+			var pwchk = $
+			{
+				user.password
+			}
+			;
 
 			if (pw != pwchk || pwchk == "") {
 				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -574,7 +582,7 @@ h3 {
 									target = e.target.result;
 								}
 							}
-						}
+						};
 						reader.readAsDataURL(f);
 
 					});
@@ -607,24 +615,25 @@ h3 {
 		}
 	</script>
 	<!-- 프로필 이미지 삭제 -->
-	<script> 				
-		function imgDel(){
-			if ('${usersVO.user_profileImagePath}' == ""){
+	<script>
+		function imgDel() {
+			if ('${usersVO.user_profileImagePath}' == "") {
 				alert("프로필 이미지를 먼저 등록해주세요.");
 				return false;
 			} else {
 				$.ajax({
-					url: '/imgDel',
-					type: 'post',
-					dataType: 'text',
-					success: function(result) {
+					url : '/imgDel',
+					type : 'post',
+					dataType : 'text',
+					success : function(result) {
 						if (result == 'success') {
 							alert("프로필 이미지 삭제에 성공했습니다.");
 							window.location.reload();
 						} else {
 							alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
 						}
-					}, error: function(error) {
+					},
+					error : function(error) {
 						alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
 					}
 				})
@@ -633,24 +642,27 @@ h3 {
 	</script>
 	<!-- 쪽지 삭제 -->
 	<script>
-		function msgDel(rm_idx, nowPage){
+		function msgDel(rm_idx, nowPage) {
 			$.ajax({
-				url: '/msgDel',
-				type: 'post',
-				data: {'rm_idx':rm_idx},
-				dataType: 'text',
-				success: function(result){
-					if (result == 'success'){
+				url : '/msgDel',
+				type : 'post',
+				data : {
+					'rm_idx' : rm_idx
+				},
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
 						alert("쪽지를 삭제했습니다.");
-					}else {
+					} else {
 						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
 					}
-				}, error: function(error){
+				},
+				error : function(error) {
 					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
 				}
 			})
-			
-			fetch_book('/my/recvMsg?nowPage='+ nowPage);
+
+			fetch_book('/my/recvMsg?nowPage=' + nowPage);
 		}
 	</script>
 	<div class="popupLayer">
@@ -662,134 +674,170 @@ h3 {
 			href="#">회원 정보 보기</a><br>
 	</div>
 	<script>
-function closeLayer( obj ) {
-	$(".popupLayer").hide();
-}
-function showBox(e, tag){
-		console.log("idDiv 클릭됨");
-		var sWidth = window.innerWidth;
-		var sHeight = window.innerHeight;
-
-		var oWidth = $('.popupLayer').width();
-		var oHeight = $('.popupLayer').height();
-
-		// 레이어가 나타날 위치를 셋팅한다.
-		var divLeft = e.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
-		var divTop = e.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
-		console.log("X: "+ e.clientX);
-		console.log("Y: "+ e.clientY);
-
-		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
-		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
-		if( divTop + oHeight > sHeight ) divTop -= oHeight;
-
-		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
-		if( divLeft < 0 ) divLeft = 0;
-		if( divTop < 0 ) divTop = 0;
-
-		$('.popupLayer').css({
-			"top": divTop,
-			"left": divLeft,
-			"position": "absolute"
-		}).show();
-		console.log(this);
-		var userId = $(tag).attr("userId");
-		console.log($(tag).attr("userId"));
-		$("#sendMsg").click(function(){
+		function closeLayer(obj) {
 			$(".popupLayer").hide();
-			if ('${usersVO.id}' == ''){
-				alert("로그인 후 이용 가능합니다.");
-				return false;
-			} 
-			window.open("/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
-		});
-		$("#userProfile").click(function(){
-			$(".popupLayer").hide();
-			if ('${usersVO.id}' == ''){
-				alert("로그인 후 이용 가능합니다.");
-				return false;
-			} 
-			window.open("/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
-		});
-}
-
-function dropOut(){
-	
-	$.ajax({
-		url: "/my/dropout",
-		type: "post",
-		dataType: "text",
-		success: function(result){
-			if (result == 'success'){
-				alert('회원탈퇴가 정상적으로 완료되었습니다. 그동안 이용해주셔서 감사합니다.');
-				location.href="/logout";
-			} else if(result == 'fail'){
-				alert('회원탈퇴가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
-			} else {
-				alert('정상적인 접근이 아닙니다.');
-			}
-			
-		}, error: function(error) {
-			
 		}
-	})
-}
+		function showBox(e, tag) {
+			console.log("idDiv 클릭됨");
+			var sWidth = window.innerWidth;
+			var sHeight = window.innerHeight;
 
-function delSeat(idx) {
-	var chk = confirm('환불 금액에 관련된 사항은 미리 안내 데스크를 통해 안내 받은 후 취소하시기 바랍니다. \n충분히 공지받으셨다면 확인 버튼을 눌러 마저 취소 작업을 진행해 주세요.');
-	
-	if(chk == true){
-		
-		$.ajax({
-			url : "/my/delSeat",
-			type : "post",
-			data: {'bk_idx': idx},
-			dataType : "text",
-			success : function(result) {
-				if (result == 'success') {
-					alert('해당 좌석 예약이 취소되었습니다.');
-					location.href = "/my";
-				} else if (result == 'fail') {
-					alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
-				} else {
-					alert('관리자에게 문의해 주세요.');
+			var oWidth = $('.popupLayer').width();
+			var oHeight = $('.popupLayer').height();
+
+			// 레이어가 나타날 위치를 셋팅한다.
+			var divLeft = e.clientX
+					+ 10
+					+ (document.documentElement.scrollLeft ? document.documentElement.scrollLeft
+							: document.body.scrollLeft);
+			var divTop = e.clientY
+					+ 5
+					+ (document.documentElement.scrollTop ? document.documentElement.scrollTop
+							: document.body.scrollTop);
+			console.log("X: " + e.clientX);
+			console.log("Y: " + e.clientY);
+
+			// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+			if (divLeft + oWidth > sWidth)
+				divLeft -= oWidth;
+			if (divTop + oHeight > sHeight)
+				divTop -= oHeight;
+
+			// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+			if (divLeft < 0)
+				divLeft = 0;
+			if (divTop < 0)
+				divTop = 0;
+
+			$('.popupLayer').css({
+				"top" : divTop,
+				"left" : divLeft,
+				"position" : "absolute"
+			}).show();
+			console.log(this);
+			var userId = $(tag).attr("userId");
+			console.log($(tag).attr("userId"));
+			$("#sendMsg").click(
+					function() {
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == '') {
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						}
+						window.open("/sendMsg?recv_id=" + userId, "쪽지 보내기",
+								"width=500, height=600");
+					});
+			$("#userProfile").click(
+					function() {
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == '') {
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						}
+						window.open("/profileSummary?id=" + userId, "회원 정보",
+								"width=500, height=500");
+					});
+		}
+
+		function dropOut() {
+
+			$.ajax({
+				url : "/my/dropout",
+				type : "post",
+				dataType : "text",
+				success : function(result) {
+					if (result == 'success') {
+						alert('회원탈퇴가 정상적으로 완료되었습니다. 그동안 이용해주셔서 감사합니다.');
+						location.href = "/logout";
+					} else if (result == 'fail') {
+						alert('회원탈퇴가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+					} else {
+						alert('정상적인 접근이 아닙니다.');
+					}
+
+				},
+				error : function(error) {
+
 				}
-	
-			},
-			error : function(error) {
-	
+			})
+		}
+
+		function delSeat(idx, start_time) {
+			
+
+			var st = new Date(start_time);
+			console.log('start_time: ' + st);
+
+			var hour = st.getHours();
+			console.log('hour: ' + hour);
+
+			if (hour < 18) {
+				var chk = confirm('환불 금액에 관련된 사항은 미리 안내 데스크를 통해 안내 받은 후 취소하시기 바랍니다. \n충분히 공지받으셨다면 확인 버튼을 눌러 마저 취소 작업을 진행해 주세요.');
+				
+				if (chk == true) {
+
+					$
+							.ajax({
+								url : "/my/delSeat",
+								type : "post",
+								data : {
+									'bk_idx' : idx
+								},
+								dataType : "text",
+								success : function(result) {
+									if (result == 'success') {
+										alert('해당 좌석 예약이 취소되었습니다.');
+										location.href = "/my";
+									} else if (result == 'fail') {
+										alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+									} else {
+										alert('관리자에게 문의해 주세요.');
+									}
+
+								},
+								error : function(error) {
+
+								}
+							})
+				} else {
+					alert('오후 6시 이전이라 처리는 가능하나, 처리 중 오류가 발생하였습니다.');
+					location.href = "/my";
+				}
+			} else {
+					alert('오후 6시 이후부터는 관리자에게 직접 문의해 주시기 바랍니다.');
+					location.href = "/my";
 			}
-		})
-	}
-}
- 
+
+		}
 
 		function delCabinet(idx) {
 			var chk = confirm('사물함은 환불 적용이 되지 않습니다. \n그래도 취소하시려면 확인 버튼을 눌러주세요.');
-			
-			if(chk == true){
-						$.ajax({
-							url : "/my/delCabinet",
-							type : "post",
-							data: {'ckb_idx': idx},
-							dataType : "text",
-							success : function(result) {
-								if (result == 'success') {
-									alert('해당 사물함 예약이 취소되었습니다.');
-									location.href = "/my";
-								} else if (result == 'fail') {
-									alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
-								} else {
-									alert('관리자에게 문의해 주세요.');
-								}
-				
-							},
-							error : function(error) {
-				
-							}
-						})
+
+			if (chk == true) {
+				$.ajax({
+					url : "/my/delCabinet",
+					type : "post",
+					data : {
+						'ckb_idx' : idx
+					},
+					dataType : "text",
+					success : function(result) {
+						if (result == 'success') {
+							alert('해당 사물함 예약이 취소되었습니다.');
+							location.href = "/my";
+						} else if (result == 'fail') {
+							alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+						} else {
+							alert('관리자에게 문의해 주세요.');
+						}
+
+					},
+					error : function(error) {
+
 					}
+				})
 			}
+		}
 	</script>
 </body>
 </html>
