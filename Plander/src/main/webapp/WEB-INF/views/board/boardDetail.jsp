@@ -130,7 +130,11 @@ $(document).ready(function(){
 							html += "<b>";
 						}
 						html += "<a style='font-size: 0.9rem;' href='/boardDetail?idx="+value.b_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
-						html += value.b_title;
+						if("${board.b_idx}" == value.b_idx){
+							html += '<b style="font-size: 1.1em;">'+ value.b_title + '</b>';
+						} else {
+							html += value.b_title;
+						}
 						if (value.cnt != 0){
 							html += "<span style='color: #D8737F;'>["+value.cnt+"]</span>";
 						} 

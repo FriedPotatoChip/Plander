@@ -187,7 +187,11 @@ function boardList(nowPage){
 							html += "<b>";
 						}
 					html += "<a style='font-size: 0.9rem;' href='/recruitDetail?idx="+value.rc_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
-					html += value.rc_title;
+					if("${rc_board.rc_idx}" == value.rc_idx){
+						html += '<b style="font-size: 1.1em;">'+ value.rc_title + '</b>';
+					} else {
+						html += value.rc_title;
+					}
 						if (value.cnt != 0){
 							html += "<span style='color: #D8737F;'>["+value.cnt+"]</span>";
 						} 
@@ -296,10 +300,12 @@ function boardList(nowPage){
 			
 				<!-- 신청 버튼 시작 -->
 				<c:if test="${rc_board.onOff == 'ON' }">
-					<button class="appBtn btnOpt" id="hideApply" style="display: none;"
-						onclick="apply()">신청하기</button>
-					<button class="appBtn btnOpt" id="hideCancel" style="display: none;"
-						onclick="applyCancel()">신청취소</button>
+					<c:if test="${not empty usersVO }">
+						<button class="appBtn btnOpt" id="hideApply" style="display: none;"
+							onclick="apply()">신청하기</button>
+						<button class="appBtn btnOpt" id="hideCancel" style="display: none;"
+							onclick="applyCancel()">신청취소</button>
+					</c:if>
 				</c:if>
 					
 				<!-- 신청 버튼 끝 -->
