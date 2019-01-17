@@ -710,9 +710,9 @@ function boardList(nowPage){
 		var id = 'comm'+ c_idx; 
 		clickCnt++;
 		$(".replyComm").css("display", "none");
-		var html = "<div class='replyComm'>";
+		var html = "<div class='replyComm' style='background-color: #f2f2f2; padding: 15px;'>";
 		html += "<form name='updateCommAjax"+clickCnt+"'>";
-		html += "<span style='font-family: 굴림;'>&rdsh;</span><br>";
+		//html += "<span style='font-family: 굴림;'>&rdsh;</span><br>";
 		html += "<textarea rows='3' name='c_content' style='width:100%; overflow:visible; text-overflow:ellipsis;'>"+c_content+"</textarea>";
 		html += "<input type='hidden' value='"+c_idx+"' name='c_idx'>";
 		html += "<input type='button' class='btnOpt' onclick='modifyCommAjax()' value='수정'>&nbsp;";
