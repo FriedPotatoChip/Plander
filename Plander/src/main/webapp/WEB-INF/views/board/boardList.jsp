@@ -331,6 +331,7 @@
 			location.href="/boardWrite?ct_idx=${ct_idx}"; /* */
 		}
 	}
+	
 	<c:if test="${not empty chkBooking}">
 		alert("거기스 서비스 이용 후에 후기를 작성할 수 있습니다.");
 	</c:if>

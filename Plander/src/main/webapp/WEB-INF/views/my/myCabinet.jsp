@@ -6,9 +6,10 @@
 
 <style>
 tr, td {
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid #4d4d4d;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	text-align: center;
 }
 
 tr:last-child td {
@@ -67,7 +68,7 @@ a {
 			<c:when test="${empty list}">
 				<tr>
 					<td colspan="5">
-						<h2>현재 예약된 사물함이 없습니다.</h2>
+						<h5>현재 예약된 사물함이 없습니다.</h5>
 					</td>
 				</tr>
 			</c:when>
@@ -88,46 +89,51 @@ a {
 								onclick="location.href='/my/delCabinet?ckb_idx=${cabinet.ckb_idx }'">예약취소</button></td>
 					</tr>
 				</c:forEach>
-
-				<!-- 페이징 시작 -->
-				<div id="paging">
-					<ul id="pagingList"
-						class="pagination justify-content-center centered">
-						<c:if test="${page.chkStartPage }">
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/my_cabinet?nowPage=1')">〈</a></li>
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/my_cabinet?nowPage=${page.startPage-1 }')"><span
-									style="font-size: 0.5em;">…</span></a></li>
-						</c:if>
-
-						<c:forEach var="p" begin="${page.startPage }"
-							end="${page.endPage }">
-							<c:if test="${p == page.nowPage }">
-								<li class="page_edge now"><a class="p-n now"
-									href="javascript:click()"
-									onclick="fetch_book('/my/my_cabinet?nowPage=${p }')">${p }</a></li>
-							</c:if>
-							<c:if test="${p != page.nowPage }">
+				
+				<tr>
+					<td colspan="5">
+					<!-- 페이징 시작 -->
+					<div id="paging">
+						<ul id="pagingList"
+							class="pagination justify-content-center centered">
+							<c:if test="${page.chkStartPage }">
 								<li class="page_edge"><a class="p-n"
 									href="javascript:click()"
-									onclick="fetch_book('/my/my_cabinet?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/my/my_cabinet?nowPage=1')">〈</a></li>
+								<li class="page_edge"><a class="p-n"
+									href="javascript:click()"
+									onclick="fetch_book('/my/my_cabinet?nowPage=${page.startPage-1 }')"><span
+										style="font-size: 0.5em;">…</span></a></li>
 							</c:if>
-						</c:forEach>
-
-						<c:if test="${page.chkEndPage }">
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/my_cabinet?nowPage=${page.endPage+1 }')"><span
-									style="font-size: 0.5em;">…</span></a></li>
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/my_cabinet?nowPage=${page.lastPage }')">〉</a></li>
-						</c:if>
-					</ul>
-				</div>
+	
+							<c:forEach var="p" begin="${page.startPage }"
+								end="${page.endPage }">
+								<c:if test="${p == page.nowPage }">
+									<li class="page_edge now"><a class="p-n now"
+										href="javascript:click()"
+										onclick="fetch_book('/my/my_cabinet?nowPage=${p }')">${p }</a></li>
+								</c:if>
+								<c:if test="${p != page.nowPage }">
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/my_cabinet?nowPage=${p }')">${p }</a></li>
+								</c:if>
+							</c:forEach>
+	
+							<c:if test="${page.chkEndPage }">
+								<li class="page_edge"><a class="p-n"
+									href="javascript:click()"
+									onclick="fetch_book('/my/my_cabinet?nowPage=${page.endPage+1 }')"><span
+										style="font-size: 0.5em;">…</span></a></li>
+								<li class="page_edge"><a class="p-n"
+									href="javascript:click()"
+									onclick="fetch_book('/my/my_cabinet?nowPage=${page.lastPage }')">〉</a></li>
+							</c:if>
+						</ul>
+					</div>
+					
+					</td>
+				</tr> <!-- 페이징 끝 -->
 			</c:otherwise>
 
 		</c:choose>
