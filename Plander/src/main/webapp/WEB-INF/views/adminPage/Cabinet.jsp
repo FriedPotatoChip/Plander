@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 <meta charset="UTF-8">
 <title>관리자</title>
@@ -103,11 +103,11 @@ h3 {
 	<script>
 	$(document).ready(function() {
 			
+		$('.po_category').removeClass('on');
+		$("div[value='${br_idx}']").addClass('on');
 			
 		$('.po_category').click(function() {
 			
-			$('.po_category').removeClass('on');
-			$("div[value='${br_idx}']").addClass('on');
 			//색변환
 /* 			$('.po_category').removeClass('on');
 			$(this).addClass('on'); */

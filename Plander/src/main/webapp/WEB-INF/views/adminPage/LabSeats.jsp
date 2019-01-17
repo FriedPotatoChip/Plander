@@ -428,7 +428,6 @@ h3 {
 	</script>
 	<script>
 		$(document).ready(function() {
-			
 			$('.po_category').removeClass('on');
 			$("div[value='${br_idx}']").addClass('on')
 /* 				//색변환
@@ -440,7 +439,6 @@ h3 {
 				
 				var code = $(this).attr('value');
 				console.log('code : ' + code);
-				
 				location.href = '/TMS/admin/LabSeats?br_idx='+ code;
 			});
 		});
@@ -501,23 +499,6 @@ h3 {
 			var target = a;
 			
 			window.bk_idx = target;
-			/* var chid = $("input[name=nid]").val();
-			var start_time = target + '_s';
-			var end_time = target + '_e'; */
-
-			/* console.log('nid : ' + chid);
-			console.log("start_time : " + start_time);
-
-			var start_time_value = document.getElementById(start_time).innerHTML;
-
-			var end_time_value = document.getElementById(end_time).innerHTML;
-			
-			window.tar = chid;
-			window.stv = start_time_value;
-			window.etv = end_time_value;
-
-			console.log("start_time : " + start_time_value
-					+ ", end_time_value : " + end_time_value); */
 
 			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
 			$('.bd-example-modal-lg').modal();
@@ -578,31 +559,20 @@ h3 {
 			/* 이동할것인지 묻기 */
 			var r = confirm("이동하시겠습니까?");
 
-			/* 지점번호 */
+			 /* 지점번호 */
 			var br_idx = $('.po_category.on').attr('value');
 			console.log('br_idx : ' + br_idx);
 
 			var CBk_idx = bk_idx;
-			console.log('bk_idx : ' + bk_idx);
-			
-			/* 이동을 원하는 사람의 아이디 */
-			/* var chId = tar;
-			console.log('chId : ' + tar); */
+			console.log('bk_idx : ' + CBk_idx);
 
-			/* 이동을 원하는 사람의 START_TIME, END_TIME */
-			/* var chStartTime = stv;
-			console.log('start_time : ' + chStartTime); */
-
-			/* var chEndTime = etv;
-			console.log('end_time : ' + chEndTime);
- */
 			/* 옮기기를 원하는 좌석의 번호 */
 			var changeScol = i;
 			console.log('changeSeats : ' + changeScol);
 
 			try {
 				if (r == true) {
-					location.href = "/TMS/admin/update?s_idx=" + changeScol + "&bk_idx= " + CBk_idx;
+					location.href = "/TMS/admin/update?s_col=" + changeScol + "&bk_idx=" + CBk_idx + "&br_idx=" + br_idx;
 				}
 				alert("성공적으로 이동되었습니다.");
 			} catch (e) {

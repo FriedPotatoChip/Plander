@@ -146,6 +146,7 @@ public class AdminController {
 		System.out.println("bcvo : " + bcvo);
 		model.addAttribute("cabinet", service.bookingCabinet(bcvo));
 		model.addAttribute("count", service.bookingCabinet_count(bcvo));
+		model.addAttribute("br_idx", br_idx);
 		return "adminPage/Cabinet";
 	}
 
@@ -165,12 +166,19 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/update")
-	public String changeSeats(@RequestParam int bk_idx, @RequestParam int s_idx, @RequestParam(value="roomnum", defaultValue="1") int roomnum, BookingVO bvo) throws ParseException {
+	public String changeSeats(@RequestParam(value="br_idx", defaultValue="1") int br_idx, @RequestParam int s_col, @RequestParam int bk_idx,  @RequestParam(value="roomnum", defaultValue="1") int roomnum, BookingVO bvo) throws ParseException {
 		System.out.println("roomnum1 : " + roomnum);
-
+		Map<Object, Object> map1 = new HashMap<>();
+		map1.put("s_col", s_col);
+		map1.put("br_idx", br_idx);
+		
+		int sidx = service.s_idx(map1);
+		
+		System.out.println("map1 : " + sidx);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("bk_idx", bk_idx);
-		map.put("s_idx", s_idx);
+		map.put("s_idx", sidx);
 
 		service.changeSeats(map);
 		
@@ -198,6 +206,7 @@ public class AdminController {
 		System.out.println("bvo : " + bvo);
 		bvo.setBr_idx(br_idx);
 		bvo.setRoomnum(roomnum);
+		model.addAttribute("br_idx", br_idx);
 		model.addAttribute("BookingSeats", service.BookingSeats(bvo));
 		return "adminPage/LabSeats";
 	}

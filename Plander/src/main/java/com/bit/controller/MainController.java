@@ -177,12 +177,14 @@ public class MainController {
 	}
 	
 	@GetMapping("/recvMsg")
-	public String recvMsg(@RequestParam("rm_idx")int rm_idx, Model model) {
+	public String recvMsg(@RequestParam("rm_idx")int rm_idx, @RequestParam(value="type", required=false)String type, Model model) {
 		RecvMsgVO vo = new RecvMsgVO();
 		vo = comService.msgDetail(rm_idx);
 		model.addAttribute("msg", vo);
-		if (vo.getChk() == 1) {
-			comService.readMsgOne(rm_idx);
+		if (type == null) {
+			if (vo.getChk() == 1) {
+				comService.readMsgOne(rm_idx);
+			}
 		}
 		return "main/recvMsg";
 	}

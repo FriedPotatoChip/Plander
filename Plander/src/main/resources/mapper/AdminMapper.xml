@@ -333,6 +333,14 @@
 		    where to_char(sysdate, 'YYYYMMDD') between to_char(start_time, 'YYYYMMDD') and to_char(end_time, 'YYYYMMDD')
 		    and (to_char(start_time, 'd') = 1 or to_char(end_time, 'd') = 1)
 	</select>
+	
+	<!-- s_col -> s_idx -->
+	<select id="s_idx" resultType="int" parameterType="map">
+		select s_idx
+		    from seats_view 
+		    where s_col = #{s_col}
+		    and br_idx = #{br_idx}
+	</select>
 </mapper>
 
 

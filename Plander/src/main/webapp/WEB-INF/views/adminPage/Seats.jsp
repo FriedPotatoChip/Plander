@@ -666,7 +666,6 @@ h3 {
 	</script>
 	<script>
 		$(document).ready(function() {
-			
 			$('.po_category').removeClass('on');
 			$("div[value='${br_idx}']").addClass('on')
 /* 				//색변환
@@ -687,6 +686,7 @@ h3 {
 	<script>
 		function check(a) {
 			console.log('안농');
+			/* i의 값이 1 ~ 60 */
 			var i = a;
 			var html = "";
 			console.log(i);
@@ -739,23 +739,6 @@ h3 {
 			var target = a;
 			
 			window.bk_idx = target;
-			/* var chid = $("input[name=nid]").val();
-			var start_time = target + '_s';
-			var end_time = target + '_e'; */
-
-			/* console.log('nid : ' + chid);
-			console.log("start_time : " + start_time);
-
-			var start_time_value = document.getElementById(start_time).innerHTML;
-
-			var end_time_value = document.getElementById(end_time).innerHTML;
-			
-			window.tar = chid;
-			window.stv = start_time_value;
-			window.etv = end_time_value;
-
-			console.log("start_time : " + start_time_value
-					+ ", end_time_value : " + end_time_value); */
 
 			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
 			$('.bd-example-modal-lg').modal();
@@ -807,12 +790,6 @@ h3 {
 		
 		/* 이동버튼 후 정보 업데이트 */
 		function move(i) {
-			/* console.log("tar: " + tar);
-			console.log("stv: " + stv);
-			console.log("etv: " + etv);
-			 */
-			 
-			
 			/* 이동할것인지 묻기 */
 			var r = confirm("이동하시겠습니까?");
 
@@ -822,25 +799,14 @@ h3 {
 
 			var CBk_idx = bk_idx;
 			console.log('bk_idx : ' + bk_idx);
-			
-			/* 이동을 원하는 사람의 아이디 */
-			/* var chId = tar;
-			console.log('chId : ' + tar); */
 
-			/* 이동을 원하는 사람의 START_TIME, END_TIME */
-			/* var chStartTime = stv;
-			console.log('start_time : ' + chStartTime); */
-
-			/* var chEndTime = etv;
-			console.log('end_time : ' + chEndTime);
- */
 			/* 옮기기를 원하는 좌석의 번호 */
 			var changeScol = i;
 			console.log('changeSeats : ' + changeScol);
-
+			
 			try {
 				if (r == true) {
-					location.href = "/TMS/admin/update?s_idx=" + changeScol + "&bk_idx= " + CBk_idx;
+					location.href = "/TMS/admin/update?s_col=" + changeScol + "&bk_idx=" + CBk_idx + "&br_idx=" + br_idx;
 				}
 				alert("성공적으로 이동되었습니다.");
 			} catch (e) {

@@ -68,6 +68,11 @@ public class CommonServiceImpl implements CommonService {
 	public List<RecruitVO> RandomRecruit() {
 		return mapper.RandomRecruit();
 	}
+
+	@Override
+	public boolean delSendMsg(int sm_idx) {
+		return mapper.delSendMsg(sm_idx);
+	}
 	
 	
 }
