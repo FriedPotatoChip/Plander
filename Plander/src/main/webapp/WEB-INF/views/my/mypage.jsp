@@ -177,8 +177,7 @@ h3 {
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
-				<li class="nav-item"><a class="nav-link bold"
-					href="/logout">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link bold" href="/logout">로그아웃</a></li>
 				<li class="nav-item"><a class="nav-link bold" href="/">홈으로가기</a></li>
 			</ul>
 		</div>
@@ -238,8 +237,7 @@ h3 {
 
 		<!-- 내예약 -->
 		<div class="myBook"
-			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;
-			text-align: center; height: 566px;">
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px; text-align: center; height: 566px;">
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내예약</h5>
 			<div class="myBook_nav d-inline">
 				<strong><a href="javascript:click()"
@@ -247,8 +245,8 @@ h3 {
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
 					onclick="fetch_book('/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
-					onclick="fetch_book('/my/coupon?nowPage=1')">내쿠폰</a></strong>
-				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/my/coupon?nowPage=1')">내쿠폰</a></strong> &nbsp;|&nbsp;<strong><a
+					href="javascript:click()"
 					onclick="fetch_book('/my/sendMsg?nowPage=1')">보낸쪽지</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
 					onclick="fetch_book('/my/recvMsg?nowPage=1')">받은쪽지</a></strong>
@@ -276,7 +274,9 @@ h3 {
 			<table id="myRecruit"></table>
 		</div>
 	</div>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 
 
 	<!-- 회원정보수정 모달창 -->
@@ -415,8 +415,9 @@ h3 {
 
 
 	<!-- 프로필 사진 업로드 모달 -->
-	<div class="modal fade bd-example-modal-xl" id="updateProfile" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-xl" id="updateProfile"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -453,9 +454,10 @@ h3 {
 					</c:if>
 				</div>
 				<div class="modal-footer">
-					<input type="button" class="btn btn-outline-warning" data-dismiss="modal"
-						value="닫기"> <input type="button" class="btn btn-outline-danger"
-						value="수정" onclick="submitProfile()">
+					<input type="button" class="btn btn-outline-warning"
+						data-dismiss="modal" value="닫기"> <input type="button"
+						class="btn btn-outline-danger" value="수정"
+						onclick="submitProfile()">
 				</div>
 			</div>
 		</div>
@@ -732,6 +734,62 @@ function dropOut(){
 		}
 	})
 }
-</script>
+
+function delSeat(idx) {
+	var chk = confirm('환불 금액에 관련된 사항은 미리 안내 데스크를 통해 안내 받은 후 취소하시기 바랍니다. \n충분히 공지받으셨다면 확인 버튼을 눌러 마저 취소 작업을 진행해 주세요.');
+	
+	if(chk == true){
+		
+		$.ajax({
+			url : "/my/delSeat",
+			type : "post",
+			data: {'bk_idx': idx},
+			dataType : "text",
+			success : function(result) {
+				if (result == 'success') {
+					alert('해당 좌석 예약이 취소되었습니다.');
+					location.href = "/my";
+				} else if (result == 'fail') {
+					alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+				} else {
+					alert('관리자에게 문의해 주세요.');
+				}
+	
+			},
+			error : function(error) {
+	
+			}
+		})
+	}
+}
+
+
+		function delCabinet(idx) {
+			var chk = confirm('사물함은 환불 적용이 되지 않습니다. \n그래도 취소하시려면 확인 버튼을 눌러주세요.');
+			
+			if(chk == true){
+						$.ajax({
+							url : "/my/delCabinet",
+							type : "post",
+							data: {'ckb_idx': idx},
+							dataType : "text",
+							success : function(result) {
+								if (result == 'success') {
+									alert('해당 사물함 예약이 취소되었습니다.');
+									location.href = "/my";
+								} else if (result == 'fail') {
+									alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+								} else {
+									alert('관리자에게 문의해 주세요.');
+								}
+				
+							},
+							error : function(error) {
+				
+							}
+						})
+					}
+			}
+	</script>
 </body>
 </html>

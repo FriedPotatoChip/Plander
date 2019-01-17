@@ -85,16 +85,15 @@ a {
 						</td>
 						<td><button type="button"
 								class="btn btn-outline-danger btn-sm"
-								onclick="location.href='/my/delSeat?bk_idx=${seat.bk_idx }'">예약취소</button></td>
+								onclick="delSeat(${seat.bk_idx })">예약취소</button></td>
 					</tr>
 				</c:forEach>
-				
+
 				<tr>
 					<td colspan="6">
 						<!-- 페이징 시작 -->
 						<div id="paging">
-							<ul id="pagingList"
-								class="pagination justify-content-center">
+							<ul id="pagingList" class="pagination justify-content-center">
 								<c:if test="${page.chkStartPage }">
 									<li class="page_edge"><a class="p-n" href="#"
 										onclick="fetch_book('/my/my_seat?nowPage=1')">〈</a></li>
@@ -102,7 +101,7 @@ a {
 										onclick="fetch_book('/my/my_seat?nowPage=${page.startPage-1 }')"><span
 											style="font-size: 0.5em;">…</span></a></li>
 								</c:if>
-		
+
 								<c:forEach var="p" begin="${page.startPage }"
 									end="${page.endPage }">
 									<c:if test="${p == page.nowPage }">
@@ -114,7 +113,7 @@ a {
 											onclick="fetch_book('/my/my_seat?nowPage=${p }')">${p }</a></li>
 									</c:if>
 								</c:forEach>
-		
+
 								<c:if test="${page.chkEndPage }">
 									<li class="page_edge"><a class="p-n" href="#"
 										onclick="fetch_book('/my/my_seat?nowPage=${page.endPage+1 }')"><span
@@ -125,7 +124,8 @@ a {
 							</ul>
 						</div>
 					</td>
-				</tr> <!-- 페이징 끝 -->
+				</tr>
+				<!-- 페이징 끝 -->
 
 			</c:otherwise>
 

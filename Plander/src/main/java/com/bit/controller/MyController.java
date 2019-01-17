@@ -37,7 +37,7 @@ public class MyController {
 
 	@Autowired
 	MyService myService;
-	
+
 	@Autowired
 	private adminService service;
 
@@ -46,7 +46,7 @@ public class MyController {
 		session.setAttribute("user", vo);
 		return "my/mypage";
 	}
-	
+
 	// 회원탈퇴
 	@ResponseBody
 	@RequestMapping("dropout")
@@ -54,18 +54,18 @@ public class MyController {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
 		System.out.println("탈퇴 컨트롤러");
 		int chk = service.userDelete(vo.getU_idx());
-		if(chk == 1) {
+		if (chk == 1) {
 			return "success";
 		} else {
 			return "fail";
 		}
 	}
-	
+
 	// 내쿠폰보유현황(+갯수)
 	@RequestMapping("coupon")
 	public String coupon(PagingVO page, HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
-		
+
 		// 페이징 처리
 		int total = myService.coupon_cnt(vo);
 		System.out.println("total: " + total);
@@ -81,15 +81,15 @@ public class MyController {
 		List<CouponVO> list = myService.coupon(map);
 		System.out.println("list: " + list);
 		model.addAttribute("list", list);
-		
+
 		return "my/coupon";
 	}
-	
+
 	@RequestMapping("sendMsg")
 	public String sendMsg(PagingVO page, HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
 		System.out.println("user: " + vo);
-		
+
 		// 페이징 처리
 		int total = myService.sendMsgCnt(vo);
 		System.out.println("total: " + total);
@@ -105,14 +105,14 @@ public class MyController {
 		List<SendMsgVO> list = myService.sendMsg(map);
 		System.out.println("list: " + list);
 		model.addAttribute("list", list);
-		
+
 		return "my/sendmsg";
 	}
-	
+
 	@RequestMapping("recvMsg")
 	public String recvMsg(PagingVO page, HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
-		
+
 		// 페이징 처리
 		int total = myService.recvMsgCnt(vo);
 		System.out.println("total: " + total);
@@ -128,7 +128,7 @@ public class MyController {
 		List<RecvMsgVO> list = myService.recvMsg(map);
 		System.out.println("list: " + list);
 		model.addAttribute("list", list);
-		
+
 		return "my/recvmsg";
 	}
 
@@ -186,22 +186,28 @@ public class MyController {
 
 		return "my/mySeat";
 	}
-	
+
 	// 예약좌석삭제
 	@RequestMapping("delSeat")
+	@ResponseBody
 	public String delSeat(@RequestParam int bk_idx, Model model) {
+		System.out.println("bk_idx: " + bk_idx);
 		
 		int result = myService.delSeat(bk_idx);
 		System.out.println("처리결과: " + result);
-		model.addAttribute("result", result);
-		return "redirect: /TMS/my";
+
+		if (result == 1) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 
 	// 사물함 예약내역
 	@RequestMapping("my_cabinet")
 	public String my_cabinet(PagingVO page, HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
-
+			
 		// 페이징 처리
 		int total = myService.getTotalCabinet(vo);
 		System.out.println("total: " + total);
@@ -220,16 +226,20 @@ public class MyController {
 
 		return "my/myCabinet";
 	}
-	
+
 	// 예약사물함삭제
 	@RequestMapping("delCabinet")
-	public String delCabinet(@RequestParam int ckb_idx, Model model) {
-		
+	@ResponseBody
+	public String delCabinet(@RequestParam("ckb_idx") int ckb_idx, Model model) {
+		System.out.println("ckb_idx: " + ckb_idx);
 		int result = myService.delCabinet(ckb_idx);
 		System.out.println("처리결과: " + result);
-		
-		model.addAttribute("result", result);
-		return "redirect: /my";
+
+		if (result == 1) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 
 	// 내모집글
@@ -318,7 +328,7 @@ public class MyController {
 	@RequestMapping("board")
 	public String board(PagingVO page, HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
-		
+
 		// 페이징 처리
 		int total = myService.board_cnt(vo);
 		System.out.println("total: " + total);
@@ -334,7 +344,7 @@ public class MyController {
 		List<BoardVO> list = myService.board(map);
 		System.out.println("list: " + list);
 		model.addAttribute("list", list);
-		
+
 		return "my/freeboard";
 	}
 
@@ -342,7 +352,7 @@ public class MyController {
 	@RequestMapping("board_comment")
 	public String board_comment(PagingVO page, HttpSession session, Model model) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
-	
+
 		// 페이징 처리
 		int total = myService.board_comment_cnt(vo);
 		System.out.println("total: " + total);
@@ -358,7 +368,7 @@ public class MyController {
 		List<CommentsVO> list = myService.board_comment(map);
 		System.out.println("list: " + list);
 		model.addAttribute("list", list);
-		
+
 		return "my/freeboardComment";
 	}
 
