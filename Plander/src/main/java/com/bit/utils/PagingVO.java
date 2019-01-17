@@ -120,7 +120,7 @@ public class PagingVO {
 		boolean chkEP = true;
 		int endP = (int)Math.ceil((double)nowPage / (double)this.cntPage) * getCntPage();
 		this.startPage = endP - this.cntPage + 1;
-		cntPerPage = 3;
+		cntPerPage = 5;
 		
 		this.end = nowPage * cntPerPage;
 		this.start = end - cntPerPage + 1;

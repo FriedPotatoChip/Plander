@@ -65,7 +65,7 @@ a {
 		<c:choose>
 			<c:when test="${empty list}">
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<h5>보낸 쪽지가 없습니다.</h5>
 					</td>
 				</tr>
@@ -90,7 +90,7 @@ a {
 				</c:forEach>
 				
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<!-- 페이징 시작 -->
 						<div id="paging">
 							<ul id="pagingList"
