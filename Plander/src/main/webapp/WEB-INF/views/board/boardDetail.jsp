@@ -220,6 +220,9 @@ $(document).ready(function(){
 			</c:if>
 		</div>	
 	
+		<c:if test="${empty usersVO }">
+			<span style="color: red; font-size: 0.8em;">&#8251;댓글 기능은 로그인 후 이용 가능합니다.</span>
+		</c:if>
 		<hr>
 		<!-- 댓글 출력 -->
 		<div id="comments">

@@ -307,6 +307,9 @@ function boardList(nowPage){
 							onclick="applyCancel()">신청취소</button>
 					</c:if>
 				</c:if>
+				<c:if test="${empty usersVO }">
+					<span style="color: red; font-size: 0.8em;">&#8251;모집글에 신청, 댓글 기능은 로그인 후 이용 가능합니다.</span>
+				</c:if>
 					
 				<!-- 신청 버튼 끝 -->
 				

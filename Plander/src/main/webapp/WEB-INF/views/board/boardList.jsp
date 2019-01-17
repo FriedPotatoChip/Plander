@@ -181,7 +181,7 @@
 						<td>
 							<a href="#" onclick="to_detail(${list.b_idx})">${list.b_title }</a>
 							<c:if test="${list.cnt != 0 }">
-								<a href="#" onclick="to_detail(${list.b_idx})">[${list.cnt }]</a>
+								<a href="#" onclick="to_detail(${list.b_idx})" style="color: red;">[${list.cnt }]</a>
 							</c:if>
 						</td>
 						<td>
