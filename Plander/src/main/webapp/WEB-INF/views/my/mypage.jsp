@@ -261,7 +261,7 @@ h3 {
 
 		<!-- 내글목록 -->
 		<div class="myRecruit"
-			style="border: 1px solid lightgray; padding: 20px; text-align: center;">
+			style="border: 1px solid lightgray; padding: 20px; text-align: center; height: 420px;">
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내글목록</h5>
 			<div class="myRecruit_nav d-inline mr-3">
 				<strong><a href="javascript:click()"
