@@ -175,7 +175,7 @@ tr:last-child td {
 						</td>
 
 						<td><div class="idDiv" userId="${msg.send_id }"
-								onclick="showBox(event, this)">${msg.send_id }</div></td>
+								onclick="showBox(event, this)" style="display: inline-block;">${msg.send_id }</div></td>
 
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${msg.regdate }" /></td>

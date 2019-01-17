@@ -499,7 +499,38 @@
 	//네이버페이
 </script>
 <script>
-	function payment() {
+	function payment(frm) {
+
+		if (finalPrice == 0) {
+			finalPrice = sum;
+		}
+		$("#hiddenPrice").val(finalPrice);
+		var couponVal = $("#coupon").val();
+		if (couponVal != 0) {
+			$.ajax({
+				url : '/minusCoupon',
+				type : 'get',
+				data : {
+					'cp_idx' : cp_idx
+				},
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
+						console.log("성공");
+						frm.submit();
+					} else if (result == 'fail') {
+						alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+						return false;
+					}
+				},
+				error : function(error) {
+					alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+					return false;
+				}
+			})
+		} else {
+			frm.submit();
+		}
 		form1.action = "/book/payok";
 		form1.submit();
 	}
@@ -531,7 +562,7 @@
 		<!-- 예약 헤더끝 -->
 
 		<div class="boxoutside">
-			<form method="post" name="form1" onsubmit="payment()">
+			<form method="post" name="form1" onsubmit="payment(this.form)">
 				<br>
 				<div style="padding: 10px;">
 					<h5 style="color: #475C7A;">예매자 확인</h5>
@@ -710,6 +741,8 @@
 					}
 					finalPrice = Math.floor(finalPrice);
 					$("#finPrice").html(couponPrice);
+					 
+					$("input[name='price']").attr('value', finalPrice);
 				})
 
 		function nextSubmit(frm) {

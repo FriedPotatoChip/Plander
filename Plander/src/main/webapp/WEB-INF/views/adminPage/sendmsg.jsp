@@ -171,7 +171,7 @@ tr:last-child td {
 							onclick="window.open('/recvMsg?rm_idx=${msg.sm_idx }', '받은 쪽지', 'width=500, height=600'); return false;">${msg.title }</a>
 						</td>
 						<td><div class="idDiv" userId="${msg.recv_id }"
-								onclick="showBox(event, this)">${msg.recv_id }</div></td>
+								onclick="showBox(event, this)" style="display: inline-block;">${msg.recv_id }</div></td>
 						<td>${msg.content }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${msg.regdate }" /></td>
