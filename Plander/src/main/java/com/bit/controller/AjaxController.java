@@ -130,6 +130,15 @@ public class AjaxController {
 			return "fail";
 		}
 	}
+	@RequestMapping("/sendMsgDel")
+	public String sendMsgDel(@RequestParam("sm_idx") int sm_idx) {
+		boolean chkDel = comService.delSendMsg(sm_idx);
+		if (chkDel) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 
 	@RequestMapping("/imgDel")
 	public String imgDel(HttpSession session) {

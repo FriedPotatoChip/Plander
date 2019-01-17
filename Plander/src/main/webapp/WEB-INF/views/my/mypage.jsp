@@ -649,6 +649,26 @@ h3 {
 			
 			fetch_book('/my/recvMsg?nowPage='+ nowPage);
 		}
+		
+		function sendMsgDel(sm_idx, nowPage){
+			$.ajax({
+				url: '/sendMsgDel',
+				type: 'post',
+				data: {'sm_idx':sm_idx},
+				dataType: 'text',
+				success: function(result){
+					if (result == 'success'){
+						alert("쪽지를 삭제했습니다.");
+					}else {
+						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				}, error: function(error){
+					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+			
+			fetch_book('/my/sendMsg?nowPage='+ nowPage);
+		}
 	</script>
 	<div class="popupLayer">
 		<div>
@@ -730,6 +750,12 @@ function dropOut(){
 			
 		}
 	})
+}
+
+function openWindow(rm_idx){
+	console.log("여기 들어옴");
+	$("#span"+rm_idx).css("display", "block");
+	window.open('/recvMsg?rm_idx='+rm_idx, '받은 쪽지', 'width=500, height=600'); return false;
 }
 </script>
 </body>
