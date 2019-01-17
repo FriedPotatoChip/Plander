@@ -15,8 +15,8 @@
 
 <style>
 .container {
-	width: 80%;
-	margin: 50px auto;
+	width: 90%;
+	margin: 25px auto;
 }
 
 table {
@@ -35,7 +35,7 @@ th, td {
 
 <body>
 	<div class="container"
-		style="border: 1px solid lightgray; padding: 30px;">
+		style="border: 1px solid lightgray; padding: 10px 30px;">
 		<h4 class="text-center"
 			style="text-decoration: underline; color: #475C7A; margin-bottom: 20px;">
 			쪽지</h4>
@@ -46,23 +46,28 @@ th, td {
 					<td><c:if test='${empty msg.user_profileImagePath }'>
 							<img class="user" src="/resources/images/users.png" alt="user"
 								style="width: 30px; height: 30px; border-radius: 50%;" />
-						</c:if> <c:if test='${not empty msg.user_profileImagePath }'>
+						</c:if>
+						<c:if test='${not empty msg.user_profileImagePath }'>
 							<img class="user" src="${msg.user_profileImagePath }" alt="user"
 								style="width: 30px; height: 30px; border-radius: 50%;" />
-						</c:if> ${msg.send_id }</td>
+						</c:if>
+						${msg.send_id }
+					</td>
 				</tr>
 				<tr>
 					<th>보낸날짜</th>
-					<td><fmt:formatDate value="${msg.regdate }"
-							pattern="yyyy-MM-dd HH:mm" /></td>
+					<td><fmt:formatDate value="${msg.regdate }" pattern="yyyy-MM-dd HH:mm" /></td>
 				</tr>
 				<tr>
 					<th>제목</th>
 					<td>${msg.title }</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea rows="12" cols="50" name="content"
-							id='content' placeholder="content" style="width: 100%;" readonly>${msg.content }</textarea></td>
+					<td colspan="2">
+						<textarea rows="10" class="form-control" name="content"
+							id='content' placeholder="content" 
+							style="width: 100%; background-color: white;" readonly>${msg.content }</textarea>
+					</td>
 				</tr>
 			</table>
 		</form>

@@ -5,13 +5,14 @@
 <%-- <jsp:include page="/commons/head.jsp"></jsp:include> --%>
 <style>
 tr, td {
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid #4d4d4d;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	text-align: center;
 }
 
 tr:last-child td {
-	border-bottom: none;
+	border-bottom: hidden;
 }
 
 /* 페이징 시작 */
@@ -67,8 +68,8 @@ a {
 		<c:choose>
 			<c:when test="${empty list}">
 				<tr>
-					<td colspan="4">
-						<h2>받은 쪽지가 없습니다.</h2>
+					<td colspan="5">
+						<h5>받은 쪽지가 없습니다.</h5>
 					</td>
 				</tr>
 			</c:when>
@@ -96,45 +97,50 @@ a {
 								onclick="msgDel('${msg.rm_idx}', '${page.nowPage }')">삭제</button></td>
 					</tr>
 				</c:forEach>
+				
+				<tr>
+					<td colspan="5">
+						<!-- 페이징 시작 -->
+						<div id="paging">
+							<ul id="pagingList"
+								class="pagination justify-content-center centered">
+								<c:if test="${page.chkStartPage }">
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/recvMsg?nowPage=1')">〈</a></li>
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/recvMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+								</c:if>
+		
+								<c:forEach var="p" begin="${page.startPage }"
+									end="${page.endPage }">
+									<c:if test="${p == page.nowPage }">
+										<li class="page_edge now"><a class="p-n now"
+											href="javascript:click()"
+											onclick="fetch_book('/my/recvMsg?nowPage=${p }')">${p }</a></li>
+									</c:if>
+									<c:if test="${p != page.nowPage }">
+										<li class="page_edge"><a class="p-n"
+											href="javascript:click()"
+											onclick="fetch_book('/my/recvMsg?nowPage=${p }')">${p }</a></li>
+									</c:if>
+								</c:forEach>
+		
+								<c:if test="${page.chkEndPage }">
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/recvMsg?nowPage=${page.endPage+1 }')"><span
+											style="font-size: 0.5em;">…</span></a></li>
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/recvMsg?nowPage=${page.lastPage }')">〉</a></li>
+								</c:if>
+							</ul>
+						</div>
+					</td>
+				</tr> <!-- 페이징 끝 -->
 
-				<!-- 페이징 시작 -->
-				<div id="paging">
-					<ul id="pagingList"
-						class="pagination justify-content-center centered">
-						<c:if test="${page.chkStartPage }">
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/recvMsg?nowPage=1')">〈</a></li>
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/recvMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
-						</c:if>
-
-						<c:forEach var="p" begin="${page.startPage }"
-							end="${page.endPage }">
-							<c:if test="${p == page.nowPage }">
-								<li class="page_edge now"><a class="p-n now"
-									href="javascript:click()"
-									onclick="fetch_book('/my/recvMsg?nowPage=${p }')">${p }</a></li>
-							</c:if>
-							<c:if test="${p != page.nowPage }">
-								<li class="page_edge"><a class="p-n"
-									href="javascript:click()"
-									onclick="fetch_book('/my/recvMsg?nowPage=${p }')">${p }</a></li>
-							</c:if>
-						</c:forEach>
-
-						<c:if test="${page.chkEndPage }">
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/recvMsg?nowPage=${page.endPage+1 }')"><span
-									style="font-size: 0.5em;">…</span></a></li>
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/recvMsg?nowPage=${page.lastPage }')">〉</a></li>
-						</c:if>
-					</ul>
-				</div>
 			</c:otherwise>
 
 		</c:choose>

@@ -53,7 +53,6 @@ body {
 	font-weight: 400;
 	color: #666;
 	text-decoration: none;
-	width: 80%;
 	margin: auto;
 }
 
@@ -113,11 +112,11 @@ h3 {
 
 #my_info_table table, #my_info_table tr, #my_info_table th,
 	#my_info_table td {
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid #4d4d4d;
 }
 
 #my_info_table tr:first-child td, #my_info_table tr:first-child th {
-	border-top: 1px solid #000;
+	border-top: 1px solid #4d4d4d;
 }
 
 .myBook_nav, .myRecruit_nav {
@@ -207,7 +206,7 @@ h3 {
 				</c:if>
 			</div>
 			<br>
-			<table class="table" id="my_info_table">
+			<table class="table" id="my_info_table" style="text-align: center;">
 				<tr>
 					<th>회원아이디</th>
 					<td>${user.id }</td>
@@ -239,7 +238,8 @@ h3 {
 
 		<!-- 내예약 -->
 		<div class="myBook"
-			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;">
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;
+			text-align: center; height: 566px;">
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내예약</h5>
 			<div class="myBook_nav d-inline">
 				<strong><a href="javascript:click()"
@@ -259,7 +259,7 @@ h3 {
 
 		<!-- 내글목록 -->
 		<div class="myRecruit"
-			style="border: 1px solid lightgray; padding: 20px;">
+			style="border: 1px solid lightgray; padding: 20px; text-align: center;">
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내글목록</h5>
 			<div class="myRecruit_nav d-inline mr-3">
 				<strong><a href="javascript:click()"
@@ -276,6 +276,7 @@ h3 {
 			<table id="myRecruit"></table>
 		</div>
 	</div>
+	<br><br><br>
 
 
 	<!-- 회원정보수정 모달창 -->

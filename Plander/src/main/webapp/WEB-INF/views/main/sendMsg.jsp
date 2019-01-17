@@ -61,7 +61,7 @@ th, td {
 				<button type="submit" onclick="sendMsg2()"
 					class="btn my-1 btn-inline" style="background-color: #685D79; color: white;">보내기</button>
 				<button type="reset" onclick="closeMsg()"
-					class="btn my-1 btn-inline" style="border: 1px solid #4d4d4d; color: black;">초기화</button>
+					class="btn my-1 btn-inline" style="border: 1px solid #4d4d4d; color: black;">취소</button>
 			</p>
 		</div>
 	</div>

@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
+import com.bit.domain.PriceVO;
 import com.bit.domain.RecruitVO;
 import com.bit.domain.RecvMsgVO;
 import com.bit.domain.UsersVO;
@@ -193,4 +194,12 @@ public class MainController {
 		
 		return "main/operation";
 	}
+	
+	
+	@RequestMapping("/guide")
+	public String guide() {
+		
+		return "main/guide";
+	}
+
 }
