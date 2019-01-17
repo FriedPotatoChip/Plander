@@ -664,6 +664,28 @@ h3 {
 
 			fetch_book('/my/recvMsg?nowPage=' + nowPage);
 		}
+		function sendMsgDel(sm_idx, nowPage) {
+			$.ajax({
+				url : '/sendMsgDel',
+				type : 'post',
+				data : {
+					'sm_idx' : sm_idx
+				},
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
+						alert("쪽지를 삭제했습니다.");
+					} else {
+						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				},
+				error : function(error) {
+					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+
+			fetch_book('/my/sendMsg?nowPage=' + nowPage);
+		}
 	</script>
 	<div class="popupLayer">
 		<div>
@@ -677,7 +699,7 @@ h3 {
 		function closeLayer(obj) {
 			$(".popupLayer").hide();
 		}
-		function showBox(e, tag) {
+		function showBox(e, tag, chk) {
 			console.log("idDiv 클릭됨");
 			var sWidth = window.innerWidth;
 			var sHeight = window.innerHeight;
@@ -694,6 +716,9 @@ h3 {
 					+ 5
 					+ (document.documentElement.scrollTop ? document.documentElement.scrollTop
 							: document.body.scrollTop);
+			if (chk == 'chk'){
+				divTop += 89;
+			}
 			console.log("X: " + e.clientX);
 			console.log("Y: " + e.clientY);
 
@@ -837,6 +862,11 @@ h3 {
 					}
 				})
 			}
+		}
+		
+		function openWindow(rm_idx){
+			$("#span"+rm_idx).css("display", "block");
+			window.open('/recvMsg?rm_idx='+rm_idx, '받은 쪽지', 'width=500, height=600');
 		}
 	</script>
 </body>

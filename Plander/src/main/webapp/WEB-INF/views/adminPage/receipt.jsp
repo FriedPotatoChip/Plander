@@ -116,10 +116,9 @@ table thead tr {
 	<div class="container-fluid">
 		<div class="row">
 			<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-				<div class="sidebar-sticky">
-					<ul class="nav flex-column">
+				<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-linkef="/admin">
+						<li class="nav-item"><a class="nav-link" href="/admin">
 								<span data-feather="users"></span> Customers <span
 								class="sr-only">(current)</span>
 						</a></li>

@@ -392,7 +392,7 @@ function boardList(nowPage){
 	        		  
 	        		  $(".appBtn").css("display", "none");
 	        		  $("#hideCancel").css("display", "block");
-	        		  
+	        		  alert("스터디 모집에 신청하였스비다!")
 	        	  } else if(result == 'fail'){
 	        		  alert("신청하기에 실패하였습니다.\n관리자에게 문의해주세요.")
 	        	  }
@@ -404,6 +404,10 @@ function boardList(nowPage){
 	
 	/* 신청 취소 */
 	function applyCancel(){
+		var con = confirm("정말 모집신청을 취소하시겠습니까?");
+		if (!con){
+			return false;
+		}
 	      $.ajax({
 	          type: "get",
 	          url: '/applyCancel',
@@ -419,7 +423,7 @@ function boardList(nowPage){
         		  
         		  $(".appBtn").css("display", "none");
         		  $("#hideApply").css("display", "block");
-        		  
+        		  alert("스터디 모집 신청을 취소하였습니다.");
         	  } else if(result == 'fail'){
         		  alert("신청하기에 실패하였습니다.\n관리자에게 문의해주세요.")
         	  }
