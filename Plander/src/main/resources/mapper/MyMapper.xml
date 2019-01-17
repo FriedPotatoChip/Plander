@@ -38,8 +38,8 @@
 		parameterType="Map">
 		select * from (
 		select rownum rn, m.*
-		from send_msg m where send_id =
-		#{id}
+		from send_msg m 
+		where m.send_id = #{id}
 		order by sm_idx desc 
 		)
 		where rn between

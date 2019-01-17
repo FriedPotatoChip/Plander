@@ -5,13 +5,14 @@
 <jsp:include page="/commons/head.jsp"></jsp:include>
 <style>
 tr, td {
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid #4d4d4d;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	text-align: center;
 }
 
 tr:last-child td {
-	border-bottom: none;
+	border-bottom: hidden;
 }
 
 /* 페이징 시작 */
@@ -54,8 +55,9 @@ a {
 		<tr>
 			<th>제목</th>
 			<th>받는사람</th>
-			<th>내용</th>
 			<th>날짜</th>
+			<th>수신 여부</th>
+			<th></th>
 		</tr>
 	</thead>
 
@@ -64,7 +66,7 @@ a {
 			<c:when test="${empty list}">
 				<tr>
 					<td colspan="4">
-						<h2>보낸 쪽지가 없습니다.</h2>
+						<h5>보낸 쪽지가 없습니다.</h5>
 					</td>
 				</tr>
 			</c:when>
@@ -73,53 +75,63 @@ a {
 				<c:forEach var="msg" items="${list }">
 					<tr>
 						<td><a href="#"
-							onclick="window.open('/recvMsg?rm_idx=${msg.sm_idx }', '받은 쪽지', 'width=500, height=600'); return false;">${msg.title }</a>
+							onclick="window.open('/recvMsg?rm_idx=${msg.sm_idx }&type=send', '받은 쪽지', 'width=500, height=600'); return false;">${msg.title }</a>
 						</td>
-						<td>${msg.recv_id }</td>
-						<td>${msg.content }</td>
+						<td><div class="idDiv" onclick="showBox(event, this)"
+								userId="${msg.recv_id }">${msg.recv_id }</div></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${msg.regdate }" /></td>
+						<td><c:if test="${msg.chk == 0 }">
+								<span style="color: red;">&#10004;</span>
+							</c:if></td>		
+						<td><button class="btn btn-outline-danger"
+						onclick="sendMsgDel('${msg.sm_idx}', '${page.nowPage }')">삭제</button></td>
 					</tr>
 				</c:forEach>
+				
+				<tr>
+					<td colspan="4">
+						<!-- 페이징 시작 -->
+						<div id="paging">
+							<ul id="pagingList"
+								class="pagination justify-content-center centered">
+								<c:if test="${page.chkStartPage }">
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/sendMsg?nowPage=1')"><button>&lt;&lt;</button></a></li>
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/sendMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
+								</c:if>
+		
+								<c:forEach var="p" begin="${page.startPage }"
+									end="${page.endPage }">
+									<c:if test="${p == page.nowPage }">
+										<li class="page_edge now"><a class="p-n now"
+											href="javascript:click()"
+											onclick="fetch_book('/my/sendMsg?nowPage=${p }')">${p }</a></li>
+									</c:if>
+									<c:if test="${p != page.nowPage }">
+										<li class="page_edge"><a class="p-n"
+											href="javascript:click()"
+											onclick="fetch_book('/my/sendMsg?nowPage=${p }')">${p }</a></li>
+									</c:if>
+								</c:forEach>
+		
+								<c:if test="${page.chkEndPage }">
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/sendMsg?nowPage=${page.endPage+1 }')"><span
+											style="font-size: 0.5em;">…</span></a></li>
+									<li class="page_edge"><a class="p-n"
+										href="javascript:click()"
+										onclick="fetch_book('/my/sendMsg?nowPage=${page.lastPage }')">〉</a></li>
+								</c:if>
+							</ul>
+						</div>
+					</td>
+				</tr> <!-- 페이징 끝 -->
 
-				<!-- 페이징 시작 -->
-				<div id="paging">
-					<ul id="pagingList"
-						class="pagination justify-content-center centered">
-						<c:if test="${page.chkStartPage }">
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/sendMsg?nowPage=1')"><button>&lt;&lt;</button></a></li>
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/sendMsg?nowPage=${page.startPage-1 }')"><button>&lt;</button></a></li>
-						</c:if>
-
-						<c:forEach var="p" begin="${page.startPage }"
-							end="${page.endPage }">
-							<c:if test="${p == page.nowPage }">
-								<li class="page_edge now"><a class="p-n now"
-									href="javascript:click()"
-									onclick="fetch_book('/my/sendMsg?nowPage=${p }')">${p }</a></li>
-							</c:if>
-							<c:if test="${p != page.nowPage }">
-								<li class="page_edge"><a class="p-n"
-									href="javascript:click()"
-									onclick="fetch_book('/my/sendMsg?nowPage=${p }')">${p }</a></li>
-							</c:if>
-						</c:forEach>
-
-						<c:if test="${page.chkEndPage }">
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/sendMsg?nowPage=${page.endPage+1 }')"><span
-									style="font-size: 0.5em;">…</span></a></li>
-							<li class="page_edge"><a class="p-n"
-								href="javascript:click()"
-								onclick="fetch_book('/my/sendMsg?nowPage=${page.lastPage }')">〉</a></li>
-						</c:if>
-					</ul>
-				</div>
 			</c:otherwise>
 
 		</c:choose>
