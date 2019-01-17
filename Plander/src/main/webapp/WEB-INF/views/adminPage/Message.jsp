@@ -152,10 +152,10 @@ h3 {
 
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin">Admin page</a>
 		<ul class="navbar-nav px-3">
 			<li class="nav-item text-nowrap"><a class="nav-link"
-				href="/TMS/logout">logout</a></li>
+				href="/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -165,33 +165,33 @@ h3 {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
+						<li class="nav-item"><a class="nav-link" href="/admin">
 								<span data-feather="users"></span> Customers <span
 								class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
+							href="/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+							href="/admin/Chart"> <span data-feather="home"></span>
 								Reservation
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+							href="/admin/Seats"> <span data-feather="bar-chart-2"></span>
 								Seats
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+							href="/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Message"> <span data-feather="file"></span>
+							href="/admin/Message"> <span data-feather="file"></span>
 								Message
 						</a></li>
 					</ul>
@@ -202,12 +202,12 @@ h3 {
 			<div style="width: 80%; margin: 0 auto; text-align: center;">
 				<h4 class="d-inline">
 					<a href="javascript:click()"
-						onclick="fetch_book('/TMS/admin/recvMsg?nowPage=1')">받은쪽지</a>
+						onclick="fetch_book('/admin/recvMsg?nowPage=1')">받은쪽지</a>
 				</h4>
 				&nbsp;|&nbsp;
 				<h4 class="d-inline">
 					<a href="javascript:click()"
-						onclick="fetch_book('/TMS/admin/sendMsg?nowPage=1')">보낸쪽지</a>
+						onclick="fetch_book('/admin/sendMsg?nowPage=1')">보낸쪽지</a>
 				</h4>
 			</div>
 			<div class="myBook_nav" style="margin-top: 30px;">
@@ -270,7 +270,7 @@ h3 {
 				}
 			})
 
-			fetch_book('/TMS/admin/recvMsg?nowPage=' + nowPage);
+			fetch_book('/admin/recvMsg?nowPage=' + nowPage);
 		}
 	</script>
 	<script>
@@ -324,8 +324,8 @@ h3 {
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						}
-						window.open("/TMS/sendMsg?recv_id=" + userId, "쪽지 보내기",
-								"width=500, height=500");
+						window.open("/sendMsg?recv_id=" + userId, "쪽지 보내기",
+								"width=500, height=600");
 					});
 			$("#userProfile").click(
 					function() {
@@ -334,7 +334,7 @@ h3 {
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						}
-						window.open("/TMS/profileSummary?id=" + userId,
+						window.open("/profileSummary?id=" + userId,
 								"회원 정보", "width=500, height=500");
 					});
 		}

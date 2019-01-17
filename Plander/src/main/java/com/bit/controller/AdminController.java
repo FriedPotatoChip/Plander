@@ -24,7 +24,7 @@ import com.bit.service.adminService;
 import com.bit.utils.PagingVO;
 
 @Controller
-@RequestMapping("/TMS/admin")
+@RequestMapping("/admin")
 public class AdminController {
 	
 	@Autowired
@@ -137,14 +137,16 @@ public class AdminController {
 	public String userDelete(@RequestParam int u_idx) {
 		System.out.println("u_idx : " + u_idx);
 		service.userDelete(u_idx);
-		return "redirect: /TMS/admin";
+		return "redirect: /admin";
 	}
 
 	@RequestMapping("/Cabinet")
 	public String CabitnetPage(@RequestParam(value="br_idx", defaultValue="1") int br_idx, BookingCbVO bcvo, Model model) {
 		bcvo.setBr_idx(br_idx);
 		System.out.println("bcvo : " + bcvo);
-		model.addAttribute("cabinet", service.bookingCabinet(bcvo));
+		List<BookingCbVO> list = service.bookingCabinet(bcvo);
+		System.out.println("list: "+ list);
+		model.addAttribute("cabinet", list);
 		model.addAttribute("count", service.bookingCabinet_count(bcvo));
 		model.addAttribute("br_idx", br_idx);
 		return "adminPage/Cabinet";
@@ -182,7 +184,7 @@ public class AdminController {
 
 		service.changeSeats(map);
 		
-		return "redirect: /TMS/admin/Seats?roomnum="+ roomnum;
+		return "redirect: /admin/Seats?roomnum="+ roomnum;
 	}
 	
 	@RequestMapping("/Seats")

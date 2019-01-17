@@ -105,11 +105,11 @@ table thead tr {
 <body>
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin">Admin page</a>
 
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/">logout</a></li>
 		</ul>
 	</nav>
 
@@ -119,33 +119,33 @@ table thead tr {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
+						<li class="nav-item"><a class="nav-linkef="/admin">
 								<span data-feather="users"></span> Customers <span
 								class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
+							href="/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+							href="/admin/Chart"> <span data-feather="home"></span>
 								Reservation
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+							href="/admin/Seats"> <span data-feather="bar-chart-2"></span>
 								Seats
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+							href="/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Message"> <span data-feather="file"></span>
+							href="/admin/Message"> <span data-feather="file"></span>
 								Message
 						</a></li>
 					</ul>
@@ -178,7 +178,7 @@ table thead tr {
 
 							<!-- 검색창 -->
 							<div style="width: 60%; margin: 0 auto; float: left;">
-								<form action="/TMS/admin/ListSearch"
+								<form action="/admin/ListSearch"
 									class="form-inline my-2 my-lg-0">
 									<select class="custom-select my-1 mr-sm-2" name="target">
 										<option value="id">ID</option>
@@ -226,14 +226,14 @@ table thead tr {
 									<c:choose>
 										<c:when test="${page.chkStartPage }">
 											<li class="page-item"><a class="page-link"
-												href="/TMS/admin/Receipt?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
+												href="/admin/Receipt?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
 												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 													<span class="sr-only">Previous</span>
 											</a></li>
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
-												href="/TMS/admin/Receipt?nowPage=1&cntPerPage=${page.cntPerPage}"
+												href="/admin/Receipt?nowPage=1&cntPerPage=${page.cntPerPage}"
 												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 													<span class="sr-only">Previous</span>
 											</a></li>
@@ -244,12 +244,12 @@ table thead tr {
 										end="${page.endPage }">
 										<c:if test="${p == page.nowPage }">
 											<li class="page-item"><a class="now marginLi page-link"
-												href="/TMS/admin/Receipt?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+												href="/admin/Receipt?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 											</li class="page-item">
 										</c:if>
 										<c:if test="${p != page.nowPage }">
 											<li class="page-item"><a class="marginLi page-link"
-												href="/TMS/admin/Receipt?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+												href="/admin/Receipt?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 											</li class="page-item">
 										</c:if>
 
@@ -258,14 +258,14 @@ table thead tr {
 									<c:choose>
 										<c:when test="${page.chkEndPage }">
 											<li class="page-item"><a class="page-link"
-												href="/TMS/admin/Receipt?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
+												href="/admin/Receipt?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
 												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 													<span class="sr-only">Next</span>
 											</a></li>
 										</c:when>
 										<c:otherwise>
 											<li class="page-item"><a class="page-link"
-												href="/TMS/admin/Receipt?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
+												href="/admin/Receipt?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
 												aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 													<span class="sr-only">Next</span>
 											</a></li>

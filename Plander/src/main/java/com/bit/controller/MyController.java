@@ -194,7 +194,7 @@ public class MyController {
 		int result = myService.delSeat(bk_idx);
 		System.out.println("처리결과: " + result);
 		model.addAttribute("result", result);
-		return "redirect: /TMS/my";
+		return "redirect: /my";
 	}
 
 	// 사물함 예약내역

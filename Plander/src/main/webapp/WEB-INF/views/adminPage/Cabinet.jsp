@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 <title>관리자</title>
 	
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
@@ -115,7 +115,7 @@ h3 {
 			var code = $(this).attr('value');
 			console.log('code : ' + code);
 			
-			location.href = '/TMS/admin/Cabinet?br_idx='+ code;
+			location.href = '/admin/Cabinet?br_idx='+ code;
 		});
 		
 		var list = new Array();
@@ -133,12 +133,11 @@ h3 {
 <body>
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin">Admin page</a>
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS/logout">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/logout">logout</a></li>
 		</ul>
 	</nav>
-
 	<div class="container-fluid">
 		<div class="row">
 			<nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -146,32 +145,32 @@ h3 {
 					<ul class="nav flex-column">
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin"> <span data-feather="users"></span>
+							href="/admin"> <span data-feather="users"></span>
 								Customers <span class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
+							href="/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+							href="/admin/Chart"> <span data-feather="home"></span>
 								Reservation
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+							href="/admin/Seats"> <span data-feather="bar-chart-2"></span>
 								Seats
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+							href="/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Message"> <span data-feather="file"></span>
+							href="/admin/Message"> <span data-feather="file"></span>
 								Message
 						</a></li>
 					</ul>
