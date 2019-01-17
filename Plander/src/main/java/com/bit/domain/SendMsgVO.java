@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class SendMsgVO {
 	
-	private int sm_idx;
+	private int sm_idx, chk;
 	private String send_id, recv_id, title, content;
 	private Date regdate;
 }

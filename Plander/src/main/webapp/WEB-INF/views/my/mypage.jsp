@@ -762,7 +762,7 @@ function delSeat(idx) {
 		})
 	}
 }
-
+ 
 
 		function delCabinet(idx) {
 			var chk = confirm('사물함은 환불 적용이 되지 않습니다. \n그래도 취소하시려면 확인 버튼을 눌러주세요.');

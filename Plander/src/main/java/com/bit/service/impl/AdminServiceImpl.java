@@ -180,5 +180,10 @@ public class AdminServiceImpl implements adminService {
 		return mapper.Sunday();
 	}
 
+	@Override
+	public int s_idx(Map map) {
+		return mapper.s_idx(map);
+	}
+
 
 }

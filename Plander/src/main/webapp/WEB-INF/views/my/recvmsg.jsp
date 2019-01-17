@@ -12,7 +12,7 @@ tr, td {
 }
 
 tr:last-child td {
-	border-bottom: none;
+	border-bottom: hidden;
 }
 
 /* 페이징 시작 */
@@ -78,15 +78,21 @@ a {
 				<c:forEach var="msg" items="${list }">
 					<tr>
 						<td><a href="#"
-							onclick="window.open('/recvMsg?rm_idx=${msg.rm_idx }', '받은 쪽지', 'width=500, height=600'); return false;">${msg.title }</a>
+							onclick="openWindow('${msg.rm_idx}')">${msg.title }</a>
 						</td>
 						<td><div class="idDiv" onclick="showBox(event, this)"
 								userId="${msg.send_id }">${msg.send_id }</div></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${msg.regdate }" /></td>
-						<td><c:if test="${msg.chk == 0 }">
-								<span style="color: red;">&#10004;</span>
-							</c:if></td>
+						<td>
+						<c:if test="${msg.chk == 0 }">
+								<span id="span${msg.rm_idx }" style="color: red;">&#10004;</span>
+						</c:if>
+						<c:if test="${msg.chk == 1 }">
+								<span id="span${msg.rm_idx }" style="color: red; display: none;">&#10004;</span>
+						</c:if>
+						
+							</td>
 						<td><button class="btn btn-outline-danger"
 								onclick="msgDel('${msg.rm_idx}', '${page.nowPage }')">삭제</button></td>
 					</tr>

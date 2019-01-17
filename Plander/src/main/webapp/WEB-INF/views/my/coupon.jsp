@@ -14,7 +14,7 @@ tr, td {
 }
 
 tr:last-child td {
-	border-bottom: none;
+	border-bottom: hidden;
 }
 
 /* 페이징 시작 */
@@ -77,11 +77,10 @@ a {
 					<tr>
 						<td>${coupon.cb_name }</td>
 						<td>${coupon.cb_discount }<c:choose>
-								<c:when
-									test="${coupon.cb_distype == percent || coupon.cb_distype == PERCENT }">
+							<c:when test="${coupon.cb_distype == percent || coupon.cb_distype == PERCENT }">
 								%
 							</c:when>
-								<c:otherwise>
+							<c:otherwise>
 							원
 							</c:otherwise>
 							</c:choose>

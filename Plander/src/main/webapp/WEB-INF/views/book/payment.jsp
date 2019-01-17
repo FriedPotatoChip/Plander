@@ -536,6 +536,7 @@ button:hover {
 				</a></li>
 			</ul>
 		</div>
+		<hr>
 		<!-- 예약 헤더끝 -->
 
 		<div class="boxoutside">
@@ -645,56 +646,49 @@ button:hover {
 	<!-- 바디 콘테이너 끝 -->
 
 	<script>
-		$(document)
-				.ready(
-						function() {
-							window.finalPrice = 0;
-							$
-									.ajax({
-										url : "/couponList",
-										type : "get",
-										data : {
-											"id" : "${usersVO.id}"
-										},
-										dataType : "json",
-										success : function(result) {
+		$(document).ready(function() {
+			window.finalPrice = 0;
+			$.ajax({
+				url : "/couponList",
+				type : "get",
+				data : {
+					"id" : "${usersVO.id}"
+				},
+				dataType : "json",
+				success : function(result) {
 
-											var html = "";
-											if (result == "") {
-												html += "<option value='0' type='0' price='0'>없음</option>";
-											} else {
-												$
-														.each(
-																result,
-																function(index,
-																		value) {
-																	if ((value.cb_roomtype == 'LAB' && sct_idx != 1)
-																			|| (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)
-																			|| (value.cb_roomtype == 'ALL')) {
-																		html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"
-																				+ value.cb_name
-																				+ " "
-																				+ value.cb_discount;
-																		if (value.cb_distype == 'PERCENT') {
-																			html += "%";
-																		} else if (value.cb_distype == 'PRICE') {
-																			html += "원";
-																		}
-																		html += "("
-																				+ value.cp_quantity
-																				+ " 개)";
-																		html += "</option>";
-																	}
-																});
-											}
-											$("#coupon").append(html);
-
-										},
-										error : function(error) {
-
-										}
-									});
+					var html = "";
+					if (result == "") {
+						html += "<option value='0' type='0' price='0'>없음</option>";
+					} else {
+						$.each(result, function(index, value) {
+							if ((value.cb_roomtype == 'LAB' && sct_idx != 1)
+									|| (value.cb_roomtype == 'PRIVATE' && sct_idx == 1)
+									|| (value.cb_roomtype == 'ALL')) {
+								html += "<option value='"+value.cp_idx+"' type='"+value.cb_distype+ "' price='"+value.cb_discount+"'>"
+										+ value.cb_name
+										+ " "
+										+ value.cb_discount;
+								if (value.cb_distype == 'PERCENT') {
+									html += "%";
+								} else if (value.cb_distype == 'PRICE') {
+									html += "원";
+								}
+								html += "("
+										+ value.cp_quantity
+										+ " 개)";
+								html += "</option>";
+							}
 						});
+					}
+					$("#coupon").append(html);
+
+				},
+				error : function(error) {
+
+				}
+			});
+		});
 
 		$("#coupon").on(
 				"change",
