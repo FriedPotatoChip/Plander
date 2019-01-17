@@ -85,8 +85,7 @@ a {
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link" href="/operation">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">이용안내</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"
-					onclick="loginChk()">예약하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="/book">예약하기</a></li>
 				<li class="nav-item"><a class="nav-link" href="#"
 					onclick="loginChk()">모집게시판</a></li>
 				<li class="nav-item">
