@@ -104,9 +104,6 @@
 <!-- 네이버 페이 -->
 <!-- <script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"></script> -->
 <script>
-function subTest(){
-	$("form[name='form1']").submit();
-}
 	$(function() {
 		$("#normalpay").click(
 			function() {
@@ -696,7 +693,6 @@ function subTest(){
 				<!-- 결제방식 선택 끝  -->
 
 			</form>
-			<button onclick="subTest()">테스트</button>
 		</div>
 		<!-- 박스 아웃사이드 끝 -->
 		<br> <br> <br>
