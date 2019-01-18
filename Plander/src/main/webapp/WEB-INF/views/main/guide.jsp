@@ -98,9 +98,9 @@ strong {
 		
 		function moveRight(){
 			imgObj.style.left = parseInt(imgObj.style.left) + 1 + 'px';
-			animate = setTimeout(moveRight, 50);
+			animate = setTimeout(moveRight, 40);
 		
-			if(parseInt(imgObj.style.left) == 1000){
+			if(parseInt(imgObj.style.left) == 225){
 				imgObj.style.left = '0px';
 			}
 		
@@ -131,10 +131,29 @@ strong {
 	<!-- 본문  -->
 	<!-- 게시판 제목 -->
 	<div class="fc_content content _content_body">
-		<div style="height: 100px; width: 100%;">
+		<div style="height: 100px; width: 300px; text-align: left; margin: auto;">
 			<img src="/resources/images/turtle.png" alt="turtle" id="turtle" />
+			<p id="text" style="width: 500px; font-size: 40px;">&nbsp;</p>
 		</div>
 
+		<script>
+			var text = '느려도 괜찮아';
+			var cnt = 0;
+			var speed = 1200;
+			var timer1 = null;
+
+			function go() {
+				document.getElementById('text').innerHTML = text.substring(0, cnt) + "_";
+				cnt++;
+				timer1 = setTimeout('go()', speed);
+
+				if (text.length < cnt) {
+					cnt = 0;
+				}
+			}
+			go();
+		</script>
+		<br><br><br><br>
 		<p class="bold" style="color: #475C7A; font-size: 18px;">이용안내</p>
 		<hr>
 		<!-- 

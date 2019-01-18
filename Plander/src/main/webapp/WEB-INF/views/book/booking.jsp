@@ -32,7 +32,7 @@
 		//정기권 1일권 체크
 		$('#oneday').click(
 			function() {
-				//var startTime = $(document.getElementsByName('start_time')).val();
+				var startTime = $(document.getElementsByName('start_time')).val();
 				console.log('start_time : ' + startTime);
 
 				if (startTime == "") {
@@ -277,6 +277,7 @@
 			frm.end_time.focus();
 			return false;
 		}
+		
 		var ti_idx = $("input:radio[name=time_idx]:checked").val();
 		var startGetTime = new Date($(document.getElementsByName('start_time')).val()).getTime();
 		var endGetTime = new Date($(document.getElementsByName('end_time')).val()).getTime();
@@ -287,6 +288,7 @@
 				return false;
 			}
 		}
+		
 		var chk = $(":input:radio[name=roomnum]:checked").val();
 		if (chk == null) {
 			alert("좌석 종류(개인실/랩실) 선택은 필수입니다.");
