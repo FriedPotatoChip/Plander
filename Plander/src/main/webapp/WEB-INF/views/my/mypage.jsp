@@ -16,11 +16,7 @@
 	//비밀번호 확인
 	function pwchk() {
 		var pw = $('#password').val();
-		var pwchk = $
-		{
-			user.password
-		}
-		;
+		var pwchk = ${user.password};
 
 		if (pw != pwchk || pwchk == "") {
 			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -337,7 +333,7 @@ h3 {
 							<tr>
 								<th>회원주소&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="text" id="zipNo" style="display: inline;"
-									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
+									class="col-sm-8 form-control mr-2" name="zipNo" value="${user.zipNo }" readonly>
 									<button type="button" class="btn btn-outline-danger"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
@@ -494,11 +490,7 @@ h3 {
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
-			var pwchk = $
-			{
-				user.password
-			}
-			;
+			var pwchk = ${user.password};
 
 			if (pw != pwchk || pwchk == "") {
 				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -793,8 +785,7 @@ h3 {
 			})
 		}
 
-		function delSeat(idx, start_time) {
-			
+		function delSeat(idx, start_time, nowPage) {
 
 			var st = new Date(start_time);
 			console.log('start_time: ' + st);
@@ -804,7 +795,7 @@ h3 {
 
 			if (hour < 18) {
 				var chk = confirm('환불 금액에 관련된 사항은 미리 안내 데스크를 통해 안내 받은 후 취소하시기 바랍니다. \n충분히 공지받으셨다면 확인 버튼을 눌러 마저 취소 작업을 진행해 주세요.');
-				
+
 				if (chk == true) {
 
 					$
@@ -818,7 +809,6 @@ h3 {
 								success : function(result) {
 									if (result == 'success') {
 										alert('해당 좌석 예약이 취소되었습니다.');
-										location.href = "/my";
 									} else if (result == 'fail') {
 										alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
 									} else {
@@ -829,19 +819,22 @@ h3 {
 								error : function(error) {
 
 								}
-							})
+							});
 				} else {
 					alert('오후 6시 이전이라 처리는 가능하나, 처리 중 오류가 발생하였습니다.');
-					location.href = "/my";
 				}
+				
+				fetch_book('/my/my_seat?nowPage=' + nowPage);
+				
 			} else {
-					alert('오후 6시 이후부터는 관리자에게 직접 문의해 주시기 바랍니다.');
-					location.href = "/my";
+				alert('오후 6시 이후부터는 관리자에게 직접 문의해 주시기 바랍니다.');
 			}
+
+			
 
 		}
 
-		function delCabinet(idx) {
+		function delCabinet(idx, nowPage) {
 			var chk = confirm('사물함은 환불 적용이 되지 않습니다. \n그래도 취소하시려면 확인 버튼을 눌러주세요.');
 
 			if (chk == true) {
@@ -855,7 +848,6 @@ h3 {
 					success : function(result) {
 						if (result == 'success') {
 							alert('해당 사물함 예약이 취소되었습니다.');
-							location.href = "/my";
 						} else if (result == 'fail') {
 							alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
 						} else {
@@ -866,7 +858,8 @@ h3 {
 					error : function(error) {
 
 					}
-				})
+				});
+					fetch_book('/my/my_cabinet?nowPage=' + nowPage);
 			}
 		}
 		

@@ -4,148 +4,116 @@
 <jsp:include page="/commons/head.jsp" />
 <script>
 	//DB에서 예약된 좌석이랑 비교해서 체크박스 disabled
-	$()
-			.ready(
-					function() {
-						var size = document.getElementsByName('s_col').length;
-						console.log("size : " + size);
-						var booklist = '<c:out value='${booklist}' />';
+	$().ready(function() {
+		var size = document.getElementsByName('s_col').length;
+		console.log("size : " + size);
+		var booklist = '<c:out value='${booklist}' />';
+	
+		<c:forEach var='k' items='${booklist }'>
+		var bookseat = '${k.s_col }';
+	
+		for (var i = 0; i <= size; i++) {
+			//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+			if (bookseat == document.getElementsByName('s_col')[i].value) {
+				console.log("예약된 값 : " + bookseat);
+				$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+				$(document.getElementsByName('s_col')[i]).parents("td").addClass('eq');
+				break;
+			}
+		}
+		</c:forEach>
+	
+		//선택한 인원 수와 체크된 박스 수가 같을 때 나머지 체크박스 disabled
+		$(":checkbox").change(function() {
+			var cnt = $("#people").val(); //선택된 인원 수
+			console.log("체크된 좌석 : " + $(":checkbox:checked").val()); //체크값 확인ok
 
-						<c:forEach var='k' items='${booklist }'>
-						var bookseat = '${k.s_col }';
+			var chkVal = $(":checkbox:checked");
+			var chkLen = $(":checkbox:checked").length;
+			console.log("chkLen : " + chkLen);
+			if (cnt == 1) {
+				$("#msg").html("<span>A-" + $(":checkbox:checked").val() + "</span>");
 
-						for (var i = 0; i <= size; i++) {
-							//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
-							if (bookseat == document.getElementsByName('s_col')[i].value) {
-								console.log("예약된 값 : " + bookseat);
-								$(document.getElementsByName('s_col')[i]).attr(
-										'disabled', true);
-								break;
-							}
+				document.form1.test.value = $( ":checkbox:checked").val();
+				document.form1.chkLen.value = cnt;
+				document.form1.s_col_2.value = 0; //두번째 값
+
+			} else {
+				if (chkLen == 2) {
+					var test = "";
+					for (var i = 0; i < 2; i++) {
+						if (i == 0) {
+							test += chkVal[i].value + ",";
+						} else {
+							test += chkVal[i].value + "";
 						}
-						</c:forEach>
+					}
+					$("#msg").html("<span>A-" + test + "</span>");
+					console.log("선택한 좌석: " + test);
+					document.form1.test.value = test;
+					document.form1.chkLen.value = chkLen;
 
-						//선택한 인원 수와 체크된 박스 수가 같을 때 나머지 체크박스 disabled
-						$(":checkbox")
-								.change(
-										function() {
-											var cnt = $("#people").val(); //선택된 인원 수
-											console.log("체크된 좌석 : "
-													+ $(":checkbox:checked")
-															.val()); //체크값 확인ok
+					var arr = new Array;
+					arr = test.split(',');
+					console.log("arr : " + arr);
+					var fv = arr[0];
+					var sv = arr[1];
+					console.log("fv : " + fv + ", sv : " + sv);
+					document.form1.s_col_2.value = sv; //두번째 값
 
-											var chkVal = $(":checkbox:checked");
-											var chkLen = $(":checkbox:checked").length;
-											console.log("chkLen : " + chkLen);
-											if (cnt == 1) {
-												$("#msg")
-														.html(
-																"<span>A-"
-																		+ $(
-																				":checkbox:checked")
-																				.val()
-																		+ "</span>");
+				}
 
-												document.form1.test.value = $(
-														":checkbox:checked")
-														.val();
-												document.form1.chkLen.value = cnt;
-												document.form1.s_col_2.value = 0; //두번째 값
+			}
 
-											} else {
-												if (chkLen == 2) {
-													var test = "";
-													for (var i = 0; i < 2; i++) {
-														if (i == 0) {
-															test += chkVal[i].value
-																	+ ",";
-														} else {
-															test += chkVal[i].value
-																	+ "";
-														}
-													}
-													$("#msg")
-															.html(
-																	"<span>A-"
-																			+ test
-																			+ "</span>");
-													console.log("선택한 좌석: "
-															+ test);
-													document.form1.test.value = test;
-													document.form1.chkLen.value = chkLen;
+			if (cnt == $(":checkbox:checked").length) {
+				$(":checkbox:not(:checked)").attr("disabled", true);
 
-													var arr = new Array;
-													arr = test.split(',');
-													console.log("arr : " + arr);
-													var fv = arr[0];
-													var sv = arr[1];
-													console.log("fv : " + fv
-															+ ", sv : " + sv);
-													document.form1.s_col_2.value = sv; //두번째 값
+			} else {
+				$(":checkbox").removeAttr("disabled");
+				$("#msg").html("");
 
-												}
-
-											}
-
-											if (cnt == $(":checkbox:checked").length) {
-												$(":checkbox:not(:checked)")
-														.attr("disabled", true);
-
-											} else {
-												$(":checkbox").removeAttr(
-														"disabled");
-												$("#msg").html("");
-
-												<c:forEach var='k' items='${booklist }'>
-												var bookseat = '${k.s_col }';
-												for (var i = 0; i <= size; i++) {
-													//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
-													if (bookseat == document
-															.getElementsByName('s_col')[i].value) {
-														$(
-																document
-																		.getElementsByName('s_col')[i])
-																.attr(
-																		'disabled',
-																		true);
-														break;
-													}
-												}
-												</c:forEach>
-											}
-										});
-
-					});
+				<c:forEach var='k' items='${booklist }'>
+				var bookseat = '${k.s_col }';
+				for (var i = 0; i <= size; i++) {
+					//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+					if (bookseat == document.getElementsByName('s_col')[i].value) {
+						$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+						$(document.getElementsByName('s_col')[i]).parents("td").addClass('eq');
+						break;
+					}
+				}
+				</c:forEach>
+			}
+		});
+	
+	});
 </script>
 <script>
 	$(function() {
 		//인원수를 바꾸면 : db에 값이 있는건 disabled, 나머지는 체크해제
-		$("#people")
-				.change(
-						function() {
-							$(":checkbox").removeAttr("checked");
-							$(":checkbox").removeAttr("disabled");
-							$("#msg").html("");
+		$("#people").change(function() {
+			$(":checkbox").removeAttr("checked");
+			$(":checkbox").removeAttr("disabled");
+			$("#msg").html("");
 
-							var size = document.getElementsByName('s_col').length;
-							console.log("size : " + size);
-							var booklist = '<c:out value='${booklist}' />';
+			var size = document.getElementsByName('s_col').length;
+			console.log("size : " + size);
+			var booklist = '<c:out value='${booklist}' />';
 
-							<c:forEach var='k' items='${booklist }'>
-							var bookseat = '${k.s_col }';
+			<c:forEach var='k' items='${booklist }'>
+			var bookseat = '${k.s_col }';
 
-							for (var i = 0; i <= size; i++) {
-								//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
-								if (bookseat == document
-										.getElementsByName('s_col')[i].value) {
-									$(document.getElementsByName('s_col')[i])
-											.attr('disabled', true);
-									break;
-								}
-							}
-							</c:forEach>
+			for (var i = 0; i <= size; i++) {
+				//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
+				if (bookseat == document
+						.getElementsByName('s_col')[i].value) {
+					$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+					break;
+				}
+			}
+			</c:forEach>
 
-						});
+		});
 	});
 </script>
 
@@ -287,6 +255,8 @@ button:hover {
 #seat_table {
 	background-color: #f8f9fa;
 }
+
+.eq { background-color: #D8737F; }
 </style>
 
 </head>
@@ -503,30 +473,26 @@ button:hover {
 					<!-- 선택 정보 끝 -->
 
 					<div class="center" style="padding: 10px;">
-						<button type="button"
-							onclick="location.href='/book/selectSeat'">이전단계</button>
-						&nbsp;
+						<button type="button" onclick="location.href='/book/selectSeat'">이전단계</button>&nbsp;
 						<button type="button" onclick="next(this.form)">다음단계</button>
 					</div>
-					<br> <br> <input type="hidden" name="br_idx"
-						value="${bvo.br_idx }"> <input type="hidden"
-						name="roomnum" value="${bvo.roomnum }"> <input
-						type="hidden" name="sct_idx" value="1"> <input
-						type="hidden" name="sct_name" value="1인실"> <input
-						type="hidden" name="time_idx" value="${bvo.time_idx }"> <input
-						type="hidden" name="cabinet" value="${bvo.cabinet }"> <input
-						type="hidden" name="start_time" value="${bvo.start_time }">
+					<br><br>
+					<input type="hidden" name="br_idx" value="${bvo.br_idx }">
+					<input type="hidden" name="roomnum" value="${bvo.roomnum }">
+					<input type="hidden" name="sct_idx" value="1">
+					<input type="hidden" name="sct_name" value="1인실">
+					<input type="hidden" name="time_idx" value="${bvo.time_idx }">
+					<input type="hidden" name="cabinet" value="${bvo.cabinet }">
+					<input type="hidden" name="start_time" value="${bvo.start_time }">
 					<input type="hidden" name="end_time" value="${bvo.end_time }">
-					<input type="hidden" name="s_idx" value="${bvo.s_idx }"> <input
-						type="hidden" name="test" value=""> <input type="hidden"
-						name="chkLen" value=""> <input type="hidden"
-						name="s_col_2" value="">
+					<input type="hidden" name="s_idx" value="${bvo.s_idx }">
+					<input type="hidden" name="test" value="">
+					<input type="hidden" name="chkLen" value="">
+					<input type="hidden" name="s_col_2" value="">
 				</form>
 
-			</div>
-			<!-- 박스 아웃사이드 끝 -->
+			</div><!-- 박스 아웃사이드 끝 -->
 		</div>
-	</div>
-	<!-- 바디 콘테이너 끝 -->
+	</div><!-- 바디 콘테이너 끝 -->
 </body>
 </html>
