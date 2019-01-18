@@ -34,16 +34,16 @@ body {
 		<!-- 아이디 찾기: 찾은 아이디 값이 있을 때 -->
 		<c:if test="${not empty findId }">
 			<div style="margin-top: 50px;">
-				<h3>아이디 찾기 결과</h3>
+				<h3 class="text-center">아이디 찾기 결과</h3>
 				<hr>
 				<p class="center margintop">
 					회원님의 아이디는 <b>${findId }</b> 입니다.
 				</p>
 				<div class="center margintop">
-					<button type="button" class="btn btn-outline-dark btn-lg mr-2"
-						onclick="location.href='/'">메인으로가기</button>
-					<button type="button" class="btn btn-lg"
-						style="background-color: #008374; color: white;"
+					<button type="button" class="btn btn-outline-dark mr-2"
+						onclick="location.href='/findIdPw'">비밀번호찾기</button>
+					<button type="button" class="btn"
+						style="background-color: #475C7A; color: white;"
 						data-toggle="modal" href="#login">로그인하기</button>
 				</div>
 			</div>
@@ -51,12 +51,15 @@ body {
 		<!-- 비밀번호 찾기 -->
 		<c:if test="${not empty findpw }">
 			<div style="margin-top: 50px;">
-				<h3>비밀번호 찾기 결과</h3>
+				<h3 class="text-center">비밀번호 찾기 결과</h3>
 				<hr>
 				<p class="center">입력하신 이메일로 임시 비밀번호를 발송했습니다.</p>
 				<p class="center">로그인 후 반드시 비밀번호를 변경해주세요.</p>
 				<div class="center margintop">
-					<button type="button" class="btn btn-outline-dark btn-lg mr-2"
+					<button type="button" class="btn"
+						style="background-color: #475C7A; color: white;"
+						data-toggle="modal" href="#login">로그인하기</button>
+					<button type="button" class="btn btn-outline-dark mr-2"
 						onclick="location.href='/'">메인으로가기</button>
 				</div>
 			</div>

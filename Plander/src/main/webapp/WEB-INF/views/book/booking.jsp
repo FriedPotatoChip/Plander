@@ -427,7 +427,7 @@
 						<div id="calendar" class="container">
 							<div class="form-group">
 								<div class='input-group date' id='datetimepicker6'>
-									<input type='text' name="start_time" class="form-control" />
+									<input type='text' name="start_time" class="form-control" autocomplete="off"/>
 									<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -435,7 +435,7 @@
 							</div>
 							<div class="form-group">
 								<div class='input-group date' id='datetimepicker7'>
-									<input type='text' name="end_time" class="form-control" />
+									<input type='text' name="end_time" class="form-control" autocomplete="off"/>
 									<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar"></span>
 									</span>

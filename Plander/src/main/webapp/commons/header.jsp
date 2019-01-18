@@ -86,8 +86,7 @@ a {
 				<li class="nav-item"><a class="nav-link" href="/operation">운영안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="/guide">이용안내</a></li>
 				<li class="nav-item"><a class="nav-link" href="/book">예약하기</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"
-					onclick="loginChk()">모집게시판</a></li>
+				<li class="nav-item"><a class="nav-link" href="/recruit">모집게시판</a></li>
 				<li class="nav-item">
 					<div class="dropdown">
 						<a class="nav-link dropbtn" href="#">게시판</a>
@@ -568,7 +567,7 @@ a {
 <!-- 네이버 로그인 api -->
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId({
-		clientId : "네이버클라", /* 클라이언트 ID (숨겨두기) */
+		clientId : "네아로클라", /* 클라이언트 ID (숨겨두기) */
 		callbackUrl : "http://www.turtlesmiracle.ga/TMS/naverCallback",
 		isPopup : true, /* 팝업을 통한 연동처리 여부 */
 		callbackHandle : true,

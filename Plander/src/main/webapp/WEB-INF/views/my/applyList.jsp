@@ -79,7 +79,8 @@ a {
 						<td><a href="/recruitDetail?idx=${applyList.rc_idx }">${applyList.rc_title }</a></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${applyList.rc_regdate }" /></td>
-						<td>${applyList.id }</td>
+						<td><div class="idDiv" onclick="showBox(event, this, 'chk')"
+								userId="${applyList.id }">${applyList.id }</div></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${applyList.ap_regdate }" /></td>
 					</tr>

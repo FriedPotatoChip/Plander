@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
 <jsp:include page="/commons/head.jsp" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <meta charset="UTF-8">
 <style>
 	a { text-decoration: none; color: #4d4d4d; }
@@ -67,7 +65,7 @@
 		display: none;
 		background-color: #ffffff;
 		border: solid 2px #d0d0d0;
-		width: 130px;
+		width: 150px;
 		height: 120px;
 		padding: 10px;
 		padding-top: 18px; padding-left: 15px;
@@ -130,7 +128,11 @@ $(document).ready(function(){
 							html += "<b>";
 						}
 						html += "<a style='font-size: 0.9rem;' href='/boardDetail?idx="+value.b_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
-						html += value.b_title;
+						if("${board.b_idx}" == value.b_idx){
+							html += '<b style="font-size: 1.1em;">'+ value.b_title + '</b>';
+						} else {
+							html += value.b_title;
+						}
 						if (value.cnt != 0){
 							html += "<span style='color: #D8737F;'>["+value.cnt+"]</span>";
 						} 
@@ -216,6 +218,9 @@ $(document).ready(function(){
 			</c:if>
 		</div>	
 	
+		<c:if test="${empty usersVO }">
+			<span style="color: red; font-size: 0.8em;">&#8251;댓글 기능은 로그인 후 이용 가능합니다.</span>
+		</c:if>
 		<hr>
 		<!-- 댓글 출력 -->
 		<div id="comments">
@@ -592,9 +597,9 @@ $(document).ready(function(){
 		<div>
 			<span onClick="closeLayer()" style="cursor:pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br>
-		<a id="userProfile" href="#">회원 정보 보기</a><br>
-		<a id="showWritten" href="#">작성글 보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
+		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
+		<a id="showWritten" href="#"><i class="far fa-list-alt"></i>&nbsp;작성글 보기</a><br>
 	</div>
 <script>
 function closeLayer() {

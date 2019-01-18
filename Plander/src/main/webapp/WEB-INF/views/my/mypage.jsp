@@ -10,16 +10,13 @@
 <!-- Jcrop(사진 크롭) -->
 <script
 	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 <script>
 	//비밀번호 확인
 	function pwchk() {
 		var pw = $('#password').val();
-		var pwchk = $
-		{
-			user.password
-		}
-		;
+		var pwchk = ${user.password};
 
 		if (pw != pwchk || pwchk == "") {
 			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -40,11 +37,11 @@
 </script>
 
 <style>
-body {
+/* body {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
-}
+} */
 
 .nav_btn {
 	margin-right: 10px;
@@ -52,14 +49,14 @@ body {
 	float: right;
 }
 
-.container {
+/* .container {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
 	text-decoration: none;
 	margin: auto;
 }
-
+ */
 a {
 	color: #475C7A;
 }
@@ -159,17 +156,22 @@ h3 {
 	display: none;
 	background-color: #ffffff;
 	border: solid 2px #d0d0d0;
-	width: 130px;
-	height: 120px;
-	padding: 10px;
-	padding-top: 18px;
-	padding-left: 15px;
+	width: 150px;
+	height: 90px;
+	padding: 20px 10px 0 10px;
+	font-size: 17px;
 }
-
+.popupLayer	a { 
+	text-decoration: none; 
+	font-weight: 700;
+	font-size: 17px;
+	color: #666;
+}
 .popupLayer div {
 	position: absolute;
 	top: 0px;
-	right: 5px
+	right: 5px;
+	font-size: 17px;
 }
 </style>
 </head>
@@ -331,7 +333,7 @@ h3 {
 							<tr>
 								<th>회원주소&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="text" id="zipNo" style="display: inline;"
-									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
+									class="col-sm-8 form-control mr-2" name="zipNo" value="${user.zipNo }" readonly>
 									<button type="button" class="btn btn-outline-danger"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
@@ -488,11 +490,7 @@ h3 {
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
-			var pwchk = $
-			{
-				user.password
-			}
-			;
+			var pwchk = ${user.password};
 
 			if (pw != pwchk || pwchk == "") {
 				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -664,20 +662,42 @@ h3 {
 
 			fetch_book('/my/recvMsg?nowPage=' + nowPage);
 		}
+		function sendMsgDel(sm_idx, nowPage) {
+			$.ajax({
+				url : '/sendMsgDel',
+				type : 'post',
+				data : {
+					'sm_idx' : sm_idx
+				},
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
+						alert("쪽지를 삭제했습니다.");
+					} else {
+						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				},
+				error : function(error) {
+					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+
+			fetch_book('/my/sendMsg?nowPage=' + nowPage);
+		}
 	</script>
 	<div class="popupLayer">
 		<div>
 			<span onClick="closeLayer()"
 				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br> <a id="userProfile"
-			href="#">회원 정보 보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
+		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
 	</div>
 	<script>
 		function closeLayer(obj) {
 			$(".popupLayer").hide();
 		}
-		function showBox(e, tag) {
+		function showBox(e, tag, chk) {
 			console.log("idDiv 클릭됨");
 			var sWidth = window.innerWidth;
 			var sHeight = window.innerHeight;
@@ -694,6 +714,9 @@ h3 {
 					+ 5
 					+ (document.documentElement.scrollTop ? document.documentElement.scrollTop
 							: document.body.scrollTop);
+			if (chk == 'chk'){
+				divTop += 89;
+			}
 			console.log("X: " + e.clientX);
 			console.log("Y: " + e.clientY);
 
@@ -762,8 +785,7 @@ h3 {
 			})
 		}
 
-		function delSeat(idx, start_time) {
-			
+		function delSeat(idx, start_time, nowPage) {
 
 			var st = new Date(start_time);
 			console.log('start_time: ' + st);
@@ -773,7 +795,7 @@ h3 {
 
 			if (hour < 18) {
 				var chk = confirm('환불 금액에 관련된 사항은 미리 안내 데스크를 통해 안내 받은 후 취소하시기 바랍니다. \n충분히 공지받으셨다면 확인 버튼을 눌러 마저 취소 작업을 진행해 주세요.');
-				
+
 				if (chk == true) {
 
 					$
@@ -787,7 +809,6 @@ h3 {
 								success : function(result) {
 									if (result == 'success') {
 										alert('해당 좌석 예약이 취소되었습니다.');
-										location.href = "/my";
 									} else if (result == 'fail') {
 										alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
 									} else {
@@ -798,19 +819,22 @@ h3 {
 								error : function(error) {
 
 								}
-							})
+							});
 				} else {
 					alert('오후 6시 이전이라 처리는 가능하나, 처리 중 오류가 발생하였습니다.');
-					location.href = "/my";
 				}
+				
+				fetch_book('/my/my_seat?nowPage=' + nowPage);
+				
 			} else {
-					alert('오후 6시 이후부터는 관리자에게 직접 문의해 주시기 바랍니다.');
-					location.href = "/my";
+				alert('오후 6시 이후부터는 관리자에게 직접 문의해 주시기 바랍니다.');
 			}
+
+			
 
 		}
 
-		function delCabinet(idx) {
+		function delCabinet(idx, nowPage) {
 			var chk = confirm('사물함은 환불 적용이 되지 않습니다. \n그래도 취소하시려면 확인 버튼을 눌러주세요.');
 
 			if (chk == true) {
@@ -824,7 +848,6 @@ h3 {
 					success : function(result) {
 						if (result == 'success') {
 							alert('해당 사물함 예약이 취소되었습니다.');
-							location.href = "/my";
 						} else if (result == 'fail') {
 							alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
 						} else {
@@ -835,8 +858,14 @@ h3 {
 					error : function(error) {
 
 					}
-				})
+				});
+					fetch_book('/my/my_cabinet?nowPage=' + nowPage);
 			}
+		}
+		
+		function openWindow(rm_idx){
+			$("#span"+rm_idx).css("display", "block");
+			window.open('/recvMsg?rm_idx='+rm_idx, '받은 쪽지', 'width=500, height=600');
 		}
 	</script>
 </body>
