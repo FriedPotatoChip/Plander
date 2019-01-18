@@ -24,7 +24,6 @@
 		$(room[1]).click(function() {
 			$('#userTicket').hide();
 			$('#nope').prop("checked", true);
-			$("input[name='start_time']").prop('value', '');
 			$("input[name='end_time']").prop('value', '');
 		});
 		

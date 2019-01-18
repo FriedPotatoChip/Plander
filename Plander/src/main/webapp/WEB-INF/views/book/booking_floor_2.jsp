@@ -16,8 +16,8 @@
 			//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 			if (bookseat == document.getElementsByName('s_col')[i].value) {
 				console.log("예약된 값 : " + bookseat);
-				$(document.getElementsByName('s_col')[i]).attr(
-						'disabled', true);
+				$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+				$(document.getElementsByName('s_col')[i]).parents("td").addClass('eq');
 				break;
 			}
 		}
@@ -78,6 +78,7 @@
 					//예약된 좌석과 디비의 s_col 값이 같은 건 disabled
 					if (bookseat == document.getElementsByName('s_col')[i].value) {
 						$(document.getElementsByName('s_col')[i]).attr('disabled', true);
+						$(document.getElementsByName('s_col')[i]).parents("td").addClass('eq');
 						break;
 					}
 				}
@@ -254,6 +255,8 @@ button:hover {
 #seat_table {
 	background-color: #f8f9fa;
 }
+
+.eq { background-color: #D8737F; }
 </style>
 
 </head>
