@@ -85,7 +85,7 @@ a {
 						</td>
 						<td><button type="button"
 								class="btn btn-outline-danger btn-sm"
-								onclick="delSeat(${seat.bk_idx }, '${seat.start_time }')">예약취소</button></td>
+								onclick="delSeat(${seat.bk_idx }, '${seat.start_time }', '${page.nowPage }')">예약취소</button></td>
 					</tr>
 				</c:forEach>
 

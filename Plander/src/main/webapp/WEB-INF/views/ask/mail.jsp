@@ -56,7 +56,7 @@
 			<div class="form-group">
 				<label for="exampleFormControlTextarea1">[필수] 개인정보 수집 및 이용안내</label>
 				<textarea class="form-control" id="exampleFormControlTextarea1"
-					rows="5">㈜거기스는 아래의 목적으로 개인정보를 수집 및 이용하며, 회원의 개인정보를 안전하게 취급하는데 최선을 다합니다. 문의내용 확인 및 답변에 대한 의사소통 경로 확보
+					rows="5" readonly>㈜거기스는 아래의 목적으로 개인정보를 수집 및 이용하며, 회원의 개인정보를 안전하게 취급하는데 최선을 다합니다. 문의내용 확인 및 답변에 대한 의사소통 경로 확보
 수집항목: 이름, 연락처, 메일주소
 보유기간: 이용자의 개인정보는 원칙적으로 개인정보의 수집 및 이용 목적이 달성되면 지체 없이 파기하며 보유 기간은 최대 3년을 넘기지 않는 것을 원칙으로 합니다.</textarea>
 				<div style="margin-top: 20px;">

@@ -85,7 +85,7 @@ a {
 							<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd" /></td>
 						<td><button type="button"
 								class="btn btn-outline-danger btn-sm"
-								onclick="delCabinet(${cabinet.ckb_idx})">예약취소</button></td>
+								onclick="delCabinet(${cabinet.ckb_idx}, '${page.nowPage }')">예약취소</button></td>
 					</tr>
 				</c:forEach>
 
