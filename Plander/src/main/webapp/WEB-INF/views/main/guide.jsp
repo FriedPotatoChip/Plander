@@ -137,10 +137,12 @@ strong {
 
 		<p class="bold" style="color: #475C7A; font-size: 18px;">이용안내</p>
 		<hr>
+		<!-- 
 		<img src="/resources/images/coffee.png" alt="coffee">&nbsp;&nbsp;<span>카페</span>&nbsp;&nbsp;&nbsp;
 		<img src="/resources/images/wifi.png" alt="wifi">&nbsp;&nbsp;<span>와이파이(5G)</span>&nbsp;&nbsp;&nbsp;
 		<img src="/resources/images/copy.png" alt="copy">&nbsp;&nbsp;<span>복합기(유료)</span>&nbsp;&nbsp;&nbsp;
 		<img src="/resources/images/toilet.png" alt="toilet">&nbsp;&nbsp;<span>남여화장실</span>
+		 -->
 		<br><br>
 		<p>- <strong>예약하기</strong>와 <strong>모집 게시판</strong> 이용은 로그인한 회원만 가능합니다.</p>
 		<p>- <strong>자유게시판</strong>은 회원 여부에 상관없이 누구나 작성 및 열람이 가능합니다.</p>

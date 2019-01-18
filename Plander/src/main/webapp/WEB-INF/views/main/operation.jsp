@@ -114,6 +114,7 @@ h3 {
 						<span class="uio_title_bullet theme_background"></span>
 						운영안내 및 운영방침
 					</h3>
+					<br>
 					<div style="margin: auto; text-align: center;">
 						<img src="/resources/images/운영안내.jpg" alt="운영안내 "
 						width="80%" style="padding-bottom: 10px; border: 1px solid black;">
