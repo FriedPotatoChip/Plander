@@ -116,8 +116,8 @@ h3 {
 					</h3>
 					<br>
 					<div style="margin: auto; text-align: center;">
-						<img src="/resources/images/운영안내.jpg" alt="운영안내 "
-						width="80%" style="padding-bottom: 10px; border: 1px solid black;">
+						<img src="/resources/images/운영안내1-01.jpg" alt="운영안내 "
+						width="90%" style="padding-bottom: 10px;">
 					</div>
 					<!-- 
 					<div class="main_area current" data-cid="b7v11vhj"
