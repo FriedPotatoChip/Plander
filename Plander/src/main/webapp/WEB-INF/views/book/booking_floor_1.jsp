@@ -19,7 +19,7 @@
 			if (bookseat == document.getElementsByName('s_col')[i].value) {
 				console.log("예약된 값 : " + bookseat);
 				$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-				$(document.getElementsByName('s_col')[i]).parents("div").addClass('eq'); //확인할것
+				$(document.getElementsByName('s_col')[i]).parents("p").addClass('eq'); //확인할것
 				break;
 			}
 		}
@@ -44,7 +44,7 @@
 				for (var i = 0; i <= size; i++) {
 					if (bookseat == document.getElementsByName('s_col')[i].value) {
 						$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-						$(document.getElementsByName('s_col')[i]).parents("div").addClass('eq');
+						$(document.getElementsByName('s_col')[i]).parents("p").addClass('eq');
 						console.log("if문 안의 s_col : " + bookseat);
 						break;
 					}

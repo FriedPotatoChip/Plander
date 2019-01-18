@@ -443,7 +443,7 @@
 				document.form1.chkLen.value = chkLen;
 
 				if (chkLen == 2) {
-					$('#bookprice').html('<span>' + (sum * 2) + '('+sum+' * 2) 원</span>');
+					$('#bookprice').html('<span>' + (sum * 2) + ' 원<br><span style="font-size: 0.8em;">('+sum+' x 2)</span></span>');
 					sum *= 2;
 				} else {
 					$('#bookprice').html('<span>' + sum + '원</span>');
