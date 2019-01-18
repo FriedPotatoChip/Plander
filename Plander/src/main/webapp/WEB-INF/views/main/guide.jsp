@@ -82,7 +82,29 @@ h3 {
 	color: #6c4a3f;
 }
 </style>
-
+<script>
+	$(function() {
+		var imgObj = null;
+		var animate;
+		
+		imgObj = document.getElementById('turtle');
+		imgObj.style.position = 'relative';
+		imgObj.style.left = '0px';
+		
+		function moveRight(){
+			imgObj.style.left = parseInt(imgObj.style.left) + 1 + 'px';
+			animate = setTimeout(moveRight, 50);
+		
+			if(parseInt(imgObj.style.left) == 1000){
+				imgObj.style.left = '0px';
+			}
+		
+		}
+		
+		moveRight();
+		
+	});
+</script>
 </head>
 <body>
 	<!-- Header -->
@@ -104,15 +126,19 @@ h3 {
 	<!-- 본문  -->
 	<!-- 게시판 제목 -->
 	<div class="fc_content content _content_body">
+		<div style="height: 100px; width: 100%;">
+			<img src="/resources/images/turtle.png" alt="turtle" id="turtle" />
+		</div>
+
 		<p class="bold" style="color: #475C7A; font-size: 18px;">이용안내</p>
 		<hr>
 		<p>- 예약하기와 모집 게시판 이용은 로그인한 회원만 가능합니다.</p>
 		<p>- 자유게시판은 회원 여부에 상관없이 누구나 작성 및 열람이 가능합니다.</p>
 		<p>- 후기게시판은 회원 중 해당 홈페이지로 예약 후 한 번이라도 이용을 마친 고객에 한하여 작성 가능합니다.</p>
-		<p>- 문의사항이 있으시면 먼저 공지사항에 올라온 글을 확인해주시고, 그래도 원하는 답변이 없을 시
-		전화, 쪽지, 이메일을 통한 문의를 하실 수 있습니다.</p>
-		
-		<br><br>
+		<p>- 문의사항이 있으시면 먼저 공지사항에 올라온 글을 확인해주시고, 그래도 원하는 답변이 없을 시 전화, 쪽지,
+			이메일을 통한 문의를 하실 수 있습니다.</p>
+
+		<br> <br>
 		<div class="price">
 			<p class="bold" style="color: #475C7A; font-size: 18px;">시간당 가격</p>
 			<hr>

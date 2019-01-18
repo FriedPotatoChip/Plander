@@ -16,11 +16,7 @@
 	//비밀번호 확인
 	function pwchk() {
 		var pw = $('#password').val();
-		var pwchk = $
-		{
-			user.password
-		}
-		;
+		var pwchk = ${user.password};
 
 		if (pw != pwchk || pwchk == "") {
 			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -337,7 +333,7 @@ h3 {
 							<tr>
 								<th>회원주소&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="text" id="zipNo" style="display: inline;"
-									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
+									class="col-sm-8 form-control mr-2" name="zipNo" value="${user.zipNo }" readonly>
 									<button type="button" class="btn btn-outline-danger"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
@@ -494,11 +490,7 @@ h3 {
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
-			var pwchk = $
-			{
-				user.password
-			}
-			;
+			var pwchk = ${user.password};
 
 			if (pw != pwchk || pwchk == "") {
 				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
