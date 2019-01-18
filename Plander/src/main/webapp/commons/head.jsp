@@ -5,7 +5,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<link rel="icon" type="image/png" href="/resources/images/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" sizes="32x32" href="/resources/fav/favicon-32x32.png">
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport"
