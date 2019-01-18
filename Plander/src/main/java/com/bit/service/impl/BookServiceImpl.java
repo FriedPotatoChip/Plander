@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CabinetVO;
+import com.bit.domain.PaymentVO;
 import com.bit.domain.SeatsVO;
 import com.bit.mapper.BookMapper;
 import com.bit.service.BookService;
@@ -97,6 +98,11 @@ public class BookServiceImpl implements BookService {
 		map.put("br_idx", br_idx);
 		
 		return bookmapper.some_seatnum(map);
+	}
+
+	@Override
+	public boolean insertPayment(Map<String, Object> map) {
+		return bookmapper.insertPayment(map);
 	}
 	
 

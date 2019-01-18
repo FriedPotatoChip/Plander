@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.services.apigateway.model.Model;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CouponVO;
+import com.bit.domain.PaymentVO;
 import com.bit.domain.PriceVO;
 import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
 import com.bit.service.BoardService;
+import com.bit.service.BookService;
 import com.bit.service.CommonService;
 import com.bit.service.RecruitService;
-import com.bit.utils.UploadFileUtils;
 import com.bit.utils.UploadFileUtilsS3;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +41,10 @@ public class AjaxController {
 	private RecruitService recService;
 	@Autowired
 	private BoardService boardService;
-
+	@Autowired
+	private BookService bookService;
+	
+	
 	@RequestMapping("/getPrice")
 	public List<PriceVO> getPrice() {
 		return comService.getPriceList();
@@ -180,6 +182,17 @@ public class AjaxController {
 
 		log.info(user_imgPath);
 		return user_imgPath;
+	}
+	
+	@ResponseBody
+	@RequestMapping("paymentAjax")
+	public String paymenrAjax(@RequestParam("u_idx")int u_idx, @RequestParam("receipt")String receipt) {
+		System.out.println("ajax 진입 성공");
+		Map<String, Object> map = new HashMap<>();
+		map.put("u_idx", u_idx);
+		map.put("receipt", receipt);
+		bookService.insertPayment(map);
+		return "success";
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.bit.domain.BookingCbVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CabinetVO;
+import com.bit.domain.PaymentVO;
 import com.bit.domain.SeatsVO;
 
 public interface BookMapper {
@@ -37,7 +38,8 @@ public interface BookMapper {
 	//s_idx (두명)
 	public SeatsVO some_seatnum(Map<String, Integer> map);
 	
-	
+	// payment 인서트
+	public boolean insertPayment(Map<String, Object> map);
 	
 	
 }

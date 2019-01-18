@@ -120,6 +120,17 @@
 		AND id=#{id} and to_char(b.bk_regdate, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
 	</select>
 
+
+
+	<!-- payment insert -->
+	<insert id="insertPayment" parameterType="map">
+		INSERT INTO PAYMENT (P_IDX, BK_IDX, PAYMENT, U_IDX, RECEIPT)
+				VALUES (
+							PAYMENT_SEQ.NEXTVAL, (SELECT NVL(MAX(bk_idx),0)+1 FROM BOOKING), 
+							'카드', #{u_idx}, #{receipt}
+						)	 
+	</insert>
+	
 </mapper>
 
 
