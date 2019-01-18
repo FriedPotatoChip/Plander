@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image/png" href="/resources/images/favicon-16x16.png" sizes="16x16" />
 <meta charset="UTF-8">
 <title>관리자</title>
 
@@ -113,9 +114,9 @@ h3 {
 <body>
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin">Admin page</a>
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap"><a class="nav-link" href="/TMS">logout</a></li>
+			<li class="nav-item text-nowrap"><a class="nav-link" href="/">logout</a></li>
 		</ul>
 	</nav>
 
@@ -125,33 +126,33 @@ h3 {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
+						<li class="nav-item"><a class="nav-link" href="/admin">
 								<span data-feather="users"></span> Customers <span
 								class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
+							href="/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+							href="/admin/Chart"> <span data-feather="home"></span>
 								Reservation
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+							href="/admin/Seats"> <span data-feather="bar-chart-2"></span>
 								Seats
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+							href="/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Message"> <span data-feather="file"></span>
+							href="/admin/Message"> <span data-feather="file"></span>
 								Message
 						</a></li>
 					</ul>

@@ -77,11 +77,11 @@ a {
 					<tr>
 						<td>${coupon.cb_name }</td>
 						<td>${coupon.cb_discount }<c:choose>
-							<c:when test="${coupon.cb_distype == percent || coupon.cb_distype == PERCENT }">
+							<c:when test="${coupon.cb_distype == 'percent' || coupon.cb_distype == 'PERCENT' }">
 								%
 							</c:when>
 							<c:otherwise>
-							원
+								원
 							</c:otherwise>
 							</c:choose>
 						</td>

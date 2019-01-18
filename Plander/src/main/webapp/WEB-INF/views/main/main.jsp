@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html> 
 <head>
+<link rel="icon" type="image/png" sizes="32x32" href="/resources/fav/favicon-32x32.png">
 <title>거북이의기적</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">

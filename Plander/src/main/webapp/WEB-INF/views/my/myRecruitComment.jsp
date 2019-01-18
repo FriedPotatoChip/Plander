@@ -81,7 +81,8 @@ a {
 						<td><a
 							href="/recruitDetail?idx=${my_recruit_comment.rc_idx }">${my_recruit_comment.rc_title }</a></td>
 						<td>${my_recruit_comment.c_content }</td>
-						<td>${my_recruit_comment.id }</td>
+						<td><div class="idDiv" onclick="showBox(event, this, 'chk')"
+								userId="${my_recruit_comment.id }">${my_recruit_comment.id }</div></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${my_recruit_comment.c_regdate }" /></td>
 					</tr>

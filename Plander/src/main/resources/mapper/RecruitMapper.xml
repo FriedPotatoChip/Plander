@@ -118,8 +118,8 @@
 		
 		<!-- 모집게시판 신청 insert -->
 		<insert id="insertApply" parameterType="map">
-			INSERT INTO APPLY (AP_IDX, ID, RC_IDX) 
-						VALUES (APPLY_SEQ.NEXTVAL, #{id}, #{rc_idx})
+			INSERT INTO APPLY (AP_IDX, ID, RC_IDX, AP_REGDATE) 
+						VALUES (APPLY_SEQ.NEXTVAL, #{id}, #{rc_idx}, sysdate)
 		</insert>
 		
 		<!-- 모집글 삭제 -->

@@ -168,10 +168,10 @@ tr:last-child td {
 				<c:forEach var="msg" items="${list }">
 					<tr>
 						<td><a href="#"
-							onclick="window.open('/TMS/recvMsg?rm_idx=${msg.sm_idx }', '받은 쪽지', 'width=500, height=500'); return false;">${msg.title }</a>
+							onclick="window.open('/recvMsg?rm_idx=${msg.sm_idx }', '받은 쪽지', 'width=500, height=600'); return false;">${msg.title }</a>
 						</td>
 						<td><div class="idDiv" userId="${msg.recv_id }"
-								onclick="showBox(event, this)">${msg.recv_id }</div></td>
+								onclick="showBox(event, this)" style="display: inline-block;">${msg.recv_id }</div></td>
 						<td>${msg.content }</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${msg.regdate }" /></td>
@@ -185,10 +185,10 @@ tr:last-child td {
 						<c:if test="${page.chkStartPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=1')">〈</a></li>
+								onclick="fetch_book('/admin/sendMsg?nowPage=1')">〈</a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.startPage-1 }')"><span
+								onclick="fetch_book('/admin/sendMsg?nowPage=${page.startPage-1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 						</c:if>
 
@@ -197,23 +197,23 @@ tr:last-child td {
 							<c:if test="${p == page.nowPage }">
 								<li class="page_edge now"><a class="p-n now"
 									href="javascript:click()"
-									onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/admin/sendMsg?nowPage=${p }')">${p }</a></li>
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li class="page_edge"><a class="p-n"
 									href="javascript:click()"
-									onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${p }')">${p }</a></li>
+									onclick="fetch_book('/admin/sendMsg?nowPage=${p }')">${p }</a></li>
 							</c:if>
 						</c:forEach>
 
 						<c:if test="${page.chkEndPage }">
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.endPage+1 }')"><span
+								onclick="fetch_book('/admin/sendMsg?nowPage=${page.endPage+1 }')"><span
 									style="font-size: 0.5em;">…</span></a></li>
 							<li class="page_edge"><a class="p-n"
 								href="javascript:click()"
-								onclick="fetch_book('/TMS/admin/sendMsg?nowPage=${page.lastPage }')">〉</a></li>
+								onclick="fetch_book('/admin/sendMsg?nowPage=${page.lastPage }')">〉</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -276,7 +276,7 @@ tr:last-child td {
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						}
-						window.open("/TMS/sendMsg?recv_id=" + userId, "쪽지 보내기",
+						window.open("/sendMsg?recv_id=" + userId, "쪽지 보내기",
 								"width=500, height=500");
 					});
 			$("#userProfile").click(
@@ -286,7 +286,7 @@ tr:last-child td {
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						}
-						window.open("/TMS/profileSummary?id=" + userId,
+						window.open("/profileSummary?id=" + userId,
 								"회원 정보", "width=500, height=500");
 					});
 		}

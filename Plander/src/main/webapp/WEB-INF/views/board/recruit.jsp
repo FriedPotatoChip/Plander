@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <style>
 	table { text-align: center; }
 	.center { text-align: center; }
@@ -84,7 +85,7 @@
 		display: none;
 		background-color: #ffffff;
 		border: solid 2px #d0d0d0;
-		width: 130px;
+		width: 150px;
 		height: 120px;
 		padding: 20px 10px 0 10px;
 		font-size: 17px;
@@ -290,9 +291,9 @@
 			<span onClick="closeLayer()"
 			style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br>
-		<a id="userProfile" href="#">회원 정보 보기</a><br>
-		<a id="showWritten" href="#">작성글 보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
+		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
+		<a id="showWritten" href="#"><i class="far fa-list-alt"></i>&nbsp;작성글 보기</a><br>
 	</div>
 
 <script>

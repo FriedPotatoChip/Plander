@@ -3,107 +3,97 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/commons/head.jsp" />
 <style>
-body {
-	font-family: 'NanumSquare', sans-serif;
-	font-weight: 400;
-	color: #666;
-}
-
-h5 {
-	font-weight: 700;
-	font-size: 17px;
-}
-
-.center {
-	text-align: center;
-}
-
-/* 여기 밑으로 예약 헤더 CSS */
-#chk a {
-	text-decoration: none;
-}
-
-#chk {
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-ul>li {
-	float: left;
-	list-style-type: none;
-	padding: 0 5% 0 5.5%;
-	text-align: center;
-	margin-bottom: 20px;
-}
-
-ul>li>a {
-	font-size: 1.1em;
-}
-
-#chk::after {
-	content: "";
-	clear: both;
-	display: table;
-}
-/* 선택 안할 시 */
-.select {
-	color: gray;
-}
-
-.back {
-	background-color: gray;
-	color: white;
-	padding: 0 8px 0 8px;
-	border-radius: 25px;
-	font-size: 15px;
-}
-
-/* 현재 페이지 */
-.click {
-	color: #475C7A;
-	font-size: 17px;
-}
-
-.noback {
-	background-color: #D8737F;
-	color: white;
-	padding: 0 8px 0 8px;
-	border-radius: 25px;
-	font-size: 17px;
-}
-/* 예약 헤더 CSS 끝 */
-/* 버튼 */
-button {
-	display: inline-block;
-	padding: 6px 12px;
-	border-radius: 4px;
-	font-size: 14px;
-	text-align: center;
-	background-color: white;
-	border: 1px solid #D8737F;
-	cursor: pointer;
-}
-
-button:hover {
-	border: 1px solid #D8737F;
-	background-color: #D8737F;
-	color: white;
-}
-/* 버튼 끝 */
-.opt {
-	display: inline-block;
-	padding: .375rem 1.75rem .375rem .75rem;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #4d4d4d;
-	vertical-align: middle;
-	border-radius: .25rem;
-}
-
-#totalTable {
-	background-color: #f8f9fa;
-}
+	body {
+		font-family: 'NanumSquare', sans-serif;
+		font-weight: 400;
+		color: #666;
+	}
+	
+	h5 {
+		font-weight: 700;
+		font-size: 17px;
+	}
+	
+	.center { text-align: center; }
+	
+	/* 여기 밑으로 예약 헤더 CSS */
+	#chk a { text-decoration: none; }
+	#chk {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	ul>li {
+		float: left;
+		list-style-type: none;
+		padding: 0 5% 0 5.5%;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	
+	ul>li>a { font-size: 1.1em; }
+	
+	#chk::after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+	/* 선택 안할 시 */
+	.select { color: gray; }
+	.back {
+		background-color: gray;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 15px;
+	}
+	
+	/* 현재 페이지 */
+	.click {
+		color: #475C7A;
+		font-size: 17px;
+	}
+	
+	.noback {
+		background-color: #D8737F;
+		color: white;
+		padding: 0 8px 0 8px;
+		border-radius: 25px;
+		font-size: 17px;
+	}
+	/* 예약 헤더 CSS 끝 */
+	
+	/* 버튼 */
+	button {
+		display: inline-block;
+		padding: 6px 12px;
+		border-radius: 4px;
+		font-size: 14px;
+		text-align: center;
+		background-color: white;
+		border: 1px solid #D8737F;
+		cursor: pointer;
+	}
+	
+	button:hover {
+		border: 1px solid #D8737F;
+		background-color: #D8737F;
+		color: white;
+	}
+	/* 버튼 끝 */
+	
+	.opt {
+		display: inline-block;
+		padding: .375rem 1.75rem .375rem .75rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #4d4d4d;
+		vertical-align: middle;
+		border-radius: .25rem;
+	}
+	
+	#totalTable { background-color: #f8f9fa; }
 
 </style>
 
@@ -113,11 +103,11 @@ button:hover {
 
 	$(function() {
 		$("#normalpay").click(
-				function() {
-					$("#confirm").removeAttr("disabled").css(
-							'background-color', 'white').css('color', 'black').css('border', '1px solid #D8737F')
-							.attr('type','submit');
-				});
+			function() {
+				$("#confirm").removeAttr("disabled").css(
+						'background-color', 'white').css('color', 'black').css('border', '1px solid #D8737F')
+						.attr('type','submit');
+			});
 		
 		$('#booknum').html(
 				'<span>' + '${bvo.getStart_time() }'.substring(2, 4)
@@ -509,7 +499,38 @@ button:hover {
 	//네이버페이
 </script>
 <script>
-	function payment() {
+	function payment(frm) {
+
+		if (finalPrice == 0) {
+			finalPrice = sum;
+		}
+		$("#hiddenPrice").val(finalPrice);
+		var couponVal = $("#coupon").val();
+		if (couponVal != 0) {
+			$.ajax({
+				url : '/minusCoupon',
+				type : 'get',
+				data : {
+					'cp_idx' : cp_idx
+				},
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
+						console.log("성공");
+						frm.submit();
+					} else if (result == 'fail') {
+						alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+						return false;
+					}
+				},
+				error : function(error) {
+					alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+					return false;
+				}
+			})
+		} else {
+			frm.submit();
+		}
 		form1.action = "/book/payok";
 		form1.submit();
 	}
@@ -522,17 +543,18 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/book/booking"> <b><span
-							id="num" class="back">STEP1</span> <span id="select"
-							class="select">날짜선택</span></b>
+				<li><a class="menu" href="/book/booking">
+					<b><span id="num" class="back">STEP1</span>
+					<span id="select" class="select">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu"> <b><span id="num" class="back">STEP2</span>
-							<span id="select" class="select">좌석선택</span></b>
+				<li><a class="menu">
+					<b><span id="num" class="back">STEP2</span>
+					<span id="select" class="select">좌석선택</span></b>
 				</a></li>
 				<li>&gt;</li>
 				<li><a class="menu"> <b><span id="num" class="noback">STEP3</span>
-							<span id="select" class="click">결제하기</span></b>
+					<span id="select" class="click">결제하기</span></b>
 				</a></li>
 			</ul>
 		</div>
@@ -540,7 +562,7 @@ button:hover {
 		<!-- 예약 헤더끝 -->
 
 		<div class="boxoutside">
-			<form method="post" name="form1" onsubmit="payment()">
+			<form method="post" name="form1" onsubmit="payment(this.form)">
 				<br>
 				<div style="padding: 10px;">
 					<h5 style="color: #475C7A;">예매자 확인</h5>
@@ -586,14 +608,16 @@ button:hover {
 						</table>
 					</div>
 					<!-- 나의 예약 정보 끝 -->
-					<!--  -->
 
 					<!-- 결제방식 선택 -->
 					<div id="pay" class="radio" style="padding: 10px;">
 						<h5 style="color: #475C7A;">사용 가능한 쿠폰</h5>
 						<select id="coupon" class="opt">
 							<option value="0">------</option>
-						</select> <span id="finPrice"></span> <br> <br> <br>
+						</select>
+						<span id="finPrice"></span>
+						<br><br><br>
+						
 						<h5 style="color: #475C7A;">결제방식 선택</h5>
 						<div>
 							<button type="button" id="naverpay">네이버 페이</button>
@@ -611,29 +635,28 @@ button:hover {
 				</div>
 				<div class="center" style="padding: 10px;">
 					<br>
-					<button type="button" onclick="history.back(); return false;">이전단계</button>
-					&nbsp;
+					<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
 					<button type="button" id="confirm" disabled="disabled"
 						style="background-color: white; border: 1px solid lightgray; color: lightgray;">확인</button>
 				</div>
 
-				<input type="hidden" name="booknum" value=""> <input
-					type="hidden" name="price" value=""> <input type="hidden"
-					name="br_idx" value="${bvo.br_idx }"> <input type="hidden"
-					name="sct_idx" value="${bvo.sct_idx }"> <input
-					type="hidden" name="sct_name" value="${bvo.sct_name }"> <input
-					type="hidden" name="s_col" value="${bvo.s_col }"> <input
-					type="hidden" name="s_col_2" value="${bvo.s_col_2 }"> <input
-					type="hidden" name="cb_idx" value=""> <input type="hidden"
-					name="cb_idx_2" value=""> <input type="hidden"
-					name="cabinet" value="${bvo.cabinet }"> <input
-					type="hidden" name="start_time" value="${bvo.start_time }">
+				<input type="hidden" name="booknum" value="">
+				<input type="hidden" name="price" value="">
+				<input type="hidden" name="br_idx" value="${bvo.br_idx }">
+				<input type="hidden" name="sct_idx" value="${bvo.sct_idx }">
+				<input type="hidden" name="sct_name" value="${bvo.sct_name }">
+				<input type="hidden" name="s_col" value="${bvo.s_col }">
+				<input type="hidden" name="s_col_2" value="${bvo.s_col_2 }">
+				<input type="hidden" name="cb_idx" value="">
+				<input type="hidden" name="cb_idx_2" value="">
+				<input type="hidden" name="cabinet" value="${bvo.cabinet }">
+				<input type="hidden" name="start_time" value="${bvo.start_time }">
 				<input type="hidden" name="end_time" value="${bvo.end_time }">
-				<input type="hidden" name="s_idx" value="${svo.s_idx }"> <input
-					type="hidden" name="s_idx_2" value="${svo.s_idx_2 }"> <input
-					type="hidden" name="test" value="${test }"> <input
-					type="hidden" name="chkLen" value=""> <input type="hidden"
-					name="cab" value="">
+				<input type="hidden" name="s_idx" value="${svo.s_idx }">
+				<input type="hidden" name="s_idx_2" value="${svo.s_idx_2 }">
+				<input type="hidden" name="test" value="${test }">
+				<input type="hidden" name="chkLen" value="">
+				<input type="hidden" name="cab" value="">
 				<!-- 결제방식 선택 끝  -->
 
 			</form>
@@ -718,6 +741,8 @@ button:hover {
 					}
 					finalPrice = Math.floor(finalPrice);
 					$("#finPrice").html(couponPrice);
+					 
+					$("input[name='price']").attr('value', finalPrice);
 				})
 
 		function nextSubmit(frm) {
