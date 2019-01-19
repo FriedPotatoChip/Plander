@@ -266,18 +266,11 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-<<<<<<< HEAD
-				<li><a class="menu" href="/book/booking">
+				<li><a class="menu" href="/book/booking?br_idx=${bvo.br_idx }">
 					<b><span id="num" class="back">STEP1</span>
 					<span id="select" class="select">날짜선택</span></b>
 					</a>
 				</li>
-=======
-				<li><a class="menu" href="/book/booking?br_idx=${bvo.br_idx }"> <b><span
-							id="num" class="back">STEP1</span> <span id="select"
-							class="select">날짜선택</span></b>
-				</a></li>
->>>>>>> refs/remotes/origin/master
 				<li>&gt;</li>
 				<li><a class="menu" href="#">
 					<b><span id="num" class="noback">STEP2</span>
