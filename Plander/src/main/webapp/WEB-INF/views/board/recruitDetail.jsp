@@ -248,6 +248,10 @@ function boardList(nowPage){
 	<div class="bodyform" style="width: 55%; margin: auto;">
 		<div>
 			<br>
+			<a href="/recruit?nowPage=${nowPage }&cntPerPage=${cntPerPage}"
+				style="font-size: 0.8em;">
+				<strong id="boardType">모집 게시판</strong>
+			</a>
 			<!-- 요기 글목록 한번 더 출력 =============================================================== -->
 			<!-- 글 목록 보여주기 (5개씩만) -->
 			<!-- 헤더 아래 글목록 끝 -->
