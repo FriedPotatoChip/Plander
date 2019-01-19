@@ -256,7 +256,7 @@ button:hover {
 	background-color: #f8f9fa;
 }
 
-.eq { background-color: #D8737F; }
+.eq { background-color: #D8737F; opacity: 0.8; color: white; }
 </style>
 
 </head>
@@ -266,18 +266,23 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/book/booking"> <b><span
-							id="num" class="back">STEP1</span> <span id="select"
-							class="select">날짜선택</span></b>
-				</a></li>
+				<li><a class="menu" href="/book/booking">
+					<b><span id="num" class="back">STEP1</span>
+					<span id="select" class="select">날짜선택</span></b>
+					</a>
+				</li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b><span id="num"
-							class="noback">STEP2</span> <span id="select" class="click">좌석선택</span></b>
-				</a></li>
+				<li><a class="menu" href="#">
+					<b><span id="num" class="noback">STEP2</span>
+					<span id="select" class="click">좌석선택</span></b>
+					</a>
+				</li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b><span id="num"
-							class="back">STEP3</span> <span id="select" class="select">결제하기</span></b>
-				</a></li>
+				<li><a class="menu" href="#">
+					<b><span id="num" class="back">STEP3</span>
+					<span id="select" class="select">결제하기</span></b>
+					</a>
+				</li>
 			</ul>
 		</div>
 		<hr>
@@ -303,14 +308,18 @@ button:hover {
 									<table border="1px solid;" class="table table-bordered">
 										<tr>
 											<c:forEach var="i" begin="1" end="5" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 										<tr>
 											<c:forEach var="i" begin="6" end="10" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 									</table>
@@ -321,14 +330,18 @@ button:hover {
 									<table border="1px solid;" class="table table-bordered">
 										<tr>
 											<c:forEach var="i" begin="11" end="15" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 										<tr>
 											<c:forEach var="i" begin="16" end="20" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 									</table>
@@ -339,14 +352,18 @@ button:hover {
 									<table border="1px solid;" class="table table-bordered">
 										<tr>
 											<c:forEach var="i" begin="21" end="25" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 										<tr>
 											<c:forEach var="i" begin="26" end="30" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 									</table>
@@ -359,14 +376,18 @@ button:hover {
 									<table border="1px solid;" class="table table-bordered">
 										<tr>
 											<c:forEach var="i" begin="31" end="33" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 										<tr>
 											<c:forEach var="i" begin="34" end="36" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 									</table>
@@ -377,14 +398,18 @@ button:hover {
 									<table border="1px solid;" class="table table-bordered">
 										<tr>
 											<c:forEach var="i" begin="49" end="51" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 										<tr>
 											<c:forEach var="i" begin="52" end="54" step="1">
-												<td><label><input type="checkbox" name="s_col"
-														value="${i }">A-${i }</label></td>
+												<td>
+													<label><input type="checkbox" name="s_col"
+														value="${i }">A-${i }</label>
+												</td>
 											</c:forEach>
 										</tr>
 									</table>

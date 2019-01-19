@@ -19,7 +19,7 @@
 			if (bookseat == document.getElementsByName('s_col')[i].value) {
 				console.log("예약된 값 : " + bookseat);
 				$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-				$(document.getElementsByName('s_col')[i]).parents("p").addClass('eq'); //확인할것
+				$(document.getElementsByName('s_col')[i]).closest("div").addClass('eq'); //확인할것
 				break;
 			}
 		}
@@ -44,7 +44,7 @@
 				for (var i = 0; i <= size; i++) {
 					if (bookseat == document.getElementsByName('s_col')[i].value) {
 						$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-						$(document.getElementsByName('s_col')[i]).parents("p").addClass('eq');
+						$(document.getElementsByName('s_col')[i]).closest("div").addClass('eq');
 						console.log("if문 안의 s_col : " + bookseat);
 						break;
 					}
@@ -198,7 +198,7 @@ button:hover {
 	color: white;
 }
 /* 버튼 끝 */
-.eq { background-color: #D8737F; }
+.eq { background-color: #D8737F; opacity: 0.8; color: white; }
 
 </style>
 
@@ -209,20 +209,23 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/book/booking"> <b><span
-							id="num" class="back">STEP1</span> <span id="select"
-							class="select">날짜선택</span></b>
-				</a></li>
+				<li><a class="menu" href="/book/booking">
+						<b><span id="num" class="back">STEP1</span>
+						<span id="select" class="select">날짜선택</span></b>
+					</a>
+				</li>
 				<li>&gt;</li>
-				<li><a class="menu" href="/book/selectSeat"> <b><span
-							id="num" class="noback">STEP2</span> <span id="select"
-							class="click">좌석선택</span></b>
-				</a></li>
+				<li><a class="menu" href="/book/selectSeat">
+						<b><span id="num" class="noback">STEP2</span>
+						<span id="select" class="click">좌석선택</span></b>
+					</a>
+				</li>
 				<li>&gt;</li>
-				<li><a class="menu" href="#"> <b> <span
-							id="num" class="back">STEP3</span> <span id="select"
-							class="select">결제하기</span></b>
-				</a></li>
+				<li><a class="menu" href="#">
+						<b><span id="num" class="back">STEP3</span>
+						<span id="select" class="select">결제하기</span></b>
+					</a>
+				</li>
 			</ul>
 		</div>
 		<hr>
@@ -239,24 +242,24 @@ button:hover {
 					<div id="allseat">
 						<div>
 							<div class="checkbox" style="width: 100%; display: table;">
-								<div id="4people"
-									style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
+								<div id="4people" class="" style="display: inline-table;
+									width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
 									<p>
 										<label><input type="checkbox" class="4room"
-											name="s_col" value="201">201호(4인실)</label>
+										name="s_col" value="201">201호(4인실)</label>
 									</p>
 								</div>
 
-								<div id="8people"
-									style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
+								<div id="8people" class="" style="display: inline-table;
+									width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
 									<p>
 										<label><input type="checkbox" class="8room"
-											name="s_col" value="301">301호(8인실)</label>
+										name="s_col" value="301">301호(8인실)</label>
 									</p>
 								</div>
 
-								<div id="8people"
-									style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
+								<div id="8people" class="" style="display: inline-table;
+									width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
 									<p>
 										<label><input type="checkbox" class="8room"
 											name="s_col" value="302">302호(8인실)</label>
@@ -266,32 +269,31 @@ button:hover {
 							<br>
 
 							<div class="checkbox" style="width: 100%; display: table;">
-								<div id="4people"
-									style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
+								<div id="4people" class="" style="display: inline-table;
+									width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
 									<p>
 										<label><input type="checkbox" class="4room"
 											name="s_col" value="202">202호(4인실)</label>
 									</p>
 								</div>
 
-								<div id="12people"
-									style="display: inline-table; width: 53%; height: 100px; margin-right: 3%; border: 1px solid;">
+								<div id="12people" class="" style="display: inline-table;
+									width: 53%; height: 100px; margin-right: 3%; border: 1px solid;">
 									<p>
 										<label><input type="checkbox" class="12room"
 											name="s_col" value="401">401호(12인실)</label>
 									</p>
 								</div>
 
-								<div id="4people"
-									style="display: inline-table; width: 15%; height: 100px; margin-right: 3%; border: 1px solid;">
+								<div id="4people" class="" style="display: inline-table;
+									width: 15%; height: 100px; margin-right: 3%; border: 1px solid;">
 									<p>
 										<label>카페 터틀🐢</label>
 									</p>
 								</div>
 							</div>
 							<br>
-						</div>
-						<!-- 1번 열 끝 -->
+						</div> <!-- 1번 열 끝 -->
 					</div>
 
 					<!-- 선택 정보 -->
@@ -309,31 +311,26 @@ button:hover {
 						<tr>
 							<td colspan="2"></td>
 						</tr>
-					</table>
-					<!-- 선택 정보 끝 -->
+					</table> <!-- 선택 정보 끝 -->
 
 					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="location.href='/book/booking'">이전단계</button>
-						&nbsp;
+						<button type="button" onclick="location.href='/book/booking'">이전단계</button>&nbsp;
 						<button type="button" onclick="next(this.form)">다음단계</button>
 					</div>
-					<br> <br> <input type="hidden" name="br_idx"
-						value="${bvo.br_idx }"> <input type="hidden"
-						name="roomnum" value="${bvo.roomnum }"> <input
-						type="hidden" name="sct_idx" value=""> <input
-						type="hidden" name="sct_name" value=""> <input
-						type="hidden" name="time_idx" value="${bvo.time_idx }"> <input
-						type="hidden" name="cabinet" value="${bvo.cabinet }"> <input
-						type="hidden" name="start_time" value="${bvo.start_time }">
+					<br><br>
+					<input type="hidden" name="br_idx" value="${bvo.br_idx }">
+					<input type="hidden" name="roomnum" value="${bvo.roomnum }">
+					<input type="hidden" name="sct_idx" value="">
+					<input type="hidden" name="sct_name" value="">
+					<input type="hidden" name="time_idx" value="${bvo.time_idx }">
+					<input type="hidden" name="cabinet" value="${bvo.cabinet }">
+					<input type="hidden" name="start_time" value="${bvo.start_time }">
 					<input type="hidden" name="end_time" value="${bvo.end_time }">
 					<input type="hidden" name="s_idx" value="${bvo.s_idx }">
 				</form>
 
-			</div>
-			<!-- 박스 아웃사이드 끝 -->
-		</div>
-		<!-- 티켓 끝 -->
-	</div>
-	<!-- 바디 콘테이너 끝 -->
+			</div> <!-- 박스 아웃사이드 끝 -->
+		</div> <!-- 티켓 끝 -->
+	</div> <!-- 바디 콘테이너 끝 -->
 </body>
 </html>
