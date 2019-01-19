@@ -157,10 +157,10 @@
 			<thead>
 				<tr>
 					<th width="5%">No.</th>
-					<th width="55%">제목</th>
+					<th width="53%">제목</th>
 					<th width="12%">작성자</th>
 					<th width="13%">작성일</th>
-					<th width="8%">모집여부</th>
+					<th width="10%">모집여부</th>
 					<th width="7%">조회수</th>
 				</tr>
 			</thead>
