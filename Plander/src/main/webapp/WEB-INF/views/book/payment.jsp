@@ -576,12 +576,12 @@
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/book/booking">
+				<li><a class="menu" href="/book/booking?br_idx=${bvo.br_idx }">
 					<b><span id="num" class="back">STEP1</span>
 					<span id="select" class="select">날짜선택</span></b>
 				</a></li>
 				<li>&gt;</li>
-				<li><a class="menu">
+				<li><a class="menu" onclick="backSub()" style="cursor: pointer;">
 					<b><span id="num" class="back">STEP2</span>
 					<span id="select" class="select">좌석선택</span></b>
 				</a></li>
@@ -668,7 +668,7 @@
 				</div>
 				<div class="center" style="padding: 10px;">
 					<br>
-					<button type="button" onclick="history.back(); return false;">이전단계</button>&nbsp;
+					<button type="button" onclick="backSub()">이전단계</button>&nbsp;
 					<button type="button" id="confirm" disabled="disabled"
 						style="background-color: white; border: 1px solid lightgray; color: lightgray;">확인</button>
 				</div>
@@ -690,6 +690,8 @@
 				<input type="hidden" name="test" value="${test }">
 				<input type="hidden" name="chkLen" value="">
 				<input type="hidden" name="cab" value="">
+				<input type="hidden" name="roomnum" value="${bvo.roomnum }">
+				<input type="hidden" name="time_idx" value="${bvo.time_idx }">
 				<!-- 결제방식 선택 끝  -->
 
 			</form>
@@ -701,6 +703,13 @@
 	</div>
 	<!-- 바디 콘테이너 끝 -->
 
+<script>
+function backSub(){
+	var frm = document.form1;
+	frm.action = "/book/selectSeat";
+	frm.submit();
+}
+</script>
 	<script>
 		$(document).ready(function() {
 			window.finalPrice = 0;

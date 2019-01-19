@@ -204,7 +204,14 @@
 		<!-- 글쓰기 -->
 		<div class="write">
 			<c:if test="${not empty usersVO }">
-				<input class="button" type="button" value="글쓰기" id="write" onclick="write_go()">
+				<c:if test="${ct_idx == 1 }">
+					<c:if test="${usersVO.rank == 1 }">
+						<input class="button" type="button" value="글쓰기" id="write" onclick="write_go()">
+					</c:if>
+				</c:if>
+				<c:if test="${ct_idx != 1 }">
+						<input class="button" type="button" value="글쓰기" id="write" onclick="write_go()">
+				</c:if>
 			</c:if>
 		</div>
 		<br><br><br>

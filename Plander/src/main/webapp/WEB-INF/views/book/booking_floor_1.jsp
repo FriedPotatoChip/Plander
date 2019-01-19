@@ -209,13 +209,13 @@ button:hover {
 		<!-- 예약 헤더 -->
 		<div id="chk">
 			<ul>
-				<li><a class="menu" href="/book/booking">
+				<li><a class="menu" href="/book/booking?br_idx=${bvo.br_idx }">
 						<b><span id="num" class="back">STEP1</span>
 						<span id="select" class="select">날짜선택</span></b>
 					</a>
 				</li>
 				<li>&gt;</li>
-				<li><a class="menu" href="/book/selectSeat">
+				<li><a class="menu" href="#">
 						<b><span id="num" class="noback">STEP2</span>
 						<span id="select" class="click">좌석선택</span></b>
 					</a>
@@ -314,7 +314,7 @@ button:hover {
 					</table> <!-- 선택 정보 끝 -->
 
 					<div class="center" style="padding: 10px;">
-						<button type="button" onclick="location.href='/book/booking'">이전단계</button>&nbsp;
+						<button type="button" onclick="location.href='/book/booking?br_idx=${bvo.br_idx }'">이전단계</button>&nbsp;
 						<button type="button" onclick="next(this.form)">다음단계</button>
 					</div>
 					<br><br>
