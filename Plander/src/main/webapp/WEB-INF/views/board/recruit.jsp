@@ -97,6 +97,21 @@
 		right: 5px;
 		font-size: 17px;
 	}
+	
+	.notice {
+	    display: inline-block;
+	    width: 40px;
+	    height: 18px;
+	    padding-top: 1px;
+	    border: 1px solid #FF4947;
+	    background-color: #FF4947;
+	    font-size: 14px;
+	    -webkit-box-sizing: border-box;
+	    box-sizing: border-box;
+	    text-align: center;
+	    line-height: 15px;
+	    color: #fff; vertical-align: center;
+	}
 </style>
 <script> 
 	function selChange(){
@@ -107,6 +122,10 @@
 	function to_detail(b_idx){
 		var cntPerPage = document.getElementById("cntPerPage").value;
 		location.href="/recruitDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
+	}
+	function to_detailNotice(b_idx){
+		var cntPerPage = document.getElementById("cntPerPage").value;
+		location.href="/boardDetail?idx="+b_idx+"&cntPerPage="+cntPerPage;
 	}
 </script>
 </head>
@@ -156,8 +175,8 @@
 		<table class="table table-hover" style="font-size: 17px; width: 100%;">
 			<thead>
 				<tr>
-					<th width="5%">No.</th>
-					<th width="53%">제목</th>
+					<th width="12%">No.</th>
+					<th width="45%">제목</th>
 					<th width="12%">작성자</th>
 					<th width="13%">작성일</th>
 					<th width="10%">모집여부</th>
@@ -165,10 +184,25 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="notice" items="${noticeList }">
+					<tr style="background-color: #f0f0f0;">
+						<td><div class='notice'><span style="display: block;">공지</span></div></td>
+						<td style="text-align: left;">
+							<a href="#" onclick="to_detailNotice(${notice.b_idx})">${notice.b_title }</a>
+							<c:if test="${notice.cnt != 0 }">
+								<a href="#" onclick="to_detailNotice(${notice.b_idx})" style="color: #D8737F;">[${notice.cnt }]</a>
+							</c:if>
+						</td>
+						<td><div class="idDiv" userId="${notice.id }">${notice.id }</div></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.b_regdate }" /></td>
+						<td></td>
+						<td>${notice.hit }</td>
+					</tr>
+				</c:forEach>
 				<c:forEach var="list" items="${boardList }">
 					<tr>
 						<td>${list.rc_idx }</td>
-						<td>
+						<td style="text-align: left;">
 							<a href="#" onclick="to_detail(${list.rc_idx})">${list.rc_title }</a>
 							<c:if test="${list.cnt != 0 }">
 								<a href="#" onclick="to_detail(${list.rc_idx})">
@@ -182,7 +216,7 @@
 							<fmt:formatDate pattern="yyyy-MM-dd" value="${list.rc_regdate }" />
 						</td>
 						<td>
-							<c:if test='${list.onOff eq "ON" }'>모집 중</c:if>
+							<c:if test='${list.onOff eq "ON" }'><span style="color: red;">모집 중</span></c:if>
 							<c:if test='${list.onOff eq "OFF" }'>모집 마감</c:if>
 						</td>
 						<td>${list.hit }</td>

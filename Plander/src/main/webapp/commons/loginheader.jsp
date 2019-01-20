@@ -239,7 +239,7 @@ a {
 
 		function msgDetail(rm_idx) {
 			window.open("/recvMsg?rm_idx=" + rm_idx, "받은 쪽지",
-					"width=500, height=500");
+					"width=500, height=600");
 		}
 		function goMypage() {
 			location.href = "/my";

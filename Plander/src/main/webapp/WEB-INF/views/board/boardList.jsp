@@ -97,6 +97,21 @@
 		right: 5px
 	}
 	
+	.notice {
+	    display: inline-block;
+	    width: 40px;
+	    height: 18px;
+	    padding-top: 1px;
+	    border: 1px solid #FF4947;
+	    background-color: #FF4947;
+	    font-size: 14px;
+	    -webkit-box-sizing: border-box;
+	    box-sizing: border-box;
+	    text-align: center;
+	    line-height: 15px;
+	    color: #fff; vertical-align: center;
+	}
+	
 </style>
 <script> 
 	function selChange(){
@@ -106,6 +121,10 @@
 	function to_detail(b_idx){
 		var cntPerPage = document.getElementById("cntPerPage").value;
 		location.href="/boardDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
+	}
+	function to_detailNotice(b_idx){
+		var cntPerPage = document.getElementById("cntPerPage").value;
+		location.href="/boardDetail?idx="+b_idx+"&cntPerPage="+cntPerPage;
 	}
 	$(document).ready(function(){
 		if ('${ct_idx}' == 1){
@@ -168,18 +187,32 @@
 		<table class="table table-hover" style="font-size: 17px; width: 100%;">
 			<thead>
 				<tr>
-					<th width="5%" scope="row">No.</th>
-					<th width="63%">제목</th>
+					<th width="12%" scope="row">No.</th>
+					<th width="55%">제목</th>
 					<th width="12%">작성자</th>
 					<th width="13%">작성일</th>
 					<th width="7%">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="notice" items="${noticeList }">
+					<tr style="background-color: #f0f0f0;">
+						<td><div class='notice'><span style="display: block;">공지</span></div></td>
+						<td style="text-align: left;">
+							<a href="#" onclick="to_detailNotice(${notice.b_idx})">${notice.b_title }</a>
+							<c:if test="${notice.cnt != 0 }">
+								<a href="#" onclick="to_detailNotice(${notice.b_idx})" style="color: #D8737F;">[${notice.cnt }]</a>
+							</c:if>
+						</td>
+						<td><div class="idDiv" userId="${notice.id }">${notice.id }</div></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.b_regdate }" /></td>
+						<td>${notice.hit }</td>
+					</tr>
+				</c:forEach>
 				<c:forEach var="list" items="${boardList }">
 					<tr>
 						<th scope="row">${list.b_idx }</th>
-						<td>
+						<td style="text-align: left;">
 							<a href="#" onclick="to_detail(${list.b_idx})">${list.b_title }</a>
 							<c:if test="${list.cnt != 0 }">
 								<a href="#" onclick="to_detail(${list.b_idx})" style="color: #D8737F;">[${list.cnt }]</a>

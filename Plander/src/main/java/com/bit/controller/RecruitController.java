@@ -1,43 +1,24 @@
 package com.bit.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.bit.domain.BoardVO;
 import com.bit.domain.CommentsVO;
 import com.bit.domain.RecruitVO;
-import com.bit.domain.UsersVO;
+import com.bit.service.BoardService;
 import com.bit.service.RecruitService;
-import com.bit.utils.MediaUtils;
 import com.bit.utils.PagingVO;
-import com.bit.utils.UploadFileUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,6 +28,8 @@ public class RecruitController {
 
 	@Autowired
 	private RecruitService service;
+	@Autowired
+	private BoardService boardService;
 	
 	/* 모집글 작성 시작 */
 	@GetMapping("/recruitWrite")
@@ -72,6 +55,7 @@ public class RecruitController {
 		page.CalcPage(page.getNowPage(), page.getCntPerPage());
 		model.addAttribute("page", page);
 		model.addAttribute("boardList", service.getListPage(page));
+		model.addAttribute("noticeList", boardService.getNoticeList());
 		return "board/recruit";
 	}
 	

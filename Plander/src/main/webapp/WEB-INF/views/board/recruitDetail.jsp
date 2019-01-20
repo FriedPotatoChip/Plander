@@ -331,7 +331,8 @@ function boardList(nowPage){
 			</c:if>
 		</div>
 		<!-- 수정 삭제버튼 끝 -->
-
+		
+		<span style="font-size: 0.75em;"><i class='far fa-comment-alt'></i></span><span id="commentHead" style="font-weight: bold; font-size: 0.9em;"></span>
 		<hr>
 		<!-- 댓글 출력 -->
 		<div id="comments"></div>
@@ -474,6 +475,7 @@ function boardList(nowPage){
 			data: {'nowPage':nowPage, 'rc_idx':'${rc_board.rc_idx}'},
 			success: function(page){
 				console.log("페이징 처리");
+				$("#commentHead").html("&nbsp;&nbsp;댓글&nbsp;&nbsp;<span style='color: red;'>"+ page.total+ "</span>");
 				window.startPage = page.startPage;
 				window.endPage = page.endPage;
 				window.nowPage = page.nowPage;
@@ -786,7 +788,6 @@ function boardList(nowPage){
 		})
 	}
 	
-
 </script>
 	<div class="popupLayer">
 		<div>

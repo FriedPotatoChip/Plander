@@ -212,15 +212,21 @@ $(document).ready(function(){
 			
 			<c:if test="${(sessionScope.usersVO.id == board.id) || sessionScope.usersVO.rank == 1 }">
 				<p style="text-align: right;">
+					<c:if test="${usersVO.rank == 1 && board.notice == 1 && board.ct_idx == 1 }">
+						<button class="btnOpt" onclick="updateNotice(${board.b_idx}, 0)">공지내리기</button>
+					</c:if>
+					<c:if test="${usersVO.rank == 1 && board.notice == 0 }">
+						<button class="btnOpt" onclick="updateNotice(${board.b_idx}, 1)">공지하기</button>
+					</c:if>
 					<button class="btnOpt" onclick="modify()">수정</button>
 					<button class="btnOpt" onclick="deleteRec()">삭제</button>
 				</p>
 			</c:if>
 		</div>	
-	
 		<c:if test="${empty usersVO }">
 			<span style="color: red; font-size: 0.8em;">&#8251;댓글 기능은 로그인 후 이용 가능합니다.</span>
 		</c:if>
+		<span style="font-size: 0.75em;"><i class='far fa-comment-alt'></i></span><span id="commentHead" style="font-weight: bold; font-size: 0.9em;"></span>
 		<hr>
 		<!-- 댓글 출력 -->
 		<div id="comments">
@@ -302,6 +308,7 @@ $(document).ready(function(){
 			data: {'nowPage':nowPage, 'b_idx':'${board.b_idx}'},
 			success: function(page){
 				console.log("페이징 처리");
+				$("#commentHead").html("&nbsp;&nbsp;댓글&nbsp;&nbsp;<span style='color: red;'>"+ page.total+ "</span>");
 				window.startPage = page.startPage;
 				window.endPage = page.endPage;
 				window.nowPage = page.nowPage;
@@ -590,7 +597,25 @@ $(document).ready(function(){
 		});
 	}
 	
-	
+	/* 공지 올리기 / 내리기 */
+	function updateNotice(idx, notice){
+		$.ajax({
+			url: "/updateNotice",
+			type: "post",
+			data: {"b_idx" : idx, "notice" : notice},
+			dataType: "text",
+			success: function(result){
+				if (result == 'success'){
+					alert("공지 수정에 성공했습니다.");
+				} else {
+					alert("공지 수정에 실패했습니다.");
+				}
+				window.location.reload();
+			}, error: function(error){
+				alert("공지 수정에 실패했습니다.");
+			}
+		})
+	}
 
 </script>
 	<div class="popupLayer">

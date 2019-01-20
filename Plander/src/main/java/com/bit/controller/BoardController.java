@@ -47,6 +47,7 @@ public class BoardController {
 		map.put("ct_idx", ct_idx);
 		model.addAttribute("boardList", service.getListPage(map));
 		model.addAttribute("ct_idx", ct_idx);
+		model.addAttribute("noticeList", service.getNoticeList());
 		
 		return "board/boardList";
 	}

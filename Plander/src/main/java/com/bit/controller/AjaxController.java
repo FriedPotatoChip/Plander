@@ -195,4 +195,18 @@ public class AjaxController {
 		return "success";
 	}
 	
+	@ResponseBody
+	@RequestMapping("updateNotice")
+	public String updateNotice (@RequestParam("b_idx")int b_idx, @RequestParam("notice")int notice) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("b_idx", b_idx);
+		map.put("notice", notice);
+		boolean chk = boardService.updateNotice(map);
+		if (chk) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
 }

@@ -194,7 +194,19 @@
 			UPDATE BOOKING SET REVIEW = 0 WHERE BK_IDX = #{bk_idx}
 		</update>
 		
+		<!-- 공지사항 select -->
+		<select id="getNoticeList" resultType="com.bit.domain.BoardVO">
+			SELECT B.*, CNT
+			FROM BOARD B LEFT OUTER JOIN (SELECT B_IDX, COUNT(*) CNT FROM COMMENTS GROUP BY B_IDX) C
+			ON B.B_IDX = C.B_IDX
+			WHERE CT_IDX = 1 AND NOTICE = 1
+			ORDER BY B.B_IDX DESC
+		</select>
 		
+		<!-- 공지사항 수정 -->
+		<update id="updateNotice" parameterType="map">
+			UPDATE BOARD SET NOTICE = #{notice} WHERE B_IDX = #{b_idx}
+		</update>
 		 
 
 		
