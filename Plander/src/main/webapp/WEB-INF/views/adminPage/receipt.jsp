@@ -197,23 +197,23 @@ table thead tr {
 							<table>
 								<thead>
 									<tr class="table100-head">
-										<th class="column1">결제번호</th>
-										<th class="column2">아이디</th>
-										<th class="column3">내역</th>
-										<th class="column4">거래일시</th>
+										<th class="column1">이름</th>
+										<th class="column2">가격</th>
+										<th class="column3">결제내역</th>
+										<!-- <th class="column4">거래일시</th>
 										<th class="column5">가격</th>
-										<th class="column6">결제수단</th>
+										<th class="column6">결제수단</th> -->
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="rl" items="${receipt }">
 										<tr>
-											<td class="column1">${rl.p_idx }</td>
-											<td class="column2">${rl.id }</td>
-											<td class="column3">지점 ${rl.br_idx }, 좌석 : ${rl.s_col }</td>
-											<td class="column4">${rl.bk_regdate }</td>
+											<td class="column1">${rl.name }</td>
+											<td class="column2">${rl.price }</td>
+											<td class="column3"><a href="${rl.receipt }">${rl.receipt }</a></td>
+											<%-- <td class="column4">${rl.bk_regdate }</td>
 											<td class="column5">${rl.price }원</td>
-											<td class="column6">${rl.payment }</td>
+											<td class="column6">${rl.payment }</td> --%>
 										</tr>
 									</c:forEach>
 								</tbody>

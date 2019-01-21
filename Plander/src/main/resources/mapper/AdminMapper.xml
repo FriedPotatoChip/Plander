@@ -126,10 +126,10 @@
 		parameterType="com.bit.utils.PagingVO">
 		<![CDATA[
 		select *
-		    from (select rownum rn, p.p_idx, b.id, bk_regdate, price, p.payment, s.s_col, s.br_idx
-		        from booking b, payment p, seats s
-		        where p.bk_idx = b.bk_idx
-		        and s.s_idx = b.s_idx)
+		    from (select rownum rn, u.name, b.price, p.receipt 
+		        from users u, booking b, payment p
+		        where u.id = b.id
+		        and p.bk_idx = b.bk_idx)
 		    where rn between #{start} and #{end}
     	]]>
 	</select>
