@@ -51,6 +51,11 @@ public class MainController {
 	@Autowired
 	private CommonService comService;
 
+	@RequestMapping("test")
+	public String test() {
+		return "board/test";
+	}
+	
 	@RequestMapping("")
 	public String main(HttpSession session, Model model, @RequestParam(value="chk", required=false) String chk) {
 		UsersVO user = (UsersVO) session.getAttribute("usersVO");
@@ -81,16 +86,6 @@ public class MainController {
 		model.addAttribute("chk", chk);
 
 		return "main/main";
-	}
-
-/*	@GetMapping("/sub")
-	public String sub() {
-		return "main/submain";
-	}*/
-
-	@RequestMapping("/proImgTest")
-	public String proImgTest() {
-		return "main/proImgTest";
 	}
 
 	// 프로필 이미지 업로드

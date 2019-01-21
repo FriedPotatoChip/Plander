@@ -142,7 +142,7 @@
 				<!-- 글쓰기 버튼 -->
 				<div class="write">
 					<input class="button" type="button" onclick="submitBtn(this.form)" value='글 작성'>&nbsp;
-					<input class="button" type="reset" value="취소">
+					<input class="button" type="reset" onclick="window.history.back()" value="취소">
 				</div>
 				<br>
 				

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="icon" type="image/png" href="/resources/images/favicon-16x16.png" sizes="16x16" />
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <!-- 반응형 웹페이지 링크 ======================================================================== -->
 <!-- Bootstrap core CSS -->
@@ -10,7 +11,7 @@
 <!-- Custom styles for this template -->
 <link href="/resources/css/dashboard.css" rel="stylesheet">
 <!-- ======================================================================================== -->
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <style>
 
 
@@ -133,17 +134,22 @@ h3 {
 	display: none;
 	background-color: #ffffff;
 	border: solid 2px #d0d0d0;
-	width: 130px;
-	height: 120px;
-	padding: 10px;
-	padding-top: 18px;
-	padding-left: 15px;
+	width: 150px;
+	height: 90px;
+	padding: 20px 10px 0 10px;
+	font-size: 17px;
 }
-
+.popupLayer	a { 
+	text-decoration: none; 
+	font-weight: 700;
+	font-size: 16px;
+	color: #666;
+}
 .popupLayer div {
 	position: absolute;
 	top: 0px;
-	right: 5px
+	right: 5px;
+	font-size: 17px;
 }
 </style>
 </head>
@@ -152,10 +158,10 @@ h3 {
 
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin">Admin page</a>
 		<ul class="navbar-nav px-3">
 			<li class="nav-item text-nowrap"><a class="nav-link"
-				href="/TMS/logout">logout</a></li>
+				href="/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -165,33 +171,33 @@ h3 {
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 
-						<li class="nav-item"><a class="nav-link" href="/TMS/admin">
+						<li class="nav-item"><a class="nav-link" href="/admin">
 								<span data-feather="users"></span> Customers <span
 								class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
+							href="/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+							href="/admin/Chart"> <span data-feather="home"></span>
 								Reservation
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+							href="/admin/Seats"> <span data-feather="bar-chart-2"></span>
 								Seats
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+							href="/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin/Message"> <span data-feather="file"></span>
+							href="/admin/Message"> <span data-feather="file"></span>
 								Message
 						</a></li>
 					</ul>
@@ -202,12 +208,12 @@ h3 {
 			<div style="width: 80%; margin: 0 auto; text-align: center;">
 				<h4 class="d-inline">
 					<a href="javascript:click()"
-						onclick="fetch_book('/TMS/admin/recvMsg?nowPage=1')">받은쪽지</a>
+						onclick="fetch_book('/admin/recvMsg?nowPage=1')">받은쪽지</a>
 				</h4>
 				&nbsp;|&nbsp;
 				<h4 class="d-inline">
 					<a href="javascript:click()"
-						onclick="fetch_book('/TMS/admin/sendMsg?nowPage=1')">보낸쪽지</a>
+						onclick="fetch_book('/admin/sendMsg?nowPage=1')">보낸쪽지</a>
 				</h4>
 			</div>
 			<div class="myBook_nav" style="margin-top: 30px;">
@@ -270,7 +276,7 @@ h3 {
 				}
 			})
 
-			fetch_book('/TMS/admin/recvMsg?nowPage=' + nowPage);
+			fetch_book('/admin/recvMsg?nowPage=' + nowPage);
 		}
 	</script>
 	<script>
@@ -324,8 +330,8 @@ h3 {
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						}
-						window.open("/TMS/sendMsg?recv_id=" + userId, "쪽지 보내기",
-								"width=500, height=500");
+						window.open("/sendMsg?recv_id=" + userId, "쪽지 보내기",
+								"width=500, height=600");
 					});
 			$("#userProfile").click(
 					function() {
@@ -334,7 +340,7 @@ h3 {
 							alert("로그인 후 이용 가능합니다.");
 							return false;
 						}
-						window.open("/TMS/profileSummary?id=" + userId,
+						window.open("/profileSummary?id=" + userId,
 								"회원 정보", "width=500, height=500");
 					});
 		}
@@ -344,8 +350,8 @@ h3 {
 			<span style="cursor: pointer; font-size: 0.85em; color: gray;"
 				title="닫기" onclick="closeLayer()">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br> <a id="userProfile"
-			href="#">회원 정보 보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
+		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
 	</div>
 </body>
 </html>

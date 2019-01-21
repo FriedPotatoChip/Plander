@@ -81,7 +81,8 @@ a {
 						<td><a
 							href="/boardDetail?idx=${board_comment.b_idx }">${board_comment.b_title }</a></td>
 						<td>${board_comment.c_content }</td>
-						<td class="idDiv" onclick="showBox(event)">${board_comment.id }</td>
+						<td><div class="idDiv" onclick="showBox(event, this, 'chk')"
+								userId="${board_comment.id }">${board_comment.id }</div></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${board_comment.c_regdate }" /></td>
 					</tr>

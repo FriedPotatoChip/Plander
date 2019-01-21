@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.bit.domain.BoardVO;
 import com.bit.domain.BookingVO;
 import com.bit.domain.CommentsVO;
-import com.bit.domain.RecruitVO;
 import com.bit.mapper.BoardMapper;
 import com.bit.service.BoardService;
 
@@ -122,6 +121,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public boolean minusReview(int bk_idx) {
 		return mapper.minusReview(bk_idx);
+	}
+
+	@Override
+	public List<BoardVO> getNoticeList() {
+		return mapper.getNoticeList();
+	}
+
+	@Override
+	public boolean updateNotice(Map<String, Integer> map) {
+		return mapper.updateNotice(map);
 	}
 
 

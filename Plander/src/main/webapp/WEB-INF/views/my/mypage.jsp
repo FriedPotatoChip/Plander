@@ -10,37 +10,38 @@
 <!-- Jcrop(사진 크롭) -->
 <script
 	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 <script>
-//비밀번호 확인
-function pwchk() {
-	var pw = $('#password').val();
-	var pwchk = ${user.password};
+	//비밀번호 확인
+	function pwchk() {
+		var pw = $('#password').val();
+		var pwchk = ${user.password};
 
-	if (pw != pwchk || pwchk == "") {
-		//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
-		$('#pwchkMsg').html(
-				"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
-		$('#update').prop("disabled", true);
-	} else {
-		$('#pwchkMsg').html(
-				"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
-		$('#update').prop("disabled", false);
+		if (pw != pwchk || pwchk == "") {
+			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
+			$('#pwchkMsg').html(
+					"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+			$('#update').prop("disabled", true);
+		} else {
+			$('#pwchkMsg').html(
+					"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+			$('#update').prop("disabled", false);
+		}
 	}
-}
 
-// 클릭 시 스크롤이 자동으로 위로 올라가는 현상
-function click() {
-    return;
-}
+	// 클릭 시 스크롤이 자동으로 위로 올라가는 현상
+	function click() {
+		return;
+	}
 </script>
 
 <style>
-body {
+/* body {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
-}
+} */
 
 .nav_btn {
 	margin-right: 10px;
@@ -48,14 +49,14 @@ body {
 	float: right;
 }
 
-.container {
+/* .container {
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 400;
 	color: #666;
 	text-decoration: none;
 	margin: auto;
 }
-
+ */
 a {
 	color: #475C7A;
 }
@@ -155,17 +156,22 @@ h3 {
 	display: none;
 	background-color: #ffffff;
 	border: solid 2px #d0d0d0;
-	width: 130px;
-	height: 120px;
-	padding: 10px;
-	padding-top: 18px;
-	padding-left: 15px;
+	width: 150px;
+	height: 90px;
+	padding: 20px 10px 0 10px;
+	font-size: 17px;
 }
-
+.popupLayer	a { 
+	text-decoration: none; 
+	font-weight: 700;
+	font-size: 17px;
+	color: #666;
+}
 .popupLayer div {
 	position: absolute;
 	top: 0px;
-	right: 5px
+	right: 5px;
+	font-size: 17px;
 }
 </style>
 </head>
@@ -177,8 +183,7 @@ h3 {
 				src="/resources/images/logo.png" width="150px" height="50px"></a>
 
 			<ul class="navbar-nav ml-auto" id="primaryNav">
-				<li class="nav-item"><a class="nav-link bold"
-					href="/logout">로그아웃</a></li>
+				<li class="nav-item"><a class="nav-link bold" href="/logout">로그아웃</a></li>
 				<li class="nav-item"><a class="nav-link bold" href="/">홈으로가기</a></li>
 			</ul>
 		</div>
@@ -238,8 +243,7 @@ h3 {
 
 		<!-- 내예약 -->
 		<div class="myBook"
-			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px;
-			text-align: center; height: 566px;">
+			style="margin-top: 30px; border: 1px solid lightgray; padding: 20px; text-align: center; height: 566px;">
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내예약</h5>
 			<div class="myBook_nav d-inline">
 				<strong><a href="javascript:click()"
@@ -247,8 +251,8 @@ h3 {
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
 					onclick="fetch_book('/my/my_cabinet?nowPage=1')">사물함예약내역</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
-					onclick="fetch_book('/my/coupon?nowPage=1')">내쿠폰</a></strong>
-				&nbsp;|&nbsp;<strong><a href="javascript:click()"
+					onclick="fetch_book('/my/coupon?nowPage=1')">내쿠폰</a></strong> &nbsp;|&nbsp;<strong><a
+					href="javascript:click()"
 					onclick="fetch_book('/my/sendMsg?nowPage=1')">보낸쪽지</a></strong>
 				&nbsp;|&nbsp;<strong><a href="javascript:click()"
 					onclick="fetch_book('/my/recvMsg?nowPage=1')">받은쪽지</a></strong>
@@ -259,7 +263,7 @@ h3 {
 
 		<!-- 내글목록 -->
 		<div class="myRecruit"
-			style="border: 1px solid lightgray; padding: 20px; text-align: center;">
+			style="border: 1px solid lightgray; padding: 20px; text-align: center; height: 420px;">
 			<h5 class="d-inline mr-3" style="color: #D8737F;">내글목록</h5>
 			<div class="myRecruit_nav d-inline mr-3">
 				<strong><a href="javascript:click()"
@@ -276,7 +280,9 @@ h3 {
 			<table id="myRecruit"></table>
 		</div>
 	</div>
-	<br><br><br>
+	<br>
+	<br>
+	<br>
 
 
 	<!-- 회원정보수정 모달창 -->
@@ -327,7 +333,7 @@ h3 {
 							<tr>
 								<th>회원주소&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="text" id="zipNo" style="display: inline;"
-									class="col-sm-8 form-control mr-2" name="zipNo" readonly>
+									class="col-sm-8 form-control mr-2" name="zipNo" value="${user.zipNo }" readonly>
 									<button type="button" class="btn btn-outline-danger"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
@@ -415,8 +421,9 @@ h3 {
 
 
 	<!-- 프로필 사진 업로드 모달 -->
-	<div class="modal fade bd-example-modal-xl" id="updateProfile" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-xl" id="updateProfile"
+		tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -453,9 +460,10 @@ h3 {
 					</c:if>
 				</div>
 				<div class="modal-footer">
-					<input type="button" class="btn btn-outline-warning" data-dismiss="modal"
-						value="닫기"> <input type="button" class="btn btn-outline-danger"
-						value="수정" onclick="submitProfile()">
+					<input type="button" class="btn btn-outline-warning"
+						data-dismiss="modal" value="닫기"> <input type="button"
+						class="btn btn-outline-danger" value="수정"
+						onclick="submitProfile()">
 				</div>
 			</div>
 		</div>
@@ -572,7 +580,7 @@ h3 {
 									target = e.target.result;
 								}
 							}
-						}
+						};
 						reader.readAsDataURL(f);
 
 					});
@@ -605,24 +613,25 @@ h3 {
 		}
 	</script>
 	<!-- 프로필 이미지 삭제 -->
-	<script> 				
-		function imgDel(){
-			if ('${usersVO.user_profileImagePath}' == ""){
+	<script>
+		function imgDel() {
+			if ('${usersVO.user_profileImagePath}' == "") {
 				alert("프로필 이미지를 먼저 등록해주세요.");
 				return false;
 			} else {
 				$.ajax({
-					url: '/imgDel',
-					type: 'post',
-					dataType: 'text',
-					success: function(result) {
+					url : '/imgDel',
+					type : 'post',
+					dataType : 'text',
+					success : function(result) {
 						if (result == 'success') {
 							alert("프로필 이미지 삭제에 성공했습니다.");
 							window.location.reload();
 						} else {
 							alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
 						}
-					}, error: function(error) {
+					},
+					error : function(error) {
 						alert("프로필 이미지 삭제에 실패했습니다. \n관리자에게 문의 해주세요.");
 					}
 				})
@@ -631,44 +640,49 @@ h3 {
 	</script>
 	<!-- 쪽지 삭제 -->
 	<script>
-		function msgDel(rm_idx, nowPage){
+		function msgDel(rm_idx, nowPage) {
 			$.ajax({
-				url: '/msgDel',
-				type: 'post',
-				data: {'rm_idx':rm_idx},
-				dataType: 'text',
-				success: function(result){
-					if (result == 'success'){
+				url : '/msgDel',
+				type : 'post',
+				data : {
+					'rm_idx' : rm_idx
+				},
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
 						alert("쪽지를 삭제했습니다.");
-					}else {
+					} else {
 						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
 					}
-				}, error: function(error){
+				},
+				error : function(error) {
 					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
 				}
 			})
-			
-			fetch_book('/my/recvMsg?nowPage='+ nowPage);
+
+			fetch_book('/my/recvMsg?nowPage=' + nowPage);
 		}
-		
-		function sendMsgDel(sm_idx, nowPage){
+		function sendMsgDel(sm_idx, nowPage) {
 			$.ajax({
-				url: '/sendMsgDel',
-				type: 'post',
-				data: {'sm_idx':sm_idx},
-				dataType: 'text',
-				success: function(result){
-					if (result == 'success'){
+				url : '/sendMsgDel',
+				type : 'post',
+				data : {
+					'sm_idx' : sm_idx
+				},
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
 						alert("쪽지를 삭제했습니다.");
-					}else {
+					} else {
 						alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
 					}
-				}, error: function(error){
+				},
+				error : function(error) {
 					alert("쪽지 삭제에 실패했습니다.\n관리자에게 문의하세요");
 				}
 			})
-			
-			fetch_book('/my/sendMsg?nowPage='+ nowPage);
+
+			fetch_book('/my/sendMsg?nowPage=' + nowPage);
 		}
 	</script>
 	<div class="popupLayer">
@@ -676,88 +690,183 @@ h3 {
 			<span onClick="closeLayer()"
 				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br> <a id="userProfile"
-			href="#">회원 정보 보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
+		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
 	</div>
 	<script>
-function closeLayer( obj ) {
-	$(".popupLayer").hide();
-}
-function showBox(e, tag){
-		console.log("idDiv 클릭됨");
-		var sWidth = window.innerWidth;
-		var sHeight = window.innerHeight;
-
-		var oWidth = $('.popupLayer').width();
-		var oHeight = $('.popupLayer').height();
-
-		// 레이어가 나타날 위치를 셋팅한다.
-		var divLeft = e.clientX + 10 + (document.documentElement.scrollLeft?document.documentElement.scrollLeft:document.body.scrollLeft);
-		var divTop = e.clientY + 5 + (document.documentElement.scrollTop?document.documentElement.scrollTop:document.body.scrollTop);
-		console.log("X: "+ e.clientX);
-		console.log("Y: "+ e.clientY);
-
-		// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
-		if( divLeft + oWidth > sWidth ) divLeft -= oWidth;
-		if( divTop + oHeight > sHeight ) divTop -= oHeight;
-
-		// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
-		if( divLeft < 0 ) divLeft = 0;
-		if( divTop < 0 ) divTop = 0;
-
-		$('.popupLayer').css({
-			"top": divTop,
-			"left": divLeft,
-			"position": "absolute"
-		}).show();
-		console.log(this);
-		var userId = $(tag).attr("userId");
-		console.log($(tag).attr("userId"));
-		$("#sendMsg").click(function(){
+		function closeLayer(obj) {
 			$(".popupLayer").hide();
-			if ('${usersVO.id}' == ''){
-				alert("로그인 후 이용 가능합니다.");
-				return false;
-			} 
-			window.open("/sendMsg?recv_id="+userId, "쪽지 보내기", "width=500, height=600");
-		});
-		$("#userProfile").click(function(){
-			$(".popupLayer").hide();
-			if ('${usersVO.id}' == ''){
-				alert("로그인 후 이용 가능합니다.");
-				return false;
-			} 
-			window.open("/profileSummary?id="+userId, "회원 정보", "width=500, height=500");
-		});
-}
-
-function dropOut(){
-	
-	$.ajax({
-		url: "/my/dropout",
-		type: "post",
-		dataType: "text",
-		success: function(result){
-			if (result == 'success'){
-				alert('회원탈퇴가 정상적으로 완료되었습니다. 그동안 이용해주셔서 감사합니다.');
-				location.href="/logout";
-			} else if(result == 'fail'){
-				alert('회원탈퇴가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
-			} else {
-				alert('정상적인 접근이 아닙니다.');
-			}
-			
-		}, error: function(error) {
-			
 		}
-	})
-}
+		function showBox(e, tag, chk) {
+			console.log("idDiv 클릭됨");
+			var sWidth = window.innerWidth;
+			var sHeight = window.innerHeight;
 
-function openWindow(rm_idx){
-	console.log("여기 들어옴");
-	$("#span"+rm_idx).css("display", "block");
-	window.open('/recvMsg?rm_idx='+rm_idx, '받은 쪽지', 'width=500, height=600'); return false;
-}
-</script>
+			var oWidth = $('.popupLayer').width();
+			var oHeight = $('.popupLayer').height();
+
+			// 레이어가 나타날 위치를 셋팅한다.
+			var divLeft = e.clientX
+					+ 10
+					+ (document.documentElement.scrollLeft ? document.documentElement.scrollLeft
+							: document.body.scrollLeft);
+			var divTop = e.clientY
+					+ 5
+					+ (document.documentElement.scrollTop ? document.documentElement.scrollTop
+							: document.body.scrollTop);
+			if (chk == 'chk'){
+				divTop += 89;
+			}
+			console.log("X: " + e.clientX);
+			console.log("Y: " + e.clientY);
+
+			// 레이어가 화면 크기를 벗어나면 위치를 바꾸어 배치한다.
+			if (divLeft + oWidth > sWidth)
+				divLeft -= oWidth;
+			if (divTop + oHeight > sHeight)
+				divTop -= oHeight;
+
+			// 레이어 위치를 바꾸었더니 상단기준점(0,0) 밖으로 벗어난다면 상단기준점(0,0)에 배치하자.
+			if (divLeft < 0)
+				divLeft = 0;
+			if (divTop < 0)
+				divTop = 0;
+
+			$('.popupLayer').css({
+				"top" : divTop,
+				"left" : divLeft,
+				"position" : "absolute"
+			}).show();
+			console.log(this);
+			var userId = $(tag).attr("userId");
+			console.log($(tag).attr("userId"));
+			$("#sendMsg").click(
+					function() {
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == '') {
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						}
+						window.open("/sendMsg?recv_id=" + userId, "쪽지 보내기",
+								"width=500, height=600");
+					});
+			$("#userProfile").click(
+					function() {
+						$(".popupLayer").hide();
+						if ('${usersVO.id}' == '') {
+							alert("로그인 후 이용 가능합니다.");
+							return false;
+						}
+						window.open("/profileSummary?id=" + userId, "회원 정보",
+								"width=500, height=500");
+					});
+		}
+
+		function dropOut() {
+
+			$.ajax({
+				url : "/my/dropout",
+				type : "post",
+				dataType : "text",
+				success : function(result) {
+					if (result == 'success') {
+						alert('회원탈퇴가 정상적으로 완료되었습니다. 그동안 이용해주셔서 감사합니다.');
+						location.href = "/logout";
+					} else if (result == 'fail') {
+						alert('회원탈퇴가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+					} else {
+						alert('정상적인 접근이 아닙니다.');
+					}
+
+				},
+				error : function(error) {
+
+				}
+			})
+		}
+
+		function delSeat(idx, start_time, nowPage) {
+
+			var st = new Date(start_time);
+			console.log('start_time: ' + st);
+
+			var hour = st.getHours();
+			console.log('hour: ' + hour);
+
+			if (hour < 18) {
+				var chk = confirm('환불 금액에 관련된 사항은 미리 안내 데스크를 통해 안내 받은 후 취소하시기 바랍니다. \n충분히 공지받으셨다면 확인 버튼을 눌러 마저 취소 작업을 진행해 주세요.');
+
+				if (chk == true) {
+
+					$
+							.ajax({
+								url : "/my/delSeat",
+								type : "post",
+								data : {
+									'bk_idx' : idx
+								},
+								dataType : "text",
+								success : function(result) {
+									if (result == 'success') {
+										alert('해당 좌석 예약이 취소되었습니다.');
+									} else if (result == 'fail') {
+										alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+									} else {
+										alert('관리자에게 문의해 주세요.');
+									}
+
+								},
+								error : function(error) {
+
+								}
+							});
+				} else {
+					alert('오후 6시 이전이라 처리는 가능하나, 처리 중 오류가 발생하였습니다.');
+				}
+				
+				fetch_book('/my/my_seat?nowPage=' + nowPage);
+				
+			} else {
+				alert('오후 6시 이후부터는 관리자에게 직접 문의해 주시기 바랍니다.');
+			}
+
+			
+
+		}
+
+		function delCabinet(idx, nowPage) {
+			var chk = confirm('사물함은 환불 적용이 되지 않습니다. \n그래도 취소하시려면 확인 버튼을 눌러주세요.');
+
+			if (chk == true) {
+				$.ajax({
+					url : "/my/delCabinet",
+					type : "post",
+					data : {
+						'ckb_idx' : idx
+					},
+					dataType : "text",
+					success : function(result) {
+						if (result == 'success') {
+							alert('해당 사물함 예약이 취소되었습니다.');
+						} else if (result == 'fail') {
+							alert('예약 취소가 정상적으로 완료되지 않았습니다. 다시 한 번 시도해 주세요.');
+						} else {
+							alert('관리자에게 문의해 주세요.');
+						}
+
+					},
+					error : function(error) {
+
+					}
+				});
+					fetch_book('/my/my_cabinet?nowPage=' + nowPage);
+			}
+		}
+		
+		function openWindow(rm_idx){
+			$("#span"+rm_idx).css("display", "block");
+			window.open('/recvMsg?rm_idx='+rm_idx, '받은 쪽지', 'width=500, height=600');
+		}
+	</script>
 </body>
 </html>

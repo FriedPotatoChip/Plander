@@ -7,9 +7,9 @@
 		parameterType="com.bit.utils.PagingVO">
 		<![CDATA[
 		select *    
-    		from (select rownum rn, u_idx, id, name, phone, email, rank, regdate, zipno, roadAddrPart1, addrDetail from users)
+    		from (select rownum rn, u_idx, id, name, phone, email, rank, regdate, zipno, roadAddrPart1, addrDetail from users order by u_idx)
     		where rn between #{start} and #{end}
-    		order by u_idx
+    		
     	]]>
 	</select>
 

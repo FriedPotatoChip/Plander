@@ -81,12 +81,12 @@ input[type=submit]:hover {
 <body>
 	<nav
 		class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/TMS/admin">Admin page</a>
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/admin">Admin page</a>
 
 
 		<ul class="navbar-nav px-3">
 			<li class="nav-item text-nowrap"><a class="nav-link"
-				href="/TMS/logout">logout</a></li>
+				href="/logout">logout</a></li>
 		</ul>
 	</nav>
 
@@ -97,32 +97,32 @@ input[type=submit]:hover {
 					<ul class="nav flex-column">
 
 						<li class="nav-item"><a class="nav-link active"
-							href="/TMS/admin"> <span data-feather="users"></span>
+							href="/admin"> <span data-feather="users"></span>
 								Customers <span class="sr-only">(current)</span>
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Cabinet"> <span data-feather="file"></span>
+							href="/admin/Cabinet"> <span data-feather="file"></span>
 								Cabinet
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Chart"> <span data-feather="home"></span>
+							href="/admin/Chart"> <span data-feather="home"></span>
 								Reservation
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Seats"> <span data-feather="bar-chart-2"></span>
+							href="/admin/Seats"> <span data-feather="bar-chart-2"></span>
 								Seats
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Receipt"> <span data-feather="file"></span>
+							href="/admin/Receipt"> <span data-feather="file"></span>
 								Receipt
 						</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="/TMS/admin/Message"> <span data-feather="file"></span>
+							href="/admin/Message"> <span data-feather="file"></span>
 								Message
 						</a></li>
 					</ul>
@@ -136,7 +136,7 @@ input[type=submit]:hover {
 			<div class="table-responsive">
 
 				<div style="width: 60%; margin: 0 auto; float: left;">
-					<form action="/TMS/admin/searchList"
+					<form action="/admin/searchList"
 						class="form-inline my-2 my-lg-0">
 						<!-- 검색창 -->
 						<select class="custom-select my-1 mr-sm-2" name="target">
@@ -211,9 +211,9 @@ input[type=submit]:hover {
 										<div class="modal-footer">
 											<button type="button" class="btn btn-dark"
 												data-dismiss="modal"
-												onclick="location.href='/TMS/admin/delete?u_idx=${user.u_idx}'">Yes</button>
+												onclick="location.href='/admin/delete?u_idx=${user.u_idx}'">Yes</button>
 											<button type="button" class="btn btn-light ml-1"
-												onclick="location.href='/TMS/admin'">No</button>
+												onclick="location.href='/admin'">No</button>
 										</div>
 									</div>
 								</div>
@@ -227,14 +227,14 @@ input[type=submit]:hover {
 						<c:choose>
 							<c:when test="${page.chkStartPage }">
 								<li class="page-item"><a class="page-link"
-									href="/TMS/admin?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
+									href="/admin?nowPage=${page.startPage-1 }&cntPerPage=${page.cntPerPage}"
 									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 										<span class="sr-only">Previous</span>
 								</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link"
-									href="/TMS/admin?nowPage=1&cntPerPage=${page.cntPerPage}"
+									href="/admin?nowPage=1&cntPerPage=${page.cntPerPage}"
 									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 										<span class="sr-only">Previous</span>
 								</a></li>
@@ -245,12 +245,12 @@ input[type=submit]:hover {
 							end="${page.endPage }">
 							<c:if test="${p == page.nowPage }">
 								<li class="page-item"><a class="now marginLi page-link"
-									href="/TMS/admin?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+									href="/admin?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 								</li class="page-item">
 							</c:if>
 							<c:if test="${p != page.nowPage }">
 								<li class="page-item"><a class="marginLi page-link"
-									href="/TMS/admin?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
+									href="/admin?nowPage=${p }&cntPerPage=${page.cntPerPage}">${p }</a>
 								</li class="page-item">
 							</c:if>
 
@@ -259,14 +259,14 @@ input[type=submit]:hover {
 						<c:choose>
 							<c:when test="${page.chkEndPage }">
 								<li class="page-item"><a class="page-link"
-									href="/TMS/admin?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
+									href="/admin?nowPage=${page.endPage+1 }&cntPerPage=${page.cntPerPage}"
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 										<span class="sr-only">Next</span>
 								</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link"
-									href="/TMS/admin?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
+									href="/admin?nowPage=${page.lastPage }&cntPerPage=${page.cntPerPage}"
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 										<span class="sr-only">Next</span>
 								</a></li>
@@ -298,7 +298,7 @@ input[type=submit]:hover {
 	<script>
 		function selChange() {
 			var cntPerPage = document.getElementById("cntPerPage").value;
-			location.href = "/TMS/admin?nowPage=${page.nowPage }&cntPerPage="
+			location.href = "/admin?nowPage=${page.nowPage }&cntPerPage="
 					+ cntPerPage;
 		}
 	</script>

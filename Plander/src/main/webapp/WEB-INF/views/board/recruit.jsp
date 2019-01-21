@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <style>
 	table { text-align: center; }
 	.center { text-align: center; }
@@ -84,7 +85,7 @@
 		display: none;
 		background-color: #ffffff;
 		border: solid 2px #d0d0d0;
-		width: 130px;
+		width: 150px;
 		height: 120px;
 		padding: 20px 10px 0 10px;
 		font-size: 17px;
@@ -96,6 +97,21 @@
 		right: 5px;
 		font-size: 17px;
 	}
+	
+	.notice {
+	    display: inline-block;
+	    width: 40px;
+	    height: 18px;
+	    padding-top: 1px;
+	    border: 1px solid #FF4947;
+	    background-color: #FF4947;
+	    font-size: 14px;
+	    -webkit-box-sizing: border-box;
+	    box-sizing: border-box;
+	    text-align: center;
+	    line-height: 15px;
+	    color: #fff; vertical-align: center;
+	}
 </style>
 <script> 
 	function selChange(){
@@ -106,6 +122,10 @@
 	function to_detail(b_idx){
 		var cntPerPage = document.getElementById("cntPerPage").value;
 		location.href="/recruitDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
+	}
+	function to_detailNotice(b_idx){
+		var cntPerPage = document.getElementById("cntPerPage").value;
+		location.href="/boardDetail?idx="+b_idx+"&cntPerPage="+cntPerPage;
 	}
 </script>
 </head>
@@ -155,19 +175,34 @@
 		<table class="table table-hover" style="font-size: 17px; width: 100%;">
 			<thead>
 				<tr>
-					<th width="5%">No.</th>
-					<th width="55%">제목</th>
+					<th width="12%">No.</th>
+					<th width="45%">제목</th>
 					<th width="12%">작성자</th>
 					<th width="13%">작성일</th>
-					<th width="8%">모집여부</th>
+					<th width="10%">모집여부</th>
 					<th width="7%">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="notice" items="${noticeList }">
+					<tr style="background-color: #f0f0f0;">
+						<td><div class='notice'><span style="display: block;">공지</span></div></td>
+						<td style="text-align: left;">
+							<a href="#" onclick="to_detailNotice(${notice.b_idx})">${notice.b_title }</a>
+							<c:if test="${notice.cnt != 0 }">
+								<a href="#" onclick="to_detailNotice(${notice.b_idx})" style="color: #D8737F;">[${notice.cnt }]</a>
+							</c:if>
+						</td>
+						<td><div class="idDiv" userId="${notice.id }">${notice.id }</div></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.b_regdate }" /></td>
+						<td></td>
+						<td>${notice.hit }</td>
+					</tr>
+				</c:forEach>
 				<c:forEach var="list" items="${boardList }">
 					<tr>
 						<td>${list.rc_idx }</td>
-						<td>
+						<td style="text-align: left;">
 							<a href="#" onclick="to_detail(${list.rc_idx})">${list.rc_title }</a>
 							<c:if test="${list.cnt != 0 }">
 								<a href="#" onclick="to_detail(${list.rc_idx})">
@@ -181,7 +216,7 @@
 							<fmt:formatDate pattern="yyyy-MM-dd" value="${list.rc_regdate }" />
 						</td>
 						<td>
-							<c:if test='${list.onOff eq "ON" }'>모집 중</c:if>
+							<c:if test='${list.onOff eq "ON" }'><span style="color: red;">모집 중</span></c:if>
 							<c:if test='${list.onOff eq "OFF" }'>모집 마감</c:if>
 						</td>
 						<td>${list.hit }</td>
@@ -290,9 +325,9 @@
 			<span onClick="closeLayer()"
 			style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br>
-		<a id="userProfile" href="#">회원 정보 보기</a><br>
-		<a id="showWritten" href="#">작성글 보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
+		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
+		<a id="showWritten" href="#"><i class="far fa-list-alt"></i>&nbsp;작성글 보기</a><br>
 	</div>
 
 <script>

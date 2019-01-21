@@ -2,10 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
 <jsp:include page="/commons/head.jsp" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <meta charset="UTF-8">
 <style>
 a {
@@ -107,7 +105,7 @@ ul, ol {
 	display: none;
 	background-color: #ffffff;
 	border: solid 2px #d0d0d0;
-	width: 130px;
+	width: 150px;
 	height: 120px;
 	padding: 10px;
 	padding-top: 18px;
@@ -187,7 +185,11 @@ function boardList(nowPage){
 							html += "<b>";
 						}
 					html += "<a style='font-size: 0.9rem;' href='/recruitDetail?idx="+value.rc_idx+"&nowPage=${nowPage}&cntPerPage=${cntPerPage}'>";
-					html += value.rc_title;
+					if("${rc_board.rc_idx}" == value.rc_idx){
+						html += '<b style="font-size: 1.1em;">'+ value.rc_title + '</b>';
+					} else {
+						html += value.rc_title;
+					}
 						if (value.cnt != 0){
 							html += "<span style='color: #D8737F;'>["+value.cnt+"]</span>";
 						} 
@@ -246,6 +248,10 @@ function boardList(nowPage){
 	<div class="bodyform" style="width: 55%; margin: auto;">
 		<div>
 			<br>
+			<a href="/recruit?nowPage=${nowPage }&cntPerPage=${cntPerPage}"
+				style="font-size: 0.8em;">
+				<strong id="boardType">모집 게시판</strong>
+			</a>
 			<!-- 요기 글목록 한번 더 출력 =============================================================== -->
 			<!-- 글 목록 보여주기 (5개씩만) -->
 			<!-- 헤더 아래 글목록 끝 -->
@@ -296,10 +302,15 @@ function boardList(nowPage){
 			
 				<!-- 신청 버튼 시작 -->
 				<c:if test="${rc_board.onOff == 'ON' }">
-					<button class="appBtn btnOpt" id="hideApply" style="display: none;"
-						onclick="apply()">신청하기</button>
-					<button class="appBtn btnOpt" id="hideCancel" style="display: none;"
-						onclick="applyCancel()">신청취소</button>
+					<c:if test="${not empty usersVO }">
+						<button class="appBtn btnOpt" id="hideApply" style="display: none;"
+							onclick="apply()">신청하기</button>
+						<button class="appBtn btnOpt" id="hideCancel" style="display: none;"
+							onclick="applyCancel()">신청취소</button>
+					</c:if>
+				</c:if>
+				<c:if test="${empty usersVO }">
+					<span style="color: red; font-size: 0.8em;">&#8251;모집글에 신청, 댓글 기능은 로그인 후 이용 가능합니다.</span>
 				</c:if>
 					
 				<!-- 신청 버튼 끝 -->
@@ -320,7 +331,8 @@ function boardList(nowPage){
 			</c:if>
 		</div>
 		<!-- 수정 삭제버튼 끝 -->
-
+		
+		<span style="font-size: 0.75em;"><i class='far fa-comment-alt'></i></span><span id="commentHead" style="font-weight: bold; font-size: 0.9em;"></span>
 		<hr>
 		<!-- 댓글 출력 -->
 		<div id="comments"></div>
@@ -392,7 +404,7 @@ function boardList(nowPage){
 	        		  
 	        		  $(".appBtn").css("display", "none");
 	        		  $("#hideCancel").css("display", "block");
-	        		  
+	        		  alert("스터디 모집에 신청하였스비다!")
 	        	  } else if(result == 'fail'){
 	        		  alert("신청하기에 실패하였습니다.\n관리자에게 문의해주세요.")
 	        	  }
@@ -404,6 +416,10 @@ function boardList(nowPage){
 	
 	/* 신청 취소 */
 	function applyCancel(){
+		var con = confirm("정말 모집신청을 취소하시겠습니까?");
+		if (!con){
+			return false;
+		}
 	      $.ajax({
 	          type: "get",
 	          url: '/applyCancel',
@@ -419,7 +435,7 @@ function boardList(nowPage){
         		  
         		  $(".appBtn").css("display", "none");
         		  $("#hideApply").css("display", "block");
-        		  
+        		  alert("스터디 모집 신청을 취소하였습니다.");
         	  } else if(result == 'fail'){
         		  alert("신청하기에 실패하였습니다.\n관리자에게 문의해주세요.")
         	  }
@@ -459,6 +475,7 @@ function boardList(nowPage){
 			data: {'nowPage':nowPage, 'rc_idx':'${rc_board.rc_idx}'},
 			success: function(page){
 				console.log("페이징 처리");
+				$("#commentHead").html("&nbsp;&nbsp;댓글&nbsp;&nbsp;<span style='color: red;'>"+ page.total+ "</span>");
 				window.startPage = page.startPage;
 				window.endPage = page.endPage;
 				window.nowPage = page.nowPage;
@@ -710,9 +727,9 @@ function boardList(nowPage){
 		var id = 'comm'+ c_idx; 
 		clickCnt++;
 		$(".replyComm").css("display", "none");
-		var html = "<div class='replyComm'>";
+		var html = "<div class='replyComm' style='background-color: #f2f2f2; padding: 15px;'>";
 		html += "<form name='updateCommAjax"+clickCnt+"'>";
-		html += "<span style='font-family: 굴림;'>&rdsh;</span><br>";
+		//html += "<span style='font-family: 굴림;'>&rdsh;</span><br>";
 		html += "<textarea rows='3' name='c_content' style='width:100%; overflow:visible; text-overflow:ellipsis;'>"+c_content+"</textarea>";
 		html += "<input type='hidden' value='"+c_idx+"' name='c_idx'>";
 		html += "<input type='button' class='btnOpt' onclick='modifyCommAjax()' value='수정'>&nbsp;";
@@ -771,16 +788,15 @@ function boardList(nowPage){
 		})
 	}
 	
-
 </script>
 	<div class="popupLayer">
 		<div>
 			<span onClick="closeLayer()"
 				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br> <a id="userProfile"
-			href="#">회원 정보 보기</a><br> <a id="showWritten" href="#">작성글
-			보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
+		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
+		<a id="showWritten" href="#"><i class="far fa-list-alt"></i>&nbsp;작성글 보기</a><br>
 	</div>
 	<script>
 function closeLayer() {

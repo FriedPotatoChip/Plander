@@ -104,12 +104,15 @@ button:hover {
 		window.opener.top.location.href = "/my";
 		window.close();
 	}
+	
+	function qna() {
+		window.opener.top.location.href = "/ask";
+		window.close();
+	}
 </script>
 </head>
 <body>
 	<div id="container">
-		<br>
-		<br>
 		<br>
 		<!-- 예약 헤더 -->
 		<div id="chk">
@@ -128,22 +131,23 @@ button:hover {
 				</a></li>
 			</ul>
 		</div>
+		<hr>
 		<!-- 예약 헤더끝 -->
 
-		<div class="center boxoutside" style="border: 1px solid lightgray;">
+		<div class="center boxoutside">
 			<br>
 			<br>
 			<br> <img src="/resources/images/turtle.png" alt="거북이">
 			<h5 class="bold" style="color: #475C7A;">${uservo.name }님 예약이 완료되었습니다!</h5>
 
-			<p>문의사항이 있으시다면 [ Q&A ] 로 문의하시기 바랍니다.</p>
+			<p>문의사항이 있으시다면 하단의 <strong style="color: #D8737F;">[ 문의하기 ]</strong> 버튼을 눌러주세요.</p>
 
 			<!-- 예약정보 -->
 			<div id="mybookinfo" style="padding: 10px;">
 				<table border="1px solid;" class="table table-bordered"
 					style="width: 100%; text-align: center;">
 					<tbody>
-						<tr style="background-color: #FCBB6D;">
+						<tr>
 							<td width="13%">예매번호</td>
 							<td width="10%">예약자 이름</td>
 							<td width="12%">연락처</td>
@@ -175,16 +179,18 @@ button:hover {
 									<td id="cb_idx">${cab }번</td>
 								</c:otherwise>
 							</c:choose>
-							<td id="bookprice">${bvo.price }</td>
+							<td id="bookprice">${bvo.price }원</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<!-- 나의 예약 정보 끝 -->
-
+			
+			<br><br><br><hr>
 			<div class="center" style="padding: 10px;">
-				<button type="button" onclick="main()">메인으로</button>
-				<button type="button" onclick="mypage()">마이페이지</button>
+				<button type="button" onclick="main()">메인으로</button>&nbsp;
+				<button type="button" onclick="mypage()">마이페이지</button>&nbsp;
+				<button type="button" onclick="qna()">문의하기</button>
 			</div>
 			<br>
 			<br>

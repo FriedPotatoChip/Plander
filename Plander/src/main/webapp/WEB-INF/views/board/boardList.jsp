@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/commons/head.jsp" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <style>
 	table { text-align: center; }
 	.center { text-align: center; }
@@ -83,7 +84,7 @@
 		display: none;
 		background-color: #ffffff;
 		border: solid 2px #d0d0d0;
-		width: 130px;
+		width: 150px;
 		height: 120px;
 		padding: 10px;
 		padding-top: 18px;
@@ -96,6 +97,21 @@
 		right: 5px
 	}
 	
+	.notice {
+	    display: inline-block;
+	    width: 40px;
+	    height: 18px;
+	    padding-top: 1px;
+	    border: 1px solid #FF4947;
+	    background-color: #FF4947;
+	    font-size: 14px;
+	    -webkit-box-sizing: border-box;
+	    box-sizing: border-box;
+	    text-align: center;
+	    line-height: 15px;
+	    color: #fff; vertical-align: center;
+	}
+	
 </style>
 <script> 
 	function selChange(){
@@ -105,6 +121,10 @@
 	function to_detail(b_idx){
 		var cntPerPage = document.getElementById("cntPerPage").value;
 		location.href="/boardDetail?idx="+b_idx+"&nowPage=${page.nowPage}&cntPerPage="+cntPerPage;
+	}
+	function to_detailNotice(b_idx){
+		var cntPerPage = document.getElementById("cntPerPage").value;
+		location.href="/boardDetail?idx="+b_idx+"&cntPerPage="+cntPerPage;
 	}
 	$(document).ready(function(){
 		if ('${ct_idx}' == 1){
@@ -167,21 +187,35 @@
 		<table class="table table-hover" style="font-size: 17px; width: 100%;">
 			<thead>
 				<tr>
-					<th width="5%" scope="row">No.</th>
-					<th width="63%">제목</th>
+					<th width="12%" scope="row">No.</th>
+					<th width="55%">제목</th>
 					<th width="12%">작성자</th>
 					<th width="13%">작성일</th>
 					<th width="7%">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:forEach var="notice" items="${noticeList }">
+					<tr style="background-color: #f0f0f0;">
+						<td><div class='notice'><span style="display: block;">공지</span></div></td>
+						<td style="text-align: left;">
+							<a href="#" onclick="to_detailNotice(${notice.b_idx})">${notice.b_title }</a>
+							<c:if test="${notice.cnt != 0 }">
+								<a href="#" onclick="to_detailNotice(${notice.b_idx})" style="color: #D8737F;">[${notice.cnt }]</a>
+							</c:if>
+						</td>
+						<td><div class="idDiv" userId="${notice.id }">${notice.id }</div></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.b_regdate }" /></td>
+						<td>${notice.hit }</td>
+					</tr>
+				</c:forEach>
 				<c:forEach var="list" items="${boardList }">
 					<tr>
 						<th scope="row">${list.b_idx }</th>
-						<td>
+						<td style="text-align: left;">
 							<a href="#" onclick="to_detail(${list.b_idx})">${list.b_title }</a>
 							<c:if test="${list.cnt != 0 }">
-								<a href="#" onclick="to_detail(${list.b_idx})">[${list.cnt }]</a>
+								<a href="#" onclick="to_detail(${list.b_idx})" style="color: #D8737F;">[${list.cnt }]</a>
 							</c:if>
 						</td>
 						<td>
@@ -203,7 +237,14 @@
 		<!-- 글쓰기 -->
 		<div class="write">
 			<c:if test="${not empty usersVO }">
-				<input class="button" type="button" value="글쓰기" id="write" onclick="write_go()">
+				<c:if test="${ct_idx == 1 }">
+					<c:if test="${usersVO.rank == 1 }">
+						<input class="button" type="button" value="글쓰기" id="write" onclick="write_go()">
+					</c:if>
+				</c:if>
+				<c:if test="${ct_idx != 1 }">
+						<input class="button" type="button" value="글쓰기" id="write" onclick="write_go()">
+				</c:if>
 			</c:if>
 		</div>
 		<br><br><br>
@@ -342,9 +383,9 @@
 			<span onClick="closeLayer()"
 				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#">쪽지 보내기</a><br>
-		<a id="userProfile" href="#">회원 정보 보기</a><br>
-		<a id="showWritten" href="#">작성글 보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
+		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
+		<a id="showWritten" href="#"><i class="far fa-list-alt"></i>&nbsp;작성글 보기</a><br>
 	</div>
 
 <script>

@@ -42,6 +42,7 @@
 		color: black;
 	}
 	/* 버튼 끝 */
+	
 </style>
 </head>
 <body>
@@ -93,7 +94,7 @@
 				<!-- 글 수정버튼 -->
 				<div class="write">
 					<button class="button" type="submit" id="submit" name="submit">수정하기</button>
-					<input class="button" type="reset" value="취소">
+					<input class="button" type="reset" onclick="window.history.back()" value="취소">
 				</div>
 				<br>
 					

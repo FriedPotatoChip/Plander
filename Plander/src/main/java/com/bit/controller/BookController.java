@@ -54,18 +54,18 @@ public class BookController {
 	public String selectSeat(BookingVO bvo, Model model, UsersVO uservo) {
 		System.out.println("/selectSeat ===============================================");
 		System.out.println("2.날짜 선택, 방 선택");
-
+		
 		bvo.setBk_regdate(today);
 		System.out.println("예약날짜(regdate) : " + bvo.getBk_regdate());
 		System.out.println("시작날짜 : " + bvo.getStart_time() + ", 끝 날짜 : " + bvo.getEnd_time());
 		System.out.println(
 				"지점번호 : " + bvo.getBr_idx() + ", 방 번호 : " + bvo.getRoomnum() + ", 정기권 확인 : " + bvo.getTime_idx());
-
+		
 		bvo.setId(uservo.getId());
 		boolean cab = cab(bvo.getCabinet());
 		System.out.println("사물함 값 확인 : " + cab);
 		System.out.println("3.좌석조회");
-
+		
 		if (bvo.getRoomnum() == 1) {
 			// 좌석조회 개인실
 			int allseat = bookService.seatCnt(bvo.getBr_idx(), bvo.getRoomnum()); // 전체 좌석
@@ -73,13 +73,13 @@ public class BookController {
 			int leaveseat = (allseat - bookseat); // 남은 좌석 수
 			System.out.println("전체 좌석 수 : " + allseat + ", 예약된 좌석 수 : " + bookseat + ", 남은 좌석 수 : " + leaveseat);
 			List<BookingVO> booklist = bookService.bookone(bvo);
-
+			
 			System.out.println("bvo : " + bvo);
-
+			
 			model.addAttribute("booklist", booklist);
 			model.addAttribute("bvo", bvo);
 			return "book/booking_floor_2";
-
+			
 		} else if (bvo.getRoomnum() == 2) {
 			// 좌석조회 랩실
 			// 전체 좌석 : 5
@@ -88,17 +88,17 @@ public class BookController {
 			int leaveroomseat = (5 - roomseat); // 남은 좌석 수
 			System.out.println("랩실 남은 좌석 수 : " + leaveroomseat);
 			List<BookingVO> bookroomlist = bookService.bookroom(bvo);
-
+			
 			System.out.println("bvo : " + bvo);
-
+			
 			model.addAttribute("bookroomlist", bookroomlist);
 			model.addAttribute("bvo", bvo);
 			return "book/booking_floor_1";
-
+			
 		} else {
 			return "book/booking";
 		}
-
+		
 	}
 	
 	// 사물함
@@ -215,7 +215,7 @@ public class BookController {
 		
 		String chkLen = request.getParameter("chkLen");
 		System.out.println("chkLen: " + chkLen);
-
+		
 		model.addAttribute("bvo", bvo);
 		model.addAttribute("uservo", uservo);
 		model.addAttribute("svo", svo);

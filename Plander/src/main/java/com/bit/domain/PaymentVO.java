@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class PaymentVO {
 	private int p_idx, bk_idx, price, u_idx, bkc_idx;
-	private String payment;
+	private String payment, receipt;
 
 }

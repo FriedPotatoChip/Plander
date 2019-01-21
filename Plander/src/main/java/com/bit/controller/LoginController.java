@@ -148,12 +148,6 @@ public class LoginController {
 		return "redirect: /";
 	}
 	
-	@RequestMapping("/test")
-	public String goTest() {
-		return "main/test";
-	}
-	
-	
 	@PostMapping("/loginAjax")
 	public @ResponseBody String loginAjax(UsersVO vo, HttpSession session) {
 			System.out.println("controller 로그인 테스트");

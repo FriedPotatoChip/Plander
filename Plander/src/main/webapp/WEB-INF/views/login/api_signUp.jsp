@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
+<jsp:include page="/commons/head.jsp" />
 <meta charset="UTF-8">
 <title>api로그인 회원가입</title>
 <script
@@ -25,6 +23,10 @@
 </script>
 </head>
 <body>
+	<!-- 헤더 -->
+	<c:if test="${empty user }"><jsp:include
+			page="/commons/header.jsp" /></c:if>
+			
 	<form action="/signUp_api" method="post" name="joinform">
 		<table class="table">
 			<tr>

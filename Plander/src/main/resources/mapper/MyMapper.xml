@@ -21,7 +21,7 @@
 		from coupon
 		cp, coupon_table cb
 		where cp.cb_idx = cb.cb_idx
-		and cp.id = #{id})
+		and cp.id = #{id} order by cp.cb_idx)
 		where
 		rn between #{start} and #{end}
 	</select>
@@ -166,6 +166,7 @@
 		and b.id = #{id} order by
 		b.bk_idx desc)
 		where rn between #{start} and #{end}
+		order by bk_idx desc
 	</select>
 
 	<!-- 전체 사물함 예약 갯수 조회 -->
@@ -241,7 +242,7 @@
 		rc.rc_idx
 		and rc.rc_idx in(select rc_idx
 		from recruit where id
-		= #{id}))
+		= #{id}) order by a.ap_idx desc)
 		where rn between #{start} and #{end}
 	</select>
 

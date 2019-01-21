@@ -111,9 +111,15 @@ h3 {
 				<div class="card" data-cid="b7v11vhj"
 					data-anchor="e9eb6b0870ac690c87777cd01fff71c2">
 					<h3 class="uio_title theme_color" id="title">
-						<span class="uio_title_bullet theme_background"></span> 운영안내 및
-						운영방침
+						<span class="uio_title_bullet theme_background"></span>
+						운영안내 및 운영방침
 					</h3>
+					<br>
+					<div style="margin: auto; text-align: center;">
+						<img src="/resources/images/운영안내1-01.jpg" alt="운영안내 "
+						width="90%" style="padding-bottom: 10px;">
+					</div>
+					<!-- 
 					<div class="main_area current" data-cid="b7v11vhj"
 						data-anchor="e9eb6b0870ac690c87777cd01fff71c2" data-adult-flag="0"
 						data-title="요금 및 이용안내">
@@ -139,10 +145,9 @@ h3 {
 							<div class="component_box _component" data-index="3">
 								<div class="txt_box">
 									<div class="txt_component color1 big align_l t_space ">
-										<p>혼자 공부하기 힘들어 하는 사람을 위해 모집게시판 운영</p>
-										<p>
-											기간 내에 모집 인원을 채운 후 예약을 할 경우 : 스터디룸 <strong>10% 할인</strong> 쿠폰
-											5개 지급
+										<p>혼자 공부하기 힘들어 하는 사람들을 위해 모집게시판을 운영합니다.</p>
+										<p>기간 내에 모집 인원을 채운 후 예약을 할 경우 : 스터디룸 
+											<strong style="color: #D8737F;">10% 할인</strong> 쿠폰 5개 지급
 										</p>
 									</div>
 								</div>
@@ -191,7 +196,7 @@ h3 {
 								<div class="txt_box">
 									<div class="txt_component color1 big align_l t_space ">
 										<p>
-											1. TMS를 한 번이라도 이용을 마친 고객들에 한해서 후기작성이 가능<br>
+											1. TMS를 한 번이라도 이용을 마친 고객들에 한해서 후기 작성이 가능합니다.<br>
 										</p>
 									</div>
 								</div>
@@ -200,7 +205,7 @@ h3 {
 								<div class="txt_box">
 									<div class="txt_component color1 big align_l t_space ">
 										<p>
-											2. 후기를 작성할 시 <strong>1000원 쿠폰</strong> 1개 지급
+											2. 후기를 작성할 시 <strong>1000원 쿠폰</strong> 이 1개 지급됩니다.
 										</p>
 
 									</div>
@@ -223,7 +228,8 @@ h3 {
 										<div class="component_box _component" data-index="12">
 											<div class="txt_box">
 												<div class="txt_component color1 big align_l t_space ">
-													<p>1.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+													<p>1. 랩실 예약시, 음료는 인당 1잔 무료 제공됩니다.<br>
+													(아메리카노, 아이스티, 탄산음료 중 선택 1종)</p>
 
 												</div>
 											</div>
@@ -246,6 +252,7 @@ h3 {
 
 						</div>
 					</div>
+					 -->
 				</div>
 
 			</div>

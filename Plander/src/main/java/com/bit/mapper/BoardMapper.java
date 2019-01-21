@@ -70,4 +70,10 @@ public interface BoardMapper {
 	
 	// 리뷰 -1
 	public boolean minusReview(int bk_idx);
+	
+	// 공지 목록
+	public List<BoardVO> getNoticeList();
+	
+	// 공지 올리기/내리기
+	public boolean updateNotice(Map<String, Integer> map);
 }
