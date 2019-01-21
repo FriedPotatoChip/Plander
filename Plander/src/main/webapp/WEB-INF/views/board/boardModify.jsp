@@ -74,9 +74,6 @@
 				<table style="margin: auto;">
 					<tr>
 						<td>
-							<div style="float: right; color: black;">
-								공지 <input name="notice" value="1" type="checkbox">
-							</div>
 							<div class="col-xs-9 zeroPad">
 								<input type="text" class="form-control"
 									id="b_title" name="b_title" placeholder="제목" value="${board.b_title }"  required>

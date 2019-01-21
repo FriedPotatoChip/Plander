@@ -199,6 +199,7 @@ button:hover {
 }
 /* 버튼 끝 */
 .eq { background-color: #D8737F; opacity: 0.8; color: white; }
+.eq input { display: none; }
 
 </style>
 
@@ -294,6 +295,8 @@ button:hover {
 							</div>
 							<br>
 						</div> <!-- 1번 열 끝 -->
+						<div style="display: inline-block; width: 13px; height: 13px;" class="eq"></div><span style="display: inline-block;">: 예약된 좌석</span><br> 
+						<div style="display: inline-block; width: 13px; height: 13px; border: 1px solid black;"></div>: 선택 가능<br>
 					</div>
 
 					<!-- 선택 정보 -->
