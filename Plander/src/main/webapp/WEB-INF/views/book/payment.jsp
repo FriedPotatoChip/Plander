@@ -115,7 +115,7 @@
 				    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
 				    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
 				    merchant_uid : bookval, //상점에서 관리하시는 고유 주문번호를 전달
-				    name : '주문명:결제테스트',
+				    name : '거북이의 기적 예약',
 				    amount : 100,
 				    buyer_email : '${usersVO.email}',
 				    buyer_name : '${usersVO.name}',

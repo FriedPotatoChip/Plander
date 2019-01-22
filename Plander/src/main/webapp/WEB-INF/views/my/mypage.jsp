@@ -715,7 +715,7 @@ h3 {
 					+ (document.documentElement.scrollTop ? document.documentElement.scrollTop
 							: document.body.scrollTop);
 			if (chk == 'chk'){
-				divTop += 89;
+				divTop += 67;
 			}
 			console.log("X: " + e.clientX);
 			console.log("Y: " + e.clientY);
