@@ -155,27 +155,26 @@
       });
       $("#summernote").summernote('code',  '${rc_board.rc_content}');
     });
+
     function sendFile(file, el) {
-      var form_data = new FormData();
-      form_data.append('file', file);
-      $.ajax({
-        data: form_data,
-        type: "POST",
-        url: '/imageUpload',
-        cache: false,
-        contentType: false,
-        enctype: 'multipart/form-data',
-        processData: false,
-        success: function(url) {
-        	setTimeout(function(){
-	        	url = '/resources/upload'+url;
-	        	console.log("url: "+ url);
-	          $(el).summernote('editor.insertImage', url);
-	          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        	}, 3000)
-        }
-      });
-    }
+        var form_data = new FormData();
+        form_data.append('file', file);
+        $.ajax({
+          data: form_data,
+          type: "POST",
+          url: '/uploadAjaxS3',
+          cache: false,
+          contentType: false,
+          enctype: 'multipart/form-data',	
+          processData: false,
+          success: function(url) {
+  			url = 'https://s3.ap-northeast-2.amazonaws.com/turtlesmiraclebucket/resources/upload'+url;
+  			console.log("url: "+ url);
+  			$(el).summernote('editor.insertImage', url);
+  			$('#imageBoard > ul').append('<li><img src="'+url+'"/></li>');
+          }
+        });
+      }
 </script>
 
 </body>

@@ -87,6 +87,17 @@
 		});
 	
 	});
+	$(function(){
+		$("input:checkbox").on("change", function(){
+			if ($(this).prop('checked')){
+				$(this).parents("td").css("background-color", "#adb5bd");
+				$(this).parents("td").css("color", "white");
+			} else {
+				$(this).parents("td").css("background-color", "#f8f9fa");
+				$(this).parents("td").css("color", "#666");
+			}
+		})
+	})
 </script>
 <script>
 	$(function() {
@@ -257,8 +268,8 @@ button:hover {
 }
 
 .eq { background-color: #D8737F; opacity: 0.8; color: white; }
+.eq input { display: none; }
 </style>
-
 </head>
 <body>
 	<div id="container" style="box-sizing: border-box;">
@@ -475,6 +486,9 @@ button:hover {
 								</div>
 							</div>
 							<!-- 4번 열 끝 -->
+						<div style="display: inline-block; width: 13px; height: 13px;" class="eq"></div><span style="display: inline-block;">: 예약된 좌석</span><br> 
+						<div style="display: inline-block; width: 13px; height: 13px; border: 1px solid black;"></div>: 선택 가능<br>
+						<div style="display: inline-block; width: 13px; height: 13px; background-color: #adb5bd;"></div>: 선택 좌석
 						</div>
 						<!-- allseat 끝 -->
 					</div>
