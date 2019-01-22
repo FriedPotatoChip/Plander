@@ -180,8 +180,8 @@
 				return false;
 			}
 			
-			if (!testId.test(id)) {
-				alert("아이디는 영문, 숫자 조합만 사용 가능합니다.");
+			if (!testId.test(frm.id.value)) {
+				alert("아이디는 영문, 숫자 조합(4-20자)만 가능합니다.");
 				frm.id.value = "";
 				frm.id.focus();
 				return false;
