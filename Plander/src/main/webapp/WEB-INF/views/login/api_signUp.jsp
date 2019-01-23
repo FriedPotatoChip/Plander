@@ -34,10 +34,12 @@
 			</ul>
 		</div>
 	</nav>
-	
 	<div style="width: 42%; margin: auto; margin-top: 80px;">
-	
 	<form action="/signUp_api" method="post" name="joinform">
+		<input type="hidden" name="email" value="${api_user.email }">
+		<input type="hidden" name="api_id" value="${api_user.api_id }">
+		<input type="hidden" name="name" value="${api_user.name }">
+		<input type="hidden" name="type" value="${api_user.type }">
 		<table class="table">
 			<tr>
 				<th>아이디</th>
@@ -50,7 +52,7 @@
 						<div class="col-3">
 							<input class="form-control" type="button"
 								style="background-color: #FCBB6D; color: white;" id="chkId"
-								value="id 중복체크" onClick="idChkBtn()">
+								value="ID 중복체크" onClick="idChkBtn()">
 						</div>
 					</div>
 				</td>

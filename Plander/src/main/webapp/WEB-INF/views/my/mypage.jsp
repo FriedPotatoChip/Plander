@@ -10,29 +10,65 @@
 <!-- Jcrop(사진 크롭) -->
 <script
 	src="http://jcrop-cdn.tapmodo.com/v0.9.12/js/jquery.Jcrop.min.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+	crossorigin="anonymous">
 
 <script>
-	//비밀번호 확인
-	function pwchk() {
-		var pw = $('#password').val();
+	//비밀번호 확인1
+	function pwchk1() {
+		var pw = $('#password1').val();
 		var pwchk = ${user.password};
 
 		if (pw != pwchk || pwchk == "") {
 			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
+			$('#pwchkMsg1').html(
+					"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+			$('#update1').prop("disabled", true);
+		} else {
+			$('#pwchkMsg1').html(
+					"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
+			$('#update1').prop("disabled", false);
+		}
+	}
+	
+	//비밀번호 확인2
+	function pwchk2() {
+		var pw = $('#password').val();
+		var pwchk = $('#passwordchk').val();
+		window.chkPwdChk = false;
+		if (pw != pwchk || pwchk == "") {
+			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
 			$('#pwchkMsg').html(
 					"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
-			$('#update').prop("disabled", true);
 		} else {
 			$('#pwchkMsg').html(
 					"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
-			$('#update').prop("disabled", false);
+			chkPwdChk = true;
 		}
 	}
 
 	// 클릭 시 스크롤이 자동으로 위로 올라가는 현상
 	function click() {
 		return;
+	}
+
+	//내용 출력(fetch api)
+	function fetch_book(name) {
+		fetch(name).then(function(response) {
+			response.text().then(function(text) {
+				document.querySelector('#myBook').innerHTML = text;
+			});
+		});
+	}
+
+	function fetch_recruit(name) {
+		fetch(name).then(function(response) {
+			response.text().then(function(text) {
+				document.querySelector('#myRecruit').innerHTML = text;
+			});
+		});
 	}
 </script>
 
@@ -42,7 +78,6 @@
 	font-weight: 400;
 	color: #666;
 } */
-
 .nav_btn {
 	margin-right: 10px;
 	margin-top: 10px;
@@ -161,12 +196,14 @@ h3 {
 	padding: 20px 10px 0 10px;
 	font-size: 17px;
 }
-.popupLayer	a { 
-	text-decoration: none; 
+
+.popupLayer	a {
+	text-decoration: none;
 	font-weight: 700;
 	font-size: 17px;
 	color: #666;
 }
+
 .popupLayer div {
 	position: absolute;
 	top: 0px;
@@ -198,6 +235,8 @@ h3 {
 			</h5>
 			<strong
 				style="float: right; margin-bottom: 10px; margin-right: 10px;"><a
+				href="#" data-toggle="modal" data-target="#myPw">비밀번호변경</a></strong> <strong
+				style="float: right; margin-bottom: 10px; margin-right: 10px;"><a
 				href="#" data-toggle="modal" data-target="#myModal">회원정보수정</a></strong>
 			<!-- 회원 프로필 사진 -->
 			<div class="profile" style="margin-top: 20px;">
@@ -213,7 +252,7 @@ h3 {
 			<br>
 			<table class="table" id="my_info_table" style="text-align: center;">
 				<tr>
-					<th>회원아이디</th>
+					<th style="width: 30%;">회원아이디</th>
 					<td>${user.id }</td>
 				</tr>
 				<tr>
@@ -285,6 +324,57 @@ h3 {
 	<br>
 
 
+	<!-- 비밀번호변경 -->
+	<div class="modal fade" id="myPw" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">비밀번호변경</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table class="table" id="modal_table">
+							<tr>
+								<th>현재비밀번호</th>
+								<td><input type="text" class="form-control" id="password1"
+									name="password1" placeholder="비밀번호" oninput="pwchk1()" required>
+									<p id="pwchkMsg1" style="font-size: 15px;"></p> <!-- 비밀번호가 일치하지 않습니다. -->
+								</td>
+							</tr>
+							<tr>
+								<th>비밀번호&nbsp;<b style="color: red;">&#42;</b></th>
+								<td><input type="password" name="password" id="password"
+									style="font-family: 맑은 고딕;" oninput="pwchk2()"
+									class="form-control" required>
+									<p id="pwMsg" style="font-size: 15px; margin-top: 5px;">
+										(영문 대소문자/숫자/특수문자(!,@,#,$,%,^,&,*) 조합,<br> 8자~16자)
+									</p></td>
+							</tr>
+							<tr>
+								<th>비밀번호 확인&nbsp;<b style="color: red;">&#42;</b></th>
+								<td><input type="password" name="passwordchk"
+									style="font-family: 맑은 고딕;" id="passwordchk" oninput="pwchk2()"
+									class="form-control" required>
+									<p id="pwchkMsg" style="font-size: 15px; margin-top: 5px;"></p>
+									<!-- 비밀번호가 일치하지 않습니다. --></td>
+							</tr>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-warning"
+							data-dismiss="modal">닫기</button>
+						<button type="button" id="update1" 
+						onclick="updatePw()" class="btn btn-outline-danger">변경하기</button>
+					</div>
+				</div>
+		</div>
+	</div>
+
 	<!-- 회원정보수정 모달창 -->
 	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
 		<div class="modal-dialog" role="document">
@@ -333,7 +423,8 @@ h3 {
 							<tr>
 								<th>회원주소&nbsp;<b style="color: red;">&#42;</b></th>
 								<td><input type="text" id="zipNo" style="display: inline;"
-									class="col-sm-8 form-control mr-2" name="zipNo" value="${user.zipNo }" readonly>
+									class="col-sm-8 form-control mr-2" name="zipNo"
+									value="${user.zipNo }" readonly>
 									<button type="button" class="btn btn-outline-danger"
 										onclick="goPopup()">주소검색</button> <input type="text"
 									id="roadAddrPart1" class="col-sm-12 form-control my-2"
@@ -662,6 +753,8 @@ h3 {
 
 			fetch_book('/my/recvMsg?nowPage=' + nowPage);
 		}
+		
+		
 		function sendMsgDel(sm_idx, nowPage) {
 			$.ajax({
 				url : '/sendMsgDel',
@@ -684,14 +777,33 @@ h3 {
 
 			fetch_book('/my/sendMsg?nowPage=' + nowPage);
 		}
+		
+		function updatePw() {
+			$.ajax({
+				url : '/updatePw',
+				type : 'post',
+				dataType : 'text',
+				success : function(result) {
+					if (result == 'success') {
+						alert("비밀번호를 변경했습니다..");
+					} else {
+						alert("비밀번호 변경에 실패했습니다.\n관리자에게 문의하세요");
+					}
+				},
+				error : function(error) {
+					alert("비밀번호 변경에 실패했습니다.\n관리자에게 문의하세요");
+				}
+			})
+		}
 	</script>
 	<div class="popupLayer">
 		<div>
 			<span onClick="closeLayer()"
 				style="cursor: pointer; font-size: 0.85em; color: gray;" title="닫기">X</span>
 		</div>
-		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지 보내기</a><br>
-		<a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원 정보 보기</a><br>
+		<a id="sendMsg" href="#"><i class="far fa-envelope"></i>&nbsp;쪽지
+			보내기</a><br> <a id="userProfile" href="#"><i class="fas fa-user"></i>&nbsp;회원
+			정보 보기</a><br>
 	</div>
 	<script>
 		function closeLayer(obj) {
@@ -714,8 +826,8 @@ h3 {
 					+ 5
 					+ (document.documentElement.scrollTop ? document.documentElement.scrollTop
 							: document.body.scrollTop);
-			if (chk == 'chk'){
-				divTop += 67;
+			if (chk == 'chk') {
+				divTop += 89;
 			}
 			console.log("X: " + e.clientX);
 			console.log("Y: " + e.clientY);
@@ -823,14 +935,12 @@ h3 {
 				} else {
 					alert('오후 6시 이전이라 처리는 가능하나, 처리 중 오류가 발생하였습니다.');
 				}
-				
+
 				fetch_book('/my/my_seat?nowPage=' + nowPage);
-				
+
 			} else {
 				alert('오후 6시 이후부터는 관리자에게 직접 문의해 주시기 바랍니다.');
 			}
-
-			
 
 		}
 
@@ -859,13 +969,14 @@ h3 {
 
 					}
 				});
-					fetch_book('/my/my_cabinet?nowPage=' + nowPage);
+				fetch_book('/my/my_cabinet?nowPage=' + nowPage);
 			}
 		}
-		
-		function openWindow(rm_idx){
-			$("#span"+rm_idx).css("display", "block");
-			window.open('/recvMsg?rm_idx='+rm_idx, '받은 쪽지', 'width=500, height=600');
+
+		function openWindow(rm_idx) {
+			$("#span" + rm_idx).css("display", "block");
+			window.open('/recvMsg?rm_idx=' + rm_idx, '받은 쪽지',
+					'width=500, height=600');
 		}
 	</script>
 </body>

@@ -148,6 +148,22 @@ public class MyController {
 		myService.userUpdate(vo);
 		return "my/mypage";
 	}
+	
+	// 내비번변경
+	@RequestMapping("updatePw")
+	public String updatePw(HttpServletRequest request, HttpSession session) {
+		UsersVO vo = (UsersVO) session.getAttribute("user");
+		System.out.println("request.getParameter(\"password\"): " + request.getParameter("password"));
+		System.out.println("request.getParameter(\"password1\"): " + request.getParameter("password1"));
+		vo.setPassword(request.getParameter("password"));
+		int result = myService.userUpdate(vo);
+		
+		if (result == 1) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 
 	// 페이징
 	public Map<String, Object> paging(PagingVO page, UsersVO vo, int total) {

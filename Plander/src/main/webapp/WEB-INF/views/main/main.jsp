@@ -214,7 +214,7 @@ body {
 	background-color: #FCBB6D;
 	color: white;
 }
-
+ 
 .popup-bubble-content2 {
 	position: absolute;
 	top: 0;
