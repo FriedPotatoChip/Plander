@@ -217,6 +217,7 @@ public class LoginController {
 		    String tmpPwd = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
 		    content += tmpPwd;
 		    content += "</b></p>"
+		    		+ "<br><p><a href=\"http://www.turtlesmiracle.ga\">www.turtlesmiracle.ga</a></p>"
 		    		+ "</div></div>"
 		    		+ "</body></html>";
 		    user.setPassword(tmpPwd);
