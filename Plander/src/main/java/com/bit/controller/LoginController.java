@@ -208,14 +208,16 @@ public class LoginController {
 		    		"<body>"
 		    		+ "<div style=\"border: 1px solid black; padding: 2%; margin: auto; width: 70%;\">"
 		    		+ "<h4>[TMS] 임시 비밀번호 변경 안내</h4><hr><br>"
-		    		+ "<img src=\"images/자물쇠1.png\" alt=\"자물쇠 이미지\"\r style=\"width: 80px; display: block; margin: auto;\">"
+		    		+ "<img src=\"resources/images/자물쇠1.png\" alt=\"자물쇠 이미지\"\r style=\"width: 80px; display: block; margin: auto;\">"
 		    		+ "<div style=\"text-align: center;\">"
+		    		+ "<p>회원님의 <b style=\"color: darkblue;\">임시 비밀번호</b>입니다.<br>"
+		    		+ "로그인 후 반드시 비밀번호를 변경해주시길 바랍니다.</p>"
 		    		+ "<p>임시 비밀번호 : "
 		    		+ "<b>";    // 내용
 		    String tmpPwd = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
 		    content += tmpPwd;
 		    content += "</b></p>"
-		    		+ "</div>"
+		    		+ "</div></div>"
 		    		+ "</body></html>";
 		    user.setPassword(tmpPwd);
 		   service.tmpPwd(user);
