@@ -16,6 +16,7 @@
 	crossorigin="anonymous">
 
 <script>
+
 	//비밀번호 확인1
 	function pwchk1() {
 		var pw = $('#password1').val();
@@ -32,18 +33,19 @@
 			$('#update1').prop("disabled", false);
 		}
 	}
-	
+
 	//비밀번호 확인2
+	window.chkPwdChk = false;
 	function pwchk2() {
-		var pw = $('#password').val();
-		var pwchk = $('#passwordchk').val();
-		window.chkPwdChk = false;
+		var pw = $('#password2').val();
+		var pwchk = $('#passwordchk2').val();
 		if (pw != pwchk || pwchk == "") {
 			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
-			$('#pwchkMsg').html(
+			$('#pwchkMsg2').html(
 					"<span style='color: red'>비밀번호가 일치하지 않습니다.</span>");
+			chkPwdChk = false;
 		} else {
-			$('#pwchkMsg').html(
+			$('#pwchkMsg2').html(
 					"<span style='color: forestgreen'>비밀번호가 일치합니다.</span>");
 			chkPwdChk = true;
 		}
@@ -329,6 +331,7 @@ h3 {
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
+			<form id="pwform">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalCenterTitle">비밀번호변경</h5>
@@ -348,19 +351,19 @@ h3 {
 							</tr>
 							<tr>
 								<th>비밀번호&nbsp;<b style="color: red;">&#42;</b></th>
-								<td><input type="password" name="password" id="password"
+								<td><input type="password" name="password2" id="password2"
 									style="font-family: 맑은 고딕;" oninput="pwchk2()"
 									class="form-control" required>
-									<p id="pwMsg" style="font-size: 15px; margin-top: 5px;">
+									<p id="pwMsg2" style="font-size: 15px; margin-top: 5px;">
 										(영문 대소문자/숫자/특수문자(!,@,#,$,%,^,&,*) 조합,<br> 8자~16자)
 									</p></td>
 							</tr>
 							<tr>
 								<th>비밀번호 확인&nbsp;<b style="color: red;">&#42;</b></th>
-								<td><input type="password" name="passwordchk"
-									style="font-family: 맑은 고딕;" id="passwordchk" oninput="pwchk2()"
+								<td><input type="password" name="passwordchk2"
+									style="font-family: 맑은 고딕;" id="passwordchk2" oninput="pwchk2()"
 									class="form-control" required>
-									<p id="pwchkMsg" style="font-size: 15px; margin-top: 5px;"></p>
+									<p id="pwchkMsg2" style="font-size: 15px; margin-top: 5px;"></p>
 									<!-- 비밀번호가 일치하지 않습니다. --></td>
 							</tr>
 						</table>
@@ -368,10 +371,11 @@ h3 {
 					<div class="modal-footer">
 						<button type="button" class="btn btn-outline-warning"
 							data-dismiss="modal">닫기</button>
-						<button type="button" id="update1" 
-						onclick="updatePw()" class="btn btn-outline-danger">변경하기</button>
+						<input type='button' id="update1" 
+						onclick="updatePw()" class="btn btn-outline-danger" value='변경하기' />
 					</div>
 				</div>
+			</form>
 		</div>
 	</div>
 
@@ -779,21 +783,29 @@ h3 {
 		}
 		
 		function updatePw() {
-			$.ajax({
-				url : '/updatePw',
-				type : 'post',
-				dataType : 'text',
-				success : function(result) {
-					if (result == 'success') {
-						alert("비밀번호를 변경했습니다..");
-					} else {
+			if (!chkPwdChk){
+				alert("비번이 맞지 않습니다.");
+			} else {
+				$.ajax({
+					url : '/my/updatePw',
+					type : 'post',
+					data : $('#pwform').serialize(),
+					dataType : 'text',
+					success : function(result) {
+						console.log("result: "+ result);
+						if (result == 'success') {
+							alert("비밀번호를 변경했습니다.");
+							window.location.reload();
+						} else {
+							alert("비밀번호 변경에 실패했습니다.\n다시 한 번 시도해주세요.");
+						} 
+					},
+					error : function(error) {
 						alert("비밀번호 변경에 실패했습니다.\n관리자에게 문의하세요");
 					}
-				},
-				error : function(error) {
-					alert("비밀번호 변경에 실패했습니다.\n관리자에게 문의하세요");
-				}
-			})
+					
+				});
+			}
 		}
 	</script>
 	<div class="popupLayer">

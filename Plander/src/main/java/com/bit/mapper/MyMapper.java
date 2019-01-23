@@ -16,6 +16,9 @@ import com.bit.domain.UsersVO;
 
 public interface MyMapper {
 	
+	// 내 비번변경
+	public int userUpdatePw(UsersVO vo);
+	
 	// 내쿠폰보유현황갯수
 	public int coupon_cnt(UsersVO vo);
 	

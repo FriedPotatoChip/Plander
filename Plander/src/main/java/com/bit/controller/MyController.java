@@ -8,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -151,18 +153,24 @@ public class MyController {
 	
 	// 내비번변경
 	@RequestMapping("updatePw")
+	@ResponseBody
 	public String updatePw(HttpServletRequest request, HttpSession session) {
 		UsersVO vo = (UsersVO) session.getAttribute("user");
-		System.out.println("request.getParameter(\"password\"): " + request.getParameter("password"));
-		System.out.println("request.getParameter(\"password1\"): " + request.getParameter("password1"));
-		vo.setPassword(request.getParameter("password"));
-		int result = myService.userUpdate(vo);
+		System.out.println("id: " + vo.getId());
+		System.out.println("pw: " + request.getParameter("password2"));
+		vo.setPassword(request.getParameter("password2"));
+		vo.setId(vo.getId());
+		int result = myService.userUpdatePw(vo);
+		System.out.println("처리결과: " + result);
 		
 		if (result == 1) {
+			System.out.println("성공");
 			return "success";
 		} else {
+			System.out.println("실패");
 			return "fail";
 		}
+		
 	}
 
 	// 페이징

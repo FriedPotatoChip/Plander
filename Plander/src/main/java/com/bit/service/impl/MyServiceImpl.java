@@ -233,4 +233,10 @@ public class MyServiceImpl implements MyService {
 		return mapper.my_cabinet_header(vo);
 	}
 
+	// 내 비번변경
+	@Override
+	public int userUpdatePw(UsersVO vo) {
+		return mapper.userUpdatePw(vo);
+	}
+
 }

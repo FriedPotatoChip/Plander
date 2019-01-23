@@ -19,6 +19,9 @@ public interface MyService {
 	// 내쿠폰보유현황갯수
 	public int coupon_cnt(UsersVO vo);
 	
+	// 내 비번변경
+	public int userUpdatePw(UsersVO vo);
+	
 	// 내쿠폰보유현황
 	public List<CouponVO> coupon(Map map);
 	
