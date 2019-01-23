@@ -52,25 +52,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/api_signUp")
-	public String api_signUP(UsersVO vo, HttpSession session) {
+	public String api_signUP(UsersVO vo, Model model) {
+		System.out.println("api_dignUp: "+ vo);
+		model.addAttribute("api_user", vo);
 		return "/login/api_signUp";
 	}
 	
 	@PostMapping("/signUp_api")
-	public String signUp_api(UsersVO vo, HttpSession session) {
-		UsersVO sessionUser = (UsersVO) session.getAttribute("usersVO");
-		sessionUser.setId(vo.getId());
-		sessionUser.setPhone(vo.getPhone());
-		sessionUser.setAddrDetail(vo.getAddrDetail());
-		sessionUser.setZipNo(vo.getZipNo());
-		sessionUser.setRoadAddrPart1(vo.getRoadAddrPart1());
-		sessionUser.setType(vo.getType());
-		System.out.println("usersVO: "+ sessionUser);
-		service.insertApi(sessionUser);
-		session.removeAttribute("usersVO");
-		session.setAttribute("usersVO", sessionUser);
-		
-		return "redirect: /joinOk";
+	public String signUp_api(UsersVO vo, RedirectAttributes rttr) {
+		System.out.println("usersVO: "+ vo);
+		service.insertApi(vo);
+		rttr.addAttribute("name", vo.getName());
+		return "redirect: /signUpSuc";
 	}
 	
 	@GetMapping("joinOk")
@@ -79,12 +72,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("/TMS/naverAjax")
-	public @ResponseBody String naverAjax(UsersVO vo,HttpSession session) {
+	public @ResponseBody String naverAjax(UsersVO vo,HttpSession session, RedirectAttributes rttr) {
 		
 		
 		System.out.println("vo: "+ vo);
 		UsersVO result = service.chkApi(vo.getApi_id());
-		
 		if (result == null) {
 			System.out.println("널로 들어옴");
 			return "/api_signUp";
