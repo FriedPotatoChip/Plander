@@ -206,10 +206,10 @@ public class LoginController {
 		    		"<meta charset=\"UTF-8\">\r\n" + 
 		    		"</head>\r\n" + 
 		    		"<body>"
-		    		+ "<div style=\"border: 1px solid black; padding: 2%; margin: auto; width: 70%;\">"
+		    		+ "<div style=\"border: 1px solid black; padding: 2%; margin: auto; width: 50%;\">"
 		    		+ "<h4>[TMS] 임시 비밀번호 변경 안내</h4><hr><br>"
-		    		+ "<img src=\"resources/images/자물쇠1.png\" alt=\"자물쇠 이미지\"\r style=\"width: 80px; display: block; margin: auto;\">"
-		    		+ "<div style=\"text-align: center;\">"
+		    		+ "<img src=\"https://image.flaticon.com/icons/svg/483/483408.svg\" alt=\"자물쇠 이미지\"\r style=\"width: 80px; display: block; margin: auto;\">"
+		    		+ "<br><div style=\"text-align: center;\">"
 		    		+ "<p>회원님의 <b style=\"color: darkblue;\">임시 비밀번호</b>입니다.<br>"
 		    		+ "로그인 후 반드시 비밀번호를 변경해주시길 바랍니다.</p>"
 		    		+ "<p>임시 비밀번호 : "
