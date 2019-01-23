@@ -63,6 +63,13 @@
 		            order by dbms_random.value)
 		    where rownum <![CDATA[ <= 3]]>
 	</select>
+	
+	<!-- 모집 중인 내 모집글 -->
+	<select id="myRecruit" resultType="com.bit.domain.RecruitVO" parameterType="string">
+		SELECT * FROM RECRUIT WHERE ID = #{id} AND ONOFF = 'ON'
+	</select>
+	
+	
 </mapper>
 
 

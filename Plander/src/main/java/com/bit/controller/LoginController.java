@@ -52,25 +52,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/api_signUp")
-	public String api_signUP(UsersVO vo, HttpSession session) {
+	public String api_signUP(UsersVO vo, Model model) {
+		System.out.println("api_dignUp: "+ vo);
+		model.addAttribute("api_user", vo);
 		return "/login/api_signUp";
 	}
 	
 	@PostMapping("/signUp_api")
-	public String signUp_api(UsersVO vo, HttpSession session) {
-		UsersVO sessionUser = (UsersVO) session.getAttribute("usersVO");
-		sessionUser.setId(vo.getId());
-		sessionUser.setPhone(vo.getPhone());
-		sessionUser.setAddrDetail(vo.getAddrDetail());
-		sessionUser.setZipNo(vo.getZipNo());
-		sessionUser.setRoadAddrPart1(vo.getRoadAddrPart1());
-		sessionUser.setType(vo.getType());
-		System.out.println("usersVO: "+ sessionUser);
-		service.insertApi(sessionUser);
-		session.removeAttribute("usersVO");
-		session.setAttribute("usersVO", sessionUser);
-		
-		return "redirect: /joinOk";
+	public String signUp_api(UsersVO vo, RedirectAttributes rttr) {
+		System.out.println("usersVO: "+ vo);
+		service.insertApi(vo);
+		rttr.addAttribute("name", vo.getName());
+		return "redirect: /signUpSuc";
 	}
 	
 	@GetMapping("joinOk")
@@ -79,12 +72,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("/TMS/naverAjax")
-	public @ResponseBody String naverAjax(UsersVO vo,HttpSession session) {
+	public @ResponseBody String naverAjax(UsersVO vo,HttpSession session, RedirectAttributes rttr) {
 		
 		
 		System.out.println("vo: "+ vo);
 		UsersVO result = service.chkApi(vo.getApi_id());
-		
 		if (result == null) {
 			System.out.println("널로 들어옴");
 			return "/api_signUp";
@@ -200,10 +192,25 @@ public class LoginController {
 			String setfrom = "tutlestudy@gmail.com";
 		    String tomail  = vo.getEmail();     // 받는 사람 이메일
 		    String title   = "[TMS]거북이의 기적 스터디카페 임시 비밀번호";      // 제목
-		    String content = "회원님의 임시 비밀번호 \n<b>";    // 내용
+		    String content = "<!DOCTYPE html>\r\n" + 
+		    		"<html>\r\n" + 
+		    		"<head>\r\n" + 
+		    		"<meta charset=\"UTF-8\">\r\n" + 
+		    		"</head>\r\n" + 
+		    		"<body>"
+		    		+ "<div style=\"border: 1px solid black; padding: 2%; margin: auto; width: 50%;\">"
+		    		+ "<h4>[TMS] 임시 비밀번호 변경 안내</h4><hr><br>"
+		    		+ "<img src=\"https://image.flaticon.com/icons/svg/483/483408.svg\" alt=\"자물쇠 이미지\"\r style=\"width: 80px; display: block; margin: auto;\">"
+		    		+ "<br><div style=\"text-align: center;\">"
+		    		+ "<p>회원님의 <b style=\"color: darkblue;\">임시 비밀번호</b>입니다.<br>"
+		    		+ "로그인 후 반드시 비밀번호를 변경해주시길 바랍니다.</p>"
+		    		+ "<p>임시 비밀번호 : "
+		    		+ "<b>";    // 내용
 		    String tmpPwd = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
 		    content += tmpPwd;
-		    content += "</b>";
+		    content += "</b></p>"
+		    		+ "</div></div>"
+		    		+ "</body></html>";
 		    user.setPassword(tmpPwd);
 		   service.tmpPwd(user);
 		   rttr.addAttribute("findpw", "success");
@@ -215,7 +222,7 @@ public class LoginController {
 		      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
 		      messageHelper.setTo(tomail);     // 받는사람 이메일
 		      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-		      messageHelper.setText(content);  // 메일 내용
+		      messageHelper.setText(content, true);  // 메일 내용
 		     
 		      mailSender.send(message);
 		    } catch(Exception e){

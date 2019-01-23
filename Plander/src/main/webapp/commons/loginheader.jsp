@@ -172,6 +172,10 @@ a {
 										<div style="display: inline-block; text-align: center;"
 											id="msgDiv"></div>
 										<hr>
+										<p class="bold" id="recTitle">
+										</p>
+										<div style="display: inline-block; text-align: center;"
+											id="msgDivRec"></div>
 									</div>
 								</div>
 							</div>
@@ -185,20 +189,51 @@ a {
 		$(function() {
 			newMsgAlarm();
 		});
+		
 		function newMsgAlarm() {
-			$
-					.ajax({
-						url : '/newRecvMsg',
-						type : 'post',
-						data : {
-							'id' : '${usersVO.id}'
-						},
-						dataType : 'json',
-						success : function(result) {
-							console.log("result: " + result.length);
-							var almNum = result.length
-							var sendId = "";
-							var title = "";
+			var almNum;
+			$.ajax({
+				url : '/newRecvMsg',
+				type : 'post',
+				data : {
+					'id' : '${usersVO.id}'
+				},
+				dataType : 'json',
+				success : function(result) {
+					console.log("result: " + result.length);
+					almNum = result.length
+					var sendId = "";
+					var title = "";
+
+					var html = "";
+					$.each(result, function(index, value) {
+						sendId = value.send_id;
+						if (index == 3) {
+							html += "<span style='cursor: pointer; display: inline-block; float: right; font-size: 0.68em; color: black;' onclick='goMypage()'>더보기...</span>";
+						} else if (index < 3) {
+							html += "<h6 onclick='msgDetail("
+									+ value.rm_idx
+									+ ")' style='cursor: pointer;'>'<span class='sendId'>"
+									+ sendId
+									+ "</span>'&nbsp;님께서 보낸 쪽지가 있습니다.</h6>";
+						}
+					});
+					$("#msgDiv").html(html);
+					
+					$.ajax({
+						url: "myRecruit",
+						type: "post",
+						data: {"id" : "${usersVO.id}"},
+						dataType: "json",
+						success: function(result) {
+							$("#recTitle").html("내 모집글");
+							var recHtml = "";
+							almNum ++;
+							recHtml += "<span onclick='goRecDetail("+result.rc_idx+")'><h6 style='cursor: pointer;'>'<span class='sendId'>"
+								+ result.rc_title
+								+ "</span>글 신청 현황</h6>";
+							recHtml += "<div style='display: block; text-align: center;'>" + result.cur_mem+" / "+result.max_mem + "</div></span>";
+							$("#msgDivRec").html(recHtml);
 							$("#almNum").html("&nbsp;" + almNum);
 							$("#almDivHide").css("background-color", "none");
 							if (almNum == 0){
@@ -211,32 +246,23 @@ a {
 								$("#almDivHide").css("background-color",
 										"#D8737F");
 							}
-							var html = "";
-							$
-									.each(
-											result,
-											function(index, value) {
-												sendId = value.send_id;
-												if (index == 3) {
-													html += "<span style='cursor: pointer; display: inline-block; float: right; font-size: 0.68em; color: black;' onclick='goMypage()'>더보기...</span>";
-												} else if (index < 3) {
-													html += "<h6 onclick='msgDetail("
-															+ value.rm_idx
-															+ ")' style='cursor: pointer;'>'<span class='sendId'>"
-															+ sendId
-															+ "</span>'&nbsp;님께서 보낸 쪽지가 있습니다.</h6>";
-												}
-											});
-							$("#msgDiv").html(html);
-
-							setTimeout(newMsgAlarm, 10000);
-						},
-						error : function(error) {
-
+							setTimeout(newMsgAlarm, 3000);
+						}, error: function(error) {
+							console.log("실패");
 						}
 					})
-		}
 
+				},
+				error : function(error) {
+
+				}
+			})
+		}
+	
+		function goRecDetail(rc_idx){
+			location.href="/recruitDetail?idx="+ rc_idx;
+		}
+		
 		function msgDetail(rm_idx) {
 			window.open("/recvMsg?rm_idx=" + rm_idx, "받은 쪽지",
 					"width=500, height=600");

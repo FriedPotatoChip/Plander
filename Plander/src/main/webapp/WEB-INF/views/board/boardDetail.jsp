@@ -224,7 +224,7 @@ $(document).ready(function(){
 			</c:if>
 		</div>	
 		<c:if test="${empty usersVO }">
-			<span style="color: red; font-size: 0.8em;">&#8251;댓글 기능은 로그인 후 이용 가능합니다.</span>
+			<p class="center"><span style="color: red; font-size: 0.8em;">&#8251;댓글 기능은 로그인 후 이용 가능합니다.</span></p>
 		</c:if>
 		<span style="font-size: 0.75em;"><i class='far fa-comment-alt'></i></span><span id="commentHead" style="font-weight: bold; font-size: 0.9em;"></span>
 		<hr>

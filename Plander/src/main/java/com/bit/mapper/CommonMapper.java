@@ -39,7 +39,10 @@ public interface CommonMapper {
 	// 프로필 이미지 삭제
 	public boolean imgDel(String id);
 	
-	//모집글 랜덤 추출(메인 카드형식)
+	// 모집글 랜덤 추출(메인 카드형식)
 	public List<RecruitVO> RandomRecruit();
+	
+	// 모집중인 내 모집글
+	public RecruitVO myRecruit(String id);
 	
 }

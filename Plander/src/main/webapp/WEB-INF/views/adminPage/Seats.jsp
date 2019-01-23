@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>​
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>​
 
 <!DOCTYPE html>
 <html>
@@ -108,6 +109,7 @@ style>body, html {
 	margin: 0 auto;
 	position: relative;
 }
+
 h3 {
 	margin-top: 2rem;
 	text-align: center;
@@ -142,6 +144,31 @@ h3 {
 }
 
 .td a:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.ta a {
+	width: 100%;
+	display: block;
+	text-decoration: none;
+	text-align: center;
+}
+
+.ta:hover {
+	background-color: #faa2c1;
+}
+
+.ta a:link {
+	color: black;
+}
+
+.ta a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+.ta a:hover {
 	color: white;
 	text-decoration: none;
 }
@@ -236,16 +263,16 @@ h3 {
 
 											<tr>
 												<c:forEach var="i" begin="1" end="5" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"><input
-															type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
+													<td class="td" onclick="check(${i })"  id="${i }"><a href="#"><input
+															type="hidden" name="s_col" />A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
 											<tr>
 												<c:forEach var="i" begin="6" end="10" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -258,16 +285,16 @@ h3 {
 											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="11" end="15" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="16" end="20" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -280,16 +307,16 @@ h3 {
 											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="21" end="25" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="26" end="30" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -304,16 +331,16 @@ h3 {
 											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="31" end="33" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="34" end="36" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -326,16 +353,16 @@ h3 {
 											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="49" end="51" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col" >A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="52" end="54" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -351,16 +378,16 @@ h3 {
 											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="37" end="39" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="40" end="42" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 										</table>
@@ -372,16 +399,16 @@ h3 {
 											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="55" end="57" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="58" end="60" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 										</table>
@@ -395,16 +422,16 @@ h3 {
 											style="margin: 1rem">
 											<tr>
 												<c:forEach var="i" begin="43" end="45" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 											<tr>
 												<c:forEach var="i" begin="46" end="48" step="1">
-													<td class="td" onclick="check(${i })"><a href="#"
+													<td class="td" onclick="check(${i })" id="${i }"><a href="#"
 														data-target="#exampleModalLong" data-toggle="modal"
-														name="s_col" value="${i }">A-${i }</a></td>
+														name="s_col">A-${i }</a></td>
 												</c:forEach>
 											</tr>
 
@@ -450,7 +477,7 @@ h3 {
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">Close</button>
-												<!-- 											<button type="button" class="btn btn-primary">Save
+												<!-- <button type="button" class="btn btn-primary">Save
 													changes</button> -->
 											</div>
 										</div>
@@ -474,13 +501,13 @@ h3 {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="1" end="5" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="6" end="10" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -493,13 +520,13 @@ h3 {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="11" end="15" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="16" end="20" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -512,13 +539,13 @@ h3 {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="21" end="25" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="26" end="30" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -533,13 +560,13 @@ h3 {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="31" end="33" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="34" end="36" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -552,13 +579,13 @@ h3 {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="49" end="51" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="52" end="54" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -574,13 +601,13 @@ h3 {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="37" end="39" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="40" end="42" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -592,13 +619,13 @@ h3 {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="55" end="57" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="58" end="60" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -612,13 +639,13 @@ h3 {
 														<table border="1px solid;" class="table table-bordered">
 															<tr>
 																<c:forEach var="i" begin="43" end="45" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
 															<tr>
 																<c:forEach var="i" begin="46" end="48" step="1">
-																	<td class="td" onclick="move(${i })"><a href="#"><input
+																	<td class="ta" onclick="move(${i })"><a href="#"><input
 																			type="hidden" name="s_col" value="${i }" />A-${i }</a></td>
 																</c:forEach>
 															</tr>
@@ -681,6 +708,12 @@ h3 {
 				
 				location.href = '/admin/Seats?br_idx='+ code;
 			});
+			
+			<c:forEach var="a" items="${BookingSeats}">
+				var s_col = "${a.s_col}";
+				console.log(s_col);
+				$("#"+s_col+"").attr("style", "background-color:#d0bfff;");
+			</c:forEach>
 		});
 	</script>
 
@@ -712,7 +745,8 @@ h3 {
 			if (i == s_col) {
 				console.log("data" + i + ": " + id + ", " + start_time + ", "
 						+ end_time);
-	
+				window.start = start_time;
+				window.end = end_time;
 				html += '<tr><td class="id">'
 						+ id
 						+ '</td> <td class="start_time" id = '
@@ -738,62 +772,23 @@ h3 {
 		function change(a) {
 			console.log("target : " + a);
 			var target = a;
+			var start_time_value = start;
+			var end_time_value = end;
 			
 			window.bk_idx = target;
-
+			window.ssss = start_time_value;
+			window.eeee = end_time_value;
+			
 			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
 			$('.bd-example-modal-lg').modal();
-
-			/* modal 안에서 radio를 클릭 */
-			$("input[type=radio]").click(
-					function() {
-
-						/* 선택한 좌석 radio 체크표시 */
-						$(this).prop("checked", true);
-
-						/* 체크된 좌석의 번호 */
-						var changeScol = $("input[type=radio]:checked").val();
-						console.log('asdb : ' + changeScol);
-
-						/* 체크가 되었을 때 예약된 좌석이 있는지 없는지 파악 */
-						<c:forEach var="s" items="${BookingSeats}">
-
-						/* 예약된 모든 좌석 */
-						var s_col = "${s.s_col}";
-						var id = "${s.id}";
-						var start_time = "${s.start_time}";
-						var end_time = "${s.end_time}";
-
-						console.log('s_col-before : ' + s_col);
-						console.log('asdb-after : ' + changeScol);
-
-						if (changeScol == s_col) {
-							/* 예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함 */
-							if (end_time_value < start_time
-									|| end_time < start_time_value) {
-								alert("이동이 가능합니다.");
-								return false;
-							} else {
-								alert('이동 불가');
-							}
-						} else {
-
-							alert('이동가능');
-							return false;
-						}
-
-						</c:forEach>
-						/* 좌석 비교 */
-					}
-
-			);
-		}
+		};
+		var s_colArr = new Array();
 		
+		<c:forEach var="e" items="${BookingSeats }">
+			s_colArr.push("${e.s_col}");
+		</c:forEach>
 		/* 이동버튼 후 정보 업데이트 */
 		function move(i) {
-			/* 이동할것인지 묻기 */
-			var r = confirm("이동하시겠습니까?");
-
 			/* 지점번호 */
 			var br_idx = $('.po_category.on').attr('value');
 			console.log('br_idx : ' + br_idx);
@@ -803,17 +798,108 @@ h3 {
 
 			/* 옮기기를 원하는 좌석의 번호 */
 			var changeScol = i;
-			console.log('changeSeats : ' + changeScol);
+			console.log('changeScol : ' + changeScol);
 			
-			try {
-				if (r == true) {
-					location.href = "/admin/update?s_col=" + changeScol + "&bk_idx=" + CBk_idx + "&br_idx=" + br_idx;
+			var start_time_value = ssss;
+			console.log("start_time_value : " + start_time_value);
+			
+			var end_time_value = eeee;
+			console.log("end_time_value : " + end_time_value);
+			
+			<c:forEach var="e" items="${BookingSeats }">
+				
+				var s_col = "${e.s_col}";
+				var id = "${e.id}";
+				var start_time = "${e.start_time}";
+				var end_time = "${e.end_time}";
+				
+				console.log("s_col : " + s_col);
+				console.log("start_time : " + start_time);
+				console.log("end_time : " + end_time);
+				
+				var chkSeat = false;
+				
+				if (changeScol == s_col) {
+					//옮기는 좌석(예약좌석) = 예약좌석 
+					
+					if (end_time_value < start_time
+							|| end_time < start_time_value) {
+						//시간대 비교
+						var r = confirm("이동이 가능합니다. /n이동하시겠습니까?");
+						if (r) {
+							//확인
+							location.href = "/admin/update?s_col=" + changeScol + "&bk_idx=" + CBk_idx + "&br_idx=" + br_idx;
+							alert("성공적으로 이동되었습니다.");
+						} else {
+							//취소
+							alert("취소하셨습니다.");
+						}
+					} else {
+						alert('이동 불가');
+						location.href = "/admin/Seats";
+					}
+					
 				}
-				alert("성공적으로 이동되었습니다.");
-			} catch (e) {
-				alert("좌석이동이 실패했습니다.");
-				location.href = "/admin/Seats";
+			</c:forEach>
+			var chkSeat = true;
+			for (var i=0; i<s_colArr.length; i++){
+				if (s_colArr[i] == changeScol){
+					chkSeat = false;
+					return false;
+				}
 			}
+			if (chkSeat){
+				alert("자리 이동 가능");
+				location.href = "/admin/update?s_col=" + changeScol + "&bk_idx=" + CBk_idx + "&br_idx=" + br_idx;
+				alert("성공적으로 이동되었습니다.");
+				// 여기다가 자리 옮기는거 쓰면 끝
+			}
+				/* 
+				if (changeScol == s_col) {
+					//예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함
+					if (end_time_value < start_time
+							|| end_time < start_time_value) {
+						
+						var r = confirm("이동이 가능합니다.<br>이동하시겠습니까?");
+							try {
+								if (r == true) {
+									location.href = "/admin/update?s_col=" + changeScol + "&bk_idx=" + CBk_idx + "&br_idx=" + br_idx;
+									alert("성공적으로 이동되었습니다.");
+								} else {
+									alert("취소하셨습니다.");
+								}
+							} catch (e) {
+								alert("좌석이동이 실패했습니다.");
+								location.href = "/admin/Seats";
+							}
+						return false;
+					} else {
+						alert('이동 불가');
+						return (r == false);
+					}
+				} else {
+					
+					r = confirm("이동이 가능합니다.\n이동하시겠습니까?");
+					try {
+						if (r == true) {
+							location.href = "/admin/update?s_col=" + changeScol + "&bk_idx=" + CBk_idx + "&br_idx=" + br_idx;
+							alert("성공적으로 이동되었습니다.");
+						} else {
+							alert("취소하셨습니다.");
+						}
+					} catch (e) {
+						alert("좌석이동이 실패했습니다.");
+						location.href = "/admin/Seats";
+					}
+					return false;
+				}
+			
+	 			//이동할것인지 묻기
+	 			 */
+	 			
+	 			
+			
+			
 
 		}
 	</script>

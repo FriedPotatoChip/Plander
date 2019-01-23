@@ -312,7 +312,18 @@
 
 <script>
 	function write_go(){
-		location.href="/recruitWrite";
+		$.ajax({
+			url: "myRecruit",
+			type: "post",
+			data: {"id" : "${usersVO.id}"},
+			dataType: "json",
+			success: function(result) {
+				alert("모집 중인 모집글은 계정당 1개만 작성 가능합니다.");
+				return false;
+			}, error: function(error) {
+				location.href="/recruitWrite";
+			}
+		})
 	}
 	function calcDate(date){
 		var date = new Date(date);

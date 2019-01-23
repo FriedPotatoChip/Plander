@@ -232,7 +232,7 @@ h3 {
 							<div id="allseat">
 								<div>
 									<div class="checkbox" style="width: 100%; display: table;">
-										<div id="4people" onclick="check(201)"
+										<div id="201" onclick="check(201)"
 											style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="4room"
@@ -240,7 +240,7 @@ h3 {
 											</p>
 										</div>
 
-										<div id="8people" onclick="check(301)"
+										<div id="301" onclick="check(301)"
 											style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="8room"
@@ -248,7 +248,7 @@ h3 {
 											</p>
 										</div>
 
-										<div id="8people" onclick="check(302)"
+										<div id="302" onclick="check(302)"
 											style="display: inline-table; width: 25%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="8room"
@@ -259,7 +259,7 @@ h3 {
 									<br>
 
 									<div class="checkbox" style="width: 100%; display: table;">
-										<div id="4people" onclick="check(202)"
+										<div id="202" onclick="check(202)"
 											style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="4room"
@@ -267,7 +267,7 @@ h3 {
 											</p>
 										</div>
 
-										<div id="12people" onclick="check(401)"
+										<div id="401" onclick="check(401)"
 											style="display: inline-table; width: 53%; height: 100px; margin-right: 3%; border: 1px solid; cursor: pointer;">
 											<p>
 												<label><input type="hidden" class="12room"
@@ -309,7 +309,6 @@ h3 {
 														<th>ID</th>
 														<th>START_TIME</th>
 														<th>END_TIME</th>
-														<th>이동</th>
 													</tr>
 
 													<tbody id="tr">
@@ -341,7 +340,7 @@ h3 {
 										<div id="allseat">
 											<div>
 												<div class="checkbox" style="width: 100%; display: table;">
-													<div id="4people" onclick="move(201)"
+													<div id="4people" onclick="move(201)" 
 														style="display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor: pointer;">
 														<p>
 															<label><input type="hidden" class="4room"
@@ -442,6 +441,12 @@ h3 {
 				console.log('code : ' + code);
 				location.href = '/admin/LabSeats?br_idx='+ code;
 			});
+				
+			<c:forEach var="a" items="${BookingSeats}">
+				var s_col = "${a.s_col}";
+				console.log(s_col);
+				$("#"+s_col+"").attr("style", "background-color:#d0bfff;display: inline-table; width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid; cursor: pointer;");
+			</c:forEach>
 		});
 	</script>
 	
@@ -483,104 +488,12 @@ h3 {
 						+ (temp + "_e")
 						+ '>'
 						+ end_time
-						+ '</td> <td><button type="button" class="btn btn-outline-danger" id ="'
-						+ temp
-						+ '" onclick="change(\''
-						+ bk_idx
-						+ '\')"><input type="hidden" name="nid" value="${s.id}">좌석이동</button></td></tr>';
+						+ '</td></tr>';
 			}
 			</c:forEach>
 			$('#exampleModalLong').modal();
 			$('#exampleModalLongTitle').text(i + '번 좌석 예약현황');
 			$('#tr').html(html);
-		}
-
-		function change(a) {
-			console.log("target : " + a);
-			var target = a;
-			
-			window.bk_idx = target;
-
-			/* 좌석이동 클릭 시 좌석배치도 modal 오픈 */
-			$('.bd-example-modal-lg').modal();
-
-			/* modal 안에서 radio를 클릭 */
-			$("input[type=radio]").click(
-					function() {
-
-						/* 선택한 좌석 radio 체크표시 */
-						$(this).prop("checked", true);
-
-						/* 체크된 좌석의 번호 */
-						var changeScol = $("input[type=radio]:checked").val();
-						console.log('asdb : ' + changeScol);
-
-						/* 체크가 되었을 때 예약된 좌석이 있는지 없는지 파악 */
-						<c:forEach var="s" items="${BookingSeats}">
-
-						/* 예약된 모든 좌석 */
-						var s_col = "${s.s_col}";
-						var id = "${s.id}";
-						var start_time = "${s.start_time}";
-						var end_time = "${s.end_time}";
-
-						console.log('s_col-before : ' + s_col);
-						console.log('asdb-after : ' + changeScol);
-
-						if (changeScol == s_col) {
-							/* 예약된 사람의 start_time과 이동하고 싶어하는 사람의 end_time을 비교해서 이동가능한지 불가능한지 따져봐야함 */
-							if (end_time_value < start_time
-									|| end_time < start_time_value) {
-								alert("이동이 가능합니다.");
-								return false;
-							} else {
-								alert('이동 불가');
-							}
-						} else {
-
-							alert('이동가능');
-							return false;
-						}
-
-						</c:forEach>
-						/* 좌석 비교 */
-					}
-
-			);
-		}
-
-		/* 이동버튼 후 정보 업데이트 */
-		function move(i) {
-			/* console.log("tar: " + tar);
-			console.log("stv: " + stv);
-			console.log("etv: " + etv);
-			 */
-			 
-			
-			/* 이동할것인지 묻기 */
-			var r = confirm("이동하시겠습니까?");
-
-			 /* 지점번호 */
-			var br_idx = $('.po_category.on').attr('value');
-			console.log('br_idx : ' + br_idx);
-
-			var CBk_idx = bk_idx;
-			console.log('bk_idx : ' + CBk_idx);
-
-			/* 옮기기를 원하는 좌석의 번호 */
-			var changeScol = i;
-			console.log('changeSeats : ' + changeScol);
-
-			try {
-				if (r == true) {
-					location.href = "/admin/update?s_col=" + changeScol + "&bk_idx=" + CBk_idx + "&br_idx=" + br_idx;
-				}
-				alert("성공적으로 이동되었습니다.");
-			} catch (e) {
-				alert("좌석이동이 실패했습니다.");
-				location.href = "/admin/Seats";
-			}
-
 		}
 	</script>
 

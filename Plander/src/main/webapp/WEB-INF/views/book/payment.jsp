@@ -115,7 +115,7 @@
 				    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
 				    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
 				    merchant_uid : bookval, //상점에서 관리하시는 고유 주문번호를 전달
-				    name : '주문명:결제테스트',
+				    name : '거북이의 기적 예약',
 				    amount : 100,
 				    buyer_email : '${usersVO.email}',
 				    buyer_name : '${usersVO.name}',
@@ -136,6 +136,32 @@
 				    			'receipt' : rsp.receipt_url
 				    			}
 				    	})
+				    	/* 쿠폰 사용시 */
+				    	var couponVal = $("#coupon").val();
+						if (couponVal != 0) {
+							$.ajax({
+								url : '/minusCoupon',
+								type : 'get',
+								data : {
+									'cp_idx' : cp_idx
+								},
+								dataType : 'text',
+								success : function(result) {
+									if (result == 'success') {
+										console.log("성공");
+										frm.submit();
+									} else if (result == 'fail') {
+										console.log("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+										return false;
+									}
+								},
+								error : function(error) {
+									console.log("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
+									return false;
+								}
+							})
+						}
+						/* 쿠폰 사용 끝 */
 				    	alert("결제가 완료되었습니다.");
 				    	$("form[name='form1']").submit();
 				    } else {
@@ -530,43 +556,6 @@
 	});
 
 	//네이버페이
-</script>
-<script>
-	function payment(frm) {
-
-		if (finalPrice == 0) {
-			finalPrice = sum;
-		}
-		$("#hiddenPrice").val(finalPrice);
-		var couponVal = $("#coupon").val();
-		if (couponVal != 0) {
-			$.ajax({
-				url : '/minusCoupon',
-				type : 'get',
-				data : {
-					'cp_idx' : cp_idx
-				},
-				dataType : 'text',
-				success : function(result) {
-					if (result == 'success') {
-						console.log("성공");
-						frm.submit();
-					} else if (result == 'fail') {
-						alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
-						return false;
-					}
-				},
-				error : function(error) {
-					alert("예매 진행에 실패하였습니다.\n관리자에게 문의 해주세요.");
-					return false;
-				}
-			})
-		} else {
-			frm.submit();
-		}
-		form1.action = "/book/payok";
-		form1.submit();
-	}
 </script>
 
 </head>

@@ -74,9 +74,6 @@
 				<table style="margin: auto;">
 					<tr>
 						<td>
-							<div style="float: right; color: black;">
-								공지 <input name="notice" value="1" type="checkbox">
-							</div>
 							<div class="col-xs-9 zeroPad">
 								<input type="text" class="form-control"
 									id="b_title" name="b_title" placeholder="제목" value="${board.b_title }"  required>
@@ -132,27 +129,26 @@
       });
       $("#summernote").summernote('code',  '${board.b_content}');
     });
+
     function sendFile(file, el) {
-      var form_data = new FormData();
-      form_data.append('file', file);
-      $.ajax({
-        data: form_data,
-        type: "POST",
-        url: '/imageUpload',
-        cache: false,
-        contentType: false,
-        enctype: 'multipart/form-data',
-        processData: false,
-        success: function(url) {
-        	setTimeout(function(){
-	        	url = '/resources/upload'+url;
-	        	console.log("url: "+ url);
-	          $(el).summernote('editor.insertImage', url);
-	          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        	}, 3000)
-        }
-      });
-    }
+        var form_data = new FormData();
+        form_data.append('file', file);
+        $.ajax({
+          data: form_data,
+          type: "POST",
+          url: '/uploadAjaxS3',
+          cache: false,
+          contentType: false,
+          enctype: 'multipart/form-data',	
+          processData: false,
+          success: function(url) {
+  			url = 'https://s3.ap-northeast-2.amazonaws.com/turtlesmiraclebucket/resources/upload'+url;
+  			console.log("url: "+ url);
+  			$(el).summernote('editor.insertImage', url);
+  			$('#imageBoard > ul').append('<li><img src="'+url+'"/></li>');
+          }
+        });
+      }
 </script>
 
 </body>

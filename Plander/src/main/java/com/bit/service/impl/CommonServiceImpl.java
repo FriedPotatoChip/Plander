@@ -73,6 +73,11 @@ public class CommonServiceImpl implements CommonService {
 	public boolean delSendMsg(int sm_idx) {
 		return mapper.delSendMsg(sm_idx);
 	}
+
+	@Override
+	public RecruitVO myRecruit(String id) {
+		return mapper.myRecruit(id);
+	}
 	
 	
 }

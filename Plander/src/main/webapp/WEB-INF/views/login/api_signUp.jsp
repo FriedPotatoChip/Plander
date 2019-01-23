@@ -6,6 +6,9 @@
 <title>api로그인 회원가입</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+.center { text-align: center; }
+</style>
 <script>
 	function goPopup() {
 		var pop = window.open("/juso", "pop",
@@ -21,13 +24,22 @@
 		document.getElementById("zipNo").value = zipNo;
 	}
 </script>
-</head>
-<body>
 	<!-- 헤더 -->
-	<c:if test="${empty user }"><jsp:include
-			page="/commons/header.jsp" /></c:if>
-			
+	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/"><img
+				src="/resources/images/logo.png" width="150px" height="50px"></a>
+
+			<ul class="navbar-nav ml-auto" id="primaryNav">
+			</ul>
+		</div>
+	</nav>
+	<div style="width: 42%; margin: auto; margin-top: 80px;">
 	<form action="/signUp_api" method="post" name="joinform">
+		<input type="hidden" name="email" value="${api_user.email }">
+		<input type="hidden" name="api_id" value="${api_user.api_id }">
+		<input type="hidden" name="name" value="${api_user.name }">
+		<input type="hidden" name="type" value="${api_user.type }">
 		<table class="table">
 			<tr>
 				<th>아이디</th>
@@ -86,6 +98,19 @@
 			</tr>
 		</table>
 	</form>
+	</div>
+	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<hr>
+	<!-- 허해서 넣은 풋터 -->
+	<p class="center" style="font-size: 17px;">© turtlesmiracle</p>
+	<br>
+	<br>
+	<!-- 허해서 넣은 풋터 끝 -->
 
 	<script>
 		var idChk = false;
@@ -96,7 +121,7 @@
 			var frm = document.joinform;
 
 			var testPhone = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-			var testId = /^[0-9a-zA-Z]+$/;
+			var testId = /^([a-zA-Z0-9]+){4,20}$/;
 
 			var tel = frm.phone.value;
 			var id = frm.id.value;
@@ -108,6 +133,7 @@
 			}
 			if (!testId.test(id)) {
 				alert("아이디는 영문, 숫자 조합만 사용 가능합니다.");
+				frm.id.value = "";
 				frm.id.focus();
 				return false;
 			}
@@ -147,9 +173,18 @@
 		/* 아이디 중복체크 */
 		function idChkBtn() {
 			var frm = document.joinform;
-
+			
+			var testId = /^([a-zA-Z0-9]+){4,20}$/;
+			
 			if (!frm.id.value) {
 				alert("아이디를 입력해주세요.");
+				frm.id.focus();
+				return false;
+			}
+			
+			if (!testId.test(frm.id.value)) {
+				alert("아이디는 영문, 숫자 조합(4-20자)만 가능합니다.");
+				frm.id.value = "";
 				frm.id.focus();
 				return false;
 			}

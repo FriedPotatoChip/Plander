@@ -20,6 +20,7 @@ import com.bit.domain.BookingVO;
 import com.bit.domain.CouponVO;
 import com.bit.domain.PaymentVO;
 import com.bit.domain.PriceVO;
+import com.bit.domain.RecruitVO;
 import com.bit.domain.RecvMsgVO;
 import com.bit.domain.SendMsgVO;
 import com.bit.domain.UsersVO;
@@ -208,5 +209,13 @@ public class AjaxController {
 			return "fail";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping("myRecruit")
+	public RecruitVO myRecruit(@RequestParam("id")String id) {
+		return comService.myRecruit(id);
+	}
+	
+	
 	
 }

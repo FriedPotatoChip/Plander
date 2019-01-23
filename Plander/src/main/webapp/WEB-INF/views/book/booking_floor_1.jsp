@@ -19,7 +19,7 @@
 			if (bookseat == document.getElementsByName('s_col')[i].value) {
 				console.log("예약된 값 : " + bookseat);
 				$(document.getElementsByName('s_col')[i]).attr('disabled', true);
-				$(document.getElementsByName('s_col')[i]).closest("div").addClass('eq'); //확인할것
+				$(document.getElementsByName('s_col')[i]).closest("div").addClass('eq'); 
 				break;
 			}
 		}
@@ -54,6 +54,17 @@
 			}
 		});
 
+	});
+	$(function() {
+		$("input:checkbox").on("change", function(){
+			if ($(this).prop('checked')) {
+				$(this).closest("div").css("background-color", "#adb5bd");
+				$(this).closest("div").css("color", "white");
+			} else {
+				$(this).closest("div").css("background-color", "#f8f9fa");
+				$(this).closest("div").css("color", "#666");
+			}
+		});
 	});
 </script>
 <script>
@@ -198,7 +209,10 @@ button:hover {
 	color: white;
 }
 /* 버튼 끝 */
+#seat_table { background-color: #f8f9fa; }
+
 .eq { background-color: #D8737F; opacity: 0.8; color: white; }
+.eq input { display: none; }
 
 </style>
 
@@ -238,62 +252,67 @@ button:hover {
 						<p>☑ 랩실은 4인실 기준 최소 3인 이상 단체예약만 가능합니다.</p>
 					</div>
 					<hr>
-
-					<div id="allseat">
-						<div>
-							<div class="checkbox" style="width: 100%; display: table;">
-								<div id="4people" class="" style="display: inline-table;
-									width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
-									<p>
-										<label><input type="checkbox" class="4room"
-										name="s_col" value="201">201호(4인실)</label>
-									</p>
+					
+					<div id="seat_table">
+						<div id="allseat">
+							<div>
+								<div class="checkbox" style="width: 100%; display: table;">
+									<div id="4people" class="" style="display: inline-table;
+										width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
+										<p>
+											<label><input type="checkbox" class="4room"
+											name="s_col" value="201">201호(4인실)</label>
+										</p>
+									</div>
+	
+									<div id="8people" class="" style="display: inline-table;
+										width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
+										<p>
+											<label><input type="checkbox" class="8room"
+											name="s_col" value="301">301호(8인실)</label>
+										</p>
+									</div>
+	
+									<div id="8people" class="" style="display: inline-table;
+										width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
+										<p>
+											<label><input type="checkbox" class="8room"
+												name="s_col" value="302">302호(8인실)</label>
+										</p>
+									</div>
 								</div>
-
-								<div id="8people" class="" style="display: inline-table;
-									width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
-									<p>
-										<label><input type="checkbox" class="8room"
-										name="s_col" value="301">301호(8인실)</label>
-									</p>
+								<br>
+	
+								<div class="checkbox" style="width: 100%; display: table;">
+									<div id="4people" class="" style="display: inline-table;
+										width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
+										<p>
+											<label><input type="checkbox" class="4room"
+												name="s_col" value="202">202호(4인실)</label>
+										</p>
+									</div>
+	
+									<div id="12people" class="" style="display: inline-table;
+										width: 53%; height: 100px; margin-right: 3%; border: 1px solid;">
+										<p>
+											<label><input type="checkbox" class="12room"
+												name="s_col" value="401">401호(12인실)</label>
+										</p>
+									</div>
+	
+									<div id="4people" class="" style="display: inline-table;
+										width: 15%; height: 100px; margin-right: 3%; border: 1px solid;">
+										<p>
+											<label>카페 터틀🐢</label>
+										</p>
+									</div>
 								</div>
-
-								<div id="8people" class="" style="display: inline-table;
-									width: 25%; height: 100px; margin-right: 3%; border: 1px solid;">
-									<p>
-										<label><input type="checkbox" class="8room"
-											name="s_col" value="302">302호(8인실)</label>
-									</p>
-								</div>
-							</div>
-							<br>
-
-							<div class="checkbox" style="width: 100%; display: table;">
-								<div id="4people" class="" style="display: inline-table;
-									width: 20%; height: 100px; margin: 0 3% 0 3%; border: 1px solid;">
-									<p>
-										<label><input type="checkbox" class="4room"
-											name="s_col" value="202">202호(4인실)</label>
-									</p>
-								</div>
-
-								<div id="12people" class="" style="display: inline-table;
-									width: 53%; height: 100px; margin-right: 3%; border: 1px solid;">
-									<p>
-										<label><input type="checkbox" class="12room"
-											name="s_col" value="401">401호(12인실)</label>
-									</p>
-								</div>
-
-								<div id="4people" class="" style="display: inline-table;
-									width: 15%; height: 100px; margin-right: 3%; border: 1px solid;">
-									<p>
-										<label>카페 터틀🐢</label>
-									</p>
-								</div>
-							</div>
-							<br>
-						</div> <!-- 1번 열 끝 -->
+								<br>
+							</div> <!-- 1번 열 끝 -->
+							<div style="display: inline-block; width: 13px; height: 13px;" class="eq"></div><span style="display: inline-block;">: 예약된 좌석</span><br> 
+							<div style="display: inline-block; width: 13px; height: 13px; border: 1px solid black;"></div>: 선택 가능<br>
+							<div style="display: inline-block; width: 13px; height: 13px; background-color: #adb5bd;"></div>: 선택 좌석
+						</div>
 					</div>
 
 					<!-- 선택 정보 -->
