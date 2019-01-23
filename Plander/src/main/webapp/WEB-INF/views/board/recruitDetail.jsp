@@ -271,14 +271,6 @@ function boardList(nowPage){
 			</div>
 			<hr>
 
-			<!-- 모집마감 -->
-			<c:if test="${rc_board.onOff eq 'ON' }">
-				<c:if
-					test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
-					<button class="btnOpt" onclick="endRecruit()">모집 마감</button>
-				</c:if>
-			</c:if>
-			<br>
 
 			<div id="content">${rc_board.rc_content }</div>
 			<br> <br> <br>
@@ -309,6 +301,15 @@ function boardList(nowPage){
 							onclick="applyCancel()">신청취소</button>
 					</c:if>
 				</c:if>
+				
+				<!-- 모집마감 -->
+				<c:if test="${rc_board.onOff eq 'ON' }">
+					<c:if
+						test="${usersVO.id == rc_board.id && rc_board.cur_mem == rc_board.max_mem}">
+						<button class="btnOpt" onclick="endRecruit()">모집 마감</button>
+					</c:if>
+				</c:if>
+				<br>
 				<c:if test="${empty usersVO }">
 					<span style="color: red; font-size: 0.8em;">&#8251;모집글에 신청, 댓글 기능은 로그인 후 이용 가능합니다.</span>
 				</c:if>
@@ -773,7 +774,7 @@ function boardList(nowPage){
 		$.ajax({
 			url: "/endRecruit",
 			type: "get", 
-			data: {"rc_idx":'${rc_board.rc_idx}' ,"id":'${usersVO.id}'},
+			data: {"rc_idx":'${rc_board.rc_idx}' ,"id":'${usersVO.id}', 'cb_idx':1},
 			dataType: "text",
 			success: function(result){
 				if (result == 'success'){

@@ -200,10 +200,23 @@ public class LoginController {
 			String setfrom = "tutlestudy@gmail.com";
 		    String tomail  = vo.getEmail();     // 받는 사람 이메일
 		    String title   = "[TMS]거북이의 기적 스터디카페 임시 비밀번호";      // 제목
-		    String content = "회원님의 임시 비밀번호 \n<b>";    // 내용
+		    String content = "<!DOCTYPE html>\r\n" + 
+		    		"<html>\r\n" + 
+		    		"<head>\r\n" + 
+		    		"<meta charset=\"UTF-8\">\r\n" + 
+		    		"</head>\r\n" + 
+		    		"<body>"
+		    		+ "<div style=\"border: 1px solid black; padding: 2%; margin: auto; width: 70%;\">"
+		    		+ "<h4>[TMS] 임시 비밀번호 변경 안내</h4><hr><br>"
+		    		+ "<img src=\"images/자물쇠1.png\" alt=\"자물쇠 이미지\"\r style=\"width: 80px; display: block; margin: auto;\">"
+		    		+ "<div style=\"text-align: center;\">"
+		    		+ "<p>임시 비밀번호 : "
+		    		+ "<b>";    // 내용
 		    String tmpPwd = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 10);
 		    content += tmpPwd;
-		    content += "</b>";
+		    content += "</b></p>"
+		    		+ "</div>"
+		    		+ "</body></html>";
 		    user.setPassword(tmpPwd);
 		   service.tmpPwd(user);
 		   rttr.addAttribute("findpw", "success");
@@ -215,7 +228,7 @@ public class LoginController {
 		      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
 		      messageHelper.setTo(tomail);     // 받는사람 이메일
 		      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-		      messageHelper.setText(content);  // 메일 내용
+		      messageHelper.setText(content, true);  // 메일 내용
 		     
 		      mailSender.send(message);
 		    } catch(Exception e){
