@@ -40,7 +40,7 @@
 						<div class="col-3">
 							<input class="form-control" type="button"
 								style="background-color: #FCBB6D; color: white;" id="chkId"
-								value="id 중복체크" onClick="idChkBtn()">
+								value="ID 중복체크" onClick="idChkBtn()">
 						</div>
 					</div>
 				</td>
