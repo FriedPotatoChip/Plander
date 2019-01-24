@@ -20,7 +20,7 @@
 	//비밀번호 확인1
 	function pwchk1() {
 		var pw = $('#password1').val();
-		var pwchk = ${user.password};
+		var pwchk = '${user.password}';
 
 		if (pw != pwchk || pwchk == "") {
 			//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
@@ -344,8 +344,8 @@ h3 {
 						<table class="table" id="modal_table">
 							<tr>
 								<th>현재비밀번호</th>
-								<td><input type="text" class="form-control" id="password1"
-									name="password1" placeholder="비밀번호" oninput="pwchk1()" required>
+								<td><input type="password" class="form-control" id="password1"
+									name="password1" placeholder="비밀번호" oninput="pwchk1()" required style=" font-family: 맑은고딕;">
 									<p id="pwchkMsg1" style="font-size: 15px;"></p> <!-- 비밀번호가 일치하지 않습니다. -->
 								</td>
 							</tr>
@@ -399,8 +399,8 @@ h3 {
 							</tr>
 							<tr>
 								<th>회원비밀번호&nbsp;<b style="color: red;">&#42;</b></th>
-								<td><input type="text" class="form-control" id="password"
-									name="password" placeholder="비밀번호" oninput="pwchk()" required>
+								<td><input type="password" class="form-control" id="password"
+									name="password" placeholder="비밀번호" oninput="pwchk()" required style=" font-family: 맑은고딕;">
 									<p id="pwchkMsg" style="font-size: 13px;"></p> <!-- 비밀번호가 일치하지 않습니다. -->
 								</td>
 							</tr>
@@ -585,7 +585,7 @@ h3 {
 		//비밀번호 확인
 		function pwchk() {
 			var pw = $('#password').val();
-			var pwchk = ${user.password};
+			var pwchk = "${user.password}";
 
 			if (pw != pwchk || pwchk == "") {
 				//alert("비밀번호가 일치하지 않습니다. pwchk : " + pwchk + ", pw : "+ pw);
