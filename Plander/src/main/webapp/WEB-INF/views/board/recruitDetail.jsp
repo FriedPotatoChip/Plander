@@ -405,7 +405,7 @@ function boardList(nowPage){
 	        		  
 	        		  $(".appBtn").css("display", "none");
 	        		  $("#hideCancel").css("display", "block");
-	        		  alert("스터디 모집에 신청하였스비다!")
+	        		  alert("스터디 모집에 신청되었습니다!")
 	        	  } else if(result == 'fail'){
 	        		  alert("신청하기에 실패하였습니다.\n관리자에게 문의해주세요.")
 	        	  }
