@@ -165,12 +165,11 @@ a {
 										style="text-align: center; width: 200px; padding-left: 15px; padding-right: 15px;">
 										<p class="bold" style="margin-top: 10px; color: #475C7A;">읽지
 											않은 쪽지</p>
-										<hr>
-										<p class="bold">
-											쪽지<b style="color: #D8737F;" id="almNum"></b>
+										<hr class="hideSwitch">
+										<p class="bold" id="msgTitle">
 										</p>
 										<div style="display: inline-block; text-align: center;"
-											id="msgDiv"></div>
+											id="msgDiv" class="hideSwitch"></div>
 										<hr>
 										<p class="bold" id="recTitle">
 										</p>
@@ -218,6 +217,13 @@ a {
 									+ "</span>'&nbsp;님께서 보낸 쪽지가 있습니다.</h6>";
 						}
 					});
+					if (almNum != 0){
+						$("#msgTitle").html('쪽지<b style="color: #D8737F;" id="almNum">'+ almNum + "</b>");
+						$(".hideSwitch").css("display", "block");
+					} else if (almNum == 0) {
+						$("#msgTitle").html("");
+						$(".hideSwitch").css("display", "none");
+					}
 					$("#msgDiv").html(html);
 					
 					$.ajax({
@@ -234,7 +240,6 @@ a {
 								+ "</span>글 신청 현황</h6>";
 							recHtml += "<div style='display: block; text-align: center;'>" + result.cur_mem+" / "+result.max_mem + "</div></span>";
 							$("#msgDivRec").html(recHtml);
-							$("#almNum").html("&nbsp;" + almNum);
 							$("#almDivHide").css("background-color", "none");
 							if (almNum == 0){
 								$("#almSpan").html("");

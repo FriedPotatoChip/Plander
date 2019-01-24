@@ -378,7 +378,7 @@
 			console.log(this);
 			var userId = $(this).attr("userId");
 			console.log($(this).attr("userId"));
-			$("#showWritten").attr("href", "/searchList?keyword="+userId+"&target=w&ct_idx=${ct_idx}")
+			$("#showWritten").attr("href", "/searchRecruitList?keyword="+userId+"&target=w")
 			$("#sendMsg").click(function(){
 				$(".popupLayer").hide();
 				if ('${usersVO.id}' == ''){
